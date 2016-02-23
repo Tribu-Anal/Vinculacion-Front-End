@@ -1,0 +1,22 @@
+{
+  "name": "manejo-horas-vinculacion-unitec",
+  "version": "1.0.0",
+  "description": "Aplicacion web para manejar las horas de vinculacion de los alumnos de UNITEC.",
+  "main": "js/app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC.git"
+  },
+  "author": "Tribu Anal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC/issues"
+  },
+  "homepage": "https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC#readme"
+}
