@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC/issues"
   },
-  "homepage": "https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC#readme"
+  "homepage": "https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "karma": "^0.13.21"
+  }
 }
