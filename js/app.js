@@ -3,16 +3,13 @@
 var app = angular.module("VinculacionApp", ['ui.router', 'ngAnimate']);
 
 app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/login');
-
-	// Por el primer sprint solo las primeras tres rutas
-	// estaran disponibles para los alumnos.
+	$urlRouterProvider.otherwise('/');
 
 	$stateProvider
 
-		.state('login', {
-			url: '/login',
-			templateUrl: '../templates/login.html'
+		.state('landing', {
+			url: '/',
+			templateUrl: '../templates/landing.html'
 		})
 
 		.state('registro', {
@@ -22,12 +19,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('home', {
 			url: '/home',
-			templateUrl: '../templates/home.html'
-		})
-
-		.state('home.clases', {
-			url: '/clases',
-			templateUrl: '../templates/clases.html'
+			templateUrl: '../templates/dashboard.html'
 		})
 
 		.state('home.proyectos', {
@@ -38,5 +30,21 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		.state('home.proyecto', {
 			url: '/proyecto',
 			templateUrl: '../templates/proyecto.html'
+		})
+
+		.state('home.horas', {
+			url: '/horas',
+			templateUrl: '../templates/horas.html'
+		})
+
+		.state('home.solicitudes', {
+			url: '/solicitudes',
+			templateUrl: '../templates/solicitudes.html'
+		})
+
+		.state('home.solicitud', {
+			url: '/solicitud',
+			templateUrl: '../templates/solicitud.html'
 		});
+
 }]);
