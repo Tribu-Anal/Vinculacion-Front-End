@@ -1,0 +1,23 @@
+body {
+	background: #004;
+	margin: 0;
+}
+
+.wrapper {
+	background: #DDF;
+	font-family: 'Roboto';
+	margin: auto;
+	margin-top: 20px;
+	width: 50%;
+	padding: 10px 50px;
+	border-radius: 2px;
+	box-shadow: 0 0 50px #111;
+}
+
+form {
+	margin-top: 20px;
+}
+
+legend {
+	border-bottom: 1px solid #aaa;
+}
