@@ -1,7 +1,30 @@
+*{
+	margin: 0 auto;
+	padding: 0 auto;
+}
 html, body{
+	width: 100%;
 	height: 100%;
 }
 
 body{
 	background: #002558;
+}
+
+.login-layout.img-responsive{
+	margin: 0 auto;
+}
+
+.container{
+	padding: 15px 25px;
+    width: 100%;
+    max-width: 300px;    
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;top:40%;
+}
+
+input[type="text"]{
+	background: #00132E;
+	
 }
