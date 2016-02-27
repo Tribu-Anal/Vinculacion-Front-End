@@ -13,12 +13,26 @@
     </head>
     <body ng-app="VinculacionApp">
 
-		<ui-view></ui-view>
+		<div ng-controller="RegistroCtrl">
+            <form name="registro" ng-submit="registro.$valid && validarCorreo() && registrarAlumno()" novalidate>
+                <input type="email" ng-model="correo" placeholder="Correo" required/><br/>
+                <input type="text" ng-model="numCuenta" placeholder="Numero de Cuenta" required/><br/>
+                <input type="text" ng-model="nombre" placeholder="Nombre" required/><br/>
+                <input type="text" ng-model="campus" placeholder="Campus" required/><br/>
+                <input type="password" ng-model="password" placeholder="Password" required/><br/>
+                <input type="text" ng-model="idCarrera" placeholder="Numero Carrera" required/><br/>
+                <input type="text" ng-model="carrera" placeholder="Carrera" required/><br/>
+                <button type="submit">Registrar Alumno</button>
+                Form is {{registro.$valid}}
+            </form>
+        </div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-animate.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
-		<script src="js/app.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/controllers/RegisterController.js"></script>
+		<script src="../js/services/RegisterService.js"></script>
 		
     </body>
 </html>
