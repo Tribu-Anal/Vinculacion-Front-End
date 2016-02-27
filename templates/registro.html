@@ -2,6 +2,40 @@
 	<h1>Registro</h1>
 	<form>
 		<legend>Informacion de Registro</legend>
-
+		<div class="form-group">
+			<label for="correo">Correo</label>
+			<input id="correo" class="form-control" type="email" placeholder="alumno@unitec.edu" required/>
+		</div>
+		<div class="form-group">
+			<label for="num_cuenta">Numero de Cuenta</label>
+			<input id="num_cuenta" class="form-control" type="text" placeholder="21331044" required/>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre Completo</label>
+			<input id="nombre" class="form-control" type="text" placeholder="Jose Luis Garcia" required/>
+		</div>
+		<div class="form-group">
+			<label for="campus">Campus</label>
+			<select id="campus" class="form-control" name="campus">
+				<option value="SPS">SPS</option>
+				<option value="TGU">TGU</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="clave">Clave</label>
+			<input id="clave" class="form-control" type="password" placeholder="Ingrese su clave..." required/>
+		</div>
+		<div class="form-group">
+			<label for="confirmacion_clave">Confirmar Clave</label>
+			<input id="confirmacion_clave" class="form-control" type="password" placeholder="Confirme su clave..." required/>
+		</div>
+		<div class="form-group">
+			<label for="id_carrera">Carrera</label>
+			<select id="id_carrera" class="form-control" name="carrera">
+				<option value="Sistemas">I-1 (Ing. en Sistemas Computacionales)</option>
+			</select>
+		</div>
+		<button class="btn btn-default" type="reset">Reset</button>
+		<button class="btn btn-primary" type="submit">Confirmar</button>
 	</form>
 </div>
