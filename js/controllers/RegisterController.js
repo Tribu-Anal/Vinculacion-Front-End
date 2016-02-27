@@ -10,7 +10,7 @@ app.controller('RegistroCtrl', ['$scope', 'registro', function($scope, registro)
     $scope.carrera;
     
     $scope.registrarAlumno = function() {
-        registro.registroAlumno({
+        registro.registroAlumno(JSON.stringify({
             IdNumber: $scope.numCuenta,
             Name: $scope.nombre,
             Password: $scope.password,
@@ -20,7 +20,7 @@ app.controller('RegistroCtrl', ['$scope', 'registro', function($scope, registro)
                 MajorId : $scope.idCarrera,
                 Name: $scope.carrera
             }
-    }).success(function(response) {
+    })).success(function(response) {
             console.log(response);
             console.log("Alumno registrado");
         })
