@@ -6,8 +6,7 @@ body {
 .wrapper {
 	background: #EEF;
 	font-family: 'Roboto';
-	margin: auto;
-	margin-top: 20px;
+	margin: 20px auto;
 	width: 50%;
 	padding: 10px 50px;
 	border-radius: 2px;
