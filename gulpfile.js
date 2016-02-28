@@ -17,8 +17,9 @@ paths.build = {};
 paths.src.scripts = 'js/';
 paths.src.less = 'css/';
 paths.src.html = 'templates/';
+paths.src.index = 'test/';
 
-paths.build.scripts = 'js/';
+paths.build.scripts = 'css/';
 paths.build.less = 'css/';
 
 gulp.task('js',function(){
@@ -47,7 +48,8 @@ gulp.task('html-templates', function () {
 });
 
 gulp.task('html-index', function () {
-  gulp.src('index.html')
+	console.log(paths.src.index);
+  gulp.src(paths.src.index)
     .pipe(connect.reload());
 });
 
@@ -55,14 +57,14 @@ gulp.task('watch',function(){
 	gulp.watch(paths.src.scripts+'**/*.js', ['js']);
 	gulp.watch(paths.src.less+'**/*.less', ['less']);
 	gulp.watch(paths.src.html+'**/*.html', ['html-templates']);
-	gulp.watch(['index.html'], ['html-index']);
+	gulp.watch(paths.src.index+'**/*.html', ['html-index']);
 
 });
 
-gulp.task('connect',['watch'], function(){
-	connect.server({port:3000,livereload: true});
+gulp.task('connect', function(){
+	connect.server({port:3000,livereload: true,root:[paths.src.index]});
 });
 
-gulp.task('start',['connect', 'less','html-templates', 'html-index', 'js'],function(){
+gulp.task('start',['connect', 'less','html-templates', 'html-index', 'js','watch'],function(){
 	console.log("Server now is running :D");	
 });
