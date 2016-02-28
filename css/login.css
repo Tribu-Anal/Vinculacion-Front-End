@@ -18,10 +18,8 @@ body{
 
 .container{
 	padding: 15px 25px;
-    max-width: 450px;   
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;top:45%;
+    max-width: 500px;   
+    transform: translate(0%, 15%);
 }
 
 .jumbotron{
@@ -41,6 +39,20 @@ body{
 .fa{
 	font-size: 20px;
 	color: #fff;
+
+}
+.btn.btn-success{
+	background: #9B0000;
+	color: #fff;
+	outline: none !important;
+	border: none;
+	border-radius: 0px;
+	width: 50%;
+	left: 25%;
+	border-bottom: 8px solid #820000;
+	-webkit-box-shadow: none !important;
+  	-moz-box-shadow: none !important;
+  	box-shadow: none !important;
 
 }
 input::-webkit-input-placeholder {
