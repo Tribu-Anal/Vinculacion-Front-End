@@ -5,10 +5,8 @@ app.controller('ProyectosCtrl', ['proyectos', function(proyectos) {
     
     controlador.proyectos = [];
     
-    proyectos.getProyectos(controlador.numCuenta, function(response) {
-        for(var obj in response.data) {
-            for(var proyecto in response.data[obj])
-                controlador.proyectos.push(response.data[obj][proyecto]);
-        }
+    proyectos.getProyectos(controlador.numCuenta, function(response) {        
+        console.log(response.data);
+        controlador.proyectos.push(response.data);
     });
 }]);
