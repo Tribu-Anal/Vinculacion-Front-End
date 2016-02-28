@@ -4,7 +4,7 @@ body {
 }
 
 .wrapper {
-	background: #DDF;
+	background: #EEF;
 	font-family: 'Roboto';
 	margin: auto;
 	margin-top: 20px;
@@ -20,4 +20,9 @@ form {
 
 legend {
 	border-bottom: 1px solid #aaa;
+}
+
+.form-btns {
+	margin-top: 30px;
+	margin-bottom: 20px;
 }
