@@ -41,7 +41,7 @@ body{
 	color: #fff;
 
 }
-.btn.btn-success{
+.btn.btn-success, .btn.btn-success:active{
 	background: #9B0000;
 	color: #fff;
 	outline: none !important;
@@ -49,11 +49,64 @@ body{
 	border-radius: 0px;
 	width: 50%;
 	left: 25%;
+	position: fixed;
 	border-bottom: 8px solid #820000;
 	-webkit-box-shadow: none !important;
   	-moz-box-shadow: none !important;
   	box-shadow: none !important;
+  	font-size: 20px;
 
+}
+.btn.btn-success:hover{
+	border-bottom: 4px solid #820000;
+	margin-bottom: -3px;
+    margin-top: 3px;
+}
+
+.btn.btn-success:active{
+	border-bottom: 0px solid #820000;
+	margin-bottom: -8px;
+    margin-top: 8px;
+}
+
+.register-btn.btn.btn-success{
+	background: #005508;
+	border-bottom: 8px solid #366E3B;
+	width: 30%;
+	left: 65%;
+	top: 92%;
+	font-size: 16px;
+
+}
+
+.register-btn.btn.btn-success:hover{
+	border-bottom: 4px solid #366E3B;
+}
+
+.register-btn.btn.btn-success:active{
+	border-bottom: 0px solid #366E3B;
+}
+
+a{
+	color: #fff;
+	font-style: bold;
+
+}
+
+a:hover{
+	color: #820000;
+	outline: none;
+	text-decoration: none;
+}
+
+a:active, a:focus{
+	color: #366E3B;
+	text-decoration: none;
+}
+.lostpassword{
+	position: fixed;
+	bottom: 4%;
+	left: 5%;
 }
 input::-webkit-input-placeholder {
 color: #fff !important;
