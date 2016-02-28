@@ -1,33 +1,44 @@
 var app = angular.module('VinculacionApp');
 
-app.controller('RegistroCtrl', ['$scope', 'registro', function($scope, registro) {
-    $scope.correo;
-    $scope.password;
-    $scope.numCuenta;
-    $scope.nombre;
-    $scope.campus;
-    $scope.idCarrera;
-    $scope.carrera;
+app.controller('RegistroCtrl', ['registro', function(registro) {
+    var controlador = this;
     
-    $scope.registrarAlumno = function() {
+    controlador.correo;
+    controlador.password;
+    //controlador.confirm_password;
+    controlador.numCuenta;
+    controlador.nombre;
+    controlador.campus;
+    controlador.idCarrera;
+    controlador.carrera;
+    
+    controlador.registrarAlumno = function() {
         registro.registroAlumno(JSON.stringify({
-            IdNumber: $scope.numCuenta,
-            Name: $scope.nombre,
-            Password: $scope.password,
-            Campus: $scope.campus,
-            Email: $scope.correo,
+            IdNumber: controlador.numCuenta,
+            Name: controlador.nombre,
+            Password: controlador.password,
+            Campus: controlador.campus,
+            Email: controlador.correo,
             Major: {
-                MajorId : $scope.idCarrera,
-                Name: $scope.carrera
+                MajorId : controlador.idCarrera,
+                Name: controlador.carrera
             }
     })).success(function(response) {
             console.log(response);
             console.log("Alumno registrado");
         })
         console.log("Registrado");
-    }
+    };
     
-    $scope.validarCorreo = function() {
-        return $scope.correo.indexOf("@unitec.edu", $scope.correo.length - 11) >= 0 ? true : false;
-    }
+    //Credits to Alex Cross - StackOverflow
+    controlador.validar = function($event) { 
+        var regex = new RegExp("[a-z]|[0-9]|[A-Z]");
+    
+        var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+   
+        if (!regex.test(key)) {
+        $event.preventDefault();
+        return false;
+        }  
+    };
 }]);

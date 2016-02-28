@@ -13,17 +13,18 @@
     </head>
     <body ng-app="VinculacionApp">
 
-		<div ng-controller="RegistroCtrl">
-            <form name="registro" ng-submit="registro.$valid && validarCorreo() && registrarAlumno()" novalidate>
-                <input type="email" ng-model="correo" placeholder="Correo" required/><br/>
-                <input type="text" ng-model="numCuenta" placeholder="Numero de Cuenta" required/><br/>
-                <input type="text" ng-model="nombre" placeholder="Nombre" required/><br/>
-                <input type="text" ng-model="campus" placeholder="Campus" required/><br/>
-                <input type="password" ng-model="password" placeholder="Password" required/><br/>
-                <input type="text" ng-model="idCarrera" placeholder="Numero Carrera" required/><br/>
-                <input type="text" ng-model="carrera" placeholder="Carrera" required/><br/>
+		<div ng-controller="RegistroCtrl as registro">
+            <form name="registro1" ng-submit="registro1.$valid && registro.registrarAlumno()" novalidate>
+                <input type="email" ng-model="registro.correo" ng-pattern='/@unitec.edu$/' placeholder="Correo" required/><br/>
+                <input type="text" ng-model="registro.numCuenta" placeholder="Numero de Cuenta" required/><br/>
+                <input type="text" ng-model="registro.nombre" placeholder="Nombre" required/><br/>
+                <input type="text" ng-model="registro.campus" placeholder="Campus" required/><br/>
+                <input type="password" ng-model="registro.password" ng-minlength="8"  ng-keypress="registro.validar($event)" placeholder="Password" required/><br/>
+                <input type="password" ng-model="registro.confirm_password" placeholder="Confirmar pass" ng-pattern="registro.password" required/><br/>
+                <input type="text" ng-model="registro.idCarrera" placeholder="Numero Carrera" required/><br/>
+                <input type="text" ng-model="registro.carrera" placeholder="Carrera" required/><br/>
                 <button type="submit">Registrar Alumno</button>
-                Form is {{registro.$valid}}
+                Form is {{registro1.$valid}}<br>
             </form>
         </div>
 
