@@ -1,12 +1,14 @@
 var app = angular.module('VinculacionApp');
 
-app.controller('ProyectosCtrl', ['$scope', 'proyectos', function($scope, proyectos) {
-    $scope.proyectos = [];
+app.controller('ProyectosCtrl', ['proyectos', function(proyectos) {
+    var controlador = this;
     
-    proyectos.getProyectos($scope.numCuenta, function(response) {
+    controlador.proyectos = [];
+    
+    proyectos.getProyectos(controlador.numCuenta, function(response) {
         for(var obj in response.data) {
             for(var proyecto in response.data[obj])
-                $scope.proyectos.push(response.data[obj][proyecto]);
+                controlador.proyectos.push(response.data[obj][proyecto]);
         }
     });
 }]);

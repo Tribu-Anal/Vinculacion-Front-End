@@ -1,7 +1,7 @@
 var app = angular.module('VinculacionApp');
 
 app.service('proyectos', function($http) {
-   var direccion = 'http://proyecto-vinculacion.getsandbox.com/proyectos';//Direccion temporal
+   var direccion = 'http://proyecto-vinculacion.getsandbox.com/proyectos';//http://vinculacionbackend.apphb.com/
    
    this.getProyectos = function(numCuenta, callback) {
        //Mas adelante se utilizara el numero de cuenta para obtener los proyectos de un alumno/docente en especifico.
