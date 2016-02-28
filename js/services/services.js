@@ -7,8 +7,7 @@ app.factory('horasEndPoints', ['$http', function($http){
 		obtenerAlumnosPorSeccion:function(seccion, handleSuccess){
 			var peticion = {
                 method: 'GET',
-                url: url +'/Students',
-                dataType: 'jsonp'
+                url: url +'/Students'
             };
             $http(peticion).then(function(data) {
                 handleSuccess(data);
