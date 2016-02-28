@@ -5,6 +5,7 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
     
     controlador.correo;
     controlador.password;
+    //controlador.confirm_password;
     controlador.numCuenta;
     controlador.nombre;
     controlador.campus;
@@ -27,5 +28,17 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
             console.log("Alumno registrado");
         })
         console.log("Registrado");
-    }
+    };
+    
+    //Credits to Alex Cross - StackOverflow
+    controlador.validar = function($event) { 
+        var regex = new RegExp("[a-z]|[0-9]|[A-Z]");
+    
+        var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+   
+        if (!regex.test(key)) {
+        $event.preventDefault();
+        return false;
+        }  
+    };
 }]);
