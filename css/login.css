@@ -18,14 +18,55 @@ body{
 
 .container{
 	padding: 15px 25px;
-    width: 100%;
-    max-width: 300px;    
+    max-width: 450px;   
     position: absolute;
     transform: translate(-50%, -50%);
-    left: 50%;top:40%;
+    left: 50%;top:45%;
 }
 
-input[type="text"]{
-	background: #00132E;
+.jumbotron{
+	background: #CCCCCC;
+}
 
+.input-group-addon{
+	background: #00132E;
+	outline: 0;
+	border: none;
+}
+
+.col-md-4{
+	width: 100%;
+}
+
+.fa{
+	font-size: 20px;
+	color: #fff;
+
+}
+input::-webkit-input-placeholder {
+color: #fff !important;
+}
+ 
+input:-moz-placeholder { 
+color: #fff !important;  
+}
+ 
+input::-moz-placeholder {  
+color: #fff !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: #fff !important;  
+}
+input[type="email"], input[type="password"]{
+	background: #00132E;
+	font-size: 20px;
+	height: 60%;
+	display: block;
+	color: #fff;
+	outline: none;
+  	border: 2px solid #CCCCCC !important;
+  	-webkit-box-shadow: none !important;
+  	-moz-box-shadow: none !important;
+  	box-shadow: none !important;
 }
