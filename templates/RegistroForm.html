@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vinculacion</title>
+
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    </head>
+    <body ng-app="VinculacionApp">
+
+		<div ng-controller="RegistroCtrl as registro">
+            <form name="registro1" ng-submit="registro1.$valid && registro.registrarAlumno()" novalidate>
+                <input type="email" ng-model="registro.correo" ng-pattern='/@unitec.edu$/' placeholder="Correo" required/><br/>
+                <input type="text" ng-model="registro.numCuenta" placeholder="Numero de Cuenta" required/><br/>
+                <input type="text" ng-model="registro.nombre" placeholder="Nombre" required/><br/>
+                <input type="text" ng-model="registro.campus" placeholder="Campus" required/><br/>
+                <input type="password" ng-model="registro.password" placeholder="Password" required/><br/>
+                <input type="text" ng-model="registro.idCarrera" placeholder="Numero Carrera" required/><br/>
+                <input type="text" ng-model="registro.carrera" placeholder="Carrera" required/><br/>
+                <button type="submit">Registrar Alumno</button>
+                Form is {{registro1.$valid}}<br>
+            </form>
+        </div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-animate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/controllers/RegisterController.js"></script>
+		<script src="../js/services/RegisterService.js"></script>
+		
+    </body>
+</html>
