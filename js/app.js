@@ -14,7 +14,8 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('registro', {
 			url: '/registro',
-			templateUrl: '../templates/registro.html'
+			templateUrl: '../templates/registro.html',
+			controller: 'RegistroCtrl as registro'
 		})
 
 		.state('home', {
