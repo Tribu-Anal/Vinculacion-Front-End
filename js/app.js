@@ -48,3 +48,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		});
 
 }]);
+
+app.run([ '$rootScope', function($rootScope) {
+	$rootScope.links = [];
+}]);
