@@ -4,15 +4,13 @@
 		var ctrl = this;
 		ctrl.secciones={
 			opciones:[
-				{id:1, nombre: 'INF405'},
-				{id:1, nombre: 'Testing'}
+				{id:1, nombre: 'INF405'}
 			],
 			opcionSeleccionada:{}
 		};
 		ctrl.proyectos={
 			opciones:[
-				{id:1, nombre: 'Proyecto de Vinculacion Unitec'},
-				{id:1, nombre: 'Proyecto Testting'}
+				{id:1, nombre: 'Proyecto de Vinculacion Unitec'}
 			],
 			opcionSeleccionada:{}
 		};
@@ -27,7 +25,16 @@
 		};
 		horasEndPoints.obtenerAlumnosPorSeccion(1,function(data){
 			console.log(data);
-			//agregar los elemententos al select de alumnos
+			if(data.data.length>0){
+				for (let i = 0; i <data.data.length; i++) {
+					ctrl.alumnos.opciones.push(
+						{
+							id:data.data[i].Id,
+							nombre: data.data[i].Name + " " + data.data[i].IdNumber
+						}
+					);
+				}
+			}
 		});
 		function validarCampos(opcionSeccion, opcionProyecto, opcionAlumno, horaValor){
 			let valido = true;
@@ -48,6 +55,7 @@
 				hour: ctrl.horas.valor   
 			};
 			horasEndPoints.agregarHorasAlAlumno(objetoARegistrar, function(data){
+				console.log(data);
 				//mostrar mensaje de error o de exito dependiendo de la respuesta. 
 			});
 			
