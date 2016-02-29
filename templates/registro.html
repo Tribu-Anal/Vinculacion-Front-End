@@ -23,11 +23,11 @@
 		</div>
 		<div class="form-group">
 			<label for="clave">Clave</label>
-			<input id="clave" class="form-control" type="password" placeholder="Ingrese su clave..." ng-model="registro.password" required/>
+			<input id="clave" class="form-control" type="password" placeholder="Ingrese su clave..." ng-model="registro.password" ng-minlength="8" ng-keypress="registro.validar($event)" required/>
 		</div>
 		<div class="form-group">
 			<label for="confirmacion_clave">Confirmar Clave</label>
-			<input id="confirmacion_clave" class="form-control" type="password" placeholder="Confirme su clave..." required/>
+			<input id="confirmacion_clave" class="form-control" type="password" placeholder="Confirme su clave..." ng-model="registro.confirm_password" ng-pattern="registro.password" required/>
 		</div>
 		<div class="form-group">
 			<label for="id_carrera">Carrera</label>
