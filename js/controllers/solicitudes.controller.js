@@ -16,9 +16,11 @@
 		solicitudesEndPoints.obtenerAlumnosConSolicitudesPendientes(function(data){
 			if(data.data.length>0){
 				for (let i = 0; i <data.data.length; i++) {
-					ctrl.tablaSolicitudes.cuerpo.push(
-						crearNuevoElementoParaLaTabla(data.data[i].Id, data.data[i].Name, data.data[i].IdNumber , data.data[i].Major.Name,data.data[i].Email)
-					);
+					if(data.data[i].Major!==null){
+						ctrl.tablaSolicitudes.cuerpo.push(
+							crearNuevoElementoParaLaTabla(data.data[i].Id, data.data[i].Name, data.data[i].IdNumber , data.data[i].Major.Name,data.data[i].Email)
+						);
+					}
 				}
 			}
 		});
