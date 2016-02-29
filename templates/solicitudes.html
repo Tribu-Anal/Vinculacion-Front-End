@@ -1,7 +1,8 @@
+<h2>Solicitudes de Registro</h2>
 
 <div class="container" ng-controller="solicitudesController as solicitudesCtrl">
 	<div class="table-responsive">
-		<table class="table table-hover">
+		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
 					<th ng-repeat="encabezado in solicitudesCtrl.tablaSolicitudes.encabezado">{{encabezado}} </th>
@@ -12,10 +13,11 @@
 				<tr ng-repeat="cuerpo in solicitudesCtrl.tablaSolicitudes.cuerpo">
 					<td ng-repeat="contenido in cuerpo.contenido">{{contenido}}</td>
 					<td>
-						<button type="button" style="border-radius: 50%;height: 40px;" class="col-md-6" ng-repeat="accion in cuerpo.acciones" ng-click="accion.click()" ng-class="{'btn btn-primary':accion.nombre=='Aceptar', 'btn btn-danger':accion.nombre=='Rechazar'}" data-toggle="tooltip" data-placement="top" title="{{accion.nombre}}" aria-label="Left Align"><span ng-class="{'glyphicon glyphicon-ok-circle':accion.nombre=='Aceptar', 'glyphicon glyphicon-remove-circle':accion.nombre=='Rechazar'}" aria-hidden="true"></span></button>
+						<button style="width: inherit;" class="btn btn-success pull-right" ng-repeat="accion in cuerpo.acciones" ng-click="accion.click()" ng-class="{'acceptar':accion.nombre=='Aceptar'}">{{accion.nombre}}</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
+

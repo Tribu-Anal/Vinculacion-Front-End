@@ -9,12 +9,24 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('landing', {
 			url: '/',
-			templateUrl: '../templates/landing.html'
+			templateUrl: '../templates/landing.html',
+			onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"css/login.css"
+				]);
+			}]
 		})
 
 		.state('registro', {
 			url: '/registro',
-			templateUrl: '../templates/registro.html'
+			templateUrl: '../templates/registro.html',
+			onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"https://fonts.googleapis.com/css?family=Roboto",
+					"css/registro.css"
+				]);
+			}],
+			controller: 'RegistroCtrl as registro'
 		})
 
 		.state('home', {
@@ -39,7 +51,12 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('home.solicitudes', {
 			url: '/solicitudes',
-			templateUrl: '../templates/solicitudes.html'
+			templateUrl: '../templates/solicitudes.html',
+			onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"css/solicitudes.css"
+				]);
+			}]
 		})
 
 		.state('home.solicitud', {
@@ -47,4 +64,8 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 			templateUrl: '../templates/solicitud.html'
 		});
 
+}]);
+
+app.run([ '$rootScope', function($rootScope) {
+	$rootScope.links = [];
 }]);

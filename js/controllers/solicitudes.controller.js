@@ -1,6 +1,6 @@
 'use strict';
 	var app = angular.module('VinculacionApp');
-	app.controller('solicitudesController', ['$scope',function($scope) {
+	app.controller('solicitudesController', ['$scope', 'solicitudesEndPoints',function($scope,solicitudesEndPoints) {
 		var ctrl = this;
 
 		ctrl.tablaSolicitudes={
@@ -10,27 +10,18 @@
 				'Carrera',
 				'Correo Electronico'
 			],
-			cuerpo:[{
-					acciones:[
-						{nombre: 'Aceptar', click:function(){console.log('edit');}},
-						{nombre: 'Rechazar', click:function(){console.log('delete');}}
-					],
-					contenido:[
-						'testing 1',
-						'testing 2',
-						'testing 3',
-						'teting 4'
-					]
-				},{
-					acciones:[],
-					contenido:[
-						'testing 12',
-						'testing 22',
-						'testing 32',
-						'testing 42'
-					]
-				}]
+			cuerpo:[]
 		};
+
+		solicitudesEndPoints.obtenerAlumnosConSolicitudesPendientes(function(data){
+			if(data.data.length>0){
+				for (let i = 0; i <data.data.length; i++) {
+					ctrl.tablaSolicitudes.cuerpo.push(
+						crearNuevoElementoParaLaTabla(data.data[i].Id, data.data[i].Name, data.data[i].IdNumber , data.data[i].Major.Name,data.data[i].Email)
+					);
+				}
+			}
+		});
 
 		function crearNuevoElementoParaLaTabla(id, nombreAlumno, numeroCuenta, carrera, correo) {
 			var nuevoElemento = {
