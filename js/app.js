@@ -15,6 +15,12 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		.state('registro', {
 			url: '/registro',
 			templateUrl: '../templates/registro.html',
+			onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"https://fonts.googleapis.com/css?family=Roboto",
+					"css/registro.css"
+				]);
+			}],
 			controller: 'RegistroCtrl as registro'
 		})
 
