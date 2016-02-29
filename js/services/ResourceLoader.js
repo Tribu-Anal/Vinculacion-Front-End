@@ -2,9 +2,8 @@ angular.module('VinculacionApp')
 
 	.factory('ResourceLoader', [ '$rootScope', function($rootScope) {
 		var o = {
-			swapResources: function(links, scripts) {
+			swapResources: function(links) {
 				$rootScope.links = links;
-				$rootScope.scripts = scripts;
 			}
 		};
 
