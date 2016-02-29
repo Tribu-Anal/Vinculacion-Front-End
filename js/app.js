@@ -9,7 +9,12 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('landing', {
 			url: '/',
-			templateUrl: '../templates/landing.html'
+			templateUrl: '../templates/landing.html',
+			onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"css/login.css"
+				]);
+			}]
 		})
 
 		.state('registro', {
