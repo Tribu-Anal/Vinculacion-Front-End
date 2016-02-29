@@ -51,7 +51,12 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('home.solicitudes', {
 			url: '/solicitudes',
-			templateUrl: '../templates/solicitudes.html'
+			templateUrl: '../templates/solicitudes.html',
+			onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"css/solicitudes.css"
+				]);
+			}]
 		})
 
 		.state('home.solicitud', {
