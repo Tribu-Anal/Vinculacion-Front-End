@@ -1,31 +1,23 @@
 <h2>Solicitudes de Registro</h2>
 
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>DogeMan</td>
-              <td>
-              dogeman@dogemask.cool
-              <button class="btn btn-success pull-right">Rechazar</button>
-              <button style="background:#005508; border-color: #366E3B;" class="btn btn-success pull-right">Aceptar</button>
-
-              </td>
-            </tr>
-           
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<div class="container" ng-controller="solicitudesController as solicitudesCtrl">
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th ng-repeat="encabezado in solicitudesCtrl.tablaSolicitudes.encabezado">{{encabezado}} </th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="cuerpo in solicitudesCtrl.tablaSolicitudes.cuerpo">
+					<td ng-repeat="contenido in cuerpo.contenido">{{contenido}}</td>
+					<td>
+						<button style="width: inherit;" class="btn btn-success pull-right" ng-repeat="accion in cuerpo.acciones" ng-click="accion.click()" ng-class="{'acceptar':accion.nombre=='Aceptar'}">{{accion.nombre}}</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
 
