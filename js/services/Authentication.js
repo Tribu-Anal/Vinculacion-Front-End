@@ -5,10 +5,10 @@ app.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$root
  
         service.Login = function (username, password, callback) {
             //ACTIVAR CUANDO SE TENGA UNA DIRECCION CON QUE AUTENTICAR
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            $http.post('http://vinculacionbackend.apphb.com/api/Login', JSON.stringify({ username: username, password: password }))
+                .success(function (response) {
+                    callback(response);
+                });
  
         };
   

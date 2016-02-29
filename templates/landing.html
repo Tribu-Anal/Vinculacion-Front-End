@@ -1,9 +1,12 @@
 <h1>Landing Page</h1>
 <h2>Login</h2>
 <div ng-controller="LoginCtrl as login">
-    <form>
+    <form ng-submit="login.login()">
         <input type="text" ng-model="login.username" placeholder="Username"/>
-        <input type="text" ng-model="login.password" placeholder="Password"/>
-        {{login.message}}
+        <input type="text" ng-model="login.password" placeholder="Password"/><br/>
+        <button type="submit">Login</button>
+        {{login.message}}<br/>
+        {{login.username}}<br/>
+        {{login.password}}<br/>
     </form>
 </div>
