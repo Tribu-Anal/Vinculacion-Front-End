@@ -12,6 +12,14 @@ app.factory('solicitudesEndPoints', ['$http', function($http){
             $http(peticion).then(function(data) {
                 handleSuccess(data);
             });
+		}, 
+		rechazarSolicitudDeAlumno:function(objetoARegistrar, handeleSuccess){
+			var peticion = {
+				method: 'POST',
+				url: url+ '/Students/'+objetoARegistrar.NumberId+'/Rejected',
+				data: objetoARegistrar
+			};
+			$http(peticion).then(handleSuccess);
 		}
 	};
 }]);

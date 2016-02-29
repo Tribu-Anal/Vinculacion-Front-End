@@ -35,7 +35,15 @@
 					{
 						nombre: 'Rechazar',
 						click: function(){
-							
+							let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
+							let objetoARegistrar = {
+								NumberId: numeroCuenta
+							}
+							solicitudesEndPoints.rechazarSolicitudDeAlumno(objetoARegistrar,function(data){
+								//mostrar mensaje de exito o error
+								//exitoso:
+								//ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+							});
 						}
 					}
 				],
