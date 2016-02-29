@@ -2,15 +2,15 @@ var app = angular.module('VinculacionApp');
 
 app.controller('RegistroCtrl', ['registro', function(registro) {
     var controlador = this;
-    
+
     controlador.correo;
     controlador.password;
     //controlador.confirm_password;
     controlador.numCuenta;
     controlador.nombre;
-    controlador.campus;
-    controlador.idCarrera;
-    controlador.carrera;
+    controlador.campus = "SPS";
+    controlador.idCarrera = "I-1";
+    controlador.carrera = "I-1 (Ing. en Sistemas Computacionales)";
     
     controlador.registrarAlumno = function() {
         registro.registroAlumno(JSON.stringify({
