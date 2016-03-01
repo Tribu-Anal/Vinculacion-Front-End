@@ -9,7 +9,7 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
     controlador.numCuenta;
     controlador.nombre;
     controlador.campus = "SPS";
-    controlador.idCarrera = "I-1";
+    //controlador.idCarrera = "I-1";
     controlador.carrera = "I-1 (Ing. en Sistemas Computacionales)";
     
     controlador.registrarAlumno = function() {
@@ -19,15 +19,11 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
             Password: controlador.password,
             Campus: controlador.campus,
             Email: controlador.correo,
-            Major: {
-                MajorId : controlador.idCarrera,
-                Name: controlador.carrera
-            }
+            MajorId : controlador.carrera.substring(0, 4)//Agarrar solo los primeros tres caracteres, Ej: I-1
     })).success(function(response) {
             console.log(response);
             console.log("Alumno registrado");
         })
-        console.log("Registrado");
     };
     
     //Credits to Alex Cross - StackOverflow
