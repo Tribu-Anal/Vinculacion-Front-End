@@ -2,7 +2,7 @@
 var app = angular.module('VinculacionApp');
 app.factory('horasEndPoints', ['$http', function($http){
 	var ctrl = this;
-	var url = 'http://vinculacionbackend.apphb.com/api';
+	var url = 'http://fiasps.unitec.edu:8085/api';
 	return {
 		obtenerAlumnosPorSeccion:function(seccion, handleSuccess){
 			var peticion = {
