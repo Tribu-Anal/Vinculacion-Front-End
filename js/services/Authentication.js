@@ -4,8 +4,7 @@ app.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$root
         var service = {};
  
         service.Login = function (username, password, callback) {
-            //ACTIVAR CUANDO SE TENGA UNA DIRECCION CON QUE AUTENTICAR
-            $http.post('http://vinculacionbackend.apphb.com/api/Login', JSON.stringify({ username: username, password: password }))
+            $http.post('http://fiasps.unitec.edu:8085/api/Login', JSON.stringify({ username: username, password: password }))
                 .success(function (response) {
                     callback(response);
                 });
