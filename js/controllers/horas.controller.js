@@ -24,7 +24,6 @@
 			opcionSeleccionada:{}
 		};
 		horasEndPoints.obtenerAlumnosPorSeccion(1,function(data){
-			console.log(data);
 			if(data.data.length>0){
 				for (let i = 0; i <data.data.length; i++) {
 					ctrl.alumnos.opciones.push(

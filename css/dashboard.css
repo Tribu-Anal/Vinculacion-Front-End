@@ -1,0 +1,14 @@
+body {
+	background: #fff;
+	font-family: 'Roboto', sans-serif;
+}
+
+#nav-bar {
+	display: flex;
+	height: 18vh;
+	border-bottom: 45px solid #006;
+	justify-content: center;
+}
+
+h3 {
+}
