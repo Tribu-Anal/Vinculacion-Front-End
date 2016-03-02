@@ -2,17 +2,17 @@ body {
 	margin: 0;
 	background: #253a52;
 	overflow-x: hidden;
+	font-family: 'Roboto', sans-serif;
+	color: rgba(0,0,0,.54);
 }
 
 #nav-bar {
 	position: relative;
 	display: flex;
 	height: 10%;
-	background: #fff;
-	font-family: 'Roboto', sans-serif;
 	font-size: 1.4em;
 	font-weight: 500;
-	color: rgba(0,0,0,.54);
+	background: #fff;
 	padding-top: 20px;
 	padding-bottom: 50px;
 }
@@ -37,11 +37,11 @@ ul.nav {
 	justify-content: space-between;
 }
 
-ul.nav li {
+ul.nav li, .side-nav li {
 	cursor: pointer;
 }
 
-ul.nav li:hover {
+ul.nav li:hover, .side-nav li:hover {
 	color: #9219a6;
 }
 
@@ -61,6 +61,49 @@ ul.nav li:hover {
 	height: 90%;
 	top: 10%;
 	left: 10%;
+}
+
+.side-menu {
+	position: absolute;
+	top: 0%;
+	left: 35%;
+	z-index: 9999;
+	background: #fff;
+	width: 65%;
+	height: 100%;
+	box-shadow: 0 100px 50px #111;
+}
+
+.side-nav {
+	position: absolute;
+	display: flex
+	flex-direction: column;
+	list-style: none;
+	font-size: 1.3em;
+	font-weight: 500;
+	top: 13%;
+	width: 100%;
+	padding-left: 0;
+}
+
+.side-nav li {
+	width: 100%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	padding-left: 20%;
+	margin-bottom: 5%;
+}
+
+.exit-nav {
+	position: absolute;
+	top: 2.5%;
+	left: 83%;
+	font-size: 1.5em;
+	font-weight: 400;
+	background: none;
+	border: none;
+	outline: none;
+	color: #000;
 }
 
 .selected {

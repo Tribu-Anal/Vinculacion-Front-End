@@ -7,6 +7,7 @@ angular.module('VinculacionApp')
 						  { title: "Solicitudes", ref: "home.solicitudes", active: false },
 						  { title: "Log Out", ref: "landing", active: false }
 						];
+		this.showSideMenu = false;
 		var activeItem = this.navItems[0];
 
 		this.navItemClicked = function(itemIndex) {
@@ -18,4 +19,9 @@ angular.module('VinculacionApp')
 			activeItem = this.navItems[itemIndex];
 			activeItem.active = true;
 		};
+
+		this.triggerSideMenu = function() {
+			this.showSideMenu = true;
+		};
+
 	}]);
