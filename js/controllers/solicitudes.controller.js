@@ -1,6 +1,6 @@
 'use strict';
 	var app = angular.module('VinculacionApp');
-	app.controller('solicitudesController', ['$scope', 'solicitudesEndPoints',function($scope,solicitudesEndPoints) {
+	app.controller('solicitudesController', ['$scope','solicitudesEndPoints',function($scope,solicitudesEndPoints) {
 		var ctrl = this;
 
 		ctrl.tablaSolicitudes={
@@ -16,9 +16,11 @@
 		solicitudesEndPoints.obtenerAlumnosConSolicitudesPendientes(function(data){
 			if(data.data.length>0){
 				for (let i = 0; i <data.data.length; i++) {
-					ctrl.tablaSolicitudes.cuerpo.push(
-						crearNuevoElementoParaLaTabla(data.data[i].Id, data.data[i].Name, data.data[i].IdNumber , data.data[i].Major.Name,data.data[i].Email)
-					);
+					if(data.data[i].Major!==null){
+						ctrl.tablaSolicitudes.cuerpo.push(
+							crearNuevoElementoParaLaTabla(data.data[i].Id, data.data[i].Name, data.data[i].AccountId , data.data[i].Major.Name,data.data[i].Email)
+						);
+					}
 				}
 			}
 		});
@@ -37,12 +39,12 @@
 						click: function(){
 							let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
 							let objetoARegistrar = {
-								NumberId: numeroCuenta
+								AccountId: numeroCuenta,
+								Message: 'Con que autoridad quiere registrarse... Rechazado!'
 							}
-							solicitudesEndPoints.rechazarSolicitudDeAlumno(objetoARegistrar,function(data){
-								//mostrar mensaje de exito o error
-								//exitoso:
-								//ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+							solicitudesEndPoints.rechazarAceptar_SolicitudDeAlumno(objetoARegistrar,'Rejected',function(data){
+								ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+								
 							});
 						}
 					}
