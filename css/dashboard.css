@@ -72,6 +72,29 @@ ul.nav li:hover, .side-nav li:hover {
 	width: 65%;
 	height: 100%;
 	box-shadow: 0 100px 50px #111;
+	animation: slide-in .2s linear forwards;
+}
+
+.side-menu.ng-hide {
+	animation: slide-out .2s linear forwards;
+}
+
+@keyframes slide-in {
+	from {
+		left: 100%;
+	}
+	to {
+		left: 35%;
+	}
+}
+
+@keyframes slide-out {
+	from {
+		left: 35%;
+	}
+	to {
+		left: 100%;
+	}
 }
 
 .side-nav {
