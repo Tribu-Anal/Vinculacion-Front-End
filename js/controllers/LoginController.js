@@ -13,7 +13,7 @@ app.controller('LoginCtrl', ['$rootScope', '$location', 'AuthenticationService',
         AuthenticationService.Login(controlador.username, controlador.password, function(response) {
             if(response !== null) {
                 AuthenticationService.SetCredentials(controlador.username, controlador.password);
-                $location.path('/home/proyecto');
+                $location.path('/home');
                 console.log(response);
                 console.log("Entro");
             } else {
