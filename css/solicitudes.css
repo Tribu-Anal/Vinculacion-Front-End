@@ -1,0 +1,55 @@
+.container {
+	margin-top: 5%;
+	font-size: 1.3em;
+}
+
+.solicitudes-wrapper h2 {
+  text-align: center;
+  color: #fff;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 20px;
+}
+.table, th, td {
+	border: 3px solid #fff;
+}
+td, tr{
+	color: #fff;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th{
+	color: #000;
+}
+table caption {
+	padding: .5em 0;
+}
+
+/*.btn.btn-success, .btn.btn-success:active{
+	background: #9B0000;
+	color: #fff;
+	outline: none !important;
+	border: none;
+	border-radius: 0px;
+	border-bottom: 8px solid #820000;
+	-webkit-box-shadow: none !important;
+  	-moz-box-shadow: none !important;
+  	box-shadow: none !important;
+  	font-size: 15px;
+  	width: 20%;
+  	margin-left: 20px;
+
+}*/
+/*.btn.btn-success:hover{
+	border-bottom: 4px solid #820000;
+	margin-bottom: -3px;
+    margin-top: 3px;
+}
+
+.btn.btn-success.acceptar{
+	background:#005508;
+	border-color: #366E3B;
+}
+
+.btn.btn-success:active{
+	border-bottom: 0px solid #820000;
+	margin-bottom: -8px;
+    margin-top: 8px;
+}*/

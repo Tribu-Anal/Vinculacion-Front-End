@@ -1,0 +1,43 @@
+<div class="wrapper">
+	<h1>Registro</h1>
+	<form name="registro1" ng-submit="registro1.$valid && registro.registrarAlumno()" novalidate>
+		<legend>Informacion de Registro</legend>
+		<div class="form-group">
+			<label for="correo">Correo</label>
+			<input id="correo" class="form-control" type="email" placeholder="alumno@unitec.edu"  ng-model="registro.correo" ng-pattern='/@unitec.edu$/' required/>
+		</div>
+		<div class="form-group">
+			<label for="num_cuenta">Numero de Cuenta</label>
+			<input id="num_cuenta" class="form-control" type="text" placeholder="21331044" ng-model="registro.numCuenta" required/>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre Completo</label>
+			<input id="nombre" class="form-control" type="text" placeholder="Jose Luis Garcia" ng-model="registro.nombre" required/>
+		</div>
+		<div class="form-group">
+			<label for="campus">Campus</label>
+			<select id="campus" class="form-control" name="campus" ng-model="registro.campus">
+				<option value="SPS">SPS</option>
+				<option value="TGU">TGU</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="clave">Clave</label>
+			<input id="clave" class="form-control" type="password" placeholder="Ingrese su clave..." ng-model="registro.password" ng-minlength="8" ng-keypress="registro.validar($event)" required/>
+		</div>
+		<div class="form-group">
+			<label for="confirmacion_clave">Confirmar Clave</label>
+			<input id="confirmacion_clave" class="form-control" type="password" placeholder="Confirme su clave..." ng-model="registro.confirm_password" ng-pattern="registro.password" required/>
+		</div>
+		<div class="form-group">
+			<label for="id_carrera">Carrera</label>
+			<select id="id_carrera" class="form-control" name="carrera" ng-model="registro.carrera">
+				<option value="I-1 (Ing. en Sistemas Computacionales)">I-1 (Ing. en Sistemas Computacionales)</option>
+			</select>
+		</div>
+		<div class="form-btns">
+			<button class="btn btn-default" type="reset">Reset</button>
+			<button class="btn btn-primary" type="submit">Confirmar</button>
+		</div>
+	</form>
+</div>
