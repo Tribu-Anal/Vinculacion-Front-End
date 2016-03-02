@@ -7,7 +7,7 @@ body {
 #nav-bar {
 	position: relative;
 	display: flex;
-	height: 10vh;
+	height: 10%;
 	background: #fff;
 	font-family: 'Roboto', sans-serif;
 	font-size: 1.4em;
