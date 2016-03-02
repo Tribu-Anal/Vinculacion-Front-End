@@ -1,44 +1,60 @@
-.bar {
-	display: flex;
+.project-card {
+	position: absolute;
+	width: 75%;
+	min-width: 75%;
+	top: 15%;
+	left: 13%;
+	padding: 2%;
 	background: #fff;
-	width: 87%;
-	height: 55px;
-	border-radius: 1px;
-	box-shadow: 0 0 5px #111;
-	margin: 10px auto 0;
-	padding: 10px;
-	font-family: sans-serif;
+	color: #444;
+	border-radius: 2px;
+	box-shadow: 0 0 10px #111;
+	overflow: hidden;
 }
 
-input[type='text'] {
-	background: #fff;
-	outline: none;
-	border: none;
-	border-bottom: 1px solid #AAA;
-	width: 500px;
-	height: 90%;
-	padding-left: 5px;
-	font-size: 24px;
-	caret-color: #444;
-	color: #555;
-	margin-left: 100px;
-	margin-right: 600px;
+.project-header {
+	text-align: center;
 }
 
-.gallery {
-	display: flex;
-	width: 95%;
-	margin: 40px auto;
-	padding-left: 80px;
-	flex-wrap: wrap;
-}
-
-.card {
-	background: #fff;
-	border-radius: 1px;
-	box-shadow: 0 0 5px #111;
+.project-card img.round {
+	margin-top: 5%;
+	margin-left: 35%;
+	border-radius: 50%;
 	width: 25%;
-	height: 300px;
-	margin-right: 100px;
-	margin-bottom: 20px;
+	height: 230px;
+	box-shadow: 0 0 5px #111;
+}
+
+.project-card img.square {
+	margin-left: 15%;
+	margin-top: 5%;
+	box-shadow: 0 3px 5px #111;
+}
+
+.project-info {
+	margin-top: 7%;
+	padding: 0 10%;
+}
+
+.project-info p, .project-info ul li {
+	font-size: 1.3em;
+}
+
+.participantes {
+	margin-top: 4%;
+	list-style: none;
+	border: 2px solid #afbdc4;
+	padding: 5%;
+}
+
+.participantes li {
+	position: relative;
+	text-align: center;
+	border: 2px solid #afbdc4;
+	padding: 2%;
+	cursor: pointer;
+}
+
+.participantes li:hover {
+	background: #afbdc4;
 }
