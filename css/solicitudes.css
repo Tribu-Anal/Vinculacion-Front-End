@@ -22,7 +22,7 @@ table caption {
 	padding: .5em 0;
 }
 
-.btn.btn-success, .btn.btn-success:active{
+/*.btn.btn-success, .btn.btn-success:active{
 	background: #9B0000;
 	color: #fff;
 	outline: none !important;
@@ -36,8 +36,8 @@ table caption {
   	width: 20%;
   	margin-left: 20px;
 
-}
-.btn.btn-success:hover{
+}*/
+/*.btn.btn-success:hover{
 	border-bottom: 4px solid #820000;
 	margin-bottom: -3px;
     margin-top: 3px;
@@ -52,4 +52,4 @@ table caption {
 	border-bottom: 0px solid #820000;
 	margin-bottom: -8px;
     margin-top: 8px;
-}
+}*/
