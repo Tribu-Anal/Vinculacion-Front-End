@@ -2,24 +2,26 @@
 var app = angular.module('VinculacionApp');
 app.factory('solicitudesEndPoints', ['$http', function($http){
 	var ctrl = this;
-	var url = 'http://vinculacionbackend.apphb.com/api';
+	var url = 'http://fiasps.unitec.edu:8085/api';
 	return {
 		obtenerAlumnosConSolicitudesPendientes:function(handleSuccess){
 			var peticion = {
                 method: 'GET',
-                url: url +'/Students/Filter/2'
+                url: url +'/Students/Filter/0'
             };
             $http(peticion).then(function(data) {
                 handleSuccess(data);
             });
 		}, 
-		rechazarSolicitudDeAlumno:function(objetoARegistrar, handeleSuccess){
+		rechazarAceptar_SolicitudDeAlumno:function(objetoARegistrar, tipo, handleSuccess){
 			var peticion = {
 				method: 'POST',
-				url: url+ '/Students/'+objetoARegistrar.NumberId+'/Rejected',
+				url: url+ '/Students/'+tipo,
 				data: objetoARegistrar
 			};
-			$http(peticion).then(handleSuccess);
+			$http(peticion).then(function(data) {
+                handleSuccess(data);
+            });
 		}
 	};
 }]);
