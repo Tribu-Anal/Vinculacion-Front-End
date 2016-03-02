@@ -31,7 +31,16 @@
 					{
 						nombre: 'Aceptar',
 						click: function(){
-
+                            let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
+							let objetoARegistrar = {
+								AccountId: numeroCuenta,
+								Message: 'Fue aceptado',
+                                id:id
+							}
+							solicitudesEndPoints.Aceptar_SolicitudDeAlumno(objetoARegistrar,function(data){
+								ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+								
+							});
 						}
 					},
 					{
