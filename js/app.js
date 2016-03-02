@@ -31,7 +31,14 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('home', {
 			url: '/home',
-			templateUrl: '../templates/dashboard.html'
+			templateUrl: '../templates/dashboard.html',
+			onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"https://fonts.googleapis.com/css?family=Roboto:400,500",
+					"css/dashboard.css"
+				]);
+			}],
+			controller: 'NavCtrl as nav'
 		})
 
 		.state('home.proyectos', {
