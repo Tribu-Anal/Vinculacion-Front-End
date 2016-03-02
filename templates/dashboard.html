@@ -1,10 +1,7 @@
 <div id="nav-bar">
 	<div class="title"></div>
 	<ul class="nav">
-		<li class="selected">Home</li>
-		<li>Proyectos</li>
-		<li>Solicitudes</li>
-		<li>Log Out</li>
+		<li ng-repeat="navItem in nav.navItems" ng-class="{ 'selected': navItem.active }" ng-click="nav.navItemClicked($index)" ui-sref="{{navItem.ref}}">{{navItem.title}}</li>
 	</ul>
 </div>
 <div ui-view></div>
