@@ -37,7 +37,8 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 					"https://fonts.googleapis.com/css?family=Roboto:400,500",
 					"css/dashboard.css"
 				]);
-			}]
+			}],
+			controller: 'NavCtrl as nav'
 		})
 
 		.state('home.proyectos', {
