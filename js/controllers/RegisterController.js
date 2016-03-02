@@ -10,16 +10,25 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
     controlador.nombre;
     controlador.campus = "SPS";
     //controlador.idCarrera = "I-1";
-    controlador.carrera = "I-1 (Ing. en Sistemas Computacionales)";
+    controlador.carrera = "I - 01 (Ing. en Sistemas Computacionales)";
     
     controlador.registrarAlumno = function() {
-        registro.registroAlumno(JSON.stringify({
-            IdNumber: controlador.numCuenta,
+        console.log(JSON.stringify({
+            AccountId: controlador.numCuenta,
             Name: controlador.nombre,
             Password: controlador.password,
+            MajorId : controlador.carrera.substring(0, 6),//Agarrar solo los primeros tres caracteres, Ej: I - 01
             Campus: controlador.campus,
             Email: controlador.correo,
-            MajorId : controlador.carrera.substring(0, 4)//Agarrar solo los primeros tres caracteres, Ej: I-1
+    }));
+        
+        registro.registroAlumno(JSON.stringify({
+            AccountId: controlador.numCuenta,
+            Name: controlador.nombre,
+            Password: controlador.password,
+            MajorId : controlador.carrera.substring(0, 6),//Agarrar solo los primeros tres caracteres, Ej: I - 01
+            Campus: controlador.campus,
+            Email: controlador.correo,
     })).success(function(response) {
             console.log(response);
             console.log("Alumno registrado");
