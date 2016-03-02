@@ -2,15 +2,15 @@ var app = angular.module('VinculacionApp');
 
 app.controller('RegistroCtrl', ['registro', function(registro) {
     var controlador = this;
-    
+
     controlador.correo;
     controlador.password;
     //controlador.confirm_password;
     controlador.numCuenta;
     controlador.nombre;
-    controlador.campus;
-    controlador.idCarrera;
-    controlador.carrera;
+    controlador.campus = "SPS";
+    //controlador.idCarrera = "I-1";
+    controlador.carrera = "I-1 (Ing. en Sistemas Computacionales)";
     
     controlador.registrarAlumno = function() {
         registro.registroAlumno(JSON.stringify({
@@ -19,15 +19,11 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
             Password: controlador.password,
             Campus: controlador.campus,
             Email: controlador.correo,
-            Major: {
-                MajorId : controlador.idCarrera,
-                Name: controlador.carrera
-            }
+            MajorId : controlador.carrera.substring(0, 4)//Agarrar solo los primeros tres caracteres, Ej: I-1
     })).success(function(response) {
             console.log(response);
             console.log("Alumno registrado");
         })
-        console.log("Registrado");
     };
     
     //Credits to Alex Cross - StackOverflow
