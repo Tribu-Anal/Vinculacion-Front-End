@@ -152,6 +152,10 @@ ul.nav li:hover, .side-nav li:hover {
 	.title {
 		width: 60%;
 	}
+	.selected {
+		padding-bottom: 5%;
+		border: none;
+	}
 }
 
 @media screen and (max-width: 520px) {
