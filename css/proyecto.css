@@ -1,0 +1,44 @@
+.bar {
+	display: flex;
+	background: #fff;
+	width: 87%;
+	height: 55px;
+	border-radius: 1px;
+	box-shadow: 0 0 5px #111;
+	margin: 10px auto 0;
+	padding: 10px;
+	font-family: sans-serif;
+}
+
+input[type='text'] {
+	background: #fff;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #AAA;
+	width: 500px;
+	height: 90%;
+	padding-left: 5px;
+	font-size: 24px;
+	caret-color: #444;
+	color: #555;
+	margin-left: 100px;
+	margin-right: 600px;
+}
+
+.gallery {
+	display: flex;
+	width: 95%;
+	margin: 40px auto;
+	padding-left: 80px;
+	flex-wrap: wrap;
+}
+
+.card {
+	background: #fff;
+	border-radius: 1px;
+	box-shadow: 0 0 5px #111;
+	width: 25%;
+	height: 300px;
+	margin-right: 100px;
+	margin-bottom: 20px;
+}

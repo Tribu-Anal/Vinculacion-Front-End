@@ -1,1 +1,11 @@
-<h1>Este es el View de un Proyecto</1>
+<div class="bar">
+	<input type="text" placeholder="Enter Project Name...">
+	<div>
+		Filter <select name="">
+		<option value="">Ecologia</option>
+	</select>
+	</div>
+</div>
+<div class="gallery">
+	<div class="card" ng-repeat="proyecto in proyectos.proyectos">{{proyecto.Name}}</div>
+</div>

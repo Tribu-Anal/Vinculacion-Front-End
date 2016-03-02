@@ -40,6 +40,11 @@ table caption {
     margin-top: 3px;
 }
 
+.btn.btn-success.acceptar{
+	background:#005508;
+	border-color: #366E3B;
+}
+
 .btn.btn-success:active{
 	border-bottom: 0px solid #820000;
 	margin-bottom: -8px;
