@@ -4,10 +4,10 @@ app.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$root
         var service = {};
  
         service.Login = function (username, password, callback) {
-            $http.post('http://fiasps.unitec.edu:8085/api/Login', JSON.stringify({ username: username, password: password }))
+            $http.post('http://fiasps.unitec.edu:8085/api/Login', JSON.stringify({ User: username, Password: password }))
                 .success(function (response) {
                     console.log(response);
-                    callback(response);
+                    callback(response);//callback(response)
                 });
  
         };
@@ -22,14 +22,16 @@ app.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$root
                 }
             };
   
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
+            console.log('Cookie set!');
         };
   
         service.ClearCredentials = function () {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            //$http.defaults.headers.common.Authorization = 'Basic ';
+            console.log('Cookie removed!');
         };
   
         return service;
