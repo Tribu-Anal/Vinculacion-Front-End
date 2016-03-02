@@ -21,29 +21,78 @@ body {
 	position: absolute;
 	top: -12%;
 	left: 1%;
-	width: 100%;
 	height: 100%;
+	min-width: 50%;
 	background: url('../assets/unitec-dashboard.png') no-repeat;
 }
 
 .nav {
 	position: absolute;
 	display: flex;
-	width: 30%;
 	right: 5%;
+}
+
+ul.nav {
+	width: 35%;
 	justify-content: space-between;
 }
 
-.nav li {
+ul.nav li {
 	cursor: pointer;
 }
 
-.nav li:hover {
+ul.nav li:hover {
 	color: #9219a6;
+}
+
+.hamburger {
+	display: none;
+	position: absolute;
+	background: #fff;
+	top: 10%;
+	outline: none;
+	border: none;
+	height: 80%;
+}
+
+.hamburger img {
+	position: absolute;
+	width: 80%;
+	height: 90%;
+	top: 10%;
+	left: 10%;
 }
 
 .selected {
 	color: #9219a6;
 	padding-bottom: 18px;
 	border-bottom: 4px solid #9219a6;
+}
+
+@media screen and (max-width: 1020px) {
+	ul.nav {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	ul.nav {
+		display: none;
+	}
+	.hamburger {
+		display: block;
+		width: 10%;
+	}
+	.title {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 520px) {
+	.hamburger {
+		width: 10%;
+	}
+	.title {
+		background-size: 100% 120%;
+	}
 }

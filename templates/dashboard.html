@@ -3,5 +3,6 @@
 	<ul class="nav">
 		<li ng-repeat="navItem in nav.navItems" ng-class="{ 'selected': navItem.active }" ng-click="nav.navItemClicked($index)" ui-sref="{{navItem.ref}}">{{navItem.title}}</li>
 	</ul>
+	<button class="nav hamburger"><img src="../assets/hamburger-nav.png" alt="Hamburger Navigation"></button>
 </div>
 <div ui-view></div>
