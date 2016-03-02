@@ -1,5 +1,6 @@
 .container {
 	margin-top: 5%;
+	font-size: 1.3em;
 }
 
 .solicitudes-wrapper h2 {
@@ -7,6 +8,9 @@
   color: #fff;
   font-family: 'Oxygen', sans-serif;
   font-size: 20px;
+}
+.table, th, td {
+	border: 3px solid #fff;
 }
 td, tr{
 	color: #fff;

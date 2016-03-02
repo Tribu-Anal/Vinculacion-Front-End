@@ -5,15 +5,15 @@
 			<thead>
 				<tr>
 					<th ng-repeat="encabezado in solicitudesCtrl.tablaSolicitudes.encabezado">{{encabezado}} </th>
-					<th></th>
+					<!-- <th></th> -->
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="cuerpo in solicitudesCtrl.tablaSolicitudes.cuerpo">
 					<td ng-repeat="contenido in cuerpo.contenido">{{contenido}}</td>
-					<td>
+					<!-- <td>
 						<button style="width: inherit;" class="btn btn-success pull-right" ng-repeat="accion in cuerpo.acciones" ng-click="accion.click()" ng-class="{'acceptar':accion.nombre=='Aceptar'}">{{accion.nombre}}</button>
-					</td>
+					</td> -->
 				</tr>
 			</tbody>
 		</table>
