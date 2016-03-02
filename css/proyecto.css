@@ -28,6 +28,7 @@
 .project-card img.square {
 	margin-left: 15%;
 	margin-top: 5%;
+	min-width: 60%;
 	box-shadow: 0 3px 5px #111;
 }
 
@@ -57,4 +58,28 @@
 
 .participantes li:hover {
 	background: #afbdc4;
+}
+
+@media screen and (max-width: 1200px) {
+	.project-card img.square {
+		width: 75%;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.project-card {
+		width: 100%;
+		box-shadow: none;
+		top: 12%;
+		left: 0%;
+	}
+
+	.project-card img.square {
+		width: 70%;
+		height: 20%;
+	}
+
+	.project-info {
+		line-height: 1.2;
+	}
 }
