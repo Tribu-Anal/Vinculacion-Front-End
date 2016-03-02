@@ -1,4 +1,14 @@
 <div id="nav-bar">
-	<h3>Home</h3>
+	<div class="title"></div>
+	<ul class="nav">
+		<li ng-repeat="navItem in nav.navItems" ng-class="{ 'selected': navItem.active }" ng-click="nav.navItemClicked($index)" ui-sref="{{navItem.ref}}">{{navItem.title}}</li>
+	</ul>
+	<button class="nav hamburger" ng-click="nav.showSideMenu = true"><img src="../assets/hamburger-nav.png" alt="Hamburger Navigation"></button>
+</div>
+<div class="side-menu" ng-show="nav.showSideMenu">
+	<button class="exit-nav" ng-click="nav.showSideMenu = false"><i class="glyphicon glyphicon-remove"></i></button>
+	<ul class="side-nav">
+		<li ng-repeat="navItem in nav.navItems" ng-class="{ 'selected': navItem.active }" ng-click="nav.navItemClicked($index)" ui-sref="{{navItem.ref}}">{{navItem.title}}</li>
+	</ul>
 </div>
 <div ui-view></div>

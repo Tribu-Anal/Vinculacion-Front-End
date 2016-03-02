@@ -28,8 +28,8 @@
 				for (let i = 0; i <data.data.length; i++) {
 					ctrl.alumnos.opciones.push(
 						{
-							id:data.data[i].Id,
-							nombre: data.data[i].Name + " " + data.data[i].IdNumber
+							id:data.data[i].AccountId,
+							nombre: data.data[i].Name + " " + data.data[i].AccountId
 						}
 					);
 				}
@@ -48,10 +48,10 @@
 				return; 
 			}
 			let objetoARegistrar = {
-				numberId: ctrl.alumnos.opcionSeleccionada.id,
-				sectionId: ctrl.secciones.opcionSeleccionada.id,
-				projectId: ctrl.proyectos.opcionSeleccionada.id,
-				hour: ctrl.horas.valor   
+				AccountId: ctrl.alumnos.opcionSeleccionada.id,
+				SectionId: ctrl.secciones.opcionSeleccionada.id,
+				ProjectId: ctrl.proyectos.opcionSeleccionada.id,
+				Hour: ctrl.horas.valor   
 			};
 			horasEndPoints.agregarHorasAlAlumno(objetoARegistrar, function(data){
 				console.log(data);
