@@ -43,7 +43,15 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('home.proyecto', {
 			url: '/proyecto',
-			templateUrl: '../templates/proyecto.html'
+			templateUrl: '../templates/proyecto.html',
+            onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"https://fonts.googleapis.com/css?family=Roboto",
+					"css/dashboard.css",
+					"css/proyecto.css"
+				]);
+			}],
+			controller: 'ProyectosCtrl as proyectos'
 		})
 
 		.state('home.horas', {
