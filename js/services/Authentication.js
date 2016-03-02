@@ -6,6 +6,7 @@ app.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$root
         service.Login = function (username, password, callback) {
             $http.post('http://fiasps.unitec.edu:8085/api/Login', JSON.stringify({ username: username, password: password }))
                 .success(function (response) {
+                    console.log(response);
                     callback(response);
                 });
  

@@ -14,7 +14,9 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 				rl.swapResources([
 					"css/login.css"
 				]);
-			}]
+			}],
+            
+        controller: 'LoginCtrl as login'
 		})
 
 		.state('registro', {
@@ -82,4 +84,3 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScop
         
         $rootScope.links = [];
     }]);
-}]);
