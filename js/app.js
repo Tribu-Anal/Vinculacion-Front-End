@@ -53,7 +53,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 			templateUrl: '../templates/proyecto.html',
             onEnter: ['ResourceLoader', function(rl) {
 				rl.swapResources([
-					"https://fonts.googleapis.com/css?family=Roboto",
+					"https://fonts.googleapis.com/css?family=Roboto:400,500",
 					"css/dashboard.css",
 					"css/proyecto.css"
 				]);
@@ -71,6 +71,8 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 			templateUrl: '../templates/solicitudes.html',
 			onEnter: ['ResourceLoader', function(rl) {
 				rl.swapResources([
+					"https://fonts.googleapis.com/css?family=Roboto:400,500",
+					"css/dashboard.css",
 					"css/solicitudes.css"
 				]);
 			}]
