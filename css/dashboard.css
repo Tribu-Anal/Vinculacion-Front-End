@@ -1,14 +1,49 @@
 body {
-	background: #fff;
-	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	background: #253a52;
+	overflow-x: hidden;
 }
 
 #nav-bar {
+	position: relative;
 	display: flex;
-	height: 18vh;
-	border-bottom: 45px solid #006;
-	justify-content: center;
+	height: 10vh;
+	background: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.4em;
+	font-weight: 500;
+	color: rgba(0,0,0,.54);
+	padding-top: 20px;
+	padding-bottom: 50px;
 }
 
-h3 {
+.title {
+	position: absolute;
+	top: -12%;
+	left: 1%;
+	width: 100%;
+	height: 100%;
+	background: url('../assets/unitec-dashboard.png') no-repeat;
+}
+
+.nav {
+	position: absolute;
+	display: flex;
+	width: 30%;
+	right: 5%;
+	justify-content: space-between;
+}
+
+.nav li {
+	cursor: pointer;
+}
+
+.nav li:hover {
+	color: #9219a6;
+}
+
+.selected {
+	color: #9219a6;
+	padding-bottom: 18px;
+	border-bottom: 4px solid #9219a6;
 }
