@@ -20,8 +20,4 @@ angular.module('VinculacionApp')
 			activeItem.active = true;
 		};
 
-		this.triggerSideMenu = function() {
-			this.showSideMenu = true;
-		};
-
 	}]);
