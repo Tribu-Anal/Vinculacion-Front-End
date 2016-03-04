@@ -12,17 +12,13 @@ app.controller('LoginCtrl', ['$rootScope', '$location', 'AuthenticationService',
         controlador.dataLoading = true;
         AuthenticationService.Login(controlador.username, controlador.password, function(response) {
             if(response !== null) {
-                AuthenticationService.SetCredentials(controlador.username, controlador.password);
+                AuthenticationService.SetCredentials(response);
                 $location.path('/home');
-                console.log(response);
-                console.log("Entro");
             } else {
-                //controlador.error = response.message;
+                controlador.error = response.message;
                 controlador.dataLoading = false;
                 //console.log(controlador.error);
             }
         });
     };
-    
-    controlador.message = "Hello";
 }]);
