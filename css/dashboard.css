@@ -1,124 +1,157 @@
 body
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Ubuntu', 'Roboto', sans-serif;
 
     overflow-x: hidden;
 
     margin: 0;
-
-    color: rgba(0,0,0,.54);
-    background: #afbdc4;
 }
 
-#nav-bar
+#side-bar
 {
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: 500;
 
-    position: relative;
-
-    display: flex;
-
-    height: 10%;
-    padding-top: 20px;
-    padding-bottom: 50px;
-
-    background: #fff;
-}
-
-.title
-{
     position: absolute;
-    top: -12%;
-    left: 1%;
 
-    min-width: 50%;
+    width: 18%;
     height: 100%;
 
-    background: url('../assets/unitec-dashboard.png') no-repeat;
+    animation: slide-in .3s linear forwards;
+
+    background: #283b5b;
 }
 
-.nav
+#side-bar.ng-hide
 {
-    position: absolute;
-    right: 5%;
-
-    display: flex;
+    animation: slide-out .3s linear forwards;
 }
 
-ul.nav
+#logo-area
+{
+    display: flex;
+
+    height: 13%;
+
+    background: #213250;
+
+    justify-content: center;
+}
+
+#logo-area img
 {
     width: 35%;
+    height: 80%;
 
-    justify-content: space-between;
+    align-self: center;
 }
 
-ul.nav li,
-.side-nav li
+#navigation
 {
+    margin-top: 30%;
+    padding: 0 15%;
+
+    color: #6b7fa4;
+}
+
+#navigation ul
+{
+    padding: 0;
+
+    list-style: none;
+}
+
+#navigation li
+{
+    margin-bottom: 15%;
+
     cursor: pointer;
 }
 
-ul.nav li:hover,
-.side-nav li:hover
+#navigation li:hover,
+.active
 {
-    color: #9219a6;
+    color: #55e4d4;
 }
 
-.hamburger
+#navigation i
 {
-    position: absolute;
-    top: 10%;
-
-    display: none;
-
-    height: 80%;
-
-    border: none;
-    outline: none;
-    background: #fff;
+    margin-right: 6%;
 }
 
-.hamburger img
+.header-bar
 {
     position: absolute;
-    top: 10%;
-    left: 10%;
+    left: 18%;
 
-    width: 80%;
-    height: 90%;
+    display: flex;
+
+    width: 82%;
+    height: 13%;
+    padding-left: 2%;
+
+    transition: all .3s linear;
+
+    color: #7b96c4;
+    border-bottom: 1px solid #e1ecff;
+    background: #f7faff;
 }
 
-.side-menu
+#activity-section
 {
-    position: absolute;
-    z-index: 9999;
-    top: 0;
-    left: 35%;
+    font-size: 18px;
 
-    width: 65%;
+    display: flex;
+
+    align-self: center;
+}
+
+#activity-section img
+{
+    width: 10%;
     height: 100%;
+    margin-right: 3%;
 
-    animation: slide-in .2s linear forwards;
-
-    background: #fff;
-    box-shadow: 0 100px 50px #111;
+    cursor: pointer;
 }
 
-.side-menu.ng-hide
+.dynamic-area
 {
-    animation: slide-out .2s linear forwards;
+    position: absolute;
+    top: 13%;
+    left: 18%;
+
+    overflow-y: scroll;
+
+    width: 82%;
+    height: 87%;
+
+    transition: all .3s linear;
+}
+
+.expanded
+{
+    left: 0;
+
+    width: 100%;
+}
+
+.shrunk
+{
+    left: 18%;
+
+    width: 82%;
 }
 
 @keyframes slide-in
 {
     from
     {
-        left: 100%;
+        left: -18%;
     }
     to
     {
-        left: 35%;
+        left: 0;
     }
 }
 
@@ -126,103 +159,10 @@ ul.nav li:hover,
 {
     from
     {
-        left: 35%;
+        left: 0;
     }
     to
     {
-        left: 100%;
-    }
-}
-
-.side-nav
-{
-    font-size: 1.3em;
-    font-weight: 500;
-
-    position: absolute;
-    top: 13%;
-
-    display: flex
-    flex-direction: column;
-
-    width: 100%;
-    padding-left: 0;
-
-    list-style: none;
-}
-
-.side-nav li
-{
-    width: 100%;
-    margin-bottom: 5%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    padding-left: 20%;
-}
-
-.exit-nav
-{
-    font-size: 1.5em;
-    font-weight: 400;
-
-    position: absolute;
-    top: 2.5%;
-    left: 83%;
-
-    color: #000;
-    border: none;
-    outline: none;
-    background: none;
-}
-
-.selected
-{
-    padding-bottom: 18px;
-
-    color: #9219a6;
-    border-bottom: 4px solid #9219a6;
-}
-
-@media screen and (max-width: 1020px)
-{
-    ul.nav
-    {
-        width: 50%;
-    }
-}
-
-@media screen and (max-width: 700px)
-{
-    ul.nav
-    {
-        display: none;
-    }
-    .hamburger
-    {
-        display: block;
-
-        width: 10%;
-    }
-    .title
-    {
-        width: 60%;
-    }
-    .selected
-    {
-        padding-bottom: 5%;
-
-        border: none;
-    }
-}
-
-@media screen and (max-width: 520px)
-{
-    .hamburger
-    {
-        width: 10%;
-    }
-    .title
-    {
-        background-size: 100% 120%;
+        left: -18%;
     }
 }

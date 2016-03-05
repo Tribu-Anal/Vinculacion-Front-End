@@ -2,12 +2,20 @@ angular.module('VinculacionApp')
 
 	.controller('NavCtrl', [ function() {
 		this.navItems = [ 
-						  { title: "Home", ref: "home", active: true },
-						  { title: "Proyectos", ref: "home.proyectos", active: false },
-						  { title: "Solicitudes", ref: "home.solicitudes", active: false },
-						  { title: "Log Out", ref: "landing", active: false }
+						  { title: "HOME", ref: "home", icon: 
+						  "glyphicon glyphicon-home", active: true },
+
+						  { title: "PROYECTOS", ref: "home.proyectos", 
+						  icon: "glyphicon glyphicon-folder-open", active: false },
+
+						  { title: "SOLICITUDES", ref: "home.solicitudes", 
+						  	icon: "glyphicon glyphicon-tasks", active: false },
+
+						  { title: "LOG OUT", ref: "landing", 
+						  icon: "glyphicon glyphicon-log-out", active: false }
 						];
-		this.showSideMenu = false;
+
+		this.showSideBar = true;
 		var activeItem = this.navItems[0];
 
 		this.navItemClicked = function(itemIndex) {
