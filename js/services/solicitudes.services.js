@@ -7,7 +7,7 @@ app.factory('solicitudesEndPoints', ['$http', function($http){
 		obtenerAlumnosConSolicitudesPendientes:function(handleSuccess){
 			var peticion = {
                 method: 'GET',
-                url: url +'/Students/Filter/1'
+                url: url +'/Students/Filter/Active'
             };
             $http(peticion).then(function(data) {
                 handleSuccess(data);
