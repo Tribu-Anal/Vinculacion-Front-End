@@ -103,7 +103,9 @@
 }
 
 .img-responsive{
-    margin: 0 auto;   
+    margin: 0 auto;
+    width: 120px;
+    height: 120px;
 }
 body {
   background: #213250; /* fallback for old browsers */
