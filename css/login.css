@@ -90,16 +90,16 @@
   color: #EF3B3A;
 }
 .fa.fa-user{
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .fa.fa-lock{
-    font-size: 20px;   
+    font-size: 22px;   
 }
 
 .fa{
     position: absolute;
-    padding: 11px;
+    padding: 13px;
 }
 
 .img-responsive{
