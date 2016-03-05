@@ -1,6 +1,6 @@
 body
 {
-    font-family: sans;
+    font-family: 'Ubuntu', 'Roboto', sans-serif;
 
     overflow-x: hidden;
 
@@ -10,7 +10,7 @@ body
 #side-bar {
     position: absolute;
     background: #283b5b;
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: 500;
     width: 18%;
     height: 100%;
@@ -50,7 +50,8 @@ body
 #header-bar {
     position: absolute;
     display: flex;
-    background: #f5f8fd;
+    background: #f7faff;
+    border-bottom: 1px solid #e1ecff;
     color: #7b96c4;
     left: 18%;
     width: 82%;
@@ -61,4 +62,12 @@ body
 #activity-section {
     align-self: center;
     font-size: 18px;
+}
+
+#dynamic-area {
+    position: absolute;
+    top: 13%;
+    left: 18%;
+    width: 82%;
+    height: 87%;
 }

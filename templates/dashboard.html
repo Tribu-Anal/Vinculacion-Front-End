@@ -4,7 +4,7 @@
 	</div>
 	<div id="navigation">
 		<ul>
-			<li ng-repeat="item in nav.navItems">
+			<li ng-repeat="item in nav.navItems" ui-sref="{{item.ref}}">
 				<img src="" alt="icon">
 				<span>{{item.title}}</span>
 			</li>
@@ -17,4 +17,4 @@
 		<span>Activity</span>
 	</div>
 </div>
-<div ui-view></div>
+<div id="dynamic-area" ui-view></div>
