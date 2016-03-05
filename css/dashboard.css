@@ -45,7 +45,7 @@ body
     margin-bottom: 15%;
 }
 
-#navigation li:hover {
+#navigation li:hover, .active {
     color: #55e4d4;
 }
 

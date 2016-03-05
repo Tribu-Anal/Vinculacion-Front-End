@@ -1,11 +1,11 @@
 <div id="side-bar">
 	<div id="logo-area">
-		<img src="../assets/logo.png" alt="Logo">
+		<img src="../assets/logo.png" alt="Logo" ui-sref="home">
 	</div>
 	<div id="navigation">
 		<ul>
-			<li ng-repeat="item in nav.navItems" ui-sref="{{item.ref}}">
-				<!-- <img src="{{item.icon}}" alt="icon"> -->
+			<li ng-repeat="item in nav.navItems" ui-sref="{{item.ref}}"
+			ng-class="{ 'active': item.active }" ng-click="nav.navItemClicked($index)">
 				<i class="{{item.icon}}"></i>
 				<span>{{item.title}}</span>
 			</li>
