@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module("VinculacionApp", ['ui.router', 'ngAnimate', 'ngCookies']);
+var app = angular.module("VinculacionApp", ['ui.router', 'toaster','ngAnimate', 'ngCookies']);
 
 app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/');

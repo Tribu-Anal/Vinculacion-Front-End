@@ -1,6 +1,6 @@
 'use strict';
 	var app = angular.module('VinculacionApp');
-	app.controller('solicitudesController', ['$scope','solicitudesEndPoints',function($scope,solicitudesEndPoints) {
+	app.controller('solicitudesController', ['$scope','solicitudesEndPoints', 'toaster',function($scope,solicitudesEndPoints, toaster) {
 		var ctrl = this;
 
 		ctrl.tablaSolicitudes={
@@ -68,5 +68,4 @@
 			};
 			return nuevoElemento;
 		}
-		   
 }]);
