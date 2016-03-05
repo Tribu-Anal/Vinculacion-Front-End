@@ -49,6 +49,10 @@ body
     color: #55e4d4;
 }
 
+#navigation i {
+    margin-right: 6%;
+}
+
 #header-bar {
     position: absolute;
     display: flex;

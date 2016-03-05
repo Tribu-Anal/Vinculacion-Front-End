@@ -1,11 +1,12 @@
 <div id="side-bar">
 	<div id="logo-area">
-		<img src="" alt="Logo">
+		<img src="../assets/logo.png" alt="Logo">
 	</div>
 	<div id="navigation">
 		<ul>
 			<li ng-repeat="item in nav.navItems" ui-sref="{{item.ref}}">
-				<img src="" alt="icon">
+				<!-- <img src="{{item.icon}}" alt="icon"> -->
+				<i class="{{item.icon}}"></i>
 				<span>{{item.title}}</span>
 			</li>
 		</ul>
@@ -13,7 +14,7 @@
 </div>
 <div id="header-bar">
 	<div id="activity-section">
-		<img src="" alt="Hamburger Menu">
+		<img src="../assets/hamburger-nav.png" alt="Hamburger Menu">
 		<span>Activity</span>
 	</div>
 </div>
