@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC#readme",
   "devDependencies": {
+    "angularjs-toaster": "^1.2.0",
     "gulp": "^3.9.1",
     "karma": "^0.13.21"
   }
