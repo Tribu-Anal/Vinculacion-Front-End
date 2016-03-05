@@ -90,6 +90,8 @@ body
     height: 13%;
     padding-left: 2%;
 
+    transition: all .3s linear;
+
     color: #7b96c4;
     border-bottom: 1px solid #e1ecff;
     background: #f7faff;
@@ -123,6 +125,8 @@ body
 
     width: 82%;
     height: 87%;
+
+    transition: all .3s linear;
 }
 
 .expanded
