@@ -1,14 +1,20 @@
-<div id="nav-bar">
-	<div class="title"></div>
-	<ul class="nav">
-		<li ng-repeat="navItem in nav.navItems" ng-class="{ 'selected': navItem.active }" ng-click="nav.navItemClicked($index)" ui-sref="{{navItem.ref}}">{{navItem.title}}</li>
-	</ul>
-	<button class="nav hamburger" ng-click="nav.showSideMenu = true"><img src="../assets/hamburger-nav.png" alt="Hamburger Navigation"></button>
+<div id="side-bar">
+	<div id="logo-area">
+		<img src="" alt="Logo">
+	</div>
+	<div id="navigation">
+		<ul>
+			<li ng-repeat="item in nav.navItems">
+				<img src="" alt="icon">
+				<span>{{item.title}}</span>
+			</li>
+		</ul>
+	</div>
 </div>
-<div class="side-menu" ng-show="nav.showSideMenu">
-	<button class="exit-nav" ng-click="nav.showSideMenu = false"><i class="glyphicon glyphicon-remove"></i></button>
-	<ul class="side-nav">
-		<li ng-repeat="navItem in nav.navItems" ng-class="{ 'selected': navItem.active }" ng-click="nav.navItemClicked($index)" ui-sref="{{navItem.ref}}">{{navItem.title}}</li>
-	</ul>
+<div id="header-bar">
+	<div id="activity-section">
+		<img src="" alt="Hamburger Menu">
+		<span>Activity</span>
+	</div>
 </div>
 <div ui-view></div>
