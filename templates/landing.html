@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="css/login.css">
+<div class="login-layout">
+	<div class="container">
+		<img class="img-responsive" src="../assets/logo.png" />
+		<div class="jumbotron">
+			<form class="form-horizontal">
+<fieldset>
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="prependedtext"></label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input id="usuario" name="usuario" ng-model="login.username" class="form-control" placeholder="Usuario" type="email" required="">
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="clave"></label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input id="clave" name="clave" ng-model="login.password" class="form-control" placeholder="Clave" type="password" required="">
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton"></label>
+      <div class="col-md-4">
+        <button id="ingresar" name="ingresar" class="btn btn-success btn-lg" ng-click="login.login()">Ingresar</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton"></label>
+      <div class="col-md-4">
+        <button id="regstrarme" name="registrarme" class="register-btn btn btn-success" ui-sref="registro">Registrarme</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+    <div class="form-group pull-left">
+      <a class="lostpassword" href="#">Olvidaste tu clave?</a>
+
+    </div>
+
+</fieldset>
+</form>
+		</div>
+	</div>
+</div>

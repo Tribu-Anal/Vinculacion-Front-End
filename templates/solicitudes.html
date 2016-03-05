@@ -1,0 +1,23 @@
+
+<div class="container" ng-controller="solicitudesController as solicitudesCtrl">
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th ng-repeat="encabezado in solicitudesCtrl.tablaSolicitudes.encabezado">{{encabezado}} </th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="cuerpo in solicitudesCtrl.tablaSolicitudes.cuerpo">
+					<td ng-repeat="contenido in cuerpo.contenido">{{contenido}}</td>
+					<td>
+						<button style="width: inherit;" class="class="btn btn-default"" ng-repeat="accion in cuerpo.acciones" ng-click="accion.click()" ng-class="{'acceptar':accion.nombre=='Aceptar'}">{{accion.nombre}}</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+

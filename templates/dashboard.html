@@ -1,0 +1,22 @@
+<div id="side-bar" ng-show="nav.showSideBar">
+	<div id="logo-area">
+		<img src="../assets/logo.png" alt="Logo" ui-sref="home">
+	</div>
+	<div id="navigation">
+		<ul>
+			<li ng-repeat="item in nav.navItems" ui-sref="{{item.ref}}"
+			ng-class="{ 'active': item.active }" ng-click="nav.navItemClicked($index)">
+				<i class="{{item.icon}}"></i>
+				<span>{{item.title}}</span>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="header-bar" ng-class="!nav.showSideBar ? 'expanded' : 'shrunk'">
+	<div id="activity-section">
+		<img src="../assets/hamburger-nav.png" alt="Hamburger Menu" 
+		ng-click="nav.showSideBar = !nav.showSideBar">
+		<span>Activity</span>
+	</div>
+</div>
+<div class="dynamic-area" ng-class="!nav.showSideBar ? 'expanded' : 'shrunk'" ui-view></div>

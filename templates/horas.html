@@ -1,0 +1,23 @@
+<div class="container" ng-controller="horasController as hrsCtrl">
+	<h1>Editar horas</h1>
+	<ng-form name="registroDeHoras" class="row">
+		<div class="col-md-3">
+			<label style="width: 100%">Sección: </label>
+		<select style="width: 100%" ng-options="opcion.nombre for opcion in hrsCtrl.secciones.opciones track by opcion.id" ng-model="hrsCtrl.secciones.opcionSeleccionada"></select>
+		</div>
+		<div class="col-md-3">
+			<label style="width: 100%">Proyecto: </label>
+		<select style="width: 100%" ng-options="opcion.nombre for opcion in hrsCtrl.proyectos.opciones track by opcion.id" ng-model="hrsCtrl.proyectos.opcionSeleccionada"></select>	
+		</div>
+		<div class="col-md-3">
+			<label style="width: 100%" >Alumno: </label>
+		<select style="width: 100%" ng-options="opcion.nombre for opcion in hrsCtrl.alumnos.opciones track by opcion.id" ng-model="hrsCtrl.alumnos.opcionSeleccionada"></select>	
+		</div>
+		<div class="col-md-3">
+			<label style="width: 100%" >Horas: </label>
+		<input style="width: 100%" type="number" min="{{hrsCtrl.horas.min}}" max="{{hrsCtrl.horas.max}}"ng-model="hrsCtrl.horas.valor"/>
+		</div>
+		<input style="float: right; margin-top: 1%;" type="button" value="Guardar" ng-click="hrsCtrl.registrarHoras()"/>
+
+	</ng-form>
+</div>
