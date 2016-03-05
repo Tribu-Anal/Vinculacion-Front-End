@@ -14,6 +14,11 @@ body
     font-weight: 500;
     width: 18%;
     height: 100%;
+    animation: slide-in .3s linear forwards;
+}
+
+#side-bar.ng-hide {
+    animation: slide-out .3s linear forwards;
 }
 
 #logo-area {
@@ -53,7 +58,7 @@ body
     margin-right: 6%;
 }
 
-#header-bar {
+.header-bar {
     position: absolute;
     display: flex;
     background: #f7faff;
@@ -78,10 +83,45 @@ body
     margin-right: 3%;
 }
 
-#dynamic-area {
+.dynamic-area {
     position: absolute;
     top: 13%;
     left: 18%;
     width: 82%;
     height: 87%;
+    overflow: scroll;
+}
+
+.expanded {
+    left: 0%;
+    width: 100%;
+}
+
+.shrunk {
+    left: 18%;
+    width: 82%;
+}
+
+@keyframes slide-in
+{
+    from
+    {
+        left: -18%;
+    }
+    to
+    {
+        left: 0%;
+    }
+}
+
+@keyframes slide-out
+{
+    from
+    {
+        left: 0%;
+    }
+    to
+    {
+        left: -18%;
+    }
 }

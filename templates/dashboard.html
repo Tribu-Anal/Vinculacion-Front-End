@@ -1,4 +1,4 @@
-<div id="side-bar">
+<div id="side-bar" ng-show="nav.showSideBar">
 	<div id="logo-area">
 		<img src="../assets/logo.png" alt="Logo" ui-sref="home">
 	</div>
@@ -12,10 +12,11 @@
 		</ul>
 	</div>
 </div>
-<div id="header-bar">
+<div class="header-bar" ng-class="!nav.showSideBar ? 'expanded' : 'shrunk'">
 	<div id="activity-section">
-		<img src="../assets/hamburger-nav.png" alt="Hamburger Menu">
+		<img src="../assets/hamburger-nav.png" alt="Hamburger Menu" 
+		ng-click="nav.showSideBar = !nav.showSideBar">
 		<span>Activity</span>
 	</div>
 </div>
-<div id="dynamic-area" ui-view></div>
+<div class="dynamic-area" ng-class="!nav.showSideBar ? 'expanded' : 'shrunk'" ui-view></div>

@@ -14,8 +14,8 @@ angular.module('VinculacionApp')
 						  { title: "LOG OUT", ref: "landing", 
 						  icon: "glyphicon glyphicon-log-out", active: false }
 						];
-						
-		this.showSideMenu = false;
+
+		this.showSideBar = true;
 		var activeItem = this.navItems[0];
 
 		this.navItemClicked = function(itemIndex) {
