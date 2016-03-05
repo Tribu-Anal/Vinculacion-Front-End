@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module("VinculacionApp", ['ui.router', 'ngAnimate']);
+var app = angular.module("VinculacionApp", ['ui.router', 'ngAnimate', 'ngCookies']);
 
 app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/');
@@ -14,7 +14,9 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 				rl.swapResources([
 					"css/login.css"
 				]);
-			}]
+			}],
+            
+        controller: 'LoginCtrl as login'
 		})
 
 		.state('registro', {
@@ -80,9 +82,22 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 			url: '/solicitud',
 			templateUrl: '../templates/solicitud.html'
 		});
+}]); 
 
-}]);
-
-app.run([ '$rootScope', function($rootScope) {
-	$rootScope.links = [];
-}]);
+  
+app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScope, $location, $cookieStore, $http) {
+        // keep user logged in after page refresh
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.token) {
+            $http.defaults.headers.common['Authorization'] = $rootScope.globals.token; // jshint ignore:line
+        }
+  
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            // redirect to login page if not logged in
+            if ($location.path() !== '/' && !$rootScope.globals.token) {
+                $location.path('/');
+            }
+        });
+        
+        $rootScope.links = [];
+    }]);

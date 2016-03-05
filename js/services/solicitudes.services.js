@@ -7,7 +7,7 @@ app.factory('solicitudesEndPoints', ['$http', function($http){
 		obtenerAlumnosConSolicitudesPendientes:function(handleSuccess){
 			var peticion = {
                 method: 'GET',
-                url: url +'/Students/Filter/0'
+                url: url +'/Students/Filter/Active'
             };
             $http(peticion).then(function(data) {
                 handleSuccess(data);
@@ -17,6 +17,16 @@ app.factory('solicitudesEndPoints', ['$http', function($http){
 			var peticion = {
 				method: 'POST',
 				url: url+ '/Students/'+tipo,
+				data: objetoARegistrar
+			};
+			$http(peticion).then(function(data) {
+                handleSuccess(data);
+            });
+		},
+        Aceptar_SolicitudDeAlumno:function(objetoARegistrar, handleSuccess){
+			var peticion = {
+				method: 'PUT',
+				url: url+ '/Students/'+objetoARegistrar.AccountId+'/Verified',
 				data: objetoARegistrar
 			};
 			$http(peticion).then(function(data) {
