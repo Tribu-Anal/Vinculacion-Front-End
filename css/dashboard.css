@@ -119,7 +119,7 @@ body
     top: 13%;
     left: 18%;
 
-    overflow: scroll;
+    overflow-y: scroll;
 
     width: 82%;
     height: 87%;
