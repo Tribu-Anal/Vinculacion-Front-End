@@ -25,6 +25,8 @@ body
 
 #logo-area img {
     align-self: center;
+    width: 35%;
+    height: 80%;
 }
 
 #navigation {
@@ -60,8 +62,16 @@ body
 }
 
 #activity-section {
+    display: flex;
     align-self: center;
     font-size: 18px;
+}
+
+#activity-section img {
+    cursor: pointer;
+    width: 10%;
+    height: 100%;
+    margin-right: 3%;
 }
 
 #dynamic-area {
