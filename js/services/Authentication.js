@@ -3,15 +3,15 @@ var app = angular.module('VinculacionApp');
 app.factory('AuthenticationService', ['$http', '$cookieStore', '$rootScope', 'toaster', function ($http, $cookieStore, $rootScope, toaster) {
         var service = {};
  
-        service.Login = function (username, password, callback) {
+        service.Login = function (username, password, successCallback, errorCallback) {
             $http.post('http://fiasps.unitec.edu:8085/api/Login', JSON.stringify({ User: username, Password: password }))
-                .success(function (response) {
-                    //console.log(response);
-                    callback(response);
-                })
-                .error(function() {
-                    toaster.pop({type: 'error', title: 'Error', body: 'Se ha producido un error! Lamentamos los inconvenientes.'});
-            });
+                .then(successCallback, errorCallback);
+//                .success(function (response) {
+//                    callback(response);
+//                })
+//                .error(function() {
+//                    toaster.pop({type: 'error', title: 'Error', body: 'Se ha producido un error! Lamentamos los inconvenientes.'});
+//            });
  
         };
   

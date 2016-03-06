@@ -1,6 +1,6 @@
 var app = angular.module('VinculacionApp');
   
-app.controller('LoginCtrl', ['$rootScope', '$location', 'AuthenticationService', function ($rootScope, $location, AuthenticationService) {
+app.controller('LoginCtrl', ['$rootScope', '$location', 'AuthenticationService', 'toaster', function ($rootScope, $location, AuthenticationService, toaster) {
     var controlador = this;
     controlador.username;
     controlador.password;
@@ -14,10 +14,12 @@ app.controller('LoginCtrl', ['$rootScope', '$location', 'AuthenticationService',
             if(response !== "") {
                 AuthenticationService.SetCredentials(response);
                 $location.path('/home');
-            } else {
-                controlador.error = response.message;
-                controlador.dataLoading = false;
+            } 
+            else {
+                toaster.pop({type: 'warning', title: 'Usuario no encontrado.', body: 'No se encontro algun usuario conesas credenciales!'});
             }
+        }, function() {
+            toaster.pop({type: 'error', title: 'Error', body: 'Se ha producido un error! Lamentamos los inconvenientes.'});
         });
     };
 }]);
