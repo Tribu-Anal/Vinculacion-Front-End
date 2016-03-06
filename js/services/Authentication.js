@@ -1,6 +1,6 @@
 var app = angular.module('VinculacionApp');
 
-app.factory('AuthenticationService', ['$http', '$cookieStore', '$rootScope', function ($http, $cookieStore, $rootScope) {
+app.factory('AuthenticationService', ['$http', '$cookieStore', '$rootScope', 'toaster', function ($http, $cookieStore, $rootScope, toaster) {
         var service = {};
  
         service.Login = function (username, password, callback) {
@@ -8,7 +8,10 @@ app.factory('AuthenticationService', ['$http', '$cookieStore', '$rootScope', fu
                 .success(function (response) {
                     //console.log(response);
                     callback(response);
-                });
+                })
+                .error(function() {
+                    toaster.pop({type: 'error', title: 'Error', body: 'Se ha producido un error! Lamentamos los inconvenientes.'});
+            });
  
         };
   

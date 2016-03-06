@@ -1,6 +1,6 @@
 var app = angular.module('VinculacionApp');
 
-app.controller('RegistroCtrl', ['registro', function(registro) {
+app.controller('RegistroCtrl', ['registro', 'toaster', function(registro, toaster) {
     var controlador = this;
 
     controlador.correo;
@@ -13,6 +13,7 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
     controlador.carrera = "I - 01 (Ing. en Sistemas Computacionales)";
     
     controlador.registrarAlumno = function() {
+        //console.log("Registrado");
         console.log(JSON.stringify({
             AccountId: controlador.numCuenta,
             Name: controlador.nombre,
@@ -32,6 +33,11 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
     })).success(function(response) {
             console.log(response);
             console.log("Alumno registrado");
+            toaster.pop({type: 'success', title: 'Revisa tu Correo', body: 'Se le ha enviado un correo de confirmacion. Porfavor revisar.'});
+        })
+        .error(function() {
+            toaster.pop({type: 'error', title: 'Error', body: 'Se ha producido un error! Lamentamos los inconvenientes.'});
+            console.log("Error");
         })
     };
     
