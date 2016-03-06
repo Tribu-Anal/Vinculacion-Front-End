@@ -5,10 +5,11 @@
 
 		ctrl.tablaSolicitudes={
 			encabezado: [
-				'Nombre del Alumno',
-				'Número de Cuenta',
+				'Numero de Cuenta',
+				'Nombre',
 				'Carrera',
-				'Correo Electronico'
+				'Correo Electronico',
+                ''//Encabezado vacio para la columna del boton
 			],
 			cuerpo:[]
 		};
@@ -59,8 +60,8 @@
 					}
 				],
 				contenido:[
-					nombreAlumno,
 					numeroCuenta,
+					nombreAlumno,
 					carrera,
 					correo
 				],
