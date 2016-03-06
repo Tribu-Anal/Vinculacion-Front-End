@@ -1,0 +1,9 @@
+<div class="tb-dialog">
+	<div class="header">
+		{{title}}
+	</div>
+	<div class="content" ng-include="template"></div>
+	<div class="footer">
+		<button class="custom-button" type="button" ng-repeat="button in buttons" ng-click="button.click()">{{button.text}}</button>
+	</div>
+</div>
