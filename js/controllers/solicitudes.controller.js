@@ -8,10 +8,10 @@
 				'Numero de Cuenta',
 				'Nombre',
 				'Carrera',
-				'Correo Electronico',
-                ''//Encabezado vacio para la columna del boton
-			],
-			cuerpo:[]
+				'Correo Electronico'
+            ],
+			cuerpo:[],
+			acciones:true
 		};
 
 		solicitudesEndPoints.obtenerAlumnosConSolicitudesPendientes(function(data){
@@ -31,7 +31,9 @@
 				acciones:[
 					{
 						nombre: 'Aceptar',
+						icon:'glyphicon glyphicon-ok',
 						click: function(){
+							console.log('acceptar');
                             let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
 							let objetoARegistrar = {
 								AccountId: numeroCuenta,
@@ -45,7 +47,8 @@
 						}
 					},
 					{
-						nombre: 'Rechazar',
+						nombre: 'Rechazar Test',
+						icon:'glyphicon glyphicon-remove',
 						click: function(){
 							let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
 							let objetoARegistrar = {
