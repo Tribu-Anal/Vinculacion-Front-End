@@ -1,35 +1,6 @@
 <div class="login-page">
       <img class = "img-responsive" src="assets/logo.png" />
       <div class="form">
-        <form class="register-form">
-            <label>Registrar Usuario</label>
-            <span class="fa fa-envelope"></span>
-            <input type="text" placeholder="Correo Electr&oacute;nico"/>
-            <span class="fa fa-sort-numeric-desc"></span>
-            <input type="text" placeholder="N&uacute;mero de Cuenta">
-            <span class="fa fa-user register"></span>
-            <input type="text" placeholder="Nombre Completo">
-            <div class="campus">
-                <label>Campus</label>
-                <select class="form-control">
-                <option>SPS</option>
-                <option>TGU</option>
-                </select>
-            </div>
-            <span class="fa fa-lock pass"></span>
-            <input type="password" placeholder="Clave"/>
-            <span class="fa fa-lock confirmpass"></span>
-            <input type="text" placeholder="Confirmar Clave"/>
-            <div class="carrera">
-                <label>Carrera</label>
-                <select class="form-control">
-                    <option>I - 01 (Ing. Sistemas Computacionales)</option>
-                </select>
-            </div>
-              <button>Registrar</button>
-              <p class="message login">Ya estas registrado? <a href="#">Iniciar Sesion</a></p>
-        </form>
-          
         <form class="login-form">
             <span class="fa fa-user"></span>
             <input id="usuario" name="usuario" ng-model = "login.username" type="text" placeholder="Correo o Usuario"/>
@@ -37,7 +8,39 @@
             <input id="clave" name="clave" ng-model = "login.password" type="password" placeholder="Clave"/>
             <button id="ingresar" name="ingresar" ng-click="login.login()">Ingresar</button>
             <p class="message register">No estas registrado? <a href="#">Crear una cuenta</a></p>
-        </form>
+        </form>  
+          
+        <div ng-controller="RegistroCtrl as registro">
+            <form class="register-form" name="registro1" ng-submit="registro1.$valid && registro.registrarAlumno()" novalidate>
+                <label>Registrar Usuario</label>
+                <span class="fa fa-envelope"></span>
+                <input type="email" placeholder="Correo Electr&oacute;nico" ng-model="registro.correo" ng-pattern='/@unitec.edu$/' required/>
+                <span class="fa fa-sort-numeric-desc"></span>
+                <input type="text" placeholder="N&uacute;mero de Cuenta" ng-model="registro.numCuenta" required>
+                <span class="fa fa-user register"></span>
+                <input type="text" placeholder="Nombre Completo" ng-model="registro.nombre" required>
+                <div class="campus">
+                    <label>Campus</label>
+                    <select class="form-control" ng-model="registro.campus">
+                        <option>SPS</option>
+                        <option>TGU</option>
+                    </select>
+                </div>
+                <span class="fa fa-lock pass"></span>
+                <input type="password" placeholder="Clave" ng-model="registro.password" ng-minlength="8" ng-keypress="registro.validar($event)" required/>
+                <span class="fa fa-lock confirmpass"></span>
+                <input type="password" placeholder="Confirmar Clave" ng-model="registro.confirm_password" ng-pattern="registro.password" required/>
+                <div class="carrera">
+                    <label>Carrera</label>
+                    <select class="form-control" ng-model="registro.carrera">
+                        <option value="I - 01 (Ing. en Sistemas Computacionales)">I - 01 (Ing. Sistemas Computacionales)</option>
+                    </select>
+                </div>
+                  <button type="submit">Registrar</button>
+                  <p class="message login">Ya estas registrado? <a href="#">Iniciar Sesion</a></p>
+            </form>  
+        </div>
+
       </div>
 </div>
 

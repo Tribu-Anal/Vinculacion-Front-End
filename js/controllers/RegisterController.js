@@ -13,6 +13,7 @@ app.controller('RegistroCtrl', ['registro', function(registro) {
     controlador.carrera = "I - 01 (Ing. en Sistemas Computacionales)";
     
     controlador.registrarAlumno = function() {
+        //console.log("Registrado");
         console.log(JSON.stringify({
             AccountId: controlador.numCuenta,
             Name: controlador.nombre,
