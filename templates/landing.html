@@ -1,12 +1,12 @@
 <div class="login-page">
       <img class = "img-responsive" src="assets/logo.png" />
       <div class="form">
-        <form class="login-form">
+        <form class="login-form" name="registroLogin" ng-submit="registroLogin.$valid && login.login()" novalidate>
             <span class="fa fa-user"></span>
-            <input id="usuario" name="usuario" ng-model = "login.username" type="text" placeholder="Correo o Usuario"/>
+            <input id="usuario" name="usuario" ng-model = "login.username" type="text" placeholder="Correo o Usuario" required/>
             <span class="fa fa-lock"></span>
-            <input id="clave" name="clave" ng-model = "login.password" type="password" placeholder="Clave"/>
-            <button id="ingresar" name="ingresar" ng-click="login.login()">Ingresar</button>
+            <input id="clave" name="clave" ng-model = "login.password" type="password" placeholder="Clave" required/>
+            <button id="ingresar" name="ingresar" type="submit">Ingresar</button>
             <p class="message register">No estas registrado? <a href="#">Crear una cuenta</a></p>
         </form>  
           
