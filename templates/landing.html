@@ -2,12 +2,32 @@
               <img class = "img-responsive" src="assets/logo.png" />
   <div class="form">
     <form class="register-form">
-
-      <input type="text" placeholder="Nombre"/>
-      <input type="password" placeholder="password"/>
-      <input type="text" placeholder="Correo electr&oacute;nico"/>
-      <button>Crear</button>
-      <p class="message">Ya estas registrado? <a href="#">Iniciar Sesion</a></p>
+          <label>Registrar Usuario</label>
+    <span class="fa fa-envelope"></span>
+      <input type="text" placeholder="Correo Electr&oacute;nico"/>
+        <span class="fa fa-sort-numeric-desc"></span>
+    <input type="text" placeholder="N&uacute;mero de Cuenta">
+    <span class="fa fa-user register"></span>
+    <input type="text" placeholder="Nombre Completo">
+<div class="campus">
+        <label>Campus</label>
+    <select class="form-control">
+        <option>SPS</option>
+        <option>TGU</option>
+        </select>
+</div>
+    <span class="fa fa-lock pass"></span>
+      <input type="password" placeholder="Clave"/>
+    <span class="fa fa-lock confirmpass"></span>
+      <input type="text" placeholder="Confirmar Clave"/>
+    <div class="carrera">
+        <label>Carrera</label>
+    <select class="form-control">
+        <option>I-1 (Ing. Sistemas Computacionales)</option>
+        </select>
+</div>
+      <button>Registrar</button>
+      <p class="message login">Ya estas registrado? <a href="#">Iniciar Sesion</a></p>
     </form>
     <form class="login-form">
         <span class="fa fa-user"></span>
@@ -15,7 +35,9 @@
         <span class="fa fa-lock"></span>
       <input id="clave" name="clave" ng-model = "login.password" type="password" placeholder="Clave"/>
       <button id="ingresar" name="ingresar" ng-click="login.login()">Ingresar</button>
-      <p class="message">No estas registrado? <a href="#" ui-sref="registro">Crear una cuenta</a></p>
+      <p class="message register">No estas registrado? <a href="#">Crear una cuenta</a></p>
     </form>
   </div>
 </div>
+
+<script type="text/javascript" src="../js/signup.js"></script>
