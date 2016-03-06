@@ -46,11 +46,20 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
 		.state('home.proyectos', {
 			url: '/proyectos',
-			templateUrl: '../templates/proyectos.html'
+			templateUrl: '../templates/proyectos.html',
+			onEnter: ['ResourceLoader', function(rl) {
+				rl.swapResources([
+					"https://fonts.googleapis.com/css?family=Ubuntu:400,500",
+					"https://fonts.googleapis.com/css?family=Roboto:400,500",
+					"css/dashboard.css",
+					"css/proyectos.css"
+				]);
+			}],
+			controller: 'ProyectosCtrl as proyectos'
 		})
 
 		.state('home.proyecto', {
-			url: '/proyecto',
+			url: '/proyectos/{projectId}',
 			templateUrl: '../templates/proyecto.html',
             onEnter: ['ResourceLoader', function(rl) {
 				rl.swapResources([
@@ -58,8 +67,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 					"css/dashboard.css",
 					"css/proyecto.css"
 				]);
-			}],
-			controller: 'ProyectosCtrl as proyectos'
+			}]
 		})
 
 		.state('home.horas', {
