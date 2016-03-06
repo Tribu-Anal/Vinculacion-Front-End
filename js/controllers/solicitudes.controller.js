@@ -14,17 +14,49 @@
 			acciones:true
 		};
 
-		// solicitudesEndPoints.obtenerAlumnosConSolicitudesPendientes(function(data){
-		// 	if(data.data.length>0){
-		// 		for (let i = 0; i <data.data.length; i++) {
-		// 			if(data.data[i].Major!==null){
+		solicitudesEndPoints.obtenerAlumnosConSolicitudesPendientes(function(data){
+			if(data.data.length>0){
+				for (let i = 0; i <data.data.length; i++) {
+					if(data.data[i].Major!==null){
 						ctrl.tablaSolicitudes.cuerpo.push(
-							crearNuevoElementoParaLaTabla(1,'Daniel',2323,'Sistemas','@unitec.edu'/*data.data[i].Id, data.data[i].Name, data.data[i].AccountId , data.data[i].Major.Name,data.data[i].Email*/)
+							crearNuevoElementoParaLaTabla(data.data[i].Id, data.data[i].Name, data.data[i].AccountId , data.data[i].Major.Name,data.data[i].Email)
 						);
-		// 			}
-		// 		}
-		// 	}
-		// });
+					}
+				}
+			}
+		});
+
+		function openDialog(tituloDialog, mensaje,id, nombreAlumno, numeroCuenta, callback){
+			var dialog = ngDialog.open({
+				template: 'js/directives/dialog/dialog.view.html',
+				controller: ['$scope', function($scope){
+					$scope.buttons = [
+						{
+							text: 'Aceptar',
+							click: function(){
+								let objectoCallback = {};
+								objectoCallback.AccountId=$scope.alumno.numeroCuenta;
+								objectoCallback.Message=$scope.field.value;
+								objectoCallback.id=id;
+								dialog.close();
+								if((callback)&&(typeof callback==='function')){
+									callback(objectoCallback);
+								}
+							}
+						},{
+							text: 'Cancelar',
+							click: function(){
+								dialog.close();
+							}
+						}
+					];
+					$scope.template = 'templates/solicitudes.dialog.html';
+					$scope.title = tituloDialog;
+					$scope.field = {label: 'Mensaje', value: mensaje};
+					$scope.alumno ={nombre: nombreAlumno, numeroCuenta: numeroCuenta};
+				}]
+			});
+		};
 
 		function crearNuevoElementoParaLaTabla(id, nombreAlumno, numeroCuenta, carrera, correo) {
 			var nuevoElemento = {
@@ -33,50 +65,15 @@
 						nombre: 'Aceptar',
 						icon:'glyphicon glyphicon-ok',
 						click: function(){
-							var dialog = ngDialog.open({
-							template: 'js/directives/dialog/dialog.view.html',
-							controller: ['$scope', function($scope){
-								$scope.buttons = [
-								{
-									text: 'Aceptar',
-									click: function(){
-										console.log()
-										// element1.content[2] = $scope.fields[0].value;
-										// element1.content[3] = $scope.fields[1].value;
-										let object = {
-                                              numeroCuenta: $scope.alumno.numeroCuenta,
-                                              mensaje:$scope.field.value
-                                        }
-                                        console.log(object);
-                                        // ctrl.updateElement(object1, element1.id, type,array);
-										dialog.close();
-									}
-								},{
-									text: 'Cancelar',
-									click: function(){
-										console.log('Cancelar');
-										dialog.close();
-									}
-								}
-								];
-							   $scope.template = 'templates/solicitudes.dialog.html';
-							   $scope.title = 'Aprobar Solicitud';
-							   $scope.field = {label: 'Mensaje', value: 'Su solicitud ha sido aprobada, ya puede comenzar a registrar sus horas de vinculacion social'};
-							   $scope.alumno ={nombre: nombreAlumno, numeroCuenta: numeroCuenta};
-							}]
-						});
-							
-							// console.log('acceptar');
-       //                      let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
-							// let objetoARegistrar = {
-							// 	AccountId: numeroCuenta,
-							// 	Message: 'Fue aceptado',
-       //                          id:id
-							// }
-							// solicitudesEndPoints.Aceptar_SolicitudDeAlumno(objetoARegistrar,function(data){
-							// 	ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+							let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
+							let mensaje = 'Su solicitud ha sido aprobada, ya puede comenzar a registrar sus horas de vinculacion social';
+							let objectoCallback = openDialog('Aprobar Solicitud', mensaje, id,nombreAlumno, numeroCuenta,function(data){
+								console.log(data);
+								// solicitudesEndPoints.rechazarAceptar_SolicitudDeAlumno(objetoARegistrar,'Rejected',function(data){
+								// ctrl.tablaSolicitudes.cuerpo.splice(index,1);
 								
-							// });
+								// });
+							});
 						}
 					},
 					{
@@ -84,13 +81,13 @@
 						icon:'glyphicon glyphicon-remove',
 						click: function(){
 							let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
-							let objetoARegistrar = {
-								AccountId: numeroCuenta,
-								Message: 'Con que autoridad quiere registrarse... Rechazado!'
-							}
-							solicitudesEndPoints.rechazarAceptar_SolicitudDeAlumno(objetoARegistrar,'Rejected',function(data){
-								ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+							let mensaje = 'Con que autoridad quiere registrarse! ';
+							let objectoCallback = openDialog('Rechazar Solicitud', mensaje, id,nombreAlumno, numeroCuenta,function(data){
+								// console.log(data);
+								// solicitudesEndPoints.rechazarAceptar_SolicitudDeAlumno(objetoARegistrar,'Rejected',function(data){
+								// ctrl.tablaSolicitudes.cuerpo.splice(index,1);
 								
+								// });
 							});
 						}
 					}
