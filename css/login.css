@@ -2,15 +2,14 @@
 
 .login-page {
   width: 360px;
-  padding: 8% 0 0;
+  padding: 5% 0 0;
   margin: auto;
 }
 .form {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 360px;
-  margin: 0 auto 100px;
+  margin: 2px auto 100px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -47,7 +46,7 @@
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
-  font-size: 12px;
+  font-size: 14px;
 }
 .form .message a {
   color: #354663;
@@ -93,8 +92,37 @@
     font-size: 22px;
 }
 
+.fa.fa-user.register{
+    font-size: 22px;
+    left: 9%;
+    top: 29.5%;
+}
+
+
 .fa.fa-lock{
     font-size: 22px;   
+}
+
+.fa.fa-lock.pass{
+    font-size: 22px;
+    left: 9%;
+    top: 50.8%;
+}
+.fa.fa-lock.confirmpass{
+    font-size: 22px;
+    left: 9%;
+    top: 60.7%;
+}
+.fa.fa-envelope{
+    font-size: 21px;
+    left: 9%;
+    top: 10%;
+}
+
+.fa.fa-sort-numeric-desc{
+    font-size: 22px;
+    left: 9%;
+    top: 20%;
 }
 
 .fa{
@@ -106,6 +134,23 @@
     margin: 0 auto;
     width: 120px;
     height: 120px;
+}
+label{
+    font-size: 16px;
+}
+.form-control{
+  width: 100%;
+  margin: 0 0 20px;
+  background: #f2f2f2;
+  color: #000;
+  outline: none;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.register-form{
+    width: 100%;
 }
 body {
   background: #213250; /* fallback for old browsers */
