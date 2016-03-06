@@ -7,9 +7,11 @@ app.controller('ProyectosCtrl', ['proyectos', 'toaster', function(proyectos, toa
     controlador.idProyecto = "";
     
     proyectos.getProyectos(controlador.idProyecto, function(response) {
-        console.log(response.data);
-        controlador.proyectos.push(response.data);
+        console.log(response);
+        for(var obj in response.data) {
+            controlador.proyectos.push(response.data[obj])
+        }
     }, function(response) {
-        toaster.pop({type: 'error', title: 'Error', body: 'No se ha podido obtener el proyectos deseados.'});
+        toaster.pop({type: 'error', title: 'Error', body: 'No se ha podido obtener los proyectos deseados.'});
     });
 }]);
