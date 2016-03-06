@@ -9,7 +9,6 @@ app.factory('solicitudesEndPoints', ['$http', function($http){
                 method: 'GET',
                 url: url +'/Students/Filter/Active'
             };
-            console.log($http.defaults.headers.common['Authorization']);
             $http(peticion).then(function(data) {
                 handleSuccess(data);
             });
