@@ -11,11 +11,11 @@
     </form>
     <form class="login-form">
         <span class="fa fa-user"></span>
-      <input type="text" placeholder="Correo o Usuario"/>
+      <input id="usuario" name="usuario" ng-model = "login.username" type="text" placeholder="Correo o Usuario"/>
         <span class="fa fa-lock"></span>
-      <input type="password" placeholder="Clave"/>
-      <button>Ingresar</button>
-      <p class="message">No estas registrado? <a href="#">Crear una cuenta</a></p>
+      <input id="clave" name="clave" ng-model = "login.password" type="password" placeholder="Clave"/>
+      <button id="ingresar" name="ingresar" ng-click="login.login()">Ingresar</button>
+      <p class="message">No estas registrado? <a href="#" ui-sref="registro">Crear una cuenta</a></p>
     </form>
   </div>
 </div>
