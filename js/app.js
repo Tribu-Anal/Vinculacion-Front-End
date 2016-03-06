@@ -59,7 +59,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		})
 
 		.state('home.proyecto', {
-			url: '/proyecto',
+			url: '/proyectos/{projectId}',
 			templateUrl: '../templates/proyecto.html',
             onEnter: ['ResourceLoader', function(rl) {
 				rl.swapResources([
