@@ -13,11 +13,11 @@ app.factory('solicitudesEndPoints', ['$http', function($http){
                 handleSuccess(data);
             });
 		}, 
-		rechazarAceptar_SolicitudDeAlumno:function(objetoARegistrar, tipo, handleSuccess){
+		Rechazar_SolicitudDeAlumno:function(objetoARegistrar, mensaje, handleSuccess){
 			var peticion = {
 				method: 'POST',
-				url: url+ '/Students/'+tipo,
-				data: objetoARegistrar
+				url: url+ '/Students/Rejected',
+				data: JSON.stringify({AccountId: objetoARegistrar.AccountId, Message: mensaje})
 			};
 			$http(peticion).then(function(data) {
                 handleSuccess(data);
@@ -26,8 +26,8 @@ app.factory('solicitudesEndPoints', ['$http', function($http){
         Aceptar_SolicitudDeAlumno:function(objetoARegistrar, handleSuccess){
 			var peticion = {
 				method: 'PUT',
-				url: url+ '/Students/'+objetoARegistrar.AccountId+'/Verified',
-				data: objetoARegistrar
+				url: url+ '/Students/Verified',
+				data: JSON.stringify({AccountId: objetoARegistrar.AccountId})
 			};
 			$http(peticion).then(function(data) {
                 handleSuccess(data);
