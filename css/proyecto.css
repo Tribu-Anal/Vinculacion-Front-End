@@ -1,85 +1,58 @@
-.project-card {
-	position: absolute;
-	width: 75%;
-	min-width: 75%;
-	top: 15%;
-	left: 13%;
-	padding: 2%;
-	background: #fff;
-	color: #444;
-	border-radius: 2px;
-	box-shadow: 0 0 10px #111;
-	overflow: hidden;
+.help {
+    background: #eee;
+    padding: 3px;
+    border-bottom: 1px dotted;
 }
 
-.project-header {
-	text-align: center;
+.img-responsive{
+   width: 430px;
+    
 }
 
-.project-card img.round {
-	margin-top: 5%;
-	margin-left: 35%;
-	border-radius: 50%;
-	width: 25%;
-	height: 230px;
-	box-shadow: 0 0 5px #111;
+.panel > .panel-heading{
+    background-color: #466196;
+    border: none;
+
+}
+p{
+    font-size: 19px;
+}
+#users-management{
+    width: 60%;
 }
 
-.project-card img.square {
-	margin-left: 15%;
-	margin-top: 5%;
-	min-width: 60%;
-	box-shadow: 0 3px 5px #111;
+#users-management .panel-heading {
+    height: 55px;
 }
 
-.project-info {
-	margin-top: 7%;
-	padding: 0 10%;
+#users-management h4 {
+    line-height: 35px;
 }
 
-.project-info p, .project-info ul li {
-	font-size: 1.3em;
+#users-management .panel-heading img {
+    width: 32px;
+    margin-right: 0.25em;
 }
 
-.participantes {
-	margin-top: 4%;
-	list-style: none;
-	border: 2px solid #afbdc4;
-	padding: 5%;
+#users-management .panel-body img {
+    margin: 0 1em 1em 0;
 }
 
-.participantes li {
-	position: relative;
-	text-align: center;
-	border: 2px solid #afbdc4;
-	padding: 2%;
-	cursor: pointer;
-}
+@media (max-width: 460px) {
+    #users-management .panel-heading .btn-group .btn span {
+        display: none;
+    }
 
-.participantes li:hover {
-	background: #afbdc4;
-}
+    #users-management .panel-heading img {
+        display: none;
+    }
 
-@media screen and (max-width: 1200px) {
-	.project-card img.square {
-		width: 75%;
-	}
-}
+    #users-management .panel-heading .btn-group .btn {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
 
-@media screen and (max-width: 700px) {
-	.project-card {
-		width: 100%;
-		box-shadow: none;
-		top: 12%;
-		left: 0%;
-	}
-
-	.project-card img.square {
-		width: 70%;
-		height: 20%;
-	}
-
-	.project-info {
-		line-height: 1.2;
-	}
+    #users-management .panel-heading h4 {
+        font-size: 13px;
+    };
 }
