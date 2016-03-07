@@ -1,0 +1,33 @@
+.ngdialog.ngdialog-theme-default .ngdialog-content{
+	width: 700px;
+}
+.tb-dialog .header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+}
+.tb-dialog .content {
+    font-family: 'Roboto', sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    padding-left: 5%;
+}
+.tb-dialog .footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+
+.tb-dialog .footer .custom-button {
+      border: none;
+    background-color: rgb(240, 240, 240);
+    height: 50px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: -15px;
+    font-size: 1.3em;
+}

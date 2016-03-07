@@ -1,0 +1,150 @@
+.responstable {
+  margin: 1em 0;
+  width: 95%;
+  overflow: hidden;
+  background: #FFF;
+  color: #024457;
+  border-radius: 10px;
+  border: 1px solid #167F92;
+  margin: 20px auto 0;
+}
+
+.responstable tr {
+  border: 1px solid #D9E4E6;
+}
+
+.responstable tr:nth-child(odd) {
+  background-color: #EAF3F3;
+}
+
+.responstable th {
+  display: none;
+  border: 1px solid #FFF;
+  background-color: #213250;
+  color: #FFF;
+  padding: 1em;
+}
+
+.responstable th:first-child {
+  display: table-cell;
+  text-align: center;
+}
+
+.responstable th:nth-child(2) {
+  display: table-cell;
+}
+
+.responstable th:nth-child(2) span {
+  display: none;
+}
+
+.responstable th:nth-child(2):after {
+  content: attr(data-th);
+}
+
+@media (min-width: 480px) {
+  .responstable th:nth-child(2) span {
+    display: block;
+  }
+  .responstable th:nth-child(2):after {
+    display: none;
+  }
+}
+
+.responstable td {
+  display: block;
+  word-wrap: break-word;
+  max-width: 7em;
+}
+
+.responstable td:first-child {
+  display: table-cell;
+  text-align: center;
+  border-right: 1px solid #D9E4E6;
+}
+
+.responstable td button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    //padding: 15px 32px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    //text-decoration: none;
+    //display: inline-block;
+    font-size: 17px;
+    //margin: 4px 2px;
+    cursor: pointer;
+    //width: 100%;
+}
+
+.responstable td button:hover {
+    background-color: #f44336;
+}
+
+@media (min-width: 480px) {
+  .responstable td {
+    border: 1px solid #D9E4E6;
+  }
+}
+
+.responstable th, .responstable td {
+  text-align: left;
+  margin: .5em 1em;
+}
+
+@media (min-width: 480px) {
+  .responstable th, .responstable td {
+    display: table-cell;
+    padding: 1em;
+  }
+}
+
+body {
+  padding: 0 2em;
+  font-family: Arial, sans-serif;
+  color: #024457;
+  background: #f2f2f2;
+}
+
+.tb-body .actions-button {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tb-body .actions-button .icon {
+  font-size: 25px;
+  margin: 5px 5px 5px 7px;
+}
+.tb-body .action-content {
+  height: 50px;
+  //width: 200px;
+  background-color: whitesmoke;
+  border-radius: 30px 0px 0px 30px;
+  padding-right: 15%;
+  border-top: 1px solid #008CBA;
+  border-left: 1px solid #008CBA;
+  border-bottom: 1px solid #008CBA;
+  background: linear-gradient(to left, rgba(22, 127, 146, 0), rgba(245, 245, 245, 0));
+}
+.tb-body .action-content .wrapper-buttons {
+  height: 100%;
+  width: 80%;
+  padding: initial;
+  border-radius: 30px 0px 0px 30px;
+  background-color: white;
+  border-top: 1px solid #008CBA;
+  border-bottom: 1px solid #008CBA;
+}
+.tb-body .action-content .wrapper-buttons .style-button {
+  margin-top: 15%;
+  float: right;
+  margin-left: 2%;
+  //margin-right: 2%;
+  background-color: whitesmoke;
+  border: none;
+  color: #008CBA;
+  padding-left: 1%;
+}

@@ -1,12 +1,4 @@
 <div ng-controller="solicitudesController as solicitudesCtrl">
-    <table class="responstable">
-          <tr>
-            <th ng-repeat="encabezado in solicitudesCtrl.tablaSolicitudes.encabezado">{{encabezado}}</th>
-          </tr>
-
-          <tr ng-repeat="cuerpo in solicitudesCtrl.tablaSolicitudes.cuerpo">
-            <td ng-repeat="contenido in cuerpo.contenido">{{contenido}}</td>
-            <td><button>Responder</button></td>
-          </tr>
-        </table>
+  <tb-table encabezado="solicitudesCtrl.tablaSolicitudes.encabezado" cuerpo="solicitudesCtrl.tablaSolicitudes.cuerpo" acciones="solicitudesCtrl.tablaSolicitudes.acciones"></tb-table>
 </div>
+
