@@ -67,7 +67,8 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 					"css/dashboard.css",
 					"css/proyecto.css"
 				]);
-			}]
+			}],
+            controller: 'ProyectosCtrl as proyectos'
 		})
 
 		.state('home.horas', {
