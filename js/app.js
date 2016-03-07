@@ -103,9 +103,9 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScop
   
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in
-            // if ($location.path() !== '/' && !$rootScope.globals.token) {
-            //     $location.path('/');
-            // }
+            if ($location.path() !== '/' && !$rootScope.globals.token) {
+                $location.path('/');
+            }
         });
         
         $rootScope.links = [];
