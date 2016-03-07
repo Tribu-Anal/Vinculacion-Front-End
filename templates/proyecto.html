@@ -8,9 +8,9 @@
       <div class="panel-group">
         <h2>Participantes</h2>
         <div class="panel panel-default" ng-repeat="participante in proyectos.participantes">
-          <div class="panel-heading">
+          <div class="panel-heading" ng-click="proyectos.editarHoras(participante)">
             <h4 class="panel-title">
-              <a ng-click="proyectos.editarHoras(participante)" style="color: white;">{{participante.nombre}}</a>
+              <a style="color: white;">{{participante.nombre}}</a>
             </h4>
           </div>
         </div>

@@ -1,0 +1,60 @@
+/*Home CSS */
+.dynamic-area{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.row{
+    margin-top:40px;
+    padding: 0 10px;
+
+}
+
+.clickable{
+    cursor: pointer;   
+}
+.panel{
+        border: 1px solid  #354663 !important;
+    outline: none !important;
+}
+.panel > .panel-heading{
+    background-color: #213250;
+
+}
+.panel-heading span {
+	margin-top: -20px;
+	font-size: 15px;
+}
+
+.btn.btn-success, .btn.btn-success:focus{
+  outline: none;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  width: 30%;
+}
+.glyphicon-lg{font-size:3em}
+.notebox{font-size: 3em}
+.blockquote-box{border-right:5px solid #E6E6E6;margin-bottom:25px}
+.blockquote-box .square{width:100px;min-height:50px;margin-right:22px;text-align:center!important;background-color:#E6E6E6;padding:20px 0}
+.blockquote-box.blockquote-primary{border-color:#357EBD}
+.blockquote-box.blockquote-primary .square{background-color:#428BCA;color:#FFF}
+.blockquote-box.blockquote-success{border-color:#4CAE4C}
+.blockquote-box.blockquote-success .square{background-color:#5CB85C;color:#FFF}
+.blockquote-box.blockquote-info{border-color:#46B8DA}
+.blockquote-box.blockquote-info .square{background-color:#5BC0DE;color:#FFF}
+.blockquote-box.blockquote-warning{border-color:#479898}
+.blockquote-box.blockquote-warning .square{background-color:#479898;color:#FFF}
+.blockquote-box.blockquote-danger{border-color:#D43F3A}
+.blockquote-box.blockquote-danger .square{background-color:#D9534F;color:#FFF}
+
+
+.widget .panel-body { padding:0px; margin-top: 0px;}
+.widget .list-group { margin-bottom: 0; margin-top: 0;}
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 2px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }

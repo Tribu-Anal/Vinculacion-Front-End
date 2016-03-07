@@ -12,6 +12,7 @@
 .panel > .panel-heading{
     background-color: #466196;
     border: none;
+    cursor: pointer;
 
 }
 p{
@@ -36,6 +37,10 @@ p{
 
 #users-management .panel-body img {
     margin: 0 1em 1em 0;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 @media (max-width: 460px) {
