@@ -77,7 +77,7 @@
 						}
 					},
 					{
-						nombre: 'Rechazar Test',
+						nombre: 'Rechazar',
 						icon:'glyphicon glyphicon-remove',
 						click: function(){
 							let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);

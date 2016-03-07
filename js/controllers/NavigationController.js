@@ -1,7 +1,8 @@
 angular.module('VinculacionApp')
 
 	.controller('NavCtrl', [ function() {
-		this.navItems = [ 
+		var ctrl = this;
+		ctrl.navItems = [ 
 						  { title: "HOME", ref: "home", icon: 
 						  "glyphicon glyphicon-home", active: true },
 
@@ -15,17 +16,28 @@ angular.module('VinculacionApp')
 						  icon: "glyphicon glyphicon-log-out", active: false }
 						];
 
-		this.showSideBar = true;
-		var activeItem = this.navItems[0];
+		ctrl.showSideBar = true;
+		var activeItem = ctrl.navItems[0];
 
-		this.navItemClicked = function(itemIndex) {
+		ctrl.navItemClicked = function(itemIndex) {
 			activeItem.active = false;
-			this.setActiveItem(itemIndex);
+			ctrl.setActiveItem(itemIndex);
 		};
 
-		this.setActiveItem = function(itemIndex) {
-			activeItem = this.navItems[itemIndex];
+		ctrl.setActiveItem = function(itemIndex) {
+			activeItem = ctrl.navItems[itemIndex];
 			activeItem.active = true;
 		};
 
+		ctrl.recentProjects = [];
+
+		function getRecentProyects(){
+			ctrl.recentProjects.push({
+				name: 'Proyecto de Reforestacion',
+				image: '../assets/reforestacion.jpg',
+				coment: 'Cupcake ipsum dolor sit amet. Carrot cake gummies sweet roll topping. Tiramisu sugar plum sesame snaps wafer oat cake pastry pudding candy. Candy cupcake dragée soufflé macaroon tiramisu. Tiramisu soufflé gummies wafer soufflé. Sweet tootsie roll cookie gummi bears. Sweet roll croissant sesame snaps croissant cake apple pie marzipan marshmallow macaroon.'
+			});
+		};
+
+		getRecentProyects();
 	}]);
