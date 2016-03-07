@@ -68,11 +68,11 @@
 							let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
 							let mensaje = 'Su solicitud ha sido aprobada, ya puede comenzar a registrar sus horas de vinculacion social';
 							let objectoCallback = openDialog('Aprobar Solicitud', mensaje, id,nombreAlumno, numeroCuenta,function(data){
-								console.log(data);
-								// solicitudesEndPoints.rechazarAceptar_SolicitudDeAlumno(objetoARegistrar,'Rejected',function(data){
-								// ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+								//console.log(data);
+								 solicitudesEndPoints.Aceptar_SolicitudDeAlumno(data, function(data){
+								 ctrl.tablaSolicitudes.cuerpo.splice(index,1);
 								
-								// });
+								 });
 							});
 						}
 					},
@@ -83,11 +83,11 @@
 							let index = ctrl.tablaSolicitudes.cuerpo.indexOf(nuevoElemento);
 							let mensaje = 'Con que autoridad quiere registrarse! ';
 							let objectoCallback = openDialog('Rechazar Solicitud', mensaje, id,nombreAlumno, numeroCuenta,function(data){
-								// console.log(data);
-								// solicitudesEndPoints.rechazarAceptar_SolicitudDeAlumno(objetoARegistrar,'Rejected',function(data){
-								// ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+								 //console.log(data);
+								 solicitudesEndPoints.Rechazar_SolicitudDeAlumno(data, mensaje, function(data){
+								 ctrl.tablaSolicitudes.cuerpo.splice(index,1);
 								
-								// });
+								 });
 							});
 						}
 					}
