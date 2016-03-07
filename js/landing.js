@@ -1,13 +1,23 @@
 $('.message a').click(function(){
    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     $(".login-page").css("width", "500px");
+    $("input").css("border", "none");
 });
 
 $('.message.login a').click(function(){
     $(".login-page").css("width", "360px");
+    $("input").css("border", "none");
 });
 
+function shakeIt(element) {
+   var l = 20;  
+   for( var i = 0; i < 10; i++ )   
+     $(element).animate( { 
+         'margin-left': "+=" + ( l = -l ) + 'px',
+         'margin-right': "-=" + l + 'px'
+      }, 50);  
 
+}
 
 $('#ingresar').click(function(){
         jQuery.validator.addMethod("unitecmail", function (value, element) {
@@ -32,6 +42,12 @@ $('#ingresar').click(function(){
             clave: {
                 required: "Este campo es requerido"
             }
+        },
+        invalidHandler: function(){
+            shakeIt("input");
+            shakeIt("span");
+            $("input").css("border", "2px solid #D46A6A");
+            
         }
     });
     
