@@ -101,6 +101,12 @@ $('#registrar').click(function(){
             confirmpass: {
                 equalTo: "Las contraseñas no coinciden"
             }
+        },
+        invalidHandler: function(){
+            shakeIt("input");
+            shakeIt("span");
+            $("input").css("border", "2px solid #D46A6A");
+            
         }
     });
     
