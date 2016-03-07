@@ -4,7 +4,7 @@ app.service('proyectos', function($http) {
    var direccion = 'http://fiasps.unitec.edu:8085/api/Projects';
    
    this.getProyectos = function(idProyecto, successCallback, errorCallback) {
-       if(idProyecto === "")
+       if(idProyecto === undefined)
            $http.get(direccion).then(successCallback, errorCallback);
        
        else
