@@ -70,7 +70,8 @@
 							let objectoCallback = openDialog('Aprobar Solicitud', mensaje, id,nombreAlumno, numeroCuenta,function(data){
 								//console.log(data);
 								 solicitudesEndPoints.Aceptar_SolicitudDeAlumno(data, function(data){
-								 ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+                                    toaster.pop({type: 'success', title: 'Alumno aceptado', body: 'El alumno ahora puede iniciar sesion con su cuenta'});
+								    ctrl.tablaSolicitudes.cuerpo.splice(index,1);
 								
 								 });
 							});
@@ -85,7 +86,8 @@
 							let objectoCallback = openDialog('Rechazar Solicitud', mensaje, id,nombreAlumno, numeroCuenta,function(data){
 								 //console.log(data);
 								 solicitudesEndPoints.Rechazar_SolicitudDeAlumno(data, mensaje, function(data){
-								 ctrl.tablaSolicitudes.cuerpo.splice(index,1);
+                                     toaster.pop({type: 'success', title: 'Alumno rechazado', body: 'El alumno ha sido denegado'});
+								    ctrl.tablaSolicitudes.cuerpo.splice(index,1);
 								
 								 });
 							});
