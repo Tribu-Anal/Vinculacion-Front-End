@@ -14,6 +14,7 @@ app.controller('ProyectosCtrl', ['proyectos', 'toaster', '$stateParams', 'ngDial
         for(var obj in response.data) {
             controlador.proyectos.push(response.data[obj])
         }
+        console.log(controlador.proyectos);
     }, function(response) {
         toaster.pop({type: 'error', title: 'Error', body: 'No se ha podido obtener los proyectos deseados.'});
     });
