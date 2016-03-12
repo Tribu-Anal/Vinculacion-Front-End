@@ -68,17 +68,17 @@
 				controller: 'ProjectsController as vm'
 			})
 
-			.state('dashboard.proyecto', {
+			.state('dashboard.project', {
 				url: '/proyectos/{projectId}',
-				templateUrl: '../templates/proyecto.html',
+				templateUrl: '../templates/project.html',
 	            onEnter: ['ResourceLoader', function(rl) {
 					rl.swapResources([
 						"https://fonts.googleapis.com/css?family=Roboto:400,500",
 						"css/dashboard.css",
-						"css/proyecto.css"
+						"css/project.css"
 					]);
 				}],
-	            controller: 'ProyectosCtrl as proyectos'
+	            controller: 'ProjectController as vm'
 			})
 
 			.state('dashboard.solicitudes', {

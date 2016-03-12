@@ -12,7 +12,7 @@
         
         vm.projects = [];
         
-        proyectos.getProyectos( vm.projectId, 
+        proyectos.getProyectos( undefined, 
             function(response) {
                 console.log(response);
                 for(var obj in response.data) {
