@@ -17,7 +17,7 @@
 		  { title: "HOME", ref: "dashboard.home", 
 		  	icon: "glyphicon glyphicon-home", active: true },
 
-		  { title: "PROYECTOS", ref: "dashboard.proyectos", 
+		  { title: "PROYECTOS", ref: "dashboard.projects", 
 		  	icon: "glyphicon glyphicon-folder-open", active: false },
 
 		  { title: "SOLICITUDES", ref: "dashboard.solicitudes", 

@@ -54,18 +54,18 @@
 				controller: 'HomeController as vm'
 			})
 
-			.state('dashboard.proyectos', {
+			.state('dashboard.projects', {
 				url: '/proyectos',
-				templateUrl: '../templates/proyectos.html',
+				templateUrl: '../templates/projects.html',
 				onEnter: ['ResourceLoader', function(rl) {
 					rl.swapResources([
 						"https://fonts.googleapis.com/css?family=Ubuntu:400,500",
 						"https://fonts.googleapis.com/css?family=Roboto:400,500",
 						"css/dashboard.css",
-						"css/proyectos.css"
+						"css/projects.css"
 					]);
 				}],
-				controller: 'ProyectosCtrl as proyectos'
+				controller: 'ProjectsController as vm'
 			})
 
 			.state('dashboard.proyecto', {
