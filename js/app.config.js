@@ -28,7 +28,7 @@
 	        controller: 'LoginController as vm'
 			})
 
-			.state('nav', {
+			.state('dashboard', {
 				templateUrl: '../templates/dashboard.html',
 				onEnter: ['ResourceLoader', function(rl) {
 					rl.swapResources([
@@ -37,10 +37,10 @@
 						"css/dashboard.css"
 					]);
 				}],
-				controller: 'NavCtrl as nav'
+				controller: 'NavigationController as nav'
 			})
 
-			.state('nav.home', {
+			.state('dashboard.home', {
 				url: '/home',
 				templateUrl: '../templates/home.html',
 				onEnter: ['ResourceLoader', function(rl) {
@@ -54,7 +54,7 @@
 				controller: 'HomeController as vm'
 			})
 
-			.state('nav.proyectos', {
+			.state('dashboard.proyectos', {
 				url: '/proyectos',
 				templateUrl: '../templates/proyectos.html',
 				onEnter: ['ResourceLoader', function(rl) {
@@ -68,7 +68,7 @@
 				controller: 'ProyectosCtrl as proyectos'
 			})
 
-			.state('nav.proyecto', {
+			.state('dashboard.proyecto', {
 				url: '/proyectos/{projectId}',
 				templateUrl: '../templates/proyecto.html',
 	            onEnter: ['ResourceLoader', function(rl) {
@@ -81,7 +81,7 @@
 	            controller: 'ProyectosCtrl as proyectos'
 			})
 
-			.state('nav.solicitudes', {
+			.state('dashboard.solicitudes', {
 				url: '/solicitudes',
 				templateUrl: '../templates/solicitudes.html',
 				onEnter: ['ResourceLoader', function(rl) {
