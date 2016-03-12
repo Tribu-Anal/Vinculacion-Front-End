@@ -25,7 +25,7 @@
 					]);
 				}],
 	            
-	        controller: 'LoginCtrl as login'
+	        controller: 'LoginController as vm'
 			})
 
 			.state('nav', {
