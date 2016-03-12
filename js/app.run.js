@@ -1,7 +1,8 @@
 (function() {
     "use strict";
 
-    angular.module("VinculacionApp")
+    angular
+        .module("VinculacionApp")
         .run(run);
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];

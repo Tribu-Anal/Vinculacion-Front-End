@@ -1,7 +1,8 @@
 (function(){
 	"use strict";
 
-	angular.module("VinculacionApp")
+	angular
+		.module("VinculacionApp")
 		.config(config);
 
 	config.$inject = [ '$stateProvider', '$urlRouterProvider' ];
@@ -50,7 +51,7 @@
 						"css/home.css"
 					]);
 				}],
-				controller: 'HomeCtrl as home'
+				controller: 'HomeController as vm'
 			})
 
 			.state('nav.proyectos', {
