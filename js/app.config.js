@@ -34,7 +34,7 @@
 					rl.swapResources([
 						"https://fonts.googleapis.com/css?family=Ubuntu:400,500",
 						"https://fonts.googleapis.com/css?family=Roboto:400,500",
-						"css/dashboard.css"
+						"css/navigation.css"
 					]);
 				}],
 				controller: 'NavigationController as nav'
@@ -47,7 +47,7 @@
 					rl.swapResources([
 						"https://fonts.googleapis.com/css?family=Ubuntu:400,500",
 						"https://fonts.googleapis.com/css?family=Roboto:400,500",
-						"css/dashboard.css",
+						"css/navigation.css",
 						"css/home.css"
 					]);
 				}],
@@ -61,7 +61,7 @@
 					rl.swapResources([
 						"https://fonts.googleapis.com/css?family=Ubuntu:400,500",
 						"https://fonts.googleapis.com/css?family=Roboto:400,500",
-						"css/dashboard.css",
+						"css/navigation.css",
 						"css/projects.css"
 					]);
 				}],
@@ -74,7 +74,7 @@
 	            onEnter: ['ResourceLoader', function(rl) {
 					rl.swapResources([
 						"https://fonts.googleapis.com/css?family=Roboto:400,500",
-						"css/dashboard.css",
+						"css/navigation.css",
 						"css/project.css"
 					]);
 				}],
@@ -87,7 +87,7 @@
 				onEnter: ['ResourceLoader', function(rl) {
 					rl.swapResources([
 						"https://fonts.googleapis.com/css?family=Roboto",
-						"css/dashboard.css",
+						"css/navigation.css",
 						"css/requests.css"
 					]);
 				}],
