@@ -5,25 +5,25 @@
         .module('VinculacionApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$location', 'AuthenticationService', 'toaster'];
+    LoginController.$inject = ['$rootScope', '$location', 'authentication', 'toaster'];
 
-    function LoginController ($rootScope, $location, AuthenticationService, toaster) {
+    function LoginController ($rootScope, $location, authentication, toaster) {
         var vm = this;
 
         vm.username = "";
         vm.password = "";
         vm.login = login;
 
-        AuthenticationService.ClearCredentials();
+        authentication.ClearCredentials();
 
         function login() {
             console.log("Login");
 
-            AuthenticationService.Login( vm.username, vm.password, 
+            authentication.Login( vm.username, vm.password, 
                 function(response) {
                     if(response.statusText === "OK") {
                         console.log(response);
-                        AuthenticationService.SetCredentials(response.data);
+                        authentication.SetCredentials(response.data);
                         $location.path('/home');
                     }
                 }, 
