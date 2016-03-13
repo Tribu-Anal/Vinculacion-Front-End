@@ -3,52 +3,55 @@
 <div class="login-page">
       <img class = "img-responsive" src="assets/logo.png" />
       <div class="form">
-        <form id="login-form" class="login-form" name="registroLogin" ng-submit="registroLogin.$valid && login.login()" novalidate>
+        <form id="login-form" class="login-form" name="registerLogin" ng-submit="registerLogin.$valid && vm.login()" novalidate>
             <div class="inner-addon left-addon">
             <span class="fa fa-user"></span>
-            <input id="usuario" name="usuario" ng-model = "login.username" type="text" placeholder="Correo o Usuario" required/>
+            <input ng-model="vm.username" type="text" placeholder="Correo o Usuario" required/>
             </div>
             <div class="inner-addon left-addon">
             <span class="fa fa-lock"></span>
-            <input id="clave" name="clave" ng-model = "login.password" type="password" placeholder="Clave" required/>
+            <input ng-model="vm.password" type="password" placeholder="Clave" required/>
             </div>
-            <button id="ingresar" name="ingresar" type="submit">Ingresar</button>
+            <button id="ingresar" type="submit">Ingresar</button>
             <p class="message register">No estas registrado? <a href="#">Crear una cuenta</a></p>
         </form>  
           
-        <div ng-controller="RegistroCtrl as registro">
-            <form id="register-form" class="register-form" name="registro1" ng-submit="registro1.$valid && registro.registrarAlumno()" novalidate>
+        <div ng-controller="RegisterController as vm">
+            <form id="register-form" class="register-form" name="register" 
+                  ng-submit="register.$valid && vm.registerStudent()" novalidate>
                 <label>Registrar Usuario</label>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-envelope"></span>
-                <input name="correo" type="email" placeholder="Correo Electr&oacute;nico" ng-model="registro.correo" ng-pattern='/@unitec.edu$/' required/>
+                <input name="email" type="email" placeholder="Correo Electr&oacute;nico" ng-model="vm.email" 
+                       ng-pattern='/@unitec.edu$/' required/>
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-sort-numeric-desc"></span>
-                <input name="cuenta" type="text" placeholder="N&uacute;mero de Cuenta" ng-model="registro.numCuenta" required>
+                <input name="accountId" type="text" placeholder="N&uacute;mero de Cuenta" ng-model="vm.accountId" required>
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-user register"></span>
-                <input name="nombre" type="text" placeholder="Nombre Completo" ng-model="registro.nombre" required>
+                <input name="name" type="text" placeholder="Nombre Completo" ng-model="vm.name" required>
                 </div>
                 <div class="campus">
                     <label>Campus</label>
-                    <select class="form-control" ng-model="registro.campus">
+                    <select class="form-control" ng-model="vm.campus">
                         <option>SPS</option>
                         <option>TGU</option>
                     </select>
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-lock pass"></span>
-                <input id="password" name="password" type="password" placeholder="Clave" ng-model="registro.password" ng-minlength="8" ng-keypress="registro.validar($event)" required/>
+                <input id="password" name="password" type="password" placeholder="Clave" ng-model="vm.password" 
+                        ng-minlength="8" ng-keypress="vm.validate($event)" required/>
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-lock confirmpass"></span>
-                <input name="confirmpass" type="password" placeholder="Confirmar Clave" ng-model="registro.confirm_password" ng-pattern="registro.password" required/>
+                <input type="password" placeholder="Confirmar Clave" ng-pattern="vm.password" required/>
                 </div>
                 <div class="carrera">
                     <label>Carrera</label>
-                    <select class="form-control" ng-model="registro.carrera">
+                    <select class="form-control" ng-model="vm.career">
                         <option value="I - 01 (Ing. en Sistemas Computacionales)">I - 01 (Ing. Sistemas Computacionales)</option>
                     </select>
                 </div>

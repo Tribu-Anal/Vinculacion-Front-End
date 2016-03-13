@@ -1,16 +1,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-5">
-  <h1>{{proyectos.proyectos[1]}}</h1>
+  <h1>{{vm.project}}</h1>
   <img class="img-responsive img-thumbnail" src="../assets/reforestacion.jpg">
 
             <div id="users-management" class="col-md-8">
       <div class="panel-group">
         <h2>Participantes</h2>
-        <div class="panel panel-default" ng-repeat="participante in proyectos.participantes">
-          <div class="panel-heading" ng-click="proyectos.editarHoras(participante)">
+        <div class="panel panel-default" ng-repeat="participant in vm.participants">
+          <div class="panel-heading" ng-click="vm.editHours(participant)">
             <h4 class="panel-title">
-              <a style="color: white;">{{participante.nombre}}</a>
+              <a style="color: white;">{{participant.name}}</a>
             </h4>
           </div>
         </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-5">
             <h2>Descripci&oacute;n</h2>
-            <p>{{proyectos.proyectos[2]}}</p>
+            <p>{{vm.project}}</p>
         </div>
     </div>
 </div>
