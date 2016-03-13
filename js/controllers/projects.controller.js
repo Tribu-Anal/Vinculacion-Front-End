@@ -5,14 +5,14 @@
         .module('VinculacionApp')
         .controller('ProjectsController', ProjectsController);
 
-    ProjectsController.$inject = ['proyectos', 'toaster'];
+    ProjectsController.$inject = ['projects', 'toaster'];
 
-    function ProjectsController (proyectos, toaster) {
+    function ProjectsController (projects, toaster) {
         var vm = this;
         
         vm.projects = [];
         
-        proyectos.getProyectos( undefined, 
+        projects.getProjects( undefined, 
             function(response) {
                 console.log(response);
                 for(var obj in response.data) {

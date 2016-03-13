@@ -5,16 +5,16 @@
 		.module('VinculacionApp')
 		.controller('ProjectController', ProjectController);
 
-	ProjectController.$inject = ['$stateParams', 'proyectos'];
+	ProjectController.$inject = ['$stateParams', 'projects'];
 
-	function ProjectController($stateParams, proyectos) {
+	function ProjectController($stateParams, projects) {
 		var vm = this;
 
 		vm.project = {};
 	    vm.participants = [];
 	    vm.editHours = editHours;
 
-	    proyectos.getProyectos( $stateParams.projectId, 
+	    projects.getProject( $stateParams.projectId, 
             function(response) {
                 console.log(response);
                 vm.project = response.data;
