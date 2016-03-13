@@ -5,9 +5,9 @@
 		.module('VinculacionApp')
 		.controller('ProjectController', ProjectController);
 
-	ProjectController.$inject = ['$stateParams', 'projects'];
+	ProjectController.$inject = ['$stateParams', 'projects', 'toaster'];
 
-	function ProjectController($stateParams, projects) {
+	function ProjectController($stateParams, projects, toaster) {
 		var vm = this;
 
 		vm.project = {};

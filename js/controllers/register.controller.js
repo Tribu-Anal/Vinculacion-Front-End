@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['registro', 'toaster'];
+    RegisterController.$inject = ['register', 'toaster'];
 
-    function RegisterController (registro, toaster) {
+    function RegisterController (register, toaster) {
         var vm = this;
 
         vm.email = "";
@@ -20,8 +20,8 @@
         vm.validate = validate;
         
         function registerStudent() {        
-            registro
-                .registroAlumno( JSON.stringify (
+            register
+                .registerStudent( JSON.stringify (
                 {
                     AccountId: vm.accountId,
                     Name: vm.name,
