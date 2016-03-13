@@ -5,9 +5,9 @@
 		.module('VinculacionApp')
 		.controller('RequestsController', RequestsController);
 
-	RequestsController.$inject = ['$scope','solicitudesEndPoints', 'toaster'];
+	RequestsController.$inject = ['$scope','requests', 'toaster'];
 
-	function RequestsController ($scope,solicitudesEndPoints, toaster) {
+	function RequestsController ($scope, requests, toaster) {
 			var vm = this;
 			var acceptButton = 
 			{
@@ -43,7 +43,7 @@
 				acciones: true
 			};
 
-			solicitudesEndPoints.obtenerAlumnosConSolicitudesPendientes( function(response) {
+			requests.getRequests( function(response) {
 				if (response.data.length <= 0) return;
 
 				for (let student in response.data) {
