@@ -1,0 +1,28 @@
+<table class="responstable">
+	<tr>
+		<th ng-repeat="header in headers">{{header}}</th>
+		<th ng-if="actions"></th>
+	</tr>
+
+	<tr ng-repeat="row in body" class="tb-body">
+		<td ng-repeat="content in row.content">{{content}}</td>
+		<td ng-if="actions">
+			<button class="actions-button" id="buttonTB{{$index}}" ng-init="visible=false" ng-click="vm.onClickActions($index, row.actions.length, row)">
+				<span class="icon glyphicon glyphicon-th-large" aria-hidden="true"></span>
+			</button>
+			<!-- ng-if="visible" -->
+			<div ng-if="row.visible" ng-style="vm.buttonsCSS">
+				<div class="action-content" ng-style="vm.actionContentCSS">
+					<div class="wrapper-buttons">
+						<button class="style-button tb-tooltip" 
+						ng-repeat="action in row.actions" 
+						ng-click="vm.closeButtons(row, action.click($parent.$index))">
+							<span class="{{action.icon}}"></span>
+							<span class="tooltiptext">{{action.name}}</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>

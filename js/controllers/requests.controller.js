@@ -11,7 +11,7 @@
 			var vm = this;
 			var acceptButton = 
 			{
-				nombre: 'Aceptar',
+				name: 'Aceptar',
 				icon:'glyphicon glyphicon-ok',
 				click: function(index) {
 					/*
@@ -21,7 +21,7 @@
 			};
 			var rejectButton = 
 			{
-				nombre: 'Rechazar',
+				name: 'Rechazar',
 				icon:'glyphicon glyphicon-remove',
 				click: function(index) {
 					/*
@@ -32,15 +32,15 @@
 
 			vm.requestsTable = 
 			{
-				encabezado: 
+				headers: 
 				[
 					'Numero de Cuenta',
 					'Nombre',
 					'Carrera',
 					'Correo Electronico'
 	            ],
-				cuerpo: [],
-				acciones: true
+				body: [],
+				actions: true
 			};
 
 			requests.getRequests( function(response) {
@@ -51,8 +51,8 @@
 
 					let newTableElement = 
 					{
-						acciones: [ acceptButton, rejectButton ],
-						contenido:[
+						actions: [ acceptButton, rejectButton ],
+						content:[
 							student.AccountId,
 							student.Name,
 							student.Major.Name,
@@ -61,7 +61,7 @@
 						id: student.Id
 					};
 
-					vm.requestsTable.cuerpo.push(newTableElement);
+					vm.requestsTable.body.push(newTableElement);
 				}
 			});
 

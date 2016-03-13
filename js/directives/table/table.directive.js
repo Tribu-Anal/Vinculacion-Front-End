@@ -1,22 +1,24 @@
 (function() {
-    'use strict';
+    "use strict";
 
-    var app = angular
-        .module('VinculacionApp');
-    app
+    angular
+        .module('VinculacionApp')
         .directive('tbTable', tbTable);
 
     function tbTable() {
-        return {
+        var directive = 
+        {
             restrict: 'E',
             scope: {
-                encabezado: '=?',
-                cuerpo: '=?',
-                acciones:"=?"
+                headers: '=?',
+                body: '=?',
+                actions:"=?"
             },
-            controller : 'tableController as tableCtrl',
-            templateUrl: 'js/directives/table/table.view.html'
-                       
-        }
-    };
+            controller : 'TableController as vm',
+            templateUrl: 'js/directives/table/table.html'           
+        };
+
+        return directive;
+    }
+
 })();

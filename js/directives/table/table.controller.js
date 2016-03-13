@@ -1,37 +1,49 @@
 (function() {
-    'use strict';
-    var app =angular
-        .module('VinculacionApp');
-    
-    app
-        .controller('tableController', tableController)
+    "use strict";
 
-    tableController.$inject = [
-       '$scope'
-    ];
+    angular
+        .module('VinculacionApp')
+        .controller('TableController', TableController);
 
-    function tableController($scope) {
-        var ctrl = this;
-        ctrl.bottonesCss = {};
-        ctrl.actionContentCSS={};
-        if($scope.acciones){
-            for (let i = 0; i < $scope.cuerpo.length; i++) {
-                $scope.cuerpo[i].visible = false;
+    TableController.$inject = ['$scope'];
+
+    /*
+     * @todo Evitar $scope
+     * @todo Evitar DOM manipulation
+     * @todo Revisar codigo
+     */
+    function TableController ($scope) {
+        var vm = this;
+
+        vm.buttonsCSS = {};
+        vm.actionContentCSS = {};
+        vm.onClickActions = onClickActions;
+        vm.closeButtons = closeButtons;
+
+        function onClickActions(index, actionLength, actionVisible) {
+            actionVisible.visible = !actionVisible.visible;
+
+            let position = $("#buttonTB" + index).position();
+
+            vm.buttonsCSS.top = position.top + 'px';
+            vm.buttonsCSS.position = 'absolute';
+
+            let width = 100 + ( (actionLength - 2) * 50 );
+
+            vm.actionContentCSS.width = width + 'px';
+            vm.buttonsCSS.left = (position.left - width + 20) + 'px';
+        };
+
+        function closeButtons (actionVisible, funct) {
+            funct;
+            actionVisible.visible = false;      
+        };
+
+        if($scope.actions){
+            for (let i = 0; i < $scope.body.length; i++) {
+                $scope.body[i].visible = false;
             }
         }
-        ctrl.onClickActions = function(index, accionesLength,actionVisible){
-            actionVisible.visible=actionVisible.visible?false:true;
-            let posicion = $("#buttonTB"+index).position();
-            ctrl.bottonesCss.top = posicion.top+'px';
-            ctrl.bottonesCss.position = 'absolute';
-            let width = 100 + ((accionesLength-2)*50);
-            ctrl.actionContentCSS.width = width+'px';
-            ctrl.bottonesCss.left = (posicion.left - width +20)+'px';
-        };
 
-        ctrl.closeButtons = function(actionVisible,funcion){
-            funcion;
-            actionVisible.visible=false;      
-        };
     }
 })();
