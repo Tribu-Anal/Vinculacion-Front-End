@@ -20,7 +20,7 @@
 		  { title: "PROYECTOS", ref: "dashboard.projects", 
 		  	icon: "glyphicon glyphicon-folder-open", active: false },
 
-		  { title: "SOLICITUDES", ref: "dashboard.solicitudes", 
+		  { title: "SOLICITUDES", ref: "dashboard.requests", 
 		  	icon: "glyphicon glyphicon-tasks", active: false },
 
 		  { title: "LOG OUT", ref: "landing", 

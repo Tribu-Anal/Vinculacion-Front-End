@@ -81,17 +81,17 @@
 	            controller: 'ProjectController as vm'
 			})
 
-			.state('dashboard.solicitudes', {
+			.state('dashboard.requests', {
 				url: '/solicitudes',
-				templateUrl: '../templates/solicitudes.html',
+				templateUrl: '../templates/requests.html',
 				onEnter: ['ResourceLoader', function(rl) {
 					rl.swapResources([
 						"https://fonts.googleapis.com/css?family=Roboto",
 						"css/dashboard.css",
-						"css/solicitudes.css"
+						"css/requests.css"
 					]);
 				}],
-				controller: "solicitudesController as solicitudesCtrl"
+				controller: "RequestsController as vm"
 			});
 	}
 })();

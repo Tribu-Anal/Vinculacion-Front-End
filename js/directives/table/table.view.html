@@ -14,7 +14,7 @@
 			<div ng-if="cuerpoTR.visible" ng-style="tableCtrl.bottonesCss">
 				<div class="action-content" ng-style="tableCtrl.actionContentCSS">
 					<div class="wrapper-buttons">
-						<button class="style-button tb-tooltip" ng-repeat="accion in cuerpoTR.acciones" ng-click="tableCtrl.closeButtons(cuerpoTR, accion.click())">
+						<button class="style-button tb-tooltip" ng-repeat="accion in cuerpoTR.acciones" ng-click="tableCtrl.closeButtons(cuerpoTR, accion.click($parent.$index))">
 							<span class="{{accion.icon}}"></span>
 							<span class="tooltiptext">{{accion.nombre}}</span>
 						</button>
