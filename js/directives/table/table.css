@@ -108,11 +108,12 @@ body {
 }
 
 .tb-body .actions-button {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
+      height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: inherit;
+    margin-right: auto;
+    float: left;
 }
 .tb-body .actions-button .icon {
   font-size: 25px;
