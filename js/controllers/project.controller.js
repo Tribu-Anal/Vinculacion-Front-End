@@ -17,7 +17,7 @@
 			],
 			body: [],
 			actions: false
-		}
+		};
 		vm.editHours = editHours;
 
 		projects.getProject($stateParams.projectId,
