@@ -45,18 +45,5 @@
 			 * @todo Que funcione con un table o grid en vez de dialog
 			 */
 		}
-
-		function addParticipantsToTable(studentName, id) {
-			vm.participants.body.push({
-				content: [
-					studentName
-				],
-				id: id,
-				textInputs: [{
-					type: 'number',
-					value: ''
-				}]
-			});
-		}
 	}
 })();
