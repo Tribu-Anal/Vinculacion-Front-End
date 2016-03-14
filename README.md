@@ -33,3 +33,8 @@ Aplicacion web para manejar las horas de trabajo social de los alumnos de UNITEC
 - Controller: `HomeController` (Pascal case only)
 - Service/Factory: `projects` (Camel case only)
 - Directive: `sidebar` (Camel case only)
+
+## Project Structure
+
+![Project Structure 1](https://trello-attachments.s3.amazonaws.com/56e5216038ef94c55d9cb601/885x629/6e49dc59a25ac40eb37e09b8ae0da4e0/Screenshot_from_2016-03-14_00_00_32.png)
+![Project Structure 2](https://trello-attachments.s3.amazonaws.com/56e5216038ef94c55d9cb601/755x329/f78a306792bee8b419188428fe3f11fa/Screenshot_from_2016-03-14_00_00_45.png)
