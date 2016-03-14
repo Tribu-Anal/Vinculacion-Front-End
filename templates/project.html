@@ -6,16 +6,11 @@
 
             <div id="users-management" class="col-md-8">
       <div class="panel-group">
-        <h2>Participantes</h2>
-        <div class="panel panel-default" ng-repeat="participant in vm.participants">
-          <div class="panel-heading" ng-click="vm.editHours(participant)">
-            <h4 class="panel-title">
-              <a style="color: white;">{{participant.name}}</a>
-            </h4>
-          </div>
-        </div>
-       
-</div>
+          <h2>Participantes</h2>
+          <tb-table   headers="vm.participants.headers" 
+                body="vm.participants.body">
+         </tb-table>
+      </div>
     
 </div>
         </div>

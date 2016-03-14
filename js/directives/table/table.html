@@ -12,5 +12,8 @@
 				<span class="tooltiptext">{{action.name}}</span>
 			</button>	
 		</td>
+		<td ng-if="row.textInputs" ng-repeat="input in row.textInputs">
+			<input type="{{input.type}}" ng-model="input.value">
+		</td>
 	</tr>
 </table>

@@ -11,35 +11,52 @@
 		var vm = this;
 
 		vm.project = {};
-	    vm.participants = [];
-	    vm.editHours = editHours;
+		vm.participants = {
+			headers: [
+				'Alumno'
+			],
+			body: [],
+			actions: false
+		}
+		vm.editHours = editHours;
 
-	    projects.getProject( $stateParams.projectId, 
-            function(response) {
-                console.log(response);
-                vm.project = response.data;
-            }, 
-            function(response) {
-                toaster.pop(
-                    {
-                        type: 'error', 
-                        title: 'Error', 
-                        body: 'El proyecto deseado no existe.'
-                    }
-                );
-            }
-        );
+		projects.getProject($stateParams.projectId,
+			function(response) {
+				console.log(response);
+				vm.project = response.data;
+			},
+			function(response) {
+				toaster.pop({
+					type: 'error',
+					title: 'Error',
+					body: 'El proyecto deseado no existe.'
+				});
+			}
+		);
 
-		function getParticipants(){
+		function getParticipants() {
 			/*
-	         * @todo Request al server por los participantes
-	         */
-	    }
+			 * @todo Request al server por los participantes
+			 */
+		}
 
-	    function editHours (participant) {
-	        /*
-	         * @todo Que funcione con un table o grid en vez de dialog
-	         */
-	    }
+		function editHours(participant) {
+			/*
+			 * @todo Que funcione con un table o grid en vez de dialog
+			 */
+		}
+
+		function addParticipantsToTable(studentName, id) {
+			vm.participants.body.push({
+				content: [
+					studentName
+				],
+				id: id,
+				textInputs: [{
+					type: 'number',
+					value: ''
+				}]
+			});
+		}
 	}
 })();
