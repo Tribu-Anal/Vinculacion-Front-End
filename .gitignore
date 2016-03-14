@@ -1,5 +1,6 @@
 node_modules/
 test/
+public/
 
 # cache files for sublime text
 *.tmlanguage.cache
