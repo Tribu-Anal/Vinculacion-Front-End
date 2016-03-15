@@ -1,6 +1,18 @@
 .landing
 {
     @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+    font-family: 'Roboto', sans-serif;
+
+    background: #213250; /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, #213250, #213250);
+    background:    -moz-linear-gradient(right, #213250, #213250);
+    background:      -o-linear-gradient(right, #213250, #213250);
+    background:         linear-gradient(to left, #213250, #213250);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     .login-page
     {
         width: 360px;
@@ -12,7 +24,7 @@
         position: relative;
         z-index: 1;
 
-        margin: 2px auto 100px;
+        margin: 15px auto 100px;
         padding: 45px;
 
         text-align: center;
@@ -201,18 +213,5 @@
         padding-top: 0;
 
         color: red;
-    }
-    body
-    {
-        font-family: 'Roboto', sans-serif;
-
-        background: #213250; /* fallback for old browsers */
-        background: -webkit-linear-gradient(right, #213250, #213250);
-        background:    -moz-linear-gradient(right, #213250, #213250);
-        background:      -o-linear-gradient(right, #213250, #213250);
-        background:         linear-gradient(to left, #213250, #213250);
-
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
     }
 }

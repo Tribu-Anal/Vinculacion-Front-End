@@ -20,4 +20,5 @@
 		<span>Activity</span>
 	</div>
 </div>
-<div class="dynamic-area" ng-class="!nav.showSideBar ? 'expanded' : 'shrunk'" ui-view></div>
+<div ng-show="stateLoading" class="dynamic-area loading"><img src="../assets/logo.png" alt="loading"></div>
+<div class="dynamic-area" ng-class="!nav.showSideBar ? 'expanded' : 'shrunk'" ng-hide="!hideLoading" ng-cloak ui-view></div>

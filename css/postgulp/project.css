@@ -1,0 +1,49 @@
+.project .help {
+  padding: 3px;
+  border-bottom: 1px dotted;
+  background: #eee; }
+
+.project .img-responsive {
+  width: 430px; }
+
+.project .panel > .panel-heading {
+  cursor: pointer;
+  border: none;
+  background-color: #466196; }
+
+.project p {
+  font-size: 19px; }
+
+.project #users-management {
+  width: 100%; }
+
+.project #users-management .panel-heading {
+  height: 55px; }
+
+.project #users-management h4 {
+  line-height: 35px; }
+
+.project #users-management .panel-heading img {
+  width: 32px;
+  margin-right: .25em; }
+
+.project #users-management .panel-body img {
+  margin: 0 1em 1em 0; }
+
+.project a:hover {
+  text-decoration: none; }
+
+.project .tb-dialogHRS {
+  margin-right: auto;
+  margin-left: auto; }
+
+@media (max-width: 460px) {
+  .project #users-management .panel-heading .btn-group .btn span {
+    display: none; }
+  .project #users-management .panel-heading img {
+    display: none; }
+  .project #users-management .panel-heading .btn-group .btn {
+    padding-right: 6px;
+    padding-left: 6px; }
+  .project #users-management .panel-heading h4 {
+    font-size: 13px; } }

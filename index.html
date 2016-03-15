@@ -9,7 +9,7 @@
         <link rel="icon" href="assets/logo.png">
 
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500"' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
 
@@ -21,9 +21,14 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 		<link href="css/include.css" rel="stylesheet" />
-		<link ng-repeat="link in links" rel="stylesheet" href="{{link}}">
+		<link href="css/postgulp/home.css" rel="stylesheet" />
+		<link href="css/postgulp/login.css" rel="stylesheet" />
+		<link href="css/postgulp/navigation.css" rel="stylesheet" />
+		<link href="css/postgulp/project.css" rel="stylesheet" />
+		<link href="css/postgulp/projects.css" rel="stylesheet" />
+		<link href="css/requests.css" rel="stylesheet" />
     </head>
-    <body>
+    <body class="{{viewStyles}}">
     	<toaster-container></toaster-container>
 		<ui-view></ui-view>
 
@@ -38,7 +43,6 @@
 		<script src="js/app.config.js"></script>
 		<script src="js/app.run.js"></script>
 
-		<script src="js/services/ResourceLoader.js"></script>
 		<script src="js/services/hours.service.js"></script>
 
 		<script src="js/controllers/register.controller.js"></script>
