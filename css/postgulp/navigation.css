@@ -1,0 +1,94 @@
+.navigation {
+  font-family: 'Ubuntu', 'Roboto', sans-serif;
+  overflow-x: hidden;
+  margin: 0; }
+  .navigation #side-bar {
+    font-size: 1.2em;
+    font-weight: 500;
+    position: absolute;
+    width: 18%;
+    height: 100%;
+    animation: slide-in .3s linear forwards;
+    background: #283b5b; }
+  .navigation #side-bar.ng-hide {
+    animation: slide-out .3s linear forwards; }
+  .navigation #logo-area {
+    display: flex;
+    height: 13%;
+    background: #213250;
+    justify-content: center; }
+  .navigation #logo-area img {
+    width: 35%;
+    height: 80%;
+    cursor: pointer;
+    align-self: center; }
+  .navigation #navigation {
+    margin-top: 30%;
+    padding: 0 15%;
+    color: #6b7fa4; }
+  .navigation #navigation ul {
+    padding: 0;
+    list-style: none; }
+  .navigation #navigation li {
+    margin-bottom: 15%;
+    cursor: pointer; }
+  .navigation #navigation li:hover,
+  .navigation .active {
+    color: #55e4d4; }
+  .navigation #navigation i {
+    margin-right: 6%; }
+  .navigation .header-bar {
+    position: absolute;
+    left: 18%;
+    display: flex;
+    width: 82%;
+    height: 13%;
+    padding-left: 2%;
+    transition: all .3s linear;
+    color: #7b96c4;
+    border-bottom: 1px solid #e1ecff;
+    background: #f7faff; }
+  .navigation #activity-section {
+    font-size: 18px;
+    display: flex;
+    align-self: center; }
+  .navigation #activity-section img {
+    width: 10%;
+    height: 100%;
+    margin-right: 3%;
+    cursor: pointer; }
+  .navigation .dynamic-area {
+    position: absolute;
+    top: 13%;
+    left: 18%;
+    overflow-y: scroll;
+    width: 82%;
+    height: 87%;
+    transition: all .3s linear; }
+    .navigation .dynamic-area.loading {
+      display: flex;
+      background: #f2f2f2;
+      z-index: 1000000;
+      justify-content: center; }
+      .navigation .dynamic-area.loading img {
+        width: 20%;
+        height: 35%;
+        align-self: center; }
+  .navigation .expanded {
+    left: 0;
+    width: 100%; }
+  .navigation .shrunk {
+    left: 18%;
+    width: 82%; }
+
+@keyframes slide-in {
+  from {
+    left: -18%; }
+  to {
+    left: 0; } }
+
+@keyframes slide-out {
+  from {
+    left: 0; }
+  to {
+    left: -18%; } }
