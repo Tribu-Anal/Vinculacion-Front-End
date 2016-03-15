@@ -33,8 +33,8 @@
 
 		requests.getRequests(function(response) {
 			if (response.data.length <= 0) return;
-
-			for (let student in response.data) {
+			for(let i=0;i<response.data.length;i++){
+				let student =  response.data[i];
 				if (student.Major === null) continue;
 
 				let newTableElement = {
