@@ -17,3 +17,34 @@ let gulp            = require('gulp'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
     util            = require('gulp-util');
+
+
+/////////////////////////////////////////////////////////////////////////
+//                              PATH                                   //
+/////////////////////////////////////////////////////////////////////////
+
+
+let path = {};
+
+path.dev = {};
+path.public = {};
+
+let app = "dev/app/";
+path.dev.app = app;
+path.dev.components = app + "components/";
+path.dev.services = app + "services/";
+path.dev.shared = app + "shared/";
+
+let assets = "dev/assets/";
+path.dev.img = assets + "img/";
+path.dev.lib = assets + "lib/";
+
+let pbl = "public/";
+
+path.public.css = pbl + "css/";
+path.public.img = pbl + "img/";
+path.public.js = pbl + "js/";
+path.public.lib = pbl + "lib/";
+path.public.templates = pbl + "templates/";
+
+let production = util.env.type === 'prod';
