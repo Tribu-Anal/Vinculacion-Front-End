@@ -27,38 +27,38 @@ let gulp            = require('gulp'),
 
 let path = {};
 
-path.dev = {};
+path.dev    = {};
 path.public = {};
 
-let app = "dev/app/";
-path.dev.app = app;
-path.dev.components = app + "components/";
-path.dev.services = app + "services/";
-path.dev.shared = app + "shared/";
+path.dev.app = "dev/app/";
 
-let assets = "dev/assets/";
+let assets   = "dev/assets/";
 path.dev.img = assets + "img/";
 path.dev.lib = assets + "lib/";
 
 let pbl = "public/";
 
-path.public.css = pbl + "css/";
-path.public.img = pbl + "img/";
-path.public.js = pbl + "js/";
-path.public.lib = pbl + "lib/";
+path.public.css       = pbl + "css/";
+path.public.img       = pbl + "img/";
+path.public.js        = pbl + "js/";
+path.public.lib       = pbl + "lib/";
 path.public.templates = pbl + "templates/";
 
 let production = util.env.type === 'prod';
 
-let appJs = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ];
 
-let sassSrc = [ path.dev.app + "**/*.scss" ];
+/////////////////////////////////////////////////////////////////////////
+//                            SOURCE                                   //
+/////////////////////////////////////////////////////////////////////////
 
-let templateSrc = [ path.dev.app + "**/*.html", path.dev.app + "**/*.*.html" ];
 
-let vendorJs = [ path.dev.lib + "**/*.js", path.dev.lib + "**/*.*.js" ];
 
-let imgSrc = [ path.dev.img + "*.jpg", path.dev.img + "*.png" ];
+let appJs       = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ],
+    vendorJs    = [ path.dev.lib + "**/*.js", path.dev.lib + "**/*.*.js" ],
+    sassSrc     = [ path.dev.app + "**/*.scss" ],
+    templateSrc = [ path.dev.app + "**/*.html", path.dev.app + "**/*.*.html" ],
+    imgSrc      = [ path.dev.img + "*.jpg", path.dev.img + "*.png" ];
+
 
 
 /////////////////////////////////////////////////////////////////////////
