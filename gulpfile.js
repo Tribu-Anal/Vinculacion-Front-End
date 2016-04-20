@@ -54,6 +54,8 @@ let appJs = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ];
 
 let sassSrc = [ path.dev.app + "**/*.scss" ];
 
+let templateSrc = [ path.dev.app + "**/*.html", path.dev.app + "**/*.*.html" ];
+
 let vendorJs = [ path.dev.lib + "**/*.js", path.dev.lib + "**/*.*.js" ];
 
 
@@ -116,6 +118,20 @@ gulp.task ( 'css', () => {
 		.pipe( production ? util.noop() : csscomb() )
 		.pipe( autoprefixer( { browsers: [ "> 0%" ] } ) )
 		.pipe( gulp.dest(path.public.css) )
+		.pipe( connect.reload() );
+} );
+
+
+/////////////////////////////////////////////////////////////////////////
+//                           HTML TASKS                                //
+/////////////////////////////////////////////////////////////////////////
+
+
+gulp.task ( 'templates', () => {
+	return gulp.src( templateSrc )
+		.pipe( htmlmin( { collapseWhitespace: true } ) )
+		.pipe( htmlhint() )
+		.pipe( gulp.dest( path.public.templates ) )
 		.pipe( connect.reload() );
 } );
 
