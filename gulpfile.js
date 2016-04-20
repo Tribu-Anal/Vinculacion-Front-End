@@ -52,6 +52,8 @@ let production = util.env.type === 'prod';
 
 let appJs = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ];
 
+let sassSrc = [ path.dev.app + "**/*.scss" ];
+
 let vendorJs = [ path.dev.lib + "**/*.js", path.dev.lib + "**/*.*.js" ];
 
 
@@ -90,6 +92,30 @@ gulp.task ( 'vendor-js', () => {
 		.pipe( concat('vendor.js') )
 		.pipe( uglify() )
 		.pipe( gulp.dest(path.public.lib) )
+		.pipe( connect.reload() );
+} );
+
+
+/////////////////////////////////////////////////////////////////////////
+//                            CSS TASKS                                //
+/////////////////////////////////////////////////////////////////////////
+
+
+
+gulp.task ( 'css', () => {
+	return gulp.src ( sassSrc )
+		.pipe( sass() )
+		.pipe( concat('style.css') )
+		.pipe( csso (
+			{
+	            restructure: production,
+	            sourceMap: !production,
+	            debug: !production
+        	}
+        ))
+		.pipe( production ? util.noop() : csscomb() )
+		.pipe( autoprefixer( { browsers: [ "> 0%" ] } ) )
+		.pipe( gulp.dest(path.public.css) )
 		.pipe( connect.reload() );
 } );
 
