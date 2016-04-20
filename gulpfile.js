@@ -33,12 +33,14 @@ path.public = {};
 path.dev.app = "dev/app/";
 
 let assets   = "dev/assets/";
-path.dev.img = assets + "img/";
-path.dev.lib = assets + "lib/";
+path.dev.fonts = assets + "fonts/";
+path.dev.img   = assets + "img/";
+path.dev.lib   = assets + "lib/";
 
 let pbl = "public/";
 
 path.public.css       = pbl + "css/";
+path.public.fonts     = pbl + "fonts/";
 path.public.img       = pbl + "img/";
 path.public.js        = pbl + "js/";
 path.public.lib       = pbl + "lib/";
@@ -56,6 +58,8 @@ let production = util.env.type === 'prod';
 let appJs       = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ],
     vendorJs    = [ path.dev.lib + "jQuery/*.js", path.dev.lib + "angular/*.js",
     				path.dev.lib + "**/*.js" ],
+    fonts       = [ path.dev.fonts + "*.ttf", path.dev.fonts + "*.woff", 
+                    path.dev.fonts + "*.woff2", path.dev.fonts + "*.eot" ],
     vendorCss   = [ path.dev.lib + "**/*.css", path.dev.lib + "**/*.*.css" ],
     sassSrc     = [ path.dev.app + "**/*.scss" ],
     templateSrc = [ path.dev.app + "**/*.html", path.dev.app + "**/*.*.html" ],
@@ -173,6 +177,12 @@ gulp.task ( 'img', () => {
 		.pipe( connect.reload() );
 } );
 
+gulp.task ( 'fonts', () => {
+	return gulp.src( fonts )
+		.pipe( gulp.dest(path.public.fonts) )
+		.pipe( connect.reload() );
+} );
+
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -188,6 +198,7 @@ gulp.task ( 'watch', () => {
 	gulp.watch ( sassSrc, ['css'] );
 	gulp.watch ( templateSrc, ['templates'] );
 	gulp.watch ( imgSrc, ['img'] );
+	gulp.watch ( fonts, ['fonts'] );
 	gulp.watch ( "public/index.html", ['reload-index'] );
 } );
 
@@ -199,4 +210,4 @@ gulp.task ( 'watch', () => {
 
 
 gulp.task ( 'default', [ 'vendor-js', 'app-js', 'vendor-css', 'css', 
-                         'img', 'templates', 'connect', 'watch' ] );
+                         'img', 'fonts', 'templates', 'connect', 'watch' ] );
