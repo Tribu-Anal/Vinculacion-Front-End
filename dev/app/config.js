@@ -12,7 +12,7 @@
 	}
 
 	function setupRoutes($stateProvider, $urlRouterProvider) {
-		let templateDir = "../templates/components/";
+		let templateDir = "templates/components/";
 
 		$urlRouterProvider.otherwise('/');
 

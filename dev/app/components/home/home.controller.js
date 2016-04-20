@@ -10,7 +10,7 @@
 		
 		vm.recentProjects = [];
 
-		function getRecentProyects() {
+		function getRecentProjects() {
 		};
 	}
 
