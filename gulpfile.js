@@ -152,3 +152,28 @@ gulp.task ( 'img', () => {
 } );
 
 
+
+/////////////////////////////////////////////////////////////////////////
+//                              WATCH                                  //
+/////////////////////////////////////////////////////////////////////////
+
+
+
+gulp.task ( 'watch', () => {
+	gulp.watch ( appJs, ['app-js'] );
+	gulp.watch ( vendorJs, ['vendor-js'] );
+	gulp.watch ( sassSrc, ['css'] );
+	gulp.watch ( templateSrc, ['templates'] );
+	gulp.watch ( imgSrc, ['img'] );
+	gulp.watch ( path.public + "index.html", connect.realod );
+} );
+
+
+
+/////////////////////////////////////////////////////////////////////////
+//                            DEFAULT                                  //
+/////////////////////////////////////////////////////////////////////////
+
+
+gulp.task ( 'default', [ 'app-js', 'vendor-js', 'css', 'templates', 
+                         'img', 'connect', 'watch' ] );
