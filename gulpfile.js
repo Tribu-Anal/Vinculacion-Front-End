@@ -54,7 +54,8 @@ let production = util.env.type === 'prod';
 
 
 let appJs       = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ],
-    vendorJs    = [ path.dev.lib + "**/*.js", path.dev.lib + "**/*.*.js" ],
+    vendorJs    = [ path.dev.lib + "jQuery/*.js", path.dev.lib + "angular/*.js",
+    				path.dev.lib + "**/*.js" ],
     vendorCss   = [ path.dev.lib + "**/*.css", path.dev.lib + "**/*.*.css" ],
     sassSrc     = [ path.dev.app + "**/*.scss" ],
     templateSrc = [ path.dev.app + "**/*.html", path.dev.app + "**/*.*.html" ],
@@ -197,5 +198,5 @@ gulp.task ( 'watch', () => {
 /////////////////////////////////////////////////////////////////////////
 
 
-gulp.task ( 'default', [ 'app-js', 'vendor-js', 'vendor-css', 'css', 
-                         'templates', 'img', 'connect', 'watch' ] );
+gulp.task ( 'default', [ 'vendor-js', 'app-js', 'vendor-css', 'css', 
+                         'img', 'templates', 'connect', 'watch' ] );
