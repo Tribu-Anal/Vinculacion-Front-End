@@ -8,6 +8,7 @@
 let gulp            = require('gulp'),
     autoprefixer    = require('gulp-autoprefixer'),
     concat          = require('gulp-concat'),
+    connect         = require('gulp-connect'),
     csscomb         = require('gulp-csscomb'),
     csso            = require('gulp-csso'),
     htmlhint        = require('gulp-htmlhint'),
@@ -48,3 +49,18 @@ path.public.lib = pbl + "lib/";
 path.public.templates = pbl + "templates/";
 
 let production = util.env.type === 'prod';
+
+
+/////////////////////////////////////////////////////////////////////////
+//                         CONNECT TASKS                               //
+/////////////////////////////////////////////////////////////////////////
+
+
+
+gulp.task ('connect', () => {
+	connect.server({
+    root: 'public/',
+    port: 3000,
+    livereload: true
+  });
+});
