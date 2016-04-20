@@ -58,6 +58,8 @@ let templateSrc = [ path.dev.app + "**/*.html", path.dev.app + "**/*.*.html" ];
 
 let vendorJs = [ path.dev.lib + "**/*.js", path.dev.lib + "**/*.*.js" ];
 
+let imgSrc = [ path.dev.img + "*.jpg", path.dev.img + "*.png" ];
+
 
 /////////////////////////////////////////////////////////////////////////
 //                         CONNECT TASKS                               //
@@ -134,4 +136,19 @@ gulp.task ( 'templates', () => {
 		.pipe( gulp.dest( path.public.templates ) )
 		.pipe( connect.reload() );
 } );
+
+
+/////////////////////////////////////////////////////////////////////////
+//                       RESOURCES TASKS                               //
+/////////////////////////////////////////////////////////////////////////
+
+
+
+gulp.task ( 'img', () => {
+	return gulp.src( imgSrc )
+		.pipe( imagemin() )
+		.pipe( gulp.dest( path.public.img ) )
+		.pipe( connect.reload() );
+} );
+
 
