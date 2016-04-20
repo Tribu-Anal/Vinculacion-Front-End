@@ -50,6 +50,10 @@ path.public.templates = pbl + "templates/";
 
 let production = util.env.type === 'prod';
 
+let appJs = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ];
+
+let vendorJs = [ path.dev.lib + "**/*.js", path.dev.lib + "**/*.*.js" ];
+
 
 /////////////////////////////////////////////////////////////////////////
 //                         CONNECT TASKS                               //
@@ -64,3 +68,28 @@ gulp.task ('connect', () => {
     livereload: true
   });
 });
+
+
+
+/////////////////////////////////////////////////////////////////////////
+//                            JS TASKS                                 //
+/////////////////////////////////////////////////////////////////////////
+
+
+gulp.task ( 'app-js', () => {
+	return gulp.src( appJs )
+		.pipe( concat('bundle.js') )
+		.pipe( production ? uglify() : util.noop() )
+		.pipe( production ? stripDebug() : util.noop() )
+		.pipe( gulp.dest(path.public.js) )
+		.pipe( connect.reload() );
+} );
+
+gulp.task ( 'vendor-js', () => {
+	return gulp.src( vendorJs )
+		.pipe( concat('vendor.js') )
+		.pipe( uglify() )
+		.pipe( gulp.dest(path.public.lib) )
+		.pipe( connect.reload() );
+} );
+
