@@ -15,7 +15,7 @@
                 actions:"=?"
             },
             controller : 'TableController as vm',
-            templateUrl: 'js/directives/table/table.html'           
+            templateUrl: '../templates/shared/TB-Table/table.html'           
         };
 
         return directive;
