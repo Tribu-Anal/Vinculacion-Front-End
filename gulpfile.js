@@ -55,6 +55,7 @@ let production = util.env.type === 'prod';
 
 let appJs       = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ],
     vendorJs    = [ path.dev.lib + "**/*.js", path.dev.lib + "**/*.*.js" ],
+    vendorCss   = [ path.dev.lib + "**/*.css", path.dev.lib + "**/*.*.css" ],
     sassSrc     = [ path.dev.app + "**/*.scss" ],
     templateSrc = [ path.dev.app + "**/*.html", path.dev.app + "**/*.*.html" ],
     imgSrc      = [ path.dev.img + "*.jpg", path.dev.img + "*.png" ];
@@ -94,7 +95,7 @@ gulp.task ( 'app-js', () => {
 gulp.task ( 'vendor-js', () => {
 	return gulp.src( vendorJs )
 		.pipe( concat('vendor.js') )
-		.pipe( uglify() )
+		.pipe( production ? uglify() : util.noop() )
 		.pipe( gulp.dest(path.public.lib) )
 		.pipe( connect.reload() );
 } );
@@ -120,6 +121,21 @@ gulp.task ( 'css', () => {
 		.pipe( production ? util.noop() : csscomb() )
 		.pipe( autoprefixer( { browsers: [ "> 0%" ] } ) )
 		.pipe( gulp.dest(path.public.css) )
+		.pipe( connect.reload() );
+} );
+
+gulp.task ( 'vendor-css', () => {
+	return gulp.src ( vendorCss )
+		.pipe( concat('vendor.css') )
+		.pipe( csso (
+			{
+	            restructure: production,
+	            sourceMap: !production,
+	            debug: !production
+        	}
+        ))
+		.pipe( production ? util.noop() : csscomb() )
+		.pipe( gulp.dest(path.public.lib) )
 		.pipe( connect.reload() );
 } );
 
@@ -167,6 +183,7 @@ gulp.task ( 'img', () => {
 gulp.task ( 'watch', () => {
 	gulp.watch ( appJs, ['app-js'] );
 	gulp.watch ( vendorJs, ['vendor-js'] );
+	gulp.watch ( vendorCss, ['vendor-css'] );
 	gulp.watch ( sassSrc, ['css'] );
 	gulp.watch ( templateSrc, ['templates'] );
 	gulp.watch ( imgSrc, ['img'] );
@@ -180,5 +197,5 @@ gulp.task ( 'watch', () => {
 /////////////////////////////////////////////////////////////////////////
 
 
-gulp.task ( 'default', [ 'app-js', 'vendor-js', 'css', 'templates', 
-                         'img', 'connect', 'watch' ] );
+gulp.task ( 'default', [ 'app-js', 'vendor-js', 'vendor-css', 'css', 
+                         'templates', 'img', 'connect', 'watch' ] );
