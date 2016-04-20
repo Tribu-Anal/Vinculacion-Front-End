@@ -137,6 +137,11 @@ gulp.task ( 'templates', () => {
 		.pipe( connect.reload() );
 } );
 
+gulp.task( 'reload-index', () => { 
+	return gulp.src("public/index.html")
+		.pipe(connect.reload()); 
+} );
+
 
 /////////////////////////////////////////////////////////////////////////
 //                       RESOURCES TASKS                               //
@@ -165,7 +170,7 @@ gulp.task ( 'watch', () => {
 	gulp.watch ( sassSrc, ['css'] );
 	gulp.watch ( templateSrc, ['templates'] );
 	gulp.watch ( imgSrc, ['img'] );
-	gulp.watch ( path.public + "index.html", connect.realod );
+	gulp.watch ( "public/index.html", ['reload-index'] );
 } );
 
 
