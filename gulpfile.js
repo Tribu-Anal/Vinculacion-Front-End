@@ -55,7 +55,8 @@ let production = util.env.type === 'prod';
 
 
 
-let appJs       = [ path.dev.app + "**/*.js", path.dev.app  + "**/*.*.js" ],
+let appJs       = [ path.dev.app + "app.js", path.dev.app + "**/*.js", 
+                    path.dev.app  + "**/*.*.js" ],
     vendorJs    = [ path.dev.lib + "jQuery/*.js", path.dev.lib + "angular/*.js",
     				path.dev.lib + "**/*.js" ],
     fonts       = [ path.dev.fonts + "*.ttf", path.dev.fonts + "*.woff", 
