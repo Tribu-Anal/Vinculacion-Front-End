@@ -1,5 +1,9 @@
 node_modules/
-public/**/
+public/css/
+public/img/
+public/js/bundle.js
+public/lib/
+public/templates/
 
 # cache files for sublime text
 *.tmlanguage.cache
