@@ -1,7 +1,8 @@
 node_modules/
 public/css/
+public/fonts/
 public/img/
-public/js/bundle.js
+public/js/
 public/lib/
 public/templates/
 
