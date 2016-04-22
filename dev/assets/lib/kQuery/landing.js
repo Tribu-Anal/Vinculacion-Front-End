@@ -1,14 +1,3 @@
-$('.message a').click(function(){
-   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-    $(".login-page").css("width", "500px");
-    $("input").css("border", "none");
-});
-
-$('.message.login a').click(function(){
-    $(".login-page").css("width", "360px");
-    $("input").css("border", "none");
-});
-
 function shakeIt(element) {
    var l = 20;  
    for( var i = 0; i < 10; i++ )   
@@ -19,11 +8,22 @@ function shakeIt(element) {
 
 }
 
-$('#ingresar').click(function(){
-        jQuery.validator.addMethod("unitecmail", function (value, element) {
-    return this.optional(element) || 
-           ['unitec.edu'].indexOf(value.split('@').pop()) != -1;
-},'Ingresa un correo de unitec');
+$(document).on('click', '.message a', function(e){
+    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    $(".login-page").css("width", "500px");
+    $("input").css("border", "none");
+});
+
+$(document).on('click', '.message.login a', function(e){
+    $(".login-page").css("width", "360px");
+    $("input").css("border", "none");
+});
+
+$(document).on('click', '#ingresar', function(e){
+    jQuery.validator.addMethod("unitecmail", function (value, element) {
+        return this.optional(element) || 
+            ['unitec.edu'].indexOf(value.split('@').pop()) != -1;
+        },'Ingresa un correo de unitec');
         
         $('#login-form').validate({
         rules: {
@@ -50,12 +50,9 @@ $('#ingresar').click(function(){
             
         }
     });
-    
-    
-    });
+});
 
-$('#registrar').click(function(){
-
+$(document).on('click', '#registrar', function(e) {
     jQuery.validator.addMethod("unitecmail", function (value, element) {
     return this.optional(element) || 
            ['unitec.edu'].indexOf(value.split('@').pop()) != -1;
@@ -109,7 +106,6 @@ $('#registrar').click(function(){
             
         }
     });
-    
 });
 
 
