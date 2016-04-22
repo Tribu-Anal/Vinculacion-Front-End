@@ -43,18 +43,23 @@
         function changeViewStyles (event, toState) {
             switch(toState.url) {
                 case "/home":
+                    $rootScope.viewTitle = "Vinculacion | Home";
                     $rootScope.viewStyles = "navigation home";
                 break;
                 case "/proyectos":
+                    $rootScope.viewTitle = "Vinculacion | Proyectos";
                     $rootScope.viewStyles = "navigation projects";
                 break;
                 case "/proyectos/{}":
+                    $rootScope.viewTitle = "Vinculacion | Proyecto";
                     $rootScope.viewStyles = "navigation project";
                 break;
                 case "/solicitudes":
+                    $rootScope.viewTitle = "Vinculacion | Solicitudes";
                     $rootScope.viewStyles = "navigation requests";
                 break;
                 case "/":
+                    $rootScope.viewTitle = "Vinculacion | Bienvenido";
                     $rootScope.viewStyles = "landing";
                 break;
             }
