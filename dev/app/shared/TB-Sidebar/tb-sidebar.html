@@ -1,16 +1,14 @@
-<div>
-	<div id="logo-area">
-		<img src="img/logo.png" alt="Logo">
-	</div>
-	<div id="navigation">
-		<ul>
-			<li ng-repeat="item in navItems" 
-				ui-sref="{{item.ref}}"
-				ng-class="{ 'active': item.active }" 
-				ng-click="vm.navItemClicked($index)">
-				<i class="{{item.icon}}"></i>
-				<span>{{item.title}}</span>
-			</li>
-		</ul>
-	</div>
+<div id="logo-area">
+	<img src="img/logo.png" alt="Logo">
+</div>
+<div id="navigation">
+	<ul>
+		<li ng-repeat="item in navItems" 
+			ui-sref="{{item.ref}}"
+			ng-class="{ 'active': item.active }" 
+			ng-click="vm.navItemClicked($index)">
+			<i class="{{item.icon}}"></i>
+			<span>{{item.title}}</span>
+		</li>
+	</ul>
 </div>
