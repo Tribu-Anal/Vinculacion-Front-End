@@ -1,0 +1,42 @@
+.main {
+    font-family: 'Ubuntu', 'Roboto', sans-serif;
+
+    overflow: hidden;
+
+    margin: 0;
+
+    tb-sidebar {
+        position: absolute;
+        left: 0;
+    }
+
+    .dynamic-area
+    {
+        position: absolute;
+        top: 85px;
+        left: 230px;
+
+        overflow-y: scroll;
+
+        width: 82%;
+        height: 87%;
+
+        transition: all .3s linear;
+
+        &.loading {
+            display: flex;
+            background: #f2f2f2;
+            z-index: 1000000;
+            justify-content: center;
+
+            img {
+                width: 20%;
+                height: 35%;
+                align-self: center;
+            }
+
+        }
+
+    }
+
+}

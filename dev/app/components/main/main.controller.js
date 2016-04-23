@@ -3,15 +3,13 @@
 
 	angular
 		.module('VinculacionApp')
-		.controller('NavigationController', NavigationController);
+		.controller('MainController', MainController);
 
-	function NavigationController () {
+	MainController.$inject = [ '$scope' ];
+
+	function MainController ($scope) {
 		var vm = this;
-		var activeItem = {};
 
-		vm.showSideBar = true;
-		vm.navItemClicked = navItemClicked;
-		vm.setActiveItem = setActiveItem;
 		vm.navItems = 
 		[ 
 		  { title: "HOME", ref: "dashboard.home", 
@@ -26,17 +24,5 @@
 		  { title: "LOG OUT", ref: "landing", 
 		  	icon: "glyphicon glyphicon-log-out", active: false }
 		];
-
-		function navItemClicked(itemIndex) {
-			activeItem.active = false;
-			setActiveItem(itemIndex);
-		}
-
-		function setActiveItem(itemIndex) {
-			activeItem = vm.navItems[itemIndex];
-			activeItem.active = true;
-		}
-
-		setActiveItem(0);
 	}
 })();

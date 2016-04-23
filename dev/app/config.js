@@ -20,36 +20,36 @@
 
 			.state('landing', {
 				url: '/',
-				templateUrl: templateDir + 'login/landing.html',
+				templateUrl: templateDir + 'landing/landing.html',
 	        	controller: 'LoginController as vm'
 			})
 
 			.state('dashboard', {
-				templateUrl: templateDir + 'dashboard/dashboard.html',
-				controller: 'NavigationController as nav'
+				templateUrl: templateDir + 'main/main.html',
+				controller: 'MainController as mvm'
 			})
 
 			.state('dashboard.home', {
 				url: '/home',
-				templateUrl: templateDir + 'home/home.html',
+				templateUrl: templateDir + 'main/home/home.html',
 				controller: 'HomeController as vm'
 			})
 
 			.state('dashboard.projects', {
 				url: '/proyectos',
-				templateUrl: templateDir + 'projects/projects.html',
+				templateUrl: templateDir + 'main/projects/projects.html',
 				controller: 'ProjectsController as vm'
 			})
 
 			.state('dashboard.project', {
 				url: '/proyectos/{projectId}',
-				templateUrl: templateDir + 'project/project.html',
+				templateUrl: templateDir + 'main/project/project.html',
 	            controller: 'ProjectController as vm'
 			})
 
 			.state('dashboard.requests', {
 				url: '/solicitudes',
-				templateUrl: templateDir + 'requests/requests.html',
+				templateUrl: templateDir + 'main/requests/requests.html',
 				controller: "RequestsController as vm"
 			});
 	}

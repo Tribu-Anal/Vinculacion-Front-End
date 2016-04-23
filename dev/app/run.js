@@ -44,19 +44,19 @@
             switch(toState.url) {
                 case "/home":
                     $rootScope.viewTitle = "Vinculacion | Home";
-                    $rootScope.viewStyles = "navigation home";
+                    $rootScope.viewStyles = "main home";
                 break;
                 case "/proyectos":
                     $rootScope.viewTitle = "Vinculacion | Proyectos";
-                    $rootScope.viewStyles = "navigation projects";
+                    $rootScope.viewStyles = "main projects";
                 break;
                 case "/proyectos/{}":
                     $rootScope.viewTitle = "Vinculacion | Proyecto";
-                    $rootScope.viewStyles = "navigation project";
+                    $rootScope.viewStyles = "main project";
                 break;
                 case "/solicitudes":
                     $rootScope.viewTitle = "Vinculacion | Solicitudes";
-                    $rootScope.viewStyles = "navigation requests";
+                    $rootScope.viewStyles = "main requests";
                 break;
                 case "/":
                     $rootScope.viewTitle = "Vinculacion | Bienvenido";
