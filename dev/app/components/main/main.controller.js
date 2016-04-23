@@ -5,11 +5,10 @@
 		.module('VinculacionApp')
 		.controller('MainController', MainController);
 
-	MainController.$inject = [ '$scope' ];
-
-	function MainController ($scope) {
+	function MainController () {
 		var vm = this;
 
+		vm.expand = false;
 		vm.navItems = 
 		[ 
 		  { title: "HOME", ref: "dashboard.home", 

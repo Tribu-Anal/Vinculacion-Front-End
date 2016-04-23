@@ -1,17 +1,34 @@
-.header-bar {
-    display: flex;
+tb-headerbar {
 
-    width: 1200px;
-    height: 85.5px;
-    padding-left: 2%;
+    width: 1600px;
+    height: 12%;
+    
+    #bar {
+        display: flex;
 
-    transition: all .3s linear;
+        padding-left: 2%;
 
-    color: #7b96c4;
-    border-bottom: 1px solid #e1ecff;
-    background: #f7faff;
+        height: 100%;
 
-     #activity-section
+        transition: all .3s linear;
+
+        color: #7b96c4;
+        border-bottom: 1px solid #e1ecff;
+        background: #f7faff;
+
+        &.expanded
+        {
+            margin-left: -230px;
+        }
+
+        &.shrunk
+        {
+            left: 230px;
+        }
+
+    }
+
+    #activity-section
     {
         font-size: 18px;
 

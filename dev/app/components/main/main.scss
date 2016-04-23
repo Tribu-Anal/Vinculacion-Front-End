@@ -42,6 +42,20 @@
 
         }
 
+        &.expanded
+        {
+            left: 0;
+
+            width: 100%;
+        }
+
+        &.shrunk
+        {
+            left: 230px;
+
+            width: 82%;
+        }
+
     }
 
 }

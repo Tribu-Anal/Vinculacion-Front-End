@@ -1,4 +1,13 @@
-<tb-sidebar nav-items="mvm.navItems"></tb-sidebar>
-<tb-headerbar></tb-headerbar>
-<div ng-show="stateLoading" class="dynamic-area loading"><img src="img/logo.png" alt="loading"></div>
-<div class="dynamic-area" ng-class="!showSidebar ? 'expanded' : 'shrunk'" ng-hide="!hideLoading" ng-cloak ui-view></div>
+<tb-sidebar nav-items="mvm.navItems" ng-hide="mvm.expand"></tb-sidebar>
+
+<tb-headerbar expand="mvm.expand"></tb-headerbar>
+
+<div ng-show="stateLoading" class="dynamic-area loading">
+	<img src="img/logo.png" alt="loading">
+</div>
+
+<div class="dynamic-area" 
+	 ng-class="mvm.expand ? 'expanded' : 'shrunk'" 
+	 ng-hide="!hideLoading" 
+	 ng-cloak ui-view>
+</div>

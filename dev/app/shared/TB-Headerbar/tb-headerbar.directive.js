@@ -9,6 +9,9 @@
         var directive = 
         {
             restrict: 'E',
+            scope: {
+                expand: '='
+            },
             templateUrl: 'templates/shared/TB-Headerbar/tb-headerbar.html'        
         };
 
