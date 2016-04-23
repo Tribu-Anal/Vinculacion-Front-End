@@ -1,0 +1,31 @@
+.header-bar {
+    display: flex;
+
+    width: 1200px;
+    height: 85.5px;
+    padding-left: 2%;
+
+    transition: all .3s linear;
+
+    color: #7b96c4;
+    border-bottom: 1px solid #e1ecff;
+    background: #f7faff;
+
+     #activity-section
+    {
+        font-size: 18px;
+
+        display: flex;
+
+        align-self: center;
+    }
+
+    #activity-section img
+    {
+        width: 10%;
+        height: 100%;
+        margin-right: 3%;
+
+        cursor: pointer;
+    }
+}
