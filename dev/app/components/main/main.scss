@@ -1,0 +1,61 @@
+.main {
+    font-family: 'Ubuntu', 'Roboto', sans-serif;
+
+    overflow: hidden;
+
+    margin: 0;
+
+    tb-sidebar {
+        position: absolute;
+        left: 0;
+    }
+
+    tb-headerbar {
+        position: absolute;
+        left: 230px;
+    }
+
+    .dynamic-area
+    {
+        position: absolute;
+        top: 85px;
+        left: 230px;
+
+        overflow-y: scroll;
+
+        width: 82%;
+        height: 87%;
+
+        transition: all .3s linear;
+
+        &.loading {
+            display: flex;
+            background: #f2f2f2;
+            z-index: 1000000;
+            justify-content: center;
+
+            img {
+                width: 20%;
+                height: 35%;
+                align-self: center;
+            }
+
+        }
+
+        &.expanded
+        {
+            left: 0;
+
+            width: 100%;
+        }
+
+        &.shrunk
+        {
+            left: 230px;
+
+            width: 82%;
+        }
+
+    }
+
+}

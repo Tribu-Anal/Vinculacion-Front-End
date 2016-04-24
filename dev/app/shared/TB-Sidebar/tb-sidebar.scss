@@ -1,0 +1,89 @@
+tb-sidebar {
+
+    $width: 230px;
+
+    font-size: 1.2em;
+    font-weight: 500;
+
+    width: $width;
+    height: 100%;
+
+    background: #283b5b;
+
+    animation: slide-in .3s linear forwards;
+
+    &.ng-hide {
+        animation: slide-out .3s linear forwards;
+    }
+
+    #logo-area
+    {
+        display: flex;
+
+        height: 13%;
+
+        background: #213250;
+
+        justify-content: center;
+    }
+
+    #logo-area img
+    {
+        width: 35%;
+        height: 80%;
+
+        cursor: pointer;
+
+        align-self: center;
+    }
+
+    #navigation
+    {
+        margin-top: 30%;
+        padding: 0 15%;
+
+        color: #6b7fa4;
+    }
+
+    #navigation ul
+    {
+        padding: 0;
+
+        list-style: none;
+    }
+
+    #navigation li
+    {
+        margin-bottom: 15%;
+
+        cursor: pointer;
+    }
+
+    #navigation li:hover,
+    .active
+    {
+        color: #55e4d4;
+    }
+
+    #navigation i
+    {
+        margin-right: 6%;
+    }
+
+    @keyframes slide-in
+    {
+        from
+        {
+           left: -$width;
+        }
+    }
+
+    @keyframes slide-out
+    {
+        to
+        {
+            left: -$width;
+        }
+    }
+
+}
