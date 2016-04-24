@@ -1,0 +1,48 @@
+tb-headerbar {
+
+    width: 1600px;
+    height: 12%;
+    
+    #bar {
+        display: flex;
+
+        padding-left: 2%;
+
+        height: 100%;
+
+        transition: all .3s linear;
+
+        color: #7b96c4;
+        border-bottom: 1px solid #e1ecff;
+        background: #f7faff;
+
+        &.expanded
+        {
+            margin-left: -230px;
+        }
+
+        &.shrunk
+        {
+            left: 230px;
+        }
+
+    }
+
+    #activity-section
+    {
+        font-size: 18px;
+
+        display: flex;
+
+        align-self: center;
+    }
+
+    #activity-section img
+    {
+        width: 10%;
+        height: 100%;
+        margin-right: 3%;
+
+        cursor: pointer;
+    }
+}
