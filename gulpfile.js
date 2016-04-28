@@ -214,4 +214,4 @@ gulp.task ( 'watch', () => {
 
 
 gulp.task ( 'default', [ 'vendor-js', 'app-js', 'vendor-css', 'css', 
-                         'img', 'fonts', 'templates', 'connect', 'watch' ] );
+                         'img', 'fonts', 'templates' ] );
