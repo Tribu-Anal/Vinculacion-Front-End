@@ -23,7 +23,8 @@
 					  	Password: password 
 					  }
 			))
-			.then(successCallback, errorCallback); 
+			.then(successCallback)
+            .catch(errorCallback);
 	    }
 	  
 	    function SetCredentials (token) {  
