@@ -26,6 +26,10 @@
             if ($location.path() !== '/' && !$rootScope.globals.token) {
                 $location.path('/');
             }
+            
+            if($location.path() === '/' && $rootScope.globals.token) {
+                $location.path('/home');
+            }
         });
 
         $rootScope.$on('$stateChangeStart', changeViewStyles);
