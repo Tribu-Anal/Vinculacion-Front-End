@@ -20,19 +20,20 @@
 		};
 		vm.editHours = editHours;
 
-		projects.getProject($stateParams.projectId,
-			function(response) {
-				console.log(response);
-				vm.project = response.data;
-			},
-			function(response) {
-				toaster.pop({
+		projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
+        
+        function getProjectSuccess(response) {
+            console.log(response);
+            vm.project = response.data;
+        }
+        
+        function getProjectFail() {
+            toaster.pop({
 					type: 'error',
 					title: 'Error',
 					body: 'El proyecto deseado no existe.'
-				});
-			}
-		);
+                });
+        }
 
 		function getParticipants() {
 			/*
