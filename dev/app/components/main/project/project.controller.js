@@ -25,7 +25,7 @@
         function getProjectSuccess(response) {
             console.log(response);
             vm.project = response.data;
-        }
+        };
         
         function getProjectFail() {
             toaster.pop({
@@ -33,7 +33,7 @@
 					title: 'Error',
 					body: 'El proyecto deseado no existe.'
                 });
-        }
+        };
 
 		function getParticipants() {
 			/*

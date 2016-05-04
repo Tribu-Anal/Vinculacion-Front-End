@@ -25,7 +25,7 @@
 			))
 			.then(successCallback)
             .catch(errorCallback);
-	    }
+	    };
 	  
 	    function SetCredentials (token) {  
 	       $rootScope.globals.token = token;

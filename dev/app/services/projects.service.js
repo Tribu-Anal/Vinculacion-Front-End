@@ -13,18 +13,18 @@
 	   var service = {
            getProjects: getProjects,
            getProject: getProject
-       }
+       };
        
        return service;
 
 	   function getProjects (successCallback, errorCallback) {
 	        $http.get(url).then(successCallback)
                           .catch(errorCallback);
-	   }
+	   };
 
 	   function getProject (projectId, successCallback, errorCallback) {
 	   		$http.get(url + "/" + projectId).then(successCallback)
                                             .catch(errorCallback);
-	   }	   
+	   };	   
 	}
 })();

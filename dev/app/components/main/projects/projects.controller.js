@@ -19,7 +19,7 @@
             for(var obj in response.data) {
                 vm.projects.push(response.data[obj])
             }
-        }
+        };
         
         function getProjectsFail() {
             toaster.pop(
@@ -29,7 +29,6 @@
                     body: 'No se ha podido obtener los proyectos deseados.'
                 }
             );
-        }
+        };
     }
-
 })();
