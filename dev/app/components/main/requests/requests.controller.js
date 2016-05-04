@@ -9,11 +9,13 @@
 
 	function RequestsController($scope, requests, toaster, ngDialog) {
 		var vm = this;
+        
 		var acceptButton = {
 			name: 'Aceptar',
 			icon: 'glyphicon glyphicon-ok',
 			click: acceptButtonClicked
 		};
+        
 		var rejectButton = {
 			name: 'Rechazar',
 			icon: 'glyphicon glyphicon-remove',
@@ -31,10 +33,14 @@
 			actions: true
 		};
 
-		requests.getRequests(function(response) {
-			if (response.data.length <= 0) return;
-			for(let i=0;i<response.data.length;i++){
+		requests.getRequests(getRequestSuccess, getRequestFail);
+        
+        function getRequestSuccess(response) {
+            if (response.data.length <= 0) return;
+            
+			for(let i = 0; i < response.data.length; i++) {
 				let student =  response.data[i];
+                
 				if (student.Major === null) continue;
 
 				let newTableElement = {
@@ -50,7 +56,18 @@
 
 				vm.requestsTable.body.push(newTableElement);
 			}
-		});
+        };
+        
+        function getRequestFail(response) {
+            console.log(response);
+            toaster.pop(
+                { 
+                    type: 'error', 
+                    title: 'Falla de solicitudes', 
+                    body: 'No se ha podido obtener las solicitudes de estudiantes'
+                }
+            );
+        }
 
 		function getElement(index) {
 			let element = {
@@ -58,23 +75,36 @@
 				studentName: vm.requestsTable.body[index].content[1],
 				id: vm.requestsTable.body[index].id
 			}
+            
 			return element;
 		}
 
 		function acceptButtonClicked (index) {
 			let student = getElement(index);
 			let message = 'Aceptado, ya puede ingresar sus horas de vinculación social.';
-			requests.acceptRequest(resp, function(data) {
-				vm.requestsTable.body.splice(index, 1);
-			});
+			requests.acceptRequest(resp, acceptRequestSuccess, acceptRequestFail);
 		}
 
 		function rejectButtonClicked (index) {
 			let student = getElement(index);
 			let message = 'Rechazado por no cumplir los requisitos';
-			requests.rejectRequest(resp, message, function(data) {
-				vm.requestsTable.body.splice(index, 1);
-			});
+			requests.rejectRequest(resp, message, rejectRequestSuccess, rejectRequestFail);
 		}
+        
+        function acceptRequestSuccess() {
+            vm.requestsTable.body.splice(index, 1);
+        }
+        
+        function acceptRequestFail(response) {
+            console.log(response);
+        }
+        
+        function rejectRequestSuccess() {
+            vm.requestsTable.body.splice(index, 1);
+        }
+        
+        function rejectRequestFail(response) {
+            console.log(response);
+        }
 	}
 })();

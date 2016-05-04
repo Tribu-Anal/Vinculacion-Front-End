@@ -18,17 +18,17 @@
 
 		return service;
 
-		function getRequests (handleSuccess) {
+		function getRequests (successCallback, errorCallback) {
 			let request = {
 	            method: 'GET',
 	            url: url +'/Students/Filter/Active'
 	        };
-	        $http(request).then( function(data) {
-	            handleSuccess(data);
-	        });
+            
+	        $http(request).then(successCallback)
+                          .catch(errorCallback);
 		}
 
-		function rejectRequest (obj, message, handleSuccess) {
+		function rejectRequest (obj, message, successCallback, errorCallback) {
 			let request = {
 				method: 'POST',
 				url: url + '/Students/Rejected',
@@ -39,12 +39,12 @@
 					}
 				)
 			};
-			$http(request).then(function(data) {
-	            handleSuccess(data);
-	        });
+            
+			$http(request).then(successCallback)
+                          .catch(errorCallback);
 		}
 
-		function acceptRequest (obj, handleSuccess){
+		function acceptRequest (obj, successCallback, errorCallback){
 			let request = {
 				method: 'PUT',
 				url: url + '/Students/Verified',
@@ -54,9 +54,9 @@
 					}
 				)
 			};
-			$http(request).then(function(data) {
-	            handleSuccess(data);
-	        });
+            
+			$http(request).then(successCallback)
+                          .catch(errorCallback);
 		}
 	}
 })();
