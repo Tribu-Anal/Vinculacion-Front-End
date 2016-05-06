@@ -32,12 +32,7 @@
 			let request = {
 				method: 'POST',
 				url: url + '/Students/Rejected',
-				data: JSON.stringify(
-					{ 
-						AccountId: obj.AccountId, 
-						Message: message
-					}
-				)
+				data: JSON.stringify({ AccountId: obj.AccountId, Message: message })
 			};
             
 			$http(request).then(successCallback)
@@ -48,11 +43,7 @@
 			let request = {
 				method: 'PUT',
 				url: url + '/Students/Verified',
-				data: JSON.stringify(
-					{
-						AccountId: obj.AccountId
-					}
-				)
+				data: JSON.stringify({ AccountId: obj.AccountId })
 			};
             
 			$http(request).then(successCallback)

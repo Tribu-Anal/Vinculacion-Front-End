@@ -17,14 +17,9 @@
 		return service;
 
 		function Login (username, password, successCallback, errorCallback) {
-	       $http.post('http://fiasps.unitec.edu:8085/api/Login', JSON.stringify( 
-					  { 
-					  	User: username, 
-					  	Password: password 
-					  }
-			))
-			.then(successCallback)
-            .catch(errorCallback);
+	       $http.post('http://fiasps.unitec.edu:8085/api/Login', JSON.stringify({ User: username, Password: password }))
+                .then(successCallback)
+                .catch(errorCallback);
 	    };
 	  
 	    function SetCredentials (token) {  
