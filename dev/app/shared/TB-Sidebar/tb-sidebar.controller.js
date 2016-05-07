@@ -13,6 +13,18 @@
 
 		vm.navItemClicked = navItemClicked;
 
+		function init () {
+			for (let i = 0; i < $scope.navItems.length; i++) {
+				let navItem = $scope.navItems[i];
+
+				if (navItem.active) {
+					activeItem = navItem;
+					return;
+				}
+				
+			}
+		}
+
 		function navItemClicked(itemIndex) {
 			activeItem.active = false;
 			setActiveItem(itemIndex);
@@ -30,6 +42,6 @@
 				   $scope.navItems.length === 0;
 		}
 
-		setActiveItem(0);
+		init();
 	}
 })();
