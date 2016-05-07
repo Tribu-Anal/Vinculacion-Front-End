@@ -17,24 +17,24 @@
 
 		return service;
 
-		function getStudentsBySection (section, handleSuccess) {
+		function getStudentsBySection (section, successCallback, errorCallback) {
 			let request = {
 	            method: 'GET',
 	            url: url +'/Students'
 	        };
 
-	        $http(request).then( function(data) {
-	            handleSuccess(data);
-	        });
+	        $http(request).then(successCallback)
+                          .catch(errorCallback);
 		}
 
-		function addHours (obj, handleSuccess) {
+		function addHours (obj, successCallback, errorCallback) {
 			let request = {
 				method: 'POST',
 				url: url + '/Hours',
 				data: obj
 			};
-			$http(request).then(handleSuccess);
+			$http(request).then(successCallback)
+                          .catch(errorCallback);
 		}
 	}
 })();
