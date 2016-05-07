@@ -82,16 +82,16 @@
 		function acceptButtonClicked (index) {
 			let student = getElement(index);
 			let message = 'Aceptado, ya puede ingresar sus horas de vinculación social.';
-			requests.acceptRequest(resp, acceptRequestSuccess, acceptRequestFail);
+			requests.acceptRequest(student, acceptRequestSuccess, acceptRequestFail);
 		}
 
 		function rejectButtonClicked (index) {
 			let student = getElement(index);
 			let message = 'Rechazado por no cumplir los requisitos';
-			requests.rejectRequest(resp, message, rejectRequestSuccess, rejectRequestFail);
+			requests.rejectRequest(student, message, rejectRequestSuccess, rejectRequestFail);
 		}
         
-        function acceptRequestSuccess() {
+        function acceptRequestSuccess(index) {
             vm.requestsTable.body.splice(index, 1);
         }
         
@@ -99,7 +99,7 @@
             console.log(response);
         }
         
-        function rejectRequestSuccess() {
+        function rejectRequestSuccess(index) {
             vm.requestsTable.body.splice(index, 1);
         }
         
