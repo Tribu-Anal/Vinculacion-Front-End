@@ -7,7 +7,6 @@ function shakeIt(element) {
       }, 50);  
 
 }
-
 $(document).on('click', '.message a', function(e){
     $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     $(".login-page").css("width", "500px");
@@ -43,11 +42,18 @@ $(document).on('click', '#ingresar', function(e){
                 required: "Este campo es requerido"
             }
         },
-        invalidHandler: function(){
-            shakeIt("input");
-            shakeIt("span");
-            $("input").css("border", "2px solid #D46A6A");
-            
+        highlight: function(element){
+            $(element).css("border", "2px solid #D46A6A");
+            console.log("errorlol");
+        },
+        unhighlight: function(element){
+            $(element).css("border", "none");
+        },
+        invalidHandler: function(form, validator){
+            $("input").each(function(){
+                if(!$(this).valid())
+                    shakeIt($(this));
+            });
         }
     });
 });
@@ -65,7 +71,7 @@ $(document).on('click', '#registrar', function(e) {
                 unitecmail: true,
                 email: true
             },
-            cuenta: {
+            accountId: {
                 required: true
             },
             nombre: {
@@ -85,7 +91,7 @@ $(document).on('click', '#registrar', function(e) {
                 required: "Por favor ingresa tu correo de unitec",
                 email: "Por favor ingresa un correo valido"
             },
-            cuenta: {
+            accountId: {
                 required: "Por favor ingresa tu numero de cuenta"    
             },
             nombre: {
@@ -99,11 +105,18 @@ $(document).on('click', '#registrar', function(e) {
                 equalTo: "Las contraseñas no coinciden"
             }
         },
-        invalidHandler: function(){
-            shakeIt("input");
-            shakeIt("span");
-            $("input").css("border", "2px solid #D46A6A");
-            
+        highlight: function(element){
+            $(element).css("border", "2px solid #D46A6A");
+            console.log("errorlol");
+        },
+        unhighlight: function(element){
+            $(element).css("border", "none");
+        },
+        invalidHandler: function(form, validator){
+            $("input").each(function(){
+                if(!$(this).valid())
+                    shakeIt($(this));
+            });
         }
     });
 });
