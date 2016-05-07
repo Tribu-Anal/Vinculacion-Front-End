@@ -62,6 +62,10 @@
                     $rootScope.viewTitle = "Vinculacion | Solicitudes";
                     $rootScope.viewStyles = "main requests";
                 break;
+                case "/add-project":
+                    $rootScope.viewTitle = "Vinculacion | NuevoProyecto";
+                    $rootScope.viewStyles = "main addproject";
+                break;  
                 case "/":
                     $rootScope.viewTitle = "Vinculacion | Bienvenido";
                     $rootScope.viewStyles = "landing";

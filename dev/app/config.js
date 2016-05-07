@@ -43,7 +43,7 @@
         
             .state('dashboard.addproject', {
 				url: '/add-project',
-				templateUrl: templateDir + 'main/projects/NewProject/newProject.html',
+				templateUrl: templateDir + 'main/projects/AddProject/add-project.html',
 				//controller: 'ProjectsController as vm'
 			})
 
