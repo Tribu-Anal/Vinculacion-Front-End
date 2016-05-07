@@ -20,37 +20,41 @@
         vm.validate = validate;
         
         function registerStudent() {        
-            register
-                .registerStudent( JSON.stringify (
-                {
-                    AccountId: vm.accountId,
-                    Name: vm.name,
-                    Password: vm.password,
-                    MajorId : vm.career.substring(0, 6),
-                    Campus: vm.campus,
-                    Email: vm.email,
-                }))
-                .success( function(response) {
-                    toaster.pop(
-                        {
-                            type: 'success', 
-                            title: 'Revisa tu Correo', 
-                            body: 'Se le ha enviado un correo de confirmacion. Porfavor revisar.'
-                        }
-                    );
-                })
-                .error( function() {
-                    toaster.pop(
-                        {
-                            type: 'error', 
-                            title: 'Error', 
-                            body: 'Se ha producido un error! Lamentamos los inconvenientes.'
-                        }
-                    );
-                });
+            register.registerStudent(setupJSON(), registerStudentSuccess, registerStudentFail);
         }
         
-        //Credits to Alex Cross - StackOverflow
+        function setupJSON() {
+            return JSON.stringify (
+                    {
+                        AccountId: vm.accountId,
+                        Name: vm.name,
+                        Password: vm.password,
+                        MajorId : vm.career.substring(0, 6),
+                        Campus: vm.campus,
+                        Email: vm.email,
+                    });
+        };
+        
+        function registerStudentSuccess(response) {
+            toaster.pop(
+                {
+                    type: 'success', 
+                    title: 'Revisa tu Correo', 
+                    body: 'Se le ha enviado un correo de confirmacion. Porfavor revisar.'
+                }
+            );
+        };
+        
+        function registerStudentFail() {
+            toaster.pop(
+                {
+                    type: 'error', 
+                    title: 'Error', 
+                    body: 'Se ha producido un error! Lamentamos los inconvenientes.'
+                }
+            );
+        };
+        
         function validate ($event) { 
             let regex = new RegExp("[a-z]|[0-9]|[A-Z]");
         
