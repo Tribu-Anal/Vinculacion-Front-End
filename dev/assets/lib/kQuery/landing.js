@@ -36,7 +36,8 @@ $(document).on('click', '#ingresar', function(e){
         },
         messages: {
             usuario: {
-                required: "Este campo es requerido"
+                required: "Este campo es requerido",
+                email: "Por favor ingresa un correo v&aacute;lido"
             },
             clave: {
                 required: "Este campo es requerido"
@@ -89,17 +90,17 @@ $(document).on('click', '#registrar', function(e) {
         messages: {
             correo: {
                 required: "Por favor ingresa tu correo de unitec",
-                email: "Por favor ingresa un correo valido"
+                email: "Por favor ingresa un correo v&aacute;lido"
             },
             accountId: {
-                required: "Por favor ingresa tu numero de cuenta"    
+                required: "Por favor ingresa tu n&uacute;mero de cuenta"    
             },
             nombre: {
                 required: "Por favor ingresa tu nombre"
             },
             password: {
                 required: "Por favor ingresa una contraseña",
-                minlength: "Tu contraseña tiene que tener minimo 8 caracteres"
+                minlength: "Tu contraseña tiene que tener m&iacute;nimo 8 caracteres"
             },
             confirmpass: {
                 equalTo: "Las contraseñas no coinciden"
@@ -107,7 +108,6 @@ $(document).on('click', '#registrar', function(e) {
         },
         highlight: function(element){
             $(element).css("border", "2px solid #D46A6A");
-            console.log("errorlol");
         },
         unhighlight: function(element){
             $(element).css("border", "none");
