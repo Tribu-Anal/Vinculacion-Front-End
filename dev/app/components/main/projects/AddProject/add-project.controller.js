@@ -23,7 +23,7 @@
         
         vm.submitProject = submitProject;
         
-        //majors.getMajors(getMajorsSuccess, getMajorsFail);
+        majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
         
         function submitProject() {
@@ -38,8 +38,8 @@
             fillList(response, vm.sections);
         };
         
-        function getMajorsFail() {
-            
+        function getMajorsFail(response) {
+            console.log(response);
         };
         
         function getSectionsFail(response) {

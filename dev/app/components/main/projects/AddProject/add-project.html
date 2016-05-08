@@ -21,10 +21,7 @@
 
             <p class="cd-select icon">
                 <select ng-model="vm.project.MajorIds" class="budget" multiple>
-                    <option value="0">INGENIERIA EN SISTEMAS COMPUTACIONALES</option>
-                    <option value="1">INGENIERIA CIVIL</option>
-                    <option value="2">INGENIERIA MECATRONICA</option>
-                    <option value="3">INGENIERIA ELECTRICA</option>
+                    <option ng-repeat="major in vm.majors" value="{{major.MajorId}}">{{major.Name}}</option>
                 </select>
             </p>
         </div> 
