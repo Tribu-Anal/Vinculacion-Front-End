@@ -1,4 +1,4 @@
-<form class="cd-form">
+<form name="projectForm" class="cd-form" ng-submit="projectForm.$valid && vm.submitProject()">
         <legend><strong>Informacion de Proyecto</strong></legend>
         
 <!--
@@ -8,77 +8,46 @@
 -->
         <div>
             <label class="cd-label" for="cd-name">Nombre de Proyecto</label>
-            <input class="user" type="text" name="cd-name" id="cd-name" required>
-        </div> 
+            <input ng-model="vm.project.Name" class="user" type="text" name="cd-name" id="cd-name" required>
+        </div>
+    
+        <div>
+            <label class="cd-label" for="cd-name">Id del Proyecto</label>
+            <input ng-model="vm.project.ProjectId" class="user" type="text" name="cd-name" id="cd-name" required>
+        </div>
 
         <div>
             <h4><strong>Carreras Asociadas</strong></h4>
 
             <p class="cd-select icon">
-                <select class="budget">
-                    <option value="0">Seleccione las carreras</option>
-                    <option value="1">&lt; $5000</option>
-                    <option value="2">$5000 - $10000</option>
-                    <option value="3">&gt; $10000</option>
+                <select ng-model="vm.project.MajorIds" class="budget" multiple>
+                    <option value="0">INGENIERIA EN SISTEMAS COMPUTACIONALES</option>
+                    <option value="1">INGENIERIA CIVIL</option>
+                    <option value="2">INGENIERIA MECATRONICA</option>
+                    <option value="3">INGENIERIA ELECTRICA</option>
                 </select>
             </p>
         </div> 
 
         <div>
-            <h4><strong>Docentes Asociadas</strong></h4>
-
-            <p class="cd-select icon">
-                <select class="budget">
-                    <option value="0">Seleccione los docentes</option>
-                    <option value="1">&lt; $5000</option>
-                    <option value="2">$5000 - $10000</option>
-                    <option value="3">&gt; $10000</option>
-                </select>
-            </p>
+            <label class="cd-label" for="cd-name">Costo</label>
+            <input ng-model="vm.project.Cost" ng-pattern="/^[0-9]+(\.[0-9]{1,99})?$/" class="user" type="text" name="cost" id="cd-name" required>
+            <span>Is a valid decimal? {{projectForm.cost.$valid}}</span>
         </div>
     
         <div>
             <h4><strong>Clases Asociadas</strong></h4>
 
             <p class="cd-select icon">
-                <select class="budget">
-                    <option value="0">Seleccione las clases</option>
-                    <option value="1">&lt; $5000</option>
-                    <option value="2">$5000 - $10000</option>
-                    <option value="3">&gt; $10000</option>
+                <select ng-model="vm.project.SectionId" class="budget">
+                    <option ng-repeat="section in vm.sections" value="{{section.Id}}">{{section.Class.Name}}</option>
                 </select>
             </p>
-        </div>
-    
-        <div>
-            <h4><strong>Alumnos Asociadas</strong></h4>
-
-            <p class="cd-select icon">
-                <select class="budget">
-                    <option value="0">Seleccione los alumnos</option>
-                    <option value="1">&lt; $5000</option>
-                    <option value="2">$5000 - $10000</option>
-                    <option value="3">&gt; $10000</option>
-                </select>
-            </p>
-        </div>
-    
-        <div>
-            <h4><strong>Periodo Academico</strong></h4>
-
-            <p class="cd-select icon">
-                <select class="budget">
-                    <option value="0">Seleccione el periodo academico</option>
-                    <option value="1">&lt; $5000</option>
-                    <option value="2">$5000 - $10000</option>
-                    <option value="3">&gt; $10000</option>
-                </select>
-            </p>
-        </div>
+        </div> 
 
         <div class="icon">
             <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
-            <textarea class="message" name="cd-textarea" id="cd-textarea" required></textarea>
+            <textarea ng-model="vm.project.Description" class="message" name="cd-textarea" id="cd-textarea" required></textarea>
         </div>
 
         <div>
