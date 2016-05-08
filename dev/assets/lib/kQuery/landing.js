@@ -11,11 +11,13 @@ $(document).on('click', '.message a', function(e){
     $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     $(".login-page").css("width", "500px");
     $("input").css("border", "none");
+    $("label").remove();
 });
 
 $(document).on('click', '.message.login a', function(e){
     $(".login-page").css("width", "360px");
     $("input").css("border", "none");
+    $("label").remove();
 });
 
 $(document).on('click', '#ingresar', function(e){
@@ -24,7 +26,7 @@ $(document).on('click', '#ingresar', function(e){
             ['unitec.edu'].indexOf(value.split('@').pop()) != -1;
         },'Ingresa un correo de unitec');
         
-        $('#login-form').validate({
+       var validator = $('#login-form').validate({
         rules: {
             usuario: {
                 required: true,
@@ -45,14 +47,13 @@ $(document).on('click', '#ingresar', function(e){
         },
         highlight: function(element){
             $(element).css("border", "2px solid #D46A6A");
-            console.log("errorlol");
         },
         unhighlight: function(element){
             $(element).css("border", "none");
         },
         invalidHandler: function(form, validator){
             $("input").each(function(){
-                if(!$(this).valid())
+                if(!validator.element(this))
                     shakeIt($(this));
             });
         }
@@ -65,7 +66,7 @@ $(document).on('click', '#registrar', function(e) {
            ['unitec.edu'].indexOf(value.split('@').pop()) != -1;
 },'Ingresa un correo de unitec');
 
-    $('#register-form').validate({
+    var validator = $('#register-form').validate({
         rules: {
             correo: {
                 required: true,
@@ -114,7 +115,7 @@ $(document).on('click', '#registrar', function(e) {
         },
         invalidHandler: function(form, validator){
             $("input").each(function(){
-                if(!$(this).valid())
+                if(!validator.element(this))
                     shakeIt($(this));
             });
         }
