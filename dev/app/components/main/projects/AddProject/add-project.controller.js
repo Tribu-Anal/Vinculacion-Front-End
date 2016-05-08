@@ -27,7 +27,11 @@
         sections.getSections(getSectionsSuccess, getSectionsFail);
         
         function submitProject() {
-            projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
+            if(validateFields())
+                projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
+            else
+                displayNotification('warning', 'Campos vacios',
+                                    'El campo de carreras o secciones no puede estar vacio!');
         }
         
         function getMajorsSuccess(response) {
@@ -40,24 +44,22 @@
         
         function getMajorsFail(response) {
             console.log(response);
-            toaster.pop(
-                {
-                    type: 'error', 
-                    title: 'Error', 
-                    body: 'Hay un problema con el servidor. No se ha podido obtener las carreras disponibles.'
-                }
-            );
+            displayNotification('error', 'Error',
+                                'Hay un problema con el servidor. No se ha podido obtener las carreras disponibles.');
         };
         
         function getSectionsFail(response) {
             console.log(response);
-            toaster.pop(
-                {
-                    type: 'error', 
-                    title: 'Error', 
-                    body: 'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.'
-                }
-            );
+            displayNotification('error', 'Error',
+                                'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.');
+        };
+        
+        function submitProjectSuccess() {
+            displayNotification('success', 'Proyecto Creado', 'El proyecto ha sido agregado con exito!');
+        };
+        
+        function submitProjectFail() {
+            displayNotification('error', 'Error', 'No se ha podido crear el proyecto.');
         };
         
         function fillList(response, list) {
@@ -67,26 +69,23 @@
             }
             
             console.log(list);
-        }
-        
-        function submitProjectSuccess() {
-            toaster.pop(
-                {
-                    type: 'success', 
-                    title: 'Proyecto Creado', 
-                    body: 'El proyecto ha sido agregado con exito!'
-                }
-            );
         };
         
-        function submitProjectFail() {
+        function displayNotification(type, title, body) {
             toaster.pop(
                 {
-                    type: 'error', 
-                    title: 'Error', 
-                    body: 'No se ha podido crear el proyecto.'
+                    type: type, 
+                    title: title, 
+                    body: body
                 }
             );
+        }
+        
+        function validateFields() {
+            if(vm.project.MajorIds.length > 0 && vm.project.SectionId !== 0)
+                return true;
+            
+            return false;
         };
     }
 })();
