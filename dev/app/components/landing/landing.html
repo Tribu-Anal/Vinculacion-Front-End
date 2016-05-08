@@ -25,7 +25,8 @@
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-sort-numeric-desc"></span>
-                <input name="accountId" type="text" placeholder="N&uacute;mero de Cuenta" ng-model="vm.accountId" required>
+                <input name="accountId" type="text" ng-pattern="/^\d+$/" placeholder="N&uacute;mero de Cuenta" ng-model="vm.accountId" required>
+                    {{register.accountId.$valid}}
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-user register"></span>
