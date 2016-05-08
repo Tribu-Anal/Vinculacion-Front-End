@@ -1,11 +1,6 @@
 <form name="projectForm" class="cd-form" ng-submit="projectForm.$valid && vm.submitProject()">
         <legend><strong>Informacion de Proyecto</strong></legend>
         
-<!--
-        <div class="error-message">
-            <p>Please enter a valid email address</p>
-        </div>
--->
         <div>
             <label class="cd-label" for="cd-name">Nombre de Proyecto</label>
             <input ng-model="vm.project.Name" class="user" type="text" name="cd-name" id="cd-name" required>

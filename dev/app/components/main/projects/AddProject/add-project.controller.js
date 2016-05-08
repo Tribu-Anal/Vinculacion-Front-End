@@ -40,10 +40,24 @@
         
         function getMajorsFail(response) {
             console.log(response);
+            toaster.pop(
+                {
+                    type: 'error', 
+                    title: 'Error', 
+                    body: 'Hay un problema con el servidor. No se ha podido obtener las carreras disponibles.'
+                }
+            );
         };
         
         function getSectionsFail(response) {
             console.log(response);
+            toaster.pop(
+                {
+                    type: 'error', 
+                    title: 'Error', 
+                    body: 'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.'
+                }
+            );
         };
         
         function fillList(response, list) {
