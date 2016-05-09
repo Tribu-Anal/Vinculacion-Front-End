@@ -78,6 +78,7 @@
     }
     .cd-form input[type="text"],
     .cd-form input[type="email"],
+    .cd-form input[type="number"],
     .cd-form textarea,
     .cd-form select,
     .cd-form legend
@@ -92,6 +93,7 @@
     }
     .cd-form input[type="text"],
     .cd-form input[type="email"],
+    .cd-form input[type="number"],
     .cd-form textarea,
     .cd-form select
     {
@@ -104,6 +106,7 @@
     }
     .cd-form input[type="text"]:focus,
     .cd-form input[type="email"]:focus,
+    .cd-form input[type="number"]:focus,
     .cd-form textarea:focus,
     .cd-form select:focus
     {

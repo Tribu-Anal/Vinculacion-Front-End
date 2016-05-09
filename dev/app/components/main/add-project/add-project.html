@@ -32,8 +32,8 @@
 
         <div>
             <label class="cd-label" for="cd-name">Costo</label>
-            <input ng-model="vm.project.Cost" ng-pattern="/^[0-9]+(\.[0-9]{1,99})?$/" class="user" type="text" name="cost" id="cd-name" required>
-            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.cost.$error.required || projectForm.cost.$error.pattern">
+            <input ng-model="vm.project.Cost" class="user" type="number" name="cost" id="cd-name" min="0" required>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && (projectForm.cost.$error.required || projectForm.cost.$invalid)">
                 * Asegurate de asignar un costo y que sea un valor mayor o igual a 0
             </p>
         </div>
