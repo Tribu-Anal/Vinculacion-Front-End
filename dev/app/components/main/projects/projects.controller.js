@@ -22,7 +22,7 @@
         function removeProject (project, index) {
             vm.projects.splice(index, 1);
 
-            projects.deleteProject(1000, 
+            projects.deleteProject(project.Id, 
                 removeProjectSucces, removeProjectFail);
         }
 
