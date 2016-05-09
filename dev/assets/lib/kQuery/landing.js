@@ -122,7 +122,7 @@ $(document).on('click', '#registrar', function(e) {
             }
         },
         submitHandler: function(){
-            console.log("TODO BIEN!");
+            $(".message.login a").trigger("click");
         }
     });
 });
