@@ -51,11 +51,11 @@ $(document).on('click', '#ingresar', function(e){
         unhighlight: function(element){
             $(element).css("border", "none");
         },
-        invalidHandler: function(form, validator){
-            $("input").each(function(){
-                if(!validator.element(this))
-                    shakeIt($(this));
-            });
+        invalidHandler: function(form){
+            var errors = validator.numberOfInvalids();
+            for(var i = 0; i<errors; i++){
+                shakeIt(validator.errorList[i].element);
+            }
         }
     });
 });
@@ -113,11 +113,11 @@ $(document).on('click', '#registrar', function(e) {
         unhighlight: function(element){
             $(element).css("border", "none");
         },
-        invalidHandler: function(form, validator){
-            $("input").each(function(){
-                if(!validator.element(this))
-                    shakeIt($(this));
-            });
+        invalidHandler: function(form){
+            var errors = validator.numberOfInvalids();
+            for(var i = 0; i<errors; i++){
+                shakeIt(validator.errorList[i].element);
+            }
         }
     });
 });
