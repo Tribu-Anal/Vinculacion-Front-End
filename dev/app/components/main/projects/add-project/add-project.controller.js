@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('AddProjectController', AddProjectController);
 
-    AddProjectController.$inject = ['projects', 'sections', 'majors', 'toaster'];
+    AddProjectController.$inject = ['projects', 'sections', 'majors', 'toaster', '$location'];
 
-    function AddProjectController (projects, sections, majors, toaster) {
+    function AddProjectController (projects, sections, majors, toaster, $location) {
         var vm = this;
         
         vm.sections = [];
@@ -56,6 +56,7 @@
         
         function submitProjectSuccess() {
             displayNotification('success', 'Proyecto Creado', 'El proyecto ha sido agregado con exito!');
+            $location.path('/proyectos');
         };
         
         function submitProjectFail() {
