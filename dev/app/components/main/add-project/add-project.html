@@ -1,14 +1,20 @@
-<form name="projectForm" class="cd-form" ng-submit="projectForm.$valid && vm.submitProject()">
+<form name="projectForm" class="cd-form" ng-submit="projectForm.$valid && vm.submitProject()" novalidate>
         <legend><strong>Nuevo Proyecto</strong></legend>
         
         <div>
             <label class="cd-label" for="cd-name">Nombre</label>
-            <input ng-model="vm.project.Name" class="user" type="text" name="cd-name" id="cd-name" required>
+            <input ng-model="vm.project.Name" class="user" type="text" name="projectName" id="cd-name" required>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectName.$error.required">
+                * Porfavor ingresa un nombre
+            </p>
         </div>
     
         <div>
             <label class="cd-label" for="cd-name">Id</label>
-            <input ng-model="vm.project.ProjectId" class="user" type="text" name="cd-name" id="cd-name" required>
+            <input ng-model="vm.project.ProjectId" class="user" type="text" name="projectId" id="cd-name" required>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectId.$error.required">
+                * Porfavor ingresa un Id para el proyecto
+            </p>
         </div>
 
         <div>
@@ -24,6 +30,9 @@
         <div>
             <label class="cd-label" for="cd-name">Costo</label>
             <input ng-model="vm.project.Cost" ng-pattern="/^[0-9]+(\.[0-9]{1,99})?$/" class="user" type="text" name="cost" id="cd-name" required>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.cost.$error.required || projectForm.cost.$error.pattern">
+                * Asegurate de asignar un costo y que sea un valor mayor o igual a 0
+            </p>
         </div>
     
         <div>
@@ -38,7 +47,10 @@
 
         <div class="icon">
             <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
-            <textarea ng-model="vm.project.Description" class="message" name="cd-textarea" id="cd-textarea" required></textarea>
+            <textarea ng-model="vm.project.Description" class="message" name="projectDescription" id="cd-textarea" required></textarea>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectDescription.$error.required">
+                * Porfavor ingresa un descripcion para el proyecto
+            </p>
         </div>
 
         <div>

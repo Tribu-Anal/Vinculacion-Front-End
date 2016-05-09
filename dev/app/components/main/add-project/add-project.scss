@@ -286,16 +286,17 @@
       -o-transform: scale(0.9);
       transform: scale(0.9);
     }
-    .cd-form .error-message p
+    .error-message
     {
       background: #e94b35;
       color: #ffffff;
       font-size: 1.4rem;
+      font-weight: bold;
       text-align: center;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       border-radius: .25em;
-      padding: 16px;
+      padding: 5px;
     }
     .cd-form .error {
       border-color: #e94b35 !important;
