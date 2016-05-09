@@ -74,7 +74,8 @@ $(document).on('click', '#registrar', function(e) {
                 email: true
             },
             accountId: {
-                required: true
+                required: true,
+                digits: true
             },
             nombre: {
                 required: true
@@ -94,7 +95,8 @@ $(document).on('click', '#registrar', function(e) {
                 email: "Por favor ingresa un correo v&aacute;lido"
             },
             accountId: {
-                required: "Por favor ingresa tu n&uacute;mero de cuenta"    
+                required: "Por favor ingresa tu n&uacute;mero de cuenta",
+                digits: "Por favor ingresa solo d&iacute;gitos"    
             },
             nombre: {
                 required: "Por favor ingresa tu nombre"
@@ -118,6 +120,9 @@ $(document).on('click', '#registrar', function(e) {
             for(var i = 0; i<errors; i++){
                 shakeIt(validator.errorList[i].element);
             }
+        },
+        submitHandler: function(){
+            console.log("TODO BIEN!");
         }
     });
 });
