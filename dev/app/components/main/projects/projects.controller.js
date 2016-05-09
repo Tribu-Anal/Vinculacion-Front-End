@@ -11,6 +11,34 @@
         var vm = this;
         
         vm.projects = [];
+        vm.removeProjectClicked = removeProjectClicked;
+
+        function removeProjectClicked (project, index) {
+            if (confirm("Esta seguro de borrar el proyecto: " + 
+                project.Name + "?"))
+            removeProject(project, index);
+        }
+
+        function removeProject (project, index) {
+            vm.projects.splice(index, 1);
+
+            projects.deleteProject(1000, 
+                removeProjectSucces, removeProjectFail);
+        }
+
+        function removeProjectSucces () {
+            console.log("Success");
+        }
+
+        function removeProjectFail () {
+            toaster.pop(
+                {
+                    type: 'error', 
+                    title: 'Error', 
+                    body: 'No se pudo borrar el proyecto.'
+                }
+            );
+        }
         
         projects.getProjects( 
             function(response) {
