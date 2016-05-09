@@ -26,13 +26,7 @@
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
         
-        function submitProject() {
-//            if(validateFields())
-//                projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
-//            else
-//                displayNotification('warning', 'Campos vacios',
-//                                    'El campo de carreras o secciones no puede estar vacio!');
-            
+        function submitProject() {            
             projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
         }
         
@@ -84,12 +78,5 @@
                 }
             );
         }
-        
-//        function validateFields() {
-//            if(vm.project.MajorIds.length > 0 && vm.project.SectionId !== 0)
-//                return true;
-//            
-//            return false;
-//        };
     }
 })();
