@@ -27,8 +27,6 @@ $(document).on('click', '#ingresar', function(e){
         },'Ingresa un correo de unitec');
         
        var validator = $('#login-form').validate({
-        onkeyup: false,
-        onfocusout: false,
         rules: {
             usuario: {
                 required: true,
@@ -69,8 +67,6 @@ $(document).on('click', '#registrar', function(e) {
 },'Ingresa un correo de unitec');
 
     var validator = $('#register-form').validate({
-        onkeyup: false,
-        onfocusout: false,
         rules: {
             correo: {
                 required: true,
