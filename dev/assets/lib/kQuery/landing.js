@@ -123,6 +123,7 @@ $(document).on('click', '#registrar', function(e) {
         },
         submitHandler: function(){
             $(".message.login a").trigger("click");
+            $("#register-form").trigger("reset");
         }
     });
 });
