@@ -30,8 +30,8 @@
         
        function postProject(projectData, successCallback, errorCallback) {
            console.log(JSON.stringify(projectData));
-          $http.post(url, JSON.stringify(projectData)).then(successCallback)
-                                                      .catch(errorCallback);
+//          $http.post(url, JSON.stringify(projectData)).then(successCallback)
+//                                                      .catch(errorCallback);
        };
 	}
 })();
