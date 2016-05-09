@@ -21,9 +21,12 @@
             <h4><strong>Carreras Asociadas</strong></h4>
 
             <p class="cd-select icon">
-                <select ng-model="vm.project.MajorIds" class="budget" multiple>
+                <select ng-model="vm.project.MajorIds" class="budget" name="projectMajor" required multiple>
                     <option ng-repeat="major in vm.majors" value="{{major.MajorId}}">{{major.Name}}</option>
                 </select>
+            </p>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectMajor.$error.required">
+                * Porfavor selecciona una o mas de las carreras disponibles
             </p>
         </div> 
 
@@ -39,9 +42,11 @@
             <h4><strong>Secciones Asociadas</strong></h4>
 
             <p class="cd-select icon">
-                <select ng-model="vm.project.SectionId" class="budget">
-                    <option ng-repeat="section in vm.sections" value="{{section.Id}}">{{section.Class.Name}}</option>
+                <select ng-model="vm.project.SectionId" ng-options="section.Id as section.Class.Name for section in vm.sections" class="budget" name="projectSection" required>
                 </select>
+            </p>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectSection.$error.required">
+                * Porfavor selecciona una de las secciones disponibles
             </p>
         </div> 
 

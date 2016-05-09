@@ -18,7 +18,7 @@
             Description: '',
             Cost: 0.0,
             MajorIds: [],
-            SectionId: 0,            
+            SectionId: 0            
         }
         
         vm.submitProject = submitProject;
@@ -27,11 +27,13 @@
         sections.getSections(getSectionsSuccess, getSectionsFail);
         
         function submitProject() {
-            if(validateFields())
-                projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
-            else
-                displayNotification('warning', 'Campos vacios',
-                                    'El campo de carreras o secciones no puede estar vacio!');
+//            if(validateFields())
+//                projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
+//            else
+//                displayNotification('warning', 'Campos vacios',
+//                                    'El campo de carreras o secciones no puede estar vacio!');
+            
+            projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
         }
         
         function getMajorsSuccess(response) {
@@ -40,6 +42,7 @@
         
         function getSectionsSuccess(response) {
             fillList(response, vm.sections);
+            vm.project.SectionId = vm.sections[0].Id;
         };
         
         function getMajorsFail(response) {
@@ -82,11 +85,11 @@
             );
         }
         
-        function validateFields() {
-            if(vm.project.MajorIds.length > 0 && vm.project.SectionId !== 0)
-                return true;
-            
-            return false;
-        };
+//        function validateFields() {
+//            if(vm.project.MajorIds.length > 0 && vm.project.SectionId !== 0)
+//                return true;
+//            
+//            return false;
+//        };
     }
 })();
