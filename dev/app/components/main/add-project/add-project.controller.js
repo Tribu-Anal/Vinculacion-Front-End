@@ -22,12 +22,18 @@
         }
         
         vm.submitProject = submitProject;
-        vm.tbCheckboxClicked = tbCheckboxClicked;
+        vm.MajorsCheckboxClicked = MajorsCheckboxClicked;
+        vm.SectionsCheckboxClicked = SectionsCheckboxClicked;
         
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
         
-        function tbCheckboxClicked (inputValue, id) {
+        function submitProject() {
+            if(validateMajorsSectionStatus())
+                projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
+        }
+        
+        function MajorsCheckboxClicked (inputValue, id) {
             console.log(id);
             if (inputValue) {
                 vm.project.MajorIds.push(id);
@@ -42,8 +48,22 @@
             console.log(inputValue, vm.project.MajorIds);
         }
         
-        function submitProject() {            
-            projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
+        function SectionsCheckboxClicked(inputValue, id) {
+            console.log(id);
+            if (inputValue) {
+                vm.project.SectionId = id;
+            }
+            else {
+                vm.project.SectionId = 0;
+            }
+            console.log(inputValue, vm.project.SectionId);
+        }
+        
+        function validateMajorsSectionStatus() {
+            if(vm.project.MajorIds.length > 0 && vm.project.SectionId !== 0)
+                return true;
+            
+            return false;
         }
         
         function getMajorsSuccess(response) {
@@ -52,7 +72,6 @@
         
         function getSectionsSuccess(response) {
             TbUtils.fillList(response, vm.sections);
-            vm.project.SectionId = vm.sections[0].Id;
         };
         
         function getMajorsFail(response) {
