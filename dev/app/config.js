@@ -40,6 +40,12 @@
 				templateUrl: templateDir + 'main/projects/projects.html',
 				controller: 'ProjectsController as vm'
 			})
+        
+            .state('dashboard.addproject', {
+				url: '/nuevo-proyecto',
+				templateUrl: templateDir + 'main/add-project/add-project.html',
+				controller: 'AddProjectController as vm'
+			})
 
 			.state('dashboard.project', {
 				url: '/proyectos/{projectId}',
