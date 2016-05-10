@@ -20,12 +20,23 @@
         <div>
             <h4><strong>Carreras Asociadas</strong></h4>
 
+<!--
             <p class="cd-select icon">
                 <select ng-model="vm.project.MajorIds" class="budget" name="projectMajor" required multiple>
                     <option ng-repeat="major in vm.majors" value="{{major.MajorId}}">{{major.Name}}</option>
                 </select>
             </p>
-            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectMajor.$error.required">
+-->
+            
+            <div class="tb-checklist">
+                <div class="tb-checkbox" ng-repeat="major in vm.majors">
+                    <span ng-click="vm.tbCheckboxClicked(mdl, major.MajorId)">
+                        <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = false" ng-model="mdl">
+                        <label ng-click="mdl = !mdl">{{major.Name}}</label>
+                    </span>
+                </div>
+            </div>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && vm.project.MajorIds.length === 0">
                 * Porfavor selecciona una o mas de las carreras disponibles
             </p>
         </div> 
@@ -41,10 +52,18 @@
         <div>
             <h4><strong>Secciones Asociadas</strong></h4>
 
+<!--
             <p class="cd-select icon">
                 <select ng-model="vm.project.SectionId" ng-options="section.Id as section.Class.Name for section in vm.sections" class="budget" name="projectSection" required>
                 </select>
             </p>
+-->
+            <div class="tb-checklist">
+                <div class="tb-checkbox" ng-repeat="section in vm.sections">
+                    <input type="checkbox" id="sectionBox{{section.Id}}" value="{{section.Id}}">
+                    <label for="sectionBox{{section.Id}}">{{section.Class.Name}}</label>
+                </div>
+            </div>
             <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectSection.$error.required">
                 * Porfavor selecciona una de las secciones disponibles
             </p>

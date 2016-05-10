@@ -304,6 +304,22 @@
     .cd-form .error {
       border-color: #e94b35 !important;
     }
+    
+    .tb-checklist
+    {
+        overflow-y: scroll;
+        max-height: 200px;
+        
+        .tb-checkbox {
+            margin: 5px 0;
+            
+            label {
+                margin-top: 6px;
+                cursor: pointer;
+            }
+        }
+    }
+    
     @media only screen and (min-width: 600px)
     {
       .cd-form div

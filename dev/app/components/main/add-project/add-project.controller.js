@@ -22,9 +22,25 @@
         }
         
         vm.submitProject = submitProject;
+        vm.tbCheckboxClicked = tbCheckboxClicked;
         
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
+        
+        function tbCheckboxClicked (inputValue, id) {
+            console.log(id);
+            if (inputValue) {
+                vm.project.MajorIds.push(id);
+            }
+            else {
+                for (let i = 0; i < vm.project.MajorIds.length; i++) {
+                    if (vm.project.MajorIds[i] === id) {
+                        vm.project.MajorIds.splice(i, 1);
+                    }
+                }
+            }
+            console.log(inputValue, vm.project.MajorIds);
+        }
         
         function submitProject() {            
             projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
