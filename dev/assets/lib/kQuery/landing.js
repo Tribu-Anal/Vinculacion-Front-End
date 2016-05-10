@@ -7,16 +7,17 @@ function shakeIt(element) {
       }, 50);  
 
 }
-
 $(document).on('click', '.message a', function(e){
     $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     $(".login-page").css("width", "500px");
     $("input").css("border", "none");
+    $("label").remove();
 });
 
 $(document).on('click', '.message.login a', function(e){
     $(".login-page").css("width", "360px");
     $("input").css("border", "none");
+    $("label").remove();
 });
 
 $(document).on('click', '#ingresar', function(e){
@@ -25,7 +26,7 @@ $(document).on('click', '#ingresar', function(e){
             ['unitec.edu'].indexOf(value.split('@').pop()) != -1;
         },'Ingresa un correo de unitec');
         
-        $('#login-form').validate({
+       var validator = $('#login-form').validate({
         rules: {
             usuario: {
                 required: true,
@@ -37,17 +38,24 @@ $(document).on('click', '#ingresar', function(e){
         },
         messages: {
             usuario: {
-                required: "Este campo es requerido"
+                required: "Este campo es requerido",
+                email: "Por favor ingresa un correo v&aacute;lido"
             },
             clave: {
                 required: "Este campo es requerido"
             }
         },
-        invalidHandler: function(){
-            shakeIt("input");
-            shakeIt("span");
-            $("input").css("border", "2px solid #D46A6A");
-            
+        highlight: function(element){
+            $(element).css("border", "2px solid #D46A6A");
+        },
+        unhighlight: function(element){
+            $(element).css("border", "none");
+        },
+        invalidHandler: function(form){
+            var errors = validator.numberOfInvalids();
+            for(var i = 0; i<errors; i++){
+                shakeIt(validator.errorList[i].element);
+            }
         }
     });
 });
@@ -58,15 +66,16 @@ $(document).on('click', '#registrar', function(e) {
            ['unitec.edu'].indexOf(value.split('@').pop()) != -1;
 },'Ingresa un correo de unitec');
 
-    $('#register-form').validate({
+    var validator = $('#register-form').validate({
         rules: {
             correo: {
                 required: true,
                 unitecmail: true,
                 email: true
             },
-            cuenta: {
-                required: true
+            accountId: {
+                required: true,
+                digits: true
             },
             nombre: {
                 required: true
@@ -83,27 +92,38 @@ $(document).on('click', '#registrar', function(e) {
         messages: {
             correo: {
                 required: "Por favor ingresa tu correo de unitec",
-                email: "Por favor ingresa un correo valido"
+                email: "Por favor ingresa un correo v&aacute;lido"
             },
-            cuenta: {
-                required: "Por favor ingresa tu numero de cuenta"    
+            accountId: {
+                required: "Por favor ingresa tu n&uacute;mero de cuenta",
+                digits: "Por favor ingresa solo d&iacute;gitos"    
             },
             nombre: {
                 required: "Por favor ingresa tu nombre"
             },
             password: {
                 required: "Por favor ingresa una contraseña",
-                minlength: "Tu contraseña tiene que tener minimo 8 caracteres"
+                minlength: "Tu contraseña tiene que tener m&iacute;nimo 8 caracteres"
             },
             confirmpass: {
                 equalTo: "Las contraseñas no coinciden"
             }
         },
-        invalidHandler: function(){
-            shakeIt("input");
-            shakeIt("span");
-            $("input").css("border", "2px solid #D46A6A");
-            
+        highlight: function(element){
+            $(element).css("border", "2px solid #D46A6A");
+        },
+        unhighlight: function(element){
+            $(element).css("border", "none");
+        },
+        invalidHandler: function(form){
+            var errors = validator.numberOfInvalids();
+            for(var i = 0; i<errors; i++){
+                shakeIt(validator.errorList[i].element);
+            }
+        },
+        submitHandler: function(){
+            $(".message.login a").trigger("click");
+            $("#register-form").trigger("reset");
         }
     });
 });
