@@ -16,8 +16,9 @@
 	    
 	    return service;
 
-	    function registerStudent (data, successCallback, errorCallback) {
-	        $http.post(url, data)
+	    function registerStudent (studentData, successCallback, errorCallback) {
+            console.log(JSON.stringify(studentData));
+	        $http.post(url, JSON.stringify(studentData))
                  .then(successCallback)
                  .catch(errorCallback);
 	    };
