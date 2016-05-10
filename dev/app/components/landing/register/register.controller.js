@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['register', 'toaster'];
+    RegisterController.$inject = ['register', 'TbUtils'];
 
-    function RegisterController (register, toaster) {
+    function RegisterController (register, TbUtils) {
         var vm = this;
 
         vm.email = "";
@@ -36,23 +36,12 @@
         };
         
         function registerStudentSuccess(response) {
-            toaster.pop(
-                {
-                    type: 'success', 
-                    title: 'Revisa tu Correo', 
-                    body: 'Se le ha enviado un correo de confirmacion. Porfavor revisar.'
-                }
-            );
+            TbUtils.displayNotification('success', 'Revisa tu Correo',
+                                        'Se le ha enviado un correo de confirmacion. Porfavor revisar.');
         };
         
         function registerStudentFail() {
-            toaster.pop(
-                {
-                    type: 'error', 
-                    title: 'Error', 
-                    body: 'Se ha producido un error! Lamentamos los inconvenientes.'
-                }
-            );
+            TbUtils.displayNotification('error', 'Error', 'Se ha producido un error! Lamentamos los inconvenientes.');
         };
         
         function validate ($event) { 

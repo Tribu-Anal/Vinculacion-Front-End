@@ -17,7 +17,7 @@
         
         function fillList(response, list) {
             console.log(response);
-            for(var obj in response.data) {
+            for(let obj in response.data) {
                 list.push(response.data[obj]);
             }
             

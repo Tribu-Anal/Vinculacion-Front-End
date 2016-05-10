@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ProjectsController', ProjectsController);
 
-    ProjectsController.$inject = ['projects', 'toaster'];
+    ProjectsController.$inject = ['projects', 'TbUtils'];
 
-    function ProjectsController (projects, toaster) {
+    function ProjectsController (projects, TbUtils) {
         var vm = this;
         
         vm.projects = [];
@@ -16,19 +16,11 @@
         
         function getProjectsSuccess(response) {
             console.log(response);
-            for(var obj in response.data) {
-                vm.projects.push(response.data[obj])
-            }
+            TbUtils.fillList(response, vm.projects);
         };
         
         function getProjectsFail() {
-            toaster.pop(
-                {
-                    type: 'error', 
-                    title: 'Error', 
-                    body: 'No se ha podido obtener los proyectos deseados.'
-                }
-            );
+            TbUtils.displayNotification('error', 'Error', 'No se ha podido obtener los proyectos deseados.');
         };
     }
 })();
