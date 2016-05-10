@@ -5,54 +5,37 @@
         .module('VinculacionApp')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['register', 'toaster'];
+    RegisterController.$inject = ['register', 'majors', 'TbUtils'];
 
-    function RegisterController (register, toaster) {
+    function RegisterController (register, majors, TbUtils) {
         var vm = this;
-
-        vm.email = "";
-        vm.password = "";
-        vm.accountId = "";
-        vm.name = "";
-        vm.campus = "SPS";
-        vm.career = "I - 01 (Ing. en Sistemas Computacionales)";
+        
+        vm.majors = [];
+        vm.student = {
+            Email: "",
+            Password: "",
+            AccountId: "",
+            Name: "",
+            Campus: "SPS",
+            MajorId: ""
+        }
+        
+        majors.getMajors(getMajorsSuccess, getMajorsFail);
+        
         vm.registerStudent = registerStudent;
         vm.validate = validate;
         
         function registerStudent() {        
-            register.registerStudent(setupJSON(), registerStudentSuccess, registerStudentFail);
+            register.registerStudent(vm.student, registerStudentSuccess, registerStudentFail);
         }
         
-        function setupJSON() {
-            return JSON.stringify (
-                    {
-                        AccountId: vm.accountId,
-                        Name: vm.name,
-                        Password: vm.password,
-                        MajorId : vm.career.substring(0, 6),
-                        Campus: vm.campus,
-                        Email: vm.email,
-                    });
-        };
-        
         function registerStudentSuccess(response) {
-            toaster.pop(
-                {
-                    type: 'success', 
-                    title: 'Revisa tu Correo', 
-                    body: 'Se le ha enviado un correo de confirmacion. Porfavor revisar.'
-                }
-            );
+            TbUtils.displayNotification('success', 'Revisa tu Correo',
+                                        'Se le ha enviado un correo de confirmacion. Porfavor revisar.');
         };
         
         function registerStudentFail() {
-            toaster.pop(
-                {
-                    type: 'error', 
-                    title: 'Error', 
-                    body: 'Se ha producido un error! Lamentamos los inconvenientes.'
-                }
-            );
+            TbUtils.displayNotification('error', 'Error', 'Se ha producido un error! Lamentamos los inconvenientes.');
         };
         
         function validate ($event) { 
@@ -64,6 +47,17 @@
                 $event.preventDefault();
                 return false;
             }  
+        };
+        
+        function getMajorsSuccess(response) {
+            TbUtils.fillList(response, vm.majors);
+            vm.student.MajorId = vm.majors[0].MajorId;
+        };
+        
+        function getMajorsFail(response) {
+            console.log(response);
+            TbUtils.displayNotification('error', 'Error',
+                                       'No se ha podido obtener todas las carreras disponibles.');
         }
     }
 })();

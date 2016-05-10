@@ -5,9 +5,9 @@
 		.module('VinculacionApp')
 		.controller('ProjectController', ProjectController);
 
-	ProjectController.$inject = ['$stateParams', 'projects', 'toaster'];
+	ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils'];
 
-	function ProjectController($stateParams, projects, toaster) {
+	function ProjectController($stateParams, projects, TbUtils) {
 		var vm = this;
 
 		vm.project = {};
@@ -28,11 +28,7 @@
         };
         
         function getProjectFail() {
-            toaster.pop({
-					type: 'error',
-					title: 'Error',
-					body: 'El proyecto deseado no existe.'
-                });
+            TbUtils.displayNotification('error', 'Error', 'El proyecto deseado no existe.');
         };
 
 		function getParticipants() {
