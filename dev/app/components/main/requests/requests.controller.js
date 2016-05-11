@@ -5,9 +5,9 @@
 		.module('VinculacionApp')
 		.controller('RequestsController', RequestsController);
 
-	RequestsController.$inject = ['$scope', 'requests', 'toaster'];
+	RequestsController.$inject = ['$scope', 'requests', 'TbUtils'];
 
-	function RequestsController($scope, requests, toaster, ngDialog) {
+	function RequestsController($scope, requests, TbUtils, ngDialog) {
 		var vm = this;
         
 		var acceptButton = {
@@ -60,13 +60,8 @@
         
         function getRequestFail(response) {
             console.log(response);
-            toaster.pop(
-                { 
-                    type: 'error', 
-                    title: 'Falla de solicitudes', 
-                    body: 'No se ha podido obtener las solicitudes de estudiantes'
-                }
-            );
+            TbUtils.displayNotification('error', 'Falla de solicitudes',
+                                        'No se ha podido obtener las solicitudes de estudiantes.');
         }
 
 		function getElement(index) {

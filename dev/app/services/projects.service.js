@@ -12,7 +12,8 @@
     
 	   var service = {
            getProjects: getProjects,
-           getProject: getProject
+           getProject: getProject,
+           postProject: postProject
        };
        
        return service;
@@ -25,6 +26,12 @@
 	   function getProject (projectId, successCallback, errorCallback) {
 	   		$http.get(url + "/" + projectId).then(successCallback)
                                             .catch(errorCallback);
-	   };	   
+	   };
+        
+       function postProject(projectData, successCallback, errorCallback) {
+           console.log(JSON.stringify(projectData));
+          $http.post(url, JSON.stringify(projectData)).then(successCallback)
+                                                      .catch(errorCallback);
+       };
 	}
 })();
