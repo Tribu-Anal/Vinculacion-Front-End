@@ -18,45 +18,36 @@
 
 		return service;
 
-		function getRequests (handleSuccess) {
+		function getRequests (successCallback, errorCallback) {
 			let request = {
 	            method: 'GET',
 	            url: url +'/Students/Filter/Active'
 	        };
-	        $http(request).then( function(data) {
-	            handleSuccess(data);
-	        });
+            
+	        $http(request).then(successCallback)
+                          .catch(errorCallback);
 		}
-
-		function rejectRequest (obj, message, handleSuccess) {
-			let request = {
-				method: 'POST',
-				url: url + '/Students/Rejected',
-				data: JSON.stringify(
-					{ 
-						AccountId: obj.AccountId, 
-						Message: message
-					}
-				)
-			};
-			$http(request).then(function(data) {
-	            handleSuccess(data);
-	        });
-		}
-
-		function acceptRequest (obj, handleSuccess){
+        
+        function acceptRequest (obj, successCallback, errorCallback){
 			let request = {
 				method: 'PUT',
 				url: url + '/Students/Verified',
-				data: JSON.stringify(
-					{
-						AccountId: obj.AccountId
-					}
-				)
+				data: JSON.stringify({ AccountId: obj.accountNumber })
 			};
-			$http(request).then(function(data) {
-	            handleSuccess(data);
-	        });
+            
+			$http(request).then(successCallback)
+                          .catch(errorCallback);
+		}
+
+		function rejectRequest (obj, message, successCallback, errorCallback) {
+			let request = {
+				method: 'POST',
+				url: url + '/Students/Rejected',
+				data: JSON.stringify({ AccountId: obj.accountNumber, Message: message })
+			};
+            
+			$http(request).then(successCallback)
+                          .catch(errorCallback);
 		}
 	}
 })();
