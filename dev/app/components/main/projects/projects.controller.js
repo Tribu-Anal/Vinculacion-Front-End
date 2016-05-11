@@ -32,13 +32,8 @@
         }
 
         function removeProjectFail () {
-            toaster.pop(
-                {
-                    type: 'error', 
-                    title: 'Error', 
-                    body: 'No se pudo borrar el proyecto.'
-                }
-            );
+            TbUtils.displayNotification('error', 'Error', 
+              'No se pudo borrar el proyecto.');
         }
         
         projects.getProjects(getProjectsSuccess, getProjectsFail);
@@ -49,7 +44,8 @@
         };
         
         function getProjectsFail() {
-            TbUtils.displayNotification('error', 'Error', 'No se ha podido obtener los proyectos deseados.');
-        };
+            TbUtils.displayNotification('error', 'Error', 
+              'No se ha podido obtener los proyectos deseados.');
+        }
     }
 })();
