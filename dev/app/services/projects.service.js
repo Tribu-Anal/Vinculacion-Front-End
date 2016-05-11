@@ -9,11 +9,12 @@
 
 	function projects ($http) {
 	   var url = 'http://fiasps.unitec.edu:8085/api/Projects';
-    
+
 	   var service = {
            getProjects: getProjects,
            getProject: getProject,
-           postProject: postProject
+           postProject: postProject,
+           deleteProject: deleteProject
        };
        
        return service;
@@ -26,12 +27,17 @@
 	   function getProject (projectId, successCallback, errorCallback) {
 	   		$http.get(url + "/" + projectId).then(successCallback)
                                             .catch(errorCallback);
-	   };
+	   }
         
        function postProject(projectData, successCallback, errorCallback) {
            console.log(JSON.stringify(projectData));
           $http.post(url, JSON.stringify(projectData)).then(successCallback)
                                                       .catch(errorCallback);
-       };
+       }
+
+       function deleteProject (projectId, successCallback, errorCallback) {
+	   		$http.delete(url + "/" + projectId)
+	   			.then(successCallback, errorCallback);
+	   }
 	}
 })();
