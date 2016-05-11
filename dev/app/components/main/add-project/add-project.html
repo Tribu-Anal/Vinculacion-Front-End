@@ -53,7 +53,23 @@
             <p class="error-message" ng-show="projectForm.$submitted && vm.project.SectionId === 0">
                 * Porfavor selecciona una de las secciones disponibles
             </p>
-        </div> 
+        </div>
+    
+        <div>
+            <label class="cd-label" for="cd-name">Beneficiario</label>
+            <input ng-model="vm.project.BenificiariesAlias" class="user" type="text" name="projectBeneficiario" id="cd-name" required>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectBeneficiario.$error.required">
+                * Porfavor ingresa el nombre de un beneficiario.
+            </p>
+        </div>
+    
+        <div>
+            <label class="cd-label" for="cd-name">Cantidad de Beneficiarios</label>
+            <input ng-model="vm.project.BenificiariesQuantity" class="user" ng-pattern="/^\d+$/" type="number" name="projectBeneficiarieQuantity" id="cd-name" min="0" required>
+            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && (projectForm.projectBeneficiarieQuantity.$error.required || projectForm.projectBeneficiarieQuantity.$invalid)">
+                * Asigna la cantidad de beneficiarios.
+            </p>
+        </div>
 
         <div class="icon">
             <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>

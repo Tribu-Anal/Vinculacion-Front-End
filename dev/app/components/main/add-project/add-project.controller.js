@@ -18,7 +18,9 @@
             Description: '',
             Cost: 0.0,
             MajorIds: [],
-            SectionId: 0            
+            SectionId: 0,
+            BenificiariesAlias: '',
+            BenificiariesQuantity: 0
         }
         
         vm.submitProject = submitProject;
