@@ -9,12 +9,13 @@
 
     function ProjectsController (projects, TbUtils, ModalService) {
         var vm = this;
-        
+
         var deleteIndex = -1;
         var deleteProject = {};
         var confirmDeleteModal = {
-          templateUrl: 'templates/shared/TB-Modals/Confirm/confirm.html',
-          controller: 'ConfirmController'
+          templateUrl: 'templates/components/main/projects/' +
+                       'confirm-delete/confirm-delete.html',
+          controller: 'ConfirmDeleteController'
         };
         
         vm.projects = [];
