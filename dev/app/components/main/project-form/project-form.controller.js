@@ -21,10 +21,11 @@
         vm.MajorsCheckboxClicked = MajorsCheckboxClicked;
         vm.SectionsCheckboxClicked = SectionsCheckboxClicked;
         vm.majorsAndStatusValid = majorsAndStatusValid;
+        vm.initMajorCheckbox = initMajorCheckbox;
 
         var editId = vm.edit ? vm.project.Id : -1;
-        // vm.project.MajorIds = [];
-        // vm.project.SectionId = 0;
+        vm.project.MajorIds = [ "I - 01", "I - 02" ];
+        vm.project.SectionId = 1;
         
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
@@ -77,6 +78,14 @@
             projects.postProject(vm.project, 
                 submitProjectSuccess, submitProjectFail);
         }
+
+        function initMajorCheckbox (id) {
+            for (let i = 0; i < vm.project.MajorIds.length; i++)
+                if (id === vm.project.MajorIds[i])
+                    return true;
+
+            return false;
+        }
         
         function MajorsCheckboxClicked (inputValue, id) {
             console.log(id);
@@ -115,6 +124,7 @@
         
         function getSectionsSuccess(response) {
             TbUtils.fillList(response, vm.sections);
+            console.log(vm.sections[0]);
         };
         
         function getMajorsFail(response) {
