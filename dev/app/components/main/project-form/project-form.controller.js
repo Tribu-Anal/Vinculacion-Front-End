@@ -5,18 +5,26 @@
         .module('VinculacionApp')
         .controller('ProjectFormController', ProjectFormController);
 
-    ProjectFormController.$inject = [ '$stateParams', 'projects', 'sections', 'majors', 'toaster', 'TbUtils', '$location'];
+    ProjectFormController.$inject = [ '$state', '$stateParams', 'projects', 'sections', 'majors', 'toaster', 'TbUtils', '$location'];
 
-    function ProjectFormController ($stateParams, projects, sections, majors, toaster, TbUtils, $location) {
+    function ProjectFormController ($state, $stateParams, projects, sections, majors, toaster, TbUtils, $location) {
         var vm = this;
+
+        vm.edit = $state.current.name.includes('edit');
+        vm.formLegend = vm.edit ? "Editar Proyecto" : "Nuevo Proyecto";
 
         vm.sections = [];
         vm.majors = [];
         vm.project = setProject();
-        
+
+        console.log(vm.project);
         vm.submitProject = submitProject;
         vm.MajorsCheckboxClicked = MajorsCheckboxClicked;
         vm.SectionsCheckboxClicked = SectionsCheckboxClicked;
+
+        var editId = vm.edit ? vm.project.Id : -1;
+        vm.project.MajorIds = [];
+        vm.project.SectionId = 0;
         
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
@@ -37,8 +45,38 @@
         }
         
         function submitProject() {
+            if (vm.edit) {
+                removeProjectNonAPIProperties();
+                updateProject();
+            }
+            else
+                postNewProject();
+        }
+
+        function removeProjectNonAPIProperties () {
+            delete vm.project.$$hashKey;
+            delete vm.project.Id;
+            delete vm.project.IsDeleted;
+        }
+
+        function updateProject () {
+            console.log(vm.project);
+            projects.updateProject(editId, vm.project, 
+                updateSuccess, updateFailure);
+        }
+
+        function updateSuccess () {
+            $location.path('/proyectos');
+        }
+
+        function updateFailure () {
+            console.log("Failure");
+        }
+
+        function postNewProject () {
             if(validateMajorsSectionStatus())
-                projects.postProject(vm.project, submitProjectSuccess, submitProjectFail);
+                projects.postProject(vm.project, 
+                    submitProjectSuccess, submitProjectFail);
         }
         
         function MajorsCheckboxClicked (inputValue, id) {
