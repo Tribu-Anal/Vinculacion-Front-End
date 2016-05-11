@@ -14,6 +14,7 @@
            getProjects: getProjects,
            getProject: getProject,
            postProject: postProject,
+           updateProject: updateProject,
            deleteProject: deleteProject
        };
        
@@ -30,9 +31,13 @@
 	   }
         
        function postProject(projectData, successCallback, errorCallback) {
-           console.log(JSON.stringify(projectData));
           $http.post(url, JSON.stringify(projectData)).then(successCallback)
                                                       .catch(errorCallback);
+       }
+
+       function updateProject (projectId, data, successCallback, errorCallback) {
+       		$http.put(url + "/" + projectId, data)
+	   			.then(successCallback, errorCallback);
        }
 
        function deleteProject (projectId, successCallback, errorCallback) {
