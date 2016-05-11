@@ -21,7 +21,7 @@
             SectionId: 0,
             BenificiariesAlias: '',
             BenificiariesQuantity: 0
-        }
+        };
         
         vm.submitProject = submitProject;
         vm.MajorsCheckboxClicked = MajorsCheckboxClicked;
