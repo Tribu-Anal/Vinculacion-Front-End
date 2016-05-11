@@ -75,12 +75,12 @@
             <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
             <textarea ng-model="vm.project.Description" class="message" name="projectDescription" id="cd-textarea" required></textarea>
             <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectDescription.$error.required">
-                * Porfavor ingresa un descripcion para el proyecto
+                * Porfavor ingresa una descripcion para el proyecto
             </p>
         </div>
 
         <div>
-            <input type="submit" value="Agregar Proyecto">
+            <input type="submit" value="Confirmar">
         </div>
     </fieldset>
 </form>

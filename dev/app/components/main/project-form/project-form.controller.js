@@ -3,11 +3,11 @@
 
     angular
         .module('VinculacionApp')
-        .controller('AddProjectController', AddProjectController);
+        .controller('ProjectFormController', ProjectFormController);
 
-    AddProjectController.$inject = [ '$stateParams', 'projects', 'sections', 'majors', 'toaster', 'TbUtils', '$location'];
+    ProjectFormController.$inject = [ '$stateParams', 'projects', 'sections', 'majors', 'toaster', 'TbUtils', '$location'];
 
-    function AddProjectController ($stateParams, projects, sections, majors, toaster, TbUtils, $location) {
+    function ProjectFormController ($stateParams, projects, sections, majors, toaster, TbUtils, $location) {
         var vm = this;
 
         vm.sections = [];
