@@ -5,23 +5,14 @@
         .module('VinculacionApp')
         .controller('AddProjectController', AddProjectController);
 
-    AddProjectController.$inject = ['projects', 'sections', 'majors', 'toaster', 'TbUtils', '$location'];
+    AddProjectController.$inject = [ '$stateParams', 'projects', 'sections', 'majors', 'toaster', 'TbUtils', '$location'];
 
-    function AddProjectController (projects, sections, majors, toaster, TbUtils, $location) {
+    function AddProjectController ($stateParams, projects, sections, majors, toaster, TbUtils, $location) {
         var vm = this;
-        
+
         vm.sections = [];
         vm.majors = [];
-        vm.project = {
-            ProjectId: '',
-            Name: '',
-            Description: '',
-            Cost: 0.0,
-            MajorIds: [],
-            SectionId: 0,
-            BenificiariesAlias: '',
-            BenificiariesQuantity: 0
-        };
+        vm.project = setProject();
         
         vm.submitProject = submitProject;
         vm.MajorsCheckboxClicked = MajorsCheckboxClicked;
@@ -29,6 +20,21 @@
         
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
+
+        function setProject () {
+            return $stateParams.project ? 
+                   JSON.parse($stateParams.project) : 
+                   {
+                    ProjectId: '',
+                    Name: '',
+                    Description: '',
+                    Cost: 0.0,
+                    MajorIds: [],
+                    SectionId: 0,
+                    BenificiariesAlias: '',
+                    BenificiariesQuantity: 0
+                    };
+        }
         
         function submitProject() {
             if(validateMajorsSectionStatus())
