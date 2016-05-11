@@ -9,6 +9,7 @@
 
     function ProjectsController (projects, toaster) {
         var vm = this;
+        var deleteIndex = -1;
         
         vm.projects = [];
         vm.removeProjectClicked = removeProjectClicked;
@@ -20,14 +21,14 @@
         }
 
         function removeProject (project, index) {
-            vm.projects.splice(index, 1);
+            deleteIndex = index;
 
             projects.deleteProject(project.Id, 
                 removeProjectSucces, removeProjectFail);
         }
 
         function removeProjectSucces () {
-            console.log("Success");
+            vm.projects.splice(deleteIndex, 1);
         }
 
         function removeProjectFail () {
