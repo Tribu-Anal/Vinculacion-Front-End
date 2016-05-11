@@ -22,7 +22,7 @@
         <div class="tb-checklist">
             <div class="tb-checkbox" ng-repeat="major in vm.majors">
                 <span ng-click="vm.MajorsCheckboxClicked(mdl, major.MajorId)">
-                    <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = vm.initMajorCheckbox(major.MajorId)" ng-model="mdl">
+                    <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = vm.edit && vm.initMajorCheckbox(major.MajorId)" ng-model="mdl">
                     <label ng-click="mdl = !mdl">{{major.Name}}</label>
                 </span>
             </div>
@@ -45,7 +45,7 @@
         <div class="tb-checklist">
             <div class="tb-checkbox" ng-repeat="section in vm.sections">
                 <span ng-click="vm.SectionsCheckboxClicked(mdl, section.Id)">
-                    <input type="checkbox" id="sectionBox{{section.Id}}" name="projectSection" value="{{section.Id}}" ng-init="mdl = section.Id === vm.project.SectionId" ng-model="mdl">
+                    <input type="checkbox" id="sectionBox{{section.Id}}" name="projectSection" value="{{section.Id}}" ng-init="mdl = vm.edit && section.Id === vm.project.SectionId" ng-model="mdl">
                     <label ng-click="mdl = !mdl">{{section.Class.Name}}</label>
                 </span>
             </div>
@@ -57,7 +57,7 @@
 
     <div>
         <label class="cd-label" for="cd-name">Beneficiario</label>
-        <input ng-model="vm.project.BenificiariesAlias" class="user" type="text" name="projectBeneficiario" id="cd-name" required>
+        <input ng-model="vm.project.BeneficiariesAlias" class="user" type="text" name="projectBeneficiario" id="cd-name" required>
         <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectBeneficiario.$error.required">
             * Porfavor ingresa el nombre de un beneficiario.
         </p>
@@ -65,7 +65,7 @@
 
     <div>
         <label class="cd-label" for="cd-name">Cantidad de Beneficiarios</label>
-        <input ng-model="vm.project.BenificiariesQuantity" class="user" ng-pattern="/^\d+$/" type="number" name="projectBeneficiarieQuantity" id="cd-name" min="0" required>
+        <input ng-model="vm.project.BeneficiariesQuantity" class="user" ng-pattern="/^\d+$/" type="number" name="projectBeneficiarieQuantity" id="cd-name" min="0" required>
         <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && (projectForm.projectBeneficiarieQuantity.$error.required || projectForm.projectBeneficiarieQuantity.$invalid)">
             * Asigna la cantidad de beneficiarios.
         </p>

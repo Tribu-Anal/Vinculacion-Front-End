@@ -124,7 +124,6 @@
         
         function getSectionsSuccess(response) {
             TbUtils.fillList(response, vm.sections);
-            console.log(vm.sections[0]);
         };
         
         function getMajorsFail(response) {
