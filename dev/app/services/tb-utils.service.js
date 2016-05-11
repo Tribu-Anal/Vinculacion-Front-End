@@ -16,12 +16,9 @@
         return service;
         
         function fillList(response, list) {
-            console.log(response);
             for(let obj in response.data) {
                 list.push(response.data[obj]);
             }
-            
-            console.log(list);
         };
         
         function displayNotification(type, title, body) {
