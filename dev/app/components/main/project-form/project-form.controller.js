@@ -17,14 +17,14 @@
         vm.majors = [];
         vm.project = setProject();
 
-        console.log(vm.project);
         vm.submitProject = submitProject;
         vm.MajorsCheckboxClicked = MajorsCheckboxClicked;
         vm.SectionsCheckboxClicked = SectionsCheckboxClicked;
+        vm.majorsAndStatusValid = majorsAndStatusValid;
 
         var editId = vm.edit ? vm.project.Id : -1;
-        vm.project.MajorIds = [];
-        vm.project.SectionId = 0;
+        // vm.project.MajorIds = [];
+        // vm.project.SectionId = 0;
         
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
@@ -60,7 +60,6 @@
         }
 
         function updateProject () {
-            console.log(vm.project);
             projects.updateProject(editId, vm.project, 
                 updateSuccess, updateFailure);
         }
@@ -70,13 +69,13 @@
         }
 
         function updateFailure () {
-            console.log("Failure");
+            TbUtils.displayNotification('error', 'Error', 
+                'No se pudo actualizar el proyecto.');
         }
 
         function postNewProject () {
-            if(validateMajorsSectionStatus())
-                projects.postProject(vm.project, 
-                    submitProjectSuccess, submitProjectFail);
+            projects.postProject(vm.project, 
+                submitProjectSuccess, submitProjectFail);
         }
         
         function MajorsCheckboxClicked (inputValue, id) {
@@ -105,11 +104,9 @@
             console.log(inputValue, vm.project.SectionId);
         }
         
-        function validateMajorsSectionStatus() {
-            if(vm.project.MajorIds.length > 0 && vm.project.SectionId !== 0)
-                return true;
-            
-            return false;
+        function majorsAndStatusValid() {
+            return vm.project.MajorIds.length > 0 && 
+                   vm.project.SectionId !== 0;
         }
         
         function getMajorsSuccess(response) {

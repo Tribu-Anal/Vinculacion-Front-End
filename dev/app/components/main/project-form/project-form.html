@@ -1,86 +1,85 @@
-<form name="projectForm" class="cd-form" ng-submit="projectForm.$valid && vm.submitProject()" novalidate>
-        <legend><strong>{{vm.formLegend}}</strong></legend>
-        
-        <div>
-            <label class="cd-label" for="cd-name">Nombre</label>
-            <input ng-model="vm.project.Name" class="user" type="text" name="projectName" id="cd-name" required>
-            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectName.$error.required">
-                * Porfavor ingresa un nombre
-            </p>
-        </div>
+<form name="projectForm" class="cd-form" ng-submit="projectForm.$valid && vm.majorsAndStatusValid() && vm.submitProject()" novalidate>
+    <legend><strong>{{vm.formLegend}}</strong></legend>
     
-        <div>
-            <label class="cd-label" for="cd-name">Id</label>
-            <input ng-model="vm.project.ProjectId" class="user" type="text" name="projectId" id="cd-name" required>
-            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectId.$error.required">
-                * Porfavor ingresa un Id para el proyecto
-            </p>
-        </div>
+    <div>
+        <label class="cd-label" for="cd-name">Nombre</label>
+        <input ng-model="vm.project.Name" class="user" type="text" name="projectName" id="cd-name" required>
+        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectName.$error.required">
+            * Porfavor ingresa un nombre
+        </p>
+    </div>
 
-        <div>
-            <h4><strong>Carreras Asociadas</strong></h4>            
-            <div class="tb-checklist">
-                <div class="tb-checkbox" ng-repeat="major in vm.majors">
-                    <span ng-click="vm.MajorsCheckboxClicked(mdl, major.MajorId)">
-                        <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = false" ng-model="mdl">
-                        <label ng-click="mdl = !mdl">{{major.Name}}</label>
-                    </span>
-                </div>
+    <div>
+        <label class="cd-label" for="cd-name">Id</label>
+        <input ng-model="vm.project.ProjectId" class="user" type="text" name="projectId" id="cd-name" required>
+        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectId.$error.required">
+            * Porfavor ingresa un Id para el proyecto
+        </p>
+    </div>
+
+    <div>
+        <h4><strong>Carreras Asociadas</strong></h4>            
+        <div class="tb-checklist">
+            <div class="tb-checkbox" ng-repeat="major in vm.majors">
+                <span ng-click="vm.MajorsCheckboxClicked(mdl, major.MajorId)">
+                    <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = false" ng-model="mdl">
+                    <label ng-click="mdl = !mdl">{{major.Name}}</label>
+                </span>
             </div>
-            <p class="error-message" ng-show="projectForm.$submitted && vm.project.MajorIds.length === 0">
-                * Porfavor selecciona una o mas de las carreras disponibles
-            </p>
-        </div> 
-
-        <div>
-            <label class="cd-label" for="cd-name">Costo</label>
-            <input ng-model="vm.project.Cost" class="user" type="number" name="cost" id="cd-name" min="0" required>
-            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && (projectForm.cost.$error.required || projectForm.cost.$invalid)">
-                * Asegurate de asignar un costo y que sea un valor mayor o igual a 0
-            </p>
         </div>
-    
-        <div>
-            <h4><strong>Secciones Asociadas</strong></h4>
-            <div class="tb-checklist">
-                <div class="tb-checkbox" ng-repeat="section in vm.sections">
-                    <span ng-click="vm.SectionsCheckboxClicked(mdl, section.Id)">
-                        <input type="checkbox" id="sectionBox{{section.Id}}" name="projectSection" value="{{section.Id}}" ng-init="mdl = false" ng-model="mdl">
-                        <label ng-click="mdl = !mdl">{{section.Class.Name}}</label>
-                    </span>
-                </div>
+        <p class="error-message" ng-show="projectForm.$submitted && vm.project.MajorIds.length === 0">
+            * Porfavor selecciona una o mas de las carreras disponibles
+        </p>
+    </div> 
+
+    <div>
+        <label class="cd-label" for="cd-name">Costo</label>
+        <input ng-model="vm.project.Cost" class="user" type="number" name="cost" id="cd-name" min="0" required>
+        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && (projectForm.cost.$error.required || projectForm.cost.$invalid)">
+            * Asegurate de asignar un costo y que sea un valor mayor o igual a 0
+        </p>
+    </div>
+
+    <div>
+        <h4><strong>Secciones Asociadas</strong></h4>
+        <div class="tb-checklist">
+            <div class="tb-checkbox" ng-repeat="section in vm.sections">
+                <span ng-click="vm.SectionsCheckboxClicked(mdl, section.Id)">
+                    <input type="checkbox" id="sectionBox{{section.Id}}" name="projectSection" value="{{section.Id}}" ng-init="mdl = false" ng-model="mdl">
+                    <label ng-click="mdl = !mdl">{{section.Class.Name}}</label>
+                </span>
             </div>
-            <p class="error-message" ng-show="projectForm.$submitted && vm.project.SectionId === 0">
-                * Porfavor selecciona una de las secciones disponibles
-            </p>
         </div>
-    
-        <div>
-            <label class="cd-label" for="cd-name">Beneficiario</label>
-            <input ng-model="vm.project.BenificiariesAlias" class="user" type="text" name="projectBeneficiario" id="cd-name" required>
-            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectBeneficiario.$error.required">
-                * Porfavor ingresa el nombre de un beneficiario.
-            </p>
-        </div>
-    
-        <div>
-            <label class="cd-label" for="cd-name">Cantidad de Beneficiarios</label>
-            <input ng-model="vm.project.BenificiariesQuantity" class="user" ng-pattern="/^\d+$/" type="number" name="projectBeneficiarieQuantity" id="cd-name" min="0" required>
-            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && (projectForm.projectBeneficiarieQuantity.$error.required || projectForm.projectBeneficiarieQuantity.$invalid)">
-                * Asigna la cantidad de beneficiarios.
-            </p>
-        </div>
+        <p class="error-message" ng-show="projectForm.$submitted && vm.project.SectionId === 0">
+            * Porfavor selecciona una de las secciones disponibles
+        </p>
+    </div>
 
-        <div class="icon">
-            <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
-            <textarea ng-model="vm.project.Description" class="message" name="projectDescription" id="cd-textarea" required></textarea>
-            <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectDescription.$error.required">
-                * Porfavor ingresa una descripcion para el proyecto
-            </p>
-        </div>
+    <div>
+        <label class="cd-label" for="cd-name">Beneficiario</label>
+        <input ng-model="vm.project.BenificiariesAlias" class="user" type="text" name="projectBeneficiario" id="cd-name" required>
+        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectBeneficiario.$error.required">
+            * Porfavor ingresa el nombre de un beneficiario.
+        </p>
+    </div>
 
-        <div>
-            <input type="submit" value="Confirmar">
-        </div>
-    </fieldset>
+    <div>
+        <label class="cd-label" for="cd-name">Cantidad de Beneficiarios</label>
+        <input ng-model="vm.project.BenificiariesQuantity" class="user" ng-pattern="/^\d+$/" type="number" name="projectBeneficiarieQuantity" id="cd-name" min="0" required>
+        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && (projectForm.projectBeneficiarieQuantity.$error.required || projectForm.projectBeneficiarieQuantity.$invalid)">
+            * Asigna la cantidad de beneficiarios.
+        </p>
+    </div>
+
+    <div class="icon">
+        <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
+        <textarea ng-model="vm.project.Description" class="message" name="projectDescription" id="cd-textarea" required></textarea>
+        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectDescription.$error.required">
+            * Porfavor ingresa una descripcion para el proyecto
+        </p>
+    </div>
+
+    <div>
+        <input type="submit" value="Confirmar">
+    </div>
 </form>
