@@ -47,6 +47,12 @@
 				controller: 'AddProjectController as vm'
 			})
 
+			.state('dashboard.editproject', {
+				url: '/editar-proyecto/{project}',
+				templateUrl: templateDir + 'main/add-project/add-project.html',
+				controller: 'AddProjectController as vm'
+			})
+
 			.state('dashboard.project', {
 				url: '/proyectos/{projectId}',
 				templateUrl: templateDir + 'main/project/project.html',
