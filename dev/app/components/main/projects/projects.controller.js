@@ -5,14 +5,15 @@
         .module('VinculacionApp')
         .controller('ProjectsController', ProjectsController);
 
-    ProjectsController.$inject = ['projects', 'TbUtils'];
+    ProjectsController.$inject = ['projects', 'TbUtils', '$state'];
 
-    function ProjectsController (projects, TbUtils) {
+    function ProjectsController (projects, TbUtils, $state) {
         var vm = this;
         var deleteIndex = -1;
         
         vm.projects = [];
         vm.removeProjectClicked = removeProjectClicked;
+        vm.goToEdit = goToEdit;
 
         function removeProjectClicked (project, index) {
             if (confirm("Esta seguro de borrar el proyecto: " + 
@@ -40,11 +41,14 @@
                 }
             );
         }
+
+        function goToEdit (project) {
+            $state.go('dashboard.editproject', { project: JSON.stringify(project) });
+        }
         
         projects.getProjects(getProjectsSuccess, getProjectsFail);
         
         function getProjectsSuccess(response) {
-            console.log(response);
             TbUtils.fillList(response, vm.projects);
         };
         
