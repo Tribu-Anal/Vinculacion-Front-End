@@ -11,7 +11,7 @@
 		vm.recentProjects = [];
 
 		function getRecentProjects() {
-		};
+		}
 	}
 
 })();

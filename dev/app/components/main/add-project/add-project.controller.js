@@ -5,9 +5,12 @@
         .module('VinculacionApp')
         .controller('AddProjectController', AddProjectController);
 
-    AddProjectController.$inject = ['projects', 'sections', 'majors', 'toaster', 'TbUtils', '$location'];
+    AddProjectController.$inject = ['projects', 'sections', 
+                                    'majors', 'toaster', 
+                                    'TbUtils', '$location'];
 
-    function AddProjectController (projects, sections, majors, toaster, TbUtils, $location) {
+    function AddProjectController (projects, sections, majors, 
+                                   toaster, TbUtils, $location) {
         var vm = this;
         
         vm.sections = [];
@@ -70,30 +73,31 @@
         
         function getMajorsSuccess(response) {
             TbUtils.fillList(response, vm.majors);
-        };
+        }
         
         function getSectionsSuccess(response) {
             TbUtils.fillList(response, vm.sections);
-        };
+        }
         
         function getMajorsFail(response) {
             console.log(response);
             TbUtils.displayNotification('error', 'Error',
                                 'Hay un problema con el servidor. No se ha podido obtener las carreras disponibles.');
-        };
+        }
         
         function getSectionsFail(response) {
             console.log(response);
             TbUtils.displayNotification('error', 'Error',
                                 'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.');
-        };
+        }
         
         function submitProjectSuccess() {
             $location.path('/proyectos');
-        };
+        }
         
         function submitProjectFail() {
-            TbUtils.displayNotification('error', 'Error', 'No se ha podido crear el proyecto.');
-        };
+            TbUtils.displayNotification('error', 'Error', 
+                'No se ha podido crear el proyecto.');
+        }
     }
 })();

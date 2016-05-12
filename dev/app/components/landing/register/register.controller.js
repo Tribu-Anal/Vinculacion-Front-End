@@ -18,7 +18,7 @@
             Name: "",
             Campus: "SPS",
             MajorId: ""
-        }
+        };
         
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         
@@ -32,11 +32,11 @@
         function registerStudentSuccess(response) {
             TbUtils.displayNotification('success', 'Revisa tu Correo',
                                         'Se le ha enviado un correo de confirmacion. Porfavor revisar.');
-        };
+        }
         
         function registerStudentFail() {
             TbUtils.displayNotification('error', 'Error', 'Se ha producido un error! Lamentamos los inconvenientes.');
-        };
+        }
         
         function validate ($event) { 
             let regex = new RegExp("[a-z]|[0-9]|[A-Z]");
@@ -47,12 +47,12 @@
                 $event.preventDefault();
                 return false;
             }  
-        };
+        }
         
         function getMajorsSuccess(response) {
             TbUtils.fillList(response, vm.majors);
             vm.student.MajorId = vm.majors[0].MajorId;
-        };
+        }
         
         function getMajorsFail(response) {
             console.log(response);

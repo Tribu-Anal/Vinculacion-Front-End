@@ -29,7 +29,7 @@
                 authentication.SetCredentials(response.data);
                 $location.path('/home');
             }
-        };
+        }
         
         function LoginFail(response) {
             console.log(response);
@@ -56,6 +56,6 @@
                         }
                 );
             }
-        };
+        }
     }
 })();
