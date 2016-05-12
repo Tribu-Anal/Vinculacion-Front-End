@@ -20,6 +20,7 @@
         
         vm.projects = [];
         vm.projectsLoading = true;
+        vm.deletingProject = [];
         vm.preventGeneralLoading = preventGeneralLoading;
         vm.removeProjectClicked = removeProjectClicked;
 
@@ -30,7 +31,7 @@
         function removeProjectClicked (project, index) {
             deleteProject = project;
             deleteIndex = index;
-
+            
             ModalService.showModal(confirmDeleteModal)
               .then(modalResolve);
         }
@@ -46,17 +47,22 @@
         }
 
         function removeProject () {
+            vm.deletingProject[deleteIndex] = true;
+
             projects.deleteProject(deleteProject.Id, 
                 removeProjectSucces, removeProjectFail);
         }
 
         function removeProjectSucces () {
             vm.projects.splice(deleteIndex, 1);
+            vm.deletingProject.splice(deleteIndex, 1);
         }
 
         function removeProjectFail () {
             TbUtils.displayNotification('error', 'Error', 
               'No se pudo borrar el proyecto.');
+
+            vm.deletingProject[deleteIndex] = false;
         }
 
         projects.getProjects(getProjectsSuccess, getProjectsFail);
@@ -64,6 +70,8 @@
         function getProjectsSuccess(response) {
             console.log(response);
             TbUtils.fillList(response, vm.projects);
+            TbUtils.initArrayToValue(vm.deletingProject, false, 
+                                     vm.projects.length);
 
             vm.projectsLoading = false;
         }

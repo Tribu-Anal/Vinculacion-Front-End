@@ -14,6 +14,7 @@
 				<span>{{prj.Description}}</span>
 			</div>
 		</div>
+		<tb-loading ng-show="vm.deletingProject[$index]"></tb-loading>
 	</div>
 </div>
 <tb-loading class="main-loader" ng-show="vm.projectsLoading"></tb-loading>
