@@ -1,4 +1,4 @@
-(function(){
+(function () {
     "use strict";
 
     angular
@@ -13,11 +13,13 @@
         vm.username = "";
         vm.password = "";
         vm.login = login;
+        vm.loading = false;
 
         authentication.ClearCredentials();
 
         function login() {
-            console.log("Login");
+            vm.loading = true;
+
             authentication.Login( vm.username, vm.password, LoginSuccess, LoginFail);
         }
         
@@ -27,6 +29,7 @@
                 authentication.SetCredentials(response.data);
                 $location.path('/home');
             }
+            vm.loading = false;
         }
         
         function LoginFail(response) {
@@ -54,6 +57,7 @@
                         }
                 );
             }
+            vm.loading = false;
         }
     }
 })();
