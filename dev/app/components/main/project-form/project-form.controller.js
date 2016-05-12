@@ -24,8 +24,6 @@
         vm.initMajorCheckbox = initMajorCheckbox;
 
         var editId = vm.edit ? vm.project.Id : -1;
-        vm.project.MajorIds = [ "I - 01", "I - 02" ];
-        vm.project.SectionId = 1;
         
         majors.getMajors(getMajorsSuccess, getMajorsFail);
         sections.getSections(getSectionsSuccess, getSectionsFail);
@@ -40,8 +38,8 @@
                     Cost: 0.0,
                     MajorIds: [],
                     SectionId: 0,
-                    BenificiariesAlias: '',
-                    BenificiariesQuantity: 0
+                    BeneficiariesAlias: '',
+                    BeneficiariesQuantity: 0
                     };
         }
         
