@@ -29,7 +29,8 @@
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "LOG OUT", ref: "landing", 
-		  	icon: "glyphicon glyphicon-log-out", active: false }
+		  	icon: "glyphicon glyphicon-log-out", active: false,
+		  	clicked: function () {} }
 		];
 
 		$rootScope.$on('$stateChangeStart', changeActiveItem);
