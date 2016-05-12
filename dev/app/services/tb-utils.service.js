@@ -5,12 +5,13 @@
 		.module('VinculacionApp')
 		.factory('TbUtils', TbUtils);
     
-    TbUtils.$inject = ['toaster'];
+    TbUtils.$inject = ['toaster', '$rootScope'];
 
-	function TbUtils (toaster) {        
+	function TbUtils (toaster, $rootScope) {        
         var service = {
             fillList: fillList,
-            displayNotification: displayNotification
+            displayNotification: displayNotification,
+            preventGeneralLoading: preventGeneralLoading
         };
         
         return service;
@@ -33,5 +34,10 @@
                 }
             );
         }
+
+        function preventGeneralLoading () {
+            $rootScope.generalLoading = false;
+        }
+
 	}
 })();
