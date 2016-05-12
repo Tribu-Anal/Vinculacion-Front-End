@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
 
     angular
@@ -17,15 +17,24 @@
 
         let stateUrl = "";
         
-        // keep user logged in after page refresh
-        $rootScope.globals = $cookieStore.get('globals') || {};
-        if ($rootScope.globals.token) {
-            $http.defaults.headers.common['Authorization'] = 
-            $rootScope.globals.token; // jshint ignore:line
+        getBasicAuthentication();
+
+        $rootScope.$on('$locationChangeStart', locationChangeStart);
+
+        $rootScope.$on('$stateChangeStart', stateChangeStart);
+
+        $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
+
+        function getBasicAuthentication () {
+            $rootScope.globals = $cookieStore.get('globals') || {};
+
+            if ($rootScope.globals.token) {
+                $http.defaults.headers.common['Authorization'] = 
+                $rootScope.globals.token;
+            }
         }
 
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // redirect to login page if not logged in
+        function locationChangeStart (event, next, current) {
             if ($location.path() !== '/' && !$rootScope.globals.token) {
                 $location.path('/');
             }
@@ -33,11 +42,7 @@
             if($location.path() === '/' && $rootScope.globals.token) {
                 $location.path('/home');
             }
-        });
-
-        $rootScope.$on('$stateChangeStart', stateChangeStart);
-
-        $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
+        }
 
         function stateChangeStart (event, toState) {
             $rootScope.stateLoading = true;
