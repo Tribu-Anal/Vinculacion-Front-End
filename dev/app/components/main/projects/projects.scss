@@ -39,13 +39,16 @@
             background: transparentize(#111, 0.8);
             width: 28%;
             padding: 7px;
-            color: #fff;
+            color: #ccc;
             font-size: 1.2em;
             z-index: 100;
 
             i {
                 float: right;
+
                 margin-left: 7px;
+
+                &:hover { color: #fff; }
             }
         }
 

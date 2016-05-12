@@ -25,11 +25,11 @@
         function getProjectSuccess(response) {
             console.log(response);
             vm.project = response.data;
-        };
+        }
         
         function getProjectFail() {
             TbUtils.displayNotification('error', 'Error', 'El proyecto deseado no existe.');
-        };
+        }
 
 		function getParticipants() {
 			/*

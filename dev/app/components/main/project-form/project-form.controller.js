@@ -5,9 +5,15 @@
         .module('VinculacionApp')
         .controller('ProjectFormController', ProjectFormController);
 
-    ProjectFormController.$inject = [ '$state', '$stateParams', 'projects', 'sections', 'majors', 'toaster', 'TbUtils', '$location'];
+    ProjectFormController.$inject = [ '$state', '$stateParams',
+                                      'projects', 'sections', 
+                                      'majors', 'toaster', 
+                                      'TbUtils', '$location'];
 
-    function ProjectFormController ($state, $stateParams, projects, sections, majors, toaster, TbUtils, $location) {
+    function ProjectFormController ($state, $stateParams, 
+                                    projects, sections, 
+                                    majors, toaster, 
+                                    TbUtils, $location) {
         var vm = this;
 
         vm.edit = $state.current.name.includes('edit');
@@ -118,30 +124,31 @@
         
         function getMajorsSuccess(response) {
             TbUtils.fillList(response, vm.majors);
-        };
+        }
         
         function getSectionsSuccess(response) {
             TbUtils.fillList(response, vm.sections);
-        };
+        }
         
         function getMajorsFail(response) {
             console.log(response);
             TbUtils.displayNotification('error', 'Error',
                                 'Hay un problema con el servidor. No se ha podido obtener las carreras disponibles.');
-        };
+        }
         
         function getSectionsFail(response) {
             console.log(response);
             TbUtils.displayNotification('error', 'Error',
                                 'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.');
-        };
+        }
         
         function submitProjectSuccess() {
             $location.path('/proyectos');
-        };
+        }
         
         function submitProjectFail() {
-            TbUtils.displayNotification('error', 'Error', 'No se ha podido crear el proyecto.');
-        };
+            TbUtils.displayNotification('error', 'Error', 
+                'No se ha podido crear el proyecto.');
+        }
     }
 })();
