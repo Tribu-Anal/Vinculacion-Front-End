@@ -13,6 +13,7 @@
         $rootScope.links = [];
         $rootScope.stateLoading = false;
         $rootScope.hideLoading = true;
+        $rootScope.generalLoading = true;
         
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
