@@ -1,12 +1,19 @@
 <div class="gallery">
-	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}"
-	ui-sref="dashboard.project({projectId: prj.Id})">
-		<div class="img-area">
-			<img src="img/logo.png" alt="Project Image">
-		</div>
-		<div class="project-info">
-			<h4>{{prj.Name}}</h4>
-			<span>{{prj.Description}}</span>
+	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}">
+		<span class="icon-group">
+			<i class="glyphicon glyphicon-remove" 
+			   ng-click="vm.removeProjectClicked(prj, $index)">
+			</i>
+		</span>
+		<div id="body" ui-sref="dashboard.project({projectId: prj.Id})">
+			<div class="img-area">
+				<img src="img/logo.png" alt="Project Image">
+			</div>
+			<div class="project-info">
+				<h4>{{prj.Name}}</h4>
+				<span>{{prj.Description}}</span>
+			</div>
 		</div>
 	</div>
 </div>
+<tb-round-btn ui-sref="dashboard.addproject">+</tb-round-btn>

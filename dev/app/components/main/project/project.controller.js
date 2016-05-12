@@ -5,9 +5,9 @@
 		.module('VinculacionApp')
 		.controller('ProjectController', ProjectController);
 
-	ProjectController.$inject = ['$stateParams', 'projects', 'toaster'];
+	ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils'];
 
-	function ProjectController($stateParams, projects, toaster) {
+	function ProjectController($stateParams, projects, TbUtils) {
 		var vm = this;
 
 		vm.project = {};
@@ -20,19 +20,16 @@
 		};
 		vm.editHours = editHours;
 
-		projects.getProject($stateParams.projectId,
-			function(response) {
-				console.log(response);
-				vm.project = response.data;
-			},
-			function(response) {
-				toaster.pop({
-					type: 'error',
-					title: 'Error',
-					body: 'El proyecto deseado no existe.'
-				});
-			}
-		);
+		projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
+        
+        function getProjectSuccess(response) {
+            console.log(response);
+            vm.project = response.data;
+        };
+        
+        function getProjectFail() {
+            TbUtils.displayNotification('error', 'Error', 'El proyecto deseado no existe.');
+        };
 
 		function getParticipants() {
 			/*

@@ -21,27 +21,27 @@
                 <label>Registrar Usuario</label>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-envelope"></span>
-                <input name="correo" type="email" placeholder="Correo Electr&oacute;nico" ng-model="vm.email" 
+                <input name="correo" type="email" placeholder="Correo Electr&oacute;nico" ng-model="vm.student.Email" 
                        ng-pattern='/@unitec.edu$/' required/>
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-sort-numeric-desc"></span>
-                <input name="accountId" type="number" placeholder="N&uacute;mero de Cuenta" ng-model="vm.accountId" required>
+                <input name="accountId" type="number" placeholder="N&uacute;mero de Cuenta" ng-model="vm.student.AccountId" required>
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-user register"></span>
-                <input name="nombre" type="text" placeholder="Nombre Completo" ng-model="vm.name" required>
+                <input name="nombre" type="text" placeholder="Nombre Completo" ng-model="vm.student.Name" required>
                 </div>
                 <div class="campus">
                     <label>Campus</label>
-                    <select class="form-control" ng-model="vm.campus">
+                    <select class="form-control" ng-model="vm.student.Campus">
                         <option>SPS</option>
                         <option>TGU</option>
                     </select>
                 </div>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-lock pass"></span>
-                <input id="password" name="password" type="password" placeholder="Clave" ng-model="vm.password" 
+                <input id="password" name="password" type="password" placeholder="Clave" ng-model="vm.student.Password" 
                         ng-minlength="8" ng-keypress="vm.validate($event)" required/>
                 </div>
                 <div class="inner-addon left-addon">
@@ -50,8 +50,8 @@
                 </div>
                 <div class="carrera">
                     <label>Carrera</label>
-                    <select class="form-control" ng-model="vm.career">
-                        <option value="I - 01 (Ing. en Sistemas Computacionales)">I - 01 (Ing. Sistemas Computacionales)</option>
+                    <select class="form-control" ng-model="vm.student.MajorId">
+                        <option ng-repeat="major in vm.majors" value="{{major.MajorId}}">{{major.Name}}</option>
                     </select>
                 </div>
                   <button id="registrar" type="submit">Registrar</button>

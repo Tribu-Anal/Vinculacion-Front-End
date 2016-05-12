@@ -1,0 +1,29 @@
+tb-round-btn 
+{
+    $dims: 70px;
+    $bg: #9ad3de;
+    $fnt-size: 3.3em;
+    $shadow-color: #111;
+    $shadow-spread: 10px;
+    $shadow-hover-spread: $shadow-spread+20px;
+
+    display: flex;
+    position: fixed;
+    background: $bg;
+    border-radius: 50%;
+    width: $dims;
+    height: $dims;
+    text-align: center;
+    justify-content: center;
+    font-size: $fnt-size;
+    left: 90%;
+    top: 86%;
+    z-index: 10000;
+    cursor: pointer;
+    box-shadow: 0 0 $shadow-spread $shadow-color;
+
+    &:hover 
+    {
+        box-shadow: 0 0 $shadow-hover-spread $shadow-color;
+    }
+}

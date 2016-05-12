@@ -3,23 +3,41 @@
 
 	angular
 		.module('VinculacionApp')
-		.service('projects', projects);
+		.factory('projects', projects);
 
 	projects.$inject = ['$http'];
 
 	function projects ($http) {
 	   var url = 'http://fiasps.unitec.edu:8085/api/Projects';
-	   
-	   this.getProjects = getProjects;
-	   this.getProject = getProject;
+
+	   var service = {
+           getProjects: getProjects,
+           getProject: getProject,
+           postProject: postProject,
+           deleteProject: deleteProject
+       };
+       
+       return service;
 
 	   function getProjects (successCallback, errorCallback) {
-	        $http.get(url).then(successCallback, errorCallback);
-	   }
+	        $http.get(url).then(successCallback)
+                          .catch(errorCallback);
+	   };
 
 	   function getProject (projectId, successCallback, errorCallback) {
-	   		$http.get(url + "/" + projectId).then(successCallback, errorCallback);
+	   		$http.get(url + "/" + projectId).then(successCallback)
+                                            .catch(errorCallback);
 	   }
-	   
+        
+       function postProject(projectData, successCallback, errorCallback) {
+           console.log(JSON.stringify(projectData));
+          $http.post(url, JSON.stringify(projectData)).then(successCallback)
+                                                      .catch(errorCallback);
+       }
+
+       function deleteProject (projectId, successCallback, errorCallback) {
+	   		$http.delete(url + "/" + projectId)
+	   			.then(successCallback, errorCallback);
+	   }
 	}
 })();
