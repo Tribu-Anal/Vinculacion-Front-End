@@ -5,7 +5,7 @@
 			   ng-click="vm.removeProjectClicked(prj, $index)">
 			</i>
 		</span>
-		<div id="body" ui-sref="dashboard.project({projectId: prj.Id})">
+		<div id="body" ui-sref="dashboard.project({projectId: prj.Id})" ng-click="vm.preventGeneralLoading()">
 			<div class="img-area">
 				<img src="img/logo.png" alt="Project Image">
 			</div>
@@ -16,4 +16,4 @@
 		</div>
 	</div>
 </div>
-<tb-round-btn ui-sref="dashboard.addproject">+</tb-round-btn>
+<tb-round-btn ui-sref="dashboard.addproject" ng-click="vm.preventGeneralLoading()">+</tb-round-btn>

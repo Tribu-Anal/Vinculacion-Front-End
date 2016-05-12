@@ -12,7 +12,13 @@
         var deleteIndex = -1;
         
         vm.projects = [];
+        vm.projectsLoading = true;
+        vm.preventGeneralLoading = preventGeneralLoading;
         vm.removeProjectClicked = removeProjectClicked;
+
+        function preventGeneralLoading () {
+            TbUtils.preventGeneralLoading();
+        }
 
         function removeProjectClicked (project, index) {
             if (confirm("Esta seguro de borrar el proyecto: " + 
@@ -40,16 +46,18 @@
                 }
             );
         }
-        
+
         projects.getProjects(getProjectsSuccess, getProjectsFail);
         
         function getProjectsSuccess(response) {
             console.log(response);
             TbUtils.fillList(response, vm.projects);
+            vm.projectsLoading = false;
         };
         
         function getProjectsFail() {
             TbUtils.displayNotification('error', 'Error', 'No se ha podido obtener los proyectos deseados.');
+            vm.projectsLoading = false;
         };
     }
 })();

@@ -1,3 +1,6 @@
+body{
+    overflow-y: hidden;
+}
 body tb-loading:first-of-type {
         background: #213250;
         z-index: 10000000000000;
@@ -17,7 +20,7 @@ body tb-loading:first-of-type {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
