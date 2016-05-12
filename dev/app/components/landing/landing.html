@@ -1,6 +1,7 @@
-<div class="login-page">
-      <img class = "img-responsive" src="img/logo.png" />
-      <div class="form">
+<!-- <tb-loading ng-show="stateLoading"></tb-loading> -->
+<div class="login-page" ng-hide="!hideLoading">
+      <img class = "img-responsive logo" src="img/logo.png" />
+      <div class="form" ng-hide="vm.loading">
         <form id="login-form" class="login-form" name="registerLogin" ng-submit="registerLogin.$valid && vm.login()" novalidate>
             <div class="inner-addon left-addon">
             <span class="fa fa-user"></span>
@@ -59,4 +60,5 @@
         </div>
 
       </div>
+      
 </div>

@@ -2,12 +2,9 @@
 
 <tb-headerbar expand="mvm.expand"></tb-headerbar>
 
-<div ng-show="stateLoading" class="dynamic-area loading">
-	<img src="img/logo.png" alt="loading">
-</div>
+<tb-loading class="dynamic-area loading" ng-show="stateLoading"></tb-loading>
 
 <div class="dynamic-area" 
-	 ng-class="mvm.expand ? 'expanded' : 'shrunk'" 
-	 ng-hide="!hideLoading" 
+	 ng-class="mvm.expand ? 'expanded' : 'shrunk'"
 	 ng-cloak ui-view>
 </div>

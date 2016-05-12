@@ -36,16 +36,15 @@
 
         $rootScope.$on('$viewContentLoading',function(event, viewConfig) {
             $rootScope.stateLoading = true;
-            $rootScope.hideLoading = false;
         });
 
         $rootScope.$on('$viewContentLoaded',function(event) {
-            $timeout(function(){ $rootScope.stateLoading = false; }, 100);
-            $rootScope.hideLoading = true;
+            $timeout(function(){ $rootScope.stateLoading = false; $rootScope.generalLoading = true; }, 100);
         });
 
         function changeViewStyles (event, toState) {
-            switch(toState.url) {
+            $timeout(function(){
+                switch(toState.url) {
                 case "/home":
                     $rootScope.viewTitle = "Vinculacion | Home";
                     $rootScope.viewStyles = "main home";
@@ -67,6 +66,7 @@
                     $rootScope.viewStyles = "landing";
                 break;
             }
+        }, 100);
         }
 
     }

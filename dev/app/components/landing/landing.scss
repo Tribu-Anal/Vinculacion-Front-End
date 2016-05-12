@@ -1,3 +1,7 @@
+body tb-loading:first-of-type {
+        background: #213250;
+        z-index: 10000000000000;
+}
 .landing
 {
     @import url(https://fonts.googleapis.com/css?family=Roboto:300);
@@ -10,9 +14,17 @@
     background:      -o-linear-gradient(right, #213250, #213250);
     background:         linear-gradient(to left, #213250, #213250);
 
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
+    tb-loading{
+        background: #213250;
+        z-index: 10000000000000;
+    }
     .login-page
     {
         width: 360px;

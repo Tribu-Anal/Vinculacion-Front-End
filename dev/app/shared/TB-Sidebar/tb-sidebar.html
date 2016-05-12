@@ -6,7 +6,7 @@
 		<li ng-repeat="item in navItems" 
 			ui-sref="{{item.ref}}"
 			ng-class="{ 'active': item.active }" 
-			ng-click="vm.navItemClicked($index)">
+			ng-click="vm.navItemClicked($index, item.clicked)">
 			<i class="{{item.icon}}"></i>
 			<span>{{item.title}}</span>
 		</li>
