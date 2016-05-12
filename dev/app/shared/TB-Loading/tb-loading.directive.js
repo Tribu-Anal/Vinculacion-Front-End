@@ -4,17 +4,15 @@
     angular
         .module('VinculacionApp')
         .directive('tbLoading', tbLoading);
+        tbLoading.$inject = ['$rootScope', '$timeout', '$compile', '$templateRequest'];
 
-    function tbLoading() {
+    function tbLoading($rootScope, $timeout, $compile, $templateRequest) {
         var directive = 
         {
             restrict: 'E',
-            scope: {
-            },
-            templateUrl: 'templates/shared/TB-Loading/tb-loading.html'        
+            templateUrl: 'templates/shared/TB-Loading/tb-loading.html' 
         };
 
         return directive;
     }
-
 })();
