@@ -13,13 +13,11 @@
         vm.username = "";
         vm.password = "";
         vm.login = login;
-        vm.loading = false;
 
         authentication.ClearCredentials();
 
         function login() {
             console.log("Login");
-            vm.loading = true;
             authentication.Login( vm.username, vm.password, LoginSuccess, LoginFail);
         }
         
