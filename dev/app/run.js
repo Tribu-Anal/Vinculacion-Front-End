@@ -14,6 +14,8 @@
         $rootScope.stateLoading = false;
         $rootScope.hideLoading = true;
         $rootScope.generalLoading = true;
+
+        let stateUrl = "";
         
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
@@ -33,19 +35,25 @@
             }
         });
 
-        $rootScope.$on('$stateChangeStart', changeViewStyles);
+        $rootScope.$on('$stateChangeStart', stateChangeStart);
 
-        $rootScope.$on('$viewContentLoading',function(event, viewConfig) {
+        $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
+
+        function stateChangeStart (event, toState) {
             $rootScope.stateLoading = true;
-        });
+            stateUrl = toState.url;
+        }
 
-        $rootScope.$on('$viewContentLoaded',function(event) {
-            $timeout(function(){ $rootScope.stateLoading = false; $rootScope.generalLoading = true; }, 100);
-        });
+        function stateChangeSuccess (event) {
+            $timeout(function(){ 
+                $timeout(changeViewStyles, $rootScope.generalLoading ? 1 : 100);
+                $rootScope.stateLoading = false; 
+                $rootScope.generalLoading = true; 
+            }, $rootScope.generalLoading ? 500 : 100);
+        }
 
-        function changeViewStyles (event, toState) {
-            $timeout(function(){
-                switch(toState.url) {
+        function changeViewStyles () {
+            switch(stateUrl) {
                 case "/home":
                     $rootScope.viewTitle = "Vinculacion | Home";
                     $rootScope.viewStyles = "main home";
@@ -71,7 +79,6 @@
                     $rootScope.viewStyles = "landing";
                 break;
             }
-        }, 100);
         }
 
     }
