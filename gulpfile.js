@@ -99,7 +99,6 @@ gulp.task ( 'app-js', () => {
 			rules: {
 				'strict': 1,
 				'comma-dangle': 2,
-				'no-unreachable': 2,
 				'vars-on-top': 1,
 				'block-spacing': 1,
 				'comma-spacing': 1,
