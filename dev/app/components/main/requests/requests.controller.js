@@ -56,7 +56,7 @@
 
 				vm.requestsTable.body.push(newTableElement);
 			}
-        };
+        }
         
         function getRequestFail(response) {
             console.log(response);

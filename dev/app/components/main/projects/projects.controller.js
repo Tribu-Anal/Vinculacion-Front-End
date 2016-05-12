@@ -5,25 +5,44 @@
         .module('VinculacionApp')
         .controller('ProjectsController', ProjectsController);
 
-    ProjectsController.$inject = ['projects', 'TbUtils'];
+    ProjectsController.$inject = ['projects', 'TbUtils', 'ModalService'];
 
-    function ProjectsController (projects, TbUtils) {
+    function ProjectsController (projects, TbUtils, ModalService) {
         var vm = this;
+
         var deleteIndex = -1;
+        var deleteProject = {};
+        var confirmDeleteModal = {
+          templateUrl: 'templates/components/main/projects/' +
+                       'confirm-delete/confirm-delete.html',
+          controller: 'ConfirmDeleteController'
+        };
         
         vm.projects = [];
         vm.removeProjectClicked = removeProjectClicked;
 
-        function removeProjectClicked (project, index) {
-            if (confirm("Esta seguro de borrar el proyecto: " + 
-                project.Name + "?"))
-            removeProject(project, index);
-        }
+        projects.getProjects(getProjectsSuccess, getProjectsFail);
 
-        function removeProject (project, index) {
+        function removeProjectClicked (project, index) {
+            deleteProject = project;
             deleteIndex = index;
 
-            projects.deleteProject(project.Id, 
+            ModalService.showModal(confirmDeleteModal)
+              .then(modalResolve);
+        }
+
+        function modalResolve (modal) {
+          modal.element.modal();
+          modal.close.then(modalClose);
+        }
+
+        function modalClose (result) {
+            if (result === true) 
+              removeProject();
+        }
+
+        function removeProject () {
+            projects.deleteProject(deleteProject.Id, 
                 removeProjectSucces, removeProjectFail);
         }
 
@@ -32,24 +51,18 @@
         }
 
         function removeProjectFail () {
-            toaster.pop(
-                {
-                    type: 'error', 
-                    title: 'Error', 
-                    body: 'No se pudo borrar el proyecto.'
-                }
-            );
+            TbUtils.displayNotification('error', 'Error', 
+              'No se pudo borrar el proyecto.');
         }
-        
-        projects.getProjects(getProjectsSuccess, getProjectsFail);
         
         function getProjectsSuccess(response) {
             console.log(response);
             TbUtils.fillList(response, vm.projects);
-        };
+        }
         
         function getProjectsFail() {
-            TbUtils.displayNotification('error', 'Error', 'No se ha podido obtener los proyectos deseados.');
-        };
+            TbUtils.displayNotification('error', 'Error', 
+              'No se ha podido obtener los proyectos deseados.');
+        }
     }
 })();
