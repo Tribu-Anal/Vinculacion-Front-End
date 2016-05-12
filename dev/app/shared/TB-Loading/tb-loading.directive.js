@@ -4,9 +4,8 @@
     angular
         .module('VinculacionApp')
         .directive('tbLoading', tbLoading);
-        tbLoading.$inject = ['$rootScope', '$timeout', '$compile', '$templateRequest'];
 
-    function tbLoading($rootScope, $timeout, $compile, $templateRequest) {
+    function tbLoading() {
         var directive = 
         {
             restrict: 'E',
