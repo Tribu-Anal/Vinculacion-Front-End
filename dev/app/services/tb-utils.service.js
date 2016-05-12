@@ -11,7 +11,8 @@
         var service = {
             fillList: fillList,
             displayNotification: displayNotification,
-            preventGeneralLoading: preventGeneralLoading
+            preventGeneralLoading: preventGeneralLoading,
+            initArrayToValue: initArrayToValue
         };
         
         return service;
@@ -37,6 +38,11 @@
 
         function preventGeneralLoading () {
             $rootScope.generalLoading = false;
+        }
+
+        function initArrayToValue (array, value, size) {
+            for (let i = 0; i < size; i++)
+                array.push(value);
         }
 
 	}
