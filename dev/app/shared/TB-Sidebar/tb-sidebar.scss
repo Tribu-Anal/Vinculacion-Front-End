@@ -1,30 +1,22 @@
 tb-sidebar {
 
-    $width: 230px;
+    display: flex;
+    flex-direction: column;
 
     font-size: 1.2em;
     font-weight: 500;
 
-    width: $width;
-    height: 100%;
-
     background: #283b5b;
-
-    animation: slide-in .3s linear forwards;
-
-    &.ng-hide {
-        animation: slide-out .3s linear forwards;
-    }
 
     #logo-area
     {
         display: flex;
 
-        height: 13%;
-
         background: #213250;
 
         justify-content: center;
+
+        height: 13vh;
     }
 
     #logo-area img
@@ -39,7 +31,11 @@ tb-sidebar {
 
     #navigation
     {
-        margin-top: 30%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        margin: 30% 0;
         padding: 0 15%;
 
         color: #6b7fa4;
@@ -70,20 +66,16 @@ tb-sidebar {
         margin-right: 6%;
     }
 
-    @keyframes slide-in
-    {
-        from
-        {
-           left: -$width;
+    @media screen and (max-width: 1034px) {
+        font-size: 1em;
+        #navigation i {
+            display: none;
         }
     }
 
-    @keyframes slide-out
-    {
-        to
-        {
-            left: -$width;
-        }
+    @media screen and (max-width: 500px) {
+        font-size: 8px;
+        font-weight: normal;
     }
 
 }

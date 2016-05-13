@@ -51,10 +51,10 @@
 
         function stateChangeSuccess (event) {
             $timeout(function(){ 
-                $timeout(changeViewStyles, $rootScope.generalLoading ? 1 : 100);
+                $timeout(changeViewStyles, $rootScope.generalLoading ? 1 : 0);
                 $rootScope.stateLoading = false; 
                 $rootScope.generalLoading = true; 
-            }, $rootScope.generalLoading ? 500 : 100);
+            }, $rootScope.generalLoading ? 500 : 500);
         }
 
         function changeViewStyles () {
