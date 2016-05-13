@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ProjectsController', ProjectsController);
 
-    ProjectsController.$inject = ['projects', 'TbUtils', 'ModalService'];
+    ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService'];
 
-    function ProjectsController (projects, TbUtils, ModalService) {
+    function ProjectsController (projects, TbUtils, $state, ModalService) {
         var vm = this;
 
         var deleteIndex = -1;
@@ -23,6 +23,7 @@
         vm.deletingProject = [];
         vm.preventGeneralLoading = preventGeneralLoading;
         vm.removeProjectClicked = removeProjectClicked;
+        vm.goToEdit = goToEdit;
 
         function preventGeneralLoading () {
             TbUtils.preventGeneralLoading();
@@ -66,9 +67,12 @@
         }
 
         projects.getProjects(getProjectsSuccess, getProjectsFail);
+
+        function goToEdit (project) {
+            $state.go('dashboard.editproject', { project: JSON.stringify(project) });
+        }
         
         function getProjectsSuccess(response) {
-            console.log(response);
             TbUtils.fillList(response, vm.projects);
             TbUtils.initArrayToValue(vm.deletingProject, false, 
                                      vm.projects.length);
