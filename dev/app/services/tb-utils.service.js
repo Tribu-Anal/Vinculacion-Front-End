@@ -29,7 +29,8 @@
                 {
                     type: type, 
                     title: title, 
-                    body: body
+                    body: body,
+                    timeout: 1500
                 }
             );
         }
