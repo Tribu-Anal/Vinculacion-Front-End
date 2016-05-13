@@ -66,14 +66,14 @@ tb-sidebar {
         margin-right: 6%;
     }
 
-    @media screen and (max-width: 1034px) {
+    @media screen and (max-width: 1228px) {
         font-size: 1em;
         #navigation i {
             display: none;
         }
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 900px) {
         font-size: 8px;
         font-weight: normal;
     }
