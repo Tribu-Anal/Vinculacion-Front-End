@@ -43,8 +43,14 @@
         
             .state('dashboard.addproject', {
 				url: '/nuevo-proyecto',
-				templateUrl: templateDir + 'main/add-project/add-project.html',
-				controller: 'AddProjectController as vm'
+				templateUrl: templateDir + 'main/project-form/project-form.html',
+				controller: 'ProjectFormController as vm'
+			})
+
+			.state('dashboard.editproject', {
+				url: '/editar-proyecto/{project}',
+				templateUrl: templateDir + 'main/project-form/project-form.html',
+				controller: 'ProjectFormController as vm'
 			})
 
 			.state('dashboard.project', {

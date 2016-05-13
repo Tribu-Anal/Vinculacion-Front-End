@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ProjectsController', ProjectsController);
 
-    ProjectsController.$inject = ['projects', 'TbUtils', 'ModalService'];
+    ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService'];
 
-    function ProjectsController (projects, TbUtils, ModalService) {
+    function ProjectsController (projects, TbUtils, $state, ModalService) {
         var vm = this;
 
         var deleteIndex = -1;
@@ -20,6 +20,7 @@
         
         vm.projects = [];
         vm.removeProjectClicked = removeProjectClicked;
+        vm.goToEdit = goToEdit;
 
         projects.getProjects(getProjectsSuccess, getProjectsFail);
 
@@ -54,9 +55,12 @@
             TbUtils.displayNotification('error', 'Error', 
               'No se pudo borrar el proyecto.');
         }
+
+        function goToEdit (project) {
+            $state.go('dashboard.editproject', { project: JSON.stringify(project) });
+        }
         
         function getProjectsSuccess(response) {
-            console.log(response);
             TbUtils.fillList(response, vm.projects);
         }
         
