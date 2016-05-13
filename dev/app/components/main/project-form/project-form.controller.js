@@ -70,6 +70,8 @@
 
         function updateSuccess () {
             $location.path('/proyectos');
+            TbUtils.displayNotification('success', 'Proyecto Actualizado', 
+                'Se ha actualizado exitosamente el nuevo proyecto.');
         }
 
         function updateFailure () {
@@ -116,6 +118,8 @@
         
         function submitProjectSuccess() {
             $location.path('/proyectos');
+            TbUtils.displayNotification('success', 'Proyecto Creado', 
+                'Se ha creado exitosamente el nuevo proyecto.');
         }
         
         function submitProjectFail() {
