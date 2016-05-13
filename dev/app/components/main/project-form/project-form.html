@@ -21,8 +21,8 @@
         <h4><strong>Carreras Asociadas</strong></h4>            
         <div class="tb-checklist">
             <div class="tb-checkbox" ng-repeat="major in vm.majors">
-                <span ng-click="vm.MajorsCheckboxClicked(mdl, major.MajorId)">
-                    <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = vm.edit && vm.initMajorCheckbox(major.MajorId)" ng-model="mdl">
+                <span ng-click="vm.checkboxListItemClicked(mdl, major.MajorId, vm.project.MajorIds)">
+                    <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = vm.edit && vm.project.MajorIds.indexOf(major.MajorId) >= 0" ng-model="mdl">
                     <label ng-click="mdl = !mdl">{{major.Name}}</label>
                 </span>
             </div>
@@ -44,13 +44,13 @@
         <h4><strong>Secciones Asociadas</strong></h4>
         <div class="tb-checklist">
             <div class="tb-checkbox" ng-repeat="section in vm.sections">
-                <span ng-click="vm.SectionsCheckboxClicked(mdl, section.Id)">
-                    <input type="checkbox" id="sectionBox{{section.Id}}" name="projectSection" value="{{section.Id}}" ng-init="mdl = vm.edit && section.Id === vm.project.SectionId" ng-model="mdl">
+                <span ng-click="vm.checkboxListItemClicked(mdl, section.Id, vm.project.SectionIds)">
+                    <input type="checkbox" id="sectionBox{{section.Id}}" name="projectSection" value="{{section.Id}}" ng-init="mdl = vm.edit && vm.project.SectionIds.indexOf(section.Id) >= 0" ng-model="mdl">
                     <label ng-click="mdl = !mdl">{{section.Class.Name}}</label>
                 </span>
             </div>
         </div>
-        <p class="error-message" ng-show="projectForm.$submitted && vm.project.SectionId === 0">
+        <p class="error-message" ng-show="projectForm.$submitted && vm.project.SectionIds.length === 0">
             * Porfavor selecciona una de las secciones disponibles
         </p>
     </div>

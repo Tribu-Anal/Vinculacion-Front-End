@@ -24,10 +24,8 @@
         vm.project = setProject();
 
         vm.submitProject = submitProject;
-        vm.MajorsCheckboxClicked = MajorsCheckboxClicked;
-        vm.SectionsCheckboxClicked = SectionsCheckboxClicked;
+        vm.checkboxListItemClicked = checkboxListItemClicked;
         vm.majorsAndStatusValid = majorsAndStatusValid;
-        vm.initMajorCheckbox = initMajorCheckbox;
 
         var editId = vm.edit ? vm.project.Id : -1;
         
@@ -43,7 +41,7 @@
                     Description: '',
                     Cost: 0.0,
                     MajorIds: [],
-                    SectionId: 0,
+                    SectionIds: [],
                     BeneficiariesAlias: '',
                     BeneficiariesQuantity: 0
                     };
@@ -62,6 +60,7 @@
             delete vm.project.$$hashKey;
             delete vm.project.Id;
             delete vm.project.IsDeleted;
+            console.log(vm.project);
         }
 
         function updateProject () {
@@ -83,43 +82,16 @@
                 submitProjectSuccess, submitProjectFail);
         }
 
-        function initMajorCheckbox (id) {
-            for (let i = 0; i < vm.project.MajorIds.length; i++)
-                if (id === vm.project.MajorIds[i])
-                    return true;
-
-            return false;
-        }
-        
-        function MajorsCheckboxClicked (inputValue, id) {
-            console.log(id);
-            if (inputValue) {
-                vm.project.MajorIds.push(id);
-            }
-            else {
-                for (let i = 0; i < vm.project.MajorIds.length; i++) {
-                    if (vm.project.MajorIds[i] === id) {
-                        vm.project.MajorIds.splice(i, 1);
-                    }
-                }
-            }
-            console.log(inputValue, vm.project.MajorIds);
-        }
-        
-        function SectionsCheckboxClicked(inputValue, id) {
-            console.log(id);
-            if (inputValue) {
-                vm.project.SectionId = id;
-            }
-            else {
-                vm.project.SectionId = 0;
-            }
-            console.log(inputValue, vm.project.SectionId);
+        function checkboxListItemClicked (inputValue, listItemModel, listModel) {
+            if (inputValue)
+                listModel.push(listItemModel);
+            else
+                TbUtils.removeItemFromList(listItemModel, listModel);
         }
         
         function majorsAndStatusValid() {
             return vm.project.MajorIds.length > 0 && 
-                   vm.project.SectionId !== 0;
+                   vm.project.SectionIds.length > 0;
         }
         
         function getMajorsSuccess(response) {
