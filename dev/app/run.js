@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
 
     angular
@@ -13,16 +13,28 @@
         $rootScope.links = [];
         $rootScope.stateLoading = false;
         $rootScope.hideLoading = true;
+        $rootScope.generalLoading = true;
+
+        let stateUrl = "";
         
-        // keep user logged in after page refresh
-        $rootScope.globals = $cookieStore.get('globals') || {};
-        if ($rootScope.globals.token) {
-            $http.defaults.headers.common['Authorization'] = 
-            $rootScope.globals.token; // jshint ignore:line
+        getBasicAuthentication();
+
+        $rootScope.$on('$locationChangeStart', locationChangeStart);
+
+        $rootScope.$on('$stateChangeStart', stateChangeStart);
+
+        $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
+
+        function getBasicAuthentication () {
+            $rootScope.globals = $cookieStore.get('globals') || {};
+
+            if ($rootScope.globals.token) {
+                $http.defaults.headers.common['Authorization'] = 
+                $rootScope.globals.token;
+            }
         }
 
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // redirect to login page if not logged in
+        function locationChangeStart (event, next, current) {
             if ($location.path() !== '/' && !$rootScope.globals.token) {
                 $location.path('/');
             }
@@ -30,22 +42,23 @@
             if($location.path() === '/' && $rootScope.globals.token) {
                 $location.path('/home');
             }
-        });
+        }
 
-        $rootScope.$on('$stateChangeStart', changeViewStyles);
-
-        $rootScope.$on('$viewContentLoading',function(event, viewConfig) {
+        function stateChangeStart (event, toState) {
             $rootScope.stateLoading = true;
-            $rootScope.hideLoading = false;
-        });
+            stateUrl = toState.url;
+        }
 
-        $rootScope.$on('$viewContentLoaded',function(event) {
-            $timeout(function(){ $rootScope.stateLoading = false; }, 100);
-            $rootScope.hideLoading = true;
-        });
+        function stateChangeSuccess (event) {
+            $timeout(function(){ 
+                $timeout(changeViewStyles, $rootScope.generalLoading ? 1 : 100);
+                $rootScope.stateLoading = false; 
+                $rootScope.generalLoading = true; 
+            }, $rootScope.generalLoading ? 500 : 100);
+        }
 
-        function changeViewStyles (event, toState) {
-            switch(toState.url) {
+        function changeViewStyles () {
+            switch(stateUrl) {
                 case "/home":
                     $rootScope.viewTitle = "Vinculacion | Home";
                     $rootScope.viewStyles = "main home";
@@ -64,7 +77,7 @@
                 break;
                 case "/nuevo-proyecto": 
                 case "/editar-proyecto/{project}":
-                    $rootScope.viewTitle = toState.url.includes('nuevo') ? 
+                    $rootScope.viewTitle = stateUrl.includes('nuevo') ? 
                                            "Vinculacion | Nuevo Proyecto" :
                                            "Vinculacion | Editar Proyecto";
                     $rootScope.viewStyles = "main project-form";

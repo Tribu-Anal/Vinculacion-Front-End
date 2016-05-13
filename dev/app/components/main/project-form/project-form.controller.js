@@ -23,6 +23,10 @@
         vm.majors = [];
         vm.project = setProject();
 
+        vm.majorsLoading = true;
+        vm.sectionsLoading = true;
+        vm.submitting = false;
+
         vm.submitProject = submitProject;
         vm.checkboxListItemClicked = checkboxListItemClicked;
         vm.majorsAndStatusValid = majorsAndStatusValid;
@@ -48,6 +52,8 @@
         }
         
         function submitProject() {
+            vm.submitting = true;
+
             if (vm.edit) {
                 removeProjectNonAPIProperties();
                 updateProject();
@@ -60,7 +66,6 @@
             delete vm.project.$$hashKey;
             delete vm.project.Id;
             delete vm.project.IsDeleted;
-            console.log(vm.project);
         }
 
         function updateProject () {
@@ -69,12 +74,17 @@
         }
 
         function updateSuccess () {
+            vm.submitting = false;
+
+            TbUtils.preventGeneralLoading();
             $location.path('/proyectos');
             TbUtils.displayNotification('success', 'Proyecto Actualizado', 
                 'Se ha actualizado exitosamente el nuevo proyecto.');
         }
 
         function updateFailure () {
+            vm.submitting = false;
+
             TbUtils.displayNotification('error', 'Error', 
                 'No se pudo actualizar el proyecto.');
         }
@@ -98,31 +108,43 @@
         
         function getMajorsSuccess(response) {
             TbUtils.fillList(response, vm.majors);
+
+            vm.majorsLoading = false;
         }
         
         function getSectionsSuccess(response) {
             TbUtils.fillList(response, vm.sections);
+            
+            vm.sectionsLoading = false;
         }
         
         function getMajorsFail(response) {
             console.log(response);
             TbUtils.displayNotification('error', 'Error',
-                                'Hay un problema con el servidor. No se ha podido obtener las carreras disponibles.');
+                                'Hay un problema con el servidor.' + 
+                                ' No se ha podido obtener las carreras disponibles.');
+            vm.majorsLoading = false;
         }
         
         function getSectionsFail(response) {
             console.log(response);
             TbUtils.displayNotification('error', 'Error',
                                 'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.');
+            vm.sectionsLoading = false;
         }
         
         function submitProjectSuccess() {
+            vm.submitting = false;
+
+            TbUtils.preventGeneralLoading();
             $location.path('/proyectos');
             TbUtils.displayNotification('success', 'Proyecto Creado', 
                 'Se ha creado exitosamente el nuevo proyecto.');
         }
         
         function submitProjectFail() {
+            vm.submitting = false;
+
             TbUtils.displayNotification('error', 'Error', 
                 'No se ha podido crear el proyecto.');
         }

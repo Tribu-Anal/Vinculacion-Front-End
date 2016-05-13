@@ -14,10 +14,15 @@
     }
     .card
     {
+        position: relative;
         width: 28%;
         height: 300px;
         margin-right: 5%;
         margin-bottom: 5%;
+
+        tb-loading {
+            background: #213250;
+        }
 
         cursor: pointer;
 
@@ -37,7 +42,7 @@
             display: none;
             position: absolute;
             background: transparentize(#111, 0.8);
-            width: 28%;
+            width: 100%;
             padding: 7px;
             color: #ccc;
             font-size: 1.2em;

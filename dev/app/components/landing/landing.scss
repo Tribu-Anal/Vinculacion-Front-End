@@ -10,9 +10,21 @@
     background:      -o-linear-gradient(right, #213250, #213250);
     background:         linear-gradient(to left, #213250, #213250);
 
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+    &.scrollable {
+        overflow-y: auto;
+    }
+
+    .landing-loader {
+        background: #fff;
+    }
+    
     .login-page
     {
         width: 360px;

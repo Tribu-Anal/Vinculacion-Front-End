@@ -1,5 +1,5 @@
 <div class="login-page">
-      <img class = "img-responsive" src="img/logo.png" />
+      <img class = "img-responsive logo" src="img/logo.png" />
       <div class="form">
         <form id="login-form" class="login-form" name="registerLogin" ng-submit="registerLogin.$valid && vm.login()" novalidate>
             <div class="inner-addon left-addon">
@@ -12,6 +12,7 @@
             </div>
             <button id="ingresar" type="submit">Ingresar</button>
             <p class="message register">No estas registrado? <a href="#">Crear una cuenta</a></p>
+            <tb-loading class="landing-loader main-loader" ng-show="vm.loading"></tb-loading>
         </form>  
           
         <div ng-controller="RegisterController as vm">
@@ -59,4 +60,5 @@
         </div>
 
       </div>
+      
 </div>

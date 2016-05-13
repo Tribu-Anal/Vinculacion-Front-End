@@ -26,6 +26,7 @@
                     <label ng-click="mdl = !mdl">{{major.Name}}</label>
                 </span>
             </div>
+            <tb-loading class="main-loader" style="z-index: 99999;" ng-show="vm.majorsLoading"></tb-loading>
         </div>
         <p class="error-message" ng-show="projectForm.$submitted && vm.project.MajorIds.length === 0">
             * Porfavor selecciona una o mas de las carreras disponibles
@@ -49,6 +50,7 @@
                     <label ng-click="mdl = !mdl">{{section.Class.Name}}</label>
                 </span>
             </div>
+            <tb-loading class="main-loader" style="z-index: 99999;" ng-show="vm.sectionsLoading"></tb-loading>
         </div>
         <p class="error-message" ng-show="projectForm.$submitted && vm.project.SectionIds.length === 0">
             * Porfavor selecciona una de las secciones disponibles
@@ -83,3 +85,4 @@
         <input type="submit" value="Confirmar">
     </div>
 </form>
+<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading>

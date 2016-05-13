@@ -11,6 +11,8 @@
 		var vm = this;
 
 		vm.project = {};
+		vm.projectLoading = true;
+		vm.participantsLoading = true;
 		vm.participants = {
 			headers: [
 				'Alumno'
@@ -25,10 +27,15 @@
         function getProjectSuccess(response) {
             console.log(response);
             vm.project = response.data;
+
+            vm.projectLoading = false;
         }
         
         function getProjectFail() {
-            TbUtils.displayNotification('error', 'Error', 'El proyecto deseado no existe.');
+            TbUtils.displayNotification('error', 'Error', 
+            	'El proyecto deseado no existe.');
+
+            vm.projectLoading = false;
         }
 
 		function getParticipants() {

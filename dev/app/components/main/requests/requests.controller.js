@@ -22,6 +22,8 @@
 			click: rejectButtonClicked
 		};
 
+		vm.requestsLoading = true;
+
 		vm.requestsTable = {
 			headers: [
 				'Numero de Cuenta',
@@ -36,7 +38,10 @@
 		requests.getRequests(getRequestSuccess, getRequestFail);
         
         function getRequestSuccess(response) {
-            if (response.data.length <= 0) return;
+            if (response.data.length <= 0) {
+            	vm.requestsLoading = false;
+            	return;
+            }
             
 			for(let i = 0; i < response.data.length; i++) {
 				let student =  response.data[i];
@@ -56,12 +61,15 @@
 
 				vm.requestsTable.body.push(newTableElement);
 			}
-        }
+
+			vm.requestsLoading = false;
+        };
         
         function getRequestFail(response) {
             console.log(response);
             TbUtils.displayNotification('error', 'Falla de solicitudes',
                                         'No se ha podido obtener las solicitudes de estudiantes.');
+            vm.requestsLoading = false;
         }
 
 		function getElement(index) {

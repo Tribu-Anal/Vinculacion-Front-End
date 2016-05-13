@@ -5,12 +5,14 @@
 		.module('VinculacionApp')
 		.factory('TbUtils', TbUtils);
     
-    TbUtils.$inject = ['toaster'];
+    TbUtils.$inject = ['toaster', '$rootScope'];
 
-	function TbUtils (toaster) {        
+	function TbUtils (toaster, $rootScope) {        
         var service = {
             fillList: fillList,
             displayNotification: displayNotification,
+            preventGeneralLoading: preventGeneralLoading,
+            initArrayToValue: initArrayToValue,
             removeItemFromList: removeItemFromList
         };
         
@@ -27,9 +29,19 @@
                 {
                     type: type, 
                     title: title, 
-                    body: body
+                    body: body,
+                    timeout: 1500
                 }
             );
+        }
+
+        function preventGeneralLoading () {
+            $rootScope.generalLoading = false;
+        }
+
+        function initArrayToValue (array, value, size) {
+            for (let i = 0; i < size; i++)
+                array.push(value);
         }
 
         function removeItemFromList (listItem, list) {

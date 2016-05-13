@@ -25,9 +25,10 @@
 			}
 		}
 
-		function navItemClicked(itemIndex) {
+		function navItemClicked(itemIndex, clicked) {
 			activeItem.active = false;
 			setActiveItem(itemIndex);
+			clicked();
 		}
 
 		function setActiveItem(itemIndex) {

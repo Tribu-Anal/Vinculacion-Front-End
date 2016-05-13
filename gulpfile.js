@@ -11,6 +11,7 @@ let gulp            = require('gulp'),
     connect         = require('gulp-connect'),
     csscomb         = require('gulp-csscomb'),
     csso            = require('gulp-csso'),
+    eslint          = require('gulp-eslint'),
     htmlhint        = require('gulp-htmlhint'),
     htmlmin         = require('gulp-htmlmin'),
     imagemin        = require('gulp-imagemin'),
@@ -94,6 +95,24 @@ gulp.task ('connect', () => {
 
 gulp.task ( 'app-js', () => {
 	return gulp.src( appJs )
+		.pipe(eslint({
+			rules: {
+				'strict': 1,
+				'comma-dangle': 2,
+				'vars-on-top': 1,
+				'block-spacing': 1,
+				'comma-spacing': 1,
+				'array-bracket-spacing': 1,
+				'comma-style': 1,
+				'space-infix-ops': 1,
+				'space-before-func-paren': 1,
+				'space-before-blocks': 1
+			},
+			env: {
+				es6: true
+			}
+		})) 
+        .pipe(eslint.format()) 
 		.pipe( concat('bundle.js') )
 		.pipe( production ? uglify() : util.noop() )
 		.pipe( production ? stripDebug() : util.noop() )
