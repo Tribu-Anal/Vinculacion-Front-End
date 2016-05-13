@@ -10,7 +10,8 @@
 	function TbUtils (toaster) {        
         var service = {
             fillList: fillList,
-            displayNotification: displayNotification
+            displayNotification: displayNotification,
+            removeItemFromList: removeItemFromList
         };
         
         return service;
@@ -29,6 +30,11 @@
                     body: body
                 }
             );
+        }
+
+        function removeItemFromList (listItem, list) {
+            let indexOfItem = list.indexOf(list);
+            list.splice(indexOfItem, 1);
         }
 	}
 })();
