@@ -307,7 +307,9 @@
     
     .tb-checklist
     {
-        overflow-y: scroll;
+        position: relative;
+        overflow-y: auto;
+        height: 200px;
         max-height: 200px;
         
         .tb-checkbox {
