@@ -69,6 +69,7 @@
         projects.getProjects(getProjectsSuccess, getProjectsFail);
 
         function goToEdit (project) {
+            preventGeneralLoading();
             $state.go('dashboard.editproject', { project: JSON.stringify(project) });
         }
         

@@ -77,7 +77,7 @@
                 break;
                 case "/nuevo-proyecto": 
                 case "/editar-proyecto/{project}":
-                    $rootScope.viewTitle = toState.url.includes('nuevo') ? 
+                    $rootScope.viewTitle = stateUrl.includes('nuevo') ? 
                                            "Vinculacion | Nuevo Proyecto" :
                                            "Vinculacion | Editar Proyecto";
                     $rootScope.viewStyles = "main project-form";
