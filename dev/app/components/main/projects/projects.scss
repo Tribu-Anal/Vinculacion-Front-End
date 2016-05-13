@@ -16,6 +16,7 @@
     {
         position: relative;
         width: 28%;
+        min-width: 280px;
         height: 300px;
         margin-right: 5%;
         margin-bottom: 5%;
@@ -74,12 +75,16 @@
             .img-area img
             {
                 width: 50%;
+                max-width: 50%;
+                max-height: 100%;
 
                 align-self: center;
             }
             .project-info
             {
                 text-align: center;
+                max-height: 30%;
+                overflow-y: hidden;
             }
             .project-info h4
             {
