@@ -90,6 +90,9 @@
         function createANewParticipantElement(participantData) {
             let participantElement = {
                 AccountId: participantData.AccountId,
+                Major: getMajor(participantData.Major),
+                Campus: participantData.Campus,
+                Name: participantData.Name,
                 content: []
             };
             participantElement.content.push(
@@ -115,11 +118,26 @@
                 previousState: 'dashboard.project',
                 previousStateParams: {
                     projectId: $stateParams.projectId
-                }
+                },
+                reportParams : getReportParams(participant)
             }
             $state.go('dashboard.printarea', {
                 params: params
             });
+        }
+
+        function getMajor(Major){
+            return Major.Name;
+        }
+
+        function getReportParams(participant){
+            let reportParams = {
+                AccountId:participant.AccountId,
+                Campus:participant.Campus,
+                Major:participant.Major,
+                Name:participant.Name
+            }
+            return reportParams;
         }
     }
 })();

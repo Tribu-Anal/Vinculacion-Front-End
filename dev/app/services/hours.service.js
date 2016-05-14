@@ -12,7 +12,8 @@
 		var service = 
 		{
 			getStudentsBySection: getStudentsBySection,
-			postHours:postHours
+			postHours:postHours,
+			getStudentHourReport:getStudentHourReport
 		};
 
 		return service;
@@ -30,6 +31,11 @@
 		function postHours (hoursData, successCallback, errorCallback) {
 			$http.post(url+'/Hours',JSON.stringify(hoursData)).then(successCallback)
                                   .catch(errorCallback);
+		}
+
+		function getStudentHourReport(accountId,successCallback,errorCallback){
+			$http.get(url+'/StudentHourReport/'+accountId).
+				then(successCallback).catch(errorCallback);
 		}
 	}
 })();

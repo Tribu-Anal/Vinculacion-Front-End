@@ -1,0 +1,19 @@
+.hours-by-student{
+	.header{
+	    font-size: larger;
+	}
+	.description{
+		-webkit-print-color-adjust: exact;
+	    margin-top: 2%;
+	    border-bottom: 1px solid lightgray;
+	    text-align: center;
+	}
+	.header-description{
+		-webkit-print-color-adjust: exact;
+	    margin-top: 3%;
+	    font-size: medium;
+	    font-weight: bold;
+	    border-bottom: 3px solid;
+	    text-align: center;
+	}
+}

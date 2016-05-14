@@ -1,1 +1,25 @@
-<div></div>
+<div ng-controller="HoursByStudentController as vm" class="hours-by-student">
+	<div class="container">
+	 	<div class="header">
+	 		<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">Reporte Detallado</label></div>
+	 		<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">{{vm.report.Name}}</label></div>
+	 		<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">{{vm.report.AccountId}}</label></div>
+	 		<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">{{vm.report.Campus}}</label></div>
+	 		<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">{{vm.report.Major}}</label></div>
+	 		<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">{{vm.date|date:'longDate'}}</label></div>
+	 		<div class="row">
+	 			<label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">Horas Totales:{{vm.hoursDescription.totalHours}}</label>
+ 			</div>
+	 	</div>
+	 	<div class="row header-description">
+	 		<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">Nombre del Proyecto</div>
+	 		<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">ID del Proyecto</div>
+	 		<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">Horas Trabajadas</div>
+	 	</div>
+	 	<div ng-repeat="row in vm.hoursDescription.description" class="row description">
+	 		<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">{{row.ProjectName}}</div>
+	 		<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">{{row.ProjectId}}</div>
+	 		<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">{{row.HoursWorked}}</div>
+	 	</div>
+	</div>
+</div>
