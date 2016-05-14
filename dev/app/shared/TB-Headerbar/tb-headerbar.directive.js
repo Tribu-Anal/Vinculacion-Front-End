@@ -10,7 +10,7 @@
         {
             restrict: 'E',
             scope: {
-                expand: '='
+                expand: '=?'
             },
             templateUrl: 'templates/shared/TB-Headerbar/tb-headerbar.html'        
         };

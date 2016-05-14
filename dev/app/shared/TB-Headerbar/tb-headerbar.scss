@@ -1,14 +1,13 @@
 tb-headerbar {
-
-    width: 1600px;
-    height: 12%;
+    display: flex;
     
     #bar {
         display: flex;
 
         padding-left: 2%;
 
-        height: 100%;
+        flex-grow: 1;
+        flex-basis: 100%;
 
         transition: all .3s linear;
 

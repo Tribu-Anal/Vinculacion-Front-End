@@ -1,48 +1,56 @@
 .main {
-    font-family: 'Ubuntu', 'Roboto', sans-serif;
+    $main-height: 100vh;
+    $header-height: 13vh;
+    $dynamic-height: ($main-height - $header-height);
+
+    font-family: 'Roboto', sans-serif;
 
     overflow: hidden;
-
     margin: 0;
+    padding: 0;
 
     tb-sidebar {
-        position: absolute;
-        left: 0;
+        height: $main-height;
+        min-height: $main-height;
+
+        &.col-xs-2 {
+            padding: 0;
+        }
+    }
+    
+    .container-fluid {
+        padding: 0;
+        margin: 0;
+
+        & > .row {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .main-container {
+        flex-grow: 1;
+        order: 2;
+        width: 82%;
     }
 
     tb-headerbar {
-        position: absolute;
-        left: 230px;
-        height: 13%;
+        padding: 0;
+        height: $header-height;
+    }
+
+    .loading {
+        position: relative;
+        height: $dynamic-height;
     }
 
     .dynamic-area
     {
-        position: absolute;
-        top: 85px;
-        left: 230px;
-
-        overflow-y: scroll;
-
-        width: 82%;
-        height: 87%;
+        overflow-y: auto;
 
         transition: all .3s linear;
 
-        &.expanded
-        {
-            left: 0;
-
-            width: 100%;
-        }
-
-        &.shrunk
-        {
-            left: 230px;
-
-            width: 82%;
-        }
-
+        height: $dynamic-height;
     }
 
 }

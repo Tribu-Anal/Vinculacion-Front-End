@@ -107,13 +107,13 @@
         }
         
         function getMajorsSuccess(response) {
-            TbUtils.fillList(response, vm.majors);
+            TbUtils.fillListWithResponseData(response.data, vm.majors);
 
             vm.majorsLoading = false;
         }
         
         function getSectionsSuccess(response) {
-            TbUtils.fillList(response, vm.sections);
+            TbUtils.fillListWithResponseData(response.data, vm.sections);
             
             vm.sectionsLoading = false;
         }

@@ -26,4 +26,8 @@ tb-round-btn
     {
         box-shadow: 0 0 $shadow-hover-spread $shadow-color;
     }
+
+    @media screen and (max-width: 780px) {
+        left: 80%;
+    }
 }
