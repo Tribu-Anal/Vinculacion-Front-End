@@ -62,6 +62,12 @@
 
         function editHours(participant) {
             participant.hours = getHoursOfParticipant(participant);
+            console.log(participant.hours);
+            if(!participant.hours){
+                TbUtils.displayNotification('error', 'Error',
+                'Debe ingresar las  horas a guardar.');
+                return;
+            }
             let hoursData = {
                 AccountId: participant.AccountId,
                 SectionId: vm.sectionIds[0],
@@ -119,23 +125,23 @@
                 previousStateParams: {
                     projectId: $stateParams.projectId
                 },
-                reportParams : getReportParams(participant)
+                reportParams: getReportParams(participant)
             }
             $state.go('dashboard.printarea', {
                 params: params
             });
         }
 
-        function getMajor(Major){
+        function getMajor(Major) {
             return Major.Name;
         }
 
-        function getReportParams(participant){
+        function getReportParams(participant) {
             let reportParams = {
-                AccountId:participant.AccountId,
-                Campus:participant.Campus,
-                Major:participant.Major,
-                Name:participant.Name
+                AccountId: participant.AccountId,
+                Campus: participant.Campus,
+                Major: participant.Major,
+                Name: participant.Name
             }
             return reportParams;
         }

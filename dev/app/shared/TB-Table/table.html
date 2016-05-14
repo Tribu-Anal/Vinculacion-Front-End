@@ -11,7 +11,7 @@
   		  </label>
   		  <input class="tb-input-wrapper" ng-if="content.typeObject == 'input'" 
 		  	type="{{content.properties.type}}" 
-  		  	ng-model="content.properties.value">
+  		  	ng-model="content.properties.value" min="0">
 
 			<button class="actions-button tb-tooltip" ng-if="content.typeObject == 'button'" 
 				ng-click="vm.loseFocus()" ng-blur="content.properties.onClick($parent.$parent.$parent.body[Index])">

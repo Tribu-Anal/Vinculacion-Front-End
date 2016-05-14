@@ -1,6 +1,9 @@
 .hours-by-student{
 	.header{
-	    font-size: larger;
+		color: #283B5B;
+		-webkit-print-color-adjust: exact;
+	    font-size: medium;
+	    text-transform: uppercase;
 	}
 	.description{
 		-webkit-print-color-adjust: exact;
@@ -13,7 +16,10 @@
 	    margin-top: 3%;
 	    font-size: medium;
 	    font-weight: bold;
-	    border-bottom: 3px solid;
+	    border-bottom: 3px solid #283B5B;
 	    text-align: center;
+	}
+	.logo{
+		float:right;
 	}
 }
