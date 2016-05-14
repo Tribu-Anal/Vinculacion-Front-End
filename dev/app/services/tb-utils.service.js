@@ -9,7 +9,7 @@
 
 	function TbUtils (toaster, $rootScope) {        
         var service = {
-            fillList: fillList,
+            fillListWithResponseData: fillListWithResponseData,
             displayNotification: displayNotification,
             preventGeneralLoading: preventGeneralLoading,
             initArrayToValue: initArrayToValue,
@@ -18,11 +18,12 @@
         
         return service;
         
-        function fillList(response, list) {
-            for(let obj in response.data) {
-                list.push(response.data[obj]);
-            }
-        };
+        function fillListWithResponseData(responseData, list) {
+
+            for (let obj in responseData)
+                list.push(responseData[obj]);
+
+        }
         
         function displayNotification(type, title, body) {
             toaster.pop(

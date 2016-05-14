@@ -50,7 +50,7 @@
         }
         
         function getMajorsSuccess(response) {
-            TbUtils.fillList(response, vm.majors);
+            TbUtils.fillListWithResponseData(response.data, vm.majors);
             vm.student.MajorId = vm.majors[0].MajorId;
         }
         

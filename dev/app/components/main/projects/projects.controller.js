@@ -74,7 +74,7 @@
         }
         
         function getProjectsSuccess(response) {
-            TbUtils.fillList(response, vm.projects);
+            TbUtils.fillListWithResponseData(response.data, vm.projects);
             TbUtils.initArrayToValue(vm.deletingProject, false, 
                                      vm.projects.length);
 

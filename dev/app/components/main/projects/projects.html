@@ -11,8 +11,11 @@
 				<img src="img/logo.png" alt="Project Image">
 			</div>
 			<div class="project-info">
-				<h4>{{prj.Name}}</h4>
-				<span>{{prj.Description}}</span>
+				<h4 ng-class="{ 'overflow webkit': prj.Name.length > 100 }">{{prj.Name}}</h4>
+				<span ng-class="{ 'overflow webkit': prj.Description.length > 80 }"
+					  ng-show="prj.Name.length < 60">
+					{{prj.Description}}
+				</span>
 			</div>
 		</div>
 		<tb-loading ng-show="vm.deletingProject[$index]"></tb-loading>
