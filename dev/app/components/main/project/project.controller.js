@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils'];
+    ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils', 'tableContent'];
 
-    function ProjectController($stateParams, projects, TbUtils) {
+    function ProjectController($stateParams, projects, TbUtils,tableContent) {
         var vm = this;
 
         vm.project = {};
@@ -15,7 +15,8 @@
         vm.participantsLoading = true;
         vm.participants = {
             headers: [
-                'Alumno'
+                'Alumno',
+                ' '
             ],
             body: [],
             actions: false
@@ -37,15 +38,14 @@
         }
 
         function getParticipantsSuccess(response) {
-        	console.log(response.data);
-        	addParticipantsToTable(response.data);
-        	vm.participantsLoading = false;
+            addParticipantsToTable(response.data);
+            vm.participantsLoading = false;
         }
 
         function getParticipantsFail() {
-        	TbUtils.displayNotification('error', 'Error',
+            TbUtils.displayNotification('error', 'Error',
                 'Hubo error al momento de cargar a los alumnos.');
-        	vm.participantsLoading = false;
+            vm.participantsLoading = false;
         }
 
         function editHours(participant) {
@@ -54,20 +54,27 @@
              */
         }
 
-        function createANewParticipantElement(participantData){
-        	let participantElement = {
-        		AccountId: participantData.AccountId,
-        		content:[participantData.Name]
-        	}; 
-        	return participantElement;
+        function createANewParticipantElement(participantData) {
+            let participantElement = {
+                AccountId: participantData.AccountId,
+                Hour: '',
+                content: []
+            };
+			participantElement.content.push(
+        		tableContent.createALableElement(participantData.Name)
+    		);
+    		participantElement.content.push(
+    		    tableContent.createAnInputElement(participantElement.Hour)
+		    );
+            return participantElement;
         }
 
-        function addParticipantToVMParticipansBody(element, index, array){
-        	vm.participants.body.push(createANewParticipantElement(element));
+        function addParticipantToVMParticipansBody(element, index, array) {
+            vm.participants.body.push(createANewParticipantElement(element));
         }
 
-        function addParticipantsToTable(participants){
-        	participants.forEach(addParticipantToVMParticipansBody);
+        function addParticipantsToTable(participants) {
+            participants.forEach(addParticipantToVMParticipansBody);
         }
     }
 })();
