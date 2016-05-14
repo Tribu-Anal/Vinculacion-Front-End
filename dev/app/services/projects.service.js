@@ -15,7 +15,8 @@
            getProject: getProject,
            postProject: postProject,
            updateProject: updateProject,
-           deleteProject: deleteProject
+           deleteProject: deleteProject,
+           getParticipants:getParticipants
        };
        
        return service;
@@ -43,6 +44,11 @@
        function deleteProject (projectId, successCallback, errorCallback) {
 	   		$http.delete(url + "/" + projectId)
 	   			.then(successCallback, errorCallback);
+	   }
+
+	   function getParticipants (projectId, successCallback, errorCallback) {
+	   		$http.get(url + "/Students/" + projectId).then(successCallback)
+                                            .catch(errorCallback);
 	   }
 	}
 })();
