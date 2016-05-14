@@ -1,0 +1,9 @@
+<div class="print-area">
+	<div ng-include="vm.template" ></div>
+	<tb-round-btn id="button" class="button"  ng-click="vm.backButton.onClick()">
+		<span class="glyphicon {{vm.backButton.icon}} icon" aria-hidden="true"></span>
+	</tb-round-btn>
+	<tb-round-btn id="button" class="button"  ng-click="vm.printButton.onClick()">
+		 <span class="glyphicon {{vm.printButton.icon}} icon" aria-hidden="true"></span>
+	</tb-round-btn>
+</div>

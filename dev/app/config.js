@@ -63,6 +63,13 @@
 				url: '/solicitudes',
 				templateUrl: templateDir + 'main/requests/requests.html',
 				controller: "RequestsController as vm"
+			})
+
+			.state('dashboard.printarea', {
+				url: '/reporte',
+				templateUrl: templateDir + 'main/print-area/print-area.html',
+				controller: "PrintAreaController as vm",
+				params: {templateDir: templateDir, params: null}
 			});
 	}
 })();

@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils', 'tableContent', 'horas','$state'];
+    ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils', 'tableContent', 'horas', '$state'];
 
-    function ProjectController($stateParams, projects, TbUtils,tableContent, horas,$state) {
+    function ProjectController($stateParams, projects, TbUtils, tableContent, horas, $state) {
         var vm = this;
 
         vm.project = {};
@@ -25,20 +25,20 @@
         };
         vm.sectionIds = [];
         vm.saveButton = {
-        	icon:'glyphicon-floppy-disk', 
-        	onClick:editHours,
-        	tooltip:'Agregar Horas'
+            icon: 'glyphicon-floppy-disk',
+            onClick: editHours,
+            tooltip: 'Agregar Horas'
         };
         vm.downloadButton = {
-        	icon:'glyphicon-download-alt', 
-        	onClick:downloadReport,
-        	tooltip:'Descargar Reporte'
+            icon: 'glyphicon-file',
+            onClick: downloadReport,
+            tooltip: 'Ver Reporte'
         };
         projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
         projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
 
         function getProjectSuccess(response) {
-	    	vm.sectionIds = response.data.SectionIds;
+            vm.sectionIds = response.data.SectionIds;
             vm.project = response.data;
             vm.projectLoading = false;
         }
@@ -61,53 +61,45 @@
         }
 
         function editHours(participant) {
-           participant.hours = getHoursOfParticipant(participant);
-           let hoursData= {
-	       	   AccountId: participant.AccountId,
-			   SectionId: vm.sectionIds[0],
-			   ProjectId: $stateParams.projectId,
-			   Hour: participant.hours
-           }
-           horas.postHours(hoursData,addHoursSuccess,addHoursFail);
+            participant.hours = getHoursOfParticipant(participant);
+            let hoursData = {
+                AccountId: participant.AccountId,
+                SectionId: vm.sectionIds[0],
+                ProjectId: $stateParams.projectId,
+                Hour: participant.hours
+            }
+            horas.postHours(hoursData, addHoursSuccess, addHoursFail);
         }
 
-        function addHoursSuccess(){
-        	TbUtils.displayNotification('success', 'Horas Actualizadas', 
+        function addHoursSuccess() {
+            TbUtils.displayNotification('success', 'Horas Actualizadas',
                 'Se han registrado las horas del alumno exitosamente.');
         }
 
-        function addHoursFail(){
-        	TbUtils.displayNotification('error', 'Error',
+        function addHoursFail() {
+            TbUtils.displayNotification('error', 'Error',
                 'Error inesperado al momento de guardar las horas.');
         }
 
-        function getHoursOfParticipant(participant){
-        	let hoursInput = participant.content[1];
-        	let hoursValue = hoursInput.properties.value;
-        	return hoursValue;
+        function getHoursOfParticipant(participant) {
+            let hoursInput = participant.content[1];
+            let hoursValue = hoursInput.properties.value;
+            return hoursValue;
         }
-
-        /*si viene de la bd y ocupamos agregarles horas utilizar esto
-        	caso contrario, eliminar la funcion
-        function setHoursOfParticipant(participant, hours){
-        	participant.content[1].hoursInput.properties.value = hours;
-        	return participant;
-        }
-        */
 
         function createANewParticipantElement(participantData) {
             let participantElement = {
                 AccountId: participantData.AccountId,
                 content: []
             };
-			participantElement.content.push(
-        		tableContent.createALableElement(participantData.Name),
-        		tableContent.createAnInputElement('number'),
-        		tableContent.createAButtonElement(vm.saveButton),
-        		tableContent.createAButtonElement(vm.downloadButton)
-    		);
-    		return participantElement;
-    	}
+            participantElement.content.push(
+                tableContent.createALableElement(participantData.Name),
+                tableContent.createAnInputElement('number'),
+                tableContent.createAButtonElement(vm.saveButton),
+                tableContent.createAButtonElement(vm.downloadButton)
+            );
+            return participantElement;
+        }
 
         function addParticipantToVMParticipansBody(element, index, array) {
             vm.participants.body.push(createANewParticipantElement(element));
@@ -117,7 +109,17 @@
             participants.forEach(addParticipantToVMParticipansBody);
         }
 
-        function downloadReport(participant){
+        function downloadReport(participant) {
+            let params = {
+                templateUrl: 'reports/hours-by-student/hours-by-student.html',
+                previousState: 'dashboard.project',
+                previousStateParams: {
+                    projectId: $stateParams.projectId
+                }
+            }
+            $state.go('dashboard.printarea', {
+                params: params
+            });
         }
     }
 })();

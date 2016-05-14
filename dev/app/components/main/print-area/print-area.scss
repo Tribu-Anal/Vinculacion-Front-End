@@ -1,0 +1,14 @@
+.print-area{
+	.button{
+		position: relative;
+	    margin-top: 1%;
+	}
+	.icon{
+	    margin-top: 19%;
+	}
+}
+@media print {
+  #sidebar, #header, #button {
+    display: none;
+  }
+}
