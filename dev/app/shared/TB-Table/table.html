@@ -4,14 +4,19 @@
 		<th ng-if="actions"></th>
 	</tr>
 
-	<tr ng-repeat="row in body" class="tb-body">
+	<tr ng-init="Index = $index" ng-repeat="row in body" class="tb-body">
 		<td ng-repeat="content in row.content">
 		  <label ng-if="content.typeObject == 'label'">
 		  		{{content.properties.value}}  
   		  </label>
-  		  <input ng-if="content.typeObject == 'input'" 
-  		  	type="{{content.properties.type}}" 
+  		  <input class="tb-input-wrapper" ng-if="content.typeObject == 'input'" 
+		  	type="{{content.properties.type}}" 
   		  	ng-model="content.properties.value">
+
+			<button class="actions-button tb-tooltip" ng-if="content.typeObject == 'button'" 
+				ng-click="content.properties.onClick($parent.$parent.$parent.body[Index])">
+				<span class="glyphicon {{content.properties.icon}}" aria-hidden="true" ></span>
+			</button>	  	
 		</td>
 		<td ng-if="actions">
 			<button class="actions-button tb-tooltip" ng-repeat="action in row.actions" ng-click="action.click($parent.$index)">

@@ -17,6 +17,7 @@
            updateProject: updateProject,
            deleteProject: deleteProject,
            getParticipants:getParticipants
+           
        };
        
        return service;

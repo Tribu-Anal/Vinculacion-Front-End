@@ -12,7 +12,7 @@
 		var service = 
 		{
 			getStudentsBySection: getStudentsBySection,
-			addHours: addHours
+			postHours:postHours
 		};
 
 		return service;
@@ -27,14 +27,9 @@
                           .catch(errorCallback);
 		}
 
-		function addHours (obj, successCallback, errorCallback) {
-			let request = {
-				method: 'POST',
-				url: url + '/Hours',
-				data: obj
-			};
-			$http(request).then(successCallback)
-                          .catch(errorCallback);
+		function postHours (hoursData, successCallback, errorCallback) {
+			$http.post(url+'/Hours',JSON.stringify(hoursData)).then(successCallback)
+                                  .catch(errorCallback);
 		}
 	}
 })();

@@ -10,16 +10,17 @@
 	function tableContent () {
 	   var service = {
             createAnInputElement:createAnInputElement,
-            createALableElement:createALableElement
+            createALableElement:createALableElement,
+            createAButtonElement:createAButtonElement
         };
         
         return service;
         
-        function createAnInputElement(inputType, modelValue) {
+        function createAnInputElement(inputType) {
             let element = {
                 typeObject: 'input',
                 properties: {
-                    value: modelValue,
+                    value: '',
                     type: inputType
                 }
             }
@@ -31,6 +32,17 @@
                 typeObject: 'label',
                 properties: {
                     value: modelValue
+                }
+            }
+            return element;
+        };
+
+        function createAButtonElement(objectButton){
+            let element = {
+                typeObject: 'button',
+                properties: {
+                    onClick: objectButton.onClick,
+                    icon: objectButton.icon
                 }
             }
             return element;
