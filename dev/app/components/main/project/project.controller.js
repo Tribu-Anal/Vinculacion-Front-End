@@ -58,7 +58,7 @@
 			   ProjectId: $stateParams.projectId,
 			   Hour: participant.hours
            }
-           horas.postHours(hoursData,addHoursSuccess,addHoursFail);
+           //horas.postHours(hoursData,addHoursSuccess,addHoursFail);
         }
 
         function addHoursSuccess(){

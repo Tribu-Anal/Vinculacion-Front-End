@@ -42,7 +42,8 @@
                 typeObject: 'button',
                 properties: {
                     onClick: objectButton.onClick,
-                    icon: objectButton.icon
+                    icon: objectButton.icon,
+                    tooltip:objectButton.tooltip
                 }
             }
             return element;
