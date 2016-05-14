@@ -16,6 +16,7 @@
     visibility: hidden;
     width: 120px;
     z-index: 1;
+    font-size: small;
 }
 .tb-tooltip .tooltiptext::after {
     border-color: transparent transparent black transparent;

@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils', 'tableContent', 'horas'];
+    ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils', 'tableContent', 'horas','$state'];
 
-    function ProjectController($stateParams, projects, TbUtils,tableContent, horas) {
+    function ProjectController($stateParams, projects, TbUtils,tableContent, horas,$state) {
         var vm = this;
 
         vm.project = {};
@@ -24,6 +24,16 @@
             actions: false
         };
         vm.sectionIds = [];
+        vm.saveButton = {
+        	icon:'glyphicon-floppy-disk', 
+        	onClick:editHours,
+        	tooltip:'Agregar Horas'
+        };
+        vm.downloadButton = {
+        	icon:'glyphicon-download-alt', 
+        	onClick:downloadReport,
+        	tooltip:'Descargar Reporte'
+        };
         projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
         projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
 
@@ -58,7 +68,7 @@
 			   ProjectId: $stateParams.projectId,
 			   Hour: participant.hours
            }
-           //horas.postHours(hoursData,addHoursSuccess,addHoursFail);
+           horas.postHours(hoursData,addHoursSuccess,addHoursFail);
         }
 
         function addHoursSuccess(){
@@ -93,7 +103,8 @@
 			participantElement.content.push(
         		tableContent.createALableElement(participantData.Name),
         		tableContent.createAnInputElement('number'),
-        		tableContent.createAButtonElement({icon:'glyphicon-floppy-disk', onClick:editHours})
+        		tableContent.createAButtonElement(vm.saveButton),
+        		tableContent.createAButtonElement(vm.downloadButton)
     		);
     		return participantElement;
     	}
@@ -104,6 +115,9 @@
 
         function addParticipantsToTable(participants) {
             participants.forEach(addParticipantToVMParticipansBody);
+        }
+
+        function downloadReport(participant){
         }
     }
 })();
