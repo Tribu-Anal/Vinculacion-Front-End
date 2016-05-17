@@ -21,7 +21,7 @@
         function cache (projectId) {
             recentProjects = get();
 
-            if (noRecentProjects()) 
+            if (noRecentProjectsCached()) 
                 recentProjects = [];
 
             if (!projectAlreadyInList(projectId)) {
@@ -30,7 +30,7 @@
             }
         }
 
-        function noRecentProjects () {
+        function noRecentProjectsCached () {
             return recentProjects === undefined;
         }
 
