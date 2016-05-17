@@ -5,12 +5,13 @@
 		.module('VinculacionApp')
 		.controller('HomeController', HomeController);
 
-	HomeController.$inject = [ 'recentProjects', 'projects' ];
+	HomeController.$inject = [ 'recentProjects', 'projects', 'TbUtils' ];
 
-	function HomeController (recentProjects, projects) {
+	function HomeController (recentProjects, projects, TbUtils) {
 		var vm = this;
 		
 		vm.recentProjects = [];
+		vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
 
 		getRecentProjects();
 

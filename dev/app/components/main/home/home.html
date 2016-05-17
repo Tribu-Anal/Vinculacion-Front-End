@@ -9,7 +9,9 @@
 				<div class="panel-body">
                     <ul class="list-group">
                     <li class="list-group-item" ng-repeat="project in vm.recentProjects">
-                        <div class="row project">
+                        <div class="row project" 
+                            ng-click="vm.preventGeneralLoading()"
+                            ui-sref="dashboard.project({projectId: project.Id})">
                             <div class="col-xs-2 col-md-1">
                             <img class="img-responsive" style="max-width: 80px; padding-right: 20px;max-height: 80px;" src="img/logo.png" >
                             </div>
