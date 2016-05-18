@@ -5,7 +5,7 @@
         <label class="cd-label" for="cd-name">Nombre</label>
         <input ng-model="vm.project.Name" class="user" type="text" name="projectName" id="cd-name" required>
         <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectName.$error.required">
-            * Porfavor ingresa un nombre
+            * Por favor ingresa un nombre
         </p>
     </div>
 
@@ -13,7 +13,7 @@
         <label class="cd-label" for="cd-name">Id</label>
         <input ng-model="vm.project.ProjectId" class="user" type="text" name="projectId" id="cd-name" required>
         <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectId.$error.required">
-            * Porfavor ingresa un Id para el proyecto
+            * Por favor ingresa un Id para el proyecto
         </p>
     </div>
 
@@ -29,7 +29,7 @@
             <tb-loading class="main-loader" style="z-index: 99999;" ng-show="vm.majorsLoading"></tb-loading>
         </div>
         <p class="error-message" ng-show="projectForm.$submitted && vm.project.MajorIds.length === 0">
-            * Porfavor selecciona una o mas de las carreras disponibles
+            * Por favor selecciona una o mas de las carreras disponibles
         </p>
     </div> 
 
@@ -53,7 +53,7 @@
             <tb-loading class="main-loader" style="z-index: 99999;" ng-show="vm.sectionsLoading"></tb-loading>
         </div>
         <p class="error-message" ng-show="projectForm.$submitted && vm.project.SectionIds.length === 0">
-            * Porfavor selecciona una de las secciones disponibles
+            * Por favor selecciona una de las secciones disponibles
         </p>
     </div>
 
@@ -61,7 +61,7 @@
         <label class="cd-label" for="cd-name">Beneficiario</label>
         <input ng-model="vm.project.BeneficiariesAlias" class="user" type="text" name="projectBeneficiario" id="cd-name" required>
         <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectBeneficiario.$error.required">
-            * Porfavor ingresa el nombre de un beneficiario.
+            * Por favor ingresa el nombre de un beneficiario.
         </p>
     </div>
 
@@ -77,7 +77,7 @@
         <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
         <textarea ng-model="vm.project.Description" class="message" name="projectDescription" id="cd-textarea" required></textarea>
         <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectDescription.$error.required">
-            * Porfavor ingresa una descripcion para el proyecto
+            * Por favor ingresa una descripcion para el proyecto
         </p>
     </div>
 
