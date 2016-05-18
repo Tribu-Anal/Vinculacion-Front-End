@@ -5,12 +5,9 @@
 		.module('VinculacionApp')
 		.factory('recentProjects', recentProjects);
 
-    recentProjects.$inject = [ '$rootScope' ];
-
-	function recentProjects ($rootScope) {  
+	function recentProjects () {  
         var MAX_RECENT_PROJECTS = 5;
-        var storageLocation = 'RecentProjects' + $rootScope.Session;
-        var recentProjects = get();
+        var recentProjects = [];
 
         var service = {
             put: put,
@@ -19,16 +16,18 @@
         
         return service;
 
-        function put (projectId) {
+        function put (session, projectId) {
             let projectIndex = getIndexFromList(projectId);
             let alreadyInList = projectIndex >= 0;
+
+            recentProjects = get(session);
 
             if (alreadyInList)
                 recentProjects.splice(projectIndex, 1);
             else
                 checkForOverflow();
 
-            storeRecentProject(projectId);
+            storeRecentProject(session, projectId);
         }
 
         function getIndexFromList (projectId) {
@@ -40,13 +39,14 @@
                 recentProjects.pop();
         }
 
-        function storeRecentProject (projectId) {
+        function storeRecentProject (session, projectId) {
             recentProjects.unshift(projectId);
-            window.localStorage[storageLocation] = JSON.stringify(recentProjects);
+            localStorage.setItem(session, JSON.stringify(recentProjects));
         }
 
-        function get () {
-            let storedPIds = JSON.parse(window.localStorage[storageLocation]);
+        function get (session) {
+            let data = localStorage.getItem(session);
+            let storedPIds = data ? JSON.parse(data) : [];
 
             return Array.isArray(storedPIds) ? storedPIds : [];
         }

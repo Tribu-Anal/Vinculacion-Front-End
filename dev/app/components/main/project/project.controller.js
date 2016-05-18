@@ -5,9 +5,12 @@
 		.module('VinculacionApp')
 		.controller('ProjectController', ProjectController);
 
-	ProjectController.$inject = ['$state', '$stateParams', 'projects', 'TbUtils', 'recentProjects'];
+	ProjectController.$inject = [ '$rootScope', '$state', 
+								  '$stateParams', 'projects', 
+								  'TbUtils', 'recentProjects'];
 
-	function ProjectController($state, $stateParams, projects, TbUtils, recentProjects) {
+	function ProjectController($rootScope, $state, $stateParams, projects, 
+							   TbUtils, recentProjects) {
 		var vm = this;
 
 		vm.project = {};
@@ -28,7 +31,7 @@
             console.log(response);
             vm.project = response.data;
 
-            recentProjects.put(vm.project.Id);
+            recentProjects.put($rootScope.Session, vm.project.Id);
 
             vm.projectLoading = false;
         }
