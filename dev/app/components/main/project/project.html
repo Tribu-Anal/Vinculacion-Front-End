@@ -1,26 +1,45 @@
+<div class="row">
 <div class="container">
-  <div class="row">
-    <div class="col-md-5">
-      <h1>
-        {{vm.project.Name}}
-        <tb-loading class="main-loader project-loader" ng-show="vm.projectLoading"
-        style="z-index: 99999"></tb-loading>
-      </h1>
-      <img class="img-responsive img-thumbnail" src="img/reforestacion.jpg">
-      <div id="users-management" class="col-md-8">
-        <div class="panel-group">
-            <h2>Participantes</h2>
-            <tb-table headers="vm.participants.headers" 
-                      body="vm.participants.body">
-           </tb-table>
-           <tb-loading class="main-loader project-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-5">
-      <h2>Descripci&oacute;n</h2>
-      <p>{{vm.project.Description}}</p>
-       <tb-loading class="main-loader project-loader" ng-show="vm.projectLoading" style="z-index: 99999"></tb-loading>
-    </div>
-  </div>
+<h2 class="text-center">{{vm.project.Name}}</h2>
+<tb-loading ng-show="vm.projectLoading"
+      style="z-index: 99999"></tb-loading>
 </div>
+</div>
+<div class="jumbotron container center-block">
+<div class="container description">
+
+<div class="row">
+<div class="text-center col-md-10 center-block">
+<h3>Descripci&oacute;n</h3>
+<p>{{vm.project.Description}}</p>
+<tb-loading class="main-loader project-loader" ng-show="vm.projectLoading" style="z-index: 99999"></tb-loading>
+</div>
+
+</div>
+</div>
+<div class="col-md-2 col-md-offset-1 text-center">
+<h3>Secci&oacute;n</h3>
+<p>29392</p>
+</div>
+<div class="col-md-4 col-md-offset-4 text-center">
+<h3>Maestro Asociado</h3>
+<p>Lic. Gragedita</p>
+</div>
+<div class="container">
+<div class="text-center">
+<h2>Participantes</h2>
+</div>
+<tb-table headers="vm.participants.headers" 
+                    body="vm.participants.body">
+</tb-table> 
+<tb-loading class="main-loader project-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
+</div>
+
+
+</div>
+
+
+
+
+
+
