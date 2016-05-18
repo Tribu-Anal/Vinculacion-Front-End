@@ -32,7 +32,9 @@
         }
         
         function getProjectFail(response) {
-            TbUtils.showErrorMessage('error', response);
+            TbUtils.showErrorMessage('error', response,
+                                     'El proyecto deseado no existe.',
+                                     'Error');
 
             vm.projectLoading = false;
         }

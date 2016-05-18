@@ -35,7 +35,9 @@
         
         function LoginFail(response) {
             console.log(response);
-            TbUtils.showErrorMessage('error', response);
+            TbUtils.showErrorMessage('error', response, 
+                                     'La cuenta ingresada no tiene privilegios de acceso',
+                                     'Falla autorizacion');
             
             vm.loading = false;
         }

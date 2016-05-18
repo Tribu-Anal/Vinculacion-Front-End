@@ -51,8 +51,19 @@
             list.splice(indexOfItem, 1);
         }
         
-        function showErrorMessage(type, response) {
-            displayNotification(type, response.statusText, response.data);
+        function showErrorMessage(type, response, customMessage, customTitle) {
+            if(validateApiErrorMessageExists(response))
+                displayNotification(type, response.statusText, response.data);
+            
+            else
+                displayNotification(type, customTitle, customMessage);
+        }
+        
+        function validateApiErrorMessageExists(response) {
+            if(response.data === undefined || response.data === "")
+                return false;
+            
+            return true;
         }
 	}
 })();

@@ -84,10 +84,9 @@
 
         function updateFailure (response) {
             vm.submitting = false;
-
-//            TbUtils.displayNotification('error', 'Error', 
-//                'No se pudo actualizar el proyecto.');
-            TbUtils.showErrorMessage('error', response);
+            TbUtils.showErrorMessage('error', response,
+                                     'No se pudo actualizar el proyecto.',
+                                     'Error');
         }
 
         function postNewProject () {
@@ -121,15 +120,18 @@
         
         function getMajorsFail(response) {
             console.log(response);
-            TbUtils.showErrorMessage('error', response);
+            TbUtils.showErrorMessage('error', response,
+                                     'Hay un problema con el servidor.' + 
+                                     ' No se ha podido obtener las carreras disponibles.',
+                                     'Error');
             vm.majorsLoading = false;
         }
         
         function getSectionsFail(response) {
             console.log(response);
-//            TbUtils.displayNotification('error', 'Error',
-//                                'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.');
-            TbUtils.showErrorMessage('error', response);
+            TbUtils.showErrorMessage('error', response,
+                                     'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.',
+                                     'Error');
             vm.sectionsLoading = false;
         }
         
@@ -144,10 +146,9 @@
         
         function submitProjectFail(response) {
             vm.submitting = false;
-
-//            TbUtils.displayNotification('error', 'Error', 
-//                'No se ha podido crear el proyecto.');
-            TbUtils.showErrorMessage('error', response);
+            TbUtils.showErrorMessage('error', response,
+                                     'No se ha podido crear el proyecto.',
+                                     'Error');
         }
     }
 })();
