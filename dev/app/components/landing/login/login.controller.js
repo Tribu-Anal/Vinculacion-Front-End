@@ -26,22 +26,21 @@
         
         function LoginSuccess(response) {
             authentication.SetCredentials(response.data);
-            $location.path('/home');
             
             window.localStorage['Session'] = 
             $rootScope.Session =
             JSON.parse(response.config.data).User;
 
             role.get($rootScope.Session, getRoleSuccess);
-
-            vm.loading = false;
         }
 
         function getRoleSuccess (response) {
-            console.log(response.data);
-            // window.localStorage['Role'] = 
-            // $rootScope.Role =
-            // JSON.parse(response.data);
+            window.localStorage['Role'] = 
+            $rootScope.Role =
+            response.data;
+
+            $location.path('/home');
+            vm.loading = false;
         }
         
         function LoginFail(response) {

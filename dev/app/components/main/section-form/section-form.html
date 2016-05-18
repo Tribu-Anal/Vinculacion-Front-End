@@ -23,17 +23,6 @@
     </div>
 
     <div>
-        <label class="cd-label" for="cd-name">Docente</label>
-        <select name="professor" ng-model="vm.section.ProfessorAccountId" required>
-            <option value="{{professor.Id}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
-        </select>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.professor.$error.required">
-            * Por favor escoja un profesor.
-        </p>
-        <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
-    </div>
-
-    <div>
         <label class="cd-label" for="cd-name">Periodo</label>
         <select name="period" ng-model="vm.section.PeriodId" required>
             <option value="{{period.Id}}" ng-repeat="period in vm.periods">Modulo {{period.Number}} ({{period.Year}})</option>
@@ -42,6 +31,17 @@
             * Por favor escoja un periodo.
         </p>
         <tb-loading class="main-loader" ng-show="vm.periodsLoading"></tb-loading>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Docente</label>
+        <select name="professor" ng-model="vm.section.ProffesorAccountId" required>
+            <option value="{{professor.Id}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
+        </select>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.professor.$error.required">
+            * Por favor escoja un profesor.
+        </p>
+        <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
     </div>
 
     <div>

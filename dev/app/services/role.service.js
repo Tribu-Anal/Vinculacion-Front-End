@@ -18,7 +18,7 @@
 		return service;
 
 		function get (session, successCallback, errorCallback) {
-	        $http.get(url + session)
+	        $http.post(url, JSON.stringify({ Email: session }))
 	        	.then(successCallback)
                 .catch(errorCallback);
 		}

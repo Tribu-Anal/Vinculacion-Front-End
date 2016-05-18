@@ -5,9 +5,12 @@
 		.module('VinculacionApp')
 		.controller('RequestsController', RequestsController);
 
-	RequestsController.$inject = ['$scope', 'requests', 'TbUtils'];
+	RequestsController.$inject = ['$rootScope', '$scope', '$state', 
+								  'requests', 'TbUtils'];
 
-	function RequestsController($scope, requests, TbUtils, ngDialog) {
+	function RequestsController($rootScope, $scope, $state, requests, TbUtils, ngDialog) {
+		if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
+		
 		var vm = this;
         
 		var acceptButton = {

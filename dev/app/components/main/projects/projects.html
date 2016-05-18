@@ -1,6 +1,6 @@
 <div class="gallery">
 	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}">
-		<span class="icon-group" ng-show="Role === 'ADMIN'">
+		<span class="icon-group" ng-show="Role === 'Admin'">
 			<i class="glyphicon glyphicon-remove" 
 			   ng-click="vm.removeProjectClicked(prj, $index)">
 			</i>
@@ -22,4 +22,4 @@
 	</div>
 </div>
 <tb-loading class="main-loader" ng-show="vm.projectsLoading"></tb-loading>
-<tb-round-btn ng-show="Role === 'ADMIN'" ui-sref="dashboard.addproject" ng-click="vm.preventGeneralLoading()">+</tb-round-btn>
+<tb-round-btn ng-show="Role === 'Admin'" ui-sref="dashboard.addproject" ng-click="vm.preventGeneralLoading()">+</tb-round-btn>

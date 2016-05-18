@@ -5,15 +5,17 @@
         .module('VinculacionApp')
         .controller('ProjectFormController', ProjectFormController);
 
-    ProjectFormController.$inject = [ '$state', '$stateParams',
+    ProjectFormController.$inject = [ '$rootScope', '$state', '$stateParams',
                                       'projects', 'sections', 
                                       'majors', 'toaster', 
                                       'TbUtils', '$location'];
 
-    function ProjectFormController ($state, $stateParams, 
+    function ProjectFormController ($rootScope, $state, $stateParams, 
                                     projects, sections, 
                                     majors, toaster, 
                                     TbUtils, $location) {
+        if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
+
         var vm = this;
 
         vm.edit = $state.current.name.includes('edit');

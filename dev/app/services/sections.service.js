@@ -24,7 +24,7 @@
         }
 
         function postSection (data, successCallback, errorCallback) {
-        	$http.post(url, data)
+        	$http.post(url, JSON.stringify(data))
         		.then(successCallback)
                 .catch(errorCallback);
         }

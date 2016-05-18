@@ -28,13 +28,13 @@
 		  { title: "SOLICITUDES", ref: "dashboard.requests", 
 		  	icon: "glyphicon glyphicon-th-list", 
 		  	active: $state.current.url === '/solicitudes',
-		  	show: $rootScope.Role === 'ADMIN',
+		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "SECCIONES", ref: "dashboard.newsection", 
 		  	icon: "glyphicon glyphicon-plus", 
 		  	active: $state.current.url === '/nueva-seccion',
-		  	show: $rootScope.Role === 'ADMIN',
+		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "LOG OUT", ref: "landing", 
