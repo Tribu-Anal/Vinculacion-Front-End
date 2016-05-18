@@ -14,11 +14,11 @@
             <p class="message register">No estas registrado? <a href="#">Crear una cuenta</a></p>
             <tb-loading class="landing-loader main-loader" ng-show="vm.loading"></tb-loading>
         </form>  
-          
+        
         <div ng-controller="RegisterController as vm">
             <form id="register-form" class="register-form" name="register" 
                   ng-submit="register.$valid && vm.registerStudent()" novalidate>
-                <label>Registrar Usuario</label>
+                <span class="label-container">Registrar Usuario</span>
                 <div class="inner-addon left-addon">
                 <span class="fa fa-envelope"></span>
                 <input name="correo" type="email" placeholder="Correo Electr&oacute;nico" ng-model="vm.student.Email" 
@@ -33,7 +33,7 @@
                 <input name="nombre" type="text" placeholder="Nombre Completo" ng-model="vm.student.Name" required>
                 </div>
                 <div class="campus">
-                    <label>Campus</label>
+                    <span class="label-container">Campus</span>
                     <select class="form-control" ng-model="vm.student.Campus">
                         <option>SPS</option>
                         <option>TGU</option>
@@ -49,7 +49,7 @@
                 <input type="password" name="confirmpass" placeholder="Confirmar Clave" ng-pattern="vm.password" ng-model="confirmpass" required/>
                 </div>
                 <div class="carrera">
-                    <label>Carrera</label>
+                    <span class="label-container">Carrera</span>
                     <select class="form-control" ng-model="vm.student.MajorId">
                         <option ng-repeat="major in vm.majors" value="{{major.MajorId}}">{{major.Name}}</option>
                     </select>
