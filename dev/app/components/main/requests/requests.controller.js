@@ -45,7 +45,6 @@
 
             for (let i = 0; i < response.data.length; i++) {
                 let student = response.data[i];
-
                 if (student.Major === null) continue;
 
                 let newTableElement = {
@@ -66,9 +65,9 @@
         };
 
         function getRequestFail(response) {
-            console.log(response);
-            TbUtils.displayNotification('error', 'Falla de solicitudes',
-                'No se ha podido obtener las solicitudes de estudiantes.');
+            TbUtils.showErrorMessage('error', response,
+                'No se ha podido obtener las solicitudes de estudiantes.',
+                'Error');
             vm.requestsLoading = false;
         }
 
@@ -99,7 +98,9 @@
         }
 
         function acceptRequestFail(response) {
-            console.log(response);
+            TbUtils.showErrorMessage('error', response,
+                'No se pudo aceptar la solicitud.',
+                'Error');
         }
 
         function rejectRequestSuccess(index) {
@@ -107,7 +108,9 @@
         }
 
         function rejectRequestFail(response) {
-            console.log(response);
+            TbUtils.showErrorMessage('error', response,
+                'La solicitud no pudo ser rechazada.',
+                'Error');
         }
     }
 })();

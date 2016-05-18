@@ -59,9 +59,10 @@
             vm.deletingProject.splice(deleteIndex, 1);
         }
 
-        function removeProjectFail () {
-            TbUtils.displayNotification('error', 'Error', 
-              'No se pudo borrar el proyecto.');
+        function removeProjectFail (response) {
+            TbUtils.showErrorMessage('error', response,
+                                     'No se pudo borrar el proyecto.',
+                                     'Error');
 
             vm.deletingProject[deleteIndex] = false;
         }
@@ -81,9 +82,10 @@
             vm.projectsLoading = false;
         }
         
-        function getProjectsFail() {
-            TbUtils.displayNotification('error', 'Error', 
-              'No se ha podido obtener los proyectos deseados.');
+        function getProjectsFail(response) {
+            TbUtils.showErrorMessage('error', response,
+                                     'No se ha podido obtener los proyectos deseados.',
+                                     'Error');
 
             vm.projectsLoading = false;
         }

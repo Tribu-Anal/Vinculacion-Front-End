@@ -34,8 +34,10 @@
                                         'Se le ha enviado un correo de confirmacion. Porfavor revisar.');
         }
         
-        function registerStudentFail() {
-            TbUtils.displayNotification('error', 'Error', 'Se ha producido un error! Lamentamos los inconvenientes.');
+        function registerStudentFail(response) {
+            TbUtils.showErrorMessage('error', response,
+                                     'Se ha producido un error! Lamentamos los inconvenientes.',
+                                     'Error');
         }
         
         function validate ($event) { 
@@ -56,8 +58,9 @@
         
         function getMajorsFail(response) {
             console.log(response);
-            TbUtils.displayNotification('error', 'Error',
-                                       'No se ha podido obtener todas las carreras disponibles.');
+            TbUtils.showErrorMessage('error', response,
+                                     'No se ha podido obtener todas las carreras disponibles.',
+                                     'Error');
         }
     }
 })();
