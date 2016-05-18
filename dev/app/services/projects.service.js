@@ -37,12 +37,14 @@
 
        function updateProject (projectId, data, successCallback, errorCallback) {
        		$http.put(url + "/" + projectId, data)
-	   			.then(successCallback, errorCallback);
+	   			.then(successCallback)
+                .catch(errorCallback);
        }
 
        function deleteProject (projectId, successCallback, errorCallback) {
 	   		$http.delete(url + "/" + projectId)
-	   			.then(successCallback, errorCallback);
+	   			.then(successCallback)
+                .catch(errorCallback);
 	   }
 	}
 })();

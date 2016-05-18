@@ -5,7 +5,7 @@
 		.module('VinculacionApp')
 		.controller('RequestsController', RequestsController);
 
-	RequestsController.$inject = ['$scope', 'requests', 'TbUtils'];
+	RequestsController.$inject = ['$scope', 'requests', 'TbUtils', 'ngDialog'];
 
 	function RequestsController($scope, requests, TbUtils, ngDialog) {
 		var vm = this;
@@ -67,8 +67,9 @@
         
         function getRequestFail(response) {
             console.log(response);
-            TbUtils.displayNotification('error', 'Falla de solicitudes',
-                                        'No se ha podido obtener las solicitudes de estudiantes.');
+//            TbUtils.displayNotification('error', 'Falla de solicitudes',
+//                                        'No se ha podido obtener las solicitudes de estudiantes.');
+            TbUtils.showErrorMessage('error', response);
             vm.requestsLoading = false;
         }
 
@@ -100,6 +101,7 @@
         
         function acceptRequestFail(response) {
             console.log(response);
+            TbUtils.showErrorMessage('error', response);
         }
         
         function rejectRequestSuccess(index) {
@@ -108,6 +110,7 @@
         
         function rejectRequestFail(response) {
             console.log(response);
+            TbUtils.showErrorMessage('error', response);
         }
 	}
 })();

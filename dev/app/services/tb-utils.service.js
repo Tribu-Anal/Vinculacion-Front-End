@@ -52,7 +52,7 @@
         }
         
         function showErrorMessage(type, response) {
-            displayNotification(type, response.statusText, response.content);
+            displayNotification(type, response.statusText, response.data);
         }
 	}
 })();

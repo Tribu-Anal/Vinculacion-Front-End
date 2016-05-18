@@ -82,11 +82,12 @@
                 'Se ha actualizado exitosamente el nuevo proyecto.');
         }
 
-        function updateFailure () {
+        function updateFailure (response) {
             vm.submitting = false;
 
-            TbUtils.displayNotification('error', 'Error', 
-                'No se pudo actualizar el proyecto.');
+//            TbUtils.displayNotification('error', 'Error', 
+//                'No se pudo actualizar el proyecto.');
+            TbUtils.showErrorMessage('error', response);
         }
 
         function postNewProject () {
@@ -120,16 +121,15 @@
         
         function getMajorsFail(response) {
             console.log(response);
-            TbUtils.displayNotification('error', 'Error',
-                                'Hay un problema con el servidor.' + 
-                                ' No se ha podido obtener las carreras disponibles.');
+            TbUtils.showErrorMessage('error', response);
             vm.majorsLoading = false;
         }
         
         function getSectionsFail(response) {
             console.log(response);
-            TbUtils.displayNotification('error', 'Error',
-                                'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.');
+//            TbUtils.displayNotification('error', 'Error',
+//                                'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.');
+            TbUtils.showErrorMessage('error', response);
             vm.sectionsLoading = false;
         }
         
@@ -142,11 +142,12 @@
                 'Se ha creado exitosamente el nuevo proyecto.');
         }
         
-        function submitProjectFail() {
+        function submitProjectFail(response) {
             vm.submitting = false;
 
-            TbUtils.displayNotification('error', 'Error', 
-                'No se ha podido crear el proyecto.');
+//            TbUtils.displayNotification('error', 'Error', 
+//                'No se ha podido crear el proyecto.');
+            TbUtils.showErrorMessage('error', response);
         }
     }
 })();
