@@ -33,9 +33,10 @@
             vm.projectLoading = false;
         }
         
-        function getProjectFail() {
-            TbUtils.displayNotification('error', 'Error', 
-            	'El proyecto deseado no existe.');
+        function getProjectFail(response) {
+            TbUtils.showErrorMessage('error', response,
+                                     'El proyecto deseado no existe.',
+                                     'Error');
 
             vm.projectLoading = false;
         }
