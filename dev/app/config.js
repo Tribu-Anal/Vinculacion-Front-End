@@ -69,6 +69,13 @@
 				url: '/nueva-seccion',
 				templateUrl: templateDir + 'main/section-form/section-form.html',
 				controller: "SectionFormController as vm"
+			})
+
+			.state('dashboard.printarea', {
+				url: '/reporte',
+				templateUrl: templateDir + 'main/print-area/print-area.html',
+				controller: "PrintAreaController as vm",
+				params: {templateDir: templateDir, params: null}
 			});
 	}
 })();

@@ -1,15 +1,15 @@
 <div class="container-fluid">
-	<tb-sidebar class="col-xs-2" 
+	<tb-sidebar id="sidebar" class="col-xs-2" 
 				nav-items="mvm.navItems" 
 				ng-hide="mvm.expand">
 	</tb-sidebar>
 
-	<div class="row">
+	<div id="header" class="row">
 		<tb-headerbar class="col-xs-12"></tb-headerbar>
 	</div>
 
 	<div class="row start-xs loading">
-		<div class="dynamic-area col-xs-12" 
+		<div id="dynamic-area" class="dynamic-area col-xs-12" 
 		 ng-class="mvm.expand ? 'expanded' : 'shrunk'"
 		 ng-cloak ui-view>
 		</div>

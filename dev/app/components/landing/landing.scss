@@ -163,9 +163,11 @@
         height: 120px;
         margin: 0 auto;
     }
-    label
-    {
+    .label-container{
         font-size: 16px;
+        font-weight: 800;
+        display: inline-block;
+        margin:7px 0;
     }
     /* enable absolute positioning */
     .inner-addon

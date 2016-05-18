@@ -9,5 +9,8 @@
 
     function TableController ($scope) {
         var vm = this;
+        vm.loseFocus = function(){
+        	$(':focus').blur();
+        };
     }
 })();
