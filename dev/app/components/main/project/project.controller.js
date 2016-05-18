@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils', 'tableContent', 'horas', '$state'];
+    ProjectController.$inject = ['$stateParams', '$state', 'projects', 'TbUtils', 'tableContent', 'horas'];
 
-    function ProjectController($stateParams, projects, TbUtils, tableContent, horas, $state) {
+    function ProjectController($stateParams, $state, projects, TbUtils, tableContent, horas) {
         var vm = this;
 
         vm.project = {};
@@ -23,7 +23,6 @@
             body: [],
             actions: false
         };
-        vm.sectionIds = [];
         vm.saveButton = {
             icon: 'glyphicon-floppy-disk',
             onClick: editHours,
@@ -34,6 +33,8 @@
             onClick: downloadReport,
             tooltip: 'Ver Reporte'
         };
+        vm.sectionIds = [];
+        
         projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
         projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
 
@@ -63,17 +64,20 @@
         function editHours(participant) {
             participant.hours = getHoursOfParticipant(participant);
             console.log(participant.hours);
+            
             if(!participant.hours){
                 TbUtils.displayNotification('error', 'Error',
                 'Debe ingresar las  horas a guardar.');
                 return;
             }
+            
             let hoursData = {
                 AccountId: participant.AccountId,
                 SectionId: vm.sectionIds[0],
                 ProjectId: $stateParams.projectId,
                 Hour: participant.hours
             }
+            
             horas.postHours(hoursData, addHoursSuccess, addHoursFail);
         }
 
@@ -107,6 +111,7 @@
                 tableContent.createAButtonElement(vm.saveButton),
                 tableContent.createAButtonElement(vm.downloadButton)
             );
+            
             return participantElement;
         }
 
@@ -127,6 +132,7 @@
                 },
                 reportParams: getReportParams(participant)
             }
+            
             $state.go('dashboard.printarea', {
                 params: params
             });
@@ -143,6 +149,7 @@
                 Major: participant.Major,
                 Name: participant.Name
             }
+            
             return reportParams;
         }
     }
