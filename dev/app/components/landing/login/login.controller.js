@@ -24,11 +24,10 @@
         }
         
         function LoginSuccess(response) {
-            if(response.statusText === "OK") {
-                console.log(response);
-                authentication.SetCredentials(response.data);
-                $location.path('/home');
-            }
+            authentication.SetCredentials(response.data);
+            $location.path('/home');
+            window.localStorage['Session'] = JSON.parse(response.config.data).User;
+            
             vm.loading = false;
         }
         
