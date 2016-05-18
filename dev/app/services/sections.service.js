@@ -11,14 +11,22 @@
 	   var url = 'http://fiasps.unitec.edu:8085/api/Sections';
         
         var service = {
-            getSections: getSections
+            getSections: getSections,
+            postSection: postSection
         };
         
         return service;
         
-        function getSections(successCallback, errorCallback) {
-            $http.get(url).then(successCallback)
-                          .catch(errorCallback);
-        };
+        function getSections (successCallback, errorCallback) {
+            $http.get(url)
+            	.then(successCallback)
+              	.catch(errorCallback);
+        }
+
+        function postSection (data, successCallback, errorCallback) {
+        	$http.post(url, data)
+        		.then(successCallback)
+                .catch(errorCallback);
+        }
 	}
 })();
