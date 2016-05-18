@@ -5,16 +5,15 @@
         .module('VinculacionApp')
         .controller('PrintAreaController', PrintAreaController);
 
-    PrintAreaController.$inject = ['$stateParams', '$state', 'reports', '$window'];
+    PrintAreaController.$inject = ['$stateParams', '$state', '$window', 'reports'];
 
-    function PrintAreaController($stateParams, $state, reports, $window) {
+    function PrintAreaController($stateParams, $state, $window, reports) {
         var vm = this;
         vm.template = '';
         vm.printButton = {
             icon: 'glyphicon-print',
             onClick: printReport
         };
-
         init();
 
         function init() {

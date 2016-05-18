@@ -1,27 +1,25 @@
-<div class="project">
-  <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>
-        {{vm.project.Name}}
-        <tb-loading class="main-loader project-loader" ng-show="vm.projectLoading"
-        style="z-index: 99999"></tb-loading>
-      </h1>
-       <div class="col-md-6">
-        <h2>Descripci&oacute;n</h2>
-        <p>{{vm.project.Description}}</p>
-         <tb-loading class="main-loader project-loader" ng-show="vm.projectLoading" style="z-index: 99999"></tb-loading>
-      </div>
-      <div id="users-management" class="col-md-12">
-        <div class="panel-group">
-            <h2>Participantes</h2>
-            <tb-table headers="vm.participants.headers" 
-                      body="vm.participants.body">
-           </tb-table>
-           <tb-loading class="main-loader project-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
-        </div>
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+    <h1>
+      {{vm.project.Name}}
+      <tb-loading class="main-loader project-loader" ng-show="vm.projectLoading"
+      style="z-index: 99999"></tb-loading>
+    </h1>
+     <div class="col-md-6">
+      <h2>Descripci&oacute;n</h2>
+      <p>{{vm.project.Description}}</p>
+       <tb-loading class="main-loader project-loader" ng-show="vm.projectLoading" style="z-index: 99999"></tb-loading>
+    </div>
+    <div id="users-management" class="col-md-12">
+      <div class="panel-group">
+          <h2>Participantes</h2>
+          <tb-table headers="vm.participants.headers" 
+                    body="vm.participants.body">
+         </tb-table>
+         <tb-loading class="main-loader project-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
       </div>
     </div>
   </div>
-  </div>
+</div>
 </div>

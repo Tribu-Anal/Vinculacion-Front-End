@@ -16,6 +16,7 @@
             loadingDes: true,
             description: []
         };
+        
         horas.getStudentHourReport(vm.report.AccountId, getStudentHourReportSuccess,
             getStudentHourReportFail);
 
