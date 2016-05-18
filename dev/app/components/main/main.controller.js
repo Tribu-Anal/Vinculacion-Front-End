@@ -19,21 +19,30 @@
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "PROYECTOS", ref: "dashboard.projects", 
-		  	icon: "glyphicon glyphicon-folder-open", 
+		  	icon: "glyphicon glyphicon-th-large", 
 		  	active: $state.current.url.includes('/proyectos'),
 		  	clicked:TbUtils.preventGeneralLoading },
 
 		  { title: "SOLICITUDES", ref: "dashboard.requests", 
-		  	icon: "glyphicon glyphicon-tasks", 
+		  	icon: "glyphicon glyphicon-th-list", 
 		  	active: $state.current.url === '/solicitudes',
+		  	clicked: TbUtils.preventGeneralLoading },
+
+		  { title: "SECCIONES", ref: "dashboard.newsection", 
+		  	icon: "glyphicon glyphicon-plus", 
+		  	active: $state.current.url === '/nueva-seccion',
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "LOG OUT", ref: "landing", 
 		  	icon: "glyphicon glyphicon-log-out", active: false,
-		  	clicked: function () {} }
+		  	clicked: closeSession }
 		];
 
 		$rootScope.$on('$stateChangeStart', changeActiveItem);
+
+		function closeSession () {
+			window.localStorage['Session'] = "";
+		}
 
 		function changeActiveItem (event, toState) {
 			vm.navItems[0].active = toState.url === '/home';
