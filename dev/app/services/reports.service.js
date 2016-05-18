@@ -12,7 +12,9 @@
             setReportParams: setReportParams,
             getReportParams: getReportParams
         };
+        
         var reportParams = {};
+        
         return service;
 
         function setReportParams(params) {
