@@ -47,7 +47,7 @@
             <div class="tb-checkbox" ng-repeat="section in vm.sections">
                 <span ng-click="vm.checkboxListItemClicked(mdl, section.Id, vm.project.SectionIds)">
                     <input type="checkbox" id="sectionBox{{section.Id}}" name="projectSection" value="{{section.Id}}" ng-init="mdl = vm.edit && vm.project.SectionIds.indexOf(section.Id) >= 0" ng-model="mdl">
-                    <label ng-click="mdl = !mdl">{{section.Class.Name}}</label>
+                    <label ng-click="mdl = !mdl">{{section.Code}} - {{section.Class.Name}}</label>
                 </span>
             </div>
             <tb-loading class="main-loader" style="z-index: 99999;" ng-show="vm.sectionsLoading"></tb-loading>
