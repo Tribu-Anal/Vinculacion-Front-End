@@ -5,7 +5,7 @@
         .module('VinculacionApp')
         .controller('PrintAreaController', PrintAreaController);
 
-    PrintAreaController.$inject = ['$stateParams', '$state', 'reports', '$window'];
+    PrintAreaController.$inject = ['$stateParams', '$state', '$window', 'reports'];
 
     function PrintAreaController($stateParams, $state, reports, $window) {
         var vm = this;
