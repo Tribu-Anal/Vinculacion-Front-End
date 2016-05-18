@@ -63,6 +63,12 @@
 				url: '/solicitudes',
 				templateUrl: templateDir + 'main/requests/requests.html',
 				controller: "RequestsController as vm"
+			})
+
+			.state('dashboard.newsection', {
+				url: '/nueva-seccion',
+				templateUrl: templateDir + 'main/section-form/section-form.html',
+				controller: "SectionFormController as vm"
 			});
 	}
 })();
