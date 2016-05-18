@@ -5,9 +5,9 @@
 		.module('VinculacionApp')
 		.controller('ProjectController', ProjectController);
 
-	ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils', 'recentProjects'];
+	ProjectController.$inject = ['$state', '$stateParams', 'projects', 'TbUtils', 'recentProjects'];
 
-	function ProjectController($stateParams, projects, TbUtils, recentProjects) {
+	function ProjectController($state, $stateParams, projects, TbUtils, recentProjects) {
 		var vm = this;
 
 		vm.project = {};
@@ -28,7 +28,7 @@
             console.log(response);
             vm.project = response.data;
 
-            recentProjects.cache(vm.project.Id);
+            recentProjects.put(vm.project.Id);
 
             vm.projectLoading = false;
         }
@@ -37,7 +37,7 @@
             TbUtils.displayNotification('error', 'Error', 
             	'El proyecto deseado no existe.');
 
-            vm.projectLoading = false;
+            $state.go('dashboard.home');
         }
 
 		function getParticipants() {

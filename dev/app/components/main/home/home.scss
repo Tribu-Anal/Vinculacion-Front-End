@@ -159,6 +159,8 @@
     .widget .comment-text
     {
         font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .widget .btn-block
     {

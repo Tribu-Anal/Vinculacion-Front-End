@@ -4,38 +4,35 @@
 	angular
 		.module('VinculacionApp')
 		.factory('recentProjects', recentProjects);
-    
-    recentProjects.$inject = ['TbCache'];
 
-	function recentProjects (TbCache) {  
+    recentProjects.$inject = [ '$rootScope' ];
+
+	function recentProjects ($rootScope) {  
         var MAX_RECENT_PROJECTS = 5;
-        var recentProjects = [];
+        var storageLocation = 'RecentProjects' + $rootScope.Session;
+        var recentProjects = get();
 
         var service = {
-            cache: cache,
+            put: put,
             get: get
         };
         
         return service;
 
-        function cache (projectId) {
-            recentProjects = get();
+        function put (projectId) {
+            let projectIndex = getIndexFromList(projectId);
+            let alreadyInList = projectIndex >= 0;
 
-            if (noRecentProjectsCached()) 
-                recentProjects = [];
-
-            if (!projectAlreadyInList(projectId)) {
+            if (alreadyInList)
+                recentProjects.splice(projectIndex, 1);
+            else
                 checkForOverflow();
-                cacheRecentProject(projectId);
-            }
+
+            storeRecentProject(projectId);
         }
 
-        function noRecentProjectsCached () {
-            return recentProjects === undefined;
-        }
-
-        function projectAlreadyInList (projectId) {
-            return recentProjects.indexOf(projectId) >= 0;
+        function getIndexFromList (projectId) {
+            return recentProjects.indexOf(projectId);
         }
 
         function checkForOverflow () {
@@ -43,13 +40,15 @@
                 recentProjects.pop();
         }
 
-        function cacheRecentProject (projectId) {
+        function storeRecentProject (projectId) {
             recentProjects.unshift(projectId);
-            TbCache.put("RecentProjects", recentProjects);
+            window.localStorage[storageLocation] = JSON.stringify(recentProjects);
         }
 
         function get () {
-            return TbCache.get("RecentProjects");
+            let storedPIds = JSON.parse(window.localStorage[storageLocation]);
+
+            return Array.isArray(storedPIds) ? storedPIds : [];
         }
 
 	}

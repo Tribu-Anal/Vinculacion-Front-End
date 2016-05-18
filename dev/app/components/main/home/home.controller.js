@@ -16,10 +16,10 @@
 		getRecentProjects();
 
 		function getRecentProjects () {
-			let cachedRecentProjectIds = recentProjects.get();
-
-			for (let projectId in cachedRecentProjectIds)
-				projects.getProject(projectId, getProjectSuccess);
+			let storedRecentProjectIds = recentProjects.get();
+			
+			for (let i = 0; i < storedRecentProjectIds.length; i++)
+				projects.getProject(storedRecentProjectIds[i], getProjectSuccess);
 		}
 
 		function getProjectSuccess (response) {
