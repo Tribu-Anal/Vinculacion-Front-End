@@ -36,7 +36,7 @@
     <div>
         <label class="cd-label" for="cd-name">Docente</label>
         <select name="professor" ng-model="vm.section.ProffesorAccountId" required>
-            <option value="{{professor.Id}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
+            <option value="{{professor.AccountId}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
         </select>
         <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.professor.$error.required">
             * Por favor escoja un profesor.
