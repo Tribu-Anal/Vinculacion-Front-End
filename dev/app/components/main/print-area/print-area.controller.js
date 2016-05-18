@@ -14,10 +14,7 @@
             icon: 'glyphicon-print',
             onClick: printReport
         };
-        vm.backButton = {
-            icon: 'glyphicon-menu-left',
-            onClick: backPreviousState
-        };
+
         init();
 
         function init() {
@@ -35,13 +32,6 @@
 
         function printReport() {
             $window.print();
-        }
-
-        function backPreviousState() {
-            $state.go(
-                $stateParams.params.previousState,
-                $stateParams.params.previousStateParams
-            );
         }
     }
 })();

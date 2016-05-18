@@ -1,7 +1,8 @@
 .print-area{
+	margin-top: 3%;
 	.button{
-		position: relative;
-	    margin-top: 1%;
+		left: 93%;
+	    top: 90%;
 	}
 	.icon{
 	    margin-top: 19%;
@@ -13,5 +14,5 @@
   }
   #reportContainer{padding-top:10%;}
   .container{width:95%;}
-  #hideDiv{display:block;}
+  #dynamic-area{overflow: hidden;}
 }

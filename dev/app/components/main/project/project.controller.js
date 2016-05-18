@@ -127,6 +127,7 @@
                 },
                 reportParams: getReportParams(participant)
             }
+            TbUtils.preventGeneralLoading();
             $state.go('dashboard.printarea', {
                 params: params
             });
