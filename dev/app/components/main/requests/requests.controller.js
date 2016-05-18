@@ -1,16 +1,19 @@
 (function() {
-    "use strict";
+	"use strict";
 
-    angular
-        .module('VinculacionApp')
-        .controller('RequestsController', RequestsController);
+	angular
+		.module('VinculacionApp')
+		.controller('RequestsController', RequestsController);
 
-    RequestsController.$inject = ['$scope', 'requests', 'TbUtils', 'tableContent'];
+	RequestsController.$inject = ['$rootScope', '$scope', '$state', 
+								  'requests', 'TbUtils', 'tableContent'];
 
-    function RequestsController($scope, requests, TbUtils, tableContent) {
-        var vm = this;
-
-        var acceptButton = {
+	function RequestsController($rootScope, $scope, $state, requests, TbUtils, tableContent) {
+		if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
+		
+		var vm = this;
+        
+		var acceptButton = {
             tooltip: 'Aceptar',
             icon: 'glyphicon-ok',
             onClick: acceptButtonClicked
@@ -35,7 +38,8 @@
             actions: true
         };
 
-        requests.getRequests(getRequestSuccess, getRequestFail);
+		requests.getRequests(getRequestSuccess, getRequestFail);
+        
 
         function getRequestSuccess(response) {
             if (response.data.length <= 0) {

@@ -4,38 +4,34 @@
 	angular
 		.module('VinculacionApp')
 		.factory('recentProjects', recentProjects);
-    
-    recentProjects.$inject = ['TbCache'];
 
-	function recentProjects (TbCache) {  
+	function recentProjects () {  
         var MAX_RECENT_PROJECTS = 5;
         var recentProjects = [];
 
         var service = {
-            cache: cache,
+            put: put,
             get: get
         };
         
         return service;
 
-        function cache (projectId) {
-            recentProjects = get();
+        function put (session, projectId) {
+            let projectIndex = getIndexFromList(projectId);
+            let alreadyInList = projectIndex >= 0;
 
-            if (noRecentProjectsCached()) 
-                recentProjects = [];
+            recentProjects = get(session);
 
-            if (!projectAlreadyInList(projectId)) {
+            if (alreadyInList)
+                recentProjects.splice(projectIndex, 1);
+            else
                 checkForOverflow();
-                cacheRecentProject(projectId);
-            }
+
+            storeRecentProject(session, projectId);
         }
 
-        function noRecentProjectsCached () {
-            return recentProjects === undefined;
-        }
-
-        function projectAlreadyInList (projectId) {
-            return recentProjects.indexOf(projectId) >= 0;
+        function getIndexFromList (projectId) {
+            return recentProjects.indexOf(projectId);
         }
 
         function checkForOverflow () {
@@ -43,13 +39,16 @@
                 recentProjects.pop();
         }
 
-        function cacheRecentProject (projectId) {
+        function storeRecentProject (session, projectId) {
             recentProjects.unshift(projectId);
-            TbCache.put("RecentProjects", recentProjects);
+            localStorage.setItem(session, JSON.stringify(recentProjects));
         }
 
-        function get () {
-            return TbCache.get("RecentProjects");
+        function get (session) {
+            let data = localStorage.getItem(session);
+            let storedPIds = data ? JSON.parse(data) : [];
+
+            return Array.isArray(storedPIds) ? storedPIds : [];
         }
 
 	}

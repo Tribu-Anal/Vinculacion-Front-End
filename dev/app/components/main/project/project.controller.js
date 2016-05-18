@@ -5,9 +5,10 @@
         .module('VinculacionApp')
         .controller('ProjectController', ProjectController);
 
-    ProjectController.$inject = ['$stateParams', '$state', 'projects', 'TbUtils', 'tableContent', 'horas'];
+    ProjectController.$inject = [ '$rootScope', '$stateParams', '$state', 'projects', 
+                                  'TbUtils', 'tableContent', 'horas', 'recentProjects'];
 
-    function ProjectController($stateParams, $state, projects, TbUtils, tableContent, horas) {
+    function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, tableContent, horas, recentProjects) {
         var vm = this;
 
         vm.project = {};
@@ -41,7 +42,8 @@
         function getProjectSuccess(response) {
             vm.sectionIds = response.data.SectionIds;
             vm.project = response.data;
-            recentProjects.cache(vm.project.Id);
+
+            recentProjects.put($rootScope.Session, vm.project.Id);
             vm.projectLoading = false;
         }
 
@@ -49,6 +51,9 @@
             TbUtils.showErrorMessage('error', response,
                 'El proyecto deseado no existe.',
                 'Error');
+
+            $state.go('dashboard.home');
+
             vm.projectLoading = false;
         }
 

@@ -34,6 +34,7 @@
     .panel > .panel-heading
     {
         background-color: #213250;
+        min-width: 246.3px;
     }
     .panel-heading span
     {
@@ -159,6 +160,8 @@
     .widget .comment-text
     {
         font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .widget .btn-block
     {

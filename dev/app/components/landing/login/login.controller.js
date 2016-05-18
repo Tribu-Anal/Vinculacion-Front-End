@@ -5,9 +5,10 @@
         .module('VinculacionApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$location', 'authentication', 'toaster', 'TbUtils'];
+    LoginController.$inject = ['$rootScope', '$location', 'authentication', 
+                                'role', 'toaster', 'TbUtils'];
 
-    function LoginController ($rootScope, $location, authentication, toaster, TbUtils) {
+    function LoginController ($rootScope, $location, authentication, role, toaster, TbUtils) {
         var vm = this;
 
         vm.username = "";
@@ -24,12 +25,21 @@
         }
         
         function LoginSuccess(response) {
-            if(response.statusText === "OK") {
-                console.log(response);
-                authentication.SetCredentials(response.data);
-                $location.path('/home');
-            }
+            authentication.SetCredentials(response.data);
             
+            window.localStorage['Session'] = 
+            $rootScope.Session =
+            JSON.parse(response.config.data).User;
+
+            role.get($rootScope.Session, getRoleSuccess);
+        }
+
+        function getRoleSuccess (response) {
+            window.localStorage['Role'] = 
+            $rootScope.Role =
+            response.data;
+
+            $location.path('/home');
             vm.loading = false;
         }
         

@@ -5,9 +5,9 @@
 		.module('VinculacionApp')
 		.controller('HomeController', HomeController);
 
-	HomeController.$inject = [ 'recentProjects', 'projects', 'TbUtils' ];
+	HomeController.$inject = [ '$rootScope', 'recentProjects', 'projects', 'TbUtils' ];
 
-	function HomeController (recentProjects, projects, TbUtils) {
+	function HomeController ($rootScope, recentProjects, projects, TbUtils) {
 		var vm = this;
 		
 		vm.recentProjects = [];
@@ -16,10 +16,10 @@
 		getRecentProjects();
 
 		function getRecentProjects () {
-			let cachedRecentProjectIds = recentProjects.get();
-
-			for (let projectId in cachedRecentProjectIds)
-				projects.getProject(projectId, getProjectSuccess);
+			let storedRecentProjectIds = recentProjects.get($rootScope.Session);
+			
+			for (let i = 0; i < storedRecentProjectIds.length; i++)
+				projects.getProject(storedRecentProjectIds[i], getProjectSuccess);
 		}
 
 		function getProjectSuccess (response) {

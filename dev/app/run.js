@@ -14,6 +14,8 @@
         $rootScope.stateLoading = false;
         $rootScope.hideLoading = true;
         $rootScope.generalLoading = true;
+        $rootScope.Session = window.localStorage['Session'];
+        $rootScope.Role = window.localStorage['Role'];
 
         let stateUrl = "";
         
@@ -80,6 +82,10 @@
                     $rootScope.viewTitle = stateUrl.includes('nuevo') ? 
                                            "Vinculacion | Nuevo Proyecto" :
                                            "Vinculacion | Editar Proyecto";
+                    $rootScope.viewStyles = "main project-form";
+                break;
+                case "/nueva-seccion":
+                    $rootScope.viewTitle = "Vinculacion | Nueva Seccion";
                     $rootScope.viewStyles = "main project-form";
                 break;  
                 case "/":
