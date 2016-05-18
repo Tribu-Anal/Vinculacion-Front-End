@@ -26,8 +26,11 @@
         function LoginSuccess(response) {
             authentication.SetCredentials(response.data);
             $location.path('/home');
-            window.localStorage['Session'] = JSON.parse(response.config.data).User;
             
+            window.localStorage['Session'] = 
+            $rootScope.Session =
+            JSON.parse(response.config.data).User;
+
             vm.loading = false;
         }
         
