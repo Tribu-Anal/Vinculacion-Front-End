@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$location', 'authentication', 'toaster'];
+    LoginController.$inject = ['$rootScope', '$location', 'authentication', 'toaster', 'TbUtils'];
 
-    function LoginController ($rootScope, $location, authentication, toaster) {
+    function LoginController ($rootScope, $location, authentication, toaster, TbUtils) {
         var vm = this;
 
         vm.username = "";
@@ -29,34 +29,14 @@
                 authentication.SetCredentials(response.data);
                 $location.path('/home');
             }
+            
             vm.loading = false;
         }
         
         function LoginFail(response) {
             console.log(response);
-        /**
-         *  @todo Cambiar este switch por un toaster que mande el error del server.
-         */
-            switch(response.statusText) {
-                case "Unauthorized":
-                    toaster.pop(
-                        { 
-                                type: 'warning', 
-                                title: 'Falla autorizacion', 
-                                body: 'La cuenta ingresada no tiene privilegios de acceso'
-                        }
-                    );
-                    break;
-
-                default:
-                    toaster.pop(
-                        { 
-                            type: 'error', 
-                            title: 'Error', 
-                            body: 'Se ha producido un error! Lamentamos los inconvenientes.'
-                        }
-                );
-            }
+            TbUtils.showErrorMessage('error', response);
+            
             vm.loading = false;
         }
     }

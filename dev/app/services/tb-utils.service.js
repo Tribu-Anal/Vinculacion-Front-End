@@ -13,7 +13,8 @@
             displayNotification: displayNotification,
             preventGeneralLoading: preventGeneralLoading,
             initArrayToValue: initArrayToValue,
-            removeItemFromList: removeItemFromList
+            removeItemFromList: removeItemFromList,
+            showErrorMessage: showErrorMessage
         };
         
         return service;
@@ -48,6 +49,10 @@
         function removeItemFromList (listItem, list) {
             let indexOfItem = list.indexOf(list);
             list.splice(indexOfItem, 1);
+        }
+        
+        function showErrorMessage(type, response) {
+            displayNotification(type, response.statusText, response.content);
         }
 	}
 })();
