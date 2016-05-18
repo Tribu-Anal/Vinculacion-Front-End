@@ -11,7 +11,8 @@
 		var service = {
 			Login: Login,
 			SetCredentials: SetCredentials,
-			ClearCredentials: ClearCredentials
+			ClearCredentials: ClearCredentials,
+			AccountId: AccountId
 		};
 
 		return service;
@@ -34,5 +35,11 @@
 	        $cookieStore.remove('globals');
 	        $http.defaults.headers.common.Authorization = 'Basic ';
 	    };
+
+		function AccountId(email, successCallback, errorCallback){
+			let url = 'fiasps.unitec.edu:8085/api/StudentByEmail/' + email;
+			$http.get(url).then(successCallback)
+				.catch(errorCallback); 
+		};
 	}
 })();

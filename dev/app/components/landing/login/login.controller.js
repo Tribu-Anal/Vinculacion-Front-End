@@ -31,6 +31,9 @@
             $rootScope.Session =
             JSON.parse(response.config.data).User;
 
+            window.localStorage['Email'] =
+            $rootScope.Email = 
+            vm.username;
             role.get($rootScope.Session, getRoleSuccess);
         }
 
