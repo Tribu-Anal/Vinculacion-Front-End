@@ -1,6 +1,6 @@
 .home
 {
-    /*Home CSS */
+
     .dynamic-area
     {
         overflow-x: hidden;
@@ -10,6 +10,17 @@
     {
         margin-top: 40px;
         padding: 0 10px;
+
+        &.project {
+            cursor: pointer;
+            margin-top: 0;
+
+            #project-header {
+                font-size: 1.4em;
+                font-weight: 800;
+                margin-bottom: 5px;
+            }
+        }
     }
     .clickable
     {

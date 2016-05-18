@@ -8,6 +8,25 @@
 				</div>
 				<div class="panel-body">
                     <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="project in vm.recentProjects">
+                        <div class="row project" 
+                            ng-click="vm.preventGeneralLoading()"
+                            ui-sref="dashboard.project({projectId: project.Id})">
+                            <div class="col-xs-2 col-md-1">
+                            <img class="img-responsive" style="max-width: 80px; padding-right: 20px;max-height: 80px;" src="img/logo.png" >
+                            </div>
+                            <div class="col-xs-10 col-md-11" style="padding-left: 40px;">
+                                <div id="project-header">
+                                    {{project.Name}}
+                                    <div class="mic-info">
+                                    </div>
+                                </div>
+                                <div class="comment-text">
+                                    {{project.Description}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     </ul>
                 </div>
 			</div>
