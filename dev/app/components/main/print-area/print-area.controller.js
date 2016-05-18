@@ -7,7 +7,7 @@
 
     PrintAreaController.$inject = ['$stateParams', '$state', '$window', 'reports'];
 
-    function PrintAreaController($stateParams, $state, reports, $window) {
+    function PrintAreaController($stateParams, $state, $window, reports) {
         var vm = this;
         vm.template = '';
         vm.printButton = {
