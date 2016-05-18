@@ -15,6 +15,7 @@
         $rootScope.hideLoading = true;
         $rootScope.generalLoading = true;
         $rootScope.Session = window.localStorage['Session'];
+        $rootScope.Role = 'ADMIN';//window.localStorage['Role'];
 
         let stateUrl = "";
         
