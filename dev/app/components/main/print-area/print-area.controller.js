@@ -14,16 +14,19 @@
             icon: 'glyphicon-print',
             onClick: printReport
         };
+        
         vm.backButton = {
             icon: 'glyphicon-menu-left',
             onClick: backPreviousState
         };
+        
         init();
 
         function init() {
             if (!$stateParams.params) {
                 $state.go('dashboard.home');
-            } else {
+            }
+            else {
                 loadView();
             }
         }
