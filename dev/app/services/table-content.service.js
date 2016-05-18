@@ -9,9 +9,9 @@
 
 	function tableContent () {
 	   var service = {
-            createAnInputElement:createAnInputElement,
-            createALableElement:createALableElement,
-            createAButtonElement:createAButtonElement
+            createAnInputElement: createAnInputElement,
+            createALableElement: createALableElement,
+            createAButtonElement: createAButtonElement
         };
         
         return service;
@@ -24,6 +24,7 @@
                     type: inputType
                 }
             }
+            
             return element;
         };
 
@@ -34,6 +35,7 @@
                     value: modelValue
                 }
             }
+            
             return element;
         };
 
@@ -46,6 +48,7 @@
                     tooltip:objectButton.tooltip
                 }
             }
+            
             return element;
         };
 	}
