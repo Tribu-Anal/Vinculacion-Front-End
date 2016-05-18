@@ -5,9 +5,9 @@
 		.module('VinculacionApp')
 		.controller('ProjectController', ProjectController);
 
-	ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils'];
+	ProjectController.$inject = ['$stateParams', 'projects', 'TbUtils', 'recentProjects'];
 
-	function ProjectController($stateParams, projects, TbUtils) {
+	function ProjectController($stateParams, projects, TbUtils, recentProjects) {
 		var vm = this;
 
 		vm.project = {};
@@ -27,6 +27,8 @@
         function getProjectSuccess(response) {
             console.log(response);
             vm.project = response.data;
+
+            recentProjects.cache(vm.project.Id);
 
             vm.projectLoading = false;
         }
