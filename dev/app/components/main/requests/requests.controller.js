@@ -76,9 +76,10 @@
         }
 
         function getElement(index) {
+            console.log(index);
             let element = {
-                accountNumber: vm.requestsTable.body[index].content[0],
-                studentName: vm.requestsTable.body[index].content[1],
+                accountNumber: vm.requestsTable.body[index].content[0].properties.value,
+                studentName: vm.requestsTable.body[index].content[1].properties.value,
                 id: vm.requestsTable.body[index].id
             }
 
@@ -87,6 +88,7 @@
 
         function acceptButtonClicked(index) {
             let student = getElement(index);
+            console.log(student);
             let message = 'Aceptado, ya puede ingresar sus horas de vinculación social.';
             requests.acceptRequest(student, acceptRequestSuccess, acceptRequestFail);
         }
