@@ -37,8 +37,8 @@
 	    };
 
 		function AccountId(email, successCallback, errorCallback){
-			let url = 'fiasps.unitec.edu:8085/api/StudentByEmail/' + email;
-			$http.get(url).then(successCallback)
+			let url = 'http://fiasps.unitec.edu:8085/api/StudentByEmail/';
+			$http.post(url,JSON.stringify(email)).then(successCallback)
 				.catch(errorCallback); 
 		};
 	}

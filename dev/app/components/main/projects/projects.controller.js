@@ -99,7 +99,7 @@
         }
 
         function successAccountId(response){
-            console.log(response);
+            response = response.data;
             let params = {
                 templateUrl: 'reports/hours-by-student/hours-by-student.html',
                 previousState: 'dashboard.home',
@@ -123,9 +123,10 @@
         }
         function loadReport(){
             let email = $rootScope.Session;
-            let index = email.indexOf('@');
-            email = email.substring(0,index);
-            authentication.AccountId(email,
+            let obj = {
+                Email: email
+            }
+            authentication.AccountId(obj,
                 successAccountId, failAccountId)
         }
     }
