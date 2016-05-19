@@ -6,25 +6,13 @@
 		.controller('SectionsController', SectionsController);
 
 	SectionsController.$inject = ['$rootScope', '$scope', '$state', 
-								  'TbUtils', 'tableContent'];
+								  'TbUtils', 'tableContent', 'sections'];
 
-	function SectionsController($rootScope, $scope, $state, TbUtils, tableContent) {
+	function SectionsController($rootScope, $scope, $state, TbUtils, tableContent, sections) {
 		if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
 		
 		var vm = this;
         
-//		var acceptButton = {
-//            tooltip: 'Aceptar',
-//            icon: 'glyphicon-ok',
-//            onClick: acceptButtonClicked
-//        };
-//
-//        var rejectButton = {
-//            tooltip: 'Rechazar',
-//            icon: 'glyphicon-remove',
-//            onClick: rejectButtonClicked
-//        };
-
         vm.sectionsLoading = false;
 
         vm.sectionsTable = {
@@ -32,40 +20,60 @@
                 'Codigo',
                 'Clase',
                 'Periodo',
+                'Año',
                 'Catedratico'
             ],
             
             body: [],
             
             actions: true
-        };        
-
-//        function getRequestSuccess(response) {
-//            if (response.data.length <= 0) {
-//                vm.requestsLoading = false;
-//                return;
-//            }
-//
-//            for (let i = 0; i < response.data.length; i++) {
-//                let student = response.data[i];
-//                if (student.Major === null) continue;
-//
-//                let newTableElement = {
-//                    actions: [acceptButton, rejectButton],
-//                    content: [
-//                        tableContent.createALableElement(student.AccountId),
-//                        tableContent.createALableElement(student.Name),
-//                        tableContent.createALableElement(student.Major.Name),
-//                        tableContent.createALableElement(student.Email)
-//                    ],
-//                    id: student.Id
-//                };
-//
-//                vm.requestsTable.body.push(newTableElement);
-//            }
-//
-//            vm.requestsLoading = false;
+        }; 
+        
+//		var acceptButton = {
+//            tooltip: 'Aceptar',
+//            icon: 'glyphicon-ok'
+//            //onClick: acceptButtonClicked
 //        };
+//
+//        var rejectButton = {
+//            tooltip: 'Rechazar',
+//            icon: 'glyphicon-remove'
+//            //onClick: rejectButtonClicked
+//        };
+        
+        sections.getSections(getSectionsSuccess, getSectionsFail);
+
+        function getSectionsSuccess(response) {
+            console.log(response);
+            if (response.data.length <= 0) {
+                vm.sectionsLoading = false;
+                return;
+            }
+
+            for (let i = 0; i < response.data.length; i++) {
+                let section = response.data[i];
+
+                let newTableElement = {
+                    //actions: [acceptButton, rejectButton],
+                    content: [
+                        tableContent.createALableElement(section.Code),
+                        tableContent.createALableElement(section.Class.Name),
+                        tableContent.createALableElement(section.Period.Number),
+                        tableContent.createALableElement(section.Period.Year),
+                        tableContent.createALableElement(section.User.Name)
+                    ],
+                    id: section.Id
+                };
+
+                vm.sectionsTable.body.push(newTableElement);
+            }
+
+            vm.sectionsLoading = false;
+        };
+        
+        function getSectionsFail(response) {
+            console.log(response);
+        }
 //
 //        function getElement(index) {
 //            console.log(index);
