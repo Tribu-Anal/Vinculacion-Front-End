@@ -37,6 +37,7 @@
         projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
 
         function getProjectSuccess(response) {
+            console.log(response);
             vm.sectionIds = response.data.SectionIds;
             vm.project = response.data;
 
