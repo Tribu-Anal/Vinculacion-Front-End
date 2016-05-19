@@ -13,7 +13,7 @@
 		  	type="{{content.properties.type}}" 
   		  	ng-model="content.properties.value" min="0">
 
-			<button class="actions-button tb-tooltip" ng-if="content.typeObject == 'button'" 
+			<button class="actions-button tb-tooltip" style="float:none;" ng-if="content.typeObject == 'button'" 
 				ng-click="vm.loseFocus()" ng-blur="content.properties.onClick($parent.$parent.$parent.body[Index])">
 				<span class="glyphicon {{content.properties.icon}}" aria-hidden="true" ></span>
 				<span ng-show="content.properties.tooltip" class="tooltiptext">{{content.properties.tooltip}}</span>

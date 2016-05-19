@@ -17,9 +17,6 @@
         vm.participants = {
             headers: [
                 'Alumno',
-                'Horas',
-                ' ',
-                '  '
             ],
             body: [],
             actions: false
@@ -40,6 +37,7 @@
         projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
 
         function getProjectSuccess(response) {
+            console.log(response);
             vm.sectionIds = response.data.SectionIds;
             vm.project = response.data;
 
@@ -58,6 +56,11 @@
         }
 
         function getParticipantsSuccess(response) {
+            if($rootScope.Role==='Professor'){
+                 vm.participants.headers.push('Horas');
+                 vm.participants.headers.push('Agregar');
+             }
+            vm.participants.headers.push('Ver Reporte');
             addParticipantsToTable(response.data);
             vm.participantsLoading = false;
         }
@@ -113,11 +116,15 @@
                 content: []
             };
             participantElement.content.push(
-                tableContent.createALableElement(participantData.Name),
-                tableContent.createAnInputElement('number'),
-                tableContent.createAButtonElement(vm.saveButton),
-                tableContent.createAButtonElement(vm.downloadButton)
-            );
+                tableContent.createALableElement(participantData.Name));
+            if($rootScope.Role==='Professor'){
+                participantElement.content.push(
+                    tableContent.createAnInputElement('number'));
+                participantElement.content.push(
+                    tableContent.createAButtonElement(vm.saveButton));
+             }
+            participantElement.content.push(
+                tableContent.createAButtonElement(vm.downloadButton));
 
             return participantElement;
         }
