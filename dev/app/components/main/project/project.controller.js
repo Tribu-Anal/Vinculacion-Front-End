@@ -16,7 +16,7 @@
         vm.participantsLoading = true;
         vm.participants = {
             headers: [
-                'Alumno',
+                'Alumno'
             ],
             body: [],
             actions: false
