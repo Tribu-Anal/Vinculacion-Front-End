@@ -5,7 +5,7 @@
 		.module('VinculacionApp')
 		.controller('MainController', MainController);
 
-	MainController.$inject = [ '$rootScope', '$state', 'TbUtils' ];
+	MainController.$inject = [ '$rootScope', '$state', 'TbUtils'];
 
 	function MainController ($rootScope, $state, TbUtils) {
 		var vm = this;
@@ -55,6 +55,5 @@
 			vm.navItems[2].active = toState.url === '/solicitudes';
 			vm.navItems[3].active = toState.url === '/nueva-seccion';
 		}
-
 	}
 })();

@@ -137,7 +137,8 @@
                 previousStateParams: {
                     projectId: $stateParams.projectId
                 },
-                reportParams: getReportParams(participant)
+                reportParams: getReportParams(participant),
+                showPrintButton: true
             }
             TbUtils.preventGeneralLoading();
             $state.go('dashboard.printarea', {

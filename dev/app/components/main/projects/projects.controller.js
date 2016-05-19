@@ -5,9 +5,11 @@
         .module('VinculacionApp')
         .controller('ProjectsController', ProjectsController);
 
-    ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService'];
+    ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService',
+                                    '$rootScope','authentication'];
 
-    function ProjectsController (projects, TbUtils, $state, ModalService) {
+    function ProjectsController (projects, TbUtils, $state, ModalService,
+                                $rootScope, authentication) {
         var vm = this;
 
         var deleteIndex = -1;
@@ -24,6 +26,12 @@
         vm.preventGeneralLoading = preventGeneralLoading;
         vm.removeProjectClicked = removeProjectClicked;
         vm.goToEdit = goToEdit;
+
+        vm.reportButton = {
+            show: $rootScope.Role === 'Student',
+            onClick: loadReport,
+            icon: 'glyphicon-file'
+        };
 
         function preventGeneralLoading () {
             TbUtils.preventGeneralLoading();
@@ -88,6 +96,38 @@
                                      'Error');
 
             vm.projectsLoading = false;
+        }
+
+        function successAccountId(response){
+            response = response.data;
+            let params = {
+                templateUrl: 'reports/hours-by-student/hours-by-student.html',
+                previousState: 'dashboard.home',
+                previousStateParams: { },
+                reportParams: {
+                    AccountId: response.AccountId,
+                    Campus: response.Campus,
+                    Major: response.Major.Name,
+                    Name: response.Name
+                },
+                showPrintButton: false
+            }
+            TbUtils.preventGeneralLoading();
+            $state.go('dashboard.printarea', {
+                params: params
+            });
+        }
+        function failAccountId(){
+            TbUtils.displayNotification('error', 'Error',
+                'No se pudo cargar el reporte correctamente.');
+        }
+        function loadReport(){
+            let email = $rootScope.Session;
+            let obj = {
+                Email: email
+            }
+            authentication.AccountId(obj,
+                successAccountId, failAccountId)
         }
     }
 })();

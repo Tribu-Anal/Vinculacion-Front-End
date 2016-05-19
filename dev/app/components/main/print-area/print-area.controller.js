@@ -12,7 +12,8 @@
         vm.template = '';
         vm.printButton = {
             icon: 'glyphicon-print',
-            onClick: printReport
+            onClick: printReport,
+            show: false
         };
         init();
 
@@ -27,6 +28,7 @@
         function loadView() {
             vm.template = $stateParams.templateDir + $stateParams.params.templateUrl;
             reports.setReportParams($stateParams.params.reportParams);
+            vm.printButton.show = $stateParams.params.showPrintButton;
         }
 
         function printReport() {

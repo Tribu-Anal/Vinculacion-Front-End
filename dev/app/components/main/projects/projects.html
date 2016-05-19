@@ -22,4 +22,10 @@
 	</div>
 </div>
 <tb-loading class="main-loader" ng-show="vm.projectsLoading"></tb-loading>
-<tb-round-btn ng-show="Role === 'Admin'" ui-sref="dashboard.addproject" ng-click="vm.preventGeneralLoading()">+</tb-round-btn>
+<tb-round-btn ng-show="Role === 'Admin'" ui-sref="dashboard.addproject" 
+	ng-click="vm.preventGeneralLoading()">+
+</tb-round-btn>
+<tb-round-btn ng-show="vm.reportButton.show" 
+	ng-click="vm.reportButton.onClick()">
+	<span class="glyphicon {{vm.reportButton.icon}} icon" aria-hidden="true"></span>
+</tb-round-btn>
