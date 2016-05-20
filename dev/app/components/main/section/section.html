@@ -13,13 +13,12 @@
     </div>
 
     <div class="seccion">
-      <h2>Students</h2>
+<!--      <h2>Students</h2>-->
       <div class="item">
-        <h3>Harvard</h3>
-        <h4>Science</h4>
-        <div class="description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
+          <tb-table   headers="vm.sectionsTable.headers" 
+                      body="vm.sectionsTable.body" 
+                      actions="vm.sectionsTable.actions">
+          </tb-table>
       </div>
     </div>
     <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
