@@ -14,21 +14,7 @@
 		var vm = this;
         
         vm.sectionsLoading = false;
-
-        vm.sectionsTable = {
-            headers: [
-                'Codigo',
-                'Clase',
-                'Periodo',
-                'Año',
-                'Catedratico'
-            ],
-            
-            body: [],
-            
-            actions: true
-        };
-        
+        vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo', 'Año', 'Catedratico']);        
         vm.goSection = goSection;
         vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
         

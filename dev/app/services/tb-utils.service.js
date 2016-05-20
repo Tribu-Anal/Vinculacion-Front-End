@@ -14,7 +14,8 @@
             preventGeneralLoading: preventGeneralLoading,
             initArrayToValue: initArrayToValue,
             removeItemFromList: removeItemFromList,
-            showErrorMessage: showErrorMessage
+            showErrorMessage: showErrorMessage,
+            getTable: getTable
         };
         
         return service;
@@ -64,6 +65,16 @@
                 return false;
             
             return true;
+        }
+        
+        function getTable(headers) {
+            let table = {
+                headers: headers,            
+                body: [],
+                actions: true
+            }
+            
+            return table;
         }
 	}
 })();
