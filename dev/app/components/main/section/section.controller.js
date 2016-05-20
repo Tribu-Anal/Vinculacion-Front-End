@@ -13,17 +13,6 @@
         vm.section = JSON.parse($stateParams.data);
         vm.sectionsTable = TbUtils.getTable(['Nombre', 'Numero de Cuenta']);
         
-//        vm.sectionsTable = {
-//            headers: [
-//                'Nombre',
-//                'Numero de Cuenta'
-//            ],
-//            
-//            body: [],
-//            
-//            actions: true
-//        };
-        
         console.log(vm.section);
     }
 })();
