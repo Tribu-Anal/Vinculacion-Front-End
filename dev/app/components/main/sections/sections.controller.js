@@ -9,7 +9,7 @@
 								  'TbUtils', 'tableContent', 'sections'];
 
 	function SectionsController($rootScope, $scope, $state, TbUtils, tableContent, sections) {
-		if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
+		if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('dashboard.home');
 		
 		var vm = this;
         
@@ -27,7 +27,10 @@
             body: [],
             
             actions: true
-        }; 
+        };
+        
+        vm.goSection = goSection;
+        vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
         
 //		var acceptButton = {
 //            tooltip: 'Aceptar',
@@ -42,9 +45,12 @@
 //        };
         
         sections.getSections(getSectionsSuccess, getSectionsFail);
+        
+        function goSection(index) {
+            console.log("Entro");
+        }
 
         function getSectionsSuccess(response) {
-            console.log(response);
             if (response.data.length <= 0) {
                 vm.sectionsLoading = false;
                 return;
@@ -62,7 +68,7 @@
                         tableContent.createALableElement(section.Period.Year),
                         tableContent.createALableElement(section.User.Name)
                     ],
-                    id: section.Id
+                    data: section
                 };
 
                 vm.sectionsTable.body.push(newTableElement);

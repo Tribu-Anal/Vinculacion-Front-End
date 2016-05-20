@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .factory('tableContent', tableContent);
 
-    tableContent.$inject = [];
+    tableContent.$inject = ['TbUtils'];
 
-    function tableContent() {
+    function tableContent(TbUtils) {
         var service = {
             createAnInputElement: createAnInputElement,
             createALableElement: createALableElement,
@@ -32,7 +32,8 @@
             let element = {
                 typeObject: 'label',
                 properties: {
-                    value: modelValue
+                    value: modelValue,
+                    click: TbUtils.preventGeneralLoading
                 }
             }
 

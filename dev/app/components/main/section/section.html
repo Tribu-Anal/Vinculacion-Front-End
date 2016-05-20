@@ -1,0 +1,26 @@
+<div class="view">
+      <div id="about">
+          <div id="story">
+            <h1>{{vm.section.Class.Name}}</h1>
+            <h2>{{vm.section.User.Name}}</h2>
+          </div>
+          <ul id="contact">
+            <li><span>Codigo</span> <strong>{{vm.section.Code}}</strong></li>
+            <li><span>Periodo</span> <strong>{{vm.section.Period.Number}}</strong></li>
+            <li><span>Year</span> <strong>{{vm.section.Period.Year}}</strong></li>
+          </ul>
+          <img id="picture" src="img/logo.png" alt="" />
+    </div>
+
+    <div class="seccion">
+      <h2>Students</h2>
+      <div class="item">
+        <h3>Harvard</h3>
+        <h4>Science</h4>
+        <div class="description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+    </div>
+    <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
+</div>

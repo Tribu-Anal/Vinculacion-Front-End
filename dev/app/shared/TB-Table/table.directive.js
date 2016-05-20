@@ -12,7 +12,9 @@
             scope: {
                 headers: '=?',
                 body: '=?',
-                actions:"=?"
+                actions:"=?",
+                onRowClick: '&?',
+                ref: '@?'
             },
             controller : 'TableController as vm',
             templateUrl: '../templates/shared/TB-Table/table.html'           

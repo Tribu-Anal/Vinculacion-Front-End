@@ -70,6 +70,15 @@
                     templateUrl: templateDir + 'main/sections/sections.html',
                     controller: "SectionsController as vm"
                 })
+        
+            .state('dashboard.section', {
+                    url: '/seccion',
+                    params: {
+                        data: null
+                    },
+                    templateUrl: templateDir + 'main/section/section.html',
+                    controller: "SectionController as vm"
+                })
 
 			.state('dashboard.newsection', {
 				url: '/nueva-seccion',
