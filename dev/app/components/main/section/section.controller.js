@@ -13,7 +13,7 @@
         var vm = this;
         
         vm.section = JSON.parse($stateParams.data);
-        vm.sectionsTable = TbUtils.getTable(['Nombre', 'Numero de Cuenta']);
+        vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
         
         console.log(vm.section);
     }
