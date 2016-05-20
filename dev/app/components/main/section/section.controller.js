@@ -8,6 +8,8 @@
     SectionController.$inject = [ '$rootScope', '$stateParams', '$state', 'TbUtils', 'tableContent'];
 
     function SectionController($rootScope, $stateParams, $state, TbUtils, tableContent) {
+        if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('dashboard.home');
+        
         var vm = this;
         
         vm.section = JSON.parse($stateParams.data);

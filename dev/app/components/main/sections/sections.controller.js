@@ -18,18 +18,6 @@
         vm.goSection = goSection;
         vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
         
-//		var acceptButton = {
-//            tooltip: 'Aceptar',
-//            icon: 'glyphicon-ok'
-//            //onClick: acceptButtonClicked
-//        };
-//
-//        var rejectButton = {
-//            tooltip: 'Rechazar',
-//            icon: 'glyphicon-remove'
-//            //onClick: rejectButtonClicked
-//        };
-        
         sections.getSections(getSectionsSuccess, getSectionsFail);
         
         function goSection(index) {

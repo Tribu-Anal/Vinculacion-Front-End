@@ -1,4 +1,4 @@
-<div class="view">
+<div class="section-view">
       <div id="about">
           <div id="story">
             <h1>{{vm.section.Class.Name}}</h1>
@@ -13,7 +13,6 @@
     </div>
 
     <div class="seccion">
-<!--      <h2>Students</h2>-->
       <div class="item">
           <tb-table   headers="vm.sectionsTable.headers" 
                       body="vm.sectionsTable.body" 
@@ -23,3 +22,15 @@
     </div>
     <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
 </div>
+<tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ui-sref="dashboard.newsection" 
+ng-click="vm.preventGeneralLoading()">+
+</tb-round-btn>
+<tb-round-btn style="background-color: #b91a1a; margin-top: -80px; color: #fff8f8;" ng-show="Role === 'Admin'" ui-sref="dashboard.newsection" 
+ng-click="vm.preventGeneralLoading()">
+    <div style="margin: auto;">
+        <div style="margin: 8px 8px 5px 5px;">
+        <div style="margin: 8px 8px 5px 8px;">
+            <span class="glyphicon glyphicon-trash"></span>
+        </div>
+    </div>
+</tb-round-btn>
