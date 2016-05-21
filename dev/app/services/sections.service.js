@@ -14,7 +14,8 @@
             getSections: getSections,
             postSection: postSection,
             deleteSection: deleteSection,
-            getStudents: getStudents
+            getStudents: getStudents,
+            addStudent: addStudent
         };
         
         return service;
@@ -32,6 +33,7 @@
         }
         
         function deleteSection(sectionId, successCallback, errorCallback) {
+            console.log("Borrado");
             $http.delete(url + '/' + sectionId).then(successCallback)
                                                .catch(errorCallback);
         }
@@ -39,6 +41,13 @@
         function getStudents(sectionId, successCallback, errorCallback) {
             $http.get(url + '/Students/' + sectionId).then(successCallback)
                                                      .catch(errorCallback);
+        }
+        
+        function addStudent(studentId, sectionId, successCallback, errorCallback) {
+            console.log("Agregado");
+            $http.post(url + '/AssignStudent', {SectionId: sectionId, StudentId: studentId})
+                 .then(successCallback)
+                 .catch(errorCallback);
         }
 	}
 })();

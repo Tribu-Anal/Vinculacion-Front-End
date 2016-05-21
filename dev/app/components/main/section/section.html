@@ -22,9 +22,6 @@
     </div>
     <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
 </div>
-<tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ui-sref="dashboard.newsection" 
-ng-click="vm.preventGeneralLoading()">+
-</tb-round-btn>
 <tb-round-btn style="background-color: #b91a1a; margin-top: -80px; color: #fff8f8;" ng-show="Role === 'Admin'" ng-click="vm.removeSection()">
     <div style="margin: auto;">
         <div style="margin: 8px 8px 5px 5px;">
@@ -32,4 +29,6 @@ ng-click="vm.preventGeneralLoading()">+
             <span class="glyphicon glyphicon-trash"></span>
         </div>
     </div>
+</tb-round-btn>
+<tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ng-click="vm.addStudent()">+
 </tb-round-btn>

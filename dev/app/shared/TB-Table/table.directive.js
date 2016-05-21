@@ -13,7 +13,7 @@
                 headers: '=?',
                 body: '=?',
                 actions:"=?",
-                onRowClick: '&?',
+                onRowClick: '=?',
                 ref: '@?'
             },
             controller : 'TableController as vm',

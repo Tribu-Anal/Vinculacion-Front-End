@@ -19,14 +19,30 @@
           controller: 'ConfirmDeleteController'
         };
         
+        var addStudentModal = {
+          templateUrl: 'templates/components/main/section/' +
+                       'add-student/add-student.html',
+          controller: 'AddStudentController'
+        };
+        
+        var modalFlag = '';
+        
         vm.sectionsLoading = true;
         vm.section = JSON.parse($stateParams.data);
         vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
         vm.removeSection = removeSection;
+        vm.addStudent = addStudent
         
         sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
         
+        function addStudent() {
+            modalFlag = 'AddStudent';
+            ModalService.showModal(addStudentModal)
+              .then(modalResolve);
+        }
+        
         function removeSection() {
+            modalFlag = 'DeleteSection';
             ModalService.showModal(confirmDeleteModal)
               .then(modalResolve);
         }
@@ -37,12 +53,30 @@
         }
         
         function modalClose (result) {
-            if(result === true)
-                deleteSection();
+            if(modalFlag === 'AddStudent')
+                addStudentToSection(result);
+            else
+                deleteSection(result);
         }
         
-        function deleteSection () {
-            sections.deleteSection(vm.section.Id, deleteSectionSuccess, deleteSectionFail)
+        function addStudentToSection(result) {
+            if(result.numCuenta > 0)
+                sections.addStudent(result.numCuenta, vm.section.Id, addStudentSuccess, addStudentFail);
+        }
+        
+        function deleteSection (result) {
+            if(result)
+                sections.deleteSection(vm.section.Id, deleteSectionSuccess, deleteSectionFail)
+        }
+        
+        function addStudentSuccess(response) {
+            console.log(response);
+            $state.go('dashboard.sections');
+        }
+        
+        function addStudentFail(response) {
+            console.log(response);
+            TbUtils.showErrorMessage('error', response, 'No se ha podido agregar el estudiante', 'Error');
         }
         
         function deleteSectionSuccess() {
@@ -51,7 +85,7 @@
         
         function deleteSectionFail(response) {
             console.log(response);
-            TbUtils.showErrorMessage('error', response.data, 'Error', 'No se ha podido borrar la seccion.');
+            TbUtils.showErrorMessage('error', response.data, 'No se ha podido borrar la seccion.', 'Error');
         }
         
         function getStudentsSuccess(response) {

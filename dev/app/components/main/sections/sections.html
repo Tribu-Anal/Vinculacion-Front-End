@@ -2,7 +2,7 @@
   			body="vm.sectionsTable.body" 
   			actions="vm.sectionsTable.actions"
             ref="dashboard.section"
-            onRowClick="vm.preventGeneralLoading">
+            on-row-click="vm.preventGeneralLoading">
  </tb-table>
  <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
 <tb-round-btn ng-show="Role === 'Admin'" ui-sref="dashboard.newsection" 
