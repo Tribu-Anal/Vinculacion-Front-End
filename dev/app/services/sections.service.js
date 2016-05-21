@@ -13,7 +13,8 @@
         var service = {
             getSections: getSections,
             postSection: postSection,
-            deleteSection: deleteSection
+            deleteSection: deleteSection,
+            getStudents: getStudents
         };
         
         return service;
@@ -33,6 +34,11 @@
         function deleteSection(sectionId, successCallback, errorCallback) {
             $http.delete(url + '/' + sectionId).then(successCallback)
                                                .catch(errorCallback);
+        }
+        
+        function getStudents(sectionId, successCallback, errorCallback) {
+            $http.get(url + '/Students/' + sectionId).then(successCallback)
+                                                     .catch(errorCallback);
         }
 	}
 })();

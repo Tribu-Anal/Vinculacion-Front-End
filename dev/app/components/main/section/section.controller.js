@@ -19,9 +19,12 @@
           controller: 'ConfirmDeleteController'
         };
         
+        vm.sectionsLoading = true;
         vm.section = JSON.parse($stateParams.data);
         vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
         vm.removeSection = removeSection;
+        
+        sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
         
         function removeSection() {
             ModalService.showModal(confirmDeleteModal)
@@ -49,6 +52,36 @@
         function deleteSectionFail(response) {
             console.log(response);
             TbUtils.showErrorMessage('error', response.data, 'Error', 'No se ha podido borrar la seccion.');
+        }
+        
+        function getStudentsSuccess(response) {
+            console.log(response);
+            if (response.data.length <= 0) {
+                vm.sectionsLoading = false;
+                return;
+            }
+
+            for (let i = 0; i < response.data.length; i++) {
+                let section = response.data[i];
+
+                let newTableElement = {
+                    //actions: [acceptButton, rejectButton],
+                    content: [
+                        tableContent.createALableElement(section.AccountId),
+                        tableContent.createALableElement(section.Name)
+                    ]
+                };
+
+                vm.sectionsTable.body.push(newTableElement);
+            }
+
+            vm.sectionsLoading = false;
+        }
+        
+        function getStudentsFail(response) {
+            console.log(response);
+            TbUtils.showErrorMessage('error', response.data, 'Error',
+                                     'No se ha podido obtener los estudiantes de la seccion.');
         }
     }
 })();
