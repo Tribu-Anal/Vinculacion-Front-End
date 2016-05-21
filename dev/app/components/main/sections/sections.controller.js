@@ -13,7 +13,7 @@
 		
 		var vm = this;
         
-        vm.sectionsLoading = false;
+        vm.sectionsLoading = true;
         vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo', 'Año', 'Catedratico']);        
         vm.goSection = goSection;
         vm.preventGeneralLoading = TbUtils.preventGeneralLoading;

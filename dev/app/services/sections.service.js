@@ -12,7 +12,8 @@
         
         var service = {
             getSections: getSections,
-            postSection: postSection
+            postSection: postSection,
+            deleteSection: deleteSection
         };
         
         return service;
@@ -27,6 +28,11 @@
         	$http.post(url, JSON.stringify(data))
         		.then(successCallback)
                 .catch(errorCallback);
+        }
+        
+        function deleteSection(sectionId, successCallback, errorCallback) {
+            $http.delete(url + '/' + sectionId).then(successCallback)
+                                               .catch(errorCallback);
         }
 	}
 })();

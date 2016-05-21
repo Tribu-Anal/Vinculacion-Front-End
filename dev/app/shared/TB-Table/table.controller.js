@@ -16,7 +16,7 @@
             if ($scope.ref)    
                 $state.go($scope.ref, { data: JSON.stringify(rowData) });
             
-            $scope.onRowClick();
+            //$scope.onRowClick();
         }
         
         vm.loseFocus = function(){
