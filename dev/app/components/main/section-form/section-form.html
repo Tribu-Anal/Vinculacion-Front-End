@@ -45,6 +45,20 @@
     </div>
 
     <div>
+        <label class="cd-label" for="cd-name">Alumnos</label>
+        <tb-search endpoint= 'vm.studentsSearch.endpoint' 
+            on-element-click= 'vm.studentsSearch.onElementClick' 
+            response-property-show= 'vm.studentsSearch.responsePropertyShow'
+            on-click-element="vm.studentsSearch.onClickElement">
+        </tb-search>    
+    </div>
+    <div>
+        <tb-table   headers="vm.studentsTable.headers" 
+            body="vm.studentsTable.body"
+            on-row-click="vm.deleteElementFromStudentsTable">
+         </tb-table>
+    </div>
+    <div>
         <input type="submit" ng-hide="vm.submitting" value="Confirmar">
     </div>
 </form>

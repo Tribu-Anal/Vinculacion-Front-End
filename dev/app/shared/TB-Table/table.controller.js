@@ -12,11 +12,12 @@
         
         vm.onRowClick = onRowClick;
         
-        function onRowClick (rowData) {
+        function onRowClick (row) {
             if ($scope.ref)    
-                $state.go($scope.ref, { data: JSON.stringify(rowData) });
-            
-            $scope.onRowClick();
+                $state.go($scope.ref, { data: JSON.stringify(row.data) });
+            if (typeof $scope.onRowClick === 'function'){
+                $scope.onRowClick(row);
+            } 
         }
         
         vm.loseFocus = function(){

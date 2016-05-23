@@ -7,7 +7,7 @@
           <ul id="contact">
             <li><span>Codigo</span> <strong>{{vm.section.Code}}</strong></li>
             <li><span>Periodo</span> <strong>{{vm.section.Period.Number}}</strong></li>
-            <li><span>Year</span> <strong>{{vm.section.Period.Year}}</strong></li>
+            <li><span>Año</span> <strong>{{vm.section.Period.Year}}</strong></li>
           </ul>
           <img id="picture" src="img/logo.png" alt="" />
     </div>
@@ -22,7 +22,8 @@
     </div>
     <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
 </div>
-<tb-round-btn style="background-color: #b91a1a; margin-top: -80px; color: #fff8f8;" ng-show="Role === 'Admin'" ng-click="vm.removeSection()">
+<tb-round-btn style="background-color: #b91a1a; margin-top: -80px; color: #fff8f8;" 
+  ng-show="Role === 'Admin' && vm.sectionsTable.body.length == 0" ng-click="vm.removeSection()">
     <div style="margin: auto;">
         <div style="margin: 8px 8px 5px 5px;">
         <div style="margin: 8px 8px 5px 8px;">

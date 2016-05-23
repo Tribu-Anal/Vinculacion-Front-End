@@ -4,7 +4,7 @@
 		<th ng-if="actions"></th>
 	</tr>
 
-	<tr ng-init="Index = $index" ng-click="vm.onRowClick(row.data)" ng-repeat="row in body" class="tb-body">
+	<tr ng-init="Index = $index" ng-click="vm.onRowClick(row)" ng-repeat="row in body" class="tb-body">
 		<td ng-repeat="content in row.content">
 		  <label ng-if="content.typeObject == 'label'">
 		  		{{content.properties.value}}  
