@@ -34,7 +34,6 @@
                 let section = response.data[i];
 
                 let newTableElement = {
-                    //actions: [acceptButton, rejectButton],
                     content: [
                         tableContent.createALableElement(section.Code),
                         tableContent.createALableElement(section.Class.Name),
@@ -54,16 +53,5 @@
         function getSectionsFail(response) {
             console.log(response);
         }
-//
-//        function getElement(index) {
-//            console.log(index);
-//            let element = {
-//                accountNumber: vm.requestsTable.body[index].content[0].properties.value,
-//                studentName: vm.requestsTable.body[index].content[1].properties.value,
-//                id: vm.requestsTable.body[index].id
-//            }
-//
-//            return element;
-//        }
     }
 })();

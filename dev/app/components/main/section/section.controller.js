@@ -109,7 +109,6 @@
                 let section = response.data[i];
 
                 let newTableElement = {
-                    //actions: [acceptButton, rejectButton],
                     content: [
                         tableContent.createALableElement(section.AccountId),
                         tableContent.createALableElement(section.Name),
