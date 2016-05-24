@@ -34,10 +34,16 @@
         }
 
         function accept() {
-            _close(vm.section, 500);
+            let section = {
+                Code: vm.section.Code,
+                ClassId: parseInt(vm.section.ClassId),
+                PeriodId: parseInt(vm.section.PeriodId),
+                ProffesorAccountId: vm.section.ProffesorAccountId
+            }
+            _close(section, 500);
         }
 
-        function close(){
+        function close() {
             _close({}, 500);
         }
 
