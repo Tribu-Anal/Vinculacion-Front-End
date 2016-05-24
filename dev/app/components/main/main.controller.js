@@ -31,10 +31,10 @@
 		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading },
 
-		  { title: "SECCIONES", ref: "dashboard.newsection", 
-		  	icon: "glyphicon glyphicon-plus", 
-		  	active: $state.current.url === '/nueva-seccion',
-		  	show: $rootScope.Role === 'Admin',
+		  { title: "SECCIONES", ref: "dashboard.sections", 
+		  	icon: "glyphicon glyphicon-th-list", 
+		  	active: $state.current.url === '/secciones',
+		  	show: $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "LOG OUT", ref: "landing", 
@@ -53,7 +53,7 @@
 			vm.navItems[0].active = toState.url === '/home';
 			vm.navItems[1].active = toState.url.includes('/proyectos');
 			vm.navItems[2].active = toState.url === '/solicitudes';
-			vm.navItems[3].active = toState.url === '/nueva-seccion';
+			vm.navItems[3].active = toState.url === '/secciones';
 		}
 	}
 })();

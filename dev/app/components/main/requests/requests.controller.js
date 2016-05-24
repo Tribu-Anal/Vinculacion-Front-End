@@ -13,6 +13,9 @@
 		
 		var vm = this;
         
+        vm.requestsLoading = true;
+        vm.requestsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Carrera', 'Correo Electronico']);
+        
 		var acceptButton = {
             tooltip: 'Aceptar',
             icon: 'glyphicon-ok',
@@ -23,19 +26,6 @@
             tooltip: 'Rechazar',
             icon: 'glyphicon-remove',
             onClick: rejectButtonClicked
-        };
-
-        vm.requestsLoading = true;
-
-        vm.requestsTable = {
-            headers: [
-                'Numero de Cuenta',
-                'Nombre',
-                'Carrera',
-                'Correo Electronico'
-            ],
-            body: [],
-            actions: true
         };
 
 		requests.getRequests(getRequestSuccess, getRequestFail);

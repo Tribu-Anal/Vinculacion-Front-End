@@ -1,0 +1,211 @@
+.section {
+    .section-view {
+      color: #848484;
+    }
+
+    body.grid {
+      background-image: url(../images/grid.png);
+    }
+
+    h1 {
+      font-size: 41px;
+      line-height: 50px;
+      font-weight: normal;
+      font-style: normal;
+      color: #3c3c3c;
+    }
+
+    h2 {
+      font-size: 27px;
+      line-height: 30px;
+      font-weight: normal;
+      font-style: normal;
+      color: #848484;
+    }
+
+    h3 {
+      font-size: 27px;
+      line-height: 30px;
+      font-weight: normal;
+      font-style: normal;
+      color: #3c3c3c;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    a:link, a:visited {
+      color: #3c3c3c;
+      text-decoration: none;
+    }
+
+    a:link:hover, a:visited:hover {
+      text-decoration: underline;
+      color: #000;
+    }
+
+
+    /* @end */
+
+    /* @group about */
+
+    #about {
+      width: 950px;
+      padding: 80px 0 59px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #about h1 {
+      margin-bottom: 4px;
+      margin-top: 2px;
+    }
+
+    #about h2 {
+      font-size: 14px;
+      line-height: 20px;
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+
+    #story {
+      font-size: 18px;
+      line-height: 30px;
+      width: 690px;
+      float: left;
+      padding-right: 90px;
+    }
+
+    #picture {
+      width: 190px;
+      float: right;
+    }
+
+    /* @group contact */
+
+    #contact {
+      width: 230px;
+//      float: left;
+      padding-right: 50px;
+      padding-top: 96px;
+      list-style-type: none;
+      line-height: 20px;
+      position: absolute;
+//      top: 160px;
+      margin-top: 50px;
+    }
+
+    #contact li {
+      width: 230px;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+
+    #contact li span {
+      float: left;
+    }
+
+    #contact li strong {
+      float: right;
+      text-align: right;
+      color: #3c3c3c;
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    .seccion {
+      width: 950px;
+      margin: 0 auto;
+      padding: 20px 0;
+      background: #f2f2f2;
+      overflow: hidden;
+      border-top: 2px solid #bcb9b9;
+      margin-top: 80px;
+    }
+
+    .seccion h2 {
+      width: 160px;
+      padding-right: 30px;
+      float: left;
+      padding-top: 0;
+      line-height: 22px;
+    }
+
+    .seccion h3 {
+      line-height: 22px;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .seccion h4 {
+      font-weight: normal;
+      font-style: normal;
+      margin-bottom: 20px;
+      margin-top: -20px;
+    }
+
+    .seccion .date {
+      position: absolute;
+      top: 6px;
+      right: 0;
+    }
+
+    .seccion .item {
+      width: 100%;
+//      padding-left: 50px;
+//      float: right;
+      padding-top: 0;
+      margin-bottom: 9px;
+      position: relative;
+      padding-bottom: 5px;
+    }
+
+    .seccion .description {
+      width: 510px;
+    }
+
+    body.small {
+    }
+
+    body.small #header ul  {
+      width: 750px;
+    }
+
+    body.small #about {
+      width: 750px;
+      position: relative;
+      padding-bottom: 65px;
+      min-height: 260px;
+    }
+
+    body.small #about #story {
+      float: none;
+    }
+
+    body.small #about #contact {
+      float: none;
+      padding-top: 0;
+      padding-right: 0;
+      clear: left;
+    }
+
+    body.small #about #picture {
+      clear: none;
+      float: none;
+      position: absolute;
+      top: 80px;
+      right: 0;
+    }
+
+    /* --- */
+
+    body.small .seccion {
+      width: 750px;
+    }
+
+    body.small .seccion .item {
+      width: 510px;
+    }
+}
