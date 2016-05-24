@@ -26,6 +26,12 @@
             controller: 'AddStudentController'
         };
 
+        var editSectionModal = {
+            templateUrl: 'templates/components/main/section/' +
+                'edit-section/edit-section.html',
+            controller: 'EditSectionController as vm'
+        }
+
         var modalFlag = '';
 
         vm.sectionsLoading = true;
@@ -33,6 +39,7 @@
         vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', ' ']);
         vm.removeSection = removeSection;
         vm.addStudent = addStudent;
+        vm.editSection = editSection;
         vm.deleteRowButton = {
             icon: 'glyphicon-trash',
             onClick: deleteStudent,
@@ -52,6 +59,19 @@
                 .then(modalResolve);
         }
 
+        function editSection() {
+            modalFlag = 'EditSection';
+            let params = {
+                Code: vm.section.Code,
+                ClassId: String(vm.section.Class.Id),
+                PeriodId: String(vm.section.Period.Number),
+                ProffesorAccountId: vm.section.User.AccountId
+            }
+            TbUtils.setModalParams(params);
+            ModalService.showModal(editSectionModal)
+                .then(modalResolve);
+        }
+
         function removeSection() {
             modalFlag = 'DeleteSection';
             ModalService.showModal(confirmDeleteModal)
@@ -66,6 +86,8 @@
         function modalClose(result) {
             if (modalFlag === 'AddStudent')
                 addStudentToSection(result);
+            else if (modalFlag === 'EditSection')
+                updateSection(result);
             else
                 deleteSection(result);
         }
@@ -78,6 +100,11 @@
         function deleteSection(result) {
             if (result)
                 sections.deleteSection(vm.section.Id, deleteSectionSuccess, deleteSectionFail)
+        }
+
+        function updateSection(result) {
+            if (result.ClassId)
+                sections.updateSection(result,vm.section.Id,updateSectionSuccess, updateSectionFail);
         }
 
         function addStudentSuccess(response) {
@@ -142,8 +169,13 @@
             TbUtils.showErrorMessage('error', response, 'No se ha podido eliminar al estudiante', 'Error');
         }
 
-        vm.alert = function(){
-            alert("was clicked");
+        function updateSectionSuccess(){
+            TbUtils.showErrorMessage('success', response, 'Seccion actualizada correctanmente', 'Exito');
+            $state.go('dashboard.sections');
+        }
+
+        function updateSectionFail(response) {
+            TbUtils.showErrorMessage('error', response, 'No se ha podido editar la seccion', 'Error');
         }
     }
 })();
