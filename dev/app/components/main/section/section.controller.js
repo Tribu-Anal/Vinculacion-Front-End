@@ -64,7 +64,7 @@
             let params = {
                 Code: vm.section.Code,
                 ClassId: String(vm.section.Class.Id),
-                PeriodId: String(vm.section.Period.Number),
+                PeriodId: String(vm.section.Period.Id),
                 ProffesorAccountId: vm.section.User.AccountId
             }
             TbUtils.setModalParams(params);
@@ -169,7 +169,7 @@
             TbUtils.showErrorMessage('error', response, 'No se ha podido eliminar al estudiante', 'Error');
         }
 
-        function updateSectionSuccess(){
+        function updateSectionSuccess(response){
             TbUtils.showErrorMessage('success', response, 'Seccion actualizada correctanmente', 'Exito');
             $state.go('dashboard.sections');
         }

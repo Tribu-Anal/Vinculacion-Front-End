@@ -49,13 +49,15 @@
         <tb-search endpoint= 'vm.studentsSearch.endpoint' 
             on-element-click= 'vm.studentsSearch.onElementClick' 
             response-property-show= 'vm.studentsSearch.responsePropertyShow'
-            on-click-element="vm.studentsSearch.onClickElement">
+            on-click-element="vm.studentsSearch.onClickElement"
+            ng-hide="vm.submitting">
         </tb-search>    
     </div>
     <div>
         <tb-table   headers="vm.studentsTable.headers" 
             body="vm.studentsTable.body"
-            on-row-click="vm.deleteElementFromStudentsTable">
+            on-row-click="vm.deleteElementFromStudentsTable"
+            ng-hide="vm.submitting">
          </tb-table>
     </div>
     <div>
