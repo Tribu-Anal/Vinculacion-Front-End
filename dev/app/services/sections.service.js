@@ -16,7 +16,8 @@
             deleteSection: deleteSection,
             getStudents: getStudents,
             addStudent: addStudent,
-            removeStudent: removeStudent
+            removeStudent: removeStudent,
+            updateSection: updateSection
         };
 
         return service;
@@ -49,7 +50,7 @@
                 SectionId: sectionId,
                 StudenstIds: StudenstIds
             }).then(successCallback)
-              .catch(errorCallback);
+                .catch(errorCallback);
         }
 
         function removeStudent(StudenstIds, sectionId, successCallback, errorCallback) {
@@ -57,7 +58,13 @@
                 SectionId: sectionId,
                 StudenstIds: StudenstIds
             }).then(successCallback)
-              .catch(errorCallback);
+                .catch(errorCallback);
+        }
+
+        function updateSection(data, sectionId, successCallback, errorCallback) {
+            $http.put(url + "/" + sectionId, data)
+                .then(successCallback)
+                .catch(errorCallback);
         }
     }
 })();
