@@ -8,26 +8,26 @@
       <div class="modal-body">
 		<form class="form-horizontal container" role="form">
 		  <div class="row" style="margin: 4%;">
-        <label class="cd-label col-md-3" for="cd-name">Codigo</label>
+        <label class="cd-label col-md-3 col-lg-1" for="cd-name">Codigo</label>
         <input ng-model="vm.section.Code" class="user col-md-4" type="text" name="sectionCode">
     </div>
 
     <div class="row" style="margin: 4%;">
-        <label class="cd-label col-md-3" for="cd-name">Clase</label>
+        <label class="cd-label col-md-3 col-lg-1" for="cd-name">Clase</label>
         <select name="_class" ng-model="vm.section.ClassId" class="col-md-4">
             <option value="{{class.Id}}" ng-repeat="class in vm.classes">{{class.Name}}</option>
         </select>
     </div>
 
     <div class="row" style="margin: 4%;">
-        <label class="cd-label col-md-3" for="cd-name">Periodo</label>
+        <label class="cd-label col-md-3 col-lg-1" for="cd-name">Periodo</label>
         <select name="period" ng-model="vm.section.PeriodId" class="col-md-4">
             <option value="{{period.Id}}" ng-repeat="period in vm.periods">Modulo {{period.Number}} ({{period.Year}})</option>
         </select>
     </div>
 
     <div class="row" style="margin: 4%;">
-        <label class="cd-label col-md-3" for="cd-name">Docente</label>
+        <label class="cd-label col-md-3 col-lg-1" for="cd-name">Docente</label>
         <select name="professor" ng-model="vm.section.ProffesorAccountId" class="col-md-4" >
             <option value="{{professor.AccountId}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
         </select>
