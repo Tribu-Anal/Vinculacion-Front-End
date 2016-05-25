@@ -170,7 +170,7 @@
         }
 
         function updateSectionSuccess(response){
-            TbUtils.showErrorMessage('success', response, 'Seccion actualizada correctanmente', 'Exito');
+            TbUtils.displayNotification('success', 'Exito!', 'El cambio ha sido un exito');
             $state.go('dashboard.sections');
         }
 
