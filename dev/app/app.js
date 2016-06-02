@@ -1,3 +1,6 @@
+// require("./config");
+// require("./run");
+
 (function(){
 	"use strict";
 

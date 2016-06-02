@@ -7,6 +7,7 @@
 
 let gulp            = require('gulp'),
     autoprefixer    = require('gulp-autoprefixer'),
+    browserify      = require('browserify'),
     concat          = require('gulp-concat'),
     connect         = require('gulp-connect'),
     csscomb         = require('gulp-csscomb'),
@@ -16,6 +17,7 @@ let gulp            = require('gulp'),
     htmlmin         = require('gulp-htmlmin'),
     imagemin        = require('gulp-imagemin'),
     sass            = require('gulp-sass'),
+    source          = require('vinyl-source-stream'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
     util            = require('gulp-util');
@@ -58,11 +60,6 @@ let production = util.env.type === 'prod';
 
 let appJs       = [ path.dev.app + "app.js", path.dev.app + "**/*.js", 
                     path.dev.app  + "**/*.*.js" ],
-    vendorJs    = [ path.dev.lib + "jQuery/*.js", 
-    				path.dev.lib + "jquery-validate/jquery-validate.js",
-    				path.dev.lib + "jquery-validate/*.js",
-    			    path.dev.lib + "angular/*.js",
-    				path.dev.lib + "**/*.js" ],
     fonts       = [ path.dev.fonts + "*.ttf", path.dev.fonts + "*.woff", 
                     path.dev.fonts + "*.woff2", path.dev.fonts + "*.eot" ],
     vendorCss   = [ path.dev.lib + "**/*.css", path.dev.lib + "**/*.*.css" ],
@@ -93,7 +90,7 @@ gulp.task ('connect', () => {
 /////////////////////////////////////////////////////////////////////////
 
 
-gulp.task ( 'app-js', () => {
+gulp.task ( 'js-lint', () => {
 	return gulp.src( appJs )
 		.pipe(eslint({
 			rules: {
@@ -112,19 +109,16 @@ gulp.task ( 'app-js', () => {
 				es6: true
 			}
 		})) 
-        .pipe(eslint.format()) 
-		.pipe( concat('bundle.js') )
+        .pipe(eslint.format());
+} );
+
+gulp.task ( 'js', [ 'js-lint' ], () => {
+	return browserify ('dev/app/app.bootstrap.js')
+		.bundle()
+		.pipe( source( 'bundle.js' ) )
 		.pipe( production ? uglify() : util.noop() )
 		.pipe( production ? stripDebug() : util.noop() )
 		.pipe( gulp.dest(path.public.js) )
-		.pipe( connect.reload() );
-} );
-
-gulp.task ( 'vendor-js', () => {
-	return gulp.src( vendorJs )
-		.pipe( concat('vendor.js') )
-		.pipe( production ? uglify() : util.noop() )
-		.pipe( gulp.dest(path.public.lib) )
 		.pipe( connect.reload() );
 } );
 
@@ -215,8 +209,7 @@ gulp.task ( 'fonts', () => {
 
 
 gulp.task ( 'watch', () => {
-	gulp.watch ( appJs, ['app-js'] );
-	gulp.watch ( vendorJs, ['vendor-js'] );
+	gulp.watch ( appJs, ['js'] );
 	gulp.watch ( vendorCss, ['vendor-css'] );
 	gulp.watch ( sassSrc, ['css'] );
 	gulp.watch ( templateSrc, ['templates'] );
@@ -232,5 +225,5 @@ gulp.task ( 'watch', () => {
 /////////////////////////////////////////////////////////////////////////
 
 
-gulp.task ( 'default', [ 'vendor-js', 'app-js', 'vendor-css', 'css', 
+gulp.task ( 'default', [ 'js', 'vendor-css', 'css', 
                          'img', 'fonts', 'templates' ] );
