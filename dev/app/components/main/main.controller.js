@@ -8,31 +8,31 @@ function MainController ($rootScope, $state, TbUtils) {
 	vm.expand = false;
 	vm.navItems = 
 	[ 
-	  { title: "HOME", ref: "dashboard.home", 
+	  { title: "HOME", ref: "main.home", 
 	  	icon: "glyphicon glyphicon-home", 
 	  	active: $state.current.url === '/home',
 	  	show: true,
 	  	clicked: TbUtils.preventGeneralLoading },
 
-	  { title: "PROYECTOS", ref: "dashboard.projects", 
+	  { title: "PROYECTOS", ref: "main.projects", 
 	  	icon: "glyphicon glyphicon-th-large", 
 	  	active: $state.current.url.includes('/proyectos'),
 	  	show: true,
 	  	clicked:TbUtils.preventGeneralLoading },
 
-	  { title: "SOLICITUDES", ref: "dashboard.requests", 
+	  { title: "SOLICITUDES", ref: "main.requests", 
 	  	icon: "glyphicon glyphicon-th-list", 
 	  	active: $state.current.url === '/solicitudes',
 	  	show: $rootScope.Role === 'Admin',
 	  	clicked: TbUtils.preventGeneralLoading },
 
-	  { title: "SECCIONES", ref: "dashboard.sections", 
+	  { title: "SECCIONES", ref: "main.sections", 
 	  	icon: "glyphicon glyphicon-th-list", 
 	  	active: $state.current.url === '/secciones',
 	  	show: $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
 	  	clicked: TbUtils.preventGeneralLoading },
 
-	  { title: "LOG OUT", ref: "landing", 
+	  { title: "LOG OUT", ref: "landing.login", 
 	  	icon: "glyphicon glyphicon-log-out", active: false,
 	  	show: true,
 	  	clicked: closeSession }
