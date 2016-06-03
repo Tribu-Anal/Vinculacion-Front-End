@@ -1,29 +1,22 @@
-(function() {
-    "use strict";
+"use strict";
 
-    angular
-        .module('VinculacionApp')
-        .factory('reports', reports);
+function reports () {
+    var service = {
+        setReportParams: setReportParams,
+        getReportParams: getReportParams
+    };
+    
+    var reportParams = {};
+    
+    return service;
 
-    reports.$inject = [];
-
-    function reports() {
-        var service = {
-            setReportParams: setReportParams,
-            getReportParams: getReportParams
-        };
-        
-        var reportParams = {};
-        
-        return service;
-
-        function setReportParams(params) {
-            reportParams = params;
-        }
-
-        function getReportParams() {
-            return reportParams;
-        }
-
+    function setReportParams(params) {
+        reportParams = params;
     }
-})();
+
+    function getReportParams() {
+        return reportParams;
+    }
+}
+
+module.exports = reports;

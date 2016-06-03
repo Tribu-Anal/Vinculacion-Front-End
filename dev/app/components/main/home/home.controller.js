@@ -1,30 +1,23 @@
-(function(){
-	"use strict";
+HomeController.$inject = [ '$rootScope', 'recentProjects', 'projects', 'TbUtils' ];
 
-	angular
-		.module('VinculacionApp')
-		.controller('HomeController', HomeController);
+function HomeController ($rootScope, recentProjects, projects, TbUtils) {
+	var vm = this;
+	
+	vm.recentProjects = [];
+	vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
 
-	HomeController.$inject = [ '$rootScope', 'recentProjects', 'projects', 'TbUtils' ];
+	getRecentProjects();
 
-	function HomeController ($rootScope, recentProjects, projects, TbUtils) {
-		var vm = this;
+	function getRecentProjects () {
+		let storedRecentProjectIds = recentProjects.get($rootScope.Session);
 		
-		vm.recentProjects = [];
-		vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
-
-		getRecentProjects();
-
-		function getRecentProjects () {
-			let storedRecentProjectIds = recentProjects.get($rootScope.Session);
-			
-			for (let i = 0; i < storedRecentProjectIds.length; i++)
-				projects.getProject(storedRecentProjectIds[i], getProjectSuccess);
-		}
-
-		function getProjectSuccess (response) {
-			vm.recentProjects.push(response.data);
-		}
+		for (let i = 0; i < storedRecentProjectIds.length; i++)
+			projects.getProject(storedRecentProjectIds[i], getProjectSuccess);
 	}
 
-})();
+	function getProjectSuccess (response) {
+		vm.recentProjects.push(response.data);
+	}
+}
+
+module.exports = HomeController;
