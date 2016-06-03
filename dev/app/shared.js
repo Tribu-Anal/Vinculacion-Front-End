@@ -13,7 +13,7 @@ let shared = [
 	tbHeaderbar, tbLoading, tbRoundBtn, 
 	tbSearch, tbSidebar, tbTable
 ];
-console.log(tbSidebar);
+
 angular.module(moduleName, shared);
 
 module.exports = moduleName;

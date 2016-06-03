@@ -45,7 +45,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             'El proyecto deseado no existe.',
             'Error');
 
-        $state.go('dashboard.home');
+        $state.go('main.home');
 
         vm.projectLoading = false;
     }
@@ -135,7 +135,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
     function downloadReport(participant) {
         let params = {
             templateUrl: 'reports/hours-by-student/hours-by-student.html',
-            previousState: 'dashboard.project',
+            previousState: 'main.project',
             previousStateParams: {
                 projectId: $stateParams.projectId
             },
@@ -143,7 +143,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             showPrintButton: true
         }
         TbUtils.preventGeneralLoading();
-        $state.go('dashboard.printarea', {
+        $state.go('main.printarea', {
             params: params
         });
     }

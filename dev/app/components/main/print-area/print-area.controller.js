@@ -14,7 +14,7 @@ function PrintAreaController($stateParams, $state, $window, reports) {
 
     function init() {
         if (!$stateParams.params) {
-            $state.go('dashboard.home');
+            $state.go('main.home');
         } else {
             loadView();
         }

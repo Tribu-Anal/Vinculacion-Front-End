@@ -10,10 +10,14 @@
         <link href="lib/vendor.css" rel="stylesheet"/>
 		<link href="css/style.css" rel="stylesheet"/>
     </head>
-    <body class="{{viewStyles}}" ng-class="{ 'scrollable': !stateLoading }">
+    <body class="{{viewStyles}}">
+
     	<toaster-container></toaster-container>
 		<ui-view></ui-view>
-        <tb-loading class="general-loader" ng-show="generalLoading && stateLoading"></tb-loading>
+        <tb-loading 
+                    class="general-loader" 
+                    ng-show="generalLoading && stateLoading">
+        </tb-loading>
 
 		<script src="js/bundle.js"></script>	
     </body>

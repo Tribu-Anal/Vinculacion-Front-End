@@ -1,11 +1,9 @@
 "use strict";
 
-let setupRoutes = require("./routes");
+config.$inject = [ '$urlRouterProvider' ];
 
-config.$inject = [ '$stateProvider', '$urlRouterProvider' ];
-
-function config ($stateProvider, $urlRouterProvider) {
-	setupRoutes($stateProvider, $urlRouterProvider);
+function config (urlRouterProvider) {
+	urlRouterProvider.otherwise('/');
 }
 
 module.exports = config;

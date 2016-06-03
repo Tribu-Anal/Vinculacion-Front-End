@@ -20,18 +20,6 @@ function MainController ($rootScope, $state, TbUtils) {
 	  	show: true,
 	  	clicked:TbUtils.preventGeneralLoading },
 
-	  { title: "SOLICITUDES", ref: "main.requests", 
-	  	icon: "glyphicon glyphicon-th-list", 
-	  	active: $state.current.url === '/solicitudes',
-	  	show: $rootScope.Role === 'Admin',
-	  	clicked: TbUtils.preventGeneralLoading },
-
-	  { title: "SECCIONES", ref: "main.sections", 
-	  	icon: "glyphicon glyphicon-th-list", 
-	  	active: $state.current.url === '/secciones',
-	  	show: $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
-	  	clicked: TbUtils.preventGeneralLoading },
-
 	  { title: "LOG OUT", ref: "landing.login", 
 	  	icon: "glyphicon glyphicon-log-out", active: false,
 	  	show: true,
@@ -47,8 +35,6 @@ function MainController ($rootScope, $state, TbUtils) {
 	function changeActiveItem (event, toState) {
 		vm.navItems[0].active = toState.url === '/home';
 		vm.navItems[1].active = toState.url.includes('/proyectos');
-		vm.navItems[2].active = toState.url === '/solicitudes';
-		vm.navItems[3].active = toState.url === '/secciones';
 	}
 }
 
