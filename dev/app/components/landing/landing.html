@@ -1,17 +1,1 @@
-<div class="login-page">
-      <img class = "img-responsive logo" src="img/logo.png" />
-      <div class="form">
-        <form id="login-form" class="login-form" name="registerLogin" ng-submit="registerLogin.$valid && vm.login()" novalidate>
-            <div class="inner-addon left-addon">
-            <span class="fa fa-user"></span>
-            <input name="usuario" ng-model="vm.username" ng-pattern='/@unitec.edu$/' type="email" placeholder="Correo de Unitec" required/>
-            </div>
-            <div class="inner-addon left-addon">
-            <span class="fa fa-lock"></span>
-            <input name="clave" ng-model="vm.password" type="password" placeholder="Clave" required/>
-            </div>
-            <button id="ingresar" type="submit">Ingresar</button>
-            <tb-loading class="landing-loader main-loader" ng-show="vm.loading"></tb-loading>
-        </form> 
-      </div>
-</div>
+<div ui-view></div>

@@ -6,9 +6,10 @@ let config        = require("./config"),
 	shared        = require("./shared"),
 	run           = require("./run");
 
-let dependencies = [ components, services, shared, 
-		             'ui.router', 'toaster', 'ngAnimate', 
-		             'ngCookies', 'angular-spinkit', 'angularModalService'];
+let dependencies = [ 'ui.router', 'toaster', 'ngAnimate', 
+		             'ngCookies', 'angular-spinkit', 'angularModalService', 
+		             components, services, shared 
+		           ];
 
 angular
 	.module("VinculacionApp", dependencies)

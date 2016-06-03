@@ -3,7 +3,9 @@
 LoginController.$inject = ['$rootScope', '$location', 'authentication', 
                            'role', 'toaster', 'TbUtils'];
 
-function LoginController ($rootScope, $location, authentication, role, toaster, TbUtils) {
+function LoginController ($rootScope, $location, authentication, 
+                          role, toaster, TbUtils) 
+{
     var vm = this;
 
     vm.username = "";
@@ -16,7 +18,8 @@ function LoginController ($rootScope, $location, authentication, role, toaster, 
     function login() {
         vm.loading = true;
 
-        authentication.Login( vm.username, vm.password, LoginSuccess, LoginFail);
+        authentication.Login( vm.username, vm.password, 
+                              LoginSuccess, LoginFail);
     }
     
     function LoginSuccess(response) {
@@ -44,7 +47,8 @@ function LoginController ($rootScope, $location, authentication, role, toaster, 
     function LoginFail(response) {
         console.log(response);
         TbUtils.showErrorMessage('error', response, 
-                                 'La cuenta ingresada no tiene privilegios de acceso',
+                                 'La cuenta ingresada no tiene' +
+                                 ' privilegios de acceso',
                                  'Falla autorizacion');
         
         vm.loading = false;
