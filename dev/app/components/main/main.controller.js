@@ -36,6 +36,12 @@
 		  	active: $state.current.url === '/secciones',
 		  	show: $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
 		  	clicked: TbUtils.preventGeneralLoading },
+            
+		  { title: "NUEVO PROFESOR", ref: "dashboard.newprofessor", 
+		  	icon: "glyphicon glyphicon-pencil", 
+		  	active: $state.current.url === '/nuevo-profesor',
+		  	show: $rootScope.Role === 'Admin',
+		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "LOG OUT", ref: "landing", 
 		  	icon: "glyphicon glyphicon-log-out", active: false,
@@ -54,6 +60,7 @@
 			vm.navItems[1].active = toState.url.includes('/proyectos');
 			vm.navItems[2].active = toState.url === '/solicitudes';
 			vm.navItems[3].active = toState.url === '/secciones';
+            vm.navItems[4].active = toState.url === '/nuevo-profesor';
 		}
 	}
 })();

@@ -96,6 +96,10 @@
                     $rootScope.viewTitle = "Vinculacion | Seccion";
                     $rootScope.viewStyles = "main section";
                 break;
+                case "/nuevo-profesor":
+                    $rootScope.viewTitle = "Vinculacion | Nuevo Profesor";
+                    $rootScope.viewStyles = "main project-form";
+                break;
                 case "/":
                     $rootScope.viewTitle = "Vinculacion | Bienvenido";
                     $rootScope.viewStyles = "landing";
