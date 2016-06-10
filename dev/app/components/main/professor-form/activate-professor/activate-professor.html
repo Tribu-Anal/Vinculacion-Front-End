@@ -5,15 +5,23 @@
     
     <div>
         <label class="cd-label">Numero de Cuenta</label>
-        <input ng-model="accountId" ng-init="accountId = 0" min="20000000" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
+        <input ng-model="vm.accountId" min="20000000" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
         <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.accountId.$error.required">
             * Por favor ingrese un numero de cuenta valido.
         </p>
     </div>
     
     <div>
-        <label class="cd-label">Password</label>
+        <label class="cd-label">Contraseña</label>
         <input ng-model="vm.professor.Password" class="user" type="text" name="Password" id="cd-name" required>
+        <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
+            * Por favor ingrese la contraseña.
+        </p>
+    </div>
+    
+    <div>
+        <label class="cd-label">Confirmar Contraseña</label>
+        <input ng-model="vm.confirmPass" ng-pattern="vm.professor.Password" class="user" type="text" name="Password" id="cd-name" required>
         <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
             * Por favor ingrese la contraseña.
         </p>

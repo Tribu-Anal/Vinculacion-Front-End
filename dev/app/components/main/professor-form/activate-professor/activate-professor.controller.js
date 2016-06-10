@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ActivateProfessorController', ActivateProfessorController);
 
-    ActivateProfessorController.$inject = ['$rootScope', '$state', '$scope', 'professors', 'TbUtils'];
+    ActivateProfessorController.$inject = ['$rootScope', '$state', 'professors', 'TbUtils'];
 
-    function ActivateProfessorController($rootScope, $state, $scope, professors, TBUtils) {
+    function ActivateProfessorController($rootScope, $state, professors, TBUtils) {
 //        if ($rootScope.Role !== 'Professor') $state.go('dashboard.home');
 
         var vm = this;
@@ -17,10 +17,13 @@
             Password: ''
         };
         
+        vm.accountId = 0;
+        vm.confirmPass = '';
+        
         vm.activateProfessor = activateProfessor;
         
         function activateProfessor() {
-            vm.professor.accountId = $scope.accountId.toString();
+            vm.professor.accountId = vm.accountId.toString();
             professors.activateProfessor(vm.professor, activateProfessorSuccess, activateProfessorFail);
         }
         
