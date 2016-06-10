@@ -1,0 +1,25 @@
+<form name="activateProfessorForm" class="cd-form" ng-submit="activateProfessorForm.$valid && vm.activateProfessor()" novalidate>
+    <legend>
+        <strong>Activar Profesor</strong>
+    </legend>
+    
+    <div>
+        <label class="cd-label">Numero de Cuenta</label>
+        <input ng-model="accountId" ng-init="accountId = 0" min="20000000" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
+        <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.accountId.$error.required">
+            * Por favor ingrese un numero de cuenta valido.
+        </p>
+    </div>
+    
+    <div>
+        <label class="cd-label">Password</label>
+        <input ng-model="vm.professor.Password" class="user" type="text" name="Password" id="cd-name" required>
+        <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
+            * Por favor ingrese la contraseña.
+        </p>
+    </div>
+    <div>
+        <input type="submit" value="Confirmar">
+    </div>
+</form>
+<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading>

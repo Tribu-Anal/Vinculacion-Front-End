@@ -37,7 +37,7 @@
         }
 
         function locationChangeStart (event, next, current) {
-            if ($location.path() !== '/' && !$rootScope.globals.token) {
+            if ($location.path() !== '/' && !$rootScope.globals.token && $location.path() !== '/activar-profesor') {
                 $location.path('/');
             }
             
@@ -98,6 +98,10 @@
                 break;
                 case "/nuevo-profesor":
                     $rootScope.viewTitle = "Vinculacion | Nuevo Profesor";
+                    $rootScope.viewStyles = "main project-form";
+                break;
+                case "/activar-profesor":
+                    $rootScope.viewTitle = "Vinculacion | Activar Profesor";
                     $rootScope.viewStyles = "main project-form";
                 break;
                 case "/":

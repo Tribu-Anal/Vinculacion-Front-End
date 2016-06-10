@@ -28,6 +28,7 @@
         
         function registerProfessorSuccess(response) {
             $state.go('dashboard.home');
+            TBUtils.displayNotification('success', 'Profesor Creado!', 'Se le ha enviado un correo de activacion al profesor.');
         }
         
         function registerProfessorFail(response) {

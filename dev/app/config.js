@@ -97,6 +97,12 @@
 				url: '/nuevo-profesor',
 				templateUrl: templateDir + 'main/professor-form/professor-form.html',
 				controller: "ProfessorFormController as vm"
+			})
+        
+			.state('dashboard.activateprofessor', {
+				url: '/activar-profesor',
+				templateUrl: templateDir + 'main/professor-form/activate-professor/activate-professor.html',
+				controller: "ActivateProfessorController as vm"
 			});
 	}
 })();
