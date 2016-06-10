@@ -16,36 +16,36 @@
 		  { title: "HOME", ref: "dashboard.home", 
 		  	icon: "glyphicon glyphicon-home", 
 		  	active: $state.current.url === '/home',
-		  	show: true,
+		  	show: $state.current.url !== '/activar-profesor',
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "PROYECTOS", ref: "dashboard.projects", 
 		  	icon: "glyphicon glyphicon-th-large", 
 		  	active: $state.current.url.includes('/proyectos'),
-		  	show: true,
+		  	show: $state.current.url !== '/activar-profesor',
 		  	clicked:TbUtils.preventGeneralLoading },
 
 		  { title: "SOLICITUDES", ref: "dashboard.requests", 
 		  	icon: "glyphicon glyphicon-th-list", 
 		  	active: $state.current.url === '/solicitudes',
-		  	show: $rootScope.Role === 'Admin',
+		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/activar-profesor',
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "SECCIONES", ref: "dashboard.sections", 
 		  	icon: "glyphicon glyphicon-th-list", 
 		  	active: $state.current.url === '/secciones',
-		  	show: $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
+		  	show: $state.current.url !== '/activar-profesor' && $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
 		  	clicked: TbUtils.preventGeneralLoading },
             
 		  { title: "NUEVO PROFESOR", ref: "dashboard.newprofessor", 
 		  	icon: "glyphicon glyphicon-pencil", 
 		  	active: $state.current.url === '/nuevo-profesor',
-		  	show: $rootScope.Role === 'Admin',
+		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/activar-profesor',
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "LOG OUT", ref: "landing", 
 		  	icon: "glyphicon glyphicon-log-out", active: false,
-		  	show: true,
+		  	show: $state.current.url !== '/activar-profesor',
 		  	clicked: closeSession }
 		];
 

@@ -13,7 +13,7 @@
     
     <div>
         <label class="cd-label">Contraseña</label>
-        <input ng-model="vm.professor.Password" class="user" type="text" name="Password" id="cd-name" required>
+        <input ng-model="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" required>
         <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
             * Por favor ingrese la contraseña.
         </p>
@@ -21,9 +21,9 @@
     
     <div>
         <label class="cd-label">Confirmar Contraseña</label>
-        <input ng-model="vm.confirmPass" ng-pattern="vm.professor.Password" class="user" type="text" name="Password" id="cd-name" required>
+        <input ng-model="vm.confirmPass" ng-pattern="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" required>
         <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
-            * Por favor ingrese la contraseña.
+            * Vuelva a escribir la contraseña.
         </p>
     </div>
     <div>

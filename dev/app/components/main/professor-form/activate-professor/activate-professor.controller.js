@@ -8,12 +8,11 @@
     ActivateProfessorController.$inject = ['$rootScope', '$state', 'professors', 'TbUtils'];
 
     function ActivateProfessorController($rootScope, $state, professors, TBUtils) {
-//        if ($rootScope.Role !== 'Professor') $state.go('dashboard.home');
 
         var vm = this;
 
         vm.professor = {
-            accountId: '',
+            AccountId: '',
             Password: ''
         };
         
@@ -23,18 +22,18 @@
         vm.activateProfessor = activateProfessor;
         
         function activateProfessor() {
-            vm.professor.accountId = vm.accountId.toString();
+            vm.professor.AccountId = vm.accountId.toString();
             professors.activateProfessor(vm.professor, activateProfessorSuccess, activateProfessorFail);
         }
         
         function activateProfessorSuccess(response) {
-            $state.go('dashboard.home');
+            $state.go('landing');
             TBUtils.displayNotification('success', 'Usuario activado!', 'Ya puede navegar el sitio.');
         }
         
         function activateProfessorFail(response) {
             console.log(response);
-            TbUtils.showErrorMessage('error', response, 'No se ha podido activar al profesor.', 'Error!');
+            TbUtils.showErrorMessage('error', response, 'No se ha podido activar el profesor.', 'Error!');
         }
     }
 })();

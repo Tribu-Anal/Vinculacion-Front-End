@@ -5,7 +5,7 @@
     
     <div>
         <label class="cd-label">Numero de Cuenta</label>
-        <input ng-model="accountId" ng-init="accountId = 0" min="20000000" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
+        <input ng-model="vm.accountId" min="20000000" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.accountId.$error.required">
             * Por favor ingrese un numero de cuenta valido.
         </p>

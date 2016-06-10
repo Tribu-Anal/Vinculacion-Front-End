@@ -5,24 +5,26 @@
         .module('VinculacionApp')
         .controller('ProfessorFormController', ProfessorFormController);
 
-    ProfessorFormController.$inject = ['$rootScope', '$state', '$scope', 'professors', 'TbUtils'];
+    ProfessorFormController.$inject = ['$rootScope', '$state', 'professors', 'TbUtils'];
 
-    function ProfessorFormController($rootScope, $state, $scope, professors, TBUtils) {
+    function ProfessorFormController($rootScope, $state, professors, TBUtils) {
         if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
 
         var vm = this;
 
         vm.professor = {
-            accountId: '',
+            AccountId: '',
             Name: '',
             Email: '',
-            Campus: ''
+            Campus: 'SPS'
         };
+        
+        vm.accountId = 0;
         
         vm.registerProfessor = registerProfessor;
         
         function registerProfessor() {
-            vm.professor.accountId = $scope.accountId.toString();
+            vm.professor.AccountId = vm.accountId.toString();
             professors.registerProfessor(vm.professor, registerProfessorSuccess, registerProfessorFail);
         }
         
