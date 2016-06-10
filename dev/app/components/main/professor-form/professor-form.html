@@ -1,64 +1,41 @@
-<form name="sectionForm" class="cd-form" ng-submit="sectionForm.$valid && vm.submit()" novalidate>
+<form name="professorForm" class="cd-form" ng-submit="professorForm.$valid && vm.registerProfessor()" novalidate>
     <legend>
-        <strong>Nueva Seccion</strong>
+        <strong>Nuevo Profesor</strong>
     </legend>
     
     <div>
-        <label class="cd-label" for="cd-name">Codigo</label>
-        <input ng-model="vm.section.Code" class="user" type="text" name="sectionCode" id="cd-name" required>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.sectionCode.$error.required">
-            * Por favor ingrese un codigo para la seccion.
+        <label class="cd-label">Numero de Cuenta</label>
+        <input ng-model="vm.professor.accountId" min="20000000" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
+        <p class="error-message" ng-show="professorForm.$submitted && professorForm.accountId.$error.required">
+            * Por favor ingrese un numero de cuenta valido.
+        </p>
+    </div>
+    
+    <div>
+        <label class="cd-label">Nombre</label>
+        <input ng-model="vm.professor.Name" class="user" type="text" name="Name" id="cd-name" required>
+        <p class="error-message" ng-show="professorForm.$submitted && professorForm.Name.$error.required">
+            * Por favor ingrese el nombre del profesor.
+        </p>
+    </div>
+    
+    <div>
+        <label class="cd-label">Email</label>
+        <input ng-model="vm.professor.Email" class="user" type="email" name="Email" id="cd-name" ng-pattern='/@unitec.edu$/' required>
+        <p class="error-message" ng-show="professorForm.$submitted && professorForm.Email.$error.required">
+            * Por favor ingrese el correo del profesor.
         </p>
     </div>
 
     <div>
-        <label class="cd-label" for="cd-name">Clase</label>
-        <select name="_class" ng-model="vm.section.ClassId" required>
-            <option value="{{class.Id}}" ng-repeat="class in vm.classes">{{class.Name}}</option>
+        <label class="cd-label" for="cd-name">Campus</label>
+        <select name="_class" ng-model="vm.professor.Campus" required>
+            <option value="TGU">TGU</option>
+            <option value="SPS">SPS</option>
         </select>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm._class.$error.required">
-            * Por favor escoja una clase.
+        <p class="error-message" ng-show="professorForm.$submitted && professorForm._class.$error.required">
+            * Por favor seleccione un campus.
         </p>
-        <tb-loading class="main-loader" ng-show="vm.classesLoading"></tb-loading>
-    </div>
-
-    <div>
-        <label class="cd-label" for="cd-name">Periodo</label>
-        <select name="period" ng-model="vm.section.PeriodId" required>
-            <option value="{{period.Id}}" ng-repeat="period in vm.periods">Modulo {{period.Number}} ({{period.Year}})</option>
-        </select>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.period.$error.required">
-            * Por favor escoja un periodo.
-        </p>
-        <tb-loading class="main-loader" ng-show="vm.periodsLoading"></tb-loading>
-    </div>
-
-    <div>
-        <label class="cd-label" for="cd-name">Docente</label>
-        <select name="professor" ng-model="vm.section.ProffesorAccountId" required>
-            <option value="{{professor.AccountId}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
-        </select>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.professor.$error.required">
-            * Por favor escoja un profesor.
-        </p>
-        <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
-    </div>
-
-    <div>
-        <label class="cd-label" for="cd-name">Alumnos</label>
-        <tb-search endpoint= 'vm.studentsSearch.endpoint' 
-            on-element-click= 'vm.studentsSearch.onElementClick' 
-            response-property-show= 'vm.studentsSearch.responsePropertyShow'
-            on-click-element="vm.studentsSearch.onClickElement"
-            ng-hide="vm.submitting">
-        </tb-search>    
-    </div>
-    <div>
-        <tb-table   headers="vm.studentsTable.headers" 
-            body="vm.studentsTable.body"
-            on-row-click="vm.deleteElementFromStudentsTable"
-            ng-hide="vm.submitting">
-         </tb-table>
     </div>
     <div>
         <input type="submit" ng-hide="vm.submitting" value="Confirmar">
