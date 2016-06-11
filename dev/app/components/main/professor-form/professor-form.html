@@ -5,7 +5,7 @@
     
     <div>
         <label class="cd-label">Numero de Cuenta</label>
-        <input ng-model="vm.accountId" min="20000000" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
+        <input ng-model="vm.accountId" min="20000000" maxlength="8" validation-max-length="8" validation-no-special-chars="true" class="user" type="number" name="accountId" id="cd-name" required>
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.accountId.$error.required">
             * Por favor ingrese un numero de cuenta valido.
         </p>
@@ -13,7 +13,7 @@
     
     <div>
         <label class="cd-label">Nombre</label>
-        <input ng-model="vm.professor.Name" class="user" type="text" name="Name" id="cd-name" required>
+        <input ng-model="vm.professor.Name" class="user" type="text" name="Name" id="cd-name" validation-min-length="5" validation-no-space="true" validation-field-required="true" validation-max-length="20" validation-no-special-chars="true" required> 
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.Name.$error.required">
             * Por favor ingrese el nombre del profesor.
         </p>
@@ -21,7 +21,7 @@
     
     <div>
         <label class="cd-label">Email</label>
-        <input ng-model="vm.professor.Email" class="user" type="email" name="Email" id="cd-name" ng-pattern='/@unitec.edu$/' required>
+        <input ng-model="vm.professor.Email" class="user" type="email" name="Email" id="cd-name" ng-pattern='/@unitec.edu$/' validation-no-space="true" validation-field-required="true" validation-unitec-email="true" required>
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.Email.$error.required">
             * Por favor ingrese el correo del profesor.
         </p>
