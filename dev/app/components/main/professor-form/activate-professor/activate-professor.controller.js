@@ -37,6 +37,7 @@
         function activateProfessorFail(response) {
             console.log(response);
             TbUtils.showErrorMessage('error', response, 'No se ha podido activar el profesor.', 'Error!');
+            $state.go('landing');
         }
         
         function getToken() {
