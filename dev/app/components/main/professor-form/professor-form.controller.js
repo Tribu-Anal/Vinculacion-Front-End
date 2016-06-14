@@ -15,11 +15,12 @@
         vm.professor = {
             AccountId: '',
             Name: '',
+            Password: '12345',
             Email: '',
             Campus: 'SPS'
         };
         
-        vm.accountId = 0;
+        vm.accountId;
         
         vm.registerProfessor = registerProfessor;
         

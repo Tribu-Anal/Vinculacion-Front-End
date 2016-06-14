@@ -16,7 +16,7 @@
             Password: ''
         };
         
-        vm.accountId = 0;
+        vm.accountId;
         vm.confirmPass = '';
         
         vm.activateProfessor = activateProfessor;
@@ -34,6 +34,10 @@
         function activateProfessorFail(response) {
             console.log(response);
             TbUtils.showErrorMessage('error', response, 'No se ha podido activar el profesor.', 'Error!');
+        }
+        
+        function getParameter() {
+            
         }
     }
 })();
