@@ -4,14 +4,6 @@
     </legend>
     
     <div>
-        <label class="cd-label">Numero de Cuenta</label>
-        <input ng-model="vm.accountId" min="20000000" maxlength="8" validation-field-required="true" validation-max-length="8" validation-no-special-chars="true" class="user" type="number" value="2" name="accountId" id="cd-name" required>
-         <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.accountId.$error.required">
-            * Por favor ingrese un numero de cuenta valido.
-        </p> 
-    </div>
-    
-    <div>
         <label class="cd-label">Contraseña</label>
         <input ng-model="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" validation-min-length="8" validation-one-number="true" validation-one-upper-case-letter="true" validation-one-lower-case-letter="true" validation-field-required="true" validation-no-space="true" required>
         <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">

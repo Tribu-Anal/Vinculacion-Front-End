@@ -100,7 +100,7 @@
 			})
         
 			.state('dashboard.activateprofessor', {
-				url: '/activar-profesor',
+				url: '/activar-profesor/{accountId}',
 				templateUrl: templateDir + 'main/professor-form/activate-professor/activate-professor.html',
 				controller: "ActivateProfessorController as vm"
 			});

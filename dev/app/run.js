@@ -16,6 +16,7 @@
         $rootScope.generalLoading = true;
         $rootScope.Session = window.localStorage['Session'];
         $rootScope.Role = window.localStorage['Role'];
+        $rootScope.guest = true;
 
         let stateUrl = "";
         
@@ -37,7 +38,8 @@
         }
 
         function locationChangeStart (event, next, current) {
-            if ($location.path() !== '/' && !$rootScope.globals.token && $location.path() !== '/activar-profesor') {
+            let activationUrl = $location.path().substring(0, 17);
+            if ($location.path() !== '/' && !$rootScope.globals.token && activationUrl != '/activar-profesor') {
                 $location.path('/');
             }
             
@@ -100,7 +102,7 @@
                     $rootScope.viewTitle = "Vinculacion | Nuevo Profesor";
                     $rootScope.viewStyles = "main project-form";
                 break;
-                case "/activar-profesor":
+                case "/activar-profesor/{accountId}":
                     $rootScope.viewTitle = "Vinculacion | Activar Profesor";
                     $rootScope.viewStyles = "main project-form";
                 break;

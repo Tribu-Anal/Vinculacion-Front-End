@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .controller('ActivateProfessorController', ActivateProfessorController);
 
-    ActivateProfessorController.$inject = ['$rootScope', '$state', 'professors', 'TbUtils'];
+    ActivateProfessorController.$inject = ['$rootScope', '$state', '$stateParams', 'professors', 'TbUtils', 'authentication'];
 
-    function ActivateProfessorController($rootScope, $state, professors, TBUtils) {
+    function ActivateProfessorController($rootScope, $state, $stateParams, professors, TBUtils, authentication) {
 
         var vm = this;
 
@@ -20,9 +20,12 @@
         vm.confirmPass = '';
         
         vm.activateProfessor = activateProfessor;
+        $rootScope.globals.guest = true;
+        
+        leaveIfSessionStarted();
+        getToken();
         
         function activateProfessor() {
-            vm.professor.AccountId = vm.accountId.toString();
             professors.activateProfessor(vm.professor, activateProfessorSuccess, activateProfessorFail);
         }
         
@@ -36,8 +39,18 @@
             TbUtils.showErrorMessage('error', response, 'No se ha podido activar el profesor.', 'Error!');
         }
         
-        function getParameter() {
+        function getToken() {
+            if($stateParams.accountId == undefined || $stateParams.accountId == '') $state.go('landing');
             
+            console.log($stateParams.accountId);
+            vm.professor.AccountId = $stateParams.accountId;
+        }
+        
+        function leaveIfSessionStarted() {
+            if($rootScope.globals.token) {
+                authentication.ClearCredentials();
+                $state.go('landing');
+            }
         }
     }
 })();
