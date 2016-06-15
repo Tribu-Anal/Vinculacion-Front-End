@@ -19,7 +19,8 @@ let gulp            = require('gulp'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
     util            = require('gulp-util'),
-    fs              =require('fs');
+    fs              = require('fs'),
+    argv            = require('yargs').argv;
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -129,8 +130,8 @@ gulp.task ( 'vendor-js', () => {
 		.pipe( connect.reload() );
 } );
 
-gulp.task('favicon',()=>{
-    if(SYSTEM.test==='Develop'){
+gulp.task('fabian',()=>{
+    if(argv.test) {
         fs.writeFile("Tero.txt", 'funca...',function(err){
             if(err)
                 return console.log(err);
@@ -243,4 +244,4 @@ gulp.task ( 'watch', () => {
 
 
 gulp.task ( 'default', [ 'vendor-js', 'app-js', 'vendor-css', 'css', 
-                         'img', 'fonts', 'templates', 'favicon' ] );
+                         'img', 'fonts', 'templates', 'fabian' ] );
