@@ -18,7 +18,8 @@ let gulp            = require('gulp'),
     sass            = require('gulp-sass'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
-    util            = require('gulp-util');
+    util            = require('gulp-util'),
+    fs              =require('fs');
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -127,6 +128,15 @@ gulp.task ( 'vendor-js', () => {
 		.pipe( gulp.dest(path.public.lib) )
 		.pipe( connect.reload() );
 } );
+
+gulp.task('favicon',()=>{
+    if(SYSTEM.test==='Develop'){
+        fs.writeFile("Tero.txt", 'funca...',function(err){
+            if(err)
+                return console.log(err);
+        })
+    }
+});
 
 
 /////////////////////////////////////////////////////////////////////////
