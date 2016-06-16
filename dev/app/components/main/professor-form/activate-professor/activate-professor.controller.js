@@ -7,7 +7,7 @@
 
     ActivateProfessorController.$inject = ['$rootScope', '$state', '$stateParams', 'professors', 'TbUtils', 'authentication'];
 
-    function ActivateProfessorController($rootScope, $state, $stateParams, professors, TBUtils, authentication) {
+    function ActivateProfessorController($rootScope, $state, $stateParams, professors, TbUtils, authentication) {
 
         var vm = this;
 
