@@ -8,7 +8,7 @@
 	projects.$inject = ['$http'];
 
 	function projects ($http) {
-	   var url = 'http://fiasps.unitec.edu:8085/api/Projects';
+	   var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Projects';
 
 	   var service = {
            getProjects: getProjects,

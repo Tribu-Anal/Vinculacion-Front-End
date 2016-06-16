@@ -8,7 +8,7 @@
 	register.$inject = ['$http'];
 
 	function register ($http) {
-	    var url = 'http://fiasps.unitec.edu:8085/api/Students';
+	    var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Students';
         
         var service = {
             registerStudent: registerStudent

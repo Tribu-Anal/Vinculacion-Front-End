@@ -8,7 +8,7 @@
     sections.$inject = ['$http'];
 
     function sections($http) {
-        var url = 'http://fiasps.unitec.edu:8085/api/Sections';
+        var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Sections';
 
         var service = {
             getSections: getSections,

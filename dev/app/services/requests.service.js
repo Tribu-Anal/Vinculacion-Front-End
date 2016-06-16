@@ -8,7 +8,6 @@
 	requests.$inject = ['$http'];
 
 	function requests ($http) {
-		var url = 'http://fiasps.unitec.edu:8085/api';
 		var service = 
 		{
 			getRequests: getRequests, 
@@ -21,7 +20,7 @@
 		function getRequests (successCallback, errorCallback) {
 			let request = {
 	            method: 'GET',
-	            url: url +'/Students/Filter/Active'
+	            url: URL +'/Students/Filter/Active'
 	        };
             
 	        $http(request).then(successCallback)
@@ -31,7 +30,7 @@
         function acceptRequest (obj, successCallback, errorCallback){
 			let request = {
 				method: 'PUT',
-				url: url + '/Students/Verified',
+				url: URL + '/Students/Verified',
 				data: JSON.stringify({ AccountId: obj.accountNumber })
 			};
             
@@ -42,7 +41,7 @@
 		function rejectRequest (obj, message, successCallback, errorCallback) {
 			let request = {
 				method: 'POST',
-				url: url + '/Students/Rejected',
+				url: URL + '/Students/Rejected',
 				data: JSON.stringify({ AccountId: obj.accountNumber, Message: message })
 			};
             
