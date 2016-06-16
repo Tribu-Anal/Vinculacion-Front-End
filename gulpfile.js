@@ -18,9 +18,7 @@ let gulp            = require('gulp'),
     sass            = require('gulp-sass'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
-    util            = require('gulp-util'),
-    fs              = require('fs'),
-    argv            = require('yargs').argv;
+    util            = require('gulp-util');
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -129,15 +127,6 @@ gulp.task ( 'vendor-js', () => {
 		.pipe( gulp.dest(path.public.lib) )
 		.pipe( connect.reload() );
 } );
-
-gulp.task('fabian',()=>{
-    if(argv.test) {
-        fs.writeFile("Tero.txt", 'funca...',function(err){
-            if(err)
-                return console.log(err);
-        })
-    }
-});
 
 
 /////////////////////////////////////////////////////////////////////////
