@@ -17,6 +17,4 @@ const searchString = 'global.PORT';
 const jumpLength = searchString.length;
 const endIndex = indexHtml.indexOf(searchString)+jumpLength;
 
-let newIndexHtml = `${indexHtml.slice(0, endIndex)} = "${port}"; ${indexHtml.slice(endIndex+1)}`;
-
-fs.writeFileSync('./public/index.html', newIndexHtml);
+let newIndexHtml = `${indexHtml.slice(0, endIndex)} = "${port}"${indexHtml.slice(endIndex+9)}`;
