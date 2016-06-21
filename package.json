@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC#readme",
   "devDependencies": {
     "angular-mocks": "^1.5.5",
+    "angular-ui-form-validation": "^2.1.2",
     "angularjs-toaster": "^1.2.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",

@@ -25,6 +25,7 @@
         }
         
         function LoginSuccess(response) {
+            console.log(response);
             authentication.SetCredentials(response.data);
             
             window.localStorage['Session'] = 

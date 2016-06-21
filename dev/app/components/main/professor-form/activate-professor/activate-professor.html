@@ -1,0 +1,25 @@
+<form name="activateProfessorForm" class="cd-form" ng-submit="activateProfessorForm.$valid && vm.activateProfessor()" novalidate>
+    <legend>
+        <strong>Activar Profesor</strong>
+    </legend>
+    
+    <div>
+        <label class="cd-label">Contraseña</label>
+        <input ng-model="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" validation-min-length="8" validation-one-number="true" validation-one-upper-case-letter="true" validation-one-lower-case-letter="true" validation-field-required="true" validation-no-space="true" required>
+        <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
+            * Por favor ingrese la contraseña.
+        </p>
+    </div>
+    
+    <div>
+        <label class="cd-label">Confirmar Contraseña</label>
+        <input ng-model="vm.confirmPass" ng-pattern="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" validation-confirm-password="true" required>
+        <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
+            * Vuelva a escribir la contraseña.
+        </p>
+    </div>
+    <div class="confirm-btn">
+        <input type="submit" value="Confirmar">
+    </div>
+</form>
+<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading>

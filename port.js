@@ -13,7 +13,7 @@ process.argv.forEach((val, index, array) => {
 
 let indexHtml = fs.readFileSync('./public/index.html', 'utf-8');
 
-const searchString = 'global.PORT';
+const searchString = 'var PORT';
 const jumpLength = searchString.length;
 const endIndex = indexHtml.indexOf(searchString)+jumpLength;
 

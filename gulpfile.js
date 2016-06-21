@@ -233,4 +233,4 @@ gulp.task ( 'watch', () => {
 
 
 gulp.task ( 'default', [ 'vendor-js', 'app-js', 'vendor-css', 'css', 
-                         'img', 'fonts', 'templates', 'fabian' ] );
+                         'img', 'fonts', 'templates' ] );
