@@ -1,6 +1,7 @@
 (function(){
 	"use strict";
 
-	angular.module("VinculacionApp", ['ui.router', 'toaster','ngAnimate', 
-		'ngCookies', 'ngDialog']);
+	angular.module("VinculacionApp", ['ui.router', 'toaster','ngAnimate',
+		'ngCookies', 'angular-spinkit', 'angularModalService', 'directives.customvalidation.customValidationTypes']);
+	
 })();

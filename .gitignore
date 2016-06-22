@@ -20,3 +20,5 @@ public/templates/
 
 # sftp configuration file
 sftp-config.json
+
+npm-debug.log

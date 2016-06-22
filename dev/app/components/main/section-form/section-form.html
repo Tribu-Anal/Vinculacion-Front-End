@@ -1,0 +1,67 @@
+<form name="sectionForm" class="cd-form" ng-submit="sectionForm.$valid && vm.submit()" novalidate>
+    <legend>
+        <strong>Nueva Seccion</strong>
+    </legend>
+    
+    <div>
+        <label class="cd-label" for="cd-name">Codigo</label>
+        <input ng-model="vm.section.Code" class="user" type="text" name="sectionCode" id="cd-name" required>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.sectionCode.$error.required">
+            * Por favor ingrese un codigo para la seccion.
+        </p>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Clase</label>
+        <select name="_class" ng-model="vm.section.ClassId" required>
+            <option value="{{class.Id}}" ng-repeat="class in vm.classes">{{class.Name}}</option>
+        </select>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm._class.$error.required">
+            * Por favor escoja una clase.
+        </p>
+        <tb-loading class="main-loader" ng-show="vm.classesLoading"></tb-loading>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Periodo</label>
+        <select name="period" ng-model="vm.section.PeriodId" required>
+            <option value="{{period.Id}}" ng-repeat="period in vm.periods">Modulo {{period.Number}} ({{period.Year}})</option>
+        </select>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.period.$error.required">
+            * Por favor escoja un periodo.
+        </p>
+        <tb-loading class="main-loader" ng-show="vm.periodsLoading"></tb-loading>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Docente</label>
+        <select name="professor" ng-model="vm.section.ProffesorAccountId" required>
+            <option value="{{professor.AccountId}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
+        </select>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.professor.$error.required">
+            * Por favor escoja un profesor.
+        </p>
+        <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Alumnos</label>
+        <tb-search endpoint= 'vm.studentsSearch.endpoint' 
+            on-element-click= 'vm.studentsSearch.onElementClick' 
+            response-property-show= 'vm.studentsSearch.responsePropertyShow'
+            on-click-element="vm.studentsSearch.onClickElement"
+            ng-hide="vm.submitting">
+        </tb-search>    
+    </div>
+    <div>
+        <tb-table   headers="vm.studentsTable.headers" 
+            body="vm.studentsTable.body"
+            on-row-click="vm.deleteElementFromStudentsTable"
+            ng-hide="vm.submitting">
+         </tb-table>
+    </div>
+    <div>
+        <input type="submit" ng-hide="vm.submitting" value="Confirmar">
+    </div>
+</form>
+<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading>

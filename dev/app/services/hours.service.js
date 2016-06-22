@@ -1,40 +1,40 @@
 (function() {
-	"use strict";
+    "use strict";
 
-	angular
-		.module('VinculacionApp')
-		.factory('horas', horas);
+    angular
+        .module('VinculacionApp')
+        .factory('horas', horas);
 
-	horas.$inject = ['$http'];
+    horas.$inject = ['$http'];
 
-	function horas ($http) {
-		var url = 'http://fiasps.unitec.edu:8085/api';
-		var service = 
-		{
-			getStudentsBySection: getStudentsBySection,
-			addHours: addHours
-		};
+    function horas($http) {
+        var url = 'http://fiasps.unitec.edu:' + PORT + '/api';
+        var service = {
+            getStudentsBySection: getStudentsBySection,
+            postHours: postHours,
+            getStudentHourReport: getStudentHourReport
+        };
 
-		return service;
+        return service;
 
-		function getStudentsBySection (section, handleSuccess) {
-			let request = {
-	            method: 'GET',
-	            url: url +'/Students'
-	        };
+        function getStudentsBySection(section, successCallback, errorCallback) {
+            let request = {
+                method: 'GET',
+                url: url + '/Students'
+            };
 
-	        $http(request).then( function(data) {
-	            handleSuccess(data);
-	        });
-		}
+            $http(request).then(successCallback)
+                .catch(errorCallback);
+        }
 
-		function addHours (obj, handleSuccess) {
-			let request = {
-				method: 'POST',
-				url: url + '/Hours',
-				data: obj
-			};
-			$http(request).then(handleSuccess);
-		}
-	}
+        function postHours(hoursData, successCallback, errorCallback) {
+            $http.post(url + '/Hours', JSON.stringify(hoursData)).then(successCallback)
+                .catch(errorCallback);
+        }
+
+        function getStudentHourReport(accountId, successCallback, errorCallback) {
+            $http.get(url + '/StudentHourReport/' + accountId).
+            then(successCallback).catch(errorCallback);
+        }
+    }
 })();

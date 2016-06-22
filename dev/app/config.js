@@ -40,6 +40,18 @@
 				templateUrl: templateDir + 'main/projects/projects.html',
 				controller: 'ProjectsController as vm'
 			})
+        
+            .state('dashboard.addproject', {
+				url: '/nuevo-proyecto',
+				templateUrl: templateDir + 'main/project-form/project-form.html',
+				controller: 'ProjectFormController as vm'
+			})
+
+			.state('dashboard.editproject', {
+				url: '/editar-proyecto/{project}',
+				templateUrl: templateDir + 'main/project-form/project-form.html',
+				controller: 'ProjectFormController as vm'
+			})
 
 			.state('dashboard.project', {
 				url: '/proyectos/{projectId}',
@@ -51,6 +63,46 @@
 				url: '/solicitudes',
 				templateUrl: templateDir + 'main/requests/requests.html',
 				controller: "RequestsController as vm"
+			})
+        
+            .state('dashboard.sections', {
+                    url: '/secciones',
+                    templateUrl: templateDir + 'main/sections/sections.html',
+                    controller: "SectionsController as vm"
+                })
+        
+            .state('dashboard.section', {
+                    url: '/seccion',
+                    params: {
+                        data: null
+                    },
+                    templateUrl: templateDir + 'main/section/section.html',
+                    controller: "SectionController as vm"
+                })
+
+			.state('dashboard.newsection', {
+				url: '/nueva-seccion',
+				templateUrl: templateDir + 'main/section-form/section-form.html',
+				controller: "SectionFormController as vm"
+			})
+
+			.state('dashboard.printarea', {
+				url: '/reporte',
+				templateUrl: templateDir + 'main/print-area/print-area.html',
+				controller: "PrintAreaController as vm",
+				params: {templateDir: templateDir, params: null}
+			})
+        
+			.state('dashboard.newprofessor', {
+				url: '/nuevo-profesor',
+				templateUrl: templateDir + 'main/professor-form/professor-form.html',
+				controller: "ProfessorFormController as vm"
+			})
+        
+			.state('dashboard.activateprofessor', {
+				url: '/activar-profesor/{accountId}',
+				templateUrl: templateDir + 'main/professor-form/activate-professor/activate-professor.html',
+				controller: "ActivateProfessorController as vm"
 			});
 	}
 })();

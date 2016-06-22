@@ -1,6 +1,6 @@
 .home
 {
-    /*Home CSS */
+
     .dynamic-area
     {
         overflow-x: hidden;
@@ -10,6 +10,17 @@
     {
         margin-top: 40px;
         padding: 0 10px;
+
+        &.project {
+            cursor: pointer;
+            margin-top: 0;
+
+            #project-header {
+                font-size: 1.4em;
+                font-weight: 800;
+                margin-bottom: 5px;
+            }
+        }
     }
     .clickable
     {
@@ -23,6 +34,7 @@
     .panel > .panel-heading
     {
         background-color: #213250;
+        min-width: 246.3px;
     }
     .panel-heading span
     {
@@ -148,6 +160,8 @@
     .widget .comment-text
     {
         font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .widget .btn-block
     {

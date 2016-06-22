@@ -5,76 +5,108 @@
 		.module('VinculacionApp')
 		.controller('RequestsController', RequestsController);
 
-	RequestsController.$inject = ['$scope', 'requests', 'toaster'];
+	RequestsController.$inject = ['$rootScope', '$scope', '$state', 
+								  'requests', 'TbUtils', 'tableContent'];
 
-	function RequestsController($scope, requests, toaster, ngDialog) {
+	function RequestsController($rootScope, $scope, $state, requests, TbUtils, tableContent) {
+		if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
+		
 		var vm = this;
+        
+        vm.requestsLoading = true;
+        vm.requestsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Carrera', 'Correo Electronico']);
+        
 		var acceptButton = {
-			name: 'Aceptar',
-			icon: 'glyphicon glyphicon-ok',
-			click: acceptButtonClicked
-		};
-		var rejectButton = {
-			name: 'Rechazar',
-			icon: 'glyphicon glyphicon-remove',
-			click: rejectButtonClicked
-		};
+            tooltip: 'Aceptar',
+            icon: 'glyphicon-ok',
+            onClick: acceptButtonClicked
+        };
 
-		vm.requestsTable = {
-			headers: [
-				'Numero de Cuenta',
-				'Nombre',
-				'Carrera',
-				'Correo Electronico'
-			],
-			body: [],
-			actions: true
-		};
+        var rejectButton = {
+            tooltip: 'Rechazar',
+            icon: 'glyphicon-remove',
+            onClick: rejectButtonClicked
+        };
 
-		requests.getRequests(function(response) {
-			if (response.data.length <= 0) return;
-			for(let i=0;i<response.data.length;i++){
-				let student =  response.data[i];
-				if (student.Major === null) continue;
+		requests.getRequests(getRequestSuccess, getRequestFail);
+        
 
-				let newTableElement = {
-					actions: [acceptButton, rejectButton],
-					content: [
-						student.AccountId,
-						student.Name,
-						student.Major.Name,
-						student.Email
-					],
-					id: student.Id
-				};
+        function getRequestSuccess(response) {
+            if (response.data.length <= 0) {
+                vm.requestsLoading = false;
+                return;
+            }
 
-				vm.requestsTable.body.push(newTableElement);
-			}
-		});
+            for (let i = 0; i < response.data.length; i++) {
+                let student = response.data[i];
+                if (student.Major === null) continue;
 
-		function getElement(index) {
-			let element = {
-				accountNumber: vm.requestsTable.body[index].content[0],
-				studentName: vm.requestsTable.body[index].content[1],
-				id: vm.requestsTable.body[index].id
-			}
-			return element;
-		}
+                let newTableElement = {
+                    actions: [acceptButton, rejectButton],
+                    content: [
+                        tableContent.createALableElement(student.AccountId),
+                        tableContent.createALableElement(student.Name),
+                        tableContent.createALableElement(student.Major.Name),
+                        tableContent.createALableElement(student.Email)
+                    ],
+                    id: student.Id
+                };
 
-		function acceptButtonClicked (index) {
-			let student = getElement(index);
-			let message = 'Aceptado, ya puede ingresar sus horas de vinculación social.';
-			requests.acceptRequest(resp, function(data) {
-				vm.requestsTable.body.splice(index, 1);
-			});
-		}
+                vm.requestsTable.body.push(newTableElement);
+            }
 
-		function rejectButtonClicked (index) {
-			let student = getElement(index);
-			let message = 'Rechazado por no cumplir los requisitos';
-			requests.rejectRequest(resp, message, function(data) {
-				vm.requestsTable.body.splice(index, 1);
-			});
-		}
-	}
+            vm.requestsLoading = false;
+        };
+
+        function getRequestFail(response) {
+            TbUtils.showErrorMessage('error', response,
+                'No se ha podido obtener las solicitudes de estudiantes.',
+                'Error');
+            vm.requestsLoading = false;
+        }
+
+        function getElement(index) {
+            console.log(index);
+            let element = {
+                accountNumber: vm.requestsTable.body[index].content[0].properties.value,
+                studentName: vm.requestsTable.body[index].content[1].properties.value,
+                id: vm.requestsTable.body[index].id
+            }
+
+            return element;
+        }
+
+        function acceptButtonClicked(index) {
+            let student = getElement(index);
+            console.log(student);
+            let message = 'Aceptado, ya puede ingresar sus horas de vinculación social.';
+            requests.acceptRequest(student, acceptRequestSuccess, acceptRequestFail);
+        }
+
+        function rejectButtonClicked(index) {
+            let student = getElement(index);
+            let message = 'Rechazado por no cumplir los requisitos';
+            requests.rejectRequest(student, message, rejectRequestSuccess, rejectRequestFail);
+        }
+
+        function acceptRequestSuccess(index) {
+            vm.requestsTable.body.splice(index, 1);
+        }
+
+        function acceptRequestFail(response) {
+            TbUtils.showErrorMessage('error', response,
+                'No se pudo aceptar la solicitud.',
+                'Error');
+        }
+
+        function rejectRequestSuccess(index) {
+            vm.requestsTable.body.splice(index, 1);
+        }
+
+        function rejectRequestFail(response) {
+            TbUtils.showErrorMessage('error', response,
+                'La solicitud no pudo ser rechazada.',
+                'Error');
+        }
+    }
 })();

@@ -89,7 +89,7 @@
 }
 
 .responstable th, .responstable td {
-  text-align: left;
+  text-align: center;
   margin: .5em 1em;
 }
 
@@ -148,4 +148,17 @@ body {
   border: none;
   color: #008CBA;
   padding-left: 1%;
+}
+
+.tb-body .tb-input-wrapper{
+  width: 90%;
+  margin-left:3%;
+  margin-right:3%;
+  border: none;
+  border-bottom: 1px solid #213250;
+  text-align: right;
+}
+.tb-body .actions-button:active {
+    vertical-align: top;
+    padding: 8px 13px 6px;
 }

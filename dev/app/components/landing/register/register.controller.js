@@ -5,52 +5,41 @@
         .module('VinculacionApp')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['register', 'toaster'];
+    RegisterController.$inject = ['register', 'majors', 'TbUtils'];
 
-    function RegisterController (register, toaster) {
+    function RegisterController (register, majors, TbUtils) {
         var vm = this;
-
-        vm.email = "";
-        vm.password = "";
-        vm.accountId = "";
-        vm.name = "";
-        vm.campus = "SPS";
-        vm.career = "I - 01 (Ing. en Sistemas Computacionales)";
+        
+        vm.majors = [];
+        vm.student = {
+            Email: "",
+            Password: "",
+            AccountId: "",
+            Name: "",
+            Campus: "SPS",
+            MajorId: ""
+        };
+        
+        majors.getMajors(getMajorsSuccess, getMajorsFail);
+        
         vm.registerStudent = registerStudent;
         vm.validate = validate;
         
         function registerStudent() {        
-            register
-                .registerStudent( JSON.stringify (
-                {
-                    AccountId: vm.accountId,
-                    Name: vm.name,
-                    Password: vm.password,
-                    MajorId : vm.career.substring(0, 6),
-                    Campus: vm.campus,
-                    Email: vm.email,
-                }))
-                .success( function(response) {
-                    toaster.pop(
-                        {
-                            type: 'success', 
-                            title: 'Revisa tu Correo', 
-                            body: 'Se le ha enviado un correo de confirmacion. Porfavor revisar.'
-                        }
-                    );
-                })
-                .error( function() {
-                    toaster.pop(
-                        {
-                            type: 'error', 
-                            title: 'Error', 
-                            body: 'Se ha producido un error! Lamentamos los inconvenientes.'
-                        }
-                    );
-                });
+            register.registerStudent(vm.student, registerStudentSuccess, registerStudentFail);
         }
         
-        //Credits to Alex Cross - StackOverflow
+        function registerStudentSuccess(response) {
+            TbUtils.displayNotification('success', 'Revisa tu Correo',
+                                        'Se le ha enviado un correo de confirmacion. Porfavor revisar.');
+        }
+        
+        function registerStudentFail(response) {
+            TbUtils.showErrorMessage('error', response,
+                                     'Se ha producido un error! Lamentamos los inconvenientes.',
+                                     'Error');
+        }
+        
         function validate ($event) { 
             let regex = new RegExp("[a-z]|[0-9]|[A-Z]");
         
@@ -60,6 +49,18 @@
                 $event.preventDefault();
                 return false;
             }  
+        }
+        
+        function getMajorsSuccess(response) {
+            TbUtils.fillListWithResponseData(response.data, vm.majors);
+            vm.student.MajorId = vm.majors[0].MajorId;
+        }
+        
+        function getMajorsFail(response) {
+            console.log(response);
+            TbUtils.showErrorMessage('error', response,
+                                     'No se ha podido obtener todas las carreras disponibles.',
+                                     'Error');
         }
     }
 })();

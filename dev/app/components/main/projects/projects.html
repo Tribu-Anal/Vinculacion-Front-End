@@ -1,12 +1,31 @@
 <div class="gallery">
-	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}"
-	ui-sref="dashboard.project({projectId: prj.Id})">
-		<div class="img-area">
-			<img src="img/logo.png" alt="Project Image">
+	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}">
+		<span class="icon-group" ng-show="Role === 'Admin'">
+			<i class="glyphicon glyphicon-remove" 
+			   ng-click="vm.removeProjectClicked(prj, $index)">
+			</i>
+			<i class="glyphicon glyphicon-pencil" ng-click="vm.goToEdit(prj)"></i>
+		</span>
+		<div id="body" ui-sref="dashboard.project({projectId: prj.Id})" ng-click="vm.preventGeneralLoading()">
+			<div class="img-area">
+				<img src="img/logo.png" alt="Project Image">
+			</div>
+			<div class="project-info">
+				<h4 ng-class="{ 'overflow webkit': prj.Name.length > 100 }">{{prj.Name}}</h4>
+				<span ng-class="{ 'overflow webkit': prj.Description.length > 80 }"
+					  ng-show="prj.Name.length < 60">
+					{{prj.Description}}
+				</span>
+			</div>
 		</div>
-		<div class="project-info">
-			<h4>{{prj.Name}}</h4>
-			<span>{{prj.Description}}</span>
-		</div>
+		<tb-loading ng-show="vm.deletingProject[$index]"></tb-loading>
 	</div>
 </div>
+<tb-loading class="main-loader" ng-show="vm.projectsLoading"></tb-loading>
+<tb-round-btn ng-show="Role === 'Admin'" ui-sref="dashboard.addproject" 
+	ng-click="vm.preventGeneralLoading()">+
+</tb-round-btn>
+<tb-round-btn ng-show="vm.reportButton.show" 
+	ng-click="vm.reportButton.onClick()">
+	<span class="glyphicon {{vm.reportButton.icon}} icon" aria-hidden="true"></span>
+</tb-round-btn>
