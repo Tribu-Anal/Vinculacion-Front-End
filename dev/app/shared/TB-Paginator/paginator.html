@@ -1,0 +1,6 @@
+<div class="paginator-wrapper">
+	<div ng-class="{true: 'selected', false: 'paginator-page'}[page===vm.active]" ng-repeat="page in vm.init()"
+		 ng-click="vm.onPageChange(page)">
+		<span>{{page}}</span>
+	</div>
+</div>

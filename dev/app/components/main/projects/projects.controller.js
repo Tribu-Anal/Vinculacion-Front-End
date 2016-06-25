@@ -11,7 +11,6 @@
     function ProjectsController (projects, TbUtils, $state, ModalService,
                                 $rootScope, authentication) {
         var vm = this;
-
         var deleteIndex = -1;
         var deleteProject = {};
         var confirmDeleteModal = {
@@ -20,6 +19,10 @@
           controller: 'ConfirmDeleteController'
         };
         
+        vm.options = {};
+        vm.options.startingPage = 0;
+        vm.options.pageSize = 60;
+        vm.options.count = 0;
         vm.projects = [];
         vm.projectsLoading = true;
         vm.deletingProject = [];
@@ -75,7 +78,18 @@
             vm.deletingProject[deleteIndex] = false;
         }
 
-        projects.getProjects(getProjectsSuccess, getProjectsFail);
+        projects.getProjectsCount(getProjectsCountSuccess);
+
+        function getProjectsCountSuccess(response){
+            vm.options.count = response.data;
+            projects.getProjectsWithPagination( vm.options.startingPage, vm.options.pageSize ,getProjectsSuccess, getProjectsFail);
+        }
+
+        vm.onPageChange = function(skip, page){
+            vm.projects.length = 0;
+            vm.projectsLoading = true;
+            projects.getProjectsWithPagination( page, skip, getProjectsSuccess, getProjectsFail);
+        }
 
         function goToEdit (project) {
             preventGeneralLoading();
