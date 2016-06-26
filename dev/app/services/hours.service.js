@@ -12,7 +12,8 @@
         var service = {
             getStudentsBySection: getStudentsBySection,
             postHours: postHours,
-            getStudentHourReport: getStudentHourReport
+            getStudentHourReport: getStudentHourReport,
+            getFiniquitoURL: getFiniquitoURL
         };
 
         return service;
@@ -35,6 +36,10 @@
         function getStudentHourReport(accountId, successCallback, errorCallback) {
             $http.get(url + '/StudentHourReport/' + accountId).
             then(successCallback).catch(errorCallback);
+        }
+
+        function getFiniquitoURL(accountId) {
+            return url + '/Students/FiniquitoReport/' + accountId;
         }
     }
 })();
