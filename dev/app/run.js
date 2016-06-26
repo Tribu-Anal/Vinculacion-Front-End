@@ -39,7 +39,7 @@
 
         function locationChangeStart (event, next, current) {
             let activationUrl = $location.path().substring(0, 17);
-            if ($location.path() !== '/' && !$rootScope.globals.token && activationUrl != '/activar-profesor') {
+            if ($location.path() !== '/' && !$rootScope.globals.token && activationUrl !== '/registro-maestro') {
                 $location.path('/');
             }
             
@@ -102,7 +102,7 @@
                     $rootScope.viewTitle = "Vinculacion | Nuevo Profesor";
                     $rootScope.viewStyles = "main project-form";
                 break;
-                case "/activar-profesor/{accountId}":
+                case "/registro-maestro/{accountId}":
                     $rootScope.viewTitle = "Vinculacion | Activar Profesor";
                     $rootScope.viewStyles = "main project-form";
                 break;
