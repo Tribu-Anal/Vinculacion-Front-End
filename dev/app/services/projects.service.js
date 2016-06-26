@@ -16,14 +16,25 @@
            postProject: postProject,
            updateProject: updateProject,
            deleteProject: deleteProject,
-           getParticipants:getParticipants
-           
+           getParticipants:getParticipants,
+           getProjectsWithPagination : getProjectsWithPagination,
+           getProjectsCount: getProjectsCount
        };
        
        return service;
 
+       function getProjectsWithPagination(page, size, successCallback, errorCallback) {
+	        $http.get(url+'?$top='+size+'&$skip='+(page*size)).then(successCallback)
+                          .catch(errorCallback);
+	   };
+
 	   function getProjects (successCallback, errorCallback) {
 	        $http.get(url).then(successCallback)
+                          .catch(errorCallback);
+	   };
+
+	   function getProjectsCount (successCallback, errorCallback) {
+	        $http.get(url+"Count").then(successCallback)
                           .catch(errorCallback);
 	   };
 
