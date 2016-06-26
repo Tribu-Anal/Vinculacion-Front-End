@@ -11,6 +11,7 @@
         var vm = this;
         vm.report = reports.getReportParams();
         vm.date = new Date();
+        vm.completedHours = false;
         vm.hoursDescription = {
             totalHours: 0,
             loadingDes: true,
@@ -22,6 +23,7 @@
 
         function getStudentHourReportSuccess(response) {
             fillDescriptionsHour(response.data);
+            vm.completedHours = response.data.TotalHours > 99;
         }
 
         function fillDescriptionsHour(description) {
@@ -33,6 +35,20 @@
         function getStudentHourReportFail() {
             TbUtils.displayNotification('error', 'Error',
                 'No se pudo cargar el reporte correctamente.');
+            vm.hoursDescription.loading = false;
+        }
+
+        vm.downloadFiniquito = function(){
+            document.getElementById('my_iframe').src = horas.getFiniquitoURL(vm.report.AccountId);
+        }
+
+        function downloadFiniquitoSuccess(response){
+            console.log(response);
+        }
+
+        function downloadFiniquitoFail(){
+            TbUtils.displayNotification('error', 'Error',
+                'No se pudo descargar el finiquito correctamente.');
             vm.hoursDescription.loading = false;
         }
     }
