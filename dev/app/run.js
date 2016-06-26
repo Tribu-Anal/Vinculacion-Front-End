@@ -76,10 +76,6 @@
                     $rootScope.viewTitle = "Vinculacion | Proyecto";
                     $rootScope.viewStyles = "main project";
                 break;
-                case "/solicitudes":
-                    $rootScope.viewTitle = "Vinculacion | Solicitudes";
-                    $rootScope.viewStyles = "main requests";
-                break;
                 case "/nuevo-proyecto": 
                 case "/editar-proyecto/{project}":
                     $rootScope.viewTitle = stateUrl.includes('nuevo') ? 
