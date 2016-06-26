@@ -86,6 +86,15 @@
 				controller: "SectionFormController as vm"
 			})
 
+            .state('dashboard.evaluateproject', {
+				url: '/evaluacion-proyecto/{projectId}',
+				params: {
+                    projectId: null
+                },
+				templateUrl: templateDir + 'reports/project-report/project-report.html',
+				controller: "ProjectReportFormController as vm"
+			})
+
 			.state('dashboard.printarea', {
 				url: '/reporte',
 				templateUrl: templateDir + 'main/print-area/print-area.html',
