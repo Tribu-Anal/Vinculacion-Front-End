@@ -15,6 +15,7 @@
         $rootScope.hideLoading = true;
         $rootScope.generalLoading = true;
         $rootScope.Session = window.localStorage['Session'];
+        $rootScope.Username = window.localStorage['Username'];
         $rootScope.Role = window.localStorage['Role'];
         $rootScope.guest = true;
 
