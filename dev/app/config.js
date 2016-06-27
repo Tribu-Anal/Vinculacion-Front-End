@@ -58,7 +58,6 @@
 				templateUrl: templateDir + 'main/project/project.html',
 	            controller: 'ProjectController as vm'
 			})
-
 			.state('dashboard.reports', {
 				url: '/reportes',
 				templateUrl: templateDir + 'main/reports/reports.html',
@@ -70,7 +69,6 @@
 				templateUrl: templateDir + 'main/requests/requests.html',
 				controller: "RequestsController as vm"
 			})
-        
             .state('dashboard.sections', {
                     url: '/secciones',
                     templateUrl: templateDir + 'main/sections/sections.html',

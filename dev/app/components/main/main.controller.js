@@ -25,13 +25,7 @@
 		  	show: $state.current.url !== '/activar-profesor/{accountId}',
 		  	clicked:TbUtils.preventGeneralLoading },
 
-		  { title: "SOLICITUDES", ref: "dashboard.requests", 
-		  	icon: "glyphicon glyphicon-th-list", 
-		  	active: $state.current.url === '/solicitudes',
-		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/activar-profesor/{accountId}',
-		  	clicked: TbUtils.preventGeneralLoading },
-
-		  { title: "REPORTES", ref: "dashboard.reports", 
+		  	{ title: "REPORTES", ref: "dashboard.reports", 
 		  	icon: "glyphicon glyphicon-folder-open", 
 		  	active: $state.current.url === '/reportes',
 		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/activar-profesor/{accountId}',
@@ -64,10 +58,9 @@
 		function changeActiveItem (event, toState) {
 			vm.navItems[0].active = toState.url === '/home';
 			vm.navItems[1].active = toState.url.includes('/proyectos');
-			vm.navItems[2].active = toState.url === '/solicitudes';
-			vm.navItems[3].active = toState.url === '/reportes';
-			vm.navItems[4].active = toState.url === '/secciones';
-            vm.navItems[5].active = toState.url === '/nuevo-profesor';
+			vm.navItems[2].active = toState.url === '/reportes';
+			vm.navItems[3].active = toState.url === '/secciones';
+            vm.navItems[4].active = toState.url === '/nuevo-profesor';
 		}
 	}
 })();
