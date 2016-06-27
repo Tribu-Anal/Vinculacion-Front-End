@@ -17,6 +17,7 @@
            updateProject: updateProject,
            deleteProject: deleteProject,
            getParticipants:getParticipants,
+           getProjectReportUrl: getProjectReportUrl,
            getProjectsWithPagination : getProjectsWithPagination,
            getProjectsCount: getProjectsCount
        };
@@ -41,6 +42,10 @@
 	   function getProject (projectId, successCallback, errorCallback) {
 	   		$http.get(url + "/" + projectId).then(successCallback)
                                             .catch(errorCallback);
+	   }
+
+	   function getProjectReportUrl (projectId, fieldHours, calification, beneficiariesQuantities, beneficiariGroups) {
+	   		return url + "/FinalReport/"+projectId+"/"+fieldHours+"/"+calification+"/"+beneficiariesQuantities+"/'"+beneficiariGroups+"'";
 	   }
         
        function postProject(projectData, successCallback, errorCallback) {

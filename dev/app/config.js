@@ -58,7 +58,17 @@
 				templateUrl: templateDir + 'main/project/project.html',
 	            controller: 'ProjectController as vm'
 			})
-        
+			.state('dashboard.reports', {
+				url: '/reportes',
+				templateUrl: templateDir + 'main/reports/reports.html',
+				controller: "ReportsController as vm"
+			})
+
+			.state('dashboard.requests', {
+				url: '/solicitudes',
+				templateUrl: templateDir + 'main/requests/requests.html',
+				controller: "RequestsController as vm"
+			})
             .state('dashboard.sections', {
                     url: '/secciones',
                     templateUrl: templateDir + 'main/sections/sections.html',
@@ -80,6 +90,15 @@
 				controller: "SectionFormController as vm"
 			})
 
+            .state('dashboard.evaluateproject', {
+				url: '/evaluacion-proyecto/{projectId}',
+				params: {
+                    projectId: null
+                },
+				templateUrl: templateDir + 'reports/project-report/project-report.html',
+				controller: "ProjectReportFormController as vm"
+			})
+
 			.state('dashboard.printarea', {
 				url: '/reporte',
 				templateUrl: templateDir + 'main/print-area/print-area.html',
@@ -94,7 +113,7 @@
 			})
         
 			.state('dashboard.activateprofessor', {
-				url: '/activar-profesor/{accountId}',
+				url: '/registro-maestro/{accountId}',
 				templateUrl: templateDir + 'main/professor-form/activate-professor/activate-professor.html',
 				controller: "ActivateProfessorController as vm"
 			});

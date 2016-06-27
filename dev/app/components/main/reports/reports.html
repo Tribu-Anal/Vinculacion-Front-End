@@ -1,0 +1,19 @@
+<div class="container-fluid" style="overflow-x: hidden;">
+	<div class="row">
+		<div class="col-xs-11 col-xs-offset-1">
+			<h3 style="margin-top: 50px;">Seleccione los reportes que desea:</h3>
+		</div>
+	</div>
+	<div style="margin-top: 20px; max-height: 350px;">
+		<div class="row" ng-repeat="report in vm.reports">
+			<div class="col-xs-11 col-xs-offset-1">
+				<md-checkbox ng-click="report.checked = !report.checked">{{report.title}}</md-checkbox>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-xs-11 col-xs-offset-4">
+			<md-button class="md-raised" ng-click="vm.generateReports()">Aceptar</md-button>
+		</div>
+	</div>
+</div>

@@ -7,7 +7,6 @@
 </div>
 <div class="jumbotron container center-block">
 <div class="container description">
-
 <div class="row">
 <div class="text-center col-md-10 center-block">
 <h3>Descripci&oacute;n</h3>
@@ -25,5 +24,9 @@
                     body="vm.participants.body">
 </tb-table> 
 <tb-loading class="main-loader project-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
+<tb-round-btn id="button" class="button "  ng-click="vm.downloadProjectReport()"
+		ng-show="true">
+		 <span class="glyphicon glyphicon-file icon download-icon" aria-hidden="true"></span>
+	</tb-round-btn>
 </div>
 </div>
