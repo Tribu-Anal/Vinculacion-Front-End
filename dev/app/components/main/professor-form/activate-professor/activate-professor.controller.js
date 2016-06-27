@@ -31,7 +31,7 @@
         
         function activateProfessorSuccess(response) {
             $state.go('landing');
-            TBUtils.displayNotification('success', 'Usuario activado!', 'Ya puede navegar el sitio.');
+            TbUtils.displayNotification('success', 'Usuario activado!', 'Ya puede navegar el sitio.');
         }
         
         function activateProfessorFail(response) {

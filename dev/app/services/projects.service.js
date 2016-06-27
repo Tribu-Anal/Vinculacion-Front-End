@@ -16,20 +16,36 @@
            postProject: postProject,
            updateProject: updateProject,
            deleteProject: deleteProject,
-           getParticipants:getParticipants
-           
+           getParticipants:getParticipants,
+           getProjectReportUrl: getProjectReportUrl,
+           getProjectsWithPagination : getProjectsWithPagination,
+           getProjectsCount: getProjectsCount
        };
        
        return service;
+
+       function getProjectsWithPagination(page, size, successCallback, errorCallback) {
+	        $http.get(url+'?$top='+size+'&$skip='+(page*size)+'&$orderby=Id desc').then(successCallback)
+                          .catch(errorCallback);
+	   };
 
 	   function getProjects (successCallback, errorCallback) {
 	        $http.get(url).then(successCallback)
                           .catch(errorCallback);
 	   };
 
+	   function getProjectsCount (successCallback, errorCallback) {
+	        $http.get(url+"Count").then(successCallback)
+                          .catch(errorCallback);
+	   };
+
 	   function getProject (projectId, successCallback, errorCallback) {
 	   		$http.get(url + "/" + projectId).then(successCallback)
                                             .catch(errorCallback);
+	   }
+
+	   function getProjectReportUrl (projectId, fieldHours, calification, beneficiariesQuantities, beneficiariGroups) {
+	   		return url + "/FinalReport/"+projectId+"/"+fieldHours+"/"+calification+"/"+beneficiariesQuantities+"/'"+beneficiariGroups+"'";
 	   }
         
        function postProject(projectData, successCallback, errorCallback) {

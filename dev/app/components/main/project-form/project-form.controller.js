@@ -47,8 +47,9 @@
                     Description: '',
                     Cost: 0.0,
                     MajorIds: [],
-                    SectionIds: [],
-                    BeneficiariesAlias: '',
+                    SectionIds: [0],
+                    BeneficiarieOrganization: '',
+                    BeneficiarieGroups: '',
                     BeneficiariesQuantity: 0
                     };
         }
@@ -104,8 +105,7 @@
         }
         
         function majorsAndStatusValid() {
-            return vm.project.MajorIds.length > 0 && 
-                   vm.project.SectionIds.length > 0;
+            return vm.project.MajorIds.length > 0;
         }
         
         function getMajorsSuccess(response) {

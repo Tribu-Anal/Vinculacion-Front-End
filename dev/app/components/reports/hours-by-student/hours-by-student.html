@@ -15,6 +15,9 @@
 	 		<div class="row">
 	 			<label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">Horas Totales:{{vm.hoursDescription.totalHours}}</label>
  			</div>
+ 			<div class="row" ng-show="vm.completedHours" ng-click="vm.downloadFiniquito()">
+ 				<label class="col-sm-8 col-md-8 col-lg-8 col-xs-8 finiquito">Generar Finiquito</label>
+ 			</div>
 	 	</div>
 	 	<div class="row header-description">
 	 		<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">Nombre del Proyecto</div>
@@ -28,4 +31,5 @@
 	 		<div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">{{row.HoursWorked}}</div>
 	 	</div>
 	</div>
+	<iframe id="my_iframe" style="display:none;"></iframe>
 </div>

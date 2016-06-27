@@ -7,7 +7,7 @@
 
     ProfessorFormController.$inject = ['$rootScope', '$state', 'professors', 'TbUtils'];
 
-    function ProfessorFormController($rootScope, $state, professors, TBUtils) {
+    function ProfessorFormController($rootScope, $state, professors, TbUtils) {
         if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
 
         var vm = this;
@@ -31,7 +31,7 @@
         
         function registerProfessorSuccess(response) {
             $state.go('dashboard.home');
-            TBUtils.displayNotification('success', 'Profesor Creado!', 'Se le ha enviado un correo de activacion al profesor.');
+            TbUtils.displayNotification('success', 'Profesor Creado!', 'Se le ha enviado un correo de activacion al profesor.');
         }
         
         function registerProfessorFail(response) {
