@@ -1,0 +1,28 @@
+.paginator-page{
+	display: inline-block;
+    padding-right: 1%;
+    padding-left: 1%;
+    border-color: #027ebc;
+    border-style: solid;
+    margin-left: 1%;
+    border-width: thin;
+    cursor: pointer;
+}
+
+.selected{
+	color:white;
+	background-color: #027ebc;
+	display: inline-block;
+    padding-right: 1%;
+    padding-left: 1%;
+    border-color: #027ebc;
+    border-style: solid;
+    margin-left: 1%;
+    border-width: thin;
+    cursor: pointer;
+}
+
+.paginator-wrapper{
+	margin-top: 2%;
+    margin-left: 23%;
+}
