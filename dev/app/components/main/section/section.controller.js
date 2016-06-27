@@ -65,7 +65,7 @@
                 Code: vm.section.Code,
                 ClassId: String(vm.section.Class.Id),
                 PeriodId: String(vm.section.Period.Id),
-                ProffesorAccountId: vm.section.User.AccountId
+                ProffesorAccountId: vm.section.User === null ? '' : vm.section.User.AccountId
             }
             TbUtils.setModalParams(params);
             ModalService.showModal(editSectionModal)

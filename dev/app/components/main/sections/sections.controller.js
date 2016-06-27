@@ -32,6 +32,10 @@
 
             for (let i = 0; i < response.data.length; i++) {
                 let section = response.data[i];
+                let name = 'N/A';
+                
+                if(section.User !== null)
+                    name = section.User.Name;
 
                 let newTableElement = {
                     content: [
@@ -39,7 +43,7 @@
                         tableContent.createALableElement(section.Class.Name),
                         tableContent.createALableElement(section.Period.Number),
                         tableContent.createALableElement(section.Period.Year),
-                        tableContent.createALableElement(section.User.Name)
+                        tableContent.createALableElement(name)
                     ],
                     data: section
                 };
