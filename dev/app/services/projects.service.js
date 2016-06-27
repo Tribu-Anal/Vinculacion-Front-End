@@ -25,7 +25,7 @@
        return service;
 
        function getProjectsWithPagination(page, size, successCallback, errorCallback) {
-	        $http.get(url+'?$top='+size+'&$skip='+(page*size)).then(successCallback)
+	        $http.get(url+'?$top='+size+'&$skip='+(page*size)+'&$orderby=Id desc').then(successCallback)
                           .catch(errorCallback);
 	   };
 
