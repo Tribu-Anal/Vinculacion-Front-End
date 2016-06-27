@@ -7,7 +7,8 @@
 			ng-show="item.show"
 			ui-sref="{{item.ref}}"
 			ng-class="{ 'active': item.active }" 
-			ng-click="vm.navItemClicked($index, item.clicked)">
+			ng-click="vm.navItemClicked($index, item.clicked)"
+			style="display: flex;">
 			<i class="{{item.icon}}"></i>
 			<span>{{item.title}}</span>
 		</li>
