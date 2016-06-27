@@ -35,6 +35,7 @@
 
         projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
         projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
+        vm.showDownloadButton = $rootScope.Role==='Professor';
 
         function getProjectSuccess(response) {
             console.log(response);
@@ -167,5 +168,13 @@
 
             return reportParams;
         }
+
+        vm.downloadProjectReport = function(){
+            TbUtils.preventGeneralLoading();
+            $state.go('dashboard.evaluateproject', {
+                projectId: vm.project.Id
+            });
+        }
+
     }
 })();
