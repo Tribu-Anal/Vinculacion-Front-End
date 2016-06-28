@@ -10,7 +10,7 @@
     ];
 
     function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, tableContent) {
-        if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
+        if ($rootScope.Role !== 'Admin') $state.go('dashboard.projects');
 
         var vm = this;
 
@@ -145,7 +145,7 @@
         function addStudentSuccess(){
              TbUtils.displayNotification('success', 'Seccion Creada',
                 'La seccion se creo exitosamente.');
-            $state.go('dashboard.home');
+            $state.go('dashboard.projects');
             vm.submitting = false;
         }
     }

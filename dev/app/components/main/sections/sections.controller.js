@@ -9,7 +9,7 @@
 								  'TbUtils', 'tableContent', 'sections'];
 
 	function SectionsController($rootScope, $scope, $state, TbUtils, tableContent, sections) {
-		if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('dashboard.home');
+		if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('dashboard.projects');
 		
 		var vm = this;
         

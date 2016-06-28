@@ -8,7 +8,7 @@
     ProjectReportFormController.$inject = ['$rootScope', '$state', '$stateParams', 'projects', 'TbUtils'];
 
     function ProjectReportFormController($rootScope, $state, $stateParams, projects, TBUtils) {
-        if ($rootScope.Role !== 'Professor'  || !$stateParams.projectId) $state.go('dashboard.home');
+        if ($rootScope.Role !== 'Professor'  || !$stateParams.projectId) $state.go('dashboard.projects');
 
         var vm = this;
         vm.formData = {
