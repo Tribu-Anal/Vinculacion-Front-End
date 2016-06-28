@@ -51,7 +51,7 @@
                 'El proyecto deseado no existe.',
                 'Error');
 
-            $state.go('dashboard.home');
+            $state.go('dashboard.projects');
 
             vm.projectLoading = false;
         }

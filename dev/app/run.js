@@ -46,7 +46,7 @@
             }
 
             if ($location.path() === '/' && $rootScope.globals.token) {
-                $location.path('/home');
+                $location.path('/proyectos');
             }
         }
 
