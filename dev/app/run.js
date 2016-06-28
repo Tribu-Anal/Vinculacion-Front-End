@@ -109,8 +109,6 @@
                     $rootScope.viewStyles = "main project-form";
                     break;
                 case "/registro-maestro/{accountId}":
-                    break;
-                case "/activar-profesor/{accountId}":
                     $rootScope.viewTitle = "Vinculacion | Activar Profesor";
                     $rootScope.viewStyles = "main project-form";
                     break;

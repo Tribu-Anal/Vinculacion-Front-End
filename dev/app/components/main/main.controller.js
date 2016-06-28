@@ -22,7 +22,7 @@
 		  	{ title: "REPORTES", ref: "dashboard.reports", 
 		  	icon: "glyphicon glyphicon-folder-open", 
 		  	active: $state.current.url === '/reportes',
-		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/activar-profesor/{accountId}',
+		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
 			clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "SECCIONES", ref: "dashboard.sections", 
