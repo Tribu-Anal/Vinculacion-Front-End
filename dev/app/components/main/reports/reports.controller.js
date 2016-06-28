@@ -5,26 +5,23 @@
 		.module('VinculacionApp')
 		.controller('ReportsController', ReportsController);
 
-	ReportsController.$inject = [ '$rootScope', 'TbUtils' ];
+	ReportsController.$inject = [ '$rootScope', 'TbUtils', 'reports' ];
 
-	function ReportsController ($rootScope, TbUtils) {
+	function ReportsController ($rootScope, TbUtils, reports) {
 		var vm = this;
 
 		vm.reports = [
-			{ title: 'Reporte por Facultad', checked: false },
-			{ title: 'Reporte por Periodo', checked: false },
-			{ title: 'Reporte de Costos', checked: false },
-			{ title: 'Reporte de Beneficiarios', checked: false },
-			{ title: 'Reporte de Proyectos por Clase', checked: false },
-			{ title: 'Reporte de Proyecto Especial', checked: false },
-			{ title: 'Reporte por Carreras', checked: false },
-			{ title: 'Reporte de Horas', checked: false },
-			{ title: 'Reporte Numero de Alumnos', checked: false }
+			{ title: 'Reporte de Costos', url: 'http://fiasps.unitec.edu:8085/api/Reports/CostsReport/2015' },
+			{ title: 'Reporte de Horas de Estudiantes', url: 'http://fiasps.unitec.edu:8085/api/Reports/StudentsReport/2015' }
 		];
-		vm.generateReports = generateReports;
+        vm.selectedReport = 0;
+		vm.generateReport = generateReport;
 
-		function generateReports () {
+		function generateReport () {            
+            window.open(vm.reports[vm.selectedReport].url);
 		}
+        
+        
 	}
 
 })();
