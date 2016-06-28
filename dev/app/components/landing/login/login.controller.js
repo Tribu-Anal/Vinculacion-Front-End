@@ -44,7 +44,7 @@
             $rootScope.Role =
             response.data;
 
-            $location.path('/home');
+            $location.path('/proyectos');
             vm.loading = false;
         }
         

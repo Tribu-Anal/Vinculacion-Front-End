@@ -16,7 +16,8 @@
 		  { title: "HOME", ref: "dashboard.home", 
 		  	icon: "glyphicon glyphicon-home", 
 		  	active: $state.current.url === '/home',
-		  	show: $state.current.url !== '/registro-maestro/{accountId}',
+		  	// show: $state.current.url !== '/registro-maestro/{accountId}',
+		  	show: false,
 		  	clicked: TbUtils.preventGeneralLoading },
 
 		  { title: "PROYECTOS", ref: "dashboard.projects", 
