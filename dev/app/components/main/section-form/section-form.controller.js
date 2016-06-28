@@ -6,10 +6,10 @@
         .controller('SectionFormController', SectionFormController);
 
     SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-        'tableContent'
+        'tableContent', 'projects'
     ];
 
-    function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, tableContent) {
+    function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects) {
         if ($rootScope.Role !== 'Admin') $state.go('dashboard.projects');
 
         var vm = this;
@@ -17,6 +17,7 @@
         vm.classes = [];
         vm.professors = [];
         vm.periods = [];
+        vm.projects = []
         vm.classesLoading = true;
         vm.professorsLoading = true;
         vm.periodsLoading = true;
@@ -34,6 +35,7 @@
         getClasses();
         getProfessors();
         getPeriods();
+        getProjects();
 
         function submit() {
             vm.submitting = true;
@@ -44,6 +46,10 @@
 
         function submitSuccess(response) {
             addStudentsToSection(response.data.Id);
+            projects.assignSectionToProject(vm.section.ProjectId,
+                response.data.Id,
+                assignSectionToProjectSuccess,
+                assignSectionToProjectError)
         }
 
         function submitFailure(response) {
@@ -99,7 +105,7 @@
 
         function studentsSearchClick(elementList) {
             let studentData = elementList.data;
-            if(checkIfStudentAlreadyAddedToTable(studentData.AccountId)){
+            if (checkIfStudentAlreadyAddedToTable(studentData.AccountId)) {
                 return;
             }
             let element = {
@@ -130,23 +136,46 @@
             return false;
         }
 
-        function getAccountID(bodyIndex){
+        function getAccountID(bodyIndex) {
             return vm.studentsTable.body[bodyIndex].content[0].properties.value;
         }
 
-        function addStudentsToSection(sectionId){
+        function addStudentsToSection(sectionId) {
             let students = [];
             for (let i = 0; i < vm.studentsTable.body.length; i++) {
                 students.push(getAccountID(i));
             }
-           sections.addStudent(students, sectionId, addStudentSuccess, submitFailure);
+            sections.addStudent(students, sectionId, addStudentSuccess, submitFailure);
         }
 
-        function addStudentSuccess(){
-             TbUtils.displayNotification('success', 'Seccion Creada',
+        function addStudentSuccess() {
+            TbUtils.displayNotification('success', 'Seccion Creada',
                 'La seccion se creo exitosamente.');
             $state.go('dashboard.projects');
             vm.submitting = false;
+        }
+
+        function getProjects() {
+            projects.getProjectsWithPagination(0, 60, getProjectsSuccess, getProjectsError);
+        }
+
+        function getProjectsSuccess(response) {
+            TbUtils.fillListWithResponseData(response.data, vm.projects);
+        }
+
+        function getProjectsError(response) {
+            TbUtils.displayNotification('error', 'Error',
+                'No se pudieron cargar los proyectos.');
+            vm.professorsLoading = false;
+        }
+        function assignSectionToProjectSuccess(response){
+            console.log(response.data);
+        }
+
+        function assignSectionToProjectError(){
+            TbUtils.displayNotification('error', 'Error',
+                'No se pudieron guardar el proyecto.');
+            vm.professorsLoading = false;
         }
     }
 })();
