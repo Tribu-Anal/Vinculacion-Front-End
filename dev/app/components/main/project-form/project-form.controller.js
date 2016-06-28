@@ -14,7 +14,7 @@
                                     projects, sections, 
                                     majors, toaster, 
                                     TbUtils, $location) {
-        if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
+        if ($rootScope.Role !== 'Admin') $state.go('dashboard.projects');
 
         var vm = this;
 

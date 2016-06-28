@@ -4,16 +4,14 @@
 			<h3 style="margin-top: 50px;">Seleccione los reportes que desea:</h3>
 		</div>
 	</div>
-	<div style="margin-top: 20px; max-height: 350px;">
-		<div class="row" ng-repeat="report in vm.reports">
-			<div class="col-xs-11 col-xs-offset-1">
-				<md-checkbox ng-click="report.checked = !report.checked">{{report.title}}</md-checkbox>
-			</div>
-		</div>
-	</div>
+	<div class="row">
+        <md-radio-group class="col-xs-11 col-xs-offset-1" ng-model="vm.selectedReport">
+            <md-radio-button value="{{$index}}" class="md-primary" style="margin-top: 10px;" ng-repeat="report in vm.reports">{{report.title}}</md-radio-button>
+        </md-radio-group>
+    </div>
 	<div class="row" style="margin-top: 20px;">
 		<div class="col-xs-11 col-xs-offset-4">
-			<md-button class="md-raised" ng-click="vm.generateReports()">Aceptar</md-button>
+			<md-button class="md-raised" ng-click="vm.generateReport()">Aceptar</md-button>
 		</div>
 	</div>
 </div>

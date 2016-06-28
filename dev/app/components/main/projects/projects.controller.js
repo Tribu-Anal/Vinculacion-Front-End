@@ -116,7 +116,7 @@
             response = response.data;
             let params = {
                 templateUrl: 'reports/hours-by-student/hours-by-student.html',
-                previousState: 'dashboard.home',
+                previousState: 'dashboard.projects',
                 previousStateParams: { },
                 reportParams: {
                     AccountId: response.AccountId,

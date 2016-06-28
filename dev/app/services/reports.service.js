@@ -5,9 +5,9 @@
         .module('VinculacionApp')
         .factory('reports', reports);
 
-    reports.$inject = [];
+    reports.$inject = ['$http'];
 
-    function reports() {
+    function reports($http) {
         var service = {
             setReportParams: setReportParams,
             getReportParams: getReportParams
@@ -24,6 +24,5 @@
         function getReportParams() {
             return reportParams;
         }
-
     }
 })();

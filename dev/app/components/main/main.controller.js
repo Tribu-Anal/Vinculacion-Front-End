@@ -13,12 +13,6 @@
 		vm.expand = false;
 		vm.navItems = 
 		[ 
-		  { title: "HOME", ref: "dashboard.home", 
-		  	icon: "glyphicon glyphicon-home", 
-		  	active: $state.current.url === '/home',
-		  	show: $state.current.url !== '/registro-maestro/{accountId}',
-		  	clicked: TbUtils.preventGeneralLoading },
-
 		  { title: "PROYECTOS", ref: "dashboard.projects", 
 		  	icon: "glyphicon glyphicon-th-large", 
 		  	active: $state.current.url.includes('/proyectos'),
@@ -56,11 +50,10 @@
 		}
 
 		function changeActiveItem (event, toState) {
-			vm.navItems[0].active = toState.url === '/home';
-			vm.navItems[1].active = toState.url.includes('/proyectos');
-			vm.navItems[2].active = toState.url === '/reportes';
-			vm.navItems[3].active = toState.url === '/secciones';
-            vm.navItems[4].active = toState.url === '/nuevo-profesor';
+			vm.navItems[0].active = toState.url.includes('/proyectos');
+			vm.navItems[1].active = toState.url === '/reportes';
+			vm.navItems[2].active = toState.url === '/secciones';
+            vm.navItems[3].active = toState.url === '/nuevo-profesor';
 		}
 	}
 })();
