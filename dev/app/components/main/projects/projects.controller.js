@@ -29,6 +29,7 @@
         vm.preventGeneralLoading = preventGeneralLoading;
         vm.removeProjectClicked = removeProjectClicked;
         vm.goToEdit = goToEdit;
+        vm.toTitleCase = TbUtils.toTitleCase;
 
         vm.reportButton = {
             show: $rootScope.Role === 'Student',
