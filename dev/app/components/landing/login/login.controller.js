@@ -1,7 +1,7 @@
-LoginController.$inject = ['$rootScope', '$location', 'authentication', 
+LoginController.$inject = ['$rootScope', '$location', 'auth', 
                                 'role', 'toaster', 'TbUtils'];
 
-function LoginController ($rootScope, $location, authentication, role, toaster, TbUtils) {
+function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
     var vm = this;
 
     vm.username = "";
@@ -9,17 +9,17 @@ function LoginController ($rootScope, $location, authentication, role, toaster, 
     vm.login = login;
     vm.loading = false;
 
-    authentication.ClearCredentials();
+    auth.ClearCredentials();
 
     function login() {
         vm.loading = true;
 
-        authentication.Login( vm.username, vm.password, LoginSuccess, LoginFail);
+        auth.Login( vm.username, vm.password, LoginSuccess, LoginFail);
     }
     
     function LoginSuccess(response) {
         console.log(response);
-        authentication.SetCredentials(response.data);
+        auth.SetCredentials(response.data);
         
         window.localStorage['Session'] = 
         $rootScope.Session =
