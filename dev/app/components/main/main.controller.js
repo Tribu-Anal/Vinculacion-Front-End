@@ -50,4 +50,4 @@ function MainController ($rootScope, $state, TbUtils) {
 	}
 }
 
-module.exports = { name: 'MainController', MainController };
+module.exports = { name: 'MainController', ctrl: MainController };

@@ -1,8 +1,8 @@
 ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService',
-                                    '$rootScope','authentication'];
+                                    '$rootScope','auth'];
 
 function ProjectsController (projects, TbUtils, $state, ModalService,
-                            $rootScope, authentication) {
+                            $rootScope, auth) {
     var vm = this;
     var deleteIndex = -1;
     var deleteProject = {};
@@ -134,7 +134,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
         let obj = {
             Email: email
         }
-        authentication.AccountId(obj,
+        auth.AccountId(obj,
             successAccountId, failAccountId)
     }
 }

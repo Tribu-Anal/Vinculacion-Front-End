@@ -7,7 +7,7 @@ function tbPaginator() {
             onPageChange: "=?"
         },
         controller : 'PaginatorController as vm',
-        templateUrl: 'templates/shared/TB-Paginator/paginator.html'           
+        templateUrl: 'templates/shared/TB-Paginator/tb-paginator.html'           
     };
 
     return directive;
