@@ -87,7 +87,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
 
     function goToEdit (project) {
         preventGeneralLoading();
-        $state.go('dashboard.editproject', { project: JSON.stringify(project) });
+        $state.go('main.editproject', { project: JSON.stringify(project) });
     }
     
     function getProjectsSuccess(response) {
@@ -110,7 +110,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
         response = response.data;
         let params = {
             templateUrl: 'reports/hours-by-student/hours-by-student.html',
-            previousState: 'dashboard.projects',
+            previousState: 'main.projects',
             previousStateParams: { },
             reportParams: {
                 AccountId: response.AccountId,
@@ -121,7 +121,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
             showPrintButton: false
         }
         TbUtils.preventGeneralLoading();
-        $state.go('dashboard.printarea', {
+        $state.go('main.printarea', {
             params: params
         });
     }
