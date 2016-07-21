@@ -1,5 +1,3 @@
-"use strict";
-
 run.$inject = ['$rootScope', '$location', '$cookieStore', '$http', '$state',
     '$timeout'
 ];

@@ -13,5 +13,7 @@ require("bootstrap");
 require("../assets/lib/jquery-validate/jquery-validate");
 require("../assets/lib/jquery-validate/additional-methods");
 require("../assets/lib/kQuery/landing");
-require("../assets/lib/kQuery/panels");
-require("./app");
+
+const app = require("./app.module");
+
+angular.bootstrap(document, [ app ]);

@@ -1,5 +1,3 @@
-"use strict";
-
 config.$inject = [ '$urlRouterProvider' ];
 
 function config (urlRouterProvider) {
