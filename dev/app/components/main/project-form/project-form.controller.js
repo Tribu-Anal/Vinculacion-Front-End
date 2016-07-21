@@ -1,5 +1,3 @@
-"use strict";
-
 ProjectFormController.$inject = [ '$rootScope', '$state', '$stateParams',
                                       'projects', 'sections', 
                                       'majors', 'toaster', 
@@ -149,4 +147,4 @@ function ProjectFormController ($rootScope, $state, $stateParams,
     }
 }
 
-module.exports = ProjectFormController;
+module.exports = { name: 'ProjectFormController', ctrl: ProjectFormController };
