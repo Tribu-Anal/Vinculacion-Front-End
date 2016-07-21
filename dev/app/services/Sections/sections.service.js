@@ -1,5 +1,3 @@
-"use strict";
-
 sections.$inject = ['$http'];
 
 function sections ($http) {
@@ -62,4 +60,4 @@ function sections ($http) {
     }
 }
 
-module.exports = sections;
+module.exports = { name: 'sections', srvc: sections };

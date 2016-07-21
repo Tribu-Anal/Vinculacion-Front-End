@@ -1,8 +1,6 @@
-"use strict";
-
 reports.$inject = ['$http'];
 
-function reports($http) {
+function reports ($http) {
     var service = {
         setReportParams: setReportParams,
         getReportParams: getReportParams
@@ -20,4 +18,4 @@ function reports($http) {
     }
 }
 
-module.exports = reports;
+module.exports = { name: 'reports', srvc: reports };
