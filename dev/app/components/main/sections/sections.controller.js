@@ -2,7 +2,7 @@ SectionsController.$inject = ['$rootScope', '$scope', '$state',
 								  'TbUtils', 'tableContent', 'sections'];
 
 function SectionsController ($rootScope, $scope, $state, TbUtils, tableContent, sections) {
-	if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('dashboard.projects');
+	if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
 	
 	var vm = this;
     

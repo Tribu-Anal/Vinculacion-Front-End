@@ -2,12 +2,12 @@
 	<tb-table   headers="vm.sectionsTable.headers" 
 	  			body="vm.sectionsTable.body" 
 	  			actions="vm.sectionsTable.actions"
-	            ref="dashboard.section"
+	            ref="main.section"
 	            on-row-click="vm.preventGeneralLoading"
 	            class="mouse-hover">
 	 </tb-table>
 	 <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
-	 <tb-round-btn ng-show="Role === 'Admin'" ui-sref="dashboard.newsection" 
+	 <tb-round-btn ng-show="Role === 'Admin'" ui-sref="main.newsection" 
 		ng-click="vm.preventGeneralLoading()">+
 	 </tb-round-btn>
 </div>

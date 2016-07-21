@@ -3,7 +3,7 @@ SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 
 ];
 
 function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects) {
-    if ($rootScope.Role !== 'Admin') $state.go('dashboard.projects');
+    if ($rootScope.Role !== 'Admin') $state.go('main.projects');
 
     var vm = this;
 
@@ -144,7 +144,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     function addStudentSuccess() {
         TbUtils.displayNotification('success', 'Seccion Creada',
             'La seccion se creo exitosamente.');
-        $state.go('dashboard.projects');
+        $state.go('main.projects');
         vm.submitting = false;
     }
 

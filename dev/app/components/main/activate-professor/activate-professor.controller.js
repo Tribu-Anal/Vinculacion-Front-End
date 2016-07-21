@@ -1,6 +1,6 @@
-ActivateProfessorController.$inject = ['$rootScope', '$state', '$stateParams', 'professors', 'TbUtils', 'authentication'];
+ActivateProfessorController.$inject = ['$rootScope', '$state', '$stateParams', 'professors', 'TbUtils', 'auth'];
 
-function ActivateProfessorController($rootScope, $state, $stateParams, professors, TbUtils, authentication) {
+function ActivateProfessorController($rootScope, $state, $stateParams, professors, TbUtils, auth) {
 
     var vm = this;
 
@@ -23,18 +23,18 @@ function ActivateProfessorController($rootScope, $state, $stateParams, professor
     }
     
     function activateProfessorSuccess(response) {
-        $state.go('landing');
+        $state.go('landing.login');
         TbUtils.displayNotification('success', 'Usuario activado!', 'Ya puede navegar el sitio.');
     }
     
     function activateProfessorFail(response) {
         console.log(response);
         TbUtils.showErrorMessage('error', response, 'No se ha podido activar el profesor.', 'Error!');
-        $state.go('landing');
+        $state.go('landing.login');
     }
     
     function getToken() {
-        if($stateParams.accountId == undefined || $stateParams.accountId == '') $state.go('landing');
+        if($stateParams.accountId == undefined || $stateParams.accountId == '') $state.go('landing.login');
         
         console.log($stateParams.accountId);
         vm.professor.AccountId = $stateParams.accountId;
@@ -42,8 +42,8 @@ function ActivateProfessorController($rootScope, $state, $stateParams, professor
     
     function leaveIfSessionStarted() {
         if($rootScope.globals.token) {
-            authentication.ClearCredentials();
-            $state.go('landing');
+            auth.ClearCredentials();
+            $state.go('landing.login');
         }
     }
 }

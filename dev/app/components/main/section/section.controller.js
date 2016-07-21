@@ -3,7 +3,7 @@ SectionController.$inject = ['$rootScope', '$stateParams', '$state', 'TbUtils',
 ];
 
 function SectionController($rootScope, $stateParams, $state, TbUtils, tableContent, ModalService, sections) {
-    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('dashboard.projects');
+    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
 
     var vm = this;
 
@@ -41,7 +41,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     vm.student = undefined;
 
     if (!$stateParams.data) {
-        $state.go('dashboard.sections');
+        $state.go('main.sections');
     } else {
         sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
@@ -102,7 +102,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function addStudentSuccess(response) {
         TbUtils.showErrorMessage('success', response, 'Estudiante agregado exitosamente', 'Exito');
-        $state.go('dashboard.sections');
+        $state.go('main.sections');
     }
 
     function addStudentFail(response) {
@@ -111,7 +111,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 
     function deleteSectionSuccess() {
-        $state.go('dashboard.sections');
+        $state.go('main.sections');
     }
 
     function deleteSectionFail(response) {
@@ -164,7 +164,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function updateSectionSuccess(response){
         TbUtils.displayNotification('success', 'Exito!', 'El cambio ha sido un exito');
-        $state.go('dashboard.sections');
+        $state.go('main.sections');
     }
 
     function updateSectionFail(response) {
