@@ -1,5 +1,3 @@
-"use strict";
-
 config.$inject = [ '$stateProvider' ];
 
 function config ($stateProvider) {
