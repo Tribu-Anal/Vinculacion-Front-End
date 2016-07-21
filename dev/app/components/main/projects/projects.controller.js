@@ -1,5 +1,3 @@
-"use strict";
-
 ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService',
                                     '$rootScope','authentication'];
 
@@ -141,4 +139,4 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     }
 }
 
-module.exports = ProjectsController;
+module.exports = { name: 'ProjectsController', ctrl: ProjectsController };
