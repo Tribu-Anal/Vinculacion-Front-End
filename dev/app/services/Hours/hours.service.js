@@ -1,5 +1,3 @@
-"use strict";
-
 hours.$inject = ['$http'];
 
 function hours($http) {
@@ -39,4 +37,4 @@ function hours($http) {
     
 }
 
-module.exports = hours;
+module.exports = { name: 'hours', srvc: hours };
