@@ -1,7 +1,7 @@
 ProjectController.$inject = [ '$rootScope', '$stateParams', '$state', 'projects', 
-                                  'TbUtils', 'tableContent', 'horas', 'recentProjects'];
+                                  'TbUtils', 'tableContent', 'hours' ];
 
-function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, tableContent, horas, recentProjects) {
+function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, tableContent, hours) {
     var vm = this;
 
     vm.project = {};
@@ -35,7 +35,6 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
         vm.sectionIds = response.data.SectionIds;
         vm.project = response.data;
 
-        recentProjects.put($rootScope.Session, vm.project.Id);
         vm.projectLoading = false;
     }
 
@@ -44,7 +43,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             'El proyecto deseado no existe.',
             'Error');
 
-        $state.go('dashboard.projects');
+        $state.go('main.projects');
 
         vm.projectLoading = false;
     }
@@ -82,7 +81,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             Hour: participant.hours
         }
 
-        horas.postHours(hoursData, addHoursSuccess, addHoursFail);
+        hours.postHours(hoursData, addHoursSuccess, addHoursFail);
     }
 
     function addHoursSuccess() {
@@ -133,8 +132,8 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     function downloadReport(participant) {
         let params = {
-            templateUrl: 'reports/hours-by-student/hours-by-student.html',
-            previousState: 'dashboard.project',
+            templateUrl: 'main/student-project-pdf/student-project-pdf.html',
+            previousState: 'main.project',
             previousStateParams: {
                 projectId: $stateParams.projectId
             },
@@ -142,7 +141,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             showPrintButton: true
         }
         TbUtils.preventGeneralLoading();
-        $state.go('dashboard.printarea', {
+        $state.go('main.printarea', {
             params: params
         });
     }
@@ -164,7 +163,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     vm.downloadProjectReport = function(){
         TbUtils.preventGeneralLoading();
-        $state.go('dashboard.evaluateproject', {
+        $state.go('main.evaluateproject', {
             projectId: vm.project.Id
         });
     }

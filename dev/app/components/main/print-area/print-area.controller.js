@@ -12,7 +12,7 @@ function PrintAreaController($stateParams, $state, $window, reports) {
 
     function init() {
         if (!$stateParams.params) {
-            $state.go('main.home');
+            $state.go('main.projects');
         } else {
             loadView();
         }

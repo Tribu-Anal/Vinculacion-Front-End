@@ -1,6 +1,6 @@
-StudentProjectPdfController.$inject = ['reports', 'horas', 'TbUtils'];
+StudentProjectPdfController.$inject = ['reports', 'hours', 'TbUtils'];
 
-function StudentProjectPdfController (reports, horas, TbUtils) {
+function StudentProjectPdfController (reports, hours, TbUtils) {
     var vm = this;
     vm.report = reports.getReportParams();
     vm.date = new Date();
@@ -10,7 +10,7 @@ function StudentProjectPdfController (reports, horas, TbUtils) {
         description: []
     };
     
-    horas.getStudentHourReport(vm.report.AccountId, getStudentHourReportSuccess,
+    hours.getStudentHourReport(vm.report.AccountId, getStudentHourReportSuccess,
         getStudentHourReportFail);
 
     function getStudentHourReportSuccess(response) {
