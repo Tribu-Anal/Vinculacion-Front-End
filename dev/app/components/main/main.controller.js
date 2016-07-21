@@ -1,5 +1,3 @@
-"use strict";
-
 MainController.$inject = [ '$rootScope', '$state', 'TbUtils'];
 
 function MainController ($rootScope, $state, TbUtils) {
@@ -52,4 +50,4 @@ function MainController ($rootScope, $state, TbUtils) {
 	}
 }
 
-module.exports = MainController;
+module.exports = { name: 'MainController', MainController };
