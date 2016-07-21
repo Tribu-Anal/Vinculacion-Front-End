@@ -1,5 +1,3 @@
-"use strict";
-
 projects.$inject = ['$http'];
 
 function projects($http) {
@@ -75,4 +73,4 @@ function projects($http) {
     }
 }
 
-module.exports = projects;
+module.exports = { name: 'projects', srvc: projects };
