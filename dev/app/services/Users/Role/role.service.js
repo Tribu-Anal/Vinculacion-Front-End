@@ -1,5 +1,3 @@
-"use strict";
-
 role.$inject = ['$http'];
 
 function role ($http) {
@@ -19,4 +17,4 @@ function role ($http) {
 	}
 }
 
-module.exports = role;
+module.exports = { name: 'role', srvc: role };

@@ -1,5 +1,3 @@
-"use strict";
-
 TbUtils.$inject = ['toaster', '$rootScope'];
 
 function TbUtils(toaster, $rootScope) {
@@ -96,4 +94,4 @@ function TbUtils(toaster, $rootScope) {
     }
 }
 
-module.exports = TbUtils;
+module.exports = { name: 'TbUtils', srvc: TbUtils };

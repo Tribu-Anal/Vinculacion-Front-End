@@ -1,8 +1,6 @@
-"use strict";
-
 tableContent.$inject = ['TbUtils'];
 
-function tableContent(TbUtils) {
+function tableContent (TbUtils) {
     var service = {
         createAnInputElement: createAnInputElement,
         createALableElement: createALableElement,
@@ -49,4 +47,4 @@ function tableContent(TbUtils) {
     };
 }
 
-module.exports = tableContent;
+module.exports = { name: 'tableContent', srvc: tableContent };
