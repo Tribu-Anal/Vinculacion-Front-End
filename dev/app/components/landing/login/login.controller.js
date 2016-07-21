@@ -1,5 +1,3 @@
-"use strict";
-
 LoginController.$inject = ['$rootScope', '$location', 'authentication', 
                                 'role', 'toaster', 'TbUtils'];
 
@@ -53,4 +51,4 @@ function LoginController ($rootScope, $location, authentication, role, toaster, 
     }
 }
 
-module.exports = LoginController;
+module.exports = { name: 'LoginController', ctrl: LoginController };
