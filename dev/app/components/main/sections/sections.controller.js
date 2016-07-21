@@ -1,9 +1,7 @@
-"use strict";
-
 SectionsController.$inject = ['$rootScope', '$scope', '$state', 
 								  'TbUtils', 'tableContent', 'sections'];
 
-function SectionsController($rootScope, $scope, $state, TbUtils, tableContent, sections) {
+function SectionsController ($rootScope, $scope, $state, TbUtils, tableContent, sections) {
 	if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('dashboard.projects');
 	
 	var vm = this;
@@ -53,3 +51,5 @@ function SectionsController($rootScope, $scope, $state, TbUtils, tableContent, s
         console.log(response);
     }
 }
+
+module.exports = { name: 'SectionsController', ctrl: SectionsController };
