@@ -1,10 +1,8 @@
-"use strict";
-
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
     'tableContent', 'projects'
 ];
 
-function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects) {
+function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects) {
     if ($rootScope.Role !== 'Admin') $state.go('dashboard.projects');
 
     var vm = this;
@@ -173,3 +171,5 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         vm.professorsLoading = false;
     }
 }
+
+module.exports = { name: 'SectionFormController', ctrl: SectionFormController };
