@@ -6,7 +6,7 @@ const ActivateProfessor = require('./activare-professor/activare-professor.modul
       ProjectForm       = require('./project-form/project-form.module'),
       Projects          = require('./projects/projects.module'),
       Reports           = require('./reports/reports-bundle.module'),
-      Section           = require('./section/section-bundld.module'),
+      Section           = require('./section/section-bundle.module'),
       SectionForm       = require('./section-form/section-form.module'),
       Sections          = require('./sections/sections.module');
 
