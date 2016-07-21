@@ -1,8 +1,6 @@
-"use strict";
+auth.$inject = ['$http', '$cookieStore', '$rootScope'];
 
-authentication.$inject = ['$http', '$cookieStore', '$rootScope'];
-
-function authentication ($http, $cookieStore, $rootScope) {
+function auth ($http, $cookieStore, $rootScope) {
 	var service = {
 		Login: Login,
 		SetCredentials: SetCredentials,
@@ -38,4 +36,4 @@ function authentication ($http, $cookieStore, $rootScope) {
 	};
 }
 
-module.exports = authentication;
+module.exports = { name: 'authService', srvc: auth };
