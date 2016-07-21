@@ -1,5 +1,3 @@
-"use strict";
-
 majors.$inject = ['$http'];
 
 function majors ($http) {
@@ -17,4 +15,4 @@ function majors ($http) {
     }
 }
 
-module.exports = majors;
+module.exports = { name: 'majors', srvc: majors };
