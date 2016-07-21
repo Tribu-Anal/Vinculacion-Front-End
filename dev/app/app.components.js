@@ -1,8 +1,7 @@
-const Landing = require('./components/landing/landing.component'),
-	  Main    = require('./components/main/main.component');
+const Landing = require('./components/landing/landing-bundle.module');
 
 const moduleName   = 'vinculacion.components',
-      dependencies = [ Landing, Main ];
+      dependencies = [ Landing ];
 
 angular.module(moduleName, dependencies);
 
