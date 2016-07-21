@@ -1,23 +1,15 @@
-(function() {
-    "use strict";
+function tbButton() {
+    var directive = {
+        restrict: 'E',
+        scope: {
+            text: '=?',
+            onClick: '=?',
+            round: '=?'
+        },
+        templateUrl: 'templates/shared/TB-Button/tb-button.html'
+    };
 
-    angular
-        .module('VinculacionApp')
-        .directive('tbButton', tbButton);
+    return directive;
+}
 
-    function tbButton() {
-        var directive = {
-            restrict: 'E',
-            scope: {
-                text: '=?',
-                onClick: '=?',
-                round: '=?'
-            },
-            controller: 'ButtonController as vm',
-            templateUrl: '../templates/shared/TB-Button/tb-button.html'
-        };
-
-        return directive;
-    }
-
-})();
+module.exports = { name: 'tbButton', drtv: tbButton };
