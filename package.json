@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Tribu-Anal/Manejo-Horas-de-Vinculacion-UNITEC#readme",
   "devDependencies": {
     "angular-mocks": "^1.5.5",
+    "angular-ui-form-validation": "^2.1.2",
     "angularjs-toaster": "^1.2.0",
     "browserify": "^13.0.1",
     "gulp": "^3.9.1",
@@ -45,19 +46,21 @@
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.8",
     "karma-phantomjs-launcher": "^1.0.0",
-    "ng-dialog": "^0.5.8",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "angular": "^1.5.5",
     "angular-animate": "^1.5.5",
+    "angular-aria": "^1.5.7",
     "angular-cookies": "^1.5.5",
-    "angular-material": "^1.0.9",
+    "angular-material": "^1.1.0-rc.5",
     "angular-modal-service": "^0.6.10",
     "angular-spinkit": "^0.3.4",
     "angular-ui-router": "^0.2.18",
     "angularjs-toaster": "^1.2.1",
     "bootstrap": "^3.3.6",
-    "jquery": "^2.2.4"
+    "jquery": "^2.2.4",
+    "ng-dialog": "^0.5.9",
+    "yargs": "^4.7.1"
   }
 }

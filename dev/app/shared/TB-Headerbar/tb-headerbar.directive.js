@@ -5,7 +5,8 @@ function tbHeaderbar() {
     {
         restrict: 'E',
         scope: {
-            expand: '=?'
+            expand: '=?',
+            username: '@?'
         },
         templateUrl: 'templates/shared/TB-Headerbar/tb-headerbar.html'        
     };

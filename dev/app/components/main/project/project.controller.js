@@ -1,7 +1,7 @@
 "use strict";
 
 ProjectController.$inject = [ '$rootScope', '$stateParams', '$state', 'projects', 
-                              'TbUtils', 'tableContent', 'horas', 'recentProjects'];
+                                  'TbUtils', 'tableContent', 'horas', 'recentProjects'];
 
 function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, tableContent, horas, recentProjects) {
     var vm = this;
@@ -30,6 +30,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
     projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
+    vm.showDownloadButton = $rootScope.Role==='Professor';
 
     function getProjectSuccess(response) {
         console.log(response);
@@ -45,7 +46,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             'El proyecto deseado no existe.',
             'Error');
 
-        $state.go('main.home');
+        $state.go('dashboard.projects');
 
         vm.projectLoading = false;
     }
@@ -135,7 +136,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
     function downloadReport(participant) {
         let params = {
             templateUrl: 'reports/hours-by-student/hours-by-student.html',
-            previousState: 'main.project',
+            previousState: 'dashboard.project',
             previousStateParams: {
                 projectId: $stateParams.projectId
             },
@@ -143,7 +144,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             showPrintButton: true
         }
         TbUtils.preventGeneralLoading();
-        $state.go('main.printarea', {
+        $state.go('dashboard.printarea', {
             params: params
         });
     }
@@ -162,6 +163,14 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
         return reportParams;
     }
+
+    vm.downloadProjectReport = function(){
+        TbUtils.preventGeneralLoading();
+        $state.go('dashboard.evaluateproject', {
+            projectId: vm.project.Id
+        });
+    }
+
 }
 
 module.exports = ProjectController;

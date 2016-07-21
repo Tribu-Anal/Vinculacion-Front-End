@@ -6,8 +6,9 @@ let config        = require("./config"),
 	shared        = require("./shared"),
 	run           = require("./run");
 
-let dependencies = [ 'ui.router', 'toaster', 'ngAnimate', 
+let dependencies = [ 'ui.router', 'toaster', 'ngAnimate', 'ngMaterial',
 		             'ngCookies', 'angular-spinkit', 'angularModalService', 
+		             'angularModalService', 'directives.customvalidation.customValidationTypes',
 		             components, services, shared 
 		           ];
 

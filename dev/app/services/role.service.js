@@ -3,7 +3,7 @@
 role.$inject = ['$http'];
 
 function role ($http) {
-	var url = 'http://fiasps.unitec.edu:8085/api/Login/GetUserRole/';
+	var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Login/GetUserRole/';
 
 	var service = 
 	{

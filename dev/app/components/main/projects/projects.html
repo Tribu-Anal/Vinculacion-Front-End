@@ -1,3 +1,4 @@
+<tb-paginator options="vm.options" on-page-change="vm.onPageChange"></tb-paginator>
 <div class="gallery">
 	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}">
 		<span class="icon-group" ng-show="Role === 'Admin'">
@@ -11,7 +12,7 @@
 				<img src="img/logo.png" alt="Project Image">
 			</div>
 			<div class="project-info">
-				<h4 ng-class="{ 'overflow webkit': prj.Name.length > 100 }">{{prj.Name}}</h4>
+				<h4 ng-class="{ 'overflow webkit': prj.Name.length > 100 }">{{vm.toTitleCase(prj.Name)}}</h4>
 				<span ng-class="{ 'overflow webkit': prj.Description.length > 80 }"
 					  ng-show="prj.Name.length < 60">
 					{{prj.Description}}

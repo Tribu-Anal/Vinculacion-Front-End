@@ -3,11 +3,12 @@
 hours.$inject = ['$http'];
 
 function hours($http) {
-    var url = 'http://fiasps.unitec.edu:8085/api';
+    var url = 'http://fiasps.unitec.edu:' + PORT + '/api';
     var service = {
         getStudentsBySection: getStudentsBySection,
         postHours: postHours,
-        getStudentHourReport: getStudentHourReport
+        getStudentHourReport: getStudentHourReport,
+        getFiniquitoURL: getFiniquitoURL
     };
 
     return service;
@@ -31,6 +32,11 @@ function hours($http) {
         $http.get(url + '/StudentHourReport/' + accountId).
         then(successCallback).catch(errorCallback);
     }
+
+    function getFiniquitoURL(accountId) {
+        return url + '/Students/FiniquitoReport/' + accountId;
+    }
+    
 }
 
 module.exports = hours;

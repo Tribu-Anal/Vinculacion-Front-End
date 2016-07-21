@@ -1,11 +1,9 @@
 "use strict";
 
 LoginController.$inject = ['$rootScope', '$location', 'authentication', 
-                           'role', 'toaster', 'TbUtils'];
+                                'role', 'toaster', 'TbUtils'];
 
-function LoginController ($rootScope, $location, authentication, 
-                          role, toaster, TbUtils) 
-{
+function LoginController ($rootScope, $location, authentication, role, toaster, TbUtils) {
     var vm = this;
 
     vm.username = "";
@@ -18,20 +16,21 @@ function LoginController ($rootScope, $location, authentication,
     function login() {
         vm.loading = true;
 
-        authentication.Login( vm.username, vm.password, 
-                              LoginSuccess, LoginFail);
+        authentication.Login( vm.username, vm.password, LoginSuccess, LoginFail);
     }
     
     function LoginSuccess(response) {
+        console.log(response);
         authentication.SetCredentials(response.data);
         
         window.localStorage['Session'] = 
         $rootScope.Session =
-        JSON.parse(response.config.data).User;
-
-        window.localStorage['Email'] =
-        $rootScope.Email = 
         vm.username;
+
+        window.localStorage['Username'] =
+        $rootScope.Username =
+        $rootScope.Session.slice(0, $rootScope.Session.indexOf('@'));
+
         role.get($rootScope.Session, getRoleSuccess);
     }
 
@@ -40,15 +39,14 @@ function LoginController ($rootScope, $location, authentication,
         $rootScope.Role =
         response.data;
 
-        $location.path('/home');
+        $location.path('/proyectos');
         vm.loading = false;
     }
     
     function LoginFail(response) {
         console.log(response);
         TbUtils.showErrorMessage('error', response, 
-                                 'La cuenta ingresada no tiene' +
-                                 ' privilegios de acceso',
+                                 'La cuenta ingresada no tiene privilegios de acceso',
                                  'Falla autorizacion');
         
         vm.loading = false;

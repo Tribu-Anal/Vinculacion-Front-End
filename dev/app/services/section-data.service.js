@@ -3,7 +3,7 @@
 sectionData.$inject = ['$http'];
 
 function sectionData ($http) {
-   var url = 'http://fiasps.unitec.edu:8085/api/';
+   var url = 'http://fiasps.unitec.edu:' + PORT + '/api/';
     
     var service = {
         getClasses: getClasses,
@@ -21,7 +21,7 @@ function sectionData ($http) {
 
     function getProfessors (successCallback, errorCallback) {
         $http.get(url+'Professors')
-       		.then(successCallback)
+            .then(successCallback)
             .catch(errorCallback);
     }
 

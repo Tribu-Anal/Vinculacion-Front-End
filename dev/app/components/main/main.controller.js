@@ -8,21 +8,33 @@ function MainController ($rootScope, $state, TbUtils) {
 	vm.expand = false;
 	vm.navItems = 
 	[ 
-	  { title: "HOME", ref: "main.home", 
-	  	icon: "glyphicon glyphicon-home", 
-	  	active: $state.current.url === '/home',
-	  	show: true,
-	  	clicked: TbUtils.preventGeneralLoading },
-
-	  { title: "PROYECTOS", ref: "main.projects", 
+	  { title: "PROYECTOS", ref: "dashboard.projects", 
 	  	icon: "glyphicon glyphicon-th-large", 
 	  	active: $state.current.url.includes('/proyectos'),
-	  	show: true,
+	  	show: $state.current.url !== '/registro-maestro/{accountId}',
 	  	clicked:TbUtils.preventGeneralLoading },
 
-	  { title: "LOG OUT", ref: "landing.login", 
+	  	{ title: "REPORTES", ref: "dashboard.reports", 
+	  	icon: "glyphicon glyphicon-folder-open", 
+	  	active: $state.current.url === '/reportes',
+	  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
+		clicked: TbUtils.preventGeneralLoading },
+
+	  { title: "SECCIONES", ref: "dashboard.sections", 
+	  	icon: "glyphicon glyphicon-th-list", 
+	  	active: $state.current.url === '/secciones',
+	  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
+	  	clicked: TbUtils.preventGeneralLoading },
+        
+	  { title: "NUEVO PROFESOR", ref: "dashboard.newprofessor", 
+	  	icon: "glyphicon glyphicon-pencil", 
+	  	active: $state.current.url === '/nuevo-profesor',
+	  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
+	  	clicked: TbUtils.preventGeneralLoading },
+
+	  { title: "LOG OUT", ref: "landing", 
 	  	icon: "glyphicon glyphicon-log-out", active: false,
-	  	show: true,
+	  	show: $state.current.url !== '/registro-maestro/{accountId}',
 	  	clicked: closeSession }
 	];
 
@@ -33,8 +45,10 @@ function MainController ($rootScope, $state, TbUtils) {
 	}
 
 	function changeActiveItem (event, toState) {
-		vm.navItems[0].active = toState.url === '/home';
-		vm.navItems[1].active = toState.url.includes('/proyectos');
+		vm.navItems[0].active = toState.url.includes('/proyectos');
+		vm.navItems[1].active = toState.url === '/reportes';
+		vm.navItems[2].active = toState.url === '/secciones';
+        vm.navItems[3].active = toState.url === '/nuevo-profesor';
 	}
 }
 

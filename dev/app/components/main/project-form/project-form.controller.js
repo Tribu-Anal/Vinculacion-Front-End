@@ -9,7 +9,7 @@ function ProjectFormController ($rootScope, $state, $stateParams,
                                 projects, sections, 
                                 majors, toaster, 
                                 TbUtils, $location) {
-    if ($rootScope.Role !== 'Admin') $state.go('dashboard.home');
+    if ($rootScope.Role !== 'Admin') $state.go('dashboard.projects');
 
     var vm = this;
 
@@ -42,8 +42,9 @@ function ProjectFormController ($rootScope, $state, $stateParams,
                 Description: '',
                 Cost: 0.0,
                 MajorIds: [],
-                SectionIds: [],
-                BeneficiariesAlias: '',
+                SectionIds: [0],
+                BeneficiarieOrganization: '',
+                BeneficiarieGroups: '',
                 BeneficiariesQuantity: 0
                 };
     }
@@ -99,8 +100,7 @@ function ProjectFormController ($rootScope, $state, $stateParams,
     }
     
     function majorsAndStatusValid() {
-        return vm.project.MajorIds.length > 0 && 
-               vm.project.SectionIds.length > 0;
+        return vm.project.MajorIds.length > 0;
     }
     
     function getMajorsSuccess(response) {

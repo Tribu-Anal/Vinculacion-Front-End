@@ -1,11 +1,12 @@
 "use strict";
 
-function reports () {
+reports.$inject = ['$http'];
+
+function reports($http) {
     var service = {
         setReportParams: setReportParams,
         getReportParams: getReportParams
     };
-    
     var reportParams = {};
     
     return service;

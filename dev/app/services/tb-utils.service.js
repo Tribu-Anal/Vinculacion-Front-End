@@ -12,7 +12,8 @@ function TbUtils(toaster, $rootScope) {
         showErrorMessage: showErrorMessage,
         getTable: getTable,
         setModalParams: setModalParams,
-        getModalParams: getModalParams
+        getModalParams: getModalParams,
+        toTitleCase: toTitleCase
     };
     var vm = this;
     vm.ModalParams;
@@ -82,6 +83,17 @@ function TbUtils(toaster, $rootScope) {
         return vm.ModalParams;
     }
 
+    function toTitleCase (str) {
+        let words = str.toLowerCase().split(' ');
+
+        for(let i = 0; i < words.length; i++) {
+            let letters = words[i].split('');
+            letters[0] = letters[0].toUpperCase();
+            words[i] = letters.join('');
+        }
+
+        return words.join(' ');
+    }
 }
 
 module.exports = TbUtils;
