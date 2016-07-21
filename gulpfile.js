@@ -7,6 +7,7 @@
 
 let gulp            = require('gulp'),
     autoprefixer    = require('gulp-autoprefixer'),
+    babel           = require('gulp-babel'),
     browserify      = require('browserify'),
     concat          = require('gulp-concat'),
     connect         = require('gulp-connect'),
@@ -108,7 +109,8 @@ gulp.task ( 'js-lint', () => {
 				es6: true
 			}
 		})) 
-        .pipe(eslint.format());
+        .pipe(eslint.format())
+        .pipe(babel({presets: [ 'es2015' ] }));
 } );
 
 gulp.task ( 'js', [ 'js-lint' ], () => {
