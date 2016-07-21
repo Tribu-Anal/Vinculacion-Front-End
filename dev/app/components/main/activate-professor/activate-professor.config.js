@@ -5,7 +5,7 @@ function config ($stateProvider) {
 	$stateProvider
 		.state('dashboard.activateprofessor', {
 			url: '/registro-maestro/{accountId}',
-			templateUrl: templateDir + 'main/professor-form/activate-professor/activate-professor.html',
+			templateUrl: 'templates/components/main/activate-professor/activate-professor.html',
 			controller: "ActivateProfessorController as vm",
 			onEnter: onStateEnter
 		});
