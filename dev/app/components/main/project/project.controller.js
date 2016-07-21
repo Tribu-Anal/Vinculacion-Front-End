@@ -1,5 +1,3 @@
-"use strict";
-
 ProjectController.$inject = [ '$rootScope', '$stateParams', '$state', 'projects', 
                                   'TbUtils', 'tableContent', 'horas', 'recentProjects'];
 
@@ -173,4 +171,4 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
 }
 
-module.exports = ProjectController;
+module.exports = { name: 'ProjectController', ctrl: ProjectController };
