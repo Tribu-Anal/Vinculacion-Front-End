@@ -3,7 +3,7 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('dashboard.reports', {
+		.state('main.reports', {
 			url: '/reportes',
 			templateUrl: 'templates/components/main/reports/reports.html',
 			controller: "ReportsController as vm",

@@ -3,7 +3,7 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('dashboard.newsection', {
+		.state('main.newsection', {
             url: '/nueva-seccion',
             templateUrl: 'templates/components/main/section-form/section-form.html',
             controller: "SectionFormController as vm",

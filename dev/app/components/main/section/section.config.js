@@ -3,7 +3,7 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('dashboard.section', {
+		.state('main.section', {
             url: '/seccion',
             params: {
                 data: null

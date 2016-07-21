@@ -5,7 +5,7 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('dashboard.newprofessor', {
+		.state('main.newprofessor', {
 			url: '/nuevo-profesor',
 			templateUrl: 'templates/components/main/professor-form/professor-form.html',
 			controller: "ProfessorFormController as vm",

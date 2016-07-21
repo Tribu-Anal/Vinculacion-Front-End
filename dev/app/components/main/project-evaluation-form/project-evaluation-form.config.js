@@ -5,7 +5,7 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('dashboard.evaluateproject', {
+		.state('main.evaluateproject', {
 			url: '/evaluacion-proyecto/{projectId}',
 			params: {
                 projectId: null

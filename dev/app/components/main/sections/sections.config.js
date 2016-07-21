@@ -3,7 +3,7 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('dashboard.sections', {
+		.state('main.sections', {
             url: '/secciones',
             templateUrl: 'templates/components/main/sections/sections.html',
             controller: "SectionsController as vm",

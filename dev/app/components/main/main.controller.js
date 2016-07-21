@@ -6,31 +6,31 @@ function MainController ($rootScope, $state, TbUtils) {
 	vm.expand = false;
 	vm.navItems = 
 	[ 
-	  { title: "PROYECTOS", ref: "dashboard.projects", 
+	  { title: "PROYECTOS", ref: "main.projects", 
 	  	icon: "glyphicon glyphicon-th-large", 
 	  	active: $state.current.url.includes('/proyectos'),
 	  	show: $state.current.url !== '/registro-maestro/{accountId}',
 	  	clicked:TbUtils.preventGeneralLoading },
 
-	  	{ title: "REPORTES", ref: "dashboard.reports", 
+	  	{ title: "REPORTES", ref: "main.reports", 
 	  	icon: "glyphicon glyphicon-folder-open", 
 	  	active: $state.current.url === '/reportes',
 	  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
 		clicked: TbUtils.preventGeneralLoading },
 
-	  { title: "SECCIONES", ref: "dashboard.sections", 
+	  { title: "SECCIONES", ref: "main.sections", 
 	  	icon: "glyphicon glyphicon-th-list", 
 	  	active: $state.current.url === '/secciones',
 	  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
 	  	clicked: TbUtils.preventGeneralLoading },
         
-	  { title: "NUEVO PROFESOR", ref: "dashboard.newprofessor", 
+	  { title: "NUEVO PROFESOR", ref: "main.newprofessor", 
 	  	icon: "glyphicon glyphicon-pencil", 
 	  	active: $state.current.url === '/nuevo-profesor',
 	  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
 	  	clicked: TbUtils.preventGeneralLoading },
 
-	  { title: "LOG OUT", ref: "landing", 
+	  { title: "LOG OUT", ref: "landing.login", 
 	  	icon: "glyphicon glyphicon-log-out", active: false,
 	  	show: $state.current.url !== '/registro-maestro/{accountId}',
 	  	clicked: closeSession }
