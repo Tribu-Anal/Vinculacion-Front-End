@@ -36,4 +36,4 @@ function auth ($http, $cookieStore, $rootScope) {
 	};
 }
 
-module.exports = { name: 'authService', srvc: auth };
+module.exports = { name: 'auth', srvc: auth };

@@ -1,5 +1,5 @@
 const auth        = require('./services/Auth/auth.module'),
-      hours       = require('./services/Hours/hour.module'),
+      hours       = require('./services/Hours/hours.module'),
       majors      = require('./services/Majors/majors.module'),
       professors  = require('./services/Professors/professors.module'),
       projects    = require('./services/Projects/projects.module'),

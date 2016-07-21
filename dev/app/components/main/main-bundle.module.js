@@ -1,4 +1,4 @@
-const ActivateProfessor     = require('./activare-professor/activare-professor.module'),
+const ActivateProfessor     = require('./activate-professor/activate-professor.module'),
       Main                  = require('./main.module'),
       PrintArea             = require('./print-area/print-area.module'),
       ProfessorForm         = require('./professor-form/professor-form.module'),
