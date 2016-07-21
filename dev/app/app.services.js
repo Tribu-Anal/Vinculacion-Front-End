@@ -1,18 +1,17 @@
-const auth                  = require('./services/authentication.service'),
-	  hours                 = require('./services/hours.service.js'),
-	  majors                = require('./services/majors.service.js'),
-	  projects              = require('./services/projects.service.js'),
-	  recentProjects        = require('./services/recent-projects.service.js'),
-	  reports               = require('./services/reports.service.js'),
-	  role                  = require('./services/role.service.js'),
-	  sectionData           = require('./services/section-data.service.js'),
-	  sections              = require('./services/sections.service.js'),
-	  tableContent          = require('./services/table-content.service.js'),
-      TbUtils               = require('./services/tb-utils.service');
+const auth        = require('./services/Auth/auth.module'),
+      hours       = require('./services/Hours/hour.module'),
+      majors      = require('./services/Majors/majors.module'),
+      professors  = require('./services/Professors/professors.module'),
+      projects    = require('./services/Projects/projects.module'),
+      reports     = require('./services/Reports/reports.module'),
+      sections    = require('./services/Sections/sections-bundle.module'),
+      tbTable     = require('./services/TbTable/tb-table-services.module'),
+      tbUtils     = require('./services/TbUtils/tb-utils.module'),
+      users       = require('./services/Users/users.module');
 
 const moduleName    = 'vinculacion.services',
-      dependencies  = [ auth, hours, majors, projects, recentProjects, reports, role,
-                        sectionData, sections, tableContent, TbUtils ];
+      dependencies  = [ auth, hours, majors, professors, projects, reports,
+                        sections, tbTable, tbUtils, users ];
 
 angular.module(moduleName, dependencies);
 
