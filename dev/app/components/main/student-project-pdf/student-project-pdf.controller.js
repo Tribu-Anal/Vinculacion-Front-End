@@ -1,8 +1,6 @@
-"use strict";
+StudentProjectPdfController.$inject = ['reports', 'horas', 'TbUtils'];
 
-HoursByStudentController.$inject = ['reports', 'horas', 'TbUtils'];
-
-function HoursByStudentController(reports, horas, TbUtils) {
+function StudentProjectPdfController (reports, horas, TbUtils) {
     var vm = this;
     vm.report = reports.getReportParams();
     vm.date = new Date();
@@ -32,4 +30,4 @@ function HoursByStudentController(reports, horas, TbUtils) {
     }
 }
 
-module.exports = HoursByStudentController;
+module.exports = { name: 'StudentProjectPdfController', ctrl: StudentProjectPdfController };
