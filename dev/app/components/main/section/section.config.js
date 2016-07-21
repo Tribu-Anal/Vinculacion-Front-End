@@ -9,7 +9,7 @@ function config ($stateProvider) {
                 data: null
             },
             templateUrl: 'templates/components/main/section/section.html',
-            controller: "SectionController as vm"
+            controller: "SectionController as vm",
 			onEnter: onStateEnter
 		});
 }

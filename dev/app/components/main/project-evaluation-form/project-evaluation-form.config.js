@@ -11,7 +11,7 @@ function config ($stateProvider) {
                 projectId: null
             },
 			templateUrl: 'templates/components/main/project-evaluation-form/project-evaluation-form.html',
-			controller: "ProjectEvaluationFormController as vm"
+			controller: "ProjectEvaluationFormController as vm",
 			onEnter: onStateEnter
 		});
 }
