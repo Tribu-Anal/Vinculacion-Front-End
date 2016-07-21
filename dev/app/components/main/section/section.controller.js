@@ -1,5 +1,3 @@
-"use strict";
-
 SectionController.$inject = ['$rootScope', '$stateParams', '$state', 'TbUtils',
     'tableContent', 'ModalService', 'sections'
 ];
@@ -173,3 +171,5 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
         TbUtils.showErrorMessage('error', response, 'No se ha podido editar la seccion', 'Error');
     }
 }
+
+module.exports = { name: 'SectionController', ctrl: SectionController };
