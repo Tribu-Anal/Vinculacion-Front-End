@@ -1,57 +1,51 @@
-(function() {
-    "use strict";
+ActivateProfessorController.$inject = ['$rootScope', '$state', '$stateParams', 'professors', 'TbUtils', 'authentication'];
 
-    angular
-        .module('VinculacionApp')
-        .controller('ActivateProfessorController', ActivateProfessorController);
+function ActivateProfessorController($rootScope, $state, $stateParams, professors, TbUtils, authentication) {
 
-    ActivateProfessorController.$inject = ['$rootScope', '$state', '$stateParams', 'professors', 'TbUtils', 'authentication'];
+    var vm = this;
 
-    function ActivateProfessorController($rootScope, $state, $stateParams, professors, TbUtils, authentication) {
-
-        var vm = this;
-
-        vm.professor = {
-            AccountId: '',
-            Password: ''
-        };
+    vm.professor = {
+        AccountId: '',
+        Password: ''
+    };
+    
+    vm.accountId;
+    vm.confirmPass = '';
+    
+    vm.activateProfessor = activateProfessor;
+    $rootScope.globals.guest = true;
+    
+    leaveIfSessionStarted();
+    getToken();
+    
+    function activateProfessor() {
+        professors.activateProfessor(vm.professor, activateProfessorSuccess, activateProfessorFail);
+    }
+    
+    function activateProfessorSuccess(response) {
+        $state.go('landing');
+        TbUtils.displayNotification('success', 'Usuario activado!', 'Ya puede navegar el sitio.');
+    }
+    
+    function activateProfessorFail(response) {
+        console.log(response);
+        TbUtils.showErrorMessage('error', response, 'No se ha podido activar el profesor.', 'Error!');
+        $state.go('landing');
+    }
+    
+    function getToken() {
+        if($stateParams.accountId == undefined || $stateParams.accountId == '') $state.go('landing');
         
-        vm.accountId;
-        vm.confirmPass = '';
-        
-        vm.activateProfessor = activateProfessor;
-        $rootScope.globals.guest = true;
-        
-        leaveIfSessionStarted();
-        getToken();
-        
-        function activateProfessor() {
-            professors.activateProfessor(vm.professor, activateProfessorSuccess, activateProfessorFail);
-        }
-        
-        function activateProfessorSuccess(response) {
+        console.log($stateParams.accountId);
+        vm.professor.AccountId = $stateParams.accountId;
+    }
+    
+    function leaveIfSessionStarted() {
+        if($rootScope.globals.token) {
+            authentication.ClearCredentials();
             $state.go('landing');
-            TbUtils.displayNotification('success', 'Usuario activado!', 'Ya puede navegar el sitio.');
-        }
-        
-        function activateProfessorFail(response) {
-            console.log(response);
-            TbUtils.showErrorMessage('error', response, 'No se ha podido activar el profesor.', 'Error!');
-            $state.go('landing');
-        }
-        
-        function getToken() {
-            if($stateParams.accountId == undefined || $stateParams.accountId == '') $state.go('landing');
-            
-            console.log($stateParams.accountId);
-            vm.professor.AccountId = $stateParams.accountId;
-        }
-        
-        function leaveIfSessionStarted() {
-            if($rootScope.globals.token) {
-                authentication.ClearCredentials();
-                $state.go('landing');
-            }
         }
     }
-})();
+}
+
+module.exports = { name: 'ActivateProfessorController', ActivateProfessorController };
