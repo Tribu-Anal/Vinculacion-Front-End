@@ -1,0 +1,49 @@
+<div class="section-view">
+      <div class="container">
+          <div class="row">
+            <h1 class="col-md-10 class-style">{{vm.section.Class.Name}}</h1>
+            <button type="button" class="btn btn-default edit-button" aria-label="Left Align" 
+                    ng-click="vm.editSection()" 
+                    style="margin-left:0; margin-top: 0; top: 20%; left: 60%;" >
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </button>
+            <h2 class="col-md-5 professor">{{vm.section.User.Name}}</h2>
+          </div>
+          <ul class="list">
+            <li class="row">
+              <label class="col-md-1">Codigo</label>
+              <label class="col-md-3 element"><strong>{{vm.section.Code}}</strong></label>
+            </li>
+            <li class="row">
+              <label class="col-md-1">Periodo</label> 
+              <label class="col-md-3 element"><strong>{{vm.section.Period.Number}}</strong></label>
+            </li>
+            <li class="row">
+              <label class="col-md-1">Año</label> 
+              <label class="col-md-3 element"><strong>{{vm.section.Period.Year}}</strong></label>
+            </li>
+          </ul>
+          <img class="logo-image" src="img/logo.png" alt="" />
+    </div>
+
+    <div>
+      <div>
+          <tb-table   headers="vm.sectionsTable.headers" 
+                      body="vm.sectionsTable.body" 
+                      actions="vm.sectionsTable.actions">
+          </tb-table>
+      </div>
+    </div>
+    <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
+</div>
+<tb-round-btn style="background-color: #b91a1a; margin-top: -80px; color: #fff8f8;" 
+  ng-show="Role === 'Admin' && vm.sectionsTable.body.length == 0" ng-click="vm.removeSection()">
+    <div style="margin: auto;">
+        <div style="margin: 8px 8px 5px 5px;">
+        <div style="margin: 8px 8px 5px 8px;">
+            <span class="glyphicon glyphicon-trash"></span>
+        </div>
+    </div>
+</tb-round-btn>
+<tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ng-click="vm.addStudent()">+
+</tb-round-btn>
