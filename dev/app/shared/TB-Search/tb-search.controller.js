@@ -1,5 +1,3 @@
-"use strict";
-
 TbSearchController.$inject = ['$scope', '$http'];
 
 function TbSearchController($scope, $http) {
@@ -76,4 +74,4 @@ function TbSearchController($scope, $http) {
     }
 }
 
-module.exports = TbSearchController;
+module.exports = { name: 'TbSearchController', ctrl: TbSearchController };

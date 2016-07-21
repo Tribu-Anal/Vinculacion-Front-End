@@ -1,5 +1,3 @@
-"use strict";
-
 function tbTable() {
     var directive = 
     {
@@ -12,10 +10,10 @@ function tbTable() {
             ref: '@?'
         },
         controller : 'TbTableController as vm',
-        templateUrl: '../templates/shared/TB-Table/tb-table.html'           
+        templateUrl: 'templates/shared/TB-Table/tb-table.html'           
     };
 
     return directive;
 }
 
-module.exports = tbTable;
+module.exports = { name: 'tbTable', drtv: tbTable };

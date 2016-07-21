@@ -1,5 +1,3 @@
-"use strict";
-
 function tbHeaderbar() {
     var directive = 
     {
@@ -14,4 +12,4 @@ function tbHeaderbar() {
     return directive;
 }
 
-module.exports = tbHeaderbar;
+module.exports = { name: 'tbHeaderbar', drtv: tbHeaderbar };

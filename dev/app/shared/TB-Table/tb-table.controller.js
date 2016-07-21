@@ -1,5 +1,3 @@
-"use strict";
-
 TbTableController.$inject = ['$scope', '$state'];
 
 function TbTableController ($scope, $state) {
@@ -20,4 +18,4 @@ function TbTableController ($scope, $state) {
     };
 }
 
-module.exports = TbTableController;
+module.exports = { name: 'TbTableController', ctrl: TbTableController };

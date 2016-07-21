@@ -1,5 +1,3 @@
-"use strict";
-
 function tbRoundBtn() {
     var directive = 
     {
@@ -11,4 +9,4 @@ function tbRoundBtn() {
     return directive;
 }
 
-module.exports = tbRoundBtn;
+module.exports = { name: 'tbRoundBtn', drtv: tbRoundBtn };

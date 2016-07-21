@@ -1,5 +1,3 @@
-"use strict";
-
 function tbSearch() {
     var directive = {
         restrict: 'E',
@@ -9,7 +7,7 @@ function tbSearch() {
             responsePropertyShow: '=?'
         },
         controller: 'TbSearchController as vm',
-        templateUrl: '../templates/shared/TB-Search/tb-search.html',
+        templateUrl: 'templates/shared/TB-Search/tb-search.html',
         link: function($scope, $element, $attrs, vm) {
             $scope.$watch('vm.searchInput', function(newValue, oldValue) {
                 if (typeof newValue === 'string' || !vm.searchInput) {
@@ -26,4 +24,4 @@ function tbSearch() {
     return directive;
 }
 
-module.exports = tbSearch;
+module.exports = { name: 'tbSearch', drtv: tbSearch };

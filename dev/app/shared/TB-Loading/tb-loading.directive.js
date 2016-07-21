@@ -1,5 +1,3 @@
-"use strict";
-
 function tbLoading() {
     var directive = 
     {
@@ -10,4 +8,4 @@ function tbLoading() {
     return directive;
 }
 
-module.exports = tbLoading;
+module.exports = { name: 'tbLoading', drtv: tbLoading };

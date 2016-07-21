@@ -1,5 +1,3 @@
-"use strict";
-
 TbSidebarController.$inject = [ '$scope' ];
 
 function TbSidebarController ($scope) {
@@ -41,4 +39,4 @@ function TbSidebarController ($scope) {
 	init();
 }
 
-module.exports = TbSidebarController;
+module.exports = { name: 'TbSidebarController', ctrl: TbSidebarController };
