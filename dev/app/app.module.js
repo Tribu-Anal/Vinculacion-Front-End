@@ -9,7 +9,7 @@ const moduleName   = 'VinculacionApp',
 		               'ngCookies', 'angular-spinkit', 'angularModalService', 
 		               'angularModalService', 
 		               'directives.customvalidation.customValidationTypes',
-		                components
+		                components, services, shared
 		             ];
 
 angular.module(moduleName, dependencies)
