@@ -1,5 +1,3 @@
-"use strict"; 
-
 PrintAreaController.$inject = ['$stateParams', '$state', '$window', 'reports'];
 
 function PrintAreaController($stateParams, $state, $window, reports) {
@@ -31,4 +29,4 @@ function PrintAreaController($stateParams, $state, $window, reports) {
     }
 }
 
-module.exports = PrintAreaController;
+module.exports = { name: 'PrintAreaController', ctrl: PrintAreaController };
