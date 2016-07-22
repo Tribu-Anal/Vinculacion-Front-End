@@ -1,48 +1,42 @@
-(function(){
-	"use strict";
+TbSidebarController.$inject = [ '$scope' ];
 
-	angular
-		.module('VinculacionApp')
-		.controller('TbSidebarController', TbSidebarController);
+function TbSidebarController ($scope) {
+	var vm = this;
+	var activeItem = {};
 
-	TbSidebarController.$inject = [ '$scope' ];
+	vm.navItemClicked = navItemClicked;
 
-	function TbSidebarController ($scope) {
-		var vm = this;
-		var activeItem = {};
+	function init () {
+		for (let i = 0; i < $scope.navItems.length; i++) {
+			let navItem = $scope.navItems[i];
 
-		vm.navItemClicked = navItemClicked;
-
-		function init () {
-			for (let i = 0; i < $scope.navItems.length; i++) {
-				let navItem = $scope.navItems[i];
-
-				if (navItem.active) {
-					activeItem = navItem;
-					return;
-				}
-				
+			if (navItem.active) {
+				activeItem = navItem;
+				return;
 			}
+			
 		}
-
-		function navItemClicked(itemIndex, clicked) {
-			activeItem.active = false;
-			setActiveItem(itemIndex);
-			clicked();
-		}
-
-		function setActiveItem(itemIndex) {
-			if (noList()) return;
-
-			activeItem = $scope.navItems[itemIndex];
-			activeItem.active = true;
-		}
-
-		function noList () {
-			return $scope.navItems === undefined || 
-				   $scope.navItems.length === 0;
-		}
-
-		init();
 	}
-})();
+
+	function navItemClicked(itemIndex, clicked) {
+		activeItem.active = false;
+		setActiveItem(itemIndex);
+		clicked();
+	}
+
+	function setActiveItem(itemIndex) {
+		if (noList()) return;
+
+		activeItem = $scope.navItems[itemIndex];
+		activeItem.active = true;
+	}
+
+	function noList () {
+		return $scope.navItems === undefined || 
+			   $scope.navItems.length === 0;
+	}
+
+	init();
+}
+
+module.exports = { name: 'TbSidebarController', ctrl: TbSidebarController };

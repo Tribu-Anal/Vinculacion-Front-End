@@ -1,27 +1,19 @@
-(function(){
-	"use strict";
+ReportsController.$inject = [ '$rootScope', 'TbUtils', 'reports' ];
 
-	angular
-		.module('VinculacionApp')
-		.controller('ReportsController', ReportsController);
+function ReportsController ($rootScope, TbUtils, reports) {
+	var vm = this;
 
-	ReportsController.$inject = [ '$rootScope', 'TbUtils', 'reports' ];
+	vm.reports = [
+		{ title: 'Reporte de Costos', url: 'http://fiasps.unitec.edu:8085/api/Reports/CostsReport/2015' },
+		{ title: 'Reporte de Horas de Estudiantes', url: 'http://fiasps.unitec.edu:8085/api/Reports/StudentsReport/2015' }
+	];
+    vm.selectedReport = 0;
+	vm.generateReport = generateReport;
 
-	function ReportsController ($rootScope, TbUtils, reports) {
-		var vm = this;
-
-		vm.reports = [
-			{ title: 'Reporte de Costos', url: 'http://fiasps.unitec.edu:8085/api/Reports/CostsReport/2015' },
-			{ title: 'Reporte de Horas de Estudiantes', url: 'http://fiasps.unitec.edu:8085/api/Reports/StudentsReport/2015' }
-		];
-        vm.selectedReport = 0;
-		vm.generateReport = generateReport;
-
-		function generateReport () {            
-            window.open(vm.reports[vm.selectedReport].url);
-		}
-        
-        
+	function generateReport () {            
+        window.open(vm.reports[vm.selectedReport].url);
 	}
 
-})();
+}
+
+module.exports = { name: 'ReportsController', ctrl: ReportsController };

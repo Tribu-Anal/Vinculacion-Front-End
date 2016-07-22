@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" ng-app="VinculacionApp">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +10,18 @@
         <link href="lib/vendor.css" rel="stylesheet"/>
 		<link href="css/style.css" rel="stylesheet"/>
     </head>
-    <body class="{{viewStyles}}" ng-class="{ 'scrollable': !stateLoading }">
+    <body class="{{viewStyles}}">
+
     	<toaster-container></toaster-container>
 		<ui-view></ui-view>
-        <tb-loading class="general-loader" ng-show="generalLoading && stateLoading"></tb-loading>
+        <tb-loading 
+                    class="general-loader" 
+                    ng-show="generalLoading && stateLoading">
+        </tb-loading>
 
         <script>
             var PORT = "8085"; 
         </script>
-        <script src="lib/vendor.js"></script>
 		<script src="js/bundle.js"></script>	
     </body>
 </html>
