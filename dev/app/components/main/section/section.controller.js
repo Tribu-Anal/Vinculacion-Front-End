@@ -102,7 +102,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function addStudentSuccess(response) {
         TbUtils.showErrorMessage('success', response, 'Estudiante agregado exitosamente', 'Exito');
-        $state.go('main.sections');
+        // $state.go('main.sections');
     }
 
     function addStudentFail(response) {
@@ -164,7 +164,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function updateSectionSuccess(response){
         TbUtils.displayNotification('success', 'Exito!', 'El cambio ha sido un exito');
-        $state.go('main.sections');
+        // $state.go('main.sections');
     }
 
     function updateSectionFail(response) {
