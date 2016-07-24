@@ -10,7 +10,7 @@ function config($stateProvider) {
                 "student-project-pdf/student-project-pdf.html",
             controller: 'StudentProjectPdfController as vm',
             onEnter: onStateEnter,
-            url: '/reporte-de-horas-del-proyecto'
+            url: '/proyecto-reporte-de-horas-alumno'
         });
 }
 
