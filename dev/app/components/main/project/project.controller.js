@@ -132,7 +132,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     function downloadReport(participant) {
         let params = {
-            templateUrl: 'main/student-project-pdf/student-project-pdf.html',
+            templateUrl: 'templates/components/main/student-project-pdf/student-project-pdf.html',
             previousState: 'main.project',
             previousStateParams: {
                 projectId: $stateParams.projectId
@@ -141,7 +141,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             showPrintButton: true
         }
         TbUtils.preventGeneralLoading();
-        $state.go('main.printarea', {
+        $state.go('main.student-project-pdf', {
             params: params
         });
     }
