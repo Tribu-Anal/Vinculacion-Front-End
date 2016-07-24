@@ -79,7 +79,8 @@ gulp.task ('connect', () => {
 	connect.server({
     root: 'public/',
     port: 3000,
-    livereload: true
+    livereload: true,
+    fallback: 'public/index.html'
   });
 });
 
