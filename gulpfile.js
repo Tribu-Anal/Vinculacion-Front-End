@@ -80,7 +80,7 @@ gulp.task ('connect', () => {
     root: 'public/',
     port: 3000,
     livereload: true,
-    fallback: 'public/index.html'
+    fallback: 'index.html'
   });
 });
 
@@ -178,7 +178,7 @@ gulp.task ( 'templates', () => {
 } );
 
 gulp.task( 'reload-index', () => { 
-	return gulp.src("public/index.html")
+	return gulp.src("./index.html")
 		.pipe(connect.reload()); 
 } );
 
@@ -217,7 +217,7 @@ gulp.task ( 'watch', () => {
 	gulp.watch ( templateSrc, ['templates'] );
 	gulp.watch ( imgSrc, ['img'] );
 	gulp.watch ( fonts, ['fonts'] );
-	gulp.watch ( "public/index.html", ['reload-index'] );
+	gulp.watch ( "./index.html", ['reload-index'] );
 } );
 
 
