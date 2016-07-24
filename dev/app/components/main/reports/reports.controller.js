@@ -1,6 +1,8 @@
-ReportsController.$inject = [ '$rootScope', 'TbUtils', 'reports' ];
+ReportsController.$inject = [ '$rootScope', 'TbUtils', 'reports', '$state' ];
 
-function ReportsController ($rootScope, TbUtils, reports) {
+function ReportsController ($rootScope, TbUtils, reports, $state) {
+	if ($rootScope.Role !== 'Admin') $state.go('main.projects');
+
 	var vm = this;
 
 	vm.reports = [
