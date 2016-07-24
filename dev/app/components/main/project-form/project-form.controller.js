@@ -65,6 +65,8 @@ function ProjectFormController ($rootScope, $state, $stateParams,
     }
 
     function updateProject () {
+        if(vm.project.SectionIds.length === 0)
+            vm.project.SectionIds = [0];
         projects.updateProject(editId, vm.project, 
             updateSuccess, updateFailure);
     }
