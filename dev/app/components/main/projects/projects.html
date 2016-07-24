@@ -1,6 +1,7 @@
 <tb-paginator options="vm.options" on-page-change="vm.onPageChange"></tb-paginator>
+<tb-search-field></tb-search-field>
 <div class="gallery">
-	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}">
+	<div class="card" ng-repeat="prj in vm.projects | filter:search" title="{{prj.Description}}">
 		<span class="icon-group" ng-show="Role === 'Admin'">
 			<i class="glyphicon glyphicon-remove" 
 			   ng-click="vm.removeProjectClicked(prj, $index)">
