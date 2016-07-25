@@ -8,8 +8,8 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     var deleteProject = {};
     var confirmDeleteModal = {
       templateUrl: 'templates/components/main/projects/' +
-                   'confirm-delete/confirm-delete.html',
-      controller: 'ConfirmDeleteController'
+                   'confirm-project-delete/confirm-project-delete.html',
+      controller: 'ConfirmProjectDeleteController'
     };
     
     vm.options = {};
