@@ -1,6 +1,6 @@
 sections.$inject = ['$http'];
 
-function sections ($http) {
+function sections($http) {
     var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Sections';
     var service = {
         getSections: getSections,
@@ -9,7 +9,9 @@ function sections ($http) {
         getStudents: getStudents,
         addStudent: addStudent,
         removeStudent: removeStudent,
-        updateSection: updateSection
+        updateSection: updateSection,
+        getSectionsWithPagination: getSectionsWithPagination,
+        getSectionCount: getSectionCount
     };
 
     return service;
@@ -58,6 +60,19 @@ function sections ($http) {
             .then(successCallback)
             .catch(errorCallback);
     }
+
+    function getSectionsWithPagination(page, size, successCallback, errorCallback) {
+        $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc').then(successCallback)
+            .catch(errorCallback);
+    }
+
+    function getSectionCount(successCallback, errorCallback) {
+        $http.get(url + "?$top=1&$orderby=Id desc").then(successCallback)
+            .catch(errorCallback);
+    }
 }
 
-module.exports = { name: 'sections', srvc: sections };
+module.exports = {
+    name: 'sections',
+    srvc: sections
+};
