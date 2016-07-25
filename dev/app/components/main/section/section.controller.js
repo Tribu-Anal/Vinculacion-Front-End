@@ -166,8 +166,17 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 
     function updateSectionSuccess(response) {
-        TbUtils.displayNotification('success', 'Exito!', 'El cambio ha sido un exito');
-        // $state.go('main.sections');
+        sections.getSection(vm.section.Id, getSectionSuccess, getSectionFail);
+    }
+
+    function getSectionSuccess(response) {
+        console.log(response.data);
+        localStorage.setItem('currentSection', JSON.stringify(response.data));
+        location.reload();
+    }
+
+    function getSectionFail(response) {
+        console.log(response);
     }
 
     function updateSectionFail(response) {
