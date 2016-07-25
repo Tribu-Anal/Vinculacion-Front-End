@@ -43,7 +43,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     if (!$stateParams.data && !JSON.parse(localStorage.getItem('currentSection'))) {
         $state.go('main.sections');
     } else {
-        if ($stateParams.data) localStorage.setItem('currentSection', JSON.stringify(vm.section));
+        if ($stateParams.data) localStorage.setItem('currentSection', $stateParams.data);
         vm.section = JSON.parse(localStorage.getItem('currentSection'));
         sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
