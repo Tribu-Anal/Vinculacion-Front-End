@@ -171,7 +171,4 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
 }
 
-module.exports = {
-    name: 'ProjectController',
-    ctrl: ProjectController
-};
+module.exports = { name: 'ProjectController', ctrl: ProjectController };
