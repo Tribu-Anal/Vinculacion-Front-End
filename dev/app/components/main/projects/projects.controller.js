@@ -37,10 +37,11 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
 
     function getTotalProjectsSuccess(response) {
+        console.log(response);
         TbUtils.fillListWithResponseData(response.data, vm.totalProjects);
     }
 
-    $scope.$watch('search.Name', function(term) {
+    $scope.$watch('search.data', function(term) {
         let obj = {Name: term};
 
         if(term && term.length >= vm.limitInLettersToSearch) {
@@ -108,7 +109,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     }
 
     vm.onPageChange = function(skip, page){
-        if($scope.search) $scope.search.Name = '';
+        if($scope.search) $scope.search.data = '';
         vm.projects = vm.projectsPagination;
         vm.projects.length = 0;
         vm.projectsLoading = true;
