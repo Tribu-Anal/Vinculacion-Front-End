@@ -6,10 +6,10 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     var vm = this;
     var deleteIndex = -1;
     var deleteProject = {};
-    var confirmDeleteModal = {
-      templateUrl: 'templates/components/main/projects/' +
-                   'confirm-delete/confirm-delete.html',
-      controller: 'ConfirmDeleteController'
+    var confirmProjectDeleteModal = {
+      templateUrl: 'templates/components/main/projects/dialogs/' +
+                   'confirm-project-delete/confirm-project-delete.html',
+      controller: 'ConfirmProjectDeleteController'
     };
     
     vm.options = {};
@@ -38,7 +38,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
         deleteProject = project;
         deleteIndex = index;
         
-        ModalService.showModal(confirmDeleteModal)
+        ModalService.showModal(confirmProjectDeleteModal)
           .then(modalResolve);
     }
 
