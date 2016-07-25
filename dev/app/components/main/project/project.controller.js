@@ -29,7 +29,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
     projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
-    vm.showDownloadButton = $rootScope.Role === 'Professor';
+    vm.showEvaluateProjectButton = $rootScope.Role==='Professor';
 
     function getProjectSuccess(response) {
         console.log(response);
