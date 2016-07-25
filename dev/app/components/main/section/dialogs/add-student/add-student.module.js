@@ -1,6 +1,6 @@
-const controller = require('./confirm-project-delete.controller');
+const controller = require('./add-student.controller');
 
-const moduleName   = 'confirm-project-delete-dialog.component',
+const moduleName   = 'add-student-dialog.component',
 	  dependencies = [];
 	  
 angular.module(moduleName, dependencies)
