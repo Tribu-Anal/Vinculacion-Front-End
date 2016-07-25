@@ -1,8 +1,8 @@
-const projects             = require('./projects.module'),
-      confirmProjectDelete = require('./confirm-project-delete/confirm-project-delete.module');
+const projects = require('./projects.module'),
+      dialogs  = require('./dialogs/dialogs-bundle.module');
 
 const moduleName   = 'projects-bundle.component',
-      dependencies = [ projects, confirmProjectDelete ];
+      dependencies = [ projects, dialogs ];
 
 angular.module(moduleName, dependencies);
 

@@ -7,7 +7,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     var deleteIndex = -1;
     var deleteProject = {};
     var confirmDeleteModal = {
-      templateUrl: 'templates/components/main/projects/' +
+      templateUrl: 'templates/components/main/projects/dialogs/' +
                    'confirm-project-delete/confirm-project-delete.html',
       controller: 'ConfirmProjectDeleteController'
     };
