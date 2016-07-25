@@ -7,14 +7,14 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     var vm = this;
 
-    var confirmDeleteModal = {
-        templateUrl: 'templates/components/main/section/' +
-            'confirm-delete/confirm-delete.html',
-        controller: 'ConfirmDeleteController'
+    var confirmSectionDeleteModal = {
+        templateUrl: 'templates/components/main/section/dialogs/' +
+            'confirm-section-delete/confirm-section-delete.html',
+        controller: 'ConfirmSectionDeleteController'
     };
 
     var addStudentModal = {
-        templateUrl: 'templates/components/main/section/' +
+        templateUrl: 'templates/components/main/section/dialogs/' +
             'add-student/add-student.html',
         controller: 'AddStudentController'
     };
@@ -70,7 +70,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function removeSection() {
         modalFlag = 'DeleteSection';
-        ModalService.showModal(confirmDeleteModal)
+        ModalService.showModal(confirmSectionDeleteModal)
             .then(modalResolve);
     }
 
