@@ -65,8 +65,10 @@ function ProjectFormController($rootScope, $state, $stateParams,
     }
 
     function updateProject() {
-        projects.updateProject(editId, vm.project,
-            updateSuccess, updateFailure);
+        if(vm.project.SectionIds.length === 0)
+            vm.project.SectionIds = [0];
+
+        projects.updateProject(editId, vm.project, updateSuccess, updateFailure);
     }
 
     function updateSuccess() {
@@ -147,7 +149,4 @@ function ProjectFormController($rootScope, $state, $stateParams,
     }
 }
 
-module.exports = {
-    name: 'ProjectFormController',
-    ctrl: ProjectFormController
-};
+module.exports = { name: 'ProjectFormController', ctrl: ProjectFormController };
