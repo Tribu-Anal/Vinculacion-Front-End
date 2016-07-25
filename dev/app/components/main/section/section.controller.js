@@ -33,6 +33,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     vm.removeSection = removeSection;
     vm.addStudent = addStudent;
     vm.editSection = editSection;
+    vm.toTitleCase = TbUtils.toTitleCase;
     vm.deleteRowButton = {
         icon: 'glyphicon-trash',
         onClick: deleteStudent,
@@ -99,7 +100,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function updateSection(result) {
         if (result.ClassId)
-            sections.updateSection(result,vm.section.Id,updateSectionSuccess, updateSectionFail);
+            sections.updateSection(result, vm.section.Id, updateSectionSuccess, updateSectionFail);
     }
 
     function addStudentSuccess(response) {
@@ -164,7 +165,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
         TbUtils.showErrorMessage('error', response, 'No se ha podido eliminar al estudiante', 'Error');
     }
 
-    function updateSectionSuccess(response){
+    function updateSectionSuccess(response) {
         TbUtils.displayNotification('success', 'Exito!', 'El cambio ha sido un exito');
         $state.go('main.sections');
     }
@@ -174,4 +175,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 }
 
-module.exports = { name: 'SectionController', ctrl: SectionController };
+module.exports = {
+    name: 'SectionController',
+    ctrl: SectionController
+};
