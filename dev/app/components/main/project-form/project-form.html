@@ -23,7 +23,7 @@
             <div class="tb-checkbox" ng-repeat="major in vm.majors">
                 <span ng-click="vm.checkboxListItemClicked(mdl, major.MajorId, vm.project.MajorIds)">
                     <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = vm.edit && vm.project.MajorIds.indexOf(major.MajorId) >= 0" ng-model="mdl">
-                    <label ng-click="mdl = !mdl">{{major.Name}}</label>
+                    <label ng-click="mdl = !mdl">{{vm.toTitleCase(major.Name)}}</label>
                 </span>
             </div>
             <tb-loading class="main-loader" style="z-index: 99999;" ng-show="vm.majorsLoading"></tb-loading>

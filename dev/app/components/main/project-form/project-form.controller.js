@@ -1,12 +1,13 @@
-ProjectFormController.$inject = [ '$rootScope', '$state', '$stateParams',
-                                      'projects', 'sections', 
-                                      'majors', 'toaster', 
-                                      'TbUtils', '$location'];
+ProjectFormController.$inject = ['$rootScope', '$state', '$stateParams',
+    'projects', 'sections',
+    'majors', 'toaster',
+    'TbUtils', '$location'
+];
 
-function ProjectFormController ($rootScope, $state, $stateParams, 
-                                projects, sections, 
-                                majors, toaster, 
-                                TbUtils, $location) {
+function ProjectFormController($rootScope, $state, $stateParams,
+    projects, sections,
+    majors, toaster,
+    TbUtils, $location) {
     if ($rootScope.Role !== 'Admin') $state.go('main.projects');
 
     var vm = this;
@@ -25,16 +26,16 @@ function ProjectFormController ($rootScope, $state, $stateParams,
     vm.submitProject = submitProject;
     vm.checkboxListItemClicked = checkboxListItemClicked;
     vm.majorsAndStatusValid = majorsAndStatusValid;
+    vm.toTitleCase = TbUtils.toTitleCase;
 
     var editId = vm.edit ? vm.project.Id : -1;
-    
+
     majors.getMajors(getMajorsSuccess, getMajorsFail);
     sections.getSections(getSectionsSuccess, getSectionsFail);
 
-    function setProject () {
-        return $stateParams.project ? 
-               JSON.parse($stateParams.project) : 
-               {
+    function setProject() {
+        return $stateParams.project ?
+            JSON.parse($stateParams.project) : {
                 ProjectId: '',
                 Name: '',
                 Description: '',
@@ -44,106 +45,107 @@ function ProjectFormController ($rootScope, $state, $stateParams,
                 BeneficiarieOrganization: '',
                 BeneficiarieGroups: '',
                 BeneficiariesQuantity: 0
-                };
+            };
     }
-    
+
     function submitProject() {
         vm.submitting = true;
 
         if (vm.edit) {
             removeProjectNonAPIProperties();
             updateProject();
-        }
-        else
+        } else
             postNewProject();
     }
 
-    function removeProjectNonAPIProperties () {
+    function removeProjectNonAPIProperties() {
         delete vm.project.$$hashKey;
         delete vm.project.Id;
         delete vm.project.IsDeleted;
     }
 
-    function updateProject () {
-        projects.updateProject(editId, vm.project, 
-            updateSuccess, updateFailure);
+    function updateProject() {
+        if(vm.project.SectionIds.length === 0)
+            vm.project.SectionIds = [0];
+
+        projects.updateProject(editId, vm.project, updateSuccess, updateFailure);
     }
 
-    function updateSuccess () {
+    function updateSuccess() {
         vm.submitting = false;
 
         TbUtils.preventGeneralLoading();
         $location.path('/proyectos');
-        TbUtils.displayNotification('success', 'Proyecto Actualizado', 
+        TbUtils.displayNotification('success', 'Proyecto Actualizado',
             'Se ha actualizado exitosamente el nuevo proyecto.');
     }
 
-    function updateFailure (response) {
+    function updateFailure(response) {
         vm.submitting = false;
         TbUtils.showErrorMessage('error', response,
-                                 'No se pudo actualizar el proyecto.',
-                                 'Error');
+            'No se pudo actualizar el proyecto.',
+            'Error');
     }
 
-    function postNewProject () {
-        projects.postProject(vm.project, 
+    function postNewProject() {
+        projects.postProject(vm.project,
             submitProjectSuccess, submitProjectFail);
     }
 
-    function checkboxListItemClicked (inputValue, listItemModel, listModel) {
+    function checkboxListItemClicked(inputValue, listItemModel, listModel) {
         if (inputValue)
             listModel.push(listItemModel);
         else
             TbUtils.removeItemFromList(listItemModel, listModel);
     }
-    
+
     function majorsAndStatusValid() {
         return vm.project.MajorIds.length > 0;
     }
-    
+
     function getMajorsSuccess(response) {
         TbUtils.fillListWithResponseData(response.data, vm.majors);
 
         vm.majorsLoading = false;
     }
-    
+
     function getSectionsSuccess(response) {
         TbUtils.fillListWithResponseData(response.data, vm.sections);
-        
+
         vm.sectionsLoading = false;
     }
-    
+
     function getMajorsFail(response) {
         console.log(response);
         TbUtils.showErrorMessage('error', response,
-                                 'Hay un problema con el servidor.' + 
-                                 ' No se ha podido obtener las carreras disponibles.',
-                                 'Error');
+            'Hay un problema con el servidor.' +
+            ' No se ha podido obtener las carreras disponibles.',
+            'Error');
         vm.majorsLoading = false;
     }
-    
+
     function getSectionsFail(response) {
         console.log(response);
         TbUtils.showErrorMessage('error', response,
-                                 'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.',
-                                 'Error');
+            'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.',
+            'Error');
         vm.sectionsLoading = false;
     }
-    
+
     function submitProjectSuccess() {
         vm.submitting = false;
 
         TbUtils.preventGeneralLoading();
         $location.path('/proyectos');
-        TbUtils.displayNotification('success', 'Proyecto Creado', 
+        TbUtils.displayNotification('success', 'Proyecto Creado',
             'Se ha creado exitosamente el nuevo proyecto.');
     }
-    
+
     function submitProjectFail(response) {
         vm.submitting = false;
         TbUtils.showErrorMessage('error', response,
-                                 'No se ha podido crear el proyecto.',
-                                 'Error');
+            'No se ha podido crear el proyecto.',
+            'Error');
     }
 }
 

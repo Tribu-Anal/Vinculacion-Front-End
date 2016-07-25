@@ -19,7 +19,7 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
     
     function LoginSuccess(response) {
         console.log(response);
-        auth.SetCredentials(response.data);
+        auth.SetCredentials(response.data.Token);
         
         window.localStorage['Session'] = 
         $rootScope.Session =

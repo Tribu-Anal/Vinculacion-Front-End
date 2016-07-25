@@ -1,5 +1,6 @@
-ProjectController.$inject = [ '$rootScope', '$stateParams', '$state', 'projects', 
-                                  'TbUtils', 'tableContent', 'hours' ];
+ProjectController.$inject = ['$rootScope', '$stateParams', '$state', 'projects',
+    'TbUtils', 'tableContent', 'hours'
+];
 
 function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, tableContent, hours) {
     var vm = this;
@@ -28,13 +29,13 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
     projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
-    vm.showDownloadButton = $rootScope.Role==='Professor';
+    vm.showEvaluateProjectButton = $rootScope.Role==='Professor';
 
     function getProjectSuccess(response) {
         console.log(response);
         vm.sectionIds = response.data.SectionIds;
         vm.project = response.data;
-
+        vm.project.Name = TbUtils.toTitleCase(vm.project.Name);
         vm.projectLoading = false;
     }
 
@@ -49,10 +50,10 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
     }
 
     function getParticipantsSuccess(response) {
-        if($rootScope.Role==='Professor'){
-             vm.participants.headers.push('Horas');
-             vm.participants.headers.push('Agregar');
-         }
+        if ($rootScope.Role === 'Professor') {
+            vm.participants.headers.push('Horas');
+            vm.participants.headers.push('Agregar');
+        }
         vm.participants.headers.push('Ver Reporte');
         addParticipantsToTable(response.data);
         vm.participantsLoading = false;
@@ -110,12 +111,12 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
         };
         participantElement.content.push(
             tableContent.createALableElement(participantData.Name));
-        if($rootScope.Role==='Professor'){
+        if ($rootScope.Role === 'Professor') {
             participantElement.content.push(
                 tableContent.createAnInputElement('number'));
             participantElement.content.push(
                 tableContent.createAButtonElement(vm.saveButton));
-         }
+        }
         participantElement.content.push(
             tableContent.createAButtonElement(vm.downloadButton));
 
@@ -161,7 +162,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
         return reportParams;
     }
 
-    vm.downloadProjectReport = function(){
+    vm.downloadProjectReport = function() {
         TbUtils.preventGeneralLoading();
         $state.go('main.evaluateproject', {
             projectId: vm.project.Id
