@@ -1,8 +1,8 @@
 ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService',
-                                    '$rootScope','auth'];
+                                    '$rootScope','auth', '$scope', 'filterFilter'];
 
 function ProjectsController (projects, TbUtils, $state, ModalService,
-                            $rootScope, auth) {
+                            $rootScope, auth, $scope, filterFilter) {
     var vm = this;
     var deleteIndex = -1;
     var deleteProject = {};
@@ -16,8 +16,12 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     vm.options.startingPage = 0;
     vm.options.pageSize = 60;
     vm.options.count = 0;
+
     vm.projects = [];
+    vm.totalProjects = [];
+    vm.projectsPagination = [];
     vm.projectsLoading = true;
+    vm.limitInLettersToSearch = 3;
     vm.deletingProject = [];
     vm.preventGeneralLoading = preventGeneralLoading;
     vm.removeProjectClicked = removeProjectClicked;
@@ -29,6 +33,30 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
         onClick: loadReport,
         icon: 'glyphicon-file'
     };
+
+    projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
+
+    function getTotalProjectsSuccess(response) {
+        TbUtils.fillListWithResponseData(response.data, vm.totalProjects);
+    }
+
+    $scope.$watch('search.Name', function(term) {
+        let obj = {Name: term};
+
+        if(term && term.length >= vm.limitInLettersToSearch) {
+            $scope.filterProjects = filterFilter(vm.totalProjects, obj);
+            vm.projects = $scope.filterProjects;
+        }
+
+        else {
+            console.log('vacio');
+            vm.projects = vm.projectsPagination;
+        }
+    });
+
+    function getTotalProjectsFail(response) {
+        console.log(resposne);
+    }
 
     function preventGeneralLoading () {
         TbUtils.preventGeneralLoading();
@@ -80,6 +108,8 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     }
 
     vm.onPageChange = function(skip, page){
+        if($scope.search) $scope.search.Name = '';
+        vm.projects = vm.projectsPagination;
         vm.projects.length = 0;
         vm.projectsLoading = true;
         projects.getProjectsWithPagination( page, skip, getProjectsSuccess, getProjectsFail);
@@ -91,9 +121,9 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     }
     
     function getProjectsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.projects);
+        TbUtils.fillListWithResponseData(response.data, vm.projectsPagination);
         TbUtils.initArrayToValue(vm.deletingProject, false, 
-                                 vm.projects.length);
+                                 vm.projectsPagination.length);
 
         vm.projectsLoading = false;
     }
