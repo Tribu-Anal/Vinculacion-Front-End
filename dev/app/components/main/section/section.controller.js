@@ -46,6 +46,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     } else {
         if ($stateParams.data) localStorage.setItem('currentSection', $stateParams.data);
         vm.section = JSON.parse(localStorage.getItem('currentSection'));
+        console.log(vm.section);
         sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
 
@@ -105,7 +106,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function addStudentSuccess(response) {
         TbUtils.showErrorMessage('success', response, 'Estudiante agregado exitosamente', 'Exito');
-        // $state.go('main.sections');
+        location.reload();
     }
 
     function addStudentFail(response) {
