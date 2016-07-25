@@ -20,7 +20,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     };
 
     var editSectionModal = {
-        templateUrl: 'templates/components/main/section/' +
+        templateUrl: 'templates/components/main/section/dialogs/' +
             'edit-section/edit-section.html',
         controller: 'EditSectionController as vm'
     }
