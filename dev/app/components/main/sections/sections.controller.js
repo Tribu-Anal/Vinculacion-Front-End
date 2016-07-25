@@ -1,13 +1,17 @@
 SectionsController.$inject = ['$rootScope', '$scope', '$state',
-    'TbUtils', 'tableContent', 'sections'
+    'TbUtils', 'tableContent', 'sections', 'filterFilter'
 ];
 
 function SectionsController($rootScope, $scope, $state,
-    TbUtils, tableContent, sections) {
+    TbUtils, tableContent, sections, filterFilter) {
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor')
         $state.go('main.projects');
 
     var vm = this;
+
+    vm.totalSections = [];
+    vm.paginationSections = [];
+    vm.limitInLettersToSearch = 3;
 
     vm.sectionsLoading = true;
     vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo', 'Año', 'Catedratico']);
@@ -27,6 +31,37 @@ function SectionsController($rootScope, $scope, $state,
         console.log("Entro");
     }
 
+    sections.getSections(getTotalSectionsSuccess, getTotalSectionsFail);
+
+    function getTotalSectionsSuccess(response) {
+        console.log(response);
+        TbUtils.fillListWithResponseData(response.data, vm.totalSections);
+    }
+
+    $scope.$watch('search.data', function(term) {
+        let obj = {
+            Class: {
+                Name: term
+            }
+        };
+
+        if(term && term.length >= vm.limitInLettersToSearch) {
+            let filterSections = {data: filterFilter(vm.totalSections, obj)};
+            let filterTable = [];
+            constructTableBody(filterSections, filterTable);
+            vm.sectionsTable.body = filterTable;
+        }
+
+        else {
+            console.log('vacio');
+            vm.sectionsTable.body = vm.paginationSections;
+        }
+    });
+
+    function getTotalSectionsFail(response) {
+        console.log(response);
+    }
+
     function getSectionsSuccess(response) {
         console.log(response.data.length);
         if (response.data.length <= 0) {
@@ -34,7 +69,15 @@ function SectionsController($rootScope, $scope, $state,
             return;
         }
 
+        constructTableBody(response, vm.paginationSections);
+
+        vm.sectionsTable.body = vm.paginationSections;
+        vm.sectionsLoading = false;
+    };
+
+    function constructTableBody(response, tableSections) {
         for (let i = 0; i < response.data.length; i++) {
+            console.log('Entro');
             let section = response.data[i];
             let name = 'N/A';
 
@@ -52,11 +95,10 @@ function SectionsController($rootScope, $scope, $state,
                 data: section
             };
 
-            vm.sectionsTable.body.push(newTableElement);
+            //vm.sectionsTable.body.push(newTableElement);
+            tableSections.push(newTableElement);
         }
-
-        vm.sectionsLoading = false;
-    };
+    }
 
     sections.getSectionCount(getSectionCountSuccess, getSectionCountFail);
 
@@ -78,7 +120,9 @@ function SectionsController($rootScope, $scope, $state,
     }
 
     function onPageChange(skip, page) {
+        if($scope.search) $scope.search.data = '';
         vm.sectionsTable.body = [];
+        vm.paginationSections = [];
         vm.sectionsLoading = true;
         sections.getSectionsWithPagination(page, skip,
             getSectionsSuccess, getSectionsFail);
