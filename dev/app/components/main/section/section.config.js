@@ -5,9 +5,6 @@ function config ($stateProvider) {
 	$stateProvider
 		.state('main.section', {
             url: '/seccion/{sectionId}',
-            // params: {
-            //     data: null
-            // },
             templateUrl: 'templates/components/main/section/section.html',
             controller: "SectionController as vm",
 			onEnter: onStateEnter
