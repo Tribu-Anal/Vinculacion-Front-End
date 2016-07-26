@@ -11,7 +11,8 @@ function sections($http) {
         removeStudent: removeStudent,
         updateSection: updateSection,
         getSectionsWithPagination: getSectionsWithPagination,
-        getSectionCount: getSectionCount
+        getSectionCount: getSectionCount,
+        getSection: getSection
     };
 
     return service;
@@ -69,6 +70,12 @@ function sections($http) {
     function getSectionCount(successCallback, errorCallback) {
         $http.get(url + "?$top=1&$orderby=Id desc").then(successCallback)
             .catch(errorCallback);
+    }
+
+    function getSection(sectionId, getSectionSuccess, getSectionFail) {
+        console.log('Entro');
+        $http.get(url + '/' + sectionId).then(getSectionSuccess)
+        .catch(getSectionFail);
     }
 }
 
