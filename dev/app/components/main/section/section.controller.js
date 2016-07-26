@@ -108,7 +108,6 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 
     function addStudentSuccess(response) {
-        TbUtils.showErrorMessage('success', response, 'Estudiante agregado exitosamente', 'Exito');
         location.reload();
     }
 
