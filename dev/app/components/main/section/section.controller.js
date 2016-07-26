@@ -28,7 +28,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     var modalFlag = '';
 
     vm.sectionsLoading = true;
-    vm.section = JSON.parse($stateParams.data);
+    //vm.section = JSON.parse($stateParams.data);
     vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', ' ']);
     vm.removeSection = removeSection;
     vm.addStudent = addStudent;
@@ -41,14 +41,17 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     };
     vm.student = undefined;
 
-    if (!$stateParams.data && !JSON.parse(localStorage.getItem('currentSection'))) {
+    console.log($stateParams);
+    sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
+
+/*    if (!$stateParams.data && !JSON.parse(localStorage.getItem('currentSection'))) {
         $state.go('main.sections');
     } else {
         if ($stateParams.data) localStorage.setItem('currentSection', $stateParams.data);
         vm.section = JSON.parse(localStorage.getItem('currentSection'));
         console.log(vm.section);
         sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
-    }
+    }*/
 
     function addStudent() {
         modalFlag = 'AddStudent';
@@ -171,9 +174,9 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 
     function getSectionSuccess(response) {
-        console.log(response.data);
-        localStorage.setItem('currentSection', JSON.stringify(response.data));
-        location.reload();
+        vm.section = response.data;
+        // localStorage.setItem('currentSection', JSON.stringify(response.data));
+        // location.reload();
     }
 
     function getSectionFail(response) {

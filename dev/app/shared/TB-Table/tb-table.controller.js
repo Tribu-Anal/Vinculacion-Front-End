@@ -7,7 +7,7 @@ function TbTableController($scope, $state) {
     function onRowClick(row) {
         if ($scope.ref)
             $state.go($scope.ref, {
-                data: JSON.stringify(row.data)
+                sectionId: row.data.Id
             });
         if (typeof $scope.onRowClick === 'function') {
             $scope.onRowClick(row);
