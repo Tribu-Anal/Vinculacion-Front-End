@@ -162,7 +162,6 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     function removeStudentSuccess(response) {
         let index = vm.sectionsTable.body.indexOf(vm.student);
         vm.sectionsTable.body.splice(index, 1);
-        TbUtils.showErrorMessage('success', response, 'Estudiante eliminado exitosamente', 'Exito');
     }
 
     function removeStudentFail(response) {
@@ -171,12 +170,15 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function updateSectionSuccess(response) {
         sections.getSection(vm.section.Id, getSectionSuccess, getSectionFail);
+        location.reload();
     }
 
     function getSectionSuccess(response) {
         vm.section = response.data;
+        sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
+        console.log(vm.section);
         // localStorage.setItem('currentSection', JSON.stringify(response.data));
-        // location.reload();
+         //location.reload();
     }
 
     function getSectionFail(response) {
