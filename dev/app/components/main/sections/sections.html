@@ -1,4 +1,5 @@
 <div class="sections">
+<tb-search-field></tb-search-field>
 	<div class="row">
 		<tb-table class="col-md-12" headers="vm.sectionsTable.headers"
 		body="vm.sectionsTable.body"
@@ -7,7 +8,7 @@
 		on-row-click="vm.preventGeneralLoading"
 		class="mouse-hover">
 		</tb-table>
-		<tb-paginator class="col-md-12" options="vm.options" on-page-change="vm.onPageChange" style="margin-bottom: 5em;"></tb-paginator>
+		<tb-paginator ng-hide="search.data" class="col-md-12" options="vm.options" on-page-change="vm.onPageChange" style="margin-bottom: 5em;"></tb-paginator>
 	</div>
 	<tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
 	<tb-round-btn ng-show="Role === 'Admin'" ui-sref="main.newsection"

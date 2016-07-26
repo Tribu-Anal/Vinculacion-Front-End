@@ -6,8 +6,7 @@ const config        = require("./app.config"),
 
 const moduleName   = 'VinculacionApp',
       dependencies = [ 'ui.router', 'toaster', 'ngAnimate', 'ngMaterial',
-		               'ngCookies', 'angular-spinkit', 'angularModalService', 
-		               'angularModalService', 
+		               'ngCookies', 'angular-spinkit', 'angularModalService',
 		               'directives.customvalidation.customValidationTypes',
 		                components, services, shared
 		             ];
