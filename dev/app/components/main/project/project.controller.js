@@ -115,8 +115,9 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             participantElement.content.push(
                 tableContent.createAButtonElement(vm.saveButton));
         }
-        participantElement.content.push(
-            tableContent.createAButtonElement(vm.downloadButton));
+        if ($rootScope.Role !== 'Student' || participantData.Id === $rootScope.globals.id)
+            participantElement.content.push(
+                tableContent.createAButtonElement(vm.downloadButton));
 
         return participantElement;
     }
