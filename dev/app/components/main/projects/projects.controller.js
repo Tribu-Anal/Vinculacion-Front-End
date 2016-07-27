@@ -56,7 +56,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     });
 
     function getTotalProjectsFail(response) {
-        console.log(resposne);
+        console.log(response);
     }
 
     function preventGeneralLoading () {
