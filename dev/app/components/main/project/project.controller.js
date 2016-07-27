@@ -29,7 +29,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
     projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
-    vm.showEvaluateProjectButton = $rootScope.Role==='Professor';
+    vm.showEvaluateProjectButton = $rootScope.Role === 'Professor';
 
     function getProjectSuccess(response) {
         console.log(response);
@@ -117,8 +117,9 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             participantElement.content.push(
                 tableContent.createAButtonElement(vm.saveButton));
         }
-        participantElement.content.push(
-            tableContent.createAButtonElement(vm.downloadButton));
+        if ($rootScope.Role !== 'Student' || participantData.Id === $rootScope.globals.id)
+            participantElement.content.push(
+                tableContent.createAButtonElement(vm.downloadButton));
 
         return participantElement;
     }
@@ -171,4 +172,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
 }
 
-module.exports = { name: 'ProjectController', ctrl: ProjectController };
+module.exports = {
+    name: 'ProjectController',
+    ctrl: ProjectController
+};
