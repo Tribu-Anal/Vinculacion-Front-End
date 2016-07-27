@@ -1,9 +1,8 @@
-StudentProjectPdfController.$inject = ['reports', 'hours', 'TbUtils'];
+StudentProjectPdfController.$inject = ['hours', 'TbUtils', '$stateParams'];
 
-function StudentProjectPdfController (reports, hours, TbUtils) {
+function StudentProjectPdfController (hours, TbUtils, $stateParams) {
     var vm = this;
-    vm.report = reports.getReportParams();
-    console.log(vm.reports);
+    vm.report = $stateParams.data.reportParams;
     vm.date = new Date();
     vm.hoursDescription = {
         totalHours: 0,

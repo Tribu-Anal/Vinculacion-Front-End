@@ -29,10 +29,9 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
     projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
-    vm.showEvaluateProjectButton = $rootScope.Role==='Professor';
+    vm.showEvaluateProjectButton = $rootScope.Role === 'Professor';
 
     function getProjectSuccess(response) {
-        console.log(response);
         vm.sectionIds = response.data.SectionIds;
         vm.project = response.data;
         vm.project.Name = TbUtils.toTitleCase(vm.project.Name);
@@ -67,7 +66,6 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     function editHours(participant) {
         participant.hours = getHoursOfParticipant(participant);
-        console.log(participant.hours);
 
         if (!participant.hours) {
             TbUtils.displayNotification('error', 'Error',
@@ -142,8 +140,9 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             showPrintButton: true
         }
         TbUtils.preventGeneralLoading();
+        console.log(params);
         $state.go('main.student-project-pdf', {
-            params: params
+            data: params
         });
     }
 
@@ -171,4 +170,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
 }
 
-module.exports = { name: 'ProjectController', ctrl: ProjectController };
+module.exports = {
+    name: 'ProjectController',
+    ctrl: ProjectController
+};
