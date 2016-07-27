@@ -1,5 +1,6 @@
 .print-area{
-	margin-top: 3%;
+  padding-top: 5%;
+	padding-bottom: 5%;
 	.button{
 		left: 93%;
 	    top: 90%;
@@ -15,4 +16,8 @@
   #reportContainer{padding-top:10%;}
   .container{width:95%;}
   #dynamic-area{overflow: hidden;}
+  .print-area{
+  	margin-top: 0;
+    transform: scale(0.9,0.8);
+  }
 }

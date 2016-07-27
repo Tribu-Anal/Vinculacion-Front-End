@@ -32,7 +32,6 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
     vm.showEvaluateProjectButton = $rootScope.Role === 'Professor';
 
     function getProjectSuccess(response) {
-        console.log(response);
         vm.sectionIds = response.data.SectionIds;
         vm.project = response.data;
         vm.project.Name = TbUtils.toTitleCase(vm.project.Name);
@@ -67,7 +66,6 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     function editHours(participant) {
         participant.hours = getHoursOfParticipant(participant);
-        console.log(participant.hours);
 
         if (!participant.hours) {
             TbUtils.displayNotification('error', 'Error',
@@ -134,7 +132,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
 
     function downloadReport(participant) {
         let params = {
-            templateUrl: 'main/student-project-pdf/student-project-pdf.html',
+            templateUrl: 'templates/components/main/student-project-pdf/student-project-pdf.html',
             previousState: 'main.project',
             previousStateParams: {
                 projectId: $stateParams.projectId
@@ -143,8 +141,8 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             showPrintButton: true
         }
         TbUtils.preventGeneralLoading();
-        $state.go('main.printarea', {
-            params: params
+        $state.go('main.student-project-pdf', {
+            data: params
         });
     }
 
@@ -157,7 +155,8 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             AccountId: participant.AccountId,
             Campus: participant.Campus,
             Major: participant.Major,
-            Name: participant.Name
+            Name: participant.Name,
+            project: vm.project.Name
         }
 
         return reportParams;

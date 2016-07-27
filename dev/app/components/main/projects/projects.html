@@ -3,8 +3,8 @@
 <div class="gallery">
 	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}">
 		<span class="icon-group" ng-show="Role === 'Admin'">
-			<i class="glyphicon glyphicon-remove" 
-			   ng-click="vm.removeProjectClicked(prj, $index)">
+			<i class="glyphicon glyphicon-remove"
+			ng-click="vm.removeProjectClicked(prj, $index)">
 			</i>
 			<i class="glyphicon glyphicon-pencil" ng-click="vm.goToEdit(prj)"></i>
 		</span>
@@ -15,7 +15,7 @@
 			<div class="project-info">
 				<h4 ng-class="{ 'overflow webkit': prj.Name.length > 100 }">{{vm.toTitleCase(prj.Name)}}</h4>
 				<span ng-class="{ 'overflow webkit': prj.Description.length > 80 }"
-					  ng-show="prj.Name.length < 60">
+					ng-show="prj.Name.length < 60">
 					{{prj.Description}}
 				</span>
 			</div>
@@ -24,10 +24,10 @@
 	</div>
 </div>
 <tb-loading class="main-loader" ng-show="vm.projectsLoading"></tb-loading>
-<tb-round-btn ng-show="Role === 'Admin'" ui-sref="main.addproject" 
-	ng-click="vm.preventGeneralLoading()">+
+<tb-round-btn ng-show="Role === 'Admin'" ui-sref="main.addproject"
+ng-click="vm.preventGeneralLoading()">+
 </tb-round-btn>
-<tb-round-btn ng-show="vm.reportButton.show" 
-	ng-click="vm.reportButton.onClick()">
-	<span class="glyphicon {{vm.reportButton.icon}} icon" aria-hidden="true"></span>
+<tb-round-btn ng-show="vm.reportButton.show"
+ng-click="vm.reportButton.onClick()">
+<span class="glyphicon {{vm.reportButton.icon}} icon" aria-hidden="true"></span>
 </tb-round-btn>
