@@ -140,7 +140,6 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             showPrintButton: true
         }
         TbUtils.preventGeneralLoading();
-        console.log(params);
         $state.go('main.student-project-pdf', {
             data: params
         });

@@ -1,17 +1,38 @@
-StudentProjectPdfController.$inject = ['hours', 'TbUtils', '$stateParams'];
+StudentProjectPdfController.$inject = ['hours', 'TbUtils', '$stateParams',
+    '$state', '$window'
+];
 
-function StudentProjectPdfController (hours, TbUtils, $stateParams) {
+function StudentProjectPdfController(hours, TbUtils, $stateParams,
+    $state, $window) {
     var vm = this;
-    vm.report = $stateParams.data.reportParams;
-    vm.date = new Date();
+    if (!$stateParams.data)
+        $state.go('main.projects');
+    else
+        init();
+
     vm.hoursDescription = {
         totalHours: 0,
         loadingDes: true,
         description: []
     };
-    
-    hours.getStudentHourReport(vm.report.AccountId, getStudentHourReportSuccess,
-        getStudentHourReportFail);
+
+    vm.printButton = {
+        icon: 'glyphicon-print',
+        onClick: printReport,
+        show: true
+    };
+
+    function printReport() {
+        $window.print();
+    }
+
+    function init() {
+        vm.report = $stateParams.data.reportParams;
+        hours.getStudentHourReport(vm.report.AccountId, getStudentHourReportSuccess,
+            getStudentHourReportFail);
+        vm.date = new Date();
+    }
+
 
     function getStudentHourReportSuccess(response) {
         fillDescriptionsHour(response.data);
@@ -30,4 +51,7 @@ function StudentProjectPdfController (hours, TbUtils, $stateParams) {
     }
 }
 
-module.exports = { name: 'StudentProjectPdfController', ctrl: StudentProjectPdfController };
+module.exports = {
+    name: 'StudentProjectPdfController',
+    ctrl: StudentProjectPdfController
+};
