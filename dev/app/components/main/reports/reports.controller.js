@@ -1,19 +1,37 @@
-ReportsController.$inject = [ '$rootScope', 'TbUtils', 'reports', '$state' ];
+ReportsController.$inject = [ '$rootScope', 'TbUtils', 'reports', '$state', '$mdDialog' ];
 
-function ReportsController ($rootScope, TbUtils, reports, $state) {
+function ReportsController ($rootScope, TbUtils, reports, $state, $mdDialog) {
 	if ($rootScope.Role !== 'Admin') $state.go('main.projects');
 
 	var vm = this;
 
-	vm.reports = [
-		{ title: 'Reporte de Costos', url: 'http://fiasps.unitec.edu:8085/api/Reports/CostsReport/2015' },
-		{ title: 'Reporte de Horas de Estudiantes', url: 'http://fiasps.unitec.edu:8085/api/Reports/StudentsReport/2015' }
-	];
+	vm.reports = require('./reports.js');
     vm.selectedReport = 0;
-	vm.generateReport = generateReport;
+    vm.acceptClicked = acceptClicked;
 
-	function generateReport () {            
-        window.open(vm.reports[vm.selectedReport].url);
+    function acceptClicked (ev) {
+    	const report = vm.reports[vm.selectedReport];
+
+    	if (report.hasParam) 
+    		showParamPrompt (ev, report);
+    	else
+    		generateReport('');
+    }
+
+    function showParamPrompt  (ev, report) {
+	    const confirm = $mdDialog.prompt()
+	      .title(report.paramName)
+	      .placeholder(report.placeholder)
+	      .targetEvent(ev)
+	      .ok('Aceptar')
+	      .cancel('Cancelar');
+	    $mdDialog.show(confirm).then( result => {
+	      if (result) generateReport('/'+result);
+	    });
+	  }
+
+	function generateReport (param) {            
+        window.open(vm.reports[vm.selectedReport].url+param);
 	}
 
 }
