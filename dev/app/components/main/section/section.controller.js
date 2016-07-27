@@ -28,7 +28,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     var modalFlag = '';
 
     vm.sectionsLoading = true;
-    vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', ' ']);
+    vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Eliminar', 'Ver Reporte']);
     vm.removeSection = removeSection;
     vm.addStudent = addStudent;
     vm.editSection = editSection;
@@ -37,6 +37,11 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
         icon: 'glyphicon-trash',
         onClick: deleteStudent,
         tooltip: 'Eliminar Alumno'
+    };
+    vm.downloadButton = {
+        icon: 'glyphicon-file',
+        onClick: downloadReport,
+        tooltip: 'Ver Reporte'
     };
     vm.student = undefined;
 
@@ -120,6 +125,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
             vm.sectionsLoading = false;
             return;
         }
+        console.log(response);
         for (let i = 0; i < response.data.length; i++) {
             let section = response.data[i];
 
@@ -131,7 +137,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
                 ],
                 data: section
             };
-
+            newTableElement.content.push(tableContent.createAButtonElement(vm.downloadButton));
             vm.sectionsTable.body.push(newTableElement);
         }
 
@@ -174,6 +180,26 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function updateSectionFail(response) {
         TbUtils.showErrorMessage('error', response, 'No se ha podido editar la seccion', 'Error');
+    }
+
+    function getReportParams(participant) {
+        let reportParams = {
+            AccountId: participant.AccountId,
+            Campus: participant.Campus,
+            Major: participant.Major.Name,
+            Name: participant.Name
+        }
+        return reportParams;
+    }
+
+    function downloadReport(participant) {
+        let params = {
+            reportParams: getReportParams(participant.data)
+        }
+        TbUtils.preventGeneralLoading();
+        $state.go('main.student-project-pdf', {
+            data: params
+        });
     }
 }
 
