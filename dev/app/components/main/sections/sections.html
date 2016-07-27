@@ -11,7 +11,7 @@
 		<tb-paginator ng-hide="search.data" class="col-md-12" options="vm.options" on-page-change="vm.onPageChange" style="margin-bottom: 5em;"></tb-paginator>
 	</div>
 	<tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
-	<tb-round-btn ng-show="Role === 'Admin'" ui-sref="main.newsection"
+	<tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ui-sref="main.newsection"
 	ng-click="vm.preventGeneralLoading()">+
 	</tb-round-btn>
 </div>
