@@ -1,28 +1,39 @@
-.paginator-page{
-	display: inline-block;
-    padding-right: 1%;
-    padding-left: 1%;
-    border-color: #027ebc;
-    border-style: solid;
-    margin-left: 1%;
-    border-width: thin;
-    cursor: pointer;
-}
-
-.selected{
-	color:white;
-	background-color: #027ebc;
-	display: inline-block;
-    padding-right: 1%;
-    padding-left: 1%;
-    border-color: #027ebc;
-    border-style: solid;
-    margin-left: 1%;
-    border-width: thin;
-    cursor: pointer;
-}
-
-.paginator-wrapper{
-	margin-top: 2%;
-    margin-left: 23%;
+tb-paginator{
+    .container{
+        display: flex;
+        align-self: center;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        margin: 0 auto;
+        display: inline-block;
+        margin-left: 23%;
+    }
+    .btn.btn-info{
+        border-radius: 10% !important;margin: 0 5px;
+        border: none;
+        outline: none;
+        background-color: #213250;
+        &:focus{
+            border: none;
+            outline: none;
+        }
+        &:active{
+            border: none;
+            outline: none;
+            background-color: #213250;
+        }
+        &.active{
+            border: none;
+            outline: none;
+            //background-color: #73A9A9;
+            background-color: #FC5E5E;
+        }
+        &:hover{
+            background-color: #73A9A9;
+        }
+    }
+    .option_page{
+        border-radius: 50% !important;margin: 0 5px;
+    }
+    
 }
