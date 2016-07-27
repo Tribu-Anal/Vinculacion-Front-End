@@ -1,41 +1,46 @@
 ProjectController.$inject = ['$rootScope', '$stateParams', '$state', 'projects',
-    'TbUtils', 'tableContent', 'hours'
+    'TbUtils', 'majors', 'sections'
 ];
 
-function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, tableContent, hours) {
+function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, majors, sections) {
     var vm = this;
 
     vm.project = {};
+    vm.majors = [];
+    vm.sections = [];
     vm.projectLoading = true;
-    vm.participantsLoading = true;
-    vm.participants = {
-        headers: [
-            'Alumno'
-        ],
-        body: [],
-        actions: false
-    };
-    vm.saveButton = {
-        icon: 'glyphicon-floppy-disk',
-        onClick: editHours,
-        tooltip: 'Agregar Horas'
-    };
-    vm.downloadButton = {
-        icon: 'glyphicon-file',
-        onClick: downloadReport,
-        tooltip: 'Ver Reporte'
-    };
-    vm.sectionIds = [];
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
-    projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
     vm.showEvaluateProjectButton = $rootScope.Role==='Professor';
+
+    function getNamesFromId(IdArray, getData, getSuccess, getFail) {
+        for(let id in IdArray) {
+            getData(IdArray[id], getSuccess, getFail);
+        }
+    }
+
+    function getMajorSuccess(response) {
+        vm.majors.push(response.data.Name);
+    }
+
+    function getMajorFail(response) {
+        console.log(response);
+    }
+
+    function getSectionSuccess(response) {
+        vm.sections.push({code: response.data.Code, name: response.data.Class.Name});
+    }
+
+    function getSectionFail(response) {
+        console.log(response);
+    }
 
     function getProjectSuccess(response) {
         console.log(response);
-        vm.sectionIds = response.data.SectionIds;
         vm.project = response.data;
         vm.project.Name = TbUtils.toTitleCase(vm.project.Name);
+        getNamesFromId(vm.project.MajorIds, majors.getMajor, getMajorSuccess, getMajorFail);
+        getNamesFromId(vm.project.SectionIds, sections.getSection, getSectionSuccess, getSectionFail);
         vm.projectLoading = false;
     }
 
@@ -47,88 +52,6 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
         $state.go('main.projects');
 
         vm.projectLoading = false;
-    }
-
-    function getParticipantsSuccess(response) {
-        if ($rootScope.Role === 'Professor') {
-            vm.participants.headers.push('Horas');
-            vm.participants.headers.push('Agregar');
-        }
-        vm.participants.headers.push('Ver Reporte');
-        addParticipantsToTable(response.data);
-        vm.participantsLoading = false;
-    }
-
-    function getParticipantsFail() {
-        TbUtils.displayNotification('error', 'Error',
-            'Hubo error al momento de cargar a los alumnos.');
-        vm.participantsLoading = false;
-    }
-
-    function editHours(participant) {
-        participant.hours = getHoursOfParticipant(participant);
-        console.log(participant.hours);
-
-        if (!participant.hours) {
-            TbUtils.displayNotification('error', 'Error',
-                'Debe ingresar las  horas a guardar.');
-            return;
-        }
-
-        let hoursData = {
-            AccountId: participant.AccountId,
-            SectionId: vm.sectionIds[0],
-            ProjectId: $stateParams.projectId,
-            Hour: participant.hours
-        }
-
-        hours.postHours(hoursData, addHoursSuccess, addHoursFail);
-    }
-
-    function addHoursSuccess() {
-        TbUtils.displayNotification('success', 'Horas Actualizadas',
-            'Se han registrado las horas del alumno exitosamente.');
-    }
-
-    function addHoursFail() {
-        TbUtils.displayNotification('error', 'Error',
-            'Error inesperado al momento de guardar las horas.');
-    }
-
-    function getHoursOfParticipant(participant) {
-        let hoursInput = participant.content[1];
-        let hoursValue = hoursInput.properties.value;
-        return hoursValue;
-    }
-
-    function createANewParticipantElement(participantData) {
-        let participantElement = {
-            AccountId: participantData.AccountId,
-            Major: getMajor(participantData.Major),
-            Campus: participantData.Campus,
-            Name: participantData.Name,
-            content: []
-        };
-        participantElement.content.push(
-            tableContent.createALableElement(participantData.Name));
-        if ($rootScope.Role === 'Professor') {
-            participantElement.content.push(
-                tableContent.createAnInputElement('number'));
-            participantElement.content.push(
-                tableContent.createAButtonElement(vm.saveButton));
-        }
-        participantElement.content.push(
-            tableContent.createAButtonElement(vm.downloadButton));
-
-        return participantElement;
-    }
-
-    function addParticipantToVMParticipansBody(element, index, array) {
-        vm.participants.body.push(createANewParticipantElement(element));
-    }
-
-    function addParticipantsToTable(participants) {
-        participants.forEach(addParticipantToVMParticipansBody);
     }
 
     function downloadReport(participant) {
@@ -145,10 +68,6 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
         $state.go('main.printarea', {
             params: params
         });
-    }
-
-    function getMajor(Major) {
-        return Major.Name;
     }
 
     function getReportParams(participant) {

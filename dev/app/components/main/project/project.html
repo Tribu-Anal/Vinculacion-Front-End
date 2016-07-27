@@ -11,6 +11,16 @@
 <div class="text-center col-md-10 center-block">
 <h3>Descripci&oacute;n</h3>
 <p>{{vm.project.Description}}</p>
+<h3>Organizaci&oacute;n Beneficiaria</h3>
+<p>{{vm.project.BeneficiarieOrganization}}</p>
+<h3>Id Proyecto</h3>
+<p>{{vm.project.ProjectId}}</p>
+<h3>Costo</h3>
+<p>{{vm.project.Cost | currency : "Lps" : 2}}</p>
+<h3>Carreras Asociadas</h3>
+<p ng-repeat="major in vm.majors">{{major}}</p>
+<h3>Secciones Asociadas</h3>
+<p ng-repeat="section in vm.sections">{{section.name}} : {{section.code}}</p>
 <tb-loading class="main-loader project-loader" ng-show="vm.projectLoading" style="z-index: 99999"></tb-loading>
 </div>
 
@@ -18,11 +28,11 @@
 </div>
 <div class="container">
 <div class="text-center">
-<h2>Participantes</h2>
+<!-- <h2>Participantes</h2>
 </div>
 <tb-table headers="vm.participants.headers" 
                     body="vm.participants.body">
-</tb-table> 
+</tb-table>  -->
 <tb-loading class="main-loader project-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
 <tb-round-btn id="button" class="button "  ng-click="vm.downloadProjectReport()"
 		ng-show="vm.showEvaluateProjectButton">
