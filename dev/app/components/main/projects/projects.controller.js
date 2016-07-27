@@ -140,20 +140,16 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     function successAccountId(response){
         response = response.data;
         let params = {
-            templateUrl: 'reports/hours-by-student/hours-by-student.html',
-            previousState: 'main.projects',
-            previousStateParams: { },
             reportParams: {
                 AccountId: response.AccountId,
                 Campus: response.Campus,
                 Major: response.Major.Name,
                 Name: response.Name
-            },
-            showPrintButton: false
-        }
+            }
+        };
         TbUtils.preventGeneralLoading();
-        $state.go('main.printarea', {
-            params: params
+        $state.go('main.student-project-pdf', {
+            data: params
         });
     }
     function failAccountId(){
