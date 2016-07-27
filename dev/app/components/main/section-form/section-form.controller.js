@@ -1,8 +1,8 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-    'tableContent', 'projects'
+    'tableContent', 'projects', '$q', '$timeout', 'students'
 ];
 
-function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects) {
+function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q, timeout, students) {
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
 
     var vm = this;
@@ -10,25 +10,27 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.classes = [];
     vm.professors = [];
     vm.periods = [];
-    vm.projects = []
+    vm.projects = [];
+    vm.students = [];
+    vm.sectionStudents = [];
     vm.classesLoading = true;
     vm.professorsLoading = true;
     vm.periodsLoading = true;
+    vm.studentsLoading = true;
     vm.submitting = false;
     vm.section = {};
     vm.submit = submit;
-    vm.studentsSearch = {
-        endpoint: "http://fiasps.unitec.edu:8085/api/Students?$top=2&$filter=startswith(AccountId , '{MODEL}')",
-        onElementClick: studentsSearchClick,
-        responsePropertyShow: 'Name'
-    };
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre']);
+    vm.queryStudents = queryStudents;
+    vm.simulateQuery = false;
+    vm.addStudentToSection = addStudentToSection;
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
 
     getClasses();
     getProfessors();
     getPeriods();
     getProjects();
+    getStudents();
 
     function submit() {
         vm.submitting = true;
@@ -96,45 +98,12 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         vm.periodsLoading = false;
     }
 
-    function studentsSearchClick(elementList) {
-        let studentData = elementList.data;
-        if (checkIfStudentAlreadyAddedToTable(studentData.AccountId)) {
-            return;
-        }
-        let element = {
-            content: [
-                tableContent.createALableElement(studentData.AccountId),
-                tableContent.createALableElement(studentData.Name)
-            ],
-            data: studentData
-        }
-        addElementToStudentsTable(element);
-    }
-
-    function addElementToStudentsTable(element) {
-        vm.studentsTable.body.push(element);
-        console.log(element);
-    }
-
-    function deleteElementFromStudentsTable(element) {
-        let index = vm.studentsTable.body.indexOf(element);
-        vm.studentsTable.body.splice(index, 1);
-    }
-
-    function checkIfStudentAlreadyAddedToTable(accountId) {
-        for (let i = 0; i < vm.studentsTable.body.length; i++) {
-            if (getAccountID(i) === accountId)
-                return true;
-        }
-        return false;
-    }
-
     function getAccountID(bodyIndex) {
         return vm.studentsTable.body[bodyIndex].content[0].properties.value;
     }
 
     function addStudentsToSection(sectionId) {
-        let students = [];
+        const students = [];
         for (let i = 0; i < vm.studentsTable.body.length; i++) {
             students.push(getAccountID(i));
         }
@@ -144,7 +113,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     function addStudentSuccess() {
         TbUtils.displayNotification('success', 'Seccion Creada',
             'La seccion se creo exitosamente.');
-        $state.go('main.projects');
+        $state.go('main.sections');
         vm.submitting = false;
     }
 
@@ -170,6 +139,68 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
             'No se pudieron guardar el proyecto.');
         vm.professorsLoading = false;
     }
+
+    function getStudents () {
+        students.get(response => {
+            TbUtils.fillListWithResponseData(response.data, vm.students);
+            vm.studentsLoading = false;
+        }, response => {
+            TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los estudiantes.' + 
+                                        ' Intenta resfrescando la pagina.');
+        });
+    }
+
+    function queryStudents (searchText) {
+        let results = searchText ? vm.students.filter( createFilterFor(searchText) ) : vm.students,
+          deferred;
+          if (vm.simulateQuery) {
+            deferred = q.defer();
+            timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+            return deferred.promise;
+          } else {
+            return results;
+          }
+    }
+
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(item) {
+        return (item.AccountId.indexOf(lowercaseQuery) === 0);
+      };
+    }
+
+    function addStudentToSection () {
+        console.log(vm.selectedItem);
+        if (vm.selectedItem && !isAlreadyOnList(vm.selectedItem.AccountId)) {
+            vm.sectionStudents.push(vm.selectedItem);
+            const element = {
+                content: [
+                    tableContent.createALableElement(vm.selectedItem.AccountId),
+                    tableContent.createALableElement(vm.selectedItem.Name)
+                ],
+                data: vm.selectedItem
+            };
+            vm.studentsTable.body.push(element);
+            vm.searchText = "";
+        }
+    }
+
+    function isAlreadyOnList (accountId) {
+        for (let i = 0; i < vm.sectionStudents.length; i++) {
+            const student = vm.sectionStudents[i];
+            if (student.AccountId === accountId) 
+                return true;
+        }
+
+        return false;
+    }
+
+    function deleteElementFromStudentsTable (element) {
+        const index = vm.studentsTable.body.indexOf(element);
+        vm.studentsTable.body.splice(index, 1);
+        vm.sectionStudents.splice(index, 1);
+    }
+
 }
 
 module.exports = { name: 'SectionFormController', ctrl: SectionFormController };
