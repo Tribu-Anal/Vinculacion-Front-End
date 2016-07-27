@@ -5,7 +5,7 @@ function ReportsController ($rootScope, TbUtils, reports, $state, $mdDialog) {
 
 	var vm = this;
 
-	vm.reports = require('./reports.js');
+	vm.reports = require('./reports');
     vm.selectedReport = 0;
     vm.acceptClicked = acceptClicked;
 
@@ -26,7 +26,7 @@ function ReportsController ($rootScope, TbUtils, reports, $state, $mdDialog) {
 	      .ok('Aceptar')
 	      .cancel('Cancelar');
 	    $mdDialog.show(confirm).then( result => {
-	      if (result) generateReport('/'+result);
+	      if (result) generateReport(result);
 	    });
 	  }
 
