@@ -43,7 +43,7 @@ function MainController ($rootScope, $state, TbUtils) {
 	}
 
 	function changeActiveItem (event, toState) {
-		vm.navItems[0].active = toState.url === '/proyectos' || toState.url === '/proyecto';
+		vm.navItems[0].active = toState.url === '/proyectos' || toState.url.includes('/proyectos/');
 		vm.navItems[1].active = toState.url === '/reportes';
 		vm.navItems[2].active = toState.url === '/secciones' || toState.url === '/seccion';
         vm.navItems[3].active = toState.url === '/nuevo-profesor';
