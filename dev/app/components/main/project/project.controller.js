@@ -154,7 +154,8 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             AccountId: participant.AccountId,
             Campus: participant.Campus,
             Major: participant.Major,
-            Name: participant.Name
+            Name: participant.Name,
+            project: vm.project.Name
         }
 
         return reportParams;
