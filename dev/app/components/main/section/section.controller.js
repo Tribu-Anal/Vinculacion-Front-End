@@ -1,8 +1,11 @@
-SectionController.$inject = ['$rootScope', '$stateParams', '$state', 'TbUtils',
-    'tableContent', 'ModalService', 'sections'
+SectionController.$inject = ['$rootScope', '$stateParams', '$state',
+    'TbUtils', 'tableContent', 'ModalService',
+    'sections'
 ];
 
-function SectionController($rootScope, $stateParams, $state, TbUtils, tableContent, ModalService, sections) {
+function SectionController($rootScope, $stateParams, $state,
+    TbUtils, tableContent, ModalService,
+    sections) {
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
 
     var vm = this;
@@ -28,7 +31,8 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     var modalFlag = '';
 
     vm.sectionsLoading = true;
-    vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Eliminar', 'Ver Reporte']);
+    vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
+    updateSectionTableHeaders()
     vm.removeSection = removeSection;
     vm.addStudent = addStudent;
     vm.editSection = editSection;
@@ -89,17 +93,20 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function addStudentToSection(result) {
         if (result.numCuenta > 0)
-            sections.addStudent([result.numCuenta], vm.section.Id, addStudentSuccess, addStudentFail);
+            sections.addStudent([result.numCuenta], vm.section.Id,
+                addStudentSuccess, addStudentFail);
     }
 
     function deleteSection(result) {
         if (result)
-            sections.deleteSection(vm.section.Id, deleteSectionSuccess, deleteSectionFail)
+            sections.deleteSection(vm.section.Id,
+                deleteSectionSuccess, deleteSectionFail)
     }
 
     function updateSection(result) {
         if (result.ClassId)
-            sections.updateSection(result, vm.section.Id, updateSectionSuccess, updateSectionFail);
+            sections.updateSection(result, vm.section.Id,
+                updateSectionSuccess, updateSectionFail);
     }
 
     function addStudentSuccess(response) {
@@ -108,7 +115,8 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function addStudentFail(response) {
         console.log(response);
-        TbUtils.showErrorMessage('error', response, 'No se ha podido agregar el estudiante', 'Error');
+        TbUtils.showErrorMessage('error', response,
+            'No se ha podido agregar el estudiante', 'Error');
     }
 
     function deleteSectionSuccess() {
@@ -117,7 +125,8 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function deleteSectionFail(response) {
         console.log(response);
-        TbUtils.showErrorMessage('error', response.data, 'No se ha podido borrar la seccion.', 'Error');
+        TbUtils.showErrorMessage('error', response.data,
+            'No se ha podido borrar la seccion.', 'Error');
     }
 
     function getStudentsSuccess(response) {
@@ -128,16 +137,20 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
         console.log(response);
         for (let i = 0; i < response.data.length; i++) {
             let section = response.data[i];
-
+            console.log(section);
             let newTableElement = {
                 content: [
                     tableContent.createALableElement(section.AccountId),
-                    tableContent.createALableElement(section.Name),
-                    tableContent.createAButtonElement(vm.deleteRowButton)
+                    tableContent.createALableElement(section.Name)
                 ],
                 data: section
             };
-            newTableElement.content.push(tableContent.createAButtonElement(vm.downloadButton));
+            if ($rootScope.Role !== 'Student')
+                newTableElement.content.push(
+                    tableContent.createAButtonElement(vm.deleteRowButton));
+            if ($rootScope.Role !== 'Student' || section.Id === $rootScope.globals.id)
+                newTableElement.content.push(
+                    tableContent.createAButtonElement(vm.downloadButton));
             vm.sectionsTable.body.push(newTableElement);
         }
 
@@ -151,7 +164,8 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function deleteStudent(student) {
         vm.student = student;
-        sections.removeStudent([student.data.AccountId], vm.section.Id, removeStudentSuccess, removeStudentFail);
+        sections.removeStudent([student.data.AccountId], vm.section.Id,
+            removeStudentSuccess, removeStudentFail);
     }
 
     function removeStudentSuccess(response) {
@@ -160,7 +174,8 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 
     function removeStudentFail(response) {
-        TbUtils.showErrorMessage('error', response, 'No se ha podido eliminar al estudiante', 'Error');
+        TbUtils.showErrorMessage('error', response,
+            'No se ha podido eliminar al estudiante', 'Error');
     }
 
     function updateSectionSuccess(response) {
@@ -179,7 +194,8 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 
     function updateSectionFail(response) {
-        TbUtils.showErrorMessage('error', response, 'No se ha podido editar la seccion', 'Error');
+        TbUtils.showErrorMessage('error', response,
+            'No se ha podido editar la seccion', 'Error');
     }
 
     function getReportParams(participant) {
@@ -200,6 +216,12 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
         $state.go('main.student-project-pdf', {
             data: params
         });
+    }
+
+    function updateSectionTableHeaders(){
+        if ($rootScope.Role !== 'Student')
+            vm.sectionsTable.headers.push('Eliminar Alumno');
+        vm.sectionsTable.headers.push('Ver Reporte');
     }
 }
 
