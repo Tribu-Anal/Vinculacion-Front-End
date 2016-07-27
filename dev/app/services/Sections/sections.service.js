@@ -73,7 +73,6 @@ function sections($http) {
     }
 
     function getSection(sectionId, getSectionSuccess, getSectionFail) {
-        console.log('Entro');
         $http.get(url + '/' + sectionId).then(getSectionSuccess)
         .catch(getSectionFail);
     }

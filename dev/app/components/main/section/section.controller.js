@@ -28,7 +28,6 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     var modalFlag = '';
 
     vm.sectionsLoading = true;
-    vm.section = JSON.parse($stateParams.data);
     vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', ' ']);
     vm.removeSection = removeSection;
     vm.addStudent = addStudent;
@@ -41,14 +40,8 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     };
     vm.student = undefined;
 
-    if (!$stateParams.data && !JSON.parse(localStorage.getItem('currentSection'))) {
-        $state.go('main.sections');
-    } else {
-        if ($stateParams.data) localStorage.setItem('currentSection', $stateParams.data);
-        vm.section = JSON.parse(localStorage.getItem('currentSection'));
-        console.log(vm.section);
-        sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
-    }
+    console.log($stateParams);
+    sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
 
     function addStudent() {
         modalFlag = 'AddStudent';
@@ -105,7 +98,6 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 
     function addStudentSuccess(response) {
-        TbUtils.showErrorMessage('success', response, 'Estudiante agregado exitosamente', 'Exito');
         location.reload();
     }
 
@@ -159,7 +151,6 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     function removeStudentSuccess(response) {
         let index = vm.sectionsTable.body.indexOf(vm.student);
         vm.sectionsTable.body.splice(index, 1);
-        TbUtils.showErrorMessage('success', response, 'Estudiante eliminado exitosamente', 'Exito');
     }
 
     function removeStudentFail(response) {
@@ -168,12 +159,13 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function updateSectionSuccess(response) {
         sections.getSection(vm.section.Id, getSectionSuccess, getSectionFail);
+        location.reload();
     }
 
     function getSectionSuccess(response) {
-        console.log(response.data);
-        localStorage.setItem('currentSection', JSON.stringify(response.data));
-        location.reload();
+        vm.section = response.data;
+        sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
+        console.log(vm.section);
     }
 
     function getSectionFail(response) {
