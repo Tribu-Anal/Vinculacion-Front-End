@@ -1,11 +1,12 @@
 ProjectController.$inject = ['$rootScope', '$stateParams', '$state', 'projects',
-    'TbUtils', 'tableContent', 'hours'
+    'TbUtils', 'tableContent', 'hours', 'majors', 'sections'
 ];
 
-function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, tableContent, hours) {
+function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, tableContent, hours, majors, sections) {
     var vm = this;
 
     vm.project = {};
+    vm.majors = [];
     vm.projectLoading = true;
     vm.participantsLoading = true;
     vm.participants = {
@@ -25,17 +26,47 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
         onClick: downloadReport,
         tooltip: 'Ver Reporte'
     };
-    vm.sectionIds = [];
+    vm.sections = [];
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
     projects.getParticipants($stateParams.projectId, getParticipantsSuccess, getParticipantsFail);
     vm.showEvaluateProjectButton = $rootScope.Role==='Professor';
 
+    // function getMajors() {
+    //     for(let id in vm.project.MajorIds) {
+    //         majors.getMajor(vm.project.MajorIds[id], getMajorSuccess, getMajorFail);
+    //     }
+    // }
+
+    function getNamesFromId(IdArray, getData, getSuccess, getFail) {
+        for(let id in IdArray) {
+            getData(IdArray[id], getSuccess, getFail);
+        }
+    }
+
+    function getMajorSuccess(response) {
+        vm.majors.push(response.data.Name);
+    }
+
+    function getMajorFail(response) {
+        console.log(response);
+    }
+
+    function getSectionSuccess(response) {
+        vm.sections.push({code: response.data.Code, name: response.data.Class.Name});
+    }
+
+    function getSectionFail(response) {
+        console.log(response);
+    }
+
     function getProjectSuccess(response) {
         console.log(response);
-        vm.sectionIds = response.data.SectionIds;
+        //vm.sectionIds = response.data.SectionIds;
         vm.project = response.data;
         vm.project.Name = TbUtils.toTitleCase(vm.project.Name);
+        getNamesFromId(vm.project.MajorIds, majors.getMajor, getMajorSuccess, getMajorFail);
+        getNamesFromId(vm.project.SectionIds, sections.getSection, getSectionSuccess, getSectionFail);
         vm.projectLoading = false;
     }
 
