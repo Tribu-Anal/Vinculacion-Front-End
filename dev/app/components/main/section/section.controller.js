@@ -7,20 +7,20 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     var vm = this;
 
-    var confirmDeleteModal = {
-        templateUrl: 'templates/components/main/section/' +
-            'confirm-delete/confirm-delete.html',
-        controller: 'ConfirmDeleteController'
+    var confirmSectionDeleteModal = {
+        templateUrl: 'templates/components/main/section/dialogs/' +
+            'confirm-section-delete/confirm-section-delete.html',
+        controller: 'ConfirmSectionDeleteController'
     };
 
     var addStudentModal = {
-        templateUrl: 'templates/components/main/section/' +
+        templateUrl: 'templates/components/main/section/dialogs/' +
             'add-student/add-student.html',
         controller: 'AddStudentController'
     };
 
     var editSectionModal = {
-        templateUrl: 'templates/components/main/section/' +
+        templateUrl: 'templates/components/main/section/dialogs/' +
             'edit-section/edit-section.html',
         controller: 'EditSectionController as vm'
     }
@@ -33,6 +33,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     vm.removeSection = removeSection;
     vm.addStudent = addStudent;
     vm.editSection = editSection;
+    vm.toTitleCase = TbUtils.toTitleCase;
     vm.deleteRowButton = {
         icon: 'glyphicon-trash',
         onClick: deleteStudent,
@@ -40,9 +41,12 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     };
     vm.student = undefined;
 
-    if (!$stateParams.data) {
+    if (!$stateParams.data && !JSON.parse(localStorage.getItem('currentSection'))) {
         $state.go('main.sections');
     } else {
+        if ($stateParams.data) localStorage.setItem('currentSection', $stateParams.data);
+        vm.section = JSON.parse(localStorage.getItem('currentSection'));
+        console.log(vm.section);
         sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
 
@@ -67,7 +71,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function removeSection() {
         modalFlag = 'DeleteSection';
-        ModalService.showModal(confirmDeleteModal)
+        ModalService.showModal(confirmSectionDeleteModal)
             .then(modalResolve);
     }
 
@@ -97,12 +101,12 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
 
     function updateSection(result) {
         if (result.ClassId)
-            sections.updateSection(result,vm.section.Id,updateSectionSuccess, updateSectionFail);
+            sections.updateSection(result, vm.section.Id, updateSectionSuccess, updateSectionFail);
     }
 
     function addStudentSuccess(response) {
         TbUtils.showErrorMessage('success', response, 'Estudiante agregado exitosamente', 'Exito');
-        $state.go('main.sections');
+        location.reload();
     }
 
     function addStudentFail(response) {
@@ -162,9 +166,18 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
         TbUtils.showErrorMessage('error', response, 'No se ha podido eliminar al estudiante', 'Error');
     }
 
-    function updateSectionSuccess(response){
-        TbUtils.displayNotification('success', 'Exito!', 'El cambio ha sido un exito');
-        $state.go('main.sections');
+    function updateSectionSuccess(response) {
+        sections.getSection(vm.section.Id, getSectionSuccess, getSectionFail);
+    }
+
+    function getSectionSuccess(response) {
+        console.log(response.data);
+        localStorage.setItem('currentSection', JSON.stringify(response.data));
+        location.reload();
+    }
+
+    function getSectionFail(response) {
+        console.log(response);
     }
 
     function updateSectionFail(response) {
@@ -172,4 +185,7 @@ function SectionController($rootScope, $stateParams, $state, TbUtils, tableConte
     }
 }
 
-module.exports = { name: 'SectionController', ctrl: SectionController };
+module.exports = {
+    name: 'SectionController',
+    ctrl: SectionController
+};

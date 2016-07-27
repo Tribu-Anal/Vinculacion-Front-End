@@ -25,7 +25,7 @@ function tableContent (TbUtils) {
         let element = {
             typeObject: 'label',
             properties: {
-                value: modelValue,
+                value: TbUtils.toTitleCase(modelValue),
                 click: TbUtils.preventGeneralLoading
             }
         }

@@ -1,23 +1,27 @@
 ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService',
-                                    '$rootScope','auth'];
+                                    '$rootScope','auth', '$scope', 'filterFilter'];
 
 function ProjectsController (projects, TbUtils, $state, ModalService,
-                            $rootScope, auth) {
+                            $rootScope, auth, $scope, filterFilter) {
     var vm = this;
     var deleteIndex = -1;
     var deleteProject = {};
-    var confirmDeleteModal = {
-      templateUrl: 'templates/components/main/projects/' +
-                   'confirm-delete/confirm-delete.html',
-      controller: 'ConfirmDeleteController'
+    var confirmProjectDeleteModal = {
+      templateUrl: 'templates/components/main/projects/dialogs/' +
+                   'confirm-project-delete/confirm-project-delete.html',
+      controller: 'ConfirmProjectDeleteController'
     };
     
     vm.options = {};
     vm.options.startingPage = 0;
     vm.options.pageSize = 60;
     vm.options.count = 0;
+
     vm.projects = [];
+    vm.totalProjects = [];
+    vm.projectsPagination = [];
     vm.projectsLoading = true;
+    vm.limitInLettersToSearch = 3;
     vm.deletingProject = [];
     vm.preventGeneralLoading = preventGeneralLoading;
     vm.removeProjectClicked = removeProjectClicked;
@@ -30,6 +34,31 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
         icon: 'glyphicon-file'
     };
 
+    projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
+
+    function getTotalProjectsSuccess(response) {
+        console.log(response);
+        TbUtils.fillListWithResponseData(response.data, vm.totalProjects);
+    }
+
+    $scope.$watch('search.data', function(term) {
+        let obj = {Name: term};
+
+        if(term && term.length >= vm.limitInLettersToSearch) {
+            $scope.filterProjects = filterFilter(vm.totalProjects, obj);
+            vm.projects = $scope.filterProjects;
+        }
+
+        else {
+            console.log('vacio');
+            vm.projects = vm.projectsPagination;
+        }
+    });
+
+    function getTotalProjectsFail(response) {
+        console.log(resposne);
+    }
+
     function preventGeneralLoading () {
         TbUtils.preventGeneralLoading();
     }
@@ -38,7 +67,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
         deleteProject = project;
         deleteIndex = index;
         
-        ModalService.showModal(confirmDeleteModal)
+        ModalService.showModal(confirmProjectDeleteModal)
           .then(modalResolve);
     }
 
@@ -80,6 +109,8 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     }
 
     vm.onPageChange = function(skip, page){
+        if($scope.search) $scope.search.data = '';
+        vm.projects = vm.projectsPagination;
         vm.projects.length = 0;
         vm.projectsLoading = true;
         projects.getProjectsWithPagination( page, skip, getProjectsSuccess, getProjectsFail);
@@ -91,9 +122,9 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     }
     
     function getProjectsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.projects);
+        TbUtils.fillListWithResponseData(response.data, vm.projectsPagination);
         TbUtils.initArrayToValue(vm.deletingProject, false, 
-                                 vm.projects.length);
+                                 vm.projectsPagination.length);
 
         vm.projectsLoading = false;
     }

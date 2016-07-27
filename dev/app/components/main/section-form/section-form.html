@@ -57,15 +57,21 @@
 
     <div>
         <label class="cd-label" for="cd-name">Alumnos</label>
-        <tb-search endpoint= 'vm.studentsSearch.endpoint' 
-            on-element-click= 'vm.studentsSearch.onElementClick' 
-            response-property-show= 'vm.studentsSearch.responsePropertyShow'
-            on-click-element="vm.studentsSearch.onClickElement"
-            ng-hide="vm.submitting">
-        </tb-search>    
-    </div>
-    <div>
-        <tb-table   headers="vm.studentsTable.headers" 
+        <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="vm.searchText" md-items="item in vm.queryStudents(vm.searchText)" md-item-text="item.Name">
+          <md-item-template>
+              <span md-highlight-text="vm.searchText">{{ item.Name }}</span>
+          </md-item-template>
+          <md-not-found>
+              No se encontraron alumnos con el numero de cuenta: {{vm.searchText}}.
+          </md-not-found>
+        </md-autocomplete> 
+        <button type="button" class="add-student-btn" style="margin-top: 5px; margin-left: 83%;"
+                ng-click="vm.addStudentToSection()">AGREGAR</button>
+        <tb-loading class="main-loader" ng-show="vm.studentsLoading"></tb-loading>
+    </div> 
+
+    <div ng-show="vm.sectionStudents.length > 0">
+        <tb-table headers="vm.studentsTable.headers" 
             body="vm.studentsTable.body"
             on-row-click="vm.deleteElementFromStudentsTable"
             ng-hide="vm.submitting">

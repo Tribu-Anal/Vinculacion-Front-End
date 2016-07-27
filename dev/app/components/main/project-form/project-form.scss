@@ -7,6 +7,19 @@
       box-sizing: border-box;
     }
 
+    .add-student-btn {
+      background: none;
+      outline: none;
+      border: none;
+      font-family: "Open Sans", sans-serif;
+      padding: 10px;
+      border-radius: 5%;
+      &:hover { background: rgba(158,158,158,0.2) }
+      &:active {
+        background: rgba(100,100,100,0.2)
+      }
+    }
+
     html
     {
       font-size: 62.5%;
@@ -256,7 +269,7 @@
       resize: vertical;
       overflow: auto;
     }
-    .cd-form input[type="submit"]
+    .cd-form input[type="submit"], .cd-submit
     {
       /* button style */
       border: none;
@@ -275,16 +288,16 @@
       -o-appearance: none;
       appearance: none;
     }
-    .no-touch .cd-form input[type="submit"]:hover
+    .no-touch .cd-form input[type="submit"]:hover, .cd-submit:hover
     {
       background: #42a2e1;
     }
-    .cd-form input[type="submit"]:focus
+    .cd-form input[type="submit"]:focus, .cd-submit:focus
     {
       outline: none;
       background: #2b3e51;
     }
-    .cd-form input[type="submit"]:active
+    .cd-form input[type="submit"]:active, .cd-submit:active
     {
       -webkit-transform: scale(0.9);
       -moz-transform: scale(0.9);

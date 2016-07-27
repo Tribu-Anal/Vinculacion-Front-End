@@ -81,17 +81,19 @@ function TbUtils(toaster, $rootScope) {
         return vm.ModalParams;
     }
 
-    function toTitleCase (str) {
-        let words = str.toLowerCase().split(' ');
+    function toTitleCase(str) {
+        if (!str)
+            return;
+        str = String(str);
+        return str.replace(/\w\S*/g, toCapitalize);
+    }
 
-        for(let i = 0; i < words.length; i++) {
-            let letters = words[i].split('');
-            letters[0] = letters[0].toUpperCase();
-            words[i] = letters.join('');
-        }
-
-        return words.join(' ');
+    function toCapitalize(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     }
 }
 
-module.exports = { name: 'TbUtils', srvc: TbUtils };
+module.exports = {
+    name: 'TbUtils',
+    srvc: TbUtils
+};

@@ -48,4 +48,4 @@ function ActivateProfessorController($rootScope, $state, $stateParams, professor
     }
 }
 
-module.exports = { name: 'ActivateProfessorController', ActivateProfessorController };
+module.exports = { name: 'ActivateProfessorController', ctrl: ActivateProfessorController };
