@@ -3,7 +3,7 @@ SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 
 ];
 
 function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q, timeout, students) {
-    if ($rootScope.Role !== 'Admin') $state.go('main.projects');
+    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
 
     var vm = this;
 
