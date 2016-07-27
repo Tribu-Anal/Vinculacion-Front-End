@@ -11,7 +11,7 @@ function auth($http, $cookieStore, $rootScope) {
     return service;
 
     function Login(username, password, successCallback, errorCallback) {       
-        $http.post('http://fiasps.unitec.edu:8085/api/Login', JSON.stringify({
+        $http.post(`http://fiasps.unitec.edu:${PORT}/api/Login`, JSON.stringify({
             User: username,
             Password: password
         }))
@@ -33,7 +33,7 @@ function auth($http, $cookieStore, $rootScope) {
     };
 
     function AccountId(email, successCallback, errorCallback) {
-        let url = 'http://fiasps.unitec.edu:8085/api/StudentByEmail/';
+        let url = `http://fiasps.unitec.edu:${PORT}/api/StudentByEmail/`;
         $http.post(url, JSON.stringify(email)).then(successCallback)
             .catch(errorCallback);
     };
