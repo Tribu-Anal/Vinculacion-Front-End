@@ -9,6 +9,8 @@ function StudentProjectPdfController(hours, TbUtils, $stateParams,
         $state.go('main.projects');
     else
         init();
+        
+    vm.completedHours = false;
 
     vm.hoursDescription = {
         totalHours: 0,
@@ -21,6 +23,8 @@ function StudentProjectPdfController(hours, TbUtils, $stateParams,
         onClick: printReport,
         show: true
     };
+    
+    vm.downloadFiniquito = downloadFiniquito;
 
     function printReport() {
         $window.print();
@@ -37,6 +41,7 @@ function StudentProjectPdfController(hours, TbUtils, $stateParams,
 
     function getStudentHourReportSuccess(response) {
         fillDescriptionsHour(response.data);
+        vm.completedHours = response.data.TotalHours > 99;
     }
 
     function fillDescriptionsHour(description) {
@@ -48,6 +53,20 @@ function StudentProjectPdfController(hours, TbUtils, $stateParams,
     function getStudentHourReportFail() {
         TbUtils.displayNotification('error', 'Error',
             'No se pudo cargar el reporte correctamente.');
+        vm.hoursDescription.loading = false;
+    }
+    
+    function downloadFiniquito () {
+        document.getElementById('my_iframe').src = hours.getFiniquitoURL(vm.report.AccountId);
+    }
+    
+    function downloadFiniquitoSuccess(response){
+        console.log(response);
+    }
+    
+    function downloadFiniquitoFail(){
+        TbUtils.displayNotification('error', 'Error',
+            'No se pudo descargar el finiquito correctamente.');
         vm.hoursDescription.loading = false;
     }
 }
