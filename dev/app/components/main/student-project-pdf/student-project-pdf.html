@@ -12,6 +12,7 @@
 						<img style="width: 20%;" class="logo" src="img/logo.png"/>
 					</div>
 				</div>
+				<div class="desc-section">
 				<div class="row"><label>Reporte Detallado</label></div>
 				<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">{{vm.report.Name}}</label></div>
 				<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">{{vm.report.AccountId}}</label></div>
@@ -20,6 +21,7 @@
 				<div class="row"><label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">{{vm.date|date:'longDate'}}</label></div>
 				<div class="row">
 					<label class="col-sm-8 col-md-8 col-lg-8 col-xs-8">Horas Totales: {{vm.hoursDescription.totalHours}}</label>
+				</div>
 				</div>
 				<div class="row" ng-show="vm.completedHours" ng-click="vm.downloadFiniquito()">
 					<label class="col-sm-8 col-md-8 col-lg-8 col-xs-8 finiquito">Generar Finiquito</label>
