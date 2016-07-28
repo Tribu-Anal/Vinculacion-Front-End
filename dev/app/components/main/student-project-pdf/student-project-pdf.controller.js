@@ -41,6 +41,7 @@ function StudentProjectPdfController(hours, TbUtils, $stateParams,
 
     function getStudentHourReportSuccess(response) {
         fillDescriptionsHour(response.data);
+        vm.completedHours = response.data.TotalHours > 99;
     }
 
     function fillDescriptionsHour(description) {
@@ -56,7 +57,7 @@ function StudentProjectPdfController(hours, TbUtils, $stateParams,
     }
     
     function downloadFiniquito () {
-        document.getElementById('my_iframe').src = horas.getFiniquitoURL(vm.report.AccountId);
+        document.getElementById('my_iframe').src = hours.getFiniquitoURL(vm.report.AccountId);
     }
     
     function downloadFiniquitoSuccess(response){
