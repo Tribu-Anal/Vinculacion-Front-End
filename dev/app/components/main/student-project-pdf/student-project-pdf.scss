@@ -1,10 +1,19 @@
 .student-project-pdf {
 	margin-bottom: 5%;
+	.container{
+		background: #fff;
+		height: 100%;
+	}
 	.header{
+		margin-top: 25px;
+		margin-bottom: 20px;
 		color: #283B5B;
 		-webkit-print-color-adjust: exact;
 	    font-size: medium;
 	    text-transform: uppercase;
+	}
+	.row.description{
+		margin-bottom: 20px;
 	}
 	.description{
 		-webkit-print-color-adjust: exact;
