@@ -42,9 +42,9 @@ function ProjectFormController($rootScope, $state, $stateParams,
                 Cost: 0.0,
                 MajorIds: [],
                 SectionIds: [0],
-                BeneficiarieOrganization: '',
-                BeneficiarieGroups: '',
-                BeneficiariesQuantity: 0
+                BeneficiarieOrganization: ''
+                //BeneficiarieGroups: '',
+                //BeneficiariesQuantity: 0
             };
     }
 
