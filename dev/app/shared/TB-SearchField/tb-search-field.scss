@@ -1,6 +1,39 @@
 tb-search-field {
-	label {
-	    float: right;
-	    margin-right: 40px;
-	}
+	display: flex;
+	#custom-search-input{
+    padding: 3px;
+    margin-top: 20px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+    width: 50%;
+    margin-left: 25%;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    outline:none;
+    border: 0;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    outline:none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+    color: #213250;
+}
 }
