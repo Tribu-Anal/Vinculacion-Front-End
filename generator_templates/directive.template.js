@@ -1,4 +1,4 @@
-{{camelCase name}} () {
+function {{camelCase name}} () {
 	const directive = {
 
 	};
