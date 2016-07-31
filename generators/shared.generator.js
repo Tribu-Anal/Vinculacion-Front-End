@@ -89,7 +89,7 @@ module.exports = {
                 actions.push({
                     type: 'add',
                     path: `${sharedPath}.scss`,
-                    template: `.{{dashCase name}} {\n\n\n}\n`
+                    template: `{{dashCase name}} {\n\n\n}\n`
                 });
             }
 
