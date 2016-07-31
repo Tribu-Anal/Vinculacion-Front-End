@@ -94,7 +94,7 @@ module.exports = {
                 actions.push({
                     type: 'add',
                     path: `${componentPath}.controller.js`,
-                    templateFile: `${genUtils.TEMPLATES_PATH}/component-controller.template.js`
+                    templateFile: `${genUtils.TEMPLATES_PATH}/controller.template.js`
                 });
             }
 
