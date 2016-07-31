@@ -74,6 +74,8 @@ module.exports = {
             data.hasStylesheet = genUtils.arrContains(data.genChoices, 'Stylesheet');
             data.createBundle = genUtils.arrContains(data.genChoices, 'Bundle');
 
+            data.type = 'component';
+
             actions.push({
                 type: 'add',
                 path: `${componentPath}.module.js`,

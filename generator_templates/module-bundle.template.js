@@ -1,6 +1,6 @@
 // Add your modules here
 
-const moduleName   = '{{name}}.{{type}}',
+const moduleName   = '{{name}}-bundle.{{type}}',
       dependencies = [];
 
 angular.module(moduleName, dependencies);
