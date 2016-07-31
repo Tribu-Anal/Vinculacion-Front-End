@@ -6,6 +6,7 @@ const componentGen = require('./generators/component.generator'),
       bundleGen    = require('./generators/bundle.generator');
 
 module.exports = plop => {
+	plop.addHelper('sharedCase', require('./generators/helpers').sharedCase);
 	plop.addPrompt('directory', require('inquirer-directory'));
 
     plop.setGenerator(componentGen.name, componentGen.generator);
