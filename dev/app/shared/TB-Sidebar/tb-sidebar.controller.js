@@ -1,6 +1,6 @@
-TbSidebarController.$inject = [ '$scope' ];
+TbSidebarController.$inject = [ '$rootScope', '$scope' ];
 
-function TbSidebarController ($scope) {
+function TbSidebarController ($rootScope, $scope) {
 	var vm = this;
 	var activeItem = {};
 
@@ -34,6 +34,15 @@ function TbSidebarController ($scope) {
 	function noList () {
 		return $scope.navItems === undefined || 
 			   $scope.navItems.length === 0;
+	}
+
+	$rootScope.$on('$stateChangeStart', changeActiveItem);
+
+	function changeActiveItem (event, toState) {
+		for (let i = 0; i < $scope.navItems.length; i++) {
+			const item = $scope.navItems[i];
+			item.active = item.url && toState.url.includes(item.url);
+		}
 	}
 
 	init();
