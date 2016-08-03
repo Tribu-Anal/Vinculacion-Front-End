@@ -6,10 +6,17 @@
     align-items: center;
     font-size: 1em;
     border-radius: 50%;
-    float: left;
     margin-top: 2%;
     margin-left: -8%;
     position: absolute;
+    background: #ccc;
+  }
+  .desc-section{
+    text-align: center;
+  }
+  .container{
+    background: #fff;
+    margin-top: 20px;
   }
   .professor{
     font-style: italic;
@@ -29,7 +36,7 @@
     position: absolute;
     width: 15%;
     top: 15%;
-    left: 80%;
+    left: 70%;
   }
   .list{
     margin-top: 3%;
