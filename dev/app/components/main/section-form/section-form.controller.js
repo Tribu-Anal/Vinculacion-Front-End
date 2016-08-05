@@ -29,7 +29,6 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.professorActive = $rootScope.Role === 'Professor' ? true : false;
 
     getClasses();
-    //getPeriods();
     getProjects();
     getStudents();
 
@@ -100,21 +99,6 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
             'No se pudieron cargar los profesores.');
         vm.professorsLoading = false;
     }
-
-    // function getPeriods() {
-    //     sectionData.getPeriods(getPeriodsSuccess, getPeriodsFailure);
-    // }
-
-    // function getPeriodsSuccess(response) {
-    //     TbUtils.fillListWithResponseData(response.data, vm.periods);
-    //     vm.periodsLoading = false;
-    // }
-
-    // function getPeriodsFailure(response) {
-    //     TbUtils.displayNotification('error', 'Error',
-    //         'No se pudieron cargar los periodos.');
-    //     vm.periodsLoading = false;
-    // }
 
     function getAccountID(bodyIndex) {
         return vm.studentsTable.body[bodyIndex].content[0].properties.value;
