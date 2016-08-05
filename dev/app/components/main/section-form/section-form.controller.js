@@ -9,7 +9,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     var vm = this;
 
     vm.classes = [];
-    //vm.professors = [];
+    vm.professors = [];
     vm.periods = [];
     vm.projects = [];
     vm.students = [];
@@ -26,13 +26,19 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.simulateQuery = false;
     vm.addStudentToSection = addStudentToSection;
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
+    vm.professorActive = $rootScope.Role === 'Professor' ? true : false;
 
     getClasses();
-    //getProfessors();
     //getPeriods();
     getProjects();
     getStudents();
-    professors.getActiveProfessor(window.localStorage.getItem('ProfessorDBId'), getProfessorSuccess, getProfessorFail);
+
+    if(vm.professorActive) {
+        professors.getActiveProfessor(window.localStorage.getItem('ProfessorDBId'), 
+            getProfessorSuccess, getProfessorFail);
+    } else {
+        getProfessors();
+    }
 
     function submit() {
         vm.submitting = true;
@@ -80,20 +86,20 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         vm.classesLoading = false;
     }
 
-    // function getProfessors() {
-    //     sectionData.getProfessors(getProfessorsSuccess, getProfessorsFailure);
-    // }
+    function getProfessors() {
+        sectionData.getProfessors(getProfessorsSuccess, getProfessorsFailure);
+    }
 
-    // function getProfessorsSuccess(response) {
-    //     TbUtils.fillListWithResponseData(response.data, vm.professors);
-    //     vm.professorsLoading = false;
-    // }
+    function getProfessorsSuccess(response) {
+        TbUtils.fillListWithResponseData(response.data, vm.professors);
+        vm.professorsLoading = false;
+    }
 
-    // function getProfessorsFailure(response) {
-    //     TbUtils.displayNotification('error', 'Error',
-    //         'No se pudieron cargar los profesores.');
-    //     vm.professorsLoading = false;
-    // }
+    function getProfessorsFailure(response) {
+        TbUtils.displayNotification('error', 'Error',
+            'No se pudieron cargar los profesores.');
+        vm.professorsLoading = false;
+    }
 
     // function getPeriods() {
     //     sectionData.getPeriods(getPeriodsSuccess, getPeriodsFailure);
