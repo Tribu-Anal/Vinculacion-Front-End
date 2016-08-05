@@ -1,14 +1,15 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-    'tableContent', 'projects', '$q', '$timeout', 'students'
+    'tableContent', 'projects', '$q', '$timeout', 'students', 'professors'
 ];
 
-function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q, timeout, students) {
+function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q, 
+    timeout, students, professors) {
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
 
     var vm = this;
 
     vm.classes = [];
-    vm.professors = [];
+    //vm.professors = [];
     vm.periods = [];
     vm.projects = [];
     vm.students = [];
@@ -27,16 +28,26 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
 
     getClasses();
-    getProfessors();
-    getPeriods();
+    //getProfessors();
+    //getPeriods();
     getProjects();
     getStudents();
+    professors.getActiveProfessor(window.localStorage.getItem('ProfessorDBId'), getProfessorSuccess, getProfessorFail);
 
     function submit() {
         vm.submitting = true;
 
         sections.postSection(vm.section,
             submitSuccess, submitFailure);
+    }
+
+    function getProfessorSuccess(response) {
+        vm.section.ProffesorAccountId = response.data[0].AccountId;
+        console.log(vm.section.ProffesorAccountId);
+    }
+
+    function getProfessorFail(response) {
+        console.log(response);
     }
 
     function submitSuccess(response) {
@@ -51,6 +62,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         TbUtils.displayNotification('error', 'Error',
             'Han habido problemas al crear la seccion.');
         vm.submitting = false;
+        console.log(vm.section);
     }
 
     function getClasses() {
@@ -68,35 +80,35 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         vm.classesLoading = false;
     }
 
-    function getProfessors() {
-        sectionData.getProfessors(getProfessorsSuccess, getProfessorsFailure);
-    }
+    // function getProfessors() {
+    //     sectionData.getProfessors(getProfessorsSuccess, getProfessorsFailure);
+    // }
 
-    function getProfessorsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.professors);
-        vm.professorsLoading = false;
-    }
+    // function getProfessorsSuccess(response) {
+    //     TbUtils.fillListWithResponseData(response.data, vm.professors);
+    //     vm.professorsLoading = false;
+    // }
 
-    function getProfessorsFailure(response) {
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron cargar los profesores.');
-        vm.professorsLoading = false;
-    }
+    // function getProfessorsFailure(response) {
+    //     TbUtils.displayNotification('error', 'Error',
+    //         'No se pudieron cargar los profesores.');
+    //     vm.professorsLoading = false;
+    // }
 
-    function getPeriods() {
-        sectionData.getPeriods(getPeriodsSuccess, getPeriodsFailure);
-    }
+    // function getPeriods() {
+    //     sectionData.getPeriods(getPeriodsSuccess, getPeriodsFailure);
+    // }
 
-    function getPeriodsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.periods);
-        vm.periodsLoading = false;
-    }
+    // function getPeriodsSuccess(response) {
+    //     TbUtils.fillListWithResponseData(response.data, vm.periods);
+    //     vm.periodsLoading = false;
+    // }
 
-    function getPeriodsFailure(response) {
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron cargar los periodos.');
-        vm.periodsLoading = false;
-    }
+    // function getPeriodsFailure(response) {
+    //     TbUtils.displayNotification('error', 'Error',
+    //         'No se pudieron cargar los periodos.');
+    //     vm.periodsLoading = false;
+    // }
 
     function getAccountID(bodyIndex) {
         return vm.studentsTable.body[bodyIndex].content[0].properties.value;
@@ -123,6 +135,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
 
     function getProjectsSuccess(response) {
         TbUtils.fillListWithResponseData(response.data, vm.projects);
+        vm.professorsLoading = false;
     }
 
     function getProjectsError(response) {

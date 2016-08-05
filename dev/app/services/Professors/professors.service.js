@@ -5,7 +5,8 @@ function professors ($http) {
     
     var service = {
         registerProfessor: registerProfessor,
-        activateProfessor: activateProfessor
+        activateProfessor: activateProfessor,
+        getActiveProfessor: getActiveProfessor
     };
     
     return service;
@@ -22,6 +23,11 @@ function professors ($http) {
         $http.post(url + '/Verified', JSON.stringify(professor))
              .then(successCallback)
              .catch(errorCallback);
+    }
+
+    function getActiveProfessor(professorId, successCallback, errorCallback) {
+        $http.get(url + '?$filter=Id eq ' + professorId).then(successCallback)
+             .catch(successCallback);
     }
 }
 

@@ -29,6 +29,8 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
         $rootScope.Username =
         $rootScope.Session.slice(0, $rootScope.Session.indexOf('@'));
 
+        window.localStorage.setItem('ProfessorDBId', response.data.Id);
+
         role.get($rootScope.Session, getRoleSuccess);
     }
 
