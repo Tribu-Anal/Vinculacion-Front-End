@@ -1,9 +1,12 @@
 'use strict';
 
-const componentGen = require('./generators/component.generator'),
-      serviceGen   = require('./generators/service.generator'),
-      sharedGen    = require('./generators/shared.generator'),
-      bundleGen    = require('./generators/bundle.generator');
+const componentGen  = require('./generators/component.generator'),
+      serviceGen    = require('./generators/service.generator'),
+      sharedGen     = require('./generators/shared.generator'),
+      bundleGen     = require('./generators/bundle.generator'),
+      controllerGen = require('./generators/controller.generator'),
+      configGen     = require('./generators/config.generator'),
+      runGen        = require('./generators/run.generator');
 
 module.exports = plop => {
 	plop.addHelper('sharedCase', require('./generators/helpers').sharedCase);
@@ -13,4 +16,7 @@ module.exports = plop => {
     plop.setGenerator(serviceGen.name, serviceGen.generator);
     plop.setGenerator(sharedGen.name, sharedGen.generator);
     plop.setGenerator(bundleGen.name, bundleGen.generator);
+    plop.setGenerator(controllerGen.name, controllerGen.generator);
+    plop.setGenerator(configGen.name, configGen.generator);
+    plop.setGenerator(runGen.name, runGen.generator);
 };
