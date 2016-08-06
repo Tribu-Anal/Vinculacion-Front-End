@@ -3,33 +3,20 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Ingrese los campos que desea actualizar</h4>
+        <h4 class="modal-title">Seleccione los projectos para la seccion</h4>
       </div>
       <div class="modal-body">
+      <tb-search-field></tb-search-field>
+      <tb-paginator ng-hide="search.data" options="vm.options" on-page-change="vm.onPageChange"></tb-paginator>
         <form class="form-horizontal container-fluid" role="form">
-          <div class="row" style="margin: 4%;">
-            <label class="cd-label col-xs-6 col-sm-6 col-md-3 col-lg-3" for="cd-name">Codigo</label>
-            <input ng-model="vm.section.Code" class="user col-xs-6 col-sm-6 col-md-6 col-lg-6" type="text" name="sectionCode">
-          </div>
-          <div class="row" style="margin: 4%;">
-            <label class="cd-label col-xs-6 col-sm-6 col-md-3 col-lg-3" for="cd-name">Clase</label>
-            <select name="_class" ng-model="vm.section.ClassId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <option value="{{class.Id}}" ng-repeat="class in vm.classes">{{class.Name}}</option>
-            </select>
-          </div>
-          <div class="row" style="margin: 4%;">
-            <label class="cd-label col-xs-6 col-sm-6 col-md-3 col-lg-3" for="cd-name">Periodo</label>
-            <select name="period" ng-model="vm.section.PeriodId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <option value="{{period.Id}}" ng-repeat="period in vm.periods">Modulo {{period.Number}} ({{period.Year}})</option>
-            </select>
-          </div>
-          <div class="row" style="margin: 4%;">
-            <label class="cd-label col-xs-6 col-sm-6 col-md-3 col-lg-3" for="cd-name">Docente</label>
-            <select name="professor" ng-model="vm.section.ProffesorAccountId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
-              <option value="{{professor.AccountId}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
-            </select>
+          <div ng-repeat="prj in vm.projects">
+            <div class="row">
+              <input type="checkbox">
+              <label class="cd-label col-xs-6 col-sm-6 col-md-3 col-lg-3" for="cd-name">{{prj.Name}}</label>
+            </div>
           </div>
         </form>
+        <tb-loading class="main-loader" ng-show="vm.projectsLoading"></tb-loading>
       </div>
       <div class="modal-footer">
         <button type="button" ng-click="close()" class="btn btn-default" data-dismiss="modal">Cancelar</button>
