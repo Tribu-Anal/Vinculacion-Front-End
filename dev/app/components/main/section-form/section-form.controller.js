@@ -26,18 +26,16 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.simulateQuery = false;
     vm.addStudentToSection = addStudentToSection;
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
-    vm.professorActive = $rootScope.Role === 'Professor' ? true : false;
+    vm.professorActive = $rootScope.Role === 'Professor';
 
     getClasses();
     getProjects();
     getStudents();
 
     if(vm.professorActive) {
-        professors.getActiveProfessor(window.localStorage.getItem('ProfessorDBId'), 
+        professors.getActiveProfessor($rootScope.ProfessorDBId, 
             getProfessorSuccess, getProfessorFail);
-    } else {
-        getProfessors();
-    }
+    } else getProfessors();
 
     function submit() {
         vm.submitting = true;

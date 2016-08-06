@@ -10,6 +10,7 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     $rootScope.Session = window.localStorage['Session'];
     $rootScope.Username = window.localStorage['Username'];
     $rootScope.Role = window.localStorage['Role'];
+    $rootScope.ProfessorDBId = window.localStorage['ProfessorDBId'];
     $rootScope.guest = true;
 
     let stateUrl = "";

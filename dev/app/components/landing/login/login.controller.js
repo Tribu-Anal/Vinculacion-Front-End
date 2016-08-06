@@ -9,6 +9,8 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
     vm.login = login;
     vm.loading = false;
 
+    let DBId = -1;
+
     auth.ClearCredentials();
 
     function login() {
@@ -19,6 +21,7 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
     
     function LoginSuccess(response) {
         console.log(response);
+        DBId = response.data.Id;
         auth.SetCredentials(response.data);
         
         window.localStorage['Session'] = 
@@ -29,8 +32,6 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
         $rootScope.Username =
         $rootScope.Session.slice(0, $rootScope.Session.indexOf('@'));
 
-        window.localStorage.setItem('ProfessorDBId', response.data.Id);
-
         role.get($rootScope.Session, getRoleSuccess);
     }
 
@@ -38,6 +39,12 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
         window.localStorage['Role'] = 
         $rootScope.Role =
         response.data;
+
+        if(response.data === 'Professor') {
+            window.localStorage['ProfessorDBId'] = 
+            $rootScope.ProfessorDBId = DBId;
+            console.log($rootScope.ProfessorDBId);
+        }
 
         $location.path('/proyectos');
         vm.loading = false;
