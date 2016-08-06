@@ -9,10 +9,11 @@
       <tb-search-field></tb-search-field>
       <tb-paginator ng-hide="search.data" options="vm.options" on-page-change="vm.onPageChange"></tb-paginator>
         <form class="form-horizontal container-fluid" role="form">
-          <div ng-repeat="prj in vm.projects">
+          <div ng-repeat="prj in vm.projects" ng-init="selected = false">
             <div class="row">
-              <input type="checkbox">
+              <input type="checkbox" ng-model="selected" ng-click="vm.addProject(prj)">
               <label class="cd-label col-xs-6 col-sm-6 col-md-3 col-lg-3" for="cd-name">{{prj.Name}}</label>
+              {{selected}}
             </div>
           </div>
         </form>

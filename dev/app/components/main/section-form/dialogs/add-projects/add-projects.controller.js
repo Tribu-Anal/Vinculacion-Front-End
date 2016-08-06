@@ -13,6 +13,7 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
     vm.projectsPagination = [];
     vm.projectsSelected = [];
     vm.onPageChange = onPageChange;
+    vm.addProject = addProject;
 
     $scope.accept = accept;
     $scope.close = close;
@@ -70,6 +71,11 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
 
     function getTotalProjectsFail(response) {
         console.log(response);
+    }
+
+    function addProject(prj) {
+        vm.projectsSelected.push(prj);
+        console.log(vm.projectsSelected);
     }
 
     function loadParams() {
