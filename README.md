@@ -1,4 +1,4 @@
-# Manejo Horas de Vinculacion UNITEC
+# Manejo Horas de Vinculacion UNITEC (Shamelessly Outdated)
 Aplicacion web para manejar las horas de trabajo social de los alumnos de UNITEC.
 
 ## Project Rules
