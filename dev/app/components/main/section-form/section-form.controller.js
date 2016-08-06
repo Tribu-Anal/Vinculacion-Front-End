@@ -32,10 +32,8 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     getProjects();
     getStudents();
 
-    if(vm.professorActive) {
-        professors.getActiveProfessor($rootScope.ProfessorDBId, 
-            getProfessorSuccess, getProfessorFail);
-    } else getProfessors();
+    if(vm.professorActive) professors.getActiveProfessor($rootScope.ProfessorDBId, getProfessorSuccess, getProfessorFail);
+    else getProfessors();
 
     function submit() {
         vm.submitting = true;
