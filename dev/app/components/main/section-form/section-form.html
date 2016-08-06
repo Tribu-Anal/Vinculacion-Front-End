@@ -35,9 +35,10 @@
 
     <div>
         <label class="cd-label" for="cd-name">Proyecto</label>
-        <select name="project" ng-model="vm.section.ProjectId" required>
+        <input style="cursor: pointer" ng-model="vm.section.Code" ng-click="vm.addProjects()" class="user" type="text" name="sectionCode" id="cd-name" required>
+<!--         <select name="project" ng-model="vm.section.ProjectId" required>
             <option value="{{project.Id}}" ng-repeat="project in vm.projects">{{project.Name}}</option>
-        </select>
+        </select> -->
         <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.project.$error.required">
             * Por favor escoja un proyecto.
         </p>

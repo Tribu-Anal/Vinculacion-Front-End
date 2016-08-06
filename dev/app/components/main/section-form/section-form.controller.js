@@ -1,8 +1,9 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-    'tableContent', 'projects', '$q', '$timeout', 'students'
+    'tableContent', 'projects', '$q', '$timeout', 'students', 'ModalService'
 ];
 
-function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q, timeout, students) {
+function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
+    timeout, students, ModalService) {
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
 
     var vm = this;
@@ -24,7 +25,14 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.queryStudents = queryStudents;
     vm.simulateQuery = false;
     vm.addStudentToSection = addStudentToSection;
+    vm.addProjects = addProjects;
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
+
+    var addProjectsModal = {
+        templateUrl: 'templates/components/main/section-form/dialogs/' +
+            'add-projects/add-projects.html',
+        controller: 'EditSectionController as vm'
+    }
 
     getClasses();
     getProfessors();
@@ -51,6 +59,33 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         TbUtils.displayNotification('error', 'Error',
             'Han habido problemas al crear la seccion.');
         vm.submitting = false;
+    }
+
+    function addProjects() {
+        let params = {
+            Code: 123,
+            ClassId: 563,
+            PeriodId: 12,
+            ProffesorAccountId: 11
+        }
+        TbUtils.setModalParams(params);
+        ModalService.showModal(addProjectsModal)
+            .then(modalResolve);
+    }
+
+    function modalResolve(modal) {
+        console.log('Entro');
+        modal.element.modal();
+        modal.close.then(modalClose);
+    }
+
+    function modalClose(result) {
+        // if (modalFlag === 'AddStudent')
+        //     addStudentToSection(result);
+        // else if (modalFlag === 'EditSection')
+        //     updateSection(result);
+        // else
+        //     deleteSection(result);
     }
 
     function getClasses() {
