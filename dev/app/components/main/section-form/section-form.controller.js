@@ -31,7 +31,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     var addProjectsModal = {
         templateUrl: 'templates/components/main/section-form/dialogs/' +
             'add-projects/add-projects.html',
-        controller: 'EditSectionController as vm'
+        controller: 'AddProjectsController as vm'
     }
 
     getClasses();
@@ -74,7 +74,6 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     }
 
     function modalResolve(modal) {
-        console.log('Entro');
         modal.element.modal();
         modal.close.then(modalClose);
     }
