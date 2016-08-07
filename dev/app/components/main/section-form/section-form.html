@@ -42,6 +42,14 @@
         <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
     </div>
 
+    <div ng-show="vm.section.projectIds.length > 0">
+        <tb-table headers="vm.projectsTable.headers" 
+            body="vm.projectsTable.body"
+            on-row-click="vm.deleteElementFromProjectsTable"
+            ng-hide="vm.submitting">
+         </tb-table>
+    </div>
+
     <div>
         <label class="cd-label" for="cd-name">Alumnos</label>
         <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="vm.searchText" md-items="item in vm.queryStudents(vm.searchText)" md-item-text="item.Name">

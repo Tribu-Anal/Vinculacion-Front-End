@@ -20,14 +20,18 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.periodsLoading = true;
     vm.studentsLoading = true;
     vm.submitting = false;
-    vm.section = {};
+    vm.section = {
+        projectIds: []
+    };
     vm.submit = submit;
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre']);
+    vm.projectsTable = TbUtils.getTable(['Proyectos']);
     vm.queryStudents = queryStudents;
     vm.simulateQuery = false;
     vm.addStudentToSection = addStudentToSection;
     vm.addProjects = addProjects;
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
+    vm.deleteElementFromProjectsTable = deleteElementFromProjectsTable;
     vm.professorActive = $rootScope.Role === 'Professor';
 
     var addProjectsModal = {
@@ -86,8 +90,18 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
 
     function modalClose(result) {
         vm.section.projectIds = [];
+        vm.projectsTable.body = [];
+
         for(let prj in result) {
             vm.section.projectIds.push(result[prj].Id);
+
+            const element = {
+                content: [
+                    tableContent.createALableElement(result[prj].Name)
+                ]
+                //data: result[prj].Id
+            };
+            vm.projectsTable.body.push(element);
         }
         
         console.log(vm.section.projectIds);
@@ -226,6 +240,13 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         const index = vm.studentsTable.body.indexOf(element);
         vm.studentsTable.body.splice(index, 1);
         vm.sectionStudents.splice(index, 1);
+    }
+
+    function deleteElementFromProjectsTable (element) {
+        const index = vm.projectsTable.body.indexOf(element);
+        vm.projectsTable.body.splice(index, 1);
+        vm.section.projectIds.splice(index, 1);
+        console.log(vm.section.projectIds);
     }
 
 }
