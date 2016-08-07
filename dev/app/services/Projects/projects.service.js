@@ -14,7 +14,8 @@ function projects($http) {
         getProjectsWithPagination: getProjectsWithPagination,
         getProjectsCount: getProjectsCount,
         assignSectionToProject: assignSectionToProject,
-        assignProjectstoSection: assignProjectstoSection
+        assignProjectstoSection: assignProjectstoSection,
+        selectedProjectsInSectionForm: []
     };
 
     return service;

@@ -33,6 +33,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
     vm.deleteElementFromProjectsTable = deleteElementFromProjectsTable;
     vm.professorActive = $rootScope.Role === 'Professor';
+    projects.selectedProjectsInSectionForm = [];
 
     var addProjectsModal = {
         templateUrl: 'templates/components/main/section-form/dialogs/' +
@@ -89,6 +90,8 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     }
 
     function modalClose(result) {
+        if(!result.length) return;
+
         vm.section.projectIds = [];
         vm.projectsTable.body = [];
 
@@ -99,7 +102,6 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
                 content: [
                     tableContent.createALableElement(result[prj].Name)
                 ]
-                //data: result[prj].Id
             };
             vm.projectsTable.body.push(element);
         }
@@ -246,6 +248,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         const index = vm.projectsTable.body.indexOf(element);
         vm.projectsTable.body.splice(index, 1);
         vm.section.projectIds.splice(index, 1);
+        projects.selectedProjectsInSectionForm.splice(index, 1);
         console.log(vm.section.projectIds);
     }
 

@@ -11,7 +11,7 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
     vm.projects = [];
     vm.totalProjects = [];
     vm.projectsPagination = [];
-    vm.projectsSelected = [];
+    vm.projectsSelected = projects.selectedProjectsInSectionForm;
     vm.onPageChange = onPageChange;
     vm.addProject = addProject;
     vm.showSelectedProjects = showSelectedProjects;
