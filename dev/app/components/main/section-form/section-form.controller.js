@@ -61,7 +61,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
 
     function submitSuccess(response) {
         addStudentsToSection(response.data.Id);
-        projects.assignSectionToProject(vm.section.ProjectId,
+        projects.assignProjectstoSection(vm.section.projectIds,
             response.data.Id,
             assignSectionToProjectSuccess,
             assignSectionToProjectError)
@@ -85,6 +85,12 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     }
 
     function modalClose(result) {
+        vm.section.projectIds = [];
+        for(let prj in result) {
+            vm.section.projectIds.push(result[prj].Id);
+        }
+        
+        console.log(vm.section.projectIds);
         console.log(result);
     }
 

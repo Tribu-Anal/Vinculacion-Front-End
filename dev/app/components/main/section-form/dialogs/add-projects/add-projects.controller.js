@@ -81,13 +81,6 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
     }
 
     function accept() {
-        // let section = {
-        //     Code: vm.section.Code,
-        //     ClassId: parseInt(vm.section.ClassId),
-        //     PeriodId: parseInt(vm.section.PeriodId),
-        //     ProffesorAccountId: vm.section.ProffesorAccountId
-        // }
-
         _close(vm.projectsSelected, 500);
     }
 
