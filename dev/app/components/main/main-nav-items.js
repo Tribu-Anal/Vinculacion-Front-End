@@ -38,6 +38,14 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  	},
 
 	  	{ 
+		  	title: "FINIQUITOS", ref: "main.settlement", url: '/finiquitos',
+		  	icon: "glyphicon glyphicon-pencil", 
+		  	active: $state.current.url.includes('/finiquitos'),
+		  	show: $rootScope.Role === 'Admin',
+		  	clicked: TbUtils.preventGeneralLoading 
+	  	},
+
+	  	{ 
 	  		title: "LOG OUT", ref: "landing.login", 
 	  		icon: "glyphicon glyphicon-log-out", active: false,
 		  	show: $state.current.url !== '/registro-maestro/{accountId}',
