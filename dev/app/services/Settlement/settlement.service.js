@@ -1,11 +1,25 @@
-settlement.$inject = [];
+settlement.$inject = ['$http'];
 
-settlement () {
-	const service = {
+function settlement($http) {
+    const url = 'http://fiasps.unitec.edu:' + PORT + '/api/Students';
+    const service = {
+        getPendingFiniquitos: getPendingFiniquitos,
+        dowloadFiniquitoReport: dowloadFiniquitoReport
+    };
 
-	};
+    function getPendingFiniquitos(successCallback, errorCallback) {
+        $http.get(url + '/PendingFiniquitoStudents').then(successCallback)
+            .catch(errorCallback);
+    }
 
-	return service;
+    function dowloadFiniquitoReport(accountId) {
+        return url + '/FiniquitoReport/' + accountId;
+    }
+
+    return service;
 }
 
-module.exports = { name: 'settlement', srvc: settlement };
+module.exports = {
+    name: 'settlement',
+    srvc: settlement
+};
