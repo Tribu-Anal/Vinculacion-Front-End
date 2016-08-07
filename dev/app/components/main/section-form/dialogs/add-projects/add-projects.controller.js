@@ -27,8 +27,6 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
 
     function getProjectsSuccess(response) {
         TbUtils.fillListWithResponseData(response.data, vm.projectsPagination);
-        console.log(vm.projectsPagination);
-
         vm.projectsLoading = false;
     }
     
@@ -46,6 +44,7 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
         vm.projects.length = 0;
         vm.projectsLoading = true;
         projects.getProjectsWithPagination( page, skip, getProjectsSuccess, getProjectsFail);
+        console.log(vm.projectsSelected);
     }
 
     projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
