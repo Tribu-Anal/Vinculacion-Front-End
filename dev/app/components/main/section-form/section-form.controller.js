@@ -1,8 +1,9 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-    'tableContent', 'projects', '$q', '$timeout', 'students'
+    'tableContent', 'projects', '$q', '$timeout', 'students', 'professors'
 ];
 
-function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q, timeout, students) {
+function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
+    timeout, students, professors) {
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.dashboard');
 
     var vm = this;
@@ -25,18 +26,29 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.simulateQuery = false;
     vm.addStudentToSection = addStudentToSection;
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
+    vm.professorActive = $rootScope.Role === 'Professor';
 
     getClasses();
-    getProfessors();
-    getPeriods();
     getProjects();
     getStudents();
+
+    if(vm.professorActive) professors.getActiveProfessor($rootScope.ProfessorDBId, getProfessorSuccess, getProfessorFail);
+    else getProfessors();
 
     function submit() {
         vm.submitting = true;
 
         sections.postSection(vm.section,
             submitSuccess, submitFailure);
+    }
+
+    function getProfessorSuccess(response) {
+        vm.section.ProffesorAccountId = response.data[0].AccountId;
+        console.log(vm.section.ProffesorAccountId);
+    }
+
+    function getProfessorFail(response) {
+        console.log(response);
     }
 
     function submitSuccess(response) {
@@ -51,6 +63,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         TbUtils.displayNotification('error', 'Error',
             'Han habido problemas al crear la seccion.');
         vm.submitting = false;
+        console.log(vm.section);
     }
 
     function getClasses() {
@@ -83,21 +96,6 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         vm.professorsLoading = false;
     }
 
-    function getPeriods() {
-        sectionData.getPeriods(getPeriodsSuccess, getPeriodsFailure);
-    }
-
-    function getPeriodsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.periods);
-        vm.periodsLoading = false;
-    }
-
-    function getPeriodsFailure(response) {
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron cargar los periodos.');
-        vm.periodsLoading = false;
-    }
-
     function getAccountID(bodyIndex) {
         return vm.studentsTable.body[bodyIndex].content[0].properties.value;
     }
@@ -123,6 +121,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
 
     function getProjectsSuccess(response) {
         TbUtils.fillListWithResponseData(response.data, vm.projects);
+        vm.professorsLoading = false;
     }
 
     function getProjectsError(response) {
@@ -145,7 +144,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
             TbUtils.fillListWithResponseData(response.data, vm.students);
             vm.studentsLoading = false;
         }, response => {
-            TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los estudiantes.' + 
+            TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los estudiantes.' +
                                         ' Intenta resfrescando la pagina.');
         });
     }
@@ -188,7 +187,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     function isAlreadyOnList (accountId) {
         for (let i = 0; i < vm.sectionStudents.length; i++) {
             const student = vm.sectionStudents[i];
-            if (student.AccountId === accountId) 
+            if (student.AccountId === accountId)
                 return true;
         }
 
