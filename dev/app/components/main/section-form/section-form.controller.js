@@ -75,13 +75,6 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     }
 
     function addProjects() {
-        let params = {
-            Code: 123,
-            ClassId: 563,
-            PeriodId: 12,
-            ProffesorAccountId: 11
-        }
-        TbUtils.setModalParams(params);
         ModalService.showModal(addProjectsModal)
             .then(modalResolve);
     }
@@ -92,12 +85,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     }
 
     function modalClose(result) {
-        // if (modalFlag === 'AddStudent')
-        //     addStudentToSection(result);
-        // else if (modalFlag === 'EditSection')
-        //     updateSection(result);
-        // else
-        //     deleteSection(result);
+        console.log(result);
     }
 
     function getClasses() {

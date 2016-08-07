@@ -14,10 +14,10 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
     vm.projectsSelected = [];
     vm.onPageChange = onPageChange;
     vm.addProject = addProject;
+    vm.showSelectedProjects = showSelectedProjects;
 
     $scope.accept = accept;
     $scope.close = close;
-    loadParams();
     projects.getProjectsCount(getProjectsCountSuccess);
 
     function getProjectsCountSuccess(response){
@@ -44,7 +44,6 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
         vm.projects.length = 0;
         vm.projectsLoading = true;
         projects.getProjectsWithPagination( page, skip, getProjectsSuccess, getProjectsFail);
-        console.log(vm.projectsSelected);
     }
 
     projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
@@ -77,12 +76,8 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
         console.log(vm.projectsSelected);
     }
 
-    function loadParams() {
-        let params = TbUtils.getModalParams();
-        // vm.section.Code = params.Code;
-        // vm.section.ClassId = params.ClassId;
-        // vm.section.PeriodId = params.PeriodId;
-        // vm.section.ProffesorAccountId = params.ProffesorAccountId;
+    function showSelectedProjects() {
+        console.log(vm.projectsSelected);
     }
 
     function accept() {
@@ -92,7 +87,8 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
         //     PeriodId: parseInt(vm.section.PeriodId),
         //     ProffesorAccountId: vm.section.ProffesorAccountId
         // }
-        // _close(section, 500);
+
+        _close(vm.projectsSelected, 500);
     }
 
     function close() {
