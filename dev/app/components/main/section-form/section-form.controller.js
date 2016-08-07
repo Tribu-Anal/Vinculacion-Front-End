@@ -1,17 +1,10 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-<<<<<<< HEAD
-    'tableContent', 'projects', '$q', '$timeout', 'students', 'ModalService'
+    'tableContent', 'projects', '$q', '$timeout', 'students', 'ModalService', 'professors'
 ];
 
 function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
-    timeout, students, ModalService) {
-=======
-    'tableContent', 'projects', '$q', '$timeout', 'students', 'professors'
-];
+    timeout, students, ModalService, professors) {
 
-function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q, 
-    timeout, students, professors) {
->>>>>>> 88cc23a4e58319abcbb64faeefab75f8a8f35bd5
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
 
     var vm = this;
