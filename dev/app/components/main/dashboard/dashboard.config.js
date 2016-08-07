@@ -5,7 +5,7 @@ function config ($stateProvider) {
 	$stateProvider
 		.state('main.student-dashboard', {
 			url: '/inicio',
-			templateUrl: 'templates/components/main/dashboard/dashboard.html',
+			templateUrl: 'templates/components/main/dashboard/student-dashboard.html',
 			controller: "StudentDashboardController as vm",
 			onEnter: onStateEnter
 		});

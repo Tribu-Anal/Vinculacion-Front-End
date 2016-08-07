@@ -1,4 +1,4 @@
-LoginController.$inject = ['$rootScope', '$location', 'auth', 
+LoginController.$inject = ['$rootScope', '$location', 'auth',
                                 'role', 'toaster', 'TbUtils'];
 
 function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
@@ -16,12 +16,12 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
 
         auth.Login( vm.username, vm.password, LoginSuccess, LoginFail);
     }
-    
+
     function LoginSuccess(response) {
         console.log(response);
         auth.SetCredentials(response.data);
-        
-        window.localStorage['Session'] = 
+
+        window.localStorage['Session'] =
         $rootScope.Session =
         vm.username;
 
@@ -33,20 +33,26 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
     }
 
     function getRoleSuccess (response) {
-        window.localStorage['Role'] = 
+        window.localStorage['Role'] =
         $rootScope.Role =
         response.data;
 
-        $location.path('/proyectos');
+        if(response.data === 'Student'){
+            window.localStorage['StudentId'] =
+            $rootScope.StudentId =
+            response.data.Id;
+        }
+
+        $location.path('/inicio');
         vm.loading = false;
     }
-    
+
     function LoginFail(response) {
         console.log(response);
-        TbUtils.showErrorMessage('error', response, 
+        TbUtils.showErrorMessage('error', response,
                                  'La cuenta ingresada no tiene privilegios de acceso',
                                  'Falla autorizacion');
-        
+
         vm.loading = false;
     }
 }

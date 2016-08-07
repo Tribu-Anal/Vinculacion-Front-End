@@ -1,4 +1,5 @@
 const ActivateProfessor     = require('./activate-professor/activate-professor.module'),
+      Dashboard             = require('./dashboard/dashboard.module');
       Main                  = require('./main.module'),
       PrintArea             = require('./print-area/print-area.module'),
       ProfessorForm         = require('./professor-form/professor-form.module'),
@@ -13,9 +14,9 @@ const ActivateProfessor     = require('./activate-professor/activate-professor.m
       StudentProjectPdf     = require('./student-project-pdf/student-project-pdf.module');
 
 const moduleName = 'main-bundle',
-      components = [ ActivateProfessor, Main, PrintArea, ProfessorForm, Project,
+      components = [ ActivateProfessor, Dashboard, Main, PrintArea, ProfessorForm, Project,
                      ProjectEvaluationForm, ProjectForm, Projects, Reports, Section, 
-                     SectionForm, Sections, StudentProjectPdf ];
+                     SectionForm, Sections, StudentProjectPdf];
 
 angular.module(moduleName, components);
 

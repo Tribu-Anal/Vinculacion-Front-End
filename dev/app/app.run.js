@@ -10,6 +10,7 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     $rootScope.Session = window.localStorage['Session'];
     $rootScope.Username = window.localStorage['Username'];
     $rootScope.Role = window.localStorage['Role'];
+    $rootScope.StudentId = window.localStorage['StudentId'];
     $rootScope.guest = true;
 
     let stateUrl = "";
@@ -38,7 +39,7 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
         }
 
         if ($location.path() === '/' && $rootScope.globals.token) {
-            $location.path('/proyectos');
+            $location.path('/inicio');
         }
     }
 
@@ -48,9 +49,9 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     }
 
     function stateChangeSuccess (event) {
-        $timeout(function(){ 
-            $rootScope.stateLoading = false; 
-            $rootScope.generalLoading = true; 
+        $timeout(function(){
+            $rootScope.stateLoading = false;
+            $rootScope.generalLoading = true;
         }, $rootScope.generalLoading ? 500 : 500);
     }
 }

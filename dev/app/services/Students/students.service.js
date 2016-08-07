@@ -4,7 +4,8 @@ function students ($http) {
 	const url = 'http://fiasps.unitec.edu:' + PORT + '/api/Students';
 
 	const service = {
-		get: get
+		get: get,
+		getAccountId: getAccountId
 	};
 
 	return service;
@@ -12,6 +13,11 @@ function students ($http) {
 	function get (successCallback, errorCallback) {
         $http.get(url).then(successCallback)
             .catch(errorCallback);
+	}
+
+	function getAccountId(studentId, successCallback, errorCallback){
+				$http.get(url + '$filter=Id eq ' + studentId).then(successCallback)
+						.catch(errorCallback);
 	}
 }
 
