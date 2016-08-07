@@ -22,7 +22,7 @@
         <tb-loading class="main-loader" ng-show="vm.classesLoading"></tb-loading>
     </div>
 
-    <div>
+    <div ng-hide="vm.professorActive">
         <label class="cd-label" for="cd-name">Docente</label>
         <select name="professor" ng-model="vm.section.ProffesorAccountId" required>
             <option value="{{professor.AccountId}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
