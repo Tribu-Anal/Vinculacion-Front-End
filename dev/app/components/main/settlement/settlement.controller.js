@@ -1,6 +1,9 @@
-SettlementController.$inject = ['TbUtils', 'settlement', 'tableContent'];
+SettlementController.$inject = ['TbUtils', 'settlement',
+    'tableContent', '$scope', 'filterFilter'
+];
 
-function SettlementController(TbUtils, settlement, tableContent) {
+function SettlementController(TbUtils, settlement,
+    tableContent, $scope, filterFilter) {
     const vm = this;
     vm.settlementLoading = true;
     vm.settlementTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Carrera', 'Descargar Finiquito']);
@@ -10,6 +13,9 @@ function SettlementController(TbUtils, settlement, tableContent) {
         tooltip: 'Descargar Finiquito'
     }
 
+    vm.settlementTableData = [];
+    vm.limitInLettersToSearch = 3;
+
     settlement.getPendingFiniquitos(getPendingFiniquitosSuccess, getPendingFiniquitosFail);
 
     function getPendingFiniquitosSuccess(response) {
@@ -17,8 +23,16 @@ function SettlementController(TbUtils, settlement, tableContent) {
             vm.settlementLoading = false;
             return;
         }
-        for (let i = 0; i < response.data.length; i++) {
-            let student = response.data[i];
+        vm.settlementTableData = response.data;
+        constructTableBody(vm.settlementTableData);
+        vm.settlementLoading = false;
+    }
+
+    function constructTableBody(data){
+        let table = [];
+        vm.settlementLoading = true;
+        for (let i = 0; i < data.length; i++) {
+            let student = data[i];
             let newTableElement = {
                 content: [
                     tableContent.createALableElement(student.AccountId),
@@ -28,9 +42,9 @@ function SettlementController(TbUtils, settlement, tableContent) {
                 ],
                 data: student
             }
-            vm.settlementTable.body.push(newTableElement);
+            table.push(newTableElement);
         }
-
+        vm.settlementTable.body = table;
         vm.settlementLoading = false;
     }
 
@@ -42,11 +56,29 @@ function SettlementController(TbUtils, settlement, tableContent) {
 
     function downloadSettlement(studentData) {
         window.open(settlement.dowloadFiniquitoReport(studentData.data.AccountId));
+        location.reload();
     }
 
     function getMajorName(major) {
         return major.Name ? major.Name : "N/A";
     }
+
+    $scope.$watch('search.data', function(term) {
+        let obj = {
+            AccountId: term
+        };
+        if (term && term.length >= vm.limitInLettersToSearch) {
+            let filterStudents = {
+                data: filterFilter(vm.settlementTableData, obj)
+            };
+            constructTableBody(filterStudents.data);
+        } else {
+            constructTableBody(vm.settlementTableData);
+        }
+    });
 }
 
-module.exports = {name: 'SettlementController', ctrl: SettlementController};
+module.exports = {
+    name: 'SettlementController',
+    ctrl: SettlementController
+};
