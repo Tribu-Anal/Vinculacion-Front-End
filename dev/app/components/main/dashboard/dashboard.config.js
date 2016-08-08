@@ -2,27 +2,42 @@ config.$inject = [ '$stateProvider' ];
 
 function config ($stateProvider) {
 
-	$stateProvider
-		.state('dashboard-inicio', {
-			url: '/inicio',
-			templateUrl: getTemplateUrl,
-			controller: getController,
+	 $stateProvider
+		// .state('dashboard-inicio', {
+		// 	url: '/inicio',
+		// 	templateProvider: getTemplateUrl,
+		// 	controllerProvider: getController,
+		// 	onEnter: onStateEnter
+		// });
+
+		.state('main.student-dashboard', {
+			url: '/inicio-estudiante',
+			templateUrl: 'templates/components/main/dashboard/student-dashboard.html',
+			controller: 'StudentDashboardController as vm',
+			onEnter: onStateEnter
+		})
+
+		.state('main.professor-dashboard', {
+			url: '/inicio-profesor',
+			templateUrl: 'templates/components/main/dashboard/professor-dashboard.html',
+			controller: 'ProfessorDashboardController as vm',
 			onEnter: onStateEnter
 		});
 		
+		
 }
 
-const getTemplateUrl = [ '$rootScope', 
-	rootScope => { 
-		if($rootScope.Role === 'Student') return 'templates/components/main/dashboard/student-dashboard.html';
-		else return 'templates/components/main/dashboard/professor-dashboard.html';
+const getTemplateUrl = [ '$rootScope', '$templateCache', 
+	(rootScope, $templateCache) => { 
+		if($rootScope.Role === 'Student') $templateCache.get('templates/components/main/dashboard/student-dashboard.html');
+		else $templateCache.get('templates/components/main/dashboard/professor-dashboard.html');
     }
 ];
 
-const getController = [ '$rootScope', 
-	rootScope => { 
-		if($rootScope.Role === 'Student') return 'StudentDashboardController as vm';
-		else return 'ProfessorDashboardController as vm';
+const getController = [ '$rootScope', '$templateCache', 
+	(rootScope, $templateCache) => { 
+		if($rootScope.Role === 'Student') $templateCache.get('StudentDashboardController as vm');
+		else $templateCache.get('ProfessorDashboardController as vm');
     }
 ];
 

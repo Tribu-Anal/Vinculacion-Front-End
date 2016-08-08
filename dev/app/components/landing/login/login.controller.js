@@ -47,7 +47,8 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
         }
 
         //$location.path('/inicio');
-        $state.go('dasboard-inicio');
+        //$state.go('dashboard-inicio');
+        $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
 
         vm.loading = false;
     }
