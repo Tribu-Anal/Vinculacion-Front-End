@@ -5,7 +5,7 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
 
     vm.options = {};
     vm.options.startingPage = 0;
-    vm.options.pageSize = 60;
+    vm.options.pageSize = 15;
     vm.options.count = 0;
     vm.limitInLettersToSearch = 3;
     vm.projects = [];

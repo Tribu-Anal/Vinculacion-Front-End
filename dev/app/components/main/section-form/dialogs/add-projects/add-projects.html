@@ -8,11 +8,10 @@
       <div class="modal-body">
       <tb-search-field style="margin-bottom: 20px;"></tb-search-field>
       <tb-paginator ng-hide="search.data" options="vm.options" on-page-change="vm.onPageChange"></tb-paginator>
-        <form class="form-horizontal container-fluid" role="form">
-          <div ng-repeat="prj in vm.projects">
-            <div>
-              <label class="cd-label col-xs-6 col-sm-6 col-md-3 col-lg-3" for="cd-name"><input type="checkbox" checklist-model="vm.projectsSelected" checklist-value="prj"> {{prj.Name}}</label>
-            </div>
+        <form class="project-form cd-form" role="form">
+          <div ng-repeat="prj in vm.projects" style="margin-top: 15px; margin-bottom: 5px;">
+              <input type="checkbox" checklist-model="vm.projectsSelected" checklist-value="prj">
+              <label for="cd-name">{{prj.Name}}</label>
           </div>
         </form>
         <tb-loading class="main-loader" ng-show="vm.projectsLoading"></tb-loading>
