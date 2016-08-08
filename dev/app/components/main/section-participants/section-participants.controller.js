@@ -92,6 +92,11 @@ function SectionParticipantsController($stateParams, sections,
     }
 
     function showConfirmDialog(accountId, hrs, studentName) {
+    	if(!hrs){
+    		TbUtils.displayNotification('error', 'Error',
+                'Debe de ingresar una cantidad de horas');
+            return
+    	}
         const confirm = $mdDialog.confirm()
             .title('¿Está seguro de que quiere registrar las horas?')
             .textContent('Está apunto de asignarle al estudiante ' +
