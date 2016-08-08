@@ -1,0 +1,45 @@
+<div class="container-fluid display-table">
+        <div class="row display-table-row">
+            <div class="col-md-10 col-sm-11 display-table-cell v-align">
+                <div class="user-dashboard">
+                    <h1>Hola, {{vm.toTitleCase(vm.name)}}</h1>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5 col-xs-12 gutter">
+
+                            <div class="sales">
+                                <h2>Horas Totales:
+                                  <span>{{vm.totalHours}}</span>
+                                  <i class="glyphicon glyphicon-time">
+                                </h2>
+                            </div>
+                            <div class="bs-calltoaction bs-calltoaction-default">
+                                    <div class="row">
+                                        <div class="cta-content">
+                                            <span class="cta-title">Horas recientes</span>
+                                            <div class="cta-desc">
+                                              <div ng-repeat="prj in vm.projects" class="notice notice-info">
+                                                  <strong>{{prj.HoursWorked}} <i class="glyphicon glyphicon-time"> </strong>
+                                                  <br>
+                                                  {{prj.ProjectName}}
+                                              </div>
+                                            </div>
+
+                                        </div>
+                                     </div>
+                                </div>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-12 gutter">
+
+                            <div class="sales report">
+                                <h2>Secciones</h2>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>

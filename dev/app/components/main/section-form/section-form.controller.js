@@ -2,9 +2,9 @@ SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 
     'tableContent', 'projects', '$q', '$timeout', 'students', 'professors'
 ];
 
-function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q, 
+function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
     timeout, students, professors) {
-    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
+    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.dashboard');
 
     var vm = this;
 
@@ -144,7 +144,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
             TbUtils.fillListWithResponseData(response.data, vm.students);
             vm.studentsLoading = false;
         }, response => {
-            TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los estudiantes.' + 
+            TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los estudiantes.' +
                                         ' Intenta resfrescando la pagina.');
         });
     }
@@ -187,7 +187,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     function isAlreadyOnList (accountId) {
         for (let i = 0; i < vm.sectionStudents.length; i++) {
             const student = vm.sectionStudents[i];
-            if (student.AccountId === accountId) 
+            if (student.AccountId === accountId)
                 return true;
         }
 

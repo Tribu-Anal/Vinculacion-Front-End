@@ -49,7 +49,7 @@ function ProjectController($rootScope, $stateParams, $state, projects, TbUtils, 
             'El proyecto deseado no existe.',
             'Error');
 
-        $state.go('main.projects');
+        $state.go('main.dashboard');
 
         vm.projectLoading = false;
     }

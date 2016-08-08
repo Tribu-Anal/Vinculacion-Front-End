@@ -1,11 +1,12 @@
-students.$inject = [ '$http' ];
+students.$inject = ['$http'];
 
 function students ($http) {
 	const url = 'http://fiasps.unitec.edu:' + PORT + '/api/Students';
 
 	const service = {
 		get: get,
-		getHours: getHours
+		getHours: getHours,
+		getAccountId: getAccountId
 	};
 
 	return service;
@@ -18,6 +19,10 @@ function students ($http) {
 	function getHours(accountId, successCallback, errorCallback) {
 		$http.get(url + '/' + accountId + '/Hour').then(successCallback)
 			.catch(errorCallback);
+			
+	function getAccountId(successCallback, errorCallback){
+				$http.get(url + '/Me').then(successCallback)
+						.catch(errorCallback);
 	}
 }
 

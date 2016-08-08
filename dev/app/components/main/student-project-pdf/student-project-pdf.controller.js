@@ -6,7 +6,7 @@ function StudentProjectPdfController(hours, TbUtils, $stateParams,
     $state, $window) {
     var vm = this;
     if (!$stateParams.data)
-        $state.go('main.projects');
+        $state.go('main.dashboard');
     else
         init();
         
