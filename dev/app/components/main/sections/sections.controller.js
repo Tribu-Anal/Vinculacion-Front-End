@@ -77,7 +77,6 @@ function SectionsController($rootScope, $scope, $state,
 
     function constructTableBody(response, tableSections) {
         for (let i = 0; i < response.data.length; i++) {
-            console.log('Entro');
             let section = response.data[i];
             let name = 'N/A';
 

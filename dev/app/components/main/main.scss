@@ -51,6 +51,7 @@
     .dynamic-area
     {
         overflow-y: auto;
+        overflow-x: hidden;
 
         transition: all .3s linear;
 

@@ -1,7 +1,7 @@
-const config     = require('./print-area.config'),
-	  controller = require('./print-area.controller');
+const  config     = require('./settlement.config'),
+	   controller = require('./settlement.controller');
 
-const moduleName   = 'print-area.component',
+const moduleName   = 'settlement.component',
       dependencies = [];
 
 angular.module(moduleName, dependencies)
