@@ -3,21 +3,34 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('main.student-dashboard', {
+		.state('dashboard-inicio', {
 			url: '/inicio',
-			templateUrl: 'templates/components/main/dashboard/Student/student-dashboard.html',
-			controller: "StudentDashboardController as vm",
+			templateUrl: getTemplateUrl(),
+			controller: getController(),
 			onEnter: onStateEnter
 		});
 
-	$stateProvider
-		.state('main.professor-dashboard', {
-			url: '/inicio',
-			templateUrl: 'templates/components/main/dashboard/Professor/professor-dashboard.html',
-			controller: "ProfessorDashboardController as vm",
-			onEnter: onStateEnter
-		});
+	// $stateProvider
+	// 	.state('main.professor-dashboard', {
+	// 		url: '/inicio',
+	// 		templateUrl: getTemplateUrl(),
+	// 		controller: getController(),
+	// 		onEnter: onStateEnter
+	// 	});
 		
+}
+
+getTemplateUrl.$inject = ['$rootScope'];
+
+function getTemplateUrl($rootScope) {
+	if($rootScope.Role === 'Student') return 'templates/components/main/dashboard/student-dashboard.html';
+	else return 'templates/components/main/dashboard/professor-dashboard.html';
+}
+
+getController.$inject = ['$rootScope'];
+function getController($rootScope) {
+	if($rootScope.Role === 'Student') return 'StudentDashboardController as vm';
+	else return 'ProfessorDashboardController as vm';
 }
 
 const onStateEnter = [ '$rootScope', 

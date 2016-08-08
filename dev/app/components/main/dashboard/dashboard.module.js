@@ -1,11 +1,13 @@
 const  config     = require('./dashboard.config'),
-	   Student = require('./Student/student.module'),
-	   Professor = require('./Professor/professor.module');
+	   StudentController = require('./dashboard/student-dashboard.controller'),
+	   ProfessorController = require('./dashboard/professor-dashboard.controller');
 
 const moduleName   = 'dashboard.component',
-      dependencies = [Student, Professor];
+      dependencies = [];
 
 angular.module(moduleName, dependencies)
-	.config(config);
+	.config(config)
+	.controller(StudentController.name, StudentController.ctrl)
+	.controller(ProfessorController.name, ProfessorController.ctrl);
 
 module.exports = moduleName;
