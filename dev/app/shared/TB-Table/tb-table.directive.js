@@ -7,7 +7,8 @@ function tbTable() {
             body: '=?',
             actions:"=?",
             onRowClick: '=?',
-            ref: '@?'
+            ref: '@?',
+            inputDisable: '=?'
         },
         controller : 'TbTableController as vm',
         templateUrl: 'templates/shared/TB-Table/tb-table.html'           

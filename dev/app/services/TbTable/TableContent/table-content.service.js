@@ -9,12 +9,14 @@ function tableContent (TbUtils) {
 
     return service;
 
-    function createAnInputElement(inputType) {
+    function createAnInputElement(inputProperties) {
         let element = {
             typeObject: 'input',
             properties: {
                 value: '',
-                type: inputType
+                type: inputProperties.type,
+                min: inputProperties.min,
+                max: inputProperties.max
             }
         }
 

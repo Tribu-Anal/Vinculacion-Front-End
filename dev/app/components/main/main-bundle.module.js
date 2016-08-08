@@ -11,12 +11,13 @@ const ActivateProfessor     = require('./activate-professor/activate-professor.m
       Section               = require('./section/section-bundle.module'),
       SectionForm           = require('./section-form/section-form.module'),
       Sections              = require('./sections/sections.module'),
-      StudentProjectPdf     = require('./student-project-pdf/student-project-pdf.module');
+      StudentProjectPdf     = require('./student-project-pdf/student-project-pdf.module'),
+      SectionParticipants   = require('./section-participants/section-participants.module');
 
 const moduleName = 'main-bundle',
       components = [ ActivateProfessor, Dashboard, Main, PrintArea, ProfessorForm, Project,
-                     ProjectEvaluationForm, ProjectForm, Projects, Reports, Section, 
-                     SectionForm, Sections, StudentProjectPdf];
+                     ProjectEvaluationForm, ProjectForm, Projects, Reports, Section,
+                     SectionForm, Sections, StudentProjectPdf, SectionParticipants];
 
 angular.module(moduleName, components);
 

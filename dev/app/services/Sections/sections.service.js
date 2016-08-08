@@ -15,7 +15,8 @@ function sections($http) {
         getSection: getSection,
         getCurrentSections: getCurrentSections,
         getStudents: getStudents,
-        getProjects: getProjects
+        getProjects: getProjects,
+        getSectionsByProject: getSectionsByProject
     };
 
     return service;
@@ -77,7 +78,12 @@ function sections($http) {
 
     function getSection(sectionId, getSectionSuccess, getSectionFail) {
         $http.get(url + '/' + sectionId).then(getSectionSuccess)
-        .catch(getSectionFail);
+            .catch(getSectionFail);
+    }
+
+    function getSectionsByProject(projectId, successCallback, errorCallback){
+        $http.get(url + "/SectionsByProject/"+projectId).then(successCallback)
+            .catch(errorCallback);
     }
 
     function getCurrentSections(successCallback, errorCallback) {
