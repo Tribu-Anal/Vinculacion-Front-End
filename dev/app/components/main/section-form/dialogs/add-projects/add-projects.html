@@ -3,15 +3,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Seleccione los projectos para la seccion</h4>
+        <h4 class="modal-title">Seleccione los proyectos para la seccion</h4>
       </div>
       <div class="modal-body">
-      <tb-search-field></tb-search-field>
+      <tb-search-field style="margin-bottom: 20px;"></tb-search-field>
       <tb-paginator ng-hide="search.data" options="vm.options" on-page-change="vm.onPageChange"></tb-paginator>
         <form class="form-horizontal container-fluid" role="form">
           <div ng-repeat="prj in vm.projects">
             <div>
-              <!-- <input type="checkbox" checklist-model="vm.projectsSelected" checklist-value="prj"> -->
               <label class="cd-label col-xs-6 col-sm-6 col-md-3 col-lg-3" for="cd-name"><input type="checkbox" checklist-model="vm.projectsSelected" checklist-value="prj"> {{prj.Name}}</label>
             </div>
           </div>
