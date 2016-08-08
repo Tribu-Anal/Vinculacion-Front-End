@@ -4,13 +4,18 @@ ProfessorDashboardController.$inject = ['$rootScope', '$stateParams', 'TbUtils',
 function ProfessorDashboardController($rootScope, $stateParams, TbUtils, sections, students) {
     var vm = this;
 
-    vm.sections = [];
+    vm.sections        = [];
     vm.sectionStudents = [];
-    vm.studentHours = [];
+    vm.studentHours    = [];
     vm.currentProjects = [];
 
-    vm.getStudents = getStudents;
-    vm.getStudentsHours = getStudentsHours;
+    vm.sectionsLoading        = true;
+    vm.studentsLoading        = true;
+    // vm.studentsHoursLoading   = true;
+    // vm.currentProjectsLoading = true;
+
+    vm.getStudents        = getStudents;
+    vm.getStudentsHours   = getStudentsHours;
     vm.getCurrentProjects = getCurrentProjects;
 
     sections.getCurrentSections(currentSectionsSuccess, currentSectionsFail);
@@ -18,8 +23,10 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
 
     function currentSectionsSuccess(response) {
         TbUtils.fillListWithResponseData(response.data, vm.sections);
+        vm.sectionsLoading = false;
         console.log(vm.sections);
-        getCurrentProjects();
+        getStudents(719);
+        //getCurrentProjects();
     }
 
     function currentSectionsFail(response) {
@@ -33,8 +40,9 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
     function getStudentsSuccess(response) {
         vm.sectionStudents = [];
         TbUtils.fillListWithResponseData(response.data, vm.sectionStudents);
+        vm.studentsLoading = false;
         console.log(vm.sectionStudents);
-        //getStudentsHours();
+        getStudentsHours();
     }
 
     function getStudentsFail(response) {

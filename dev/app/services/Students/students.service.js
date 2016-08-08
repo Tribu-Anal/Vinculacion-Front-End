@@ -19,6 +19,10 @@ function students ($http) {
 	function getHours(accountId, successCallback, errorCallback) {
 		$http.get(url + '/' + accountId + '/Hour').then(successCallback)
 			.catch(errorCallback);
+
+		// return $http.get(url + '/' + accountId + '/Hour').then(function(response) {
+		// 	return response.data;
+		// });
 	}
 
 	function getAccountId(successCallback, errorCallback){
