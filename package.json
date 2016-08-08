@@ -58,10 +58,11 @@
     "angular-material": "^1.1.0-rc.5",
     "angular-modal-service": "^0.6.10",
     "angular-spinkit": "^0.3.4",
-    "angular-ui-router": "^0.2.18",
     "angular-ui-form-validation": "^2.1.2",
+    "angular-ui-router": "^0.2.18",
     "angularjs-toaster": "^1.2.1",
     "bootstrap": "^3.3.6",
+    "checklist-model": "^0.10.0",
     "jquery": "^2.2.4",
     "ng-dialog": "^0.5.9",
     "yargs": "^4.7.1"

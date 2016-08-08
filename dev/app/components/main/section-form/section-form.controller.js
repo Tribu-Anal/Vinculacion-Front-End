@@ -1,10 +1,12 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-    'tableContent', 'projects', '$q', '$timeout', 'students', 'professors'
+    'tableContent', 'projects', '$q', '$timeout', 'students', 'ModalService', 'professors'
 ];
 
 function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
-    timeout, students, professors) {
-    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.dashboard');
+timeout, students, ModalService, professors) {
+
+    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.'+$rootScope.Role.toLowerCase()+"-dashboard");
+
 
     var vm = this;
 
@@ -19,14 +21,26 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     vm.periodsLoading = true;
     vm.studentsLoading = true;
     vm.submitting = false;
-    vm.section = {};
+    vm.section = {
+        projectIds: []
+    };
     vm.submit = submit;
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre']);
+    vm.projectsTable = TbUtils.getTable(['Proyectos']);
     vm.queryStudents = queryStudents;
     vm.simulateQuery = false;
     vm.addStudentToSection = addStudentToSection;
+    vm.addProjects = addProjects;
     vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
+    vm.deleteElementFromProjectsTable = deleteElementFromProjectsTable;
     vm.professorActive = $rootScope.Role === 'Professor';
+    projects.selectedProjectsInSectionForm = [];
+
+    var addProjectsModal = {
+        templateUrl: 'templates/components/main/section-form/dialogs/' +
+            'add-projects/add-projects.html',
+        controller: 'AddProjectsController as vm'
+    }
 
     getClasses();
     getProjects();
@@ -53,7 +67,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
 
     function submitSuccess(response) {
         addStudentsToSection(response.data.Id);
-        projects.assignSectionToProject(vm.section.ProjectId,
+        projects.assignProjectstoSection(vm.section.projectIds,
             response.data.Id,
             assignSectionToProjectSuccess,
             assignSectionToProjectError)
@@ -64,6 +78,37 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
             'Han habido problemas al crear la seccion.');
         vm.submitting = false;
         console.log(vm.section);
+    }
+
+    function addProjects() {
+        ModalService.showModal(addProjectsModal)
+            .then(modalResolve);
+    }
+
+    function modalResolve(modal) {
+        modal.element.modal();
+        modal.close.then(modalClose);
+    }
+
+    function modalClose(result) {
+        if(!result.length) return;
+
+        vm.section.projectIds = [];
+        vm.projectsTable.body = [];
+
+        for(let prj in result) {
+            vm.section.projectIds.push(result[prj].Id);
+
+            const element = {
+                content: [
+                    tableContent.createALableElement(result[prj].Name)
+                ]
+            };
+            vm.projectsTable.body.push(element);
+        }
+
+        console.log(vm.section.projectIds);
+        console.log(result);
     }
 
     function getClasses() {
@@ -198,6 +243,14 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
         const index = vm.studentsTable.body.indexOf(element);
         vm.studentsTable.body.splice(index, 1);
         vm.sectionStudents.splice(index, 1);
+    }
+
+    function deleteElementFromProjectsTable (element) {
+        const index = vm.projectsTable.body.indexOf(element);
+        vm.projectsTable.body.splice(index, 1);
+        vm.section.projectIds.splice(index, 1);
+        projects.selectedProjectsInSectionForm.splice(index, 1);
+        console.log(vm.section.projectIds);
     }
 
 }

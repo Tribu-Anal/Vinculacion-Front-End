@@ -8,6 +8,7 @@ require("angular-material");
 require("angular-modal-service");
 require("angular-spinkit");
 require("angular-ui-router");
+require("checklist-model");
 require("../assets/lib/angular-ui-form-validation/angular-ui-form-validation");
 require("angularjs-toaster");
 require("bootstrap");

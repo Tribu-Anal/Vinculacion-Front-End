@@ -13,7 +13,9 @@ function projects($http) {
         getProjectReportUrl: getProjectReportUrl,
         getProjectsWithPagination: getProjectsWithPagination,
         getProjectsCount: getProjectsCount,
-        assignSectionToProject: assignSectionToProject
+        assignSectionToProject: assignSectionToProject,
+        assignProjectstoSection: assignProjectstoSection,
+        selectedProjectsInSectionForm: []
     };
 
     return service;
@@ -67,6 +69,14 @@ function projects($http) {
     function assignSectionToProject(ProjectId, SectionId, successCallback, errorCallback) {
         $http.post(url + "/AssignSection", JSON.stringify({
             ProjectId: ProjectId,
+            SectionId: SectionId
+        })).then(successCallback)
+            .catch(errorCallback);
+    }
+
+    function assignProjectstoSection(ProjectIds, SectionId, successCallback, errorCallback) {
+        $http.post(url + '/AssignProjectsToSection', JSON.stringify({
+            ProjectIds: ProjectIds,
             SectionId: SectionId
         })).then(successCallback)
             .catch(errorCallback);
