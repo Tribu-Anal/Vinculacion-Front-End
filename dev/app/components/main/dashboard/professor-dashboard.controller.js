@@ -10,6 +10,7 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
     vm.getStudents = getStudents;
 
     sections.getCurrentSections(currentSectionsSuccess, currentSectionsFail);
+    console.log('Profesor');
 
     function currentSectionsSuccess(response) {
         TbUtils.fillListWithResponseData(response.data, vm.sections);

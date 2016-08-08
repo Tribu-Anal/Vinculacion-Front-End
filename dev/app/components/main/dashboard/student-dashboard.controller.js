@@ -13,6 +13,8 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   vm.toTitleCase = TbUtils.toTitleCase;
   students.getAccountId(getAccountIdSuccess, getAccountIdFail);
 
+  console.log('Estudiante');
+
   function getAccountIdSuccess(response){
       vm.accountId = response.data.AccountId;
       vm.name = response.data.Name;
