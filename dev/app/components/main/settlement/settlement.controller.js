@@ -25,12 +25,11 @@ function SettlementController(TbUtils, settlement,
         }
         vm.settlementTableData = response.data;
         constructTableBody(vm.settlementTableData);
-        vm.settlementLoading = false;
     }
 
     function constructTableBody(data){
-        let table = [];
         vm.settlementLoading = true;
+        let table = [];
         for (let i = 0; i < data.length; i++) {
             let student = data[i];
             let newTableElement = {
