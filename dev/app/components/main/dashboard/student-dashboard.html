@@ -32,8 +32,26 @@
 
                             <div class="sales report">
                                 <h2>Secciones</h2>
+                                <br>
+                                <table class="table table-list-search table-hover">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Horas trabajadas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="section in vm.sections">
+                                <td>{{section.Class.Code}}</td>
+                                <td>{{section.Class.Name}}</td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                             </div>
+
 
                         </div>
                     </div>
