@@ -1,13 +1,15 @@
 ProfessorDashboardController.$inject = ['$rootScope', '$stateParams', 'TbUtils', 
-    'sections', 'students'];
+    'sections', 'students', 'tableContent'];
 
-function ProfessorDashboardController($rootScope, $stateParams, TbUtils, sections, students) {
+function ProfessorDashboardController($rootScope, $stateParams, TbUtils, sections, students, tableContent) {
     var vm = this;
 
     vm.sections        = [];
     // vm.sectionStudents = [];
     // vm.studentHours    = [];
     vm.currentProjects = [];
+    vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo']);
+    vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
 
     vm.sectionsLoading        = true;
     //vm.studentsLoading        = true;
@@ -22,15 +24,37 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
     console.log('Profesor');
 
     function currentSectionsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.sections);
+        if (response.data.length <= 0)
+            return;
+
+        for (let i = 0; i < response.data.length; i++) {
+            let section = response.data[i];
+            let newTableElement = {
+                content: [
+                    tableContent.createALableElement(section.Code),
+                    tableContent.createALableElement(getClassName(section)),
+                    tableContent.createALableElement(getPeriod(section))
+                ],
+                data: section
+            };
+            vm.sectionsTable.body.push(newTableElement);
+        }
+
         vm.sectionsLoading = false;
-        console.log(vm.sections);
-        //getStudents(719);
-        //getCurrentProjects();
     }
 
     function currentSectionsFail(response) {
         console.log(response);
+        TbUtils.displayNotification('error', 'Error',
+            'No se pudieron cargar las secciones correctamente.');
+    }
+
+    function getClassName(section) {
+        return section.Class.Name
+    }
+
+    function getPeriod(section) {
+        return section.Period.Number + " - " + section.Period.Year
     }
 
     // function getStudents(sectionId) {
@@ -79,12 +103,23 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
     }
 
     function getProjectsSuccess(response) {
-        vm.currentProjects.push(response.data);
-        console.log(response.data);
+        for(prj in response.data) {
+            if(!findDuplicatesProjects(response.data[prj].Id))
+                vm.currentProjects.push(response.data[prj]);
+        }
+        console.log(vm.currentProjects);
     }
 
     function getProjectsFail(response) {
         console.log(response);
+    }
+
+    function findDuplicatesProjects(projectId) {
+        for(prj in vm.currentProjects) {
+            if(projectId === vm.currentProjects[prj].Id) return true;
+        }
+
+        return false;
     }
 }
 
