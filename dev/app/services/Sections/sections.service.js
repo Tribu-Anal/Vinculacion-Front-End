@@ -12,7 +12,9 @@ function sections($http) {
         updateSection: updateSection,
         getSectionsWithPagination: getSectionsWithPagination,
         getSectionCount: getSectionCount,
-        getSection: getSection
+        getSection: getSection,
+        getCurrentSections: getCurrentSections,
+        getStudents: getStudents
     };
 
     return service;
@@ -75,6 +77,15 @@ function sections($http) {
     function getSection(sectionId, getSectionSuccess, getSectionFail) {
         $http.get(url + '/' + sectionId).then(getSectionSuccess)
         .catch(getSectionFail);
+    }
+
+    function getCurrentSections(successCallback, errorCallback) {
+        $http.get(url + '/CurrentPeriodSections').then(successCallback)
+             .catch(errorCallback);
+    }
+
+    function getStudents(sectionId, successCallback, errorCallback) {
+        $http.get(url + '/Students/' + sectionId).then(successCallback).catch(errorCallback);
     }
 }
 
