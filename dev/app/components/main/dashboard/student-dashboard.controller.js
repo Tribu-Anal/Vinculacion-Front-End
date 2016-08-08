@@ -3,7 +3,10 @@ StudentDashboardController.$inject = ['$rootScope', '$scope', '$state',
 
 function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableContent,
                                       sections, filterFilter, hours, students) {
-  if($rootScope.Role !== 'Student' ) $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
+  if($rootScope.Role !== 'Student' ){
+    $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
+    return;
+  }
 
 	const vm = this;
   vm.accountId;
@@ -11,6 +14,7 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   vm.name;
   vm.projects = [];
   vm.sections = [];
+  vm.goToSection = goToSection;
   vm.toTitleCase = TbUtils.toTitleCase;
   students.getAccountId(getAccountIdSuccess, getAccountIdFail);
   sections.getCurrentPeriodSections(getCurrentPeriodSectionsSuccess, getCurrentPeriodSectionsFail);
@@ -23,6 +27,12 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   }
   function getAccountIdFail(response){
       console.log(response);
+  }
+
+  function goToSection(id){
+    $state.go('main.section',{
+      sectionId: id
+    });
   }
 
   function limitProjects(projects){
