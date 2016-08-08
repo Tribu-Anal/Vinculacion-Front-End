@@ -69,6 +69,7 @@ function SectionParticipantsController($stateParams, sections,
         }
         return table;
     }
+    console.log($stateParams);
 }
 
 module.exports = {

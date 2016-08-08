@@ -4,7 +4,7 @@ function config ($stateProvider) {
 
 	$stateProvider
 		.state('main.sectionParticipants', {
-			url: '/secciones-participantes/{sectionId}',
+			url: '/secciones-participantes/{projectId}/{sectionId}',
 			templateUrl: 'templates/components/main/section-participants/section-participants.html',
 			controller: "SectionParticipantsController as vm",
 			onEnter: onStateEnter

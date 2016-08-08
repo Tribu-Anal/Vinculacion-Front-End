@@ -70,6 +70,7 @@ function ProjectController($rootScope, $stateParams, $state, projects,
             return;
         for (let i = 0; i < response.data.length; i++) {
             let section = response.data[i];
+            section.projectId = $stateParams.projectId;
             let newTableElement = {
                 content: [
                     tableContent.createALableElement(section.Code),
