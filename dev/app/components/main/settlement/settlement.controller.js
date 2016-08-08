@@ -1,9 +1,11 @@
 SettlementController.$inject = ['TbUtils', 'settlement',
-    'tableContent', '$scope', 'filterFilter'
+    'tableContent', '$scope', 'filterFilter', '$rootScope',
+    '$state'
 ];
 
 function SettlementController(TbUtils, settlement,
-    tableContent, $scope, filterFilter) {
+    tableContent, $scope, filterFilter, $rootScope, $state) {
+    if ($rootScope.Role !== 'Admin') $state.go('main.projects');
     const vm = this;
     vm.settlementLoading = true;
     vm.settlementTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Carrera', 'Descargar Finiquito']);
@@ -27,7 +29,7 @@ function SettlementController(TbUtils, settlement,
         constructTableBody(vm.settlementTableData);
     }
 
-    function constructTableBody(data){
+    function constructTableBody(data) {
         vm.settlementLoading = true;
         let table = [];
         for (let i = 0; i < data.length; i++) {
