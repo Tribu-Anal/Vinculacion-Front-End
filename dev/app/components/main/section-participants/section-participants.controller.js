@@ -1,9 +1,9 @@
 SectionParticipantsController.$inject = ['$stateParams', 'sections',
-    'TbUtils', 'tableContent', '$rootScope'
+    'TbUtils', 'tableContent', '$rootScope', 'hours', '$mdDialog'
 ];
 
 function SectionParticipantsController($stateParams, sections,
-    TbUtils, tableContent, $rootScope) {
+    TbUtils, tableContent, $rootScope, hours, $mdDialog) {
     const vm = this;
     vm.participantsLoading = true;
     vm.editHours = {
@@ -11,9 +11,16 @@ function SectionParticipantsController($stateParams, sections,
         value: false,
         text: 'Habilitar la edición de las horas'
     }
+    vm.addHours = {
+        onClick: addHours,
+        icon: 'glyphicon-plus',
+        tooltip: 'Agregar horas'
+    }
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre', 'Horas en este proyecto']);
-    if ($rootScope.Role === 'Professor')
+    if ($rootScope.Role === 'Professor') {
         vm.studentsTable.headers.push('Horas Trabajadas');
+        vm.studentsTable.headers.push(' ');
+    }
 
 
     sections.getStudents($stateParams.sectionId, getStudentsSuccess, getStudentsFail);
@@ -45,6 +52,9 @@ function SectionParticipantsController($stateParams, sections,
                 newTableElement.content.push(
                     tableContent.createAnInputElement(inputProperties)
                 );
+                newTableElement.content.push(
+                    tableContent.createAButtonElement(vm.addHours)
+                );
             }
             vm.studentsTable.body.push(newTableElement);
         }
@@ -60,16 +70,63 @@ function SectionParticipantsController($stateParams, sections,
     function getInputValue() {
         let table = [];
         for (let i = 0; i < vm.studentsTable.body.length; i++) {
-        	let student = vm.studentsTable.body[i];
-        	let element = {
-        		data: student.data,
-        		inputValue: student.content[4].properties.value
-        	}
-        	table.push(element);
+            let student = vm.studentsTable.body[i];
+            let element = {
+                data: student.data,
+                inputValue: student.content[3].properties.value
+            }
+            table.push(element);
         }
         return table;
     }
-    console.log($stateParams);
+
+    function addHours(studentData) {
+        if (!vm.editHours.value) {
+            TbUtils.displayNotification('error', 'Error',
+                'Debe de habilitar la edición de las horas.');
+            return
+        }
+        showConfirmDialog(studentData.data.AccountId,
+            studentData.content[3].properties.value,
+            studentData.data.Name);
+    }
+
+    function showConfirmDialog(accountId, hrs, studentName) {
+        const confirm = $mdDialog.confirm()
+            .title('¿Está seguro de que quiere registrar las horas?')
+            .textContent('Está apunto de asignarle al estudiante ' +
+                TbUtils.toTitleCase(studentName) +
+                ' con número de cuenta: ' + accountId +
+                ' la cantidad de: ' + hrs +
+                ' horas trabajadas en este proyecto.')
+            .ok('Aceptar')
+            .cancel('Cancelar');
+        $mdDialog.show(confirm).then(result => {
+            if (result)
+                saveHoursByStudent(accountId, hrs);
+        });
+    }
+
+    function saveHoursByStudent(accountId, hrs) {
+        let obj = {
+            AccountId: accountId,
+            SectionId: parseInt($stateParams.sectionId),
+            ProjectId: parseInt($stateParams.projectId),
+            Hour: hrs
+        };
+        hours.postHours(obj, postHoursSuccess, postHoursFail);
+    }
+
+    function postHoursFail(response){
+    	console.log(response);
+    	TbUtils.displayNotification('error', 'Error',
+                'No se pudieron registrar las horas');
+    }
+
+    function postHoursSuccess(){
+    	TbUtils.displayNotification('success', 'Exitoso',
+                'Horas registradas exitosamente.');
+    }
 }
 
 module.exports = {
