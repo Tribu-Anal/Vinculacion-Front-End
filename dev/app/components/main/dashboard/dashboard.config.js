@@ -5,18 +5,10 @@ function config ($stateProvider) {
 	$stateProvider
 		.state('dashboard-inicio', {
 			url: '/inicio',
-			templateUrl: getTemplateUrl(),
-			controller: getController(),
+			templateUrl: getTemplateUrl($rootScope),
+			controller: getController($rootScope),
 			onEnter: onStateEnter
 		});
-
-	// $stateProvider
-	// 	.state('main.professor-dashboard', {
-	// 		url: '/inicio',
-	// 		templateUrl: getTemplateUrl(),
-	// 		controller: getController(),
-	// 		onEnter: onStateEnter
-	// 	});
 		
 }
 

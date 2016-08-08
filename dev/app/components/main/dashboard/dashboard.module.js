@@ -1,6 +1,6 @@
 const  config     = require('./dashboard.config'),
-	   StudentController = require('./dashboard/student-dashboard.controller'),
-	   ProfessorController = require('./dashboard/professor-dashboard.controller');
+	   StudentController = require('./student-dashboard.controller'),
+	   ProfessorController = require('./professor-dashboard.controller');
 
 const moduleName   = 'dashboard.component',
       dependencies = [];
