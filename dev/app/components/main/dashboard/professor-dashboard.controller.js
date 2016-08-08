@@ -70,11 +70,11 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
         vm.currentProjects = [];
 
         for(section in vm.sections) {
-            getProjectsInSection(vm.sections[section].Id);
+            getProjectsBySection(vm.sections[section].Id);
         }
     }
 
-    function getProjectsInSection(sectionId) {
+    function getProjectsBySection(sectionId) {
         sections.getProjects(sectionId, getProjectsSuccess, getProjectsFail);
     }
 
