@@ -3,25 +3,46 @@ StudentDashboardController.$inject = ['$rootScope', '$scope', '$state',
 
 function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableContent,
                                       sections, filterFilter, hours, students) {
-	const vm = this;
+  if($rootScope.Role !== 'Student' ) $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
 
-  students.getAccountId($rootScope.StudentId, getAccountIdSuccess, getAccountIdFail);
+	const vm = this;
+  vm.accountId;
+  vm.totalHours;
+  vm.name;
+  vm.projects = [];
+  vm.toTitleCase = TbUtils.toTitleCase;
+  students.getAccountId(getAccountIdSuccess, getAccountIdFail);
 
   function getAccountIdSuccess(response){
-      console.log(response);
+      vm.accountId = response.data.AccountId;
+      vm.name = response.data.Name;
+      hours.getStudentHourReport(vm.accountId, getStudentHourReportSuccess, getStudentHourReportFail);
+      console.log(vm.projects);
   }
-
   function getAccountIdFail(response){
       console.log(response);
   }
-  //
-  // function getStudentHourReportSuccess(){
-  //
-  // }
-  //
-  // function getStudentHourReportFail(){
-  //
-  // }
+
+  function limitProjects(projects){
+      prjs = [];
+      if(projects.length >= 4){
+        for(i = 0; i < 4; i++){
+          prjs[i] = projects[i];
+        }
+        return prjs;
+      }else{
+        return projects;
+      }
+  }
+  function getStudentHourReportSuccess(response){
+    vm.totalHours = response.data.TotalHours;
+    vm.projects = limitProjects(response.data.Projects);
+    console.log(response);
+  }
+
+  function getStudentHourReportFail(response){
+    console.log(response);
+  }
 
   // // sections.getSections(getSectionsSuccess, getSectionsFail);
   //
