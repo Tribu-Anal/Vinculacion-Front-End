@@ -12,7 +12,8 @@ function sections($http) {
         updateSection: updateSection,
         getSectionsWithPagination: getSectionsWithPagination,
         getSectionCount: getSectionCount,
-        getSection: getSection
+        getSection: getSection,
+        getSectionsByProject: getSectionsByProject
     };
 
     return service;
@@ -74,7 +75,12 @@ function sections($http) {
 
     function getSection(sectionId, getSectionSuccess, getSectionFail) {
         $http.get(url + '/' + sectionId).then(getSectionSuccess)
-        .catch(getSectionFail);
+            .catch(getSectionFail);
+    }
+
+    function getSectionsByProject(projectId, successCallback, errorCallback){
+        $http.get(url + "/SectionsByProject/"+projectId).then(successCallback)
+            .catch(errorCallback);
     }
 }
 
