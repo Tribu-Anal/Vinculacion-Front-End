@@ -14,7 +14,7 @@ function config ($stateProvider) {
 const onStateEnter = [ '$rootScope', 
 	rootScope => { 
 		rootScope.viewTitle  = "Vinculacion | Participantes";
-    	rootScope.viewStyles = "main sectionParticipants";
+    	rootScope.viewStyles = "main section-participants";
     }
 ];
 

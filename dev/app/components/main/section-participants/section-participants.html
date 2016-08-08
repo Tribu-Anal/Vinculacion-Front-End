@@ -1,1 +1,16 @@
-<div>HOLAa</div> 
+<tb-loading ng-show="vm.participantsLoading"
+style="z-index: 99999"></tb-loading>
+<div >
+	<div>
+		<div class="col-md-12 switch" ng-show="vm.editHours.visible">
+			<md-switch ng-model="vm.editHours.value">
+			{{ vm.editHours.text }}
+			</md-switch>
+		</div>
+		<tb-table 
+		headers="vm.studentsTable.headers"
+		body="vm.studentsTable.body"
+		input-disable="!vm.editHours.value">
+		</tb-table>
+	</div>
+</div>
