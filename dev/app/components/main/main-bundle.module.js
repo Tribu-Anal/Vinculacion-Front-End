@@ -7,7 +7,7 @@ const ActivateProfessor     = require('./activate-professor/activate-professor.m
       Projects              = require('./projects/projects-bundle.module'),
       Reports               = require('./reports/reports.module'),
       Section               = require('./section/section-bundle.module'),
-      SectionForm           = require('./section-form/section-form.module'),
+      SectionForm           = require('./section-form/section-form-bundle.module'),
       Sections              = require('./sections/sections.module'),
       Settlement            = require('./settlement/settlement.module');
 

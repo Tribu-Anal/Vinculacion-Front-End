@@ -8,7 +8,7 @@ const moduleName   = 'VinculacionApp',
       dependencies = [ 'ui.router', 'toaster', 'ngAnimate', 'ngMaterial',
 		               'ngCookies', 'angular-spinkit', 'angularModalService',
 		               'directives.customvalidation.customValidationTypes',
-		                components, services, shared
+		               'checklist-model', components, services, shared
 		             ];
 
 angular.module(moduleName, dependencies)
