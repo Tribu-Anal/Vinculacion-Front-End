@@ -10,14 +10,16 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   vm.totalHours;
   vm.name;
   vm.projects = [];
+  vm.sections = [];
   vm.toTitleCase = TbUtils.toTitleCase;
   students.getAccountId(getAccountIdSuccess, getAccountIdFail);
+  sections.getCurrentPeriodSections(getCurrentPeriodSectionsSuccess, getCurrentPeriodSectionsFail);
 
   function getAccountIdSuccess(response){
       vm.accountId = response.data.AccountId;
       vm.name = response.data.Name;
       hours.getStudentHourReport(vm.accountId, getStudentHourReportSuccess, getStudentHourReportFail);
-      console.log(vm.projects);
+      console.log(response);
   }
   function getAccountIdFail(response){
       console.log(response);
@@ -41,6 +43,16 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   }
 
   function getStudentHourReportFail(response){
+    console.log(response);
+  }
+
+  function getCurrentPeriodSectionsSuccess(response){
+    vm.sections = response.data;
+    console.log("Sections data");
+    console.log(vm.sections);
+  }
+
+  function getCurrentPeriodSectionsFail(response){
     console.log(response);
   }
 
