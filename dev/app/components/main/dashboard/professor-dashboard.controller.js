@@ -5,17 +5,17 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
     var vm = this;
 
     vm.sections        = [];
-    vm.sectionStudents = [];
-    vm.studentHours    = [];
+    // vm.sectionStudents = [];
+    // vm.studentHours    = [];
     vm.currentProjects = [];
 
     vm.sectionsLoading        = true;
-    vm.studentsLoading        = true;
+    //vm.studentsLoading        = true;
     // vm.studentsHoursLoading   = true;
     // vm.currentProjectsLoading = true;
 
-    vm.getStudents        = getStudents;
-    vm.getStudentsHours   = getStudentsHours;
+    // vm.getStudents        = getStudents;
+    // vm.getStudentsHours   = getStudentsHours;
     vm.getCurrentProjects = getCurrentProjects;
 
     sections.getCurrentSections(currentSectionsSuccess, currentSectionsFail);
@@ -25,7 +25,7 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
         TbUtils.fillListWithResponseData(response.data, vm.sections);
         vm.sectionsLoading = false;
         console.log(vm.sections);
-        getStudents(719);
+        //getStudents(719);
         //getCurrentProjects();
     }
 
@@ -33,38 +33,38 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
         console.log(response);
     }
 
-    function getStudents(sectionId) {
-        sections.getStudents(sectionId, getStudentsSuccess, getStudentsFail);
-    }
+    // function getStudents(sectionId) {
+    //     sections.getStudents(sectionId, getStudentsSuccess, getStudentsFail);
+    // }
 
-    function getStudentsSuccess(response) {
-        vm.sectionStudents = [];
-        TbUtils.fillListWithResponseData(response.data, vm.sectionStudents);
-        vm.studentsLoading = false;
-        console.log(vm.sectionStudents);
-        getStudentsHours();
-    }
+    // function getStudentsSuccess(response) {
+    //     vm.sectionStudents = [];
+    //     TbUtils.fillListWithResponseData(response.data, vm.sectionStudents);
+    //     vm.studentsLoading = false;
+    //     console.log(vm.sectionStudents);
+    //     getStudentsHours();
+    // }
 
-    function getStudentsFail(response) {
-        console.log(response);
-    }
+    // function getStudentsFail(response) {
+    //     console.log(response);
+    // }
 
-    function getStudentsHours() {
-        vm.studentHours = [];
+    // function getStudentsHours() {
+    //     vm.studentHours = [];
 
-        for(student in vm.sectionStudents) {
-            students.getHours(vm.sectionStudents[student].AccountId, HoursSuccess, HoursFail);
-        }
-    }
+    //     for(student in vm.sectionStudents) {
+    //         students.getHours(vm.sectionStudents[student].AccountId, HoursSuccess, HoursFail);
+    //     }
+    // }
 
-    function HoursSuccess(response) {
-        vm.studentHours.push(response.data);
-        console.log(vm.studentHours);
-    }
+    // function HoursSuccess(response) {
+    //     vm.studentHours.push(response.data);
+    //     console.log(vm.studentHours);
+    // }
 
-    function HoursFail(response) {
-        console.log(response);
-    }
+    // function HoursFail(response) {
+    //     console.log(response);
+    // }
 
     function getCurrentProjects() {
         vm.currentProjects = [];
