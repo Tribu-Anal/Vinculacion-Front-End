@@ -34,14 +34,20 @@
     </div>
 
     <div>
-        <label class="cd-label" for="cd-name">Proyecto</label>
-        <select name="project" ng-model="vm.section.ProjectId" required>
-            <option value="{{project.Id}}" ng-repeat="project in vm.projects">{{project.Name}}</option>
-        </select>
+        <label class="cd-label" for="cd-name">Proyectos</label>
+        <input style="cursor: pointer" ng-click="vm.addProjects()" class="user" type="text" name="sectionProjects" id="cd-name" required>
         <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.project.$error.required">
             * Por favor escoja un proyecto.
         </p>
         <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
+    </div>
+
+    <div ng-show="vm.section.projectIds.length > 0">
+        <tb-table headers="vm.projectsTable.headers" 
+            body="vm.projectsTable.body"
+            on-row-click="vm.deleteElementFromProjectsTable"
+            ng-hide="vm.submitting">
+         </tb-table>
     </div>
 
     <div>
