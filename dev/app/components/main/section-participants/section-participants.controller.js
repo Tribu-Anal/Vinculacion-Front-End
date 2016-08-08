@@ -6,7 +6,6 @@ function SectionParticipantsController($stateParams, sections,
     TbUtils, tableContent, $rootScope) {
     const vm = this;
     vm.participantsLoading = true;
-    $rootScope.Role = 'Professor';
     vm.editHours = {
         visible: $rootScope.Role === 'Professor',
         value: false,
@@ -15,7 +14,7 @@ function SectionParticipantsController($stateParams, sections,
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre', 'Horas en este proyecto']);
     if ($rootScope.Role === 'Professor')
         vm.studentsTable.headers.push('Horas Trabajadas');
-        
+
 
     sections.getStudents($stateParams.sectionId, getStudentsSuccess, getStudentsFail);
 
@@ -50,13 +49,25 @@ function SectionParticipantsController($stateParams, sections,
             vm.studentsTable.body.push(newTableElement);
         }
         vm.participantsLoading = false;
-        console.log(vm.studentsTable);
     }
 
     function getStudentsFail() {
         vm.participantsLoading = false;
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron cargar los alumnos correctamente.');
+    }
+
+    function getInputValue() {
+        let table = [];
+        for (let i = 0; i < vm.studentsTable.body.length; i++) {
+        	let student = vm.studentsTable.body[i];
+        	let element = {
+        		data: student.data,
+        		inputValue: student.content[4].properties.value
+        	}
+        	table.push(element);
+        }
+        return table;
     }
 }
 
