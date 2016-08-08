@@ -40,11 +40,6 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
         $rootScope.Role =
         response.data;
 
-        if(response.data === 'Student'){
-            window.localStorage['StudentId'] =
-            $rootScope.StudentId =
-            response.data.Id;
-        }
         if(response.data === 'Professor') {
             window.localStorage['ProfessorDBId'] =
             $rootScope.ProfessorDBId = DBId;
