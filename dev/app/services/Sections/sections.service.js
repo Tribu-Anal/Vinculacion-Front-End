@@ -13,9 +13,8 @@ function sections($http) {
         getSectionsWithPagination: getSectionsWithPagination,
         getSectionCount: getSectionCount,
         getSection: getSection,
-        getCurrentPeriodSections: getCurrentPeriodSections
-        getCurrentSections: getCurrentSections,
-        getStudents: getStudents,
+        getCurrentPeriodSections: getCurrentPeriodSections,
+        getCurrentSections: getCurrentPeriodSections,
         getProjects: getProjects,
         getSectionsByProject: getSectionsByProject
     };
@@ -37,11 +36,6 @@ function sections($http) {
     function deleteSection(sectionId, successCallback, errorCallback) {
         console.log("Borrado");
         $http.delete(url + '/' + sectionId).then(successCallback)
-            .catch(errorCallback);
-    }
-
-    function getStudents(sectionId, successCallback, errorCallback) {
-        $http.get(url + '/Students/' + sectionId).then(successCallback)
             .catch(errorCallback);
     }
 
@@ -87,10 +81,6 @@ function sections($http) {
             .catch(errorCallback);
     }
 
-    function getCurrentSections(successCallback, errorCallback) {
-        $http.get(url + '/CurrentPeriodSections').then(successCallback)
-             .catch(errorCallback);
-    }
 
     function getStudents(sectionId, successCallback, errorCallback) {
         $http.get(url + '/Students/' + sectionId).then(successCallback).catch(errorCallback);
