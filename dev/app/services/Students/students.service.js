@@ -5,6 +5,7 @@ function students ($http) {
 
 	const service = {
 		get: get,
+		getHours: getHours,
 		getAccountId: getAccountId
 	};
 
@@ -13,6 +14,15 @@ function students ($http) {
 	function get (successCallback, errorCallback) {
         $http.get(url).then(successCallback)
             .catch(errorCallback);
+	}
+
+	function getHours(accountId, successCallback, errorCallback) {
+		$http.get(url + '/' + accountId + '/Hour').then(successCallback)
+			.catch(errorCallback);
+
+		// return $http.get(url + '/' + accountId + '/Hour').then(function(response) {
+		// 	return response.data;
+		// });
 	}
 
 	function getAccountId(successCallback, errorCallback){

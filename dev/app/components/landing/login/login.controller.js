@@ -1,7 +1,7 @@
 LoginController.$inject = ['$rootScope', '$location', 'auth',
-                                'role', 'toaster', 'TbUtils'];
+                                'role', 'toaster', 'TbUtils', '$state'];
 
-function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
+function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $state) {
     var vm = this;
 
     vm.username = "";
@@ -46,7 +46,9 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
             console.log($rootScope.ProfessorDBId);
         }
 
-        $location.path('/inicio');
+        //$location.path('/inicio');
+        //$state.go('dashboard-inicio');
+        $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
 
         vm.loading = false;
     }

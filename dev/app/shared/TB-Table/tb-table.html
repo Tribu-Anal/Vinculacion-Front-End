@@ -9,10 +9,10 @@
 		  <label ng-if="content.typeObject == 'label'">
 		  		{{content.properties.value}}  
   		  </label>
-  		  <input class="tb-input-wrapper" ng-if="content.typeObject == 'input'" 
+  		  <input class="tb-input-wrapper" ng-if="content.typeObject == 'input'" ng-disabled="inputDisable"
 		  	type="{{content.properties.type}}" 
-  		  	ng-model="content.properties.value" min="0">
-
+  		  	ng-model="content.properties.value" min="{{content.properties.min}}" max="{{content.properties.max}}">
+  		  	<p ng-if="content.typeObject == 'input'">{{content.properties.disable}}</p>
 			<button class="actions-button tb-tooltip" style="float:none;" ng-if="content.typeObject == 'button'" 
 				ng-click="vm.loseFocus()" ng-blur="content.properties.onClick($parent.$parent.$parent.body[Index])">
 				<span class="glyphicon {{content.properties.icon}}" aria-hidden="true" ></span>

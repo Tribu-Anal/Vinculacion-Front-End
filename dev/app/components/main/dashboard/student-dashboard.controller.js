@@ -19,6 +19,8 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   students.getAccountId(getAccountIdSuccess, getAccountIdFail);
   sections.getCurrentPeriodSections(getCurrentPeriodSectionsSuccess, getCurrentPeriodSectionsFail);
 
+  console.log('Estudiante');
+
   function getAccountIdSuccess(response){
       vm.accountId = response.data.AccountId;
       vm.name = response.data.Name;
