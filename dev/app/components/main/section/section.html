@@ -34,22 +34,23 @@
 
     <div ng-show="Role === 'Admin' || Role === 'Professor'">
       <div>
-          <tb-table   headers="vm.sectionsTable.headers"
-                      body="vm.sectionsTable.body"
-                      actions="vm.sectionsTable.actions">
-          </tb-table>
+        <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Alumnos</h1>
+        <tb-table   headers="vm.sectionsTable.headers"
+                    body="vm.sectionsTable.body"
+                    actions="vm.sectionsTable.actions">
+        </tb-table>
+      </div>
+      <div ng-show="vm.projectsTable.body.length > 0" style="margin-bottom: 80px;">
+        <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Proyectos</h1>
+        <tb-table   headers="vm.projectsTable.headers"
+                    body="vm.projectsTable.body"
+                    ref="main.project"
+                    on-row-click="vm.preventGeneralLoading"
+                    class="mouse-hover">
+        </tb-table>
       </div>
     </div>
     <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
 </div>
-<tb-round-btn style="background-color: #b91a1a; margin-top: -80px; color: #fff8f8;"
-  ng-show="Role === 'Admin' && vm.sectionsTable.body.length == 0" ng-click="vm.removeSection()">
-    <div style="margin: auto;">
-        <div style="margin: 8px 8px 5px 5px;">
-        <div style="margin: 8px 8px 5px 8px;">
-            <span class="glyphicon glyphicon-trash"></span>
-        </div>
-    </div>
-</tb-round-btn>
 <tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ng-click="vm.addStudent()">+
 </tb-round-btn>
