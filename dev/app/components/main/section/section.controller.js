@@ -1,11 +1,9 @@
 SectionController.$inject = ['$rootScope', '$stateParams', '$state',
-    'TbUtils', 'tableContent', 'ModalService', 'sections', 'projects',
-    'tableBuilder'
+    'TbUtils', 'ModalService', 'sections', 'projects', 'tableBuilder'
 ];
 
 function SectionController($rootScope, $stateParams, $state,
-    TbUtils, tableContent, ModalService, sections, projects,
-    tableBuilder) {
+    TbUtils, ModalService, sections, projects, tableBuilder) {
 
     const vm          = this,
           sectionData = require('./section-data');
@@ -105,7 +103,9 @@ function SectionController($rootScope, $stateParams, $state,
         }
         console.log(response);
 
-        vm.studentsTable = tableBuilder.newTable(['Numero de Cuenta', 'Nombre'], response.data, ['AccountId', 'Name']);
+        vm.studentsTable = tableBuilder.newTable(
+            ['Numero de Cuenta', 'Nombre', ''], response.data, ['AccountId', 'Name'], [ [ vm.deleteRowButton ] ]);
+
         vm.sectionsLoading = false;
     }
 
