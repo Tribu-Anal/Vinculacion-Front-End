@@ -18,7 +18,7 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   vm.goToSection = goToSection;
   vm.toTitleCase = TbUtils.toTitleCase;
   students.getAccountId(getAccountIdSuccess, getAccountIdFail);
-  sections.getCurrentPeriodSections(getCurrentPeriodSectionsSuccess, getCurrentPeriodSectionsFail);
+  sections.getSections(getCurrentPeriodSectionsSuccess, getCurrentPeriodSectionsFail);
 
   console.log('Estudiante');
 
