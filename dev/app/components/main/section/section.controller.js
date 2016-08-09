@@ -5,8 +5,8 @@ SectionController.$inject = ['$rootScope', '$stateParams', '$state',
 function SectionController($rootScope, $stateParams, $state,
     TbUtils, ModalService, sections, projects, tableBuilder) {
 
-    const vm          = this,
-          sectionData = require('./section-data');
+    const vm = this,
+        sectionData = require('./section-data');
 
     var modalFlag = '';
 
@@ -35,18 +35,23 @@ function SectionController($rootScope, $stateParams, $state,
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
 
-    function editHours (student) {
+    function editHours(student) {
         // No necesariamente vas a usar prompt, a lo mejor ocupas otras cosa de Angular Material
-        TbUtils.prompt('Editar Horas', 'Cuales son las horas de ' + TbUtils.toTitleCase(student.data.name) + '?',
-            '20', result => {
-                /*
-                    @TODO
-                    Mandar a llamar el endpoint de editar horas si todo salio bien
-                 */
+        // TbUtils.prompt('Editar Horas', 'Cuales son las horas de ' + TbUtils.toTitleCase(student.data.Name) + '?',
+        //     '20', result => {
+        //         /*
+        //             @TODO
+        //             Mandar a llamar el endpoint de editar horas si todo salio bien
+        //          */
+        //     });
+        TbUtils.customDialog(dialogController,
+            'templates/components/main/section/dialogs/edit-hours.html',
+            result => {
+
             });
     }
 
-    function goToProjectEval (project) { 
+    function goToProjectEval(project) {
         TbUtils.preventGeneralLoading();
         $state.go('main.evaluateproject', {
             projectId: project.data.Id
@@ -58,12 +63,12 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getProjectsSuccess(response) {
-        const headers = [ 'Id Proyecto', 'Nombre' ];
+        const headers = ['Id Proyecto', 'Nombre'];
         let buttons = undefined;
 
         if ($rootScope.Role === 'Professor') {
             headers.push('Evaluar Proyecto');
-            buttons = [ vm.evalProjectBtn ];
+            buttons = [vm.evalProjectBtn];
         }
 
         vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name'], buttons);
@@ -202,6 +207,34 @@ function SectionController($rootScope, $stateParams, $state,
     function updateSectionFail(response) {
         TbUtils.showErrorMessage('error', response,
             'No se ha podido editar la seccion', 'Error');
+    }
+
+    function dialogController($scope, $mdDialog, sections) {
+        $scope.projects = [];
+        $scope.response = {
+            projectId: '',
+            hours: ''
+        }
+        
+        $scope.answer = function(response) {
+            console.log(response);
+            $mdDialog.hide(response);
+        }
+
+        sections.getProjects($stateParams.sectionId, function(response) {
+            if (response.data.length > 0) {
+                for (let i = 0; i < response.data.length; i++) {
+                    let project = response.data[i];
+                    let element = {
+                        Id: project.Id,
+                        Name: TbUtils.toTitleCase(project.Name)
+                    }
+                    $scope.projects.push(element);
+                }
+            }
+        }, function(err) {
+            console.log(err);
+        });
     }
 
 }
