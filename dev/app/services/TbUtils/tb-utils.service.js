@@ -1,4 +1,4 @@
-TbUtils.$inject = [ 'toaster', '$rootScope', '$mdDialog' ];
+TbUtils.$inject = ['toaster', '$rootScope', '$mdDialog'];
 
 function TbUtils(toaster, $rootScope, $mdDialog) {
     var service = {
@@ -12,7 +12,9 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
         setModalParams: setModalParams,
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
-        confirm: confirm
+        confirm: confirm,
+        prompt: prompt,
+        customDialog: customDialog
     };
     var vm = this;
     vm.ModalParams;
@@ -93,7 +95,7 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     }
 
-    function confirm (title, msg, callback) {
+    function confirm(title, msg, callback) {
         const confirm = $mdDialog.confirm()
             .title(title)
             .textContent(msg)
@@ -101,6 +103,29 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
             .cancel('Cancelar');
         $mdDialog.show(confirm).then(callback);
     }
+
+    function prompt(title, msg, placeholder, callback) {
+        const prompt =
+            $mdDialog.prompt()
+            .title(title)
+            .textContent(msg)
+            .placeholder(placeholder)
+            .ok('Aceptar')
+            .cancel('Cancelar');
+
+        $mdDialog.show(prompt).then(callback);
+    }
+
+    function customDialog(dialogController, dialogTemplateUrl, callback) {
+        let options = {
+            controller: dialogController,
+            templateUrl: dialogTemplateUrl,
+            clickOutsideToClose: true,
+            parent: angular.element(document.body)
+        }
+        $mdDialog.show(options).then(callback);
+    }
+
 }
 
 module.exports = {

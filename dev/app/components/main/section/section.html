@@ -35,9 +35,9 @@
     <div ng-show="Role === 'Admin' || Role === 'Professor'">
       <div>
         <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Alumnos</h1>
-        <tb-table   headers="vm.sectionsTable.headers"
-                    body="vm.sectionsTable.body"
-                    actions="vm.sectionsTable.actions">
+        <tb-table   headers="vm.studentsTable.headers"
+                    body="vm.studentsTable.body"
+                    actions="vm.studentsTable.actions">
         </tb-table>
       </div>
       <div ng-show="vm.projectsTable.body.length > 0" style="margin-bottom: 80px;">

@@ -1,74 +1,78 @@
 SectionController.$inject = ['$rootScope', '$stateParams', '$state',
-    'TbUtils', 'tableContent', 'ModalService', 'sections', 'projects'
+    'TbUtils', 'ModalService', 'sections', 'projects', 'tableBuilder',
+    'hours', 'tableContent'
 ];
 
 function SectionController($rootScope, $stateParams, $state,
-    TbUtils, tableContent, ModalService, sections, projects) {
+    TbUtils, ModalService, sections, projects, tableBuilder,
+    hours, tableContent) {
 
-    var vm = this;
-
-    var confirmSectionDeleteModal = {
-        templateUrl: 'templates/components/main/section/dialogs/' +
-            'confirm-section-delete/confirm-section-delete.html',
-        controller: 'ConfirmSectionDeleteController'
-    };
-
-    var addStudentModal = {
-        templateUrl: 'templates/components/main/section/dialogs/' +
-            'add-student/add-student.html',
-        controller: 'AddStudentController'
-    };
-
-    var editSectionModal = {
-        templateUrl: 'templates/components/main/section/dialogs/' +
-            'edit-section/edit-section.html',
-        controller: 'EditSectionController as vm'
-    }
+    const vm = this,
+        sectionData = require('./section-data');
 
     var modalFlag = '';
 
     vm.sectionsLoading = true;
-    vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
-    vm.projectsTable = TbUtils.getTable(['Id Proyecto', 'Nombre']);
     vm.addStudent = addStudent;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
+    vm.editHoursBtn = {
+        icon: 'glyphicon glyphicon-pencil',
+        onClick: editHours,
+        tooltip: 'Editar Horas'
+    };
+    vm.evalProjectBtn = {
+        icon: 'glyphicon glyphicon-list-alt',
+        onClick: goToProjectEval,
+        tooltip: 'Evaluar Proyecto'
+    };
     vm.deleteRowButton = {
         icon: 'glyphicon-trash',
         onClick: deleteStudent,
         tooltip: 'Eliminar Alumno'
     };
-    vm.downloadButton = {
-        icon: 'glyphicon-file',
-        onClick: downloadReport,
-        tooltip: 'Ver Reporte'
-    };
     vm.student = undefined;
 
-    console.log($stateParams);
-    updateSectionTableHeaders();
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
-    getProjectsBySection($stateParams.sectionId)
+    getProjectsBySection($stateParams.sectionId);
+
+    function editHours(student) {
+        TbUtils.customDialog(dialogController,
+            'templates/components/main/section/dialogs/edit-hours.html',
+            result => {
+                if (result) {
+                    let obj = {
+                        AccountId: student.data.User.AccountId,
+                        SectionId: parseInt($stateParams.sectionId),
+                        ProjectId: parseInt(result.projectId),
+                        Hour: result.hours
+                    };
+                    hours.postHours(obj, postHoursSuccess, postHoursFail);
+                }
+            });
+    }
+
+    function goToProjectEval(project) {
+        TbUtils.preventGeneralLoading();
+        $state.go('main.evaluateproject', {
+            projectId: project.data.Id
+        });
+    }
 
     function getProjectsBySection(sectionId) {
         sections.getProjects(sectionId, getProjectsSuccess, getProjectsFail);
     }
 
     function getProjectsSuccess(response) {
-        for (let i = 0; i < response.data.length; i++) {
-            let project = response.data[i];
+        const headers = ['Id Proyecto', 'Nombre'];
+        let buttons = undefined;
 
-            let newTableElement = {
-                content: [
-                    tableContent.createALableElement(project.ProjectId),
-                    tableContent.createALableElement(project.Name)
-                ],
-
-                data: project
-            };
-
-            vm.projectsTable.body.push(newTableElement);
+        if ($rootScope.Role === 'Professor') {
+            headers.push('Evaluar Proyecto');
+            buttons = [vm.evalProjectBtn];
         }
+
+        vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name'], buttons);
     }
 
     function getProjectsFail(response) {
@@ -79,20 +83,22 @@ function SectionController($rootScope, $stateParams, $state,
 
     function addStudent() {
         modalFlag = 'AddStudent';
-        ModalService.showModal(addStudentModal)
+        ModalService.showModal(sectionData.addStudentModal)
             .then(modalResolve);
     }
 
     function editSection() {
         modalFlag = 'EditSection';
-        let params = {
+
+        const params = {
             Code: vm.section.Code,
             ClassId: String(vm.section.Class.Id),
             PeriodId: String(vm.section.Period.Id),
             ProffesorAccountId: vm.section.User === null ? '' : vm.section.User.AccountId
-        }
+        };
+
         TbUtils.setModalParams(params);
-        ModalService.showModal(editSectionModal)
+        ModalService.showModal(sectionData.editSectionModal)
             .then(modalResolve);
     }
 
@@ -116,12 +122,6 @@ function SectionController($rootScope, $stateParams, $state,
                 addStudentSuccess, addStudentFail);
     }
 
-    function deleteSection(result) {
-        if (result)
-            sections.deleteSection(vm.section.Id,
-                deleteSectionSuccess, deleteSectionFail)
-    }
-
     function updateSection(result) {
         if (result.ClassId)
             sections.updateSection(result, vm.section.Id,
@@ -138,41 +138,41 @@ function SectionController($rootScope, $stateParams, $state,
             'No se ha podido agregar el estudiante', 'Error');
     }
 
-    function deleteSectionSuccess() {
-        $state.go('main.sections');
-    }
-
-    function deleteSectionFail(response) {
-        console.log(response);
-        TbUtils.showErrorMessage('error', response.data,
-            'No se ha podido borrar la seccion.', 'Error');
-    }
-
     function getStudentsSuccess(response) {
         if (response.data.length <= 0) {
             vm.sectionsLoading = false;
             return;
         }
-        console.log(response);
-        for (let i = 0; i < response.data.length; i++) {
-            let section = response.data[i];
-            console.log(section);
-            let newTableElement = {
-                content: [
-                    tableContent.createALableElement(section.AccountId),
-                    tableContent.createALableElement(section.Name)
-                ],
-                data: section
-            };
-            if ($rootScope.Role !== 'Student')
-                newTableElement.content.push(
-                    tableContent.createAButtonElement(vm.deleteRowButton));
-            if ($rootScope.Role !== 'Student' || section.Id === $rootScope.globals.id)
-                newTableElement.content.push(
-                    tableContent.createAButtonElement(vm.downloadButton));
-            vm.sectionsTable.body.push(newTableElement);
-        }
 
+        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
+        vm.studentsTable.actions = false;
+        if ($rootScope.Role === 'Professor') {
+            vm.studentsTable.headers.push('Editar Horas');
+        }
+        if ($rootScope.Role !== 'Student')
+            vm.studentsTable.headers.push('');
+        for (let i = 0; i < response.data.length; i++) {
+            let student = response.data[i];
+            let element = {
+                data: student,
+                content: [
+                    tableContent.createALableElement(student.User.AccountId),
+                    tableContent.createALableElement(student.User.Name),
+                    tableContent.createALableElement(student.Hours)
+                ]
+            }
+            if ($rootScope.Role === 'Professor') {
+                element.content.push(
+                    tableContent.createAButtonElement(vm.editHoursBtn)
+                );
+            }
+            if ($rootScope.Role !== 'Student') {
+                element.content.push(
+                    tableContent.createAButtonElement(vm.deleteRowButton)
+                );
+            }
+            vm.studentsTable.body.push(element);
+        }
         vm.sectionsLoading = false;
     }
 
@@ -182,14 +182,18 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function deleteStudent(student) {
-        vm.student = student;
-        sections.removeStudent([student.data.AccountId], vm.section.Id,
-            removeStudentSuccess, removeStudentFail);
+        TbUtils.confirm('Eliminar Estudiante', `Desea eliminar a ${student.data.Name} de la seccion?`, result => {
+            if (result) {
+                vm.student = student;
+                sections.removeStudent([student.data.AccountId], vm.section.Id,
+                    removeStudentSuccess, removeStudentFail);
+            }
+        });
     }
 
     function removeStudentSuccess(response) {
-        let index = vm.sectionsTable.body.indexOf(vm.student);
-        vm.sectionsTable.body.splice(index, 1);
+        let index = vm.studentsTable.body.indexOf(vm.student);
+        vm.studentsTable.body.splice(index, 1);
     }
 
     function removeStudentFail(response) {
@@ -204,8 +208,7 @@ function SectionController($rootScope, $stateParams, $state,
 
     function getSectionSuccess(response) {
         vm.section = response.data;
-        sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
-        console.log(vm.section);
+        sections.getStudentsHoursBySectionId(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
 
     function getSectionFail(response) {
@@ -217,31 +220,48 @@ function SectionController($rootScope, $stateParams, $state,
             'No se ha podido editar la seccion', 'Error');
     }
 
-    function getReportParams(participant) {
-        let reportParams = {
-            AccountId: participant.AccountId,
-            Campus: participant.Campus,
-            Major: participant.Major.Name,
-            Name: participant.Name
+    /*
+        TODO: Mejorar lo del controlador
+    */
+    function dialogController($scope, $mdDialog, sections) {
+        $scope.projects = [];
+        $scope.response = {
+            projectId: '',
+            hours: ''
         }
-        return reportParams;
-    }
 
-    function downloadReport(participant) {
-        let params = {
-            reportParams: getReportParams(participant.data)
+        $scope.answer = function(response) {
+            $mdDialog.hide(response);
         }
-        TbUtils.preventGeneralLoading();
-        $state.go('main.student-project-pdf', {
-            data: params
+
+        sections.getProjects($stateParams.sectionId, function(response) {
+            if (response.data.length > 0) {
+                for (let i = 0; i < response.data.length; i++) {
+                    let project = response.data[i];
+                    let element = {
+                        Id: project.Id,
+                        Name: TbUtils.toTitleCase(project.Name)
+                    }
+                    $scope.projects.push(element);
+                }
+            }
+        }, function(err) {
+            console.log(err);
         });
     }
 
-    function updateSectionTableHeaders(){
-        if ($rootScope.Role !== 'Student')
-            vm.sectionsTable.headers.push('Eliminar Alumno');
-        vm.sectionsTable.headers.push('Ver Reporte');
+    function postHoursFail(response) {
+        console.log(response);
+        TbUtils.displayNotification('error', 'Error',
+            'No se pudieron registrar las horas');
     }
+
+    function postHoursSuccess() {
+        TbUtils.displayNotification('success', 'Exitoso',
+            'Horas registradas exitosamente.');
+        location.reload();
+    }
+
 }
 
 module.exports = {

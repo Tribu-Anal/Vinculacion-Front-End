@@ -8,7 +8,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 			title: "INICIO", ref: 'main.'+$rootScope.Role.toLowerCase()+'-dashboard', url: '/inicio-'+$rootScope.Role.toLowerCase(),
 			icon: "glyphicon glyphicon-home",
 			active: $state.current.url.includes('/inicio-'+$rootScope.Role.toLowerCase()),
-			show: true,
+			show: $rootScope.Role !== 'Admin',
 			clicked:TbUtils.preventGeneralLoading
 		},
 		{
