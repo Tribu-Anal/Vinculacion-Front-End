@@ -158,7 +158,7 @@ function SectionController($rootScope, $stateParams, $state,
                 content: [
                     tableContent.createALableElement(student.User.AccountId),
                     tableContent.createALableElement(student.User.Name),
-                    tableContent.createALableElement(student.Hours)
+                    tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
                 ]
             }
             if ($rootScope.Role === 'Professor') {
