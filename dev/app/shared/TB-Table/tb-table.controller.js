@@ -5,10 +5,11 @@ function TbTableController($scope, $state) {
     vm.onRowClick = onRowClick;
 
     function onRowClick(row) {
+        console.log(row);
         if ($scope.ref)
             $state.go($scope.ref, {
                 sectionId: row.data.Id,
-                projectId: row.data.projectId
+                projectId: row.data.Id
             });
         if (typeof $scope.onRowClick === 'function') {
             $scope.onRowClick(row);
