@@ -24,6 +24,7 @@ function SectionsController($rootScope, $scope, $state,
     vm.options.count = 0;
     vm.onPageChange = onPageChange;
 
+    vm.loadMore = loadMore;
 
     // sections.getSections(getSectionsSuccess, getSectionsFail);
 
@@ -126,6 +127,11 @@ function SectionsController($rootScope, $scope, $state,
         sections.getSectionsWithPagination(page, skip,
             getSectionsSuccess, getSectionsFail);
     }
+
+    function loadMore () {
+        
+    }
+
 }
 
 module.exports = {
