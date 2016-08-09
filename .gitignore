@@ -17,3 +17,8 @@ public/
 sftp-config.json
 
 npm-debug.log
+
+#For vim workspace
+*~
+*.swp
+*.swo

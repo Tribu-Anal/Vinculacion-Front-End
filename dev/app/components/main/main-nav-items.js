@@ -3,7 +3,14 @@ function closeSession () {
 }
 
 module.exports = ($rootScope, $state, TbUtils) => {
-	return [ 
+	return [
+		{
+			title: "INICIO", ref: 'main.'+$rootScope.Role.toLowerCase()+'-dashboard', url: '/inicio',
+			icon: "glyphicon glyphicon-home",
+			active: $state.current.url.includes('/inicio'),
+			show: true,
+			clicked:TbUtils.preventGeneralLoading
+		}, 
 		{ 
 			title: "PROYECTOS", ref: "main.projects", url: '/proyectos',
 	  		icon: "glyphicon glyphicon-th-large", 

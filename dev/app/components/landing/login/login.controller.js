@@ -1,7 +1,7 @@
-LoginController.$inject = ['$rootScope', '$location', 'auth', 
-                                'role', 'toaster', 'TbUtils'];
+LoginController.$inject = ['$rootScope', '$location', 'auth',
+                                'role', 'toaster', 'TbUtils', '$state'];
 
-function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
+function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $state) {
     var vm = this;
 
     vm.username = "";
@@ -18,13 +18,13 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
 
         auth.Login( vm.username, vm.password, LoginSuccess, LoginFail);
     }
-    
+
     function LoginSuccess(response) {
         console.log(response);
         DBId = response.data.Id;
         auth.SetCredentials(response.data);
-        
-        window.localStorage['Session'] = 
+
+        window.localStorage['Session'] =
         $rootScope.Session =
         vm.username;
 
@@ -36,26 +36,29 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils) {
     }
 
     function getRoleSuccess (response) {
-        window.localStorage['Role'] = 
+        window.localStorage['Role'] =
         $rootScope.Role =
         response.data;
 
         if(response.data === 'Professor') {
-            window.localStorage['ProfessorDBId'] = 
+            window.localStorage['ProfessorDBId'] =
             $rootScope.ProfessorDBId = DBId;
             console.log($rootScope.ProfessorDBId);
         }
 
-        $location.path('/proyectos');
+        //$location.path('/inicio');
+        //$state.go('dashboard-inicio');
+        $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
+
         vm.loading = false;
     }
-    
+
     function LoginFail(response) {
         console.log(response);
-        TbUtils.showErrorMessage('error', response, 
+        TbUtils.showErrorMessage('error', response,
                                  'La cuenta ingresada no tiene privilegios de acceso',
                                  'Falla autorizacion');
-        
+
         vm.loading = false;
     }
 }

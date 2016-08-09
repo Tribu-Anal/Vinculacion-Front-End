@@ -3,9 +3,10 @@ SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 
 ];
 
 function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
-    timeout, students, ModalService, professors) {
+timeout, students, ModalService, professors) {
 
-    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.projects');
+    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.'+$rootScope.Role.toLowerCase()+"-dashboard");
+
 
     var vm = this;
 
@@ -105,7 +106,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
             };
             vm.projectsTable.body.push(element);
         }
-        
+
         console.log(vm.section.projectIds);
         console.log(result);
     }
@@ -188,7 +189,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
             TbUtils.fillListWithResponseData(response.data, vm.students);
             vm.studentsLoading = false;
         }, response => {
-            TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los estudiantes.' + 
+            TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los estudiantes.' +
                                         ' Intenta resfrescando la pagina.');
         });
     }
@@ -231,7 +232,7 @@ function SectionFormController ($rootScope, $state, TbUtils, sections, sectionDa
     function isAlreadyOnList (accountId) {
         for (let i = 0; i < vm.sectionStudents.length; i++) {
             const student = vm.sectionStudents[i];
-            if (student.AccountId === accountId) 
+            if (student.AccountId === accountId)
                 return true;
         }
 

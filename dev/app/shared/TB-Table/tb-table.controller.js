@@ -7,7 +7,8 @@ function TbTableController($scope, $state) {
     function onRowClick(row) {
         if ($scope.ref)
             $state.go($scope.ref, {
-                sectionId: row.data.Id
+                sectionId: row.data.Id,
+                projectId: row.data.projectId
             });
         if (typeof $scope.onRowClick === 'function') {
             $scope.onRowClick(row);

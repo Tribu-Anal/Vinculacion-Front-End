@@ -12,7 +12,11 @@ function sections($http) {
         updateSection: updateSection,
         getSectionsWithPagination: getSectionsWithPagination,
         getSectionCount: getSectionCount,
-        getSection: getSection
+        getSection: getSection,
+        getCurrentPeriodSections: getCurrentPeriodSections,
+        getCurrentSections: getCurrentPeriodSections,
+        getProjects: getProjects,
+        getSectionsByProject: getSectionsByProject
     };
 
     return service;
@@ -32,11 +36,6 @@ function sections($http) {
     function deleteSection(sectionId, successCallback, errorCallback) {
         console.log("Borrado");
         $http.delete(url + '/' + sectionId).then(successCallback)
-            .catch(errorCallback);
-    }
-
-    function getStudents(sectionId, successCallback, errorCallback) {
-        $http.get(url + '/Students/' + sectionId).then(successCallback)
             .catch(errorCallback);
     }
 
@@ -74,7 +73,27 @@ function sections($http) {
 
     function getSection(sectionId, getSectionSuccess, getSectionFail) {
         $http.get(url + '/' + sectionId).then(getSectionSuccess)
-        .catch(getSectionFail);
+            .catch(getSectionFail);
+    }
+
+    function getSectionsByProject(projectId, successCallback, errorCallback){
+        $http.get(url + "/SectionsByProject/"+projectId).then(successCallback)
+            .catch(errorCallback);
+    }
+
+
+    function getStudents(sectionId, successCallback, errorCallback) {
+        $http.get(url + '/Students/' + sectionId).then(successCallback).catch(errorCallback);
+    }
+
+    function getProjects(sectionId, successCallback, errorCallback) {
+        $http.get(url + '/Projects/' + sectionId).then(successCallback)
+            .catch(errorCallback);
+    }
+
+    function getCurrentPeriodSections(getCurrentPeriodSectionsSuccess, getCurrentPeriodSectionsFail){
+        $http.get(url + '/CurrentPeriodSections').then(getCurrentPeriodSectionsSuccess)
+            .catch(getCurrentPeriodSectionsFail);
     }
 }
 
