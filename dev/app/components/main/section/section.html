@@ -32,7 +32,7 @@
       <img class="logo-image" src="img/logo.png"/>
     </div>
 
-    <div ng-show="Role === 'Admin' || Role === 'Professor'">
+    <div ng-show="(Role === 'Admin' || Role === 'Professor') && vm.studentsTable.body.length > 0">
       <div>
         <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Alumnos</h1>
         <tb-table   headers="vm.studentsTable.headers"
@@ -40,7 +40,8 @@
                     actions="vm.studentsTable.actions">
         </tb-table>
       </div>
-      <div ng-show="vm.projectsTable.body.length > 0" style="margin-bottom: 80px;">
+    </div>
+    <div ng-show="vm.projectsTable.body.length > 0" style="margin-bottom: 80px;">
         <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Proyectos</h1>
         <tb-table   headers="vm.projectsTable.headers"
                     body="vm.projectsTable.body"
@@ -49,7 +50,6 @@
                     class="mouse-hover">
         </tb-table>
       </div>
-    </div>
     <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
 </div>
 <tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ng-click="vm.addStudent()">+
