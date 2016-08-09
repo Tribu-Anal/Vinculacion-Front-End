@@ -29,8 +29,8 @@ style="z-index: 99999"></tb-loading>
 			<h3 class="title_spec">Carreras Asociadas</h3>
 			<p ng-repeat="major in vm.majors">{{major}}</p>
 		</div>
-		<h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Secciones</h1>
-		<tb-table class="col-md-12 mouse-hover" headers="vm.sectionsTable.headers"
+		<h1 ng-show="vm.sectionsTable.body.length > 0" style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Secciones</h1>
+		<tb-table ng-show="vm.sectionsTable.body.length > 0" class="col-md-12 mouse-hover" headers="vm.sectionsTable.headers"
 		body="vm.sectionsTable.body"
 		on-row-click="vm.preventGeneralLoading"
 		ref="main.section">
