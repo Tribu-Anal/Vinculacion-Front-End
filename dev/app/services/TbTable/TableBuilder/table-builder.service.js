@@ -5,11 +5,11 @@ function tableBuilder (tableContent) {
 		newTable: newTable
 	};
 
-	function newTable (headers, data, keys) {
+	function newTable (headers, data, keys, buttons, inputs) {
         const table = {
             headers: headers,
             body: [],
-            actions: true
+            actions: false
         };
 
         for (let i = 0; i < data.length; i++) {
@@ -24,6 +24,12 @@ function tableBuilder (tableContent) {
                 const key = keys[k];
                 newTableElement.content.push(tableContent.createALableElement(obj[key]));
             }
+
+            for (let k = 0; buttons && k < buttons.length; k++)
+                newTableElement.content.push(tableContent.createAButtonElement(buttons[i][k]));
+
+            for (let k = 0; inputs && k < inputs.length; k++)
+                newTableElement.content.push(tableContent.createAnInputElement(inputs[i][k]));
 
             table.body.push(newTableElement);
         }
