@@ -14,6 +14,17 @@ function SectionController($rootScope, $stateParams, $state,
     vm.addStudent = addStudent;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
+    vm.evalProjectBtn = {
+        icon: 'glyphicon glyphicon-list-alt',
+        onClick: project => { 
+            console.log('PROJECT DATA: ', project.data);
+            TbUtils.preventGeneralLoading();
+            $state.go('main.evaluateproject', {
+                projectId: project.data.Id
+            });
+        },
+        tooltip: 'Evaluar Proyecto'
+    };
     vm.deleteRowButton = {
         icon: 'glyphicon-trash',
         onClick: deleteStudent,
@@ -30,7 +41,15 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getProjectsSuccess(response) {
-        vm.projectsTable = tableBuilder.newTable(['Id Proyecto', 'Nombre'], response.data, ['ProjectId', 'Name']);
+        const headers = [ 'Id Proyecto', 'Nombre' ];
+        let buttons = undefined;
+
+        if ($rootScope.Role === 'Professor') {
+            headers.push('Evaluar Proyecto');
+            buttons = [ [ vm.evalProjectBtn ] ];
+        }
+
+        vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name'], buttons);
     }
 
     function getProjectsFail(response) {
@@ -104,7 +123,9 @@ function SectionController($rootScope, $stateParams, $state,
         console.log(response);
 
         vm.studentsTable = tableBuilder.newTable(
-            ['Numero de Cuenta', 'Nombre', ''], response.data, ['AccountId', 'Name'], [ [ vm.deleteRowButton ] ]);
+            ['Numero de Cuenta', 'Nombre', ''], 
+            response.data, ['AccountId', 'Name'], 
+            [ [ vm.deleteRowButton ] ]);
 
         vm.sectionsLoading = false;
     }
