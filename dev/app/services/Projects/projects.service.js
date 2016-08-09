@@ -1,10 +1,11 @@
-projects.$inject = ['$http'];
+projects.$inject = ['$http', '$rootScope'];
 
-function projects($http) {
+function projects($http, $rootScope) {
     var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Projects';
 
     var service = {
         getProjects: getProjects,
+        getProjectsByUser: getProjectsByUser,
         getProject: getProject,
         postProject: postProject,
         updateProject: updateProject,
@@ -21,14 +22,23 @@ function projects($http) {
     return service;
 
     function getProjectsWithPagination(page, size, successCallback, errorCallback) {
-        $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc').then(successCallback)
-            .catch(errorCallback);
+        if($rootScope.Role === 'Professor' || $rootScope.Role === 'Student') 
+            $http.get(url + '/ProjectsByUser' + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc').then(successCallback)
+                .catch(errorCallback);
+
+        else
+            $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc').then(successCallback)
+                .catch(errorCallback);
     };
 
     function getProjects(successCallback, errorCallback) {
         $http.get(url).then(successCallback)
             .catch(errorCallback);
     };
+
+    function getProjectsByUser(successCallback, errorCallback) {
+        $http.get(url + '/ProjectsByUser').then(successCallback).catch(errorCallback);
+    }
 
     function getProjectsCount(successCallback, errorCallback) {
         $http.get(url + "Count").then(successCallback)

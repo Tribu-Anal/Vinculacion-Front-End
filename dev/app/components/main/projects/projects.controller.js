@@ -34,7 +34,10 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
         icon: 'glyphicon-file'
     };
 
-    projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
+    if($rootScope.Role === 'Professor' || $rootScope.Role === 'Student')
+        projects.getProjectsByUser(getTotalProjectsSuccess, getTotalProjectsFail);
+    else
+        projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
 
     function getTotalProjectsSuccess(response) {
         console.log(response);
@@ -122,6 +125,7 @@ function ProjectsController (projects, TbUtils, $state, ModalService,
     }
     
     function getProjectsSuccess(response) {
+        console.log(response);
         TbUtils.fillListWithResponseData(response.data, vm.projectsPagination);
         TbUtils.initArrayToValue(vm.deletingProject, false, 
                                  vm.projectsPagination.length);

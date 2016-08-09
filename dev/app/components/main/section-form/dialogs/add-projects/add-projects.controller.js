@@ -1,6 +1,6 @@
-AddProjectsController.$inject = ['$scope', 'close', 'TbUtils', 'projects', 'filterFilter'];
+AddProjectsController.$inject = ['$scope', 'close', 'TbUtils', 'projects', 'filterFilter', '$rootScope'];
 
-function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) {
+function AddProjectsController($scope, _close, TbUtils, projects, filterFilter, $rootScope) {
     var vm = this;
 
     vm.options = {};
@@ -46,7 +46,11 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter) 
         projects.getProjectsWithPagination( page, skip, getProjectsSuccess, getProjectsFail);
     }
 
-    projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
+    //projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
+    if($rootScope.Role === 'Professor' || $rootScope.Role === 'Student')
+        projects.getProjectsByUser(getTotalProjectsSuccess, getTotalProjectsFail);
+    else
+        projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
 
     function getTotalProjectsSuccess(response) {
         console.log(response);
