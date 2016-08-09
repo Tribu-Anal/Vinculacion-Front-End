@@ -36,7 +36,14 @@ function SectionController($rootScope, $stateParams, $state,
     getProjectsBySection($stateParams.sectionId);
 
     function editHours (student) {
-
+        // No necesariamente vas a usar prompt, a lo mejor ocupas otras cosa de Angular Material
+        TbUtils.prompt('Editar Horas', 'Cuales son las horas de ' + TbUtils.toTitleCase(student.data.name) + '?',
+            '20', result => {
+                /*
+                    @TODO
+                    Mandar a llamar el endpoint de editar horas si todo salio bien
+                 */
+            });
     }
 
     function goToProjectEval (project) { 
@@ -131,6 +138,11 @@ function SectionController($rootScope, $stateParams, $state,
             return;
         }
         console.log(response);
+
+        /*
+            @TODO
+            Una columna mas para las horas de la seccion de cada alumno
+        */
 
         const headers = ['Numero de Cuenta', 'Nombre'];
         const buttons = [];

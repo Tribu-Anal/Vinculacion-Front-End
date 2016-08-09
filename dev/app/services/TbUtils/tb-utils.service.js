@@ -12,7 +12,8 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
         setModalParams: setModalParams,
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
-        confirm: confirm
+        confirm: confirm,
+        prompt: prompt
     };
     var vm = this;
     vm.ModalParams;
@@ -101,6 +102,19 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
             .cancel('Cancelar');
         $mdDialog.show(confirm).then(callback);
     }
+
+    function prompt (title, msg, placeholder, callback) {
+        const prompt = 
+        $mdDialog.prompt()
+        .title(title)
+        .textContent(msg)
+        .placeholder(placeholder)
+        .ok('Aceptar')
+        .cancel('Cancelar');
+
+        $mdDialog.show(prompt).then(callback);
+    }
+
 }
 
 module.exports = {
