@@ -30,7 +30,6 @@ function SectionController($rootScope, $stateParams, $state,
     vm.sectionsLoading = true;
     vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
     vm.projectsTable = TbUtils.getTable(['Id Proyecto', 'Nombre']);
-    vm.removeSection = removeSection;
     vm.addStudent = addStudent;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
@@ -94,12 +93,6 @@ function SectionController($rootScope, $stateParams, $state,
         }
         TbUtils.setModalParams(params);
         ModalService.showModal(editSectionModal)
-            .then(modalResolve);
-    }
-
-    function removeSection() {
-        modalFlag = 'DeleteSection';
-        ModalService.showModal(confirmSectionDeleteModal)
             .then(modalResolve);
     }
 
