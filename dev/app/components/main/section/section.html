@@ -31,10 +31,20 @@
 
     <div ng-show="Role === 'Admin' || Role === 'Professor'">
       <div>
-          <tb-table   headers="vm.sectionsTable.headers"
-                      body="vm.sectionsTable.body"
-                      actions="vm.sectionsTable.actions">
-          </tb-table>
+        <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Alumnos</h1>
+        <tb-table   headers="vm.sectionsTable.headers"
+                    body="vm.sectionsTable.body"
+                    actions="vm.sectionsTable.actions">
+        </tb-table>
+      </div>
+      <div>
+        <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Proyectos</h1>
+        <tb-table   headers="vm.projectsTable.headers"
+                    body="vm.projectsTable.body"
+                    ref="main.project"
+                    on-row-click="vm.preventGeneralLoading"
+                    class="mouse-hover">
+        </tb-table>
       </div>
     </div>
     <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>

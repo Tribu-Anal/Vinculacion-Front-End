@@ -1,11 +1,9 @@
 SectionController.$inject = ['$rootScope', '$stateParams', '$state',
-    'TbUtils', 'tableContent', 'ModalService',
-    'sections'
+    'TbUtils', 'tableContent', 'ModalService', 'sections', 'projects'
 ];
 
 function SectionController($rootScope, $stateParams, $state,
-    TbUtils, tableContent, ModalService,
-    sections) {
+    TbUtils, tableContent, ModalService, sections, projects) {
 
     var vm = this;
 
@@ -31,7 +29,7 @@ function SectionController($rootScope, $stateParams, $state,
 
     vm.sectionsLoading = true;
     vm.sectionsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
-    updateSectionTableHeaders()
+    vm.projectsTable = TbUtils.getTable(['Id Proyecto', 'Nombre']);
     vm.removeSection = removeSection;
     vm.addStudent = addStudent;
     vm.editSection = editSection;
@@ -49,7 +47,36 @@ function SectionController($rootScope, $stateParams, $state,
     vm.student = undefined;
 
     console.log($stateParams);
+    updateSectionTableHeaders();
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
+    getProjectsBySection($stateParams.sectionId)
+
+    function getProjectsBySection(sectionId) {
+        sections.getProjects(sectionId, getProjectsSuccess, getProjectsFail);
+    }
+
+    function getProjectsSuccess(response) {
+        for (let i = 0; i < response.data.length; i++) {
+            let project = response.data[i];
+
+            let newTableElement = {
+                content: [
+                    tableContent.createALableElement(project.ProjectId),
+                    tableContent.createALableElement(project.Name)
+                ],
+
+                data: project
+            };
+
+            vm.projectsTable.body.push(newTableElement);
+        }
+    }
+
+    function getProjectsFail(response) {
+        console.log(response);
+        TbUtils.displayNotification('error', 'Error!',
+            'No se ha podido cargar los proyectos de la seccion');
+    }
 
     function addStudent() {
         modalFlag = 'AddStudent';
