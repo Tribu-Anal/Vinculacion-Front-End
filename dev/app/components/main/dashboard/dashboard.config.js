@@ -11,14 +11,14 @@ function config ($stateProvider) {
 		// });
 
 		.state('main.student-dashboard', {
-			url: '/inicio-estudiante',
+			url: '/inicio-student',
 			templateUrl: 'templates/components/main/dashboard/student-dashboard.html',
 			controller: 'StudentDashboardController as vm',
 			onEnter: onStateEnter
 		})
 
 		.state('main.professor-dashboard', {
-			url: '/inicio-profesor',
+			url: '/inicio-professor',
 			templateUrl: 'templates/components/main/dashboard/professor-dashboard.html',
 			controller: 'ProfessorDashboardController as vm',
 			onEnter: onStateEnter
