@@ -14,15 +14,14 @@ function SectionController($rootScope, $stateParams, $state,
     vm.addStudent = addStudent;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
+    vm.editHoursBtn = {
+        icon: 'glyphicon glyphicon-pencil',
+        onClick: editHours,
+        tooltip: 'Editar Horas'
+    };
     vm.evalProjectBtn = {
         icon: 'glyphicon glyphicon-list-alt',
-        onClick: project => { 
-            console.log('PROJECT DATA: ', project.data);
-            TbUtils.preventGeneralLoading();
-            $state.go('main.evaluateproject', {
-                projectId: project.data.Id
-            });
-        },
+        onClick: goToProjectEval,
         tooltip: 'Evaluar Proyecto'
     };
     vm.deleteRowButton = {
@@ -34,7 +33,18 @@ function SectionController($rootScope, $stateParams, $state,
 
     console.log($stateParams);
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
-    getProjectsBySection($stateParams.sectionId)
+    getProjectsBySection($stateParams.sectionId);
+
+    function editHours (student) {
+
+    }
+
+    function goToProjectEval (project) { 
+        TbUtils.preventGeneralLoading();
+        $state.go('main.evaluateproject', {
+            projectId: project.data.Id
+        });
+    }
 
     function getProjectsBySection(sectionId) {
         sections.getProjects(sectionId, getProjectsSuccess, getProjectsFail);
@@ -46,7 +56,7 @@ function SectionController($rootScope, $stateParams, $state,
 
         if ($rootScope.Role === 'Professor') {
             headers.push('Evaluar Proyecto');
-            buttons = [ [ vm.evalProjectBtn ] ];
+            buttons = [ vm.evalProjectBtn ];
         }
 
         vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name'], buttons);
@@ -122,11 +132,18 @@ function SectionController($rootScope, $stateParams, $state,
         }
         console.log(response);
 
-        vm.studentsTable = tableBuilder.newTable(
-            ['Numero de Cuenta', 'Nombre', ''], 
-            response.data, ['AccountId', 'Name'], 
-            [ [ vm.deleteRowButton ] ]);
+        const headers = ['Numero de Cuenta', 'Nombre'];
+        const buttons = [];
 
+        if ($rootScope.Role === 'Professor') {
+            headers.push('Editar Horas');
+            buttons.push(vm.editHoursBtn);
+        }
+
+        headers.push('');
+        buttons.push(vm.deleteRowButton);
+
+        vm.studentsTable = tableBuilder.newTable(headers, response.data, ['AccountId', 'Name'], buttons);
         vm.sectionsLoading = false;
     }
 
