@@ -56,8 +56,12 @@ function SettlementController(TbUtils, settlement,
     }
 
     function downloadSettlement(studentData) {
-        window.open(settlement.dowloadFiniquitoReport(studentData.data.AccountId));
-        location.reload();
+        TbUtils.confirm('Descargar Finiquito', 'Una vez lo descargue, no podra volver a hacerlo. Continuar?', result => {
+            if (result) {
+                window.open(settlement.dowloadFiniquitoReport(studentData.data.AccountId));
+                location.reload();
+            }
+        });
     }
 
     function getMajorName(major) {
