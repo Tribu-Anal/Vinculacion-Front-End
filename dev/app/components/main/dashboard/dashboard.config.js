@@ -22,27 +22,36 @@ function config ($stateProvider) {
 			templateUrl: 'templates/components/main/dashboard/professor-dashboard.html',
 			controller: 'ProfessorDashboardController as vm',
 			onEnter: onStateEnter
+		})
+
+		.state('main.admin-dashboard',{
+			url: '/inicio-admin',
+			templateUrl: 'templates/components/main/dashboard/admin-dashboard.html',
+			controller: 'AdminDashboardController as vm',
+			onEnter: onStateEnter
 		});
-		
-		
+
+
 }
 
-const getTemplateUrl = [ '$rootScope', '$templateCache', 
-	(rootScope, $templateCache) => { 
+const getTemplateUrl = [ '$rootScope', '$templateCache',
+	(rootScope, $templateCache) => {
 		if($rootScope.Role === 'Student') $templateCache.get('templates/components/main/dashboard/student-dashboard.html');
-		else $templateCache.get('templates/components/main/dashboard/professor-dashboard.html');
+		if($rootScope.Role === 'Professor') $templateCache.get('templates/components/main/dashboard/professor-dashboard.html');
+		if($rootScope.Role === 'Admin') $templateCache.get('templates/components/main/dashboard/admin-dashboard.html');
     }
 ];
 
-const getController = [ '$rootScope', '$templateCache', 
-	(rootScope, $templateCache) => { 
+const getController = [ '$rootScope', '$templateCache',
+	(rootScope, $templateCache) => {
 		if($rootScope.Role === 'Student') $templateCache.get('StudentDashboardController as vm');
-		else $templateCache.get('ProfessorDashboardController as vm');
+		if($rootScope.Role === 'Professor') $templateCache.get('ProfessorDashboardController as vm');
+		if($rootScope.Role === 'Admin') $templateCache.get('AdminDashboardController as vm');
     }
 ];
 
-const onStateEnter = [ '$rootScope', 
-	rootScope => { 
+const onStateEnter = [ '$rootScope',
+	rootScope => {
 		rootScope.viewTitle  = "Inicio";
     	rootScope.viewStyles = "main dashboard";
     }

@@ -1,17 +1,23 @@
-ProfessorDashboardController.$inject = ['$rootScope', '$stateParams', 'TbUtils', 
-    'sections', 'students', 'tableContent'];
+ProfessorDashboardController.$inject = ['$rootScope', '$stateParams', 'TbUtils',
+    'sections', 'students', 'tableContent', '$state'];
 
-function ProfessorDashboardController($rootScope, $stateParams, TbUtils, sections, students, tableContent) {
+function ProfessorDashboardController($rootScope, $stateParams, TbUtils, sections, students, tableContent
+                                      , $state) {
     var vm = this;
 
     vm.currentProjects = [];
     vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo']);
-    vm.projectsTable = TbUtils.getTable(['Id Proyecto', 'Nombre', 'Evaluar Proyecto']);
+    vm.projectsTable = TbUtils.getTable(['Id Proyecto', 'Nombre']);
     vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
 
     vm.sectionsLoading = true;
     //vm.projectsLoading = true;
     vm.getCurrentProjects = getCurrentProjects;
+    vm.evaluateProjectButton = {
+      icon: 'glyphicon glyphicon-list-alt',
+      onClick: evaluateProject,
+      tooltip: 'Evaluar Proyecto'
+    }
 
     sections.getCurrentSections(currentSectionsSuccess, currentSectionsFail);
     console.log('Profesor');
@@ -82,13 +88,21 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
                     content: [
                         tableContent.createALableElement(project.ProjectId),
                         tableContent.createALableElement(project.Name)
+                        //tableContent.createAButtonElement(vm.evaluateProjectButton)
                     ],
 
                     data: project
                 };
 
-                vm.projectsTable.body.push(newTableElement);        
+                vm.projectsTable.body.push(newTableElement);
         }
+    }
+
+    function evaluateProject(row){
+      $state.go('main.evaluateproject', {
+          projectId: row.ProjectId
+      });
+      console.log(row);
     }
 
     function getProjectsFail(response) {

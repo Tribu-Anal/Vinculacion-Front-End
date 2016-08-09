@@ -150,8 +150,6 @@
   .tab-content .tab-pane {
     padding: 70px 0;
   }
-  /*Login Signup Page*/
-  /*Home Page*/
   .home {
     background: #f6f7fa;
   }
@@ -788,5 +786,9 @@
 }
 .table-hover tr{
   cursor: pointer;
+}
+.panel-primary > .panel-heading{
+  border-color: none;
+  background-color: #213250;
 }
 }

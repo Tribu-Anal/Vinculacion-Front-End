@@ -6,7 +6,8 @@ function students ($http) {
 	const service = {
 		get: get,
 		getHours: getHours,
-		getAccountId: getAccountId
+		getAccountId: getAccountId,
+		getSectionHours: getSectionHours
 	};
 
 	return service;
@@ -29,6 +30,12 @@ function students ($http) {
 				$http.get(url + '/Me').then(successCallback)
 						.catch(errorCallback);
 	}
+
+	function getSectionHours(accountId, sectionId, successCallback, errorCallback){
+				$http.get(url + '/'+accountId+'/Section/'+sectionId+'/Hours').then(successCallback)
+						.catch(errorCallback);
+	}
+
 }
 
 module.exports = { name: 'students', srvc: students };

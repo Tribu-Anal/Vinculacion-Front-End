@@ -1,9 +1,9 @@
 SectionParticipantsController.$inject = ['$stateParams', 'sections',
-    'TbUtils', 'tableContent', '$rootScope', 'hours', '$mdDialog'
+    'TbUtils', 'tableContent', '$rootScope', 'hours', '$mdDialog', 'students'
 ];
 
 function SectionParticipantsController($stateParams, sections,
-    TbUtils, tableContent, $rootScope, hours, $mdDialog) {
+    TbUtils, tableContent, $rootScope, hours, $mdDialog, students) {
     const vm = this;
     vm.participantsLoading = true;
     vm.editHours = {
@@ -24,39 +24,61 @@ function SectionParticipantsController($stateParams, sections,
 
 
     sections.getStudents($stateParams.sectionId, getStudentsSuccess, getStudentsFail);
-
     function getStudentsSuccess(response) {
         if (response.data.length <= 0)
             return;
         for (let i = 0; i < response.data.length; i++) {
             let student = response.data[i];
+            // students.getSectionHours(student.AccountId, $stateParams.sectionId, getStudentHoursSuccess, getStudentHoursFail)
             let newTableElement = {
                 content: [
                     tableContent.createALableElement(student.AccountId),
-                    tableContent.createALableElement(student.Name),
-                    tableContent.createALableElement('0')
+                    tableContent.createALableElement(student.Name)
+                    // tableContent.createALableElement();
                     /*
                     	TODO: cambiar ese 0 por el valor correspondiente
                     	no hay llamada en el api que me de las horas en un proyecto
-                    	específicio. 
+                    	específicio.
                     */
                 ],
                 data: student
             };
-            if ($rootScope.Role === 'Professor') {
-                let inputProperties = {
-                    type: 'number',
-                    min: 0,
-                    max: 100
-                }
-                newTableElement.content.push(
-                    tableContent.createAnInputElement(inputProperties)
-                );
-                newTableElement.content.push(
-                    tableContent.createAButtonElement(vm.addHours)
-                );
-            }
-            vm.studentsTable.body.push(newTableElement);
+            // if ($rootScope.Role === 'Professor') {
+            //     let inputProperties = {
+            //         type: 'number',
+            //         min: 0,
+            //         max: 100
+            //     }
+            //     newTableElement.content.push(
+            //         tableContent.createAnInputElement(inputProperties)
+            //     );
+            //     newTableElement.content.push(
+            //         tableContent.createAButtonElement(vm.addHours)
+            //     );
+            // }
+            students.getSectionHours(student.AccountId, $stateParams.sectionId,function(res){
+              newTableElement.content.push(
+                tableContent.createALableElement(res.data)
+              );
+              if ($rootScope.Role === 'Professor') {
+                  let inputProperties = {
+                      type: 'number',
+                      min: 0,
+                      max: 100
+                  }
+                  newTableElement.content.push(
+                      tableContent.createAnInputElement(inputProperties)
+                  );
+                  newTableElement.content.push(
+                      tableContent.createAButtonElement(vm.addHours)
+                  );
+                  vm.studentsTable.body.push(newTableElement);
+
+              }
+            }, function(res){
+              console.log(res);
+            });
+            // vm.studentsTable.body.push(newTableElement);
         }
         vm.participantsLoading = false;
     }
@@ -65,6 +87,18 @@ function SectionParticipantsController($stateParams, sections,
         vm.participantsLoading = false;
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron cargar los alumnos correctamente.');
+    }
+
+    function getStudentHours(accountId, sectionId, getStudentHoursSuccess, getStudentHoursFail){
+
+    }
+
+    function getStudentHoursSuccess(response){
+
+    }
+
+    function getStudentHoursFail(response){
+
     }
 
     function getInputValue() {
