@@ -1,11 +1,11 @@
 SectionController.$inject = ['$rootScope', '$stateParams', '$state',
     'TbUtils', 'ModalService', 'sections', 'projects', 'tableBuilder',
-    'hours'
+    'hours', 'tableContent'
 ];
 
 function SectionController($rootScope, $stateParams, $state,
     TbUtils, ModalService, sections, projects, tableBuilder,
-    hours) {
+    hours, tableContent) {
 
     const vm = this,
         sectionData = require('./section-data');
@@ -42,7 +42,7 @@ function SectionController($rootScope, $stateParams, $state,
             result => {
                 if (result) {
                     let obj = {
-                        AccountId: student.data.AccountId,
+                        AccountId: student.data.User.AccountId,
                         SectionId: parseInt($stateParams.sectionId),
                         ProjectId: parseInt(result.projectId),
                         Hour: result.hours
@@ -143,23 +143,35 @@ function SectionController($rootScope, $stateParams, $state,
             vm.sectionsLoading = false;
             return;
         }
-        /*
-            @TODO
-            Una columna mas para las horas de la seccion de cada alumno
-        */
 
-        const headers = ['Numero de Cuenta', 'Nombre'];
-        const buttons = [];
-
+        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas'])
         if ($rootScope.Role === 'Professor') {
-            headers.push('Editar Horas');
-            buttons.push(vm.editHoursBtn);
+            vm.studentsTable.headers.push('Editar Horas');
         }
-
-        headers.push('');
-        buttons.push(vm.deleteRowButton);
-
-        vm.studentsTable = tableBuilder.newTable(headers, response.data, ['AccountId', 'Name'], buttons);
+        if ($rootScope.Role !== 'Student')
+            vm.studentsTable.headers.push('');
+        for (let i = 0; i < response.data.length; i++) {
+            let student = response.data[i];
+            let element = {
+                data: student,
+                content: [
+                    tableContent.createALableElement(student.User.AccountId),
+                    tableContent.createALableElement(student.User.Name),
+                    tableContent.createALableElement(student.Hours)
+                ]
+            }
+            if ($rootScope.Role === 'Professor') {
+                element.content.push(
+                    tableContent.createAButtonElement(vm.editHoursBtn)
+                );
+            }
+            if ($rootScope.Role !== 'Student') {
+                element.content.push(
+                    tableContent.createAButtonElement(vm.deleteRowButton)
+                );
+            }
+            vm.studentsTable.body.push(element);
+        }
         vm.sectionsLoading = false;
     }
 
@@ -195,7 +207,7 @@ function SectionController($rootScope, $stateParams, $state,
 
     function getSectionSuccess(response) {
         vm.section = response.data;
-        sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
+        sections.getStudentsHoursBySectionId(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
 
     function getSectionFail(response) {
@@ -246,6 +258,7 @@ function SectionController($rootScope, $stateParams, $state,
     function postHoursSuccess() {
         TbUtils.displayNotification('success', 'Exitoso',
             'Horas registradas exitosamente.');
+        location.reload();
     }
 
 }
