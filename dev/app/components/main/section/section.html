@@ -1,32 +1,35 @@
 <div class="section-view">
-      <div class="container">
-          <div class="row">
-            <h1 class="col-md-10 class-style">{{vm.toTitleCase(vm.section.Class.Name)}}</h1>
-            <h2 class="col-md-5 professor">{{vm.toTitleCase(vm.section.User.Name)}}</h2>
-          </div>
-          <ul class="list">
-            <li class="row">
-              <label class="col-md-1">Codigo</label>
-              <label class="col-md-3 element"><strong>{{vm.toTitleCase(vm.section.Code)}}</strong></label>
-            </li>
-            <li class="row">
-              <label class="col-md-1">Periodo</label>
-              <label class="col-md-3 element"><strong>{{vm.section.Period.Number}}</strong></label>
-            </li>
-            <li class="row">
-              <label class="col-md-1">Año</label>
-              <label class="col-md-3 element"><strong>{{vm.section.Period.Year}}</strong></label>
-            </li>
-          </ul>
-          <button ng-show="Role === 'Admin' || Role === 'Professor'" type="button" class="btn btn-default edit-button" aria-label="Left Align"
-                    ng-click="vm.editSection()"
-                    style="margin-left:0; margin-top: 0; top: 55%; left: 35%; outline: none;" >
+
+    <div class="container">
+      <div class="col-xs-9 col-sm-7 col-md-7" style="margin-top: 15px;">
+        <div class="row">
+          <h1 class="col-xs-4 col-sm-5 col-md-10 class-style">{{vm.toTitleCase(vm.section.Class.Name)}}</h1>
+          <h2 class="col-xs-9 col-sm-8 col-md-5 professor">{{vm.toTitleCase(vm.section.User.Name)}}</h2>
+           <button ng-show="Role === 'Admin' || Role === 'Professor'" type="button" 
+              class="btn btn-default edit-button" 
+              aria-label="Left Align" ng-click="vm.editSection()">
               <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            </button>
-            <div style="padding-left: 35px;"ng-show="Role === 'Student'">
-              <h3><strong>Horas Acumuladas: N/A</strong></h3>
-            </div>
-          <img class="logo-image" src="img/logo.png" alt="" />
+          </button>
+        </div>
+        <ul class="list">
+          <li class="row">
+            <label class="col-md-2">Codigo</label>
+            <label class="col-md-3 element"><strong>{{vm.toTitleCase(vm.section.Code)}}</strong></label>
+          </li>
+          <li class="row">
+            <label class="col-md-1">Periodo</label>
+            <label class="col-md-3 element"><strong>{{vm.section.Period.Number}}</strong></label>
+          </li>
+          <li class="row">
+            <label class="col-md-1">Año</label>
+            <label class="col-md-3 element"><strong>{{vm.section.Period.Year}}</strong></label>
+          </li>
+        </ul>
+        <div style="padding-left: 20px;" ng-show="Role === 'Student'">
+          <h3><strong>Horas Acumuladas: N/A</strong></h3>
+        </div>
+      </div>
+      <img class="logo-image" src="img/logo.png"/>
     </div>
 
     <div ng-show="Role === 'Admin' || Role === 'Professor'">
