@@ -5,58 +5,58 @@ function closeSession () {
 module.exports = ($rootScope, $state, TbUtils) => {
 	return [
 		{
-			title: "INICIO", ref: 'main.'+$rootScope.Role.toLowerCase()+'-dashboard', url: '/inicio',
+			title: "INICIO", ref: 'main.'+$rootScope.Role.toLowerCase()+'-dashboard', url: '/inicio-'+$rootScope.Role.toLowerCase(),
 			icon: "glyphicon glyphicon-home",
-			active: $state.current.url.includes('/inicio'),
+			active: $state.current.url.includes('/inicio-'+$rootScope.Role.toLowerCase()),
 			show: true,
 			clicked:TbUtils.preventGeneralLoading
-		}, 
-		{ 
+		},
+		{
 			title: "PROYECTOS", ref: "main.projects", url: '/proyectos',
-	  		icon: "glyphicon glyphicon-th-large", 
+	  		icon: "glyphicon glyphicon-th-large",
 	  		active: $state.current.url.includes('/proyectos'),
 	  		show: $state.current.url !== '/registro-maestro/{accountId}',
-	  		clicked:TbUtils.preventGeneralLoading 
+	  		clicked:TbUtils.preventGeneralLoading
 	 	},
 
-	  	{ 
+	  	{
 	  		title: "REPORTES", ref: "main.reports", url: '/reportes',
-	  		icon: "glyphicon glyphicon-folder-open", 
+	  		icon: "glyphicon glyphicon-folder-open",
 		  	active: $state.current.url.includes('/reportes'),
 		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-			clicked: TbUtils.preventGeneralLoading 
+			clicked: TbUtils.preventGeneralLoading
 		},
 
-	  	{ 
+	  	{
 	  		title: "SECCIONES", ref: "main.sections", url: '/secciones',
-		  	icon: "glyphicon glyphicon-th-list", 
+		  	icon: "glyphicon glyphicon-th-list",
 		  	active: $state.current.url.includes('/secciones'),
-		  	show: $state.current.url !== '/registro-maestro/{accountId}' 
+		  	show: $state.current.url !== '/registro-maestro/{accountId}'
 		  	      && $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
-		  	clicked: TbUtils.preventGeneralLoading 
+		  	clicked: TbUtils.preventGeneralLoading
 	  	},
-	    
-	  	{ 
+
+	  	{
 		  	title: "NUEVO PROFESOR", ref: "main.newprofessor", url: '/nuevo-profesor',
-		  	icon: "glyphicon glyphicon-pencil", 
+		  	icon: "glyphicon glyphicon-pencil",
 		  	active: $state.current.url.includes('/nuevo-profesor'),
 		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-		  	clicked: TbUtils.preventGeneralLoading 
+		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
-	  	{ 
+	  	{
 		  	title: "FINIQUITOS", ref: "main.settlement", url: '/finiquitos',
-		  	icon: "glyphicon glyphicon-save-file", 
+		  	icon: "glyphicon glyphicon-save-file",
 		  	active: $state.current.url.includes('/finiquitos'),
 		  	show: $rootScope.Role === 'Admin',
-		  	clicked: TbUtils.preventGeneralLoading 
+		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
-	  	{ 
-	  		title: "LOG OUT", ref: "landing.login", 
+	  	{
+	  		title: "LOG OUT", ref: "landing.login",
 	  		icon: "glyphicon glyphicon-log-out", active: false,
 		  	show: $state.current.url !== '/registro-maestro/{accountId}',
-		  	clicked: closeSession 
+		  	clicked: closeSession
 	  	}
 	];
 };
