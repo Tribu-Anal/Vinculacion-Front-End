@@ -9,72 +9,38 @@ function SectionsController($rootScope, $scope, $state,
 
     var vm = this;
 
-    vm.totalSections = [];
-    vm.paginationSections = [];
     vm.limitInLettersToSearch = 3;
 
     vm.sectionsLoading = true;
     vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo', 'Año', 'Catedratico']);
-    vm.goSection = goSection;
     vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
 
-    vm.options = {};
-    vm.options.startingPage = 0;
-    vm.options.pageSize = 60;
-    vm.options.count = 0;
-    vm.onPageChange = onPageChange;
+    vm.options = {
+        startingPage: 1,
+        pageSize: 26
+    };
+
+    vm.sections = [];
 
     vm.loadMore = loadMore;
 
-    // sections.getSections(getSectionsSuccess, getSectionsFail);
+    sections.getCurrentPeriodSections(getCPSectionsSuccess, getCPSectionsFailure);
 
-    function goSection(index) {
-        console.log("Entro");
-    }
-
-    sections.getSections(getTotalSectionsSuccess, getTotalSectionsFail);
-
-    function getTotalSectionsSuccess(response) {
-        console.log(response);
-        TbUtils.fillListWithResponseData(response.data, vm.totalSections);
-    }
-
-    $scope.$watch('search.data', function(term) {
-        let obj = {
-            Class: {
-                Name: term
-            }
-        };
-
-        if(term && term.length >= vm.limitInLettersToSearch) {
-            let filterSections = {data: filterFilter(vm.totalSections, obj)};
-            let filterTable = [];
-            constructTableBody(filterSections, filterTable);
-            vm.sectionsTable.body = filterTable;
-        }
-
-        else {
-            console.log('vacio');
-            vm.sectionsTable.body = vm.paginationSections;
-        }
-    });
-
-    function getTotalSectionsFail(response) {
-        console.log(response);
-    }
-
-    function getSectionsSuccess(response) {
+    function getCPSectionsSuccess (response) {
         console.log(response.data.length);
         if (response.data.length <= 0) {
             vm.sectionsLoading = false;
             return;
         }
 
-        constructTableBody(response, vm.paginationSections);
+        constructTableBody(response, vm.sectionsTable.body);
 
-        vm.sectionsTable.body = vm.paginationSections;
         vm.sectionsLoading = false;
-    };
+    }
+
+    function getCPSectionsFailure (response) {
+        
+    }
 
     function constructTableBody(response, tableSections) {
         for (let i = 0; i < response.data.length; i++) {
@@ -95,41 +61,22 @@ function SectionsController($rootScope, $scope, $state,
                 data: section
             };
 
-            //vm.sectionsTable.body.push(newTableElement);
             tableSections.push(newTableElement);
         }
     }
 
-    sections.getSectionCount(getSectionCountSuccess, getSectionCountFail);
-
-    function getSectionCountSuccess(response) {
-        vm.options.count = response.data[0].Id;
-        vm.sectionsLoading = true;
+    function loadMore () {
         sections.getSectionsWithPagination(vm.options.startingPage,
             vm.options.pageSize, getSectionsSuccess, getSectionsFail);
     }
 
-    function getSectionCountFail() {
-        getSectionsFail();
+    function getSectionsSuccess (response) {
+        constructTableBody(response, vm.sectionsTable.body);
+        vm.options.startingPage++;
     }
 
-    function getSectionsFail() {
-        vm.sectionsLoading = false;
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron cargar las secciones correctamente.');
-    }
-
-    function onPageChange(skip, page) {
-        if($scope.search) $scope.search.data = '';
-        vm.sectionsTable.body = [];
-        vm.paginationSections = [];
-        vm.sectionsLoading = true;
-        sections.getSectionsWithPagination(page, skip,
-            getSectionsSuccess, getSectionsFail);
-    }
-
-    function loadMore () {
-        
+    function getSectionsFail (response) {
+        TbUtils.displayNotification('Error', 'Error', 'No se pudieron cargar mas proyectos.')
     }
 
 }
