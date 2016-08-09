@@ -46,9 +46,10 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
             console.log($rootScope.ProfessorDBId);
         }
 
-        //$location.path('/inicio');
-        //$state.go('dashboard-inicio');
-        $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
+        if ($rootScope.Role === 'Admin')
+            $state.go('main.projects');
+        else
+            $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
 
         vm.loading = false;
     }
