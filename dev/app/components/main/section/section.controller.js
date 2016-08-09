@@ -144,7 +144,7 @@ function SectionController($rootScope, $stateParams, $state,
             return;
         }
 
-        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas']);
+        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
         vm.studentsTable.actions = false;
         if ($rootScope.Role === 'Professor') {
             vm.studentsTable.headers.push('Editar Horas');
