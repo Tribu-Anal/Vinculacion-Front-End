@@ -26,10 +26,10 @@ function tableBuilder (tableContent) {
             }
 
             for (let k = 0; buttons && k < buttons.length; k++)
-                newTableElement.content.push(tableContent.createAButtonElement(buttons[i][k]));
+                newTableElement.content.push(tableContent.createAButtonElement(buttons[k]));
 
             for (let k = 0; inputs && k < inputs.length; k++)
-                newTableElement.content.push(tableContent.createAnInputElement(inputs[i][k]));
+                newTableElement.content.push(tableContent.createAnInputElement(inputs[k]));
 
             table.body.push(newTableElement);
         }
