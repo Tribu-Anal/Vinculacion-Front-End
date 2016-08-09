@@ -6,9 +6,7 @@
     align-items: center;
     font-size: 1em;
     border-radius: 50%;
-    margin-top: 2%;
-    margin-left: -8%;
-    position: absolute;
+    outline: none;
     background: #ccc;
   }
   .desc-section{
@@ -33,10 +31,9 @@
     width: 90%;
   }
   .logo-image{
-    position: absolute;
     width: 15%;
-    top: 15%;
-    left: 70%;
+    margin-top: 10%; 
+    margin-left: 10%;
   }
   .list{
     margin-top: 3%;
