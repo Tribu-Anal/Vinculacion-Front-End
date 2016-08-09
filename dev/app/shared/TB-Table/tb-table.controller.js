@@ -3,17 +3,23 @@ TbTableController.$inject = ['$scope', '$state'];
 function TbTableController($scope, $state) {
     var vm = this;
     vm.onRowClick = onRowClick;
+    vm.onBtnClick = onBtnClick;
+
+    let btnClicked = false;
 
     function onRowClick(row) {
-        console.log(row);
-        if ($scope.ref)
+        if (!btnClicked && $scope.ref)
             $state.go($scope.ref, {
                 sectionId: row.data.Id,
                 projectId: row.data.Id
             });
-        if (typeof $scope.onRowClick === 'function') {
-            $scope.onRowClick(row);
-        }
+
+        btnClicked = false;
+    }
+
+    function onBtnClick (row) {
+        btnClicked = true;
+        vm.loseFocus();
     }
 
     vm.loseFocus = function() {

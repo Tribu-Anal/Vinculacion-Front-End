@@ -14,7 +14,7 @@
   		  	ng-model="content.properties.value" min="{{content.properties.min}}" max="{{content.properties.max}}">
   		  	<p ng-if="content.typeObject == 'input'">{{content.properties.disable}}</p>
 			<button class="actions-button tb-tooltip" style="float:none;" ng-if="content.typeObject == 'button'" 
-				ng-click="vm.loseFocus()" ng-blur="content.properties.onClick($parent.$parent.$parent.body[Index])">
+				ng-click="vm.onBtnClick(row)" ng-blur="content.properties.onClick($parent.$parent.$parent.body[Index])">
 				<span class="glyphicon {{content.properties.icon}}" aria-hidden="true" ></span>
 				<span ng-show="content.properties.tooltip" class="tooltiptext">{{content.properties.tooltip}}</span>
 			</button>	  	
