@@ -40,7 +40,7 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
         }
 
         if ($location.path() === '/' && $rootScope.globals.token) {
-            $location.path('/inicio');
+            $location.path('/inicio-'+$rootScope.Role.toLowerCase());
         }
     }
 
