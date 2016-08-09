@@ -1,5 +1,5 @@
-<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
-<form>
+<md-dialog aria-label="Mango (Fruit)" ng-cloak>
+<form style="width: 350px;">
 	<md-toolbar>
 	<div class="md-toolbar-tools">
 		<h2>Editar Horas</h2>
@@ -9,7 +9,7 @@
 	<md-dialog-content>
 	<div class="md-dialog-content">
 		<div layout="row">
-			<md-input-container style="margin-right: 10px;">
+			<md-input-container style="margin-right: 10px; width: 100%;">
 			<label>Proyecto</label>
 			<md-select ng-model="response.projectId">
 			<md-option ng-repeat="item in projects" value="{{item.Id}}">{{item.Name}}</md-option>
@@ -17,7 +17,7 @@
 			</md-input-container>
 		</div>
 		<div layout="row">
-			<md-input-container>
+			<md-input-container style="width: 100%;">
 			<label>Horas</label>
 			<input ng-model="response.hours" type="number" min="0" max="100">
 			</md-input-container>
