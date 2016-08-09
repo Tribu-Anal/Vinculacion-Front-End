@@ -1,9 +1,11 @@
 SectionController.$inject = ['$rootScope', '$stateParams', '$state',
-    'TbUtils', 'ModalService', 'sections', 'projects', 'tableBuilder'
+    'TbUtils', 'ModalService', 'sections', 'projects', 'tableBuilder',
+    'hours'
 ];
 
 function SectionController($rootScope, $stateParams, $state,
-    TbUtils, ModalService, sections, projects, tableBuilder) {
+    TbUtils, ModalService, sections, projects, tableBuilder,
+    hours) {
 
     const vm = this,
         sectionData = require('./section-data');
@@ -31,23 +33,22 @@ function SectionController($rootScope, $stateParams, $state,
     };
     vm.student = undefined;
 
-    console.log($stateParams);
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
 
     function editHours(student) {
-        // No necesariamente vas a usar prompt, a lo mejor ocupas otras cosa de Angular Material
-        // TbUtils.prompt('Editar Horas', 'Cuales son las horas de ' + TbUtils.toTitleCase(student.data.Name) + '?',
-        //     '20', result => {
-        //         /*
-        //             @TODO
-        //             Mandar a llamar el endpoint de editar horas si todo salio bien
-        //          */
-        //     });
         TbUtils.customDialog(dialogController,
             'templates/components/main/section/dialogs/edit-hours.html',
             result => {
-
+                if (result) {
+                    let obj = {
+                        AccountId: student.data.AccountId,
+                        SectionId: parseInt($stateParams.sectionId),
+                        ProjectId: parseInt(result.projectId),
+                        Hour: result.hours
+                    };
+                    hours.postHours(obj, postHoursSuccess, postHoursFail);
+                }
             });
     }
 
@@ -142,8 +143,6 @@ function SectionController($rootScope, $stateParams, $state,
             vm.sectionsLoading = false;
             return;
         }
-        console.log(response);
-
         /*
             @TODO
             Una columna mas para las horas de la seccion de cada alumno
@@ -197,7 +196,6 @@ function SectionController($rootScope, $stateParams, $state,
     function getSectionSuccess(response) {
         vm.section = response.data;
         sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
-        console.log(vm.section);
     }
 
     function getSectionFail(response) {
@@ -209,15 +207,17 @@ function SectionController($rootScope, $stateParams, $state,
             'No se ha podido editar la seccion', 'Error');
     }
 
+    /*
+        TODO: Mejorar lo del controlador
+    */
     function dialogController($scope, $mdDialog, sections) {
         $scope.projects = [];
         $scope.response = {
             projectId: '',
             hours: ''
         }
-        
+
         $scope.answer = function(response) {
-            console.log(response);
             $mdDialog.hide(response);
         }
 
@@ -235,6 +235,17 @@ function SectionController($rootScope, $stateParams, $state,
         }, function(err) {
             console.log(err);
         });
+    }
+
+    function postHoursFail(response) {
+        console.log(response);
+        TbUtils.displayNotification('error', 'Error',
+            'No se pudieron registrar las horas');
+    }
+
+    function postHoursSuccess() {
+        TbUtils.displayNotification('success', 'Exitoso',
+            'Horas registradas exitosamente.');
     }
 
 }
