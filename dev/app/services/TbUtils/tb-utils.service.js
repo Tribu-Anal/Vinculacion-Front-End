@@ -1,6 +1,6 @@
-TbUtils.$inject = ['toaster', '$rootScope'];
+TbUtils.$inject = [ 'toaster', '$rootScope', '$mdDialog' ];
 
-function TbUtils(toaster, $rootScope) {
+function TbUtils(toaster, $rootScope, $mdDialog) {
     var service = {
         fillListWithResponseData: fillListWithResponseData,
         displayNotification: displayNotification,
@@ -11,7 +11,8 @@ function TbUtils(toaster, $rootScope) {
         getTable: getTable,
         setModalParams: setModalParams,
         getModalParams: getModalParams,
-        toTitleCase: toTitleCase
+        toTitleCase: toTitleCase,
+        confirm: confirm
     };
     var vm = this;
     vm.ModalParams;
@@ -90,6 +91,15 @@ function TbUtils(toaster, $rootScope) {
 
     function toCapitalize(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
+
+    function confirm (title, msg, callback) {
+        const confirm = $mdDialog.confirm()
+            .title(title)
+            .textContent(msg)
+            .ok('Aceptar')
+            .cancel('Cancelar');
+        $mdDialog.show(confirm).then(callback);
     }
 }
 
