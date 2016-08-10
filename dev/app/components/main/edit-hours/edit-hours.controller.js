@@ -5,7 +5,7 @@ EditHoursController.$inject = ['$stateParams', '$state', 'sections', 'projects',
 function EditHoursController($stateParams, $state, sections, projects,
     TbUtils, tableContent, $rootScope, hours, $mdDialog, students) {
     const vm = this;
-    console.log($stateParams.projectId);
+
     vm.participantsLoading = true;
     vm.editHours = {
         visible: $rootScope.Role === 'Professor',
@@ -47,7 +47,6 @@ function EditHoursController($stateParams, $state, sections, projects,
 
             vm.studentsTable.body.push(newTableElement);
         }
-        console.log(response);
         vm.participantsLoading = false;
     }
 
@@ -59,11 +58,10 @@ function EditHoursController($stateParams, $state, sections, projects,
 
     function getProjectSuccess(response) {
         vm.projectName = TbUtils.toTitleCase(response.data.Name);
-        console.log(response);
     }
 
     function getProjectFail(response) {
-        console.log(response);
+
     }
 
     function evaluateProject() {
@@ -118,7 +116,6 @@ function EditHoursController($stateParams, $state, sections, projects,
     }
 
     function postHoursFail(response) {
-        console.log(response);
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron registrar las horas');
     }

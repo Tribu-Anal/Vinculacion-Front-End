@@ -35,7 +35,6 @@ function sections($http) {
     }
 
     function deleteSection(sectionId, successCallback, errorCallback) {
-        console.log("Borrado");
         $http.delete(url + '/' + sectionId).then(successCallback)
             .catch(errorCallback);
     }

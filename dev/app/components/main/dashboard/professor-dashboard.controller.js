@@ -1,8 +1,8 @@
 ProfessorDashboardController.$inject = ['$rootScope', '$stateParams', 'TbUtils',
-    'sections', 'students', 'tableContent', '$state'];
+    'sections', 'students', 'tableContent', '$state'
+];
 
-function ProfessorDashboardController($rootScope, $stateParams, TbUtils, sections, students, tableContent
-                                      , $state) {
+function ProfessorDashboardController($rootScope, $stateParams, TbUtils, sections, students, tableContent, $state) {
     var vm = this;
 
     vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo']);
@@ -11,7 +11,6 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
     vm.sectionsLoading = true;
 
     sections.getCurrentSections(currentSectionsSuccess, currentSectionsFail);
-    console.log('Profesor');
 
     function currentSectionsSuccess(response) {
         if (response.data.length <= 0)
@@ -31,11 +30,9 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
         }
 
         vm.sectionsLoading = false;
-        console.log(vm.sectionsTable.body);
     }
 
     function currentSectionsFail(response) {
-        console.log(response);
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron cargar las secciones correctamente.');
     }
@@ -49,4 +46,7 @@ function ProfessorDashboardController($rootScope, $stateParams, TbUtils, section
     }
 }
 
-module.exports = { name: 'ProfessorDashboardController', ctrl: ProfessorDashboardController };
+module.exports = {
+    name: 'ProfessorDashboardController',
+    ctrl: ProfessorDashboardController
+};

@@ -8,7 +8,6 @@ function TbTableController($scope, $state, TbUtils) {
     let btnClicked = false;
 
     function onRowClick(row) {
-        console.log(row);
         if (!btnClicked && $scope.ref) {
             TbUtils.preventGeneralLoading();
             $state.go($scope.ref, {

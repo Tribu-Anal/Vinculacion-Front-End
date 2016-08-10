@@ -65,7 +65,7 @@ function ProjectFormController($rootScope, $state, $stateParams,
     }
 
     function updateProject() {
-        if(vm.project.SectionIds.length === 0)
+        if (vm.project.SectionIds.length === 0)
             vm.project.SectionIds = [0];
 
         projects.updateProject(editId, vm.project, updateSuccess, updateFailure);
@@ -116,7 +116,6 @@ function ProjectFormController($rootScope, $state, $stateParams,
     }
 
     function getMajorsFail(response) {
-        console.log(response);
         TbUtils.showErrorMessage('error', response,
             'Hay un problema con el servidor.' +
             ' No se ha podido obtener las carreras disponibles.',
@@ -125,7 +124,6 @@ function ProjectFormController($rootScope, $state, $stateParams,
     }
 
     function getSectionsFail(response) {
-        console.log(response);
         TbUtils.showErrorMessage('error', response,
             'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.',
             'Error');
@@ -149,4 +147,7 @@ function ProjectFormController($rootScope, $state, $stateParams,
     }
 }
 
-module.exports = { name: 'ProjectFormController', ctrl: ProjectFormController };
+module.exports = {
+    name: 'ProjectFormController',
+    ctrl: ProjectFormController
+};
