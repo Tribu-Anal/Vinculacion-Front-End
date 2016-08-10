@@ -8,9 +8,10 @@ function TbTableController($scope, $state) {
     let btnClicked = false;
 
     function onRowClick(row) {
+        console.log(row);
         if (!btnClicked && $scope.ref)
             $state.go($scope.ref, {
-                sectionId: row.data.Id,
+                sectionId: row.data.sectionId ? row.data.sectionId : row.data.Id,
                 projectId: row.data.Id
             });
 

@@ -64,15 +64,15 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getProjectsSuccess(response) {
+        console.log(response);
         const headers = ['Id Proyecto', 'Nombre'];
-        let buttons = undefined;
 
-        if ($rootScope.Role === 'Professor') {
-            headers.push('Evaluar Proyecto');
-            buttons = [vm.evalProjectBtn];
+        for(prj in response.data) {
+            response.data[prj].sectionId = $stateParams.sectionId;
         }
 
-        vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name'], buttons);
+        vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name']);
+        console.log(vm.projectsTable);
     }
 
     function getProjectsFail(response) {
