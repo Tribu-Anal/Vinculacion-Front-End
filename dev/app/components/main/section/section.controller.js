@@ -156,7 +156,8 @@ function SectionController($rootScope, $stateParams, $state,
             return;
         }
 
-        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
+        //vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
+        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
         vm.studentsTable.actions = false;
 
         if ($rootScope.Role !== 'Student')
@@ -168,8 +169,8 @@ function SectionController($rootScope, $stateParams, $state,
                 data: student,
                 content: [
                     tableContent.createALableElement(student.User.AccountId),
-                    tableContent.createALableElement(student.User.Name),
-                    tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
+                    tableContent.createALableElement(student.User.Name)
+                    //tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
                 ]
             }
 
