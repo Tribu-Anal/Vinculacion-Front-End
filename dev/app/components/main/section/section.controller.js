@@ -39,11 +39,11 @@ function SectionController($rootScope, $stateParams, $state,
     function getAccountIdSuccess(response){
       vm.accountId = response.data.AccountId;
       students.getSectionHours(vm.accountId, getSectionHoursSuccess, getSectionHoursFail);
-      console.log(response);
     }
 
     function getAccountIdFail(response){
-      console.log(response);
+      TbUtils.displayNotification('error', 'Error!',
+          'No se ha podido cargar la seccion correctamente');
     }
 
     function getSectionHoursSuccess(response){
@@ -53,11 +53,11 @@ function SectionController($rootScope, $stateParams, $state,
           vm.sectionhours = vm.sections[obj].HoursWorked;
         }
       }
-      console.log(response);
     }
 
     function getSectionHoursFail(response){
-      console.log(response);
+      TbUtils.displayNotification('error', 'Error!',
+          'No se ha podido cargar las horas correspondientes de la seccion');
     }
 
     function goToProjectEval(project) {
