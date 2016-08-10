@@ -12,7 +12,10 @@ function SectionController($rootScope, $stateParams, $state,
 
     var modalFlag = '';
 
-    vm.sectionsLoading = true;
+    vm.sectionLoading = true;
+    vm.projectsLoading = true;
+    vm.hoursLoading = true;
+    vm.studentsLoading = true;
     vm.addStudent = addStudent;
     vm.accountId = null;
     vm.sections = [];
@@ -42,6 +45,7 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getAccountIdFail(response){
+      vm.hoursLoading = false;
       TbUtils.displayNotification('error', 'Error!',
           'No se ha podido cargar la seccion correctamente');
     }
@@ -53,9 +57,11 @@ function SectionController($rootScope, $stateParams, $state,
           vm.sectionhours = vm.sections[obj].HoursWorked;
         }
       }
+      vm.hoursLoading = false;
     }
 
     function getSectionHoursFail(response){
+      vm.hoursLoading = false;
       TbUtils.displayNotification('error', 'Error!',
           'No se ha podido cargar las horas correspondientes de la seccion');
     }
@@ -79,9 +85,11 @@ function SectionController($rootScope, $stateParams, $state,
         }
 
         vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name']);
+        vm.projectsLoading = false;
     }
 
     function getProjectsFail(response) {
+        vm.projectsLoading = false;
         TbUtils.displayNotification('error', 'Error!',
             'No se ha podido cargar los proyectos de la seccion');
     }
@@ -144,7 +152,7 @@ function SectionController($rootScope, $stateParams, $state,
 
     function getStudentsSuccess(response) {
         if (response.data.length <= 0) {
-            vm.sectionsLoading = false;
+            vm.studentsLoading = false;
             return;
         }
 
@@ -172,10 +180,11 @@ function SectionController($rootScope, $stateParams, $state,
             }
             vm.studentsTable.body.push(element);
         }
-        vm.sectionsLoading = false;
+        vm.studentsLoading = false;
     }
 
     function getStudentsFail(response) {
+        vm.studentsLoading = false;
         TbUtils.showErrorMessage('error', response.data, 'Error',
             'No se ha podido obtener los estudiantes de la seccion.');
     }
@@ -206,11 +215,13 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getSectionSuccess(response) {
+        vm.sectionLoading = false;
         vm.section = response.data;
         sections.getStudentsHoursBySectionId(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
 
     function getSectionFail(response) {
+        vm.sectionLoading = false;
         TbUtils.showErrorMessage('error', response.data, 'Error',
             'No se ha podido obtener las secciones.');
     }

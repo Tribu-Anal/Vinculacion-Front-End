@@ -50,7 +50,7 @@
                     class="mouse-hover">
         </tb-table>
       </div>
-    <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
+    <tb-loading class="main-loader" ng-show="vm.sectionLoading || vm.projectsLoading || vm.hoursLoading || vm.studentsLoading"></tb-loading>
 </div>
 <tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ng-click="vm.addStudent()">+
 </tb-round-btn>
