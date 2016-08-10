@@ -28,6 +28,7 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   }
 
   function goToSection(id){
+    TbUtils.preventGeneralLoading();
     $state.go('main.section',{
       sectionId: id
     });
