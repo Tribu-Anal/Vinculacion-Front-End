@@ -1,6 +1,6 @@
 <tb-search-field></tb-search-field>
-<div class="gallery">
 <tb-paginator ng-hide="search.data" options="vm.options" on-page-change="vm.onPageChange"></tb-paginator>
+<div class="gallery" style="top: 22%; left: 5%;">
 	<div class="card" ng-repeat="prj in vm.projects" title="{{prj.Description}}">
 		<span class="icon-group" ng-show="Role === 'Admin'">
 			<i class="glyphicon glyphicon-remove"
