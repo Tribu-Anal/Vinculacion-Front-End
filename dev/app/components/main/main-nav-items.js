@@ -46,7 +46,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 
 	  	{
 		  	title: "FINIQUITOS", ref: "main.settlement", url: '/finiquitos',
-		  	icon: "glyphicon glyphicon-save-file",
+		  	icon: "glyphicon glyphicon-list-alt",
 		  	active: $state.current.url.includes('/finiquitos'),
 		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
