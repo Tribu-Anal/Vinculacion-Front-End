@@ -5,100 +5,64 @@ EditHoursController.$inject = ['$stateParams', 'sections',
 function EditHoursController($stateParams, sections,
     TbUtils, tableContent, $rootScope, hours, $mdDialog, students) {
     const vm = this;
+    console.log("Estoy aqui lol");
     vm.participantsLoading = true;
     vm.editHours = {
         visible: $rootScope.Role === 'Professor',
         value: false,
         text: 'Habilitar la edición de las horas'
     }
+    vm.savebutton = false;
+    vm.triggerButton = triggerButton;
     vm.addHours = {
         onClick: addHours,
         icon: 'glyphicon-plus',
         tooltip: 'Agregar horas'
     }
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre', 'Horas en este proyecto']);
-    if ($rootScope.Role === 'Professor') {
-        vm.studentsTable.headers.push('Horas Trabajadas');
-        vm.studentsTable.headers.push(' ');
-    }
+    // if ($rootScope.Role === 'Professor') {
+    //     vm.studentsTable.headers.push('Horas Trabajadas');
+    //     vm.studentsTable.headers.push(' ');
+    // }
 
-
-    sections.getStudents($stateParams.sectionId, getStudentsSuccess, getStudentsFail);
-    function getStudentsSuccess(response) {
+    sections.getStudentsHoursBySectionId($stateParams.sectionId, getStudentsHoursSuccess, getStudentsHoursFail);
+    function getStudentsHoursSuccess(response) {
         if (response.data.length <= 0)
             return;
         for (let i = 0; i < response.data.length; i++) {
             let student = response.data[i];
-            // students.getSectionHours(student.AccountId, $stateParams.sectionId, getStudentHoursSuccess, getStudentHoursFail)
+            let inputProperties = {
+              value: student.Hours,
+              type: 'number',
+              min: 0,
+              max: 100
+            };
             let newTableElement = {
                 content: [
-                    tableContent.createALableElement(student.AccountId),
-                    tableContent.createALableElement(student.Name)
-                    // tableContent.createALableElement();
-                    /*
-                    	TODO: cambiar ese 0 por el valor correspondiente
-                    	no hay llamada en el api que me de las horas en un proyecto
-                    	específicio.
-                    */
+                    tableContent.createALableElement(student.User.AccountId),
+                    tableContent.createALableElement(student.User.Name),
+                    tableContent.createAnInputElement(inputProperties)
                 ],
                 data: student
             };
-            // if ($rootScope.Role === 'Professor') {
-            //     let inputProperties = {
-            //         type: 'number',
-            //         min: 0,
-            //         max: 100
-            //     }
-            //     newTableElement.content.push(
-            //         tableContent.createAnInputElement(inputProperties)
-            //     );
-            //     newTableElement.content.push(
-            //         tableContent.createAButtonElement(vm.addHours)
-            //     );
-            // }
-            students.getSectionHours(student.AccountId, $stateParams.sectionId,function(res){
-              newTableElement.content.push(
-                tableContent.createALableElement(res.data)
-              );
-              if ($rootScope.Role === 'Professor') {
-                  let inputProperties = {
-                      type: 'number',
-                      min: 0,
-                      max: 100
-                  }
-                  newTableElement.content.push(
-                      tableContent.createAnInputElement(inputProperties)
-                  );
-                  newTableElement.content.push(
-                      tableContent.createAButtonElement(vm.addHours)
-                  );
-                  vm.studentsTable.body.push(newTableElement);
 
-              }
-            }, function(res){
-              console.log(res);
-            });
-            // vm.studentsTable.body.push(newTableElement);
+            vm.studentsTable.body.push(newTableElement);
         }
+        console.log(response);
         vm.participantsLoading = false;
     }
 
-    function getStudentsFail() {
+    function getStudentsHoursFail() {
         vm.participantsLoading = false;
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron cargar los alumnos correctamente.');
     }
 
-    function getStudentHours(accountId, sectionId, getStudentHoursSuccess, getStudentHoursFail){
-
-    }
-
-    function getStudentHoursSuccess(response){
-
-    }
-
-    function getStudentHoursFail(response){
-
+    function triggerButton(){
+      if(!vm.savebutton)
+        vm.savebutton = true;
+      else
+        vm.savebutton = false;
     }
 
     function getInputValue() {
