@@ -1,11 +1,11 @@
 SectionController.$inject = ['$rootScope', '$stateParams', '$state',
     'TbUtils', 'ModalService', 'sections', 'projects', 'tableBuilder',
-    'hours', 'tableContent'
+    'hours', 'tableContent', 'students'
 ];
 
 function SectionController($rootScope, $stateParams, $state,
     TbUtils, ModalService, sections, projects, tableBuilder,
-    hours, tableContent) {
+    hours, tableContent, students) {
 
     const vm = this,
         sectionData = require('./section-data');
@@ -14,6 +14,9 @@ function SectionController($rootScope, $stateParams, $state,
 
     vm.sectionsLoading = true;
     vm.addStudent = addStudent;
+    vm.accountId = null;
+    vm.sections = [];
+    vm.sectionhours = null;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
     vm.evalProjectBtn = {
@@ -31,6 +34,31 @@ function SectionController($rootScope, $stateParams, $state,
 
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
+    students.getAccountId(getAccountIdSuccess, getAccountIdFail);
+
+    function getAccountIdSuccess(response){
+      vm.accountId = response.data.AccountId;
+      students.getSectionHours(vm.accountId, getSectionHoursSuccess, getSectionHoursFail);
+      console.log(response);
+    }
+
+    function getAccountIdFail(response){
+      console.log(response);
+    }
+
+    function getSectionHoursSuccess(response){
+      vm.sections = response.data;
+      for(obj in vm.sections){
+        if($stateParams.sectionId == vm.sections[obj].Id){
+          vm.sectionhours = vm.sections[obj].HoursWorked;
+        }
+      }
+      console.log(response);
+    }
+
+    function getSectionHoursFail(response){
+      console.log(response);
+    }
 
     function goToProjectEval(project) {
         TbUtils.preventGeneralLoading();
