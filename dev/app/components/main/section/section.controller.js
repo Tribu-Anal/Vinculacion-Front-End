@@ -22,11 +22,6 @@ function SectionController($rootScope, $stateParams, $state,
     vm.sectionhours = null;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
-    vm.evalProjectBtn = {
-        icon: 'glyphicon glyphicon-list-alt',
-        onClick: goToProjectEval,
-        tooltip: 'Evaluar Proyecto'
-    };
     vm.deleteRowButton = {
         icon: 'glyphicon-trash',
         onClick: deleteStudent,
@@ -37,7 +32,11 @@ function SectionController($rootScope, $stateParams, $state,
 
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
-    students.getAccountId(getAccountIdSuccess, getAccountIdFail);
+    
+    if ($rootScope.Role === 'Student')
+        students.getAccountId(getAccountIdSuccess, getAccountIdFail);
+    else
+        vm.hoursLoading = false;
 
     function getAccountIdSuccess(response){
       vm.accountId = response.data.AccountId;
@@ -64,13 +63,6 @@ function SectionController($rootScope, $stateParams, $state,
       vm.hoursLoading = false;
       TbUtils.displayNotification('error', 'Error!',
           'No se ha podido cargar las horas correspondientes de la seccion');
-    }
-
-    function goToProjectEval(project) {
-        TbUtils.preventGeneralLoading();
-        $state.go('main.evaluateproject', {
-            projectId: project.data.Id
-        });
     }
 
     function getProjectsBySection(sectionId) {
