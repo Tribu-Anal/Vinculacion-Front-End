@@ -1,6 +1,6 @@
-TbTableController.$inject = ['$scope', '$state'];
+TbTableController.$inject = ['$scope', '$state', 'TbUtils'];
 
-function TbTableController($scope, $state) {
+function TbTableController($scope, $state, TbUtils) {
     var vm = this;
     vm.onRowClick = onRowClick;
     vm.onBtnClick = onBtnClick;
@@ -9,12 +9,14 @@ function TbTableController($scope, $state) {
 
     function onRowClick(row) {
         console.log(row);
-        if (!btnClicked && $scope.ref)
+        if (!btnClicked && $scope.ref) {
+            TbUtils.preventGeneralLoading();
             $state.go($scope.ref, {
                 sectionId: row.data.sectionId ? row.data.sectionId : row.data.Id,
                 projectId: row.data.Id
             });
-
+        }
+            
         btnClicked = false;
     }
 
