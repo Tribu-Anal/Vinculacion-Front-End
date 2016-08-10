@@ -22,7 +22,7 @@ function EditHoursController($stateParams, $state, sections, projects,
         tooltip: 'Agregar horas'
     }
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre', 'Horas en este proyecto']);
-    sections.getStudentsHoursBySectionProjectId($stateParams.sectionId,$stateParams.projectId, getStudentsHoursSuccess, getStudentsHoursFail);
+    sections.getStudentsHoursBySectionProjectId($stateParams.sectionId, $stateParams.projectId, getStudentsHoursSuccess, getStudentsHoursFail);
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
 
     function getStudentsHoursSuccess(response) {
@@ -31,7 +31,7 @@ function EditHoursController($stateParams, $state, sections, projects,
         for (let i = 0; i < response.data.length; i++) {
             let student = response.data[i];
             let inputProperties = {
-                value: /*student.Hours[0]*/ 0,
+                value: student.Hours[0] ? student.Hours[0].Amount : 0,
                 type: 'number',
                 min: 0,
                 max: 100
@@ -76,7 +76,7 @@ function EditHoursController($stateParams, $state, sections, projects,
             let student = vm.studentsTable.body[i];
             let element = {
                 AccountId: student.data.Students.AccountId,
-                HourId: -1,
+                HourId: student.data.Hours[0] ? student.data.Hours[0].Id : -1,
                 Hour: student.content[2].properties.value
             }
             table.push(element);
