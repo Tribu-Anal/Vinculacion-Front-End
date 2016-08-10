@@ -10,8 +10,10 @@
 		style="margin-bottom: 40px;">
 		</tb-table>
 	</div>
-	<div style="display: flex; justify-content: center;">
-		<div class="load-more" style="margin-bottom: 15px;" ng-click="vm.loadMore()">Cargar Secciones Antiguas</div>
+	<div style="display: flex; justify-content: center;" ng-hide="vm.searching">
+		<div class="load-more" style="margin-bottom: 15px;" ng-click="vm.loadMore()">
+			Cargar Secciones Antiguas
+		</div>
 	</div>
 	<tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
 	<tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ui-sref="main.newsection"
