@@ -1,5 +1,16 @@
-.section-participants {
+.edit-hours {
 	.switch{
 		padding-left: 3%;
+	}
+	.btn.btn-lg.center-block.save-hours{
+		background-color: #213250;
+		color: #fff;
+		outline:none;
+		border:none;
+
+	}
+	.btn.btn-lg.center-block.save-hours:hover{
+		font-size: 20px;
+		background-color: #e01e26;
 	}
 }
