@@ -119,8 +119,7 @@ function SectionController($rootScope, $stateParams, $state,
             vm.sectionsLoading = false;
             return;
         }
-
-        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
+        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
         vm.studentsTable.actions = false;
 
         if ($rootScope.Role !== 'Student')
@@ -131,9 +130,8 @@ function SectionController($rootScope, $stateParams, $state,
             let element = {
                 data: student,
                 content: [
-                    tableContent.createALableElement(student.User.AccountId),
-                    tableContent.createALableElement(student.User.Name),
-                    tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
+                    tableContent.createALableElement(student.AccountId),
+                    tableContent.createALableElement(student.Name)
                 ]
             }
 
@@ -179,7 +177,7 @@ function SectionController($rootScope, $stateParams, $state,
 
     function getSectionSuccess(response) {
         vm.section = response.data;
-        sections.getStudentsHoursBySectionId(vm.section.Id, getStudentsSuccess, getStudentsFail);
+        sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
 
     function getSectionFail(response) {
