@@ -16,11 +16,6 @@ function SectionController($rootScope, $stateParams, $state,
     vm.addStudent = addStudent;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
-    vm.editHoursBtn = {
-        icon: 'glyphicon glyphicon-pencil',
-        onClick: editHours,
-        tooltip: 'Editar Horas'
-    };
     vm.evalProjectBtn = {
         icon: 'glyphicon glyphicon-list-alt',
         onClick: goToProjectEval,
@@ -31,26 +26,11 @@ function SectionController($rootScope, $stateParams, $state,
         onClick: deleteStudent,
         tooltip: 'Eliminar Alumno'
     };
+
     vm.student = undefined;
 
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
-
-    function editHours(student) {
-        TbUtils.customDialog(dialogController,
-            'templates/components/main/section/dialogs/edit-hours.html',
-            result => {
-                if (result) {
-                    let obj = {
-                        AccountId: student.data.User.AccountId,
-                        SectionId: parseInt($stateParams.sectionId),
-                        ProjectId: parseInt(result.projectId),
-                        Hour: result.hours
-                    };
-                    hours.postHours(obj, postHoursSuccess, postHoursFail);
-                }
-            });
-    }
 
     function goToProjectEval(project) {
         TbUtils.preventGeneralLoading();
@@ -146,11 +126,10 @@ function SectionController($rootScope, $stateParams, $state,
 
         vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
         vm.studentsTable.actions = false;
-        if ($rootScope.Role === 'Professor') {
-            vm.studentsTable.headers.push('Editar Horas');
-        }
+
         if ($rootScope.Role !== 'Student')
             vm.studentsTable.headers.push('');
+
         for (let i = 0; i < response.data.length; i++) {
             let student = response.data[i];
             let element = {
@@ -161,11 +140,7 @@ function SectionController($rootScope, $stateParams, $state,
                     tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
                 ]
             }
-            if ($rootScope.Role === 'Professor') {
-                element.content.push(
-                    tableContent.createAButtonElement(vm.editHoursBtn)
-                );
-            }
+            
             if ($rootScope.Role !== 'Student') {
                 element.content.push(
                     tableContent.createAButtonElement(vm.deleteRowButton)
@@ -249,19 +224,6 @@ function SectionController($rootScope, $stateParams, $state,
             console.log(err);
         });
     }
-
-    function postHoursFail(response) {
-        console.log(response);
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron registrar las horas');
-    }
-
-    function postHoursSuccess() {
-        TbUtils.displayNotification('success', 'Exitoso',
-            'Horas registradas exitosamente.');
-        location.reload();
-    }
-
 }
 
 module.exports = {
