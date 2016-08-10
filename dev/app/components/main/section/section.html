@@ -26,7 +26,7 @@
           </li>
         </ul>
         <div style="padding-left: 20px;" ng-show="Role === 'Student'">
-          <h3><strong>Horas Acumuladas: N/A</strong></h3>
+          <h3><strong>Horas Acumuladas: {{vm.sectionhours}}</strong></h3>
         </div>
       </div>
       <img class="logo-image" src="img/logo.png"/>
@@ -50,7 +50,7 @@
                     class="mouse-hover">
         </tb-table>
       </div>
-    <tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
+    <tb-loading class="main-loader" ng-show="vm.sectionLoading || vm.projectsLoading || vm.hoursLoading || vm.studentsLoading"></tb-loading>
 </div>
 <tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ng-click="vm.addStudent()">+
 </tb-round-btn>

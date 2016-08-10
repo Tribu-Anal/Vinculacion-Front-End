@@ -31,8 +31,8 @@ function students ($http) {
 						.catch(errorCallback);
 	}
 
-	function getSectionHours(accountId, sectionId, successCallback, errorCallback){
-				$http.get(url + '/'+accountId+'/Section/'+sectionId+'/Hours').then(successCallback)
+	function getSectionHours(accountId, successCallback, errorCallback){
+				$http.get(url + '/'+accountId+'/SectionHours').then(successCallback)
 						.catch(errorCallback);
 	}
 

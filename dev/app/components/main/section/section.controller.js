@@ -1,19 +1,25 @@
 SectionController.$inject = ['$rootScope', '$stateParams', '$state',
     'TbUtils', 'ModalService', 'sections', 'projects', 'tableBuilder',
-    'hours', 'tableContent'
+    'hours', 'tableContent', 'students'
 ];
 
 function SectionController($rootScope, $stateParams, $state,
     TbUtils, ModalService, sections, projects, tableBuilder,
-    hours, tableContent) {
+    hours, tableContent, students) {
 
     const vm = this,
         sectionData = require('./section-data');
 
     var modalFlag = '';
 
-    vm.sectionsLoading = true;
+    vm.sectionLoading = true;
+    vm.projectsLoading = true;
+    vm.hoursLoading = true;
+    vm.studentsLoading = true;
     vm.addStudent = addStudent;
+    vm.accountId = null;
+    vm.sections = [];
+    vm.sectionhours = null;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
     vm.evalProjectBtn = {
@@ -31,6 +37,34 @@ function SectionController($rootScope, $stateParams, $state,
 
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
+    students.getAccountId(getAccountIdSuccess, getAccountIdFail);
+
+    function getAccountIdSuccess(response){
+      vm.accountId = response.data.AccountId;
+      students.getSectionHours(vm.accountId, getSectionHoursSuccess, getSectionHoursFail);
+    }
+
+    function getAccountIdFail(response){
+      vm.hoursLoading = false;
+      TbUtils.displayNotification('error', 'Error!',
+          'No se ha podido cargar la seccion correctamente');
+    }
+
+    function getSectionHoursSuccess(response){
+      vm.sections = response.data;
+      for(obj in vm.sections){
+        if($stateParams.sectionId == vm.sections[obj].Id){
+          vm.sectionhours = vm.sections[obj].HoursWorked;
+        }
+      }
+      vm.hoursLoading = false;
+    }
+
+    function getSectionHoursFail(response){
+      vm.hoursLoading = false;
+      TbUtils.displayNotification('error', 'Error!',
+          'No se ha podido cargar las horas correspondientes de la seccion');
+    }
 
     function goToProjectEval(project) {
         TbUtils.preventGeneralLoading();
@@ -51,9 +85,11 @@ function SectionController($rootScope, $stateParams, $state,
         }
 
         vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name']);
+        vm.projectsLoading = false;
     }
 
     function getProjectsFail(response) {
+        vm.projectsLoading = false;
         TbUtils.displayNotification('error', 'Error!',
             'No se ha podido cargar los proyectos de la seccion');
     }
@@ -116,7 +152,7 @@ function SectionController($rootScope, $stateParams, $state,
 
     function getStudentsSuccess(response) {
         if (response.data.length <= 0) {
-            vm.sectionsLoading = false;
+            vm.studentsLoading = false;
             return;
         }
         vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
@@ -142,10 +178,11 @@ function SectionController($rootScope, $stateParams, $state,
             }
             vm.studentsTable.body.push(element);
         }
-        vm.sectionsLoading = false;
+        vm.studentsLoading = false;
     }
 
     function getStudentsFail(response) {
+        vm.studentsLoading = false;
         TbUtils.showErrorMessage('error', response.data, 'Error',
             'No se ha podido obtener los estudiantes de la seccion.');
     }
@@ -176,11 +213,13 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getSectionSuccess(response) {
+        vm.sectionLoading = false;
         vm.section = response.data;
         sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
 
     function getSectionFail(response) {
+        vm.sectionLoading = false;
         TbUtils.showErrorMessage('error', response.data, 'Error',
             'No se ha podido obtener las secciones.');
     }
