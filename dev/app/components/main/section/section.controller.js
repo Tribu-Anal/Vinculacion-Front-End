@@ -16,11 +16,6 @@ function SectionController($rootScope, $stateParams, $state,
     vm.addStudent = addStudent;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
-    vm.editHoursBtn = {
-        icon: 'glyphicon glyphicon-pencil',
-        onClick: editHours,
-        tooltip: 'Editar Horas'
-    };
     vm.evalProjectBtn = {
         icon: 'glyphicon glyphicon-list-alt',
         onClick: goToProjectEval,
@@ -31,26 +26,11 @@ function SectionController($rootScope, $stateParams, $state,
         onClick: deleteStudent,
         tooltip: 'Eliminar Alumno'
     };
+
     vm.student = undefined;
 
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
-
-    function editHours(student) {
-        TbUtils.customDialog(dialogController,
-            'templates/components/main/section/dialogs/edit-hours.html',
-            result => {
-                if (result) {
-                    let obj = {
-                        AccountId: student.data.User.AccountId,
-                        SectionId: parseInt($stateParams.sectionId),
-                        ProjectId: parseInt(result.projectId),
-                        Hour: result.hours
-                    };
-                    hours.postHours(obj, postHoursSuccess, postHoursFail);
-                }
-            });
-    }
 
     function goToProjectEval(project) {
         TbUtils.preventGeneralLoading();
@@ -65,18 +45,15 @@ function SectionController($rootScope, $stateParams, $state,
 
     function getProjectsSuccess(response) {
         const headers = ['Id Proyecto', 'Nombre'];
-        let buttons = undefined;
 
-        if ($rootScope.Role === 'Professor') {
-            headers.push('Evaluar Proyecto');
-            buttons = [vm.evalProjectBtn];
+        for(prj in response.data) {
+            response.data[prj].sectionId = $stateParams.sectionId;
         }
 
-        vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name'], buttons);
+        vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name']);
     }
 
     function getProjectsFail(response) {
-        console.log(response);
         TbUtils.displayNotification('error', 'Error!',
             'No se ha podido cargar los proyectos de la seccion');
     }
@@ -133,7 +110,6 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function addStudentFail(response) {
-        console.log(response);
         TbUtils.showErrorMessage('error', response,
             'No se ha podido agregar el estudiante', 'Error');
     }
@@ -146,11 +122,10 @@ function SectionController($rootScope, $stateParams, $state,
 
         vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
         vm.studentsTable.actions = false;
-        if ($rootScope.Role === 'Professor') {
-            vm.studentsTable.headers.push('Editar Horas');
-        }
+
         if ($rootScope.Role !== 'Student')
             vm.studentsTable.headers.push('');
+
         for (let i = 0; i < response.data.length; i++) {
             let student = response.data[i];
             let element = {
@@ -161,11 +136,7 @@ function SectionController($rootScope, $stateParams, $state,
                     tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
                 ]
             }
-            if ($rootScope.Role === 'Professor') {
-                element.content.push(
-                    tableContent.createAButtonElement(vm.editHoursBtn)
-                );
-            }
+
             if ($rootScope.Role !== 'Student') {
                 element.content.push(
                     tableContent.createAButtonElement(vm.deleteRowButton)
@@ -197,7 +168,7 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function removeStudentFail(response) {
-        TbUtils.showErrorMessage('error', response,
+        TbUtils.showErrorMessage('error', response.data,
             'No se ha podido eliminar al estudiante', 'Error');
     }
 
@@ -212,11 +183,12 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getSectionFail(response) {
-        console.log(response);
+        TbUtils.showErrorMessage('error', response.data, 'Error',
+            'No se ha podido obtener las secciones.');
     }
 
     function updateSectionFail(response) {
-        TbUtils.showErrorMessage('error', response,
+        TbUtils.showErrorMessage('error', response.data,
             'No se ha podido editar la seccion', 'Error');
     }
 
@@ -246,22 +218,10 @@ function SectionController($rootScope, $stateParams, $state,
                 }
             }
         }, function(err) {
-            console.log(err);
+        TbUtils.showErrorMessage('error', response.data,
+            'No se ha podido editar la seccion', 'Error');
         });
     }
-
-    function postHoursFail(response) {
-        console.log(response);
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron registrar las horas');
-    }
-
-    function postHoursSuccess() {
-        TbUtils.displayNotification('success', 'Exitoso',
-            'Horas registradas exitosamente.');
-        location.reload();
-    }
-
 }
 
 module.exports = {
