@@ -1,8 +1,8 @@
-EditHoursController.$inject = ['$stateParams', '$state', 'sections',
+EditHoursController.$inject = ['$stateParams', '$state', 'sections', 'projects',
     'TbUtils', 'tableContent', '$rootScope', 'hours', '$mdDialog', 'students'
 ];
 
-function EditHoursController($stateParams, $state, sections,
+function EditHoursController($stateParams, $state, sections, projects,
     TbUtils, tableContent, $rootScope, hours, $mdDialog, students) {
     const vm = this;
     console.log($stateParams.projectId);
@@ -15,8 +15,7 @@ function EditHoursController($stateParams, $state, sections,
     vm.evaluateProject = {
         onClick: evaluateProject
     }
-    vm.savebutton = false;
-    vm.triggerButton = triggerButton;
+    vm.projectName = null;
     vm.addHours = {
         onClick: addHours,
         icon: 'glyphicon-plus',
@@ -29,6 +28,7 @@ function EditHoursController($stateParams, $state, sections,
     // }
 
     sections.getStudentsHoursBySectionId($stateParams.sectionId, getStudentsHoursSuccess, getStudentsHoursFail);
+    projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
     function getStudentsHoursSuccess(response) {
         if (response.data.length <= 0)
             return;
@@ -61,17 +61,19 @@ function EditHoursController($stateParams, $state, sections,
             'No se pudieron cargar los alumnos correctamente.');
     }
 
+    function getProjectSuccess(response){
+      vm.projectName = TbUtils.toTitleCase(response.data.Name);
+      console.log(response);
+    }
+
+    function getProjectFail(response){
+      console.log(response);
+    }
+
     function evaluateProject(){
       $state.go('main.evaluateproject', {
           projectId: $stateParams.projectId
       });
-    }
-
-    function triggerButton(){
-      if(!vm.savebutton)
-        vm.savebutton = true;
-      else
-        vm.savebutton = false;
     }
 
     function getInputValue() {
