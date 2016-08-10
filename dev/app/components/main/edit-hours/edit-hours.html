@@ -3,14 +3,17 @@ style="z-index: 99999"></tb-loading>
 <div >
 	<div>
 		<div class="col-md-12 switch" ng-show="vm.editHours.visible">
-			<md-switch ng-model="vm.editHours.value">
+			<md-switch ng-click="vm.triggerButton()" ng-model="vm.editHours.value">
 			{{ vm.editHours.text }}
 			</md-switch>
 		</div>
-		<tb-table 
+		<tb-table
 		headers="vm.studentsTable.headers"
 		body="vm.studentsTable.body"
 		input-disable="!vm.editHours.value">
 		</tb-table>
+		<br>
+		<br>
+		<button ng-show="vm.savebutton" class="btn btn-lg center-block save-hours">Guardar cambios</button>
 	</div>
 </div>
