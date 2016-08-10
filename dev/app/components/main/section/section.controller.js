@@ -44,7 +44,6 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getProjectsSuccess(response) {
-        console.log(response);
         const headers = ['Id Proyecto', 'Nombre'];
 
         for(prj in response.data) {
@@ -52,11 +51,9 @@ function SectionController($rootScope, $stateParams, $state,
         }
 
         vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name']);
-        console.log(vm.projectsTable);
     }
 
     function getProjectsFail(response) {
-        console.log(response);
         TbUtils.displayNotification('error', 'Error!',
             'No se ha podido cargar los proyectos de la seccion');
     }
@@ -113,7 +110,6 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function addStudentFail(response) {
-        console.log(response);
         TbUtils.showErrorMessage('error', response,
             'No se ha podido agregar el estudiante', 'Error');
     }
@@ -140,7 +136,7 @@ function SectionController($rootScope, $stateParams, $state,
                     tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
                 ]
             }
-            
+
             if ($rootScope.Role !== 'Student') {
                 element.content.push(
                     tableContent.createAButtonElement(vm.deleteRowButton)
@@ -172,7 +168,7 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function removeStudentFail(response) {
-        TbUtils.showErrorMessage('error', response,
+        TbUtils.showErrorMessage('error', response.data,
             'No se ha podido eliminar al estudiante', 'Error');
     }
 
@@ -187,11 +183,12 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getSectionFail(response) {
-        console.log(response);
+        TbUtils.showErrorMessage('error', response.data, 'Error',
+            'No se ha podido obtener las secciones.');
     }
 
     function updateSectionFail(response) {
-        TbUtils.showErrorMessage('error', response,
+        TbUtils.showErrorMessage('error', response.data,
             'No se ha podido editar la seccion', 'Error');
     }
 
@@ -221,7 +218,8 @@ function SectionController($rootScope, $stateParams, $state,
                 }
             }
         }, function(err) {
-            console.log(err);
+        TbUtils.showErrorMessage('error', response.data,
+            'No se ha podido editar la seccion', 'Error');
         });
     }
 }
