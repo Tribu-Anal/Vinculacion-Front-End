@@ -37,7 +37,11 @@ function SectionController($rootScope, $stateParams, $state,
 
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
-    students.getAccountId(getAccountIdSuccess, getAccountIdFail);
+
+    if ($rootScope.Role === 'Student')
+        students.getAccountId(getAccountIdSuccess, getAccountIdFail);
+    else
+        vm.hoursLoading = false;
 
     function getAccountIdSuccess(response){
       vm.accountId = response.data.AccountId;
@@ -156,7 +160,8 @@ function SectionController($rootScope, $stateParams, $state,
             return;
         }
 
-        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
+        //vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas en la Seccion']);
+        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
         vm.studentsTable.actions = false;
 
         if ($rootScope.Role !== 'Student')
@@ -167,9 +172,9 @@ function SectionController($rootScope, $stateParams, $state,
             let element = {
                 data: student,
                 content: [
-                    tableContent.createALableElement(student.User.AccountId),
-                    tableContent.createALableElement(student.User.Name),
-                    tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
+                    tableContent.createALableElement(student.AccountId),
+                    tableContent.createALableElement(student.Name)
+                    //tableContent.createALableElement(!student.Hours ? '0' : student.Hours)
                 ]
             }
 
@@ -217,7 +222,7 @@ function SectionController($rootScope, $stateParams, $state,
     function getSectionSuccess(response) {
         vm.sectionLoading = false;
         vm.section = response.data;
-        sections.getStudentsHoursBySectionId(vm.section.Id, getStudentsSuccess, getStudentsFail);
+        sections.getSectionStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
     }
 
     function getSectionFail(response) {

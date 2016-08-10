@@ -17,7 +17,8 @@ function sections($http) {
         getCurrentSections: getCurrentPeriodSections,
         getProjects: getProjects,
         getSectionsByProject: getSectionsByProject,
-        getStudentsHoursBySectionId: getStudentsHoursBySectionId
+        getStudentsHoursBySectionId: getStudentsHoursBySectionId,
+        getSectionStudents: getSectionsStudents
     };
 
     return service;
@@ -100,6 +101,11 @@ function sections($http) {
     function getStudentsHoursBySectionId(sectionId, successCallback, errorCallback) {
         $http.get(url + '/StudentsHour/' + sectionId).then(successCallback).catch(errorCallback);
     }
+
+    function getSectionsStudents (sectionId, success, error) {
+        $http.get(url + '/Students/' + sectionId).then(success).catch(error);
+    }
+
 }
 
 module.exports = {
