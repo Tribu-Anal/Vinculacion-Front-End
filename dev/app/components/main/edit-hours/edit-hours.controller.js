@@ -1,16 +1,19 @@
-EditHoursController.$inject = ['$stateParams', 'sections',
+EditHoursController.$inject = ['$stateParams', '$state', 'sections',
     'TbUtils', 'tableContent', '$rootScope', 'hours', '$mdDialog', 'students'
 ];
 
-function EditHoursController($stateParams, sections,
+function EditHoursController($stateParams, $state, sections,
     TbUtils, tableContent, $rootScope, hours, $mdDialog, students) {
     const vm = this;
-    console.log("Estoy aqui lol");
+    console.log($stateParams.projectId);
     vm.participantsLoading = true;
     vm.editHours = {
         visible: $rootScope.Role === 'Professor',
         value: false,
         text: 'Habilitar la edición de las horas'
+    }
+    vm.evaluateProject = {
+        onClick: evaluateProject
     }
     vm.savebutton = false;
     vm.triggerButton = triggerButton;
@@ -56,6 +59,12 @@ function EditHoursController($stateParams, sections,
         vm.participantsLoading = false;
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron cargar los alumnos correctamente.');
+    }
+
+    function evaluateProject(){
+      $state.go('main.evaluateproject', {
+          projectId: $stateParams.projectId
+      });
     }
 
     function triggerButton(){
