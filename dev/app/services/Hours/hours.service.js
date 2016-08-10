@@ -22,7 +22,7 @@ function hours($http) {
     }
 
     function postHours(hoursData, successCallback, errorCallback) {
-        $http.post(url + '/Hours', JSON.stringify(hoursData)).then(successCallback)
+        $http.post(url + '/Hours/AddMany', JSON.stringify(hoursData)).then(successCallback)
             .catch(errorCallback);
     }
 

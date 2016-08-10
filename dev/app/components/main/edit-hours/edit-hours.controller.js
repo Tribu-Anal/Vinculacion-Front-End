@@ -70,14 +70,14 @@ function EditHoursController($stateParams, $state, sections, projects,
         });
     }
 
-    function getUsersHours() {
+    function getStudentsHour() {
         let table = [];
         for (let i = 0; i < vm.studentsTable.body.length; i++) {
             let student = vm.studentsTable.body[i];
             let element = {
                 AccountId: student.data.Students.AccountId,
-                Hours: student.content[2].properties.value,
-                HoursId: student.data.HoursId
+                HourId: -1,
+                Hour: student.content[2].properties.value
             }
             table.push(element);
         }
@@ -107,15 +107,16 @@ function EditHoursController($stateParams, $state, sections, projects,
 
     function saveHours() {
         let obj = {
-            SectionId: parseInt($stateParams.sectionId),
             ProjectId: parseInt($stateParams.projectId),
-            Users: getUsersHours()
+            SectionId: parseInt($stateParams.sectionId),
+            StudentsHour: getStudentsHour()
         };
-        //hours.postHours(obj, postHoursSuccess, postHoursFail);
-        console.log(obj);
+        hours.postHours(obj, postHoursSuccess, postHoursFail);
+        console.log(JSON.stringify(obj));
     }
 
     function postHoursFail(response) {
+        console.log(response);
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron registrar las horas');
     }
