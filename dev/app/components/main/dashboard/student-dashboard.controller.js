@@ -17,7 +17,9 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   vm.sectionhours = null;
   vm.goToSection = goToSection;
   vm.toTitleCase = TbUtils.toTitleCase;
-  students.getAccountId(getAccountIdSuccess, getAccountIdFail);
+  vm.studentsLoading = true;
+  vm.sectionsLoading = true;
+  students.getAccountId(getAccountIdSuccess, getStudentHourReportFail);
   sections.getSections(getCurrentPeriodSectionsSuccess, getCurrentPeriodSectionsFail);
 
   console.log('Estudiante');
@@ -26,10 +28,6 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
       vm.accountId = response.data.AccountId;
       vm.name = response.data.Name;
       hours.getStudentHourReport(vm.accountId, getStudentHourReportSuccess, getStudentHourReportFail);
-      console.log(response);
-  }
-  function getAccountIdFail(response){
-      console.log(response);
   }
 
   function goToSection(id){
@@ -49,38 +47,37 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
         return projects;
       }
   }
-  function getStudentHourReportSuccess(response){
+  function getStudentHourReportSuccess(response) {
     vm.totalHours = response.data.TotalHours;
     vm.projects = limitProjects(response.data.Projects);
-    console.log(response);
+    vm.studentsLoading = false;
   }
 
-  function getStudentHourReportFail(response){
-    console.log(response);
+  function getStudentHourReportFail(response) {
+    TbUtils.displayNotification('Error', 'Error con Reportes', 'No se pudieron cargar las horas de los proyectos.');
+    vm.studentsLoading = false;
   }
 
-  function getCurrentPeriodSectionsSuccess(response){
+  function getCurrentPeriodSectionsSuccess(response) {
     vm.sections = response.data;
-    for(obj in vm.sections){
+    for(obj in vm.sections)
       students.getSectionHours(vm.accountId, vm.sections[obj].Id, getSectionHoursSuccess, getSectionHoursFail);
-    }
-    console.log("Sections data");
-    console.log(vm.sections);
   }
 
-  function getSectionHoursSuccess(response){
-    console.log("Todo bien!");
+  function getSectionHoursSuccess(response) {
     vm.sectionhours = response.data;
-    console.log(response);
+    vm.sectionsLoading = false;
   }
 
-  function getSectionHoursFail(response){
-    console.log("Todo mal!");
-    console.log(response);
+  function getSectionHoursFail(response) {
+    TbUtils.displayNotification('Error', 'Error con las Horas de Secciones', 
+      'No se pudieron cargar las horas de una seccion.');
+    vm.sectionsLoading = false;
   }
 
   function getCurrentPeriodSectionsFail(response){
-    console.log(response);
+    TbUtils.displayNotification('Error', 'Error con Secciones', 'No se pudieron cargar las secciones.');
+    vm.sectionsLoading = false;
   }
 
 }

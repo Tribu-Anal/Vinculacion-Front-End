@@ -8,7 +8,7 @@ function SettlementController(TbUtils, settlement,
     if ($rootScope.Role !== 'Admin') $state.go('main.projects');
     const vm = this;
     vm.settlementLoading = true;
-    vm.settlementTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Carrera', 'Descargar Finiquito']);
+    vm.settlementTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas Totales', 'Carrera', 'Descargar Finiquito']);
     vm.downloadButton = {
         icon: 'glyphicon-save-file',
         onClick: downloadSettlement,
@@ -27,6 +27,7 @@ function SettlementController(TbUtils, settlement,
         }
         vm.settlementTableData = response.data;
         constructTableBody(vm.settlementTableData);
+        vm.settlementLoading = false;
     }
 
     function constructTableBody(data) {
@@ -38,6 +39,7 @@ function SettlementController(TbUtils, settlement,
                 content: [
                     tableContent.createALableElement(student.AccountId),
                     tableContent.createALableElement(student.Name),
+                    tableContent.createALableElement(student.Hours),
                     tableContent.createALableElement(getMajorName(student.Major)),
                     tableContent.createAButtonElement(vm.downloadButton)
                 ],
@@ -46,7 +48,6 @@ function SettlementController(TbUtils, settlement,
             table.push(newTableElement);
         }
         vm.settlementTable.body = table;
-        vm.settlementLoading = false;
     }
 
     function getPendingFiniquitosFail() {
