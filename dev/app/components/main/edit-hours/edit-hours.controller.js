@@ -112,11 +112,9 @@ function EditHoursController($stateParams, $state, sections, projects,
             StudentsHour: getStudentsHour()
         };
         hours.postHours(obj, postHoursSuccess, postHoursFail);
-        console.log(JSON.stringify(obj));
     }
 
     function postHoursFail(response) {
-        console.log(response);
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron registrar las horas');
     }
