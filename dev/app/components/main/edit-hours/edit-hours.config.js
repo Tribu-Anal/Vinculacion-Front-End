@@ -4,7 +4,7 @@ function config ($stateProvider) {
 
 	$stateProvider
 		.state('main.edit-hours', {
-			url: '/edit-hours/{projectId}/{sectionId}',
+			url: '/editar-horas/{projectId}/{sectionId}',
 			templateUrl: 'templates/components/main/edit-hours/edit-hours.html',
 			controller: "EditHoursController as vm",
 			onEnter: onStateEnter
