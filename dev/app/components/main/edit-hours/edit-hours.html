@@ -6,6 +6,7 @@ style="z-index: 99999"></tb-loading>
 			<md-switch ng-click="vm.triggerButton()" ng-model="vm.editHours.value">
 			{{ vm.editHours.text }}
 			</md-switch>
+			<button ng-click="vm.evaluateProject.onClick()" class="btn btn-md pull-right save-hours"><strong>Evaluar proyecto</strong></button>
 		</div>
 		<tb-table
 		headers="vm.studentsTable.headers"
@@ -15,5 +16,6 @@ style="z-index: 99999"></tb-loading>
 		<br>
 		<br>
 		<button ng-show="vm.savebutton" class="btn btn-lg center-block save-hours">Guardar cambios</button>
+
 	</div>
 </div>
