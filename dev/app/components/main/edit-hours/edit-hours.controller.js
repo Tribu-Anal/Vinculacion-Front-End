@@ -22,7 +22,7 @@ function EditHoursController($stateParams, $state, sections, projects,
         tooltip: 'Agregar horas'
     }
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre', 'Horas en este proyecto']);
-    sections.getStudentsHoursBySectionId($stateParams.sectionId, getStudentsHoursSuccess, getStudentsHoursFail);
+    sections.getStudentsHoursBySectionProjectId($stateParams.sectionId,$stateParams.projectId, getStudentsHoursSuccess, getStudentsHoursFail);
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
 
     function getStudentsHoursSuccess(response) {
@@ -31,15 +31,15 @@ function EditHoursController($stateParams, $state, sections, projects,
         for (let i = 0; i < response.data.length; i++) {
             let student = response.data[i];
             let inputProperties = {
-                value: student.Hours,
+                value: /*student.Hours[0]*/ 0,
                 type: 'number',
                 min: 0,
                 max: 100
             };
             let newTableElement = {
                 content: [
-                    tableContent.createALableElement(student.User.AccountId),
-                    tableContent.createALableElement(student.User.Name),
+                    tableContent.createALableElement(student.Students.AccountId),
+                    tableContent.createALableElement(student.Students.Name),
                     tableContent.createAnInputElement(inputProperties)
                 ],
                 data: student
@@ -75,7 +75,7 @@ function EditHoursController($stateParams, $state, sections, projects,
         for (let i = 0; i < vm.studentsTable.body.length; i++) {
             let student = vm.studentsTable.body[i];
             let element = {
-                AccountId: student.data.User.AccountId,
+                AccountId: student.data.Students.AccountId,
                 Hours: student.content[2].properties.value,
                 HoursId: student.data.HoursId
             }
