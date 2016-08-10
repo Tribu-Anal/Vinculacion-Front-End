@@ -86,11 +86,6 @@ function EditHoursController($stateParams, $state, sections, projects,
     }
 
     function addHours() {
-        if (!vm.editHours.value) {
-            TbUtils.displayNotification('error', 'Error',
-                'Debe de habilitar la edición de las horas.');
-            return
-        }
         showConfirmDialog();
     }
 
