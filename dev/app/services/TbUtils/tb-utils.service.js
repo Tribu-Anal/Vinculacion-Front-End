@@ -70,7 +70,7 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
         let table = {
             headers: headers,
             body: [],
-            actions: true
+            actions: false
         }
 
         return table;
