@@ -5,7 +5,7 @@ SectionsController.$inject = ['$rootScope', '$scope', '$state',
 function SectionsController($rootScope, $scope, $state,
     TbUtils, tableContent, sections, filterFilter) {
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor')
-        $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
+        $state.go('main.' + $rootScope.Role.toLowerCase() + '-dashboard');
 
     var vm = this;
 
@@ -30,8 +30,7 @@ function SectionsController($rootScope, $scope, $state,
 
     sections.getCurrentPeriodSections(getCPSectionsSuccess, getCPSectionsFailure);
 
-    function getCPSectionsSuccess (response) {
-        console.log(response.data.length);
+    function getCPSectionsSuccess(response) {
         vm.options.pageSize = response.data.length;
         if (response.data.length <= 0) {
             vm.sectionsLoading = false;
@@ -45,7 +44,7 @@ function SectionsController($rootScope, $scope, $state,
         vm.sectionsLoading = false;
     }
 
-    function getCPSectionsFailure (response) {
+    function getCPSectionsFailure(response) {
         TbUtils.displayNotification('Error', 'Error', 'No se pudieron cargar los proyectos.');
     }
 
@@ -72,7 +71,7 @@ function SectionsController($rootScope, $scope, $state,
         }
     }
 
-    function loadMore () {
+    function loadMore() {
         if (vm.loadingMore) return;
 
         vm.loadingMore = true;
@@ -80,7 +79,7 @@ function SectionsController($rootScope, $scope, $state,
             vm.options.pageSize, getMoreSectionsSuccess, getMoreSectionsFail);
     }
 
-    function getMoreSectionsSuccess (response) {
+    function getMoreSectionsSuccess(response) {
         constructTableBody(response, vm.sectionsTable.body);
         defaultSectionTableBody = vm.sectionsTable.body;
         vm.loadingMore = false;
@@ -88,7 +87,7 @@ function SectionsController($rootScope, $scope, $state,
         vm.options.startingPage++;
     }
 
-    function getMoreSectionsFail (response) {
+    function getMoreSectionsFail(response) {
         TbUtils.displayNotification('Error', 'Error', 'No se pudieron cargar mas proyectos.');
         vm.loadingMore = false;
     }
@@ -100,15 +99,15 @@ function SectionsController($rootScope, $scope, $state,
             }
         };
 
-        if(term && term.length >= vm.limitInLettersToSearch) {
+        if (term && term.length >= vm.limitInLettersToSearch) {
             vm.searching = true;
-            let filterSections = {data: filterFilter(vm.sections, obj)};
+            let filterSections = {
+                data: filterFilter(vm.sections, obj)
+            };
             let filterTable = [];
             constructTableBody(filterSections, filterTable);
             vm.sectionsTable.body = filterTable;
-        }
-
-        else {
+        } else {
             vm.sectionsTable.body = defaultSectionTableBody;
             vm.searching = false;
         }

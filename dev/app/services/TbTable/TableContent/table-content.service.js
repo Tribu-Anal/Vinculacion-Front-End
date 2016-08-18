@@ -13,7 +13,7 @@ function tableContent (TbUtils) {
         let element = {
             typeObject: 'input',
             properties: {
-                value: '',
+                value: inputProperties.value,
                 type: inputProperties.type,
                 min: inputProperties.min,
                 max: inputProperties.max

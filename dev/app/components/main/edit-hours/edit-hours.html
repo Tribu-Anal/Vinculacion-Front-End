@@ -1,0 +1,19 @@
+<tb-loading class="main-loader" ng-show="vm.participantsLoading"
+style="z-index: 99999"></tb-loading>
+<div >
+	<div>
+		<div class="text-center">
+			<h2>{{vm.projectName}}</h2>
+		</div>
+		<div class="col-md-12 switch" ng-show="vm.editHours.visible">
+			<button ng-click="vm.evaluateProject.onClick()" class="btn btn-md pull-right eval-proj"><strong>Evaluar proyecto</strong></button>
+		</div>
+		<tb-table
+		headers="vm.studentsTable.headers"
+		body="vm.studentsTable.body">
+		</tb-table>
+		<br>
+		<br>
+		<button ng-show="vm.editHours.visible" class="btn btn-lg center-block save-hours" ng-click="vm.addHours.onClick()">Guardar cambios</button>
+	</div>
+</div>

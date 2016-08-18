@@ -12,25 +12,27 @@ function ProfessorFormController($rootScope, $state, professors, TbUtils) {
         Email: '',
         Campus: 'SPS'
     };
-    
+
     vm.accountId;
-    
+
     vm.registerProfessor = registerProfessor;
-    
+
     function registerProfessor() {
         vm.professor.AccountId = vm.accountId.toString();
         professors.registerProfessor(vm.professor, registerProfessorSuccess, registerProfessorFail);
     }
-    
+
     function registerProfessorSuccess(response) {
         $state.go('main.dashboard');
         TbUtils.displayNotification('success', 'Profesor Creado!', 'Se le ha enviado un correo de activacion al profesor.');
     }
-    
+
     function registerProfessorFail(response) {
-        console.log(response);
         TbUtils.showErrorMessage('error', response, 'No se ha podido registrar al profesor', 'Error!');
     }
 }
 
-module.exports = { name: 'ProfessorFormController', ctrl: ProfessorFormController };
+module.exports = {
+    name: 'ProfessorFormController',
+    ctrl: ProfessorFormController
+};
