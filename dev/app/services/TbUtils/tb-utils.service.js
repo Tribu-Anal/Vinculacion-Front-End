@@ -47,7 +47,7 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
     }
 
     function removeItemFromList(listItem, list) {
-        let indexOfItem = list.indexOf(list);
+        let indexOfItem = list.indexOf(listItem);
         list.splice(indexOfItem, 1);
     }
 
