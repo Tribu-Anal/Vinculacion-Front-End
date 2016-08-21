@@ -60,7 +60,7 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
     }
 
     function validateApiErrorMessageExists(response) {
-        if (response.data === undefined || response.data === "")
+        if (!response || !response.data)
             return false;
 
         return true;

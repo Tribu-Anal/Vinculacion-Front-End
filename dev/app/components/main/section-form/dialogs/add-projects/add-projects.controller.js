@@ -20,68 +20,63 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter, 
     $scope.close = close;
     projects.getProjectsCount(getProjectsCountSuccess);
 
-    function getProjectsCountSuccess(response){
+    function getProjectsCountSuccess(response) {
         vm.options.count = response.data;
-        projects.getProjectsWithPagination(vm.options.startingPage, vm.options.pageSize , getProjectsSuccess, getProjectsFail);
+        projects.getProjectsWithPagination(vm.options.startingPage, vm.options.pageSize, getProjectsSuccess, getProjectsFail);
     }
 
     function getProjectsSuccess(response) {
         TbUtils.fillListWithResponseData(response.data, vm.projectsPagination);
         vm.projectsLoading = false;
     }
-    
+
     function getProjectsFail(response) {
         TbUtils.showErrorMessage('error', response,
-                                 'No se ha podido obtener los proyectos deseados.',
-                                 'Error');
+            'No se ha podido obtener los proyectos deseados.',
+            'Error');
 
         vm.projectsLoading = false;
     }
 
     function onPageChange(skip, page) {
-        if($scope.search) $scope.search.data = '';
+        if ($scope.search) $scope.search.data = '';
         vm.projects = vm.projectsPagination;
         vm.projects.length = 0;
         vm.projectsLoading = true;
-        projects.getProjectsWithPagination( page, skip, getProjectsSuccess, getProjectsFail);
+        projects.getProjectsWithPagination(page, skip, getProjectsSuccess, getProjectsFail);
     }
 
     //projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
-    if($rootScope.Role === 'Professor' || $rootScope.Role === 'Student')
+    if ($rootScope.Role === 'Professor' || $rootScope.Role === 'Student')
         projects.getProjectsByUser(getTotalProjectsSuccess, getTotalProjectsFail);
     else
         projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
 
     function getTotalProjectsSuccess(response) {
-        console.log(response);
         TbUtils.fillListWithResponseData(response.data, vm.totalProjects);
     }
 
     $scope.$watch('search.data', function(term) {
-        let obj = {Name: term};
+        let obj = {
+            Name: term
+        };
 
-        if(term && term.length >= vm.limitInLettersToSearch) {
+        if (term && term.length >= vm.limitInLettersToSearch) {
             $scope.filterProjects = filterFilter(vm.totalProjects, obj);
             vm.projects = $scope.filterProjects;
-        }
-
-        else {
-            console.log('vacio');
+        } else {
             vm.projects = vm.projectsPagination;
         }
     });
 
-    function getTotalProjectsFail(response) {
-        console.log(response);
-    }
+    function getTotalProjectsFail(response) {}
 
     function addProject(prj) {
         vm.projectsSelected.push(prj);
-        console.log(vm.projectsSelected);
     }
 
     function showSelectedProjects() {
-        console.log(vm.projectsSelected);
+
     }
 
     function accept() {
@@ -93,4 +88,7 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter, 
     }
 }
 
-module.exports = { name: 'AddProjectsController', ctrl: AddProjectsController };
+module.exports = {
+    name: 'AddProjectsController',
+    ctrl: AddProjectsController
+};

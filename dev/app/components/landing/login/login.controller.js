@@ -20,7 +20,6 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
     }
 
     function LoginSuccess(response) {
-        console.log(response);
         DBId = response.data.Id;
         auth.SetCredentials(response.data);
 
@@ -43,7 +42,6 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
         if(response.data === 'Professor') {
             window.localStorage['ProfessorDBId'] =
             $rootScope.ProfessorDBId = DBId;
-            console.log($rootScope.ProfessorDBId);
         }
 
         if ($rootScope.Role === 'Admin')
@@ -55,7 +53,6 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
     }
 
     function LoginFail(response) {
-        console.log(response);
         TbUtils.showErrorMessage('error', response,
                                  'La cuenta ingresada no tiene privilegios de acceso',
                                  'Falla autorizacion');

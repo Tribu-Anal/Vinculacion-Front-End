@@ -1,0 +1,30 @@
+.edit-hours {
+	.switch{
+		padding-left: 3%;
+	}
+	.btn.btn-lg.center-block.save-hours{
+		background-color: #213250;
+		color: #fff;
+		outline:none;
+		border:none;
+		margin-bottom: 30px;
+
+	}
+	.btn.btn-lg.center-block.save-hours:hover{
+		font-size: 20px;
+		background-color: #e01e26;
+	}
+	.btn.btn-md.pull-right.eval-proj{
+		margin-bottom: 15px;
+		margin-top: 10px;
+		margin-right: 40px;
+		font-size: 16px;
+		background: #213250;
+		outline:none;
+		border:none;
+		color: #fff;
+	}
+	.btn.btn-md.pull-right.eval-proj:hover{
+		background-color: #4ba763;
+	}
+}

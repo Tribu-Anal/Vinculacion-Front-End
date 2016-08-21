@@ -2,10 +2,10 @@ SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 
     'tableContent', 'projects', '$q', '$timeout', 'students', 'ModalService', 'professors'
 ];
 
-function SectionFormController ($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
-timeout, students, ModalService, professors) {
+function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
+    timeout, students, ModalService, professors) {
 
-    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.'+$rootScope.Role.toLowerCase()+"-dashboard");
+    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.' + $rootScope.Role.toLowerCase() + "-dashboard");
 
 
     var vm = this;
@@ -46,7 +46,7 @@ timeout, students, ModalService, professors) {
     getProjects();
     getStudents();
 
-    if(vm.professorActive) professors.getActiveProfessor($rootScope.ProfessorDBId, getProfessorSuccess, getProfessorFail);
+    if (vm.professorActive) professors.getActiveProfessor($rootScope.ProfessorDBId, getProfessorSuccess, getProfessorFail);
     else getProfessors();
 
     function submit() {
@@ -58,11 +58,11 @@ timeout, students, ModalService, professors) {
 
     function getProfessorSuccess(response) {
         vm.section.ProffesorAccountId = response.data[0].AccountId;
-        console.log(vm.section.ProffesorAccountId);
+
     }
 
     function getProfessorFail(response) {
-        console.log(response);
+
     }
 
     function submitSuccess(response) {
@@ -77,7 +77,7 @@ timeout, students, ModalService, professors) {
         TbUtils.displayNotification('error', 'Error',
             'Han habido problemas al crear la seccion.');
         vm.submitting = false;
-        console.log(vm.section);
+
     }
 
     function addProjects() {
@@ -91,12 +91,13 @@ timeout, students, ModalService, professors) {
     }
 
     function modalClose(result) {
-        if(!result.length) return;
+        if (!result.length)
+            return;
 
         vm.section.projectIds = [];
         vm.projectsTable.body = [];
 
-        for(let prj in result) {
+        for (let prj in result) {
             vm.section.projectIds.push(result[prj].Id);
 
             const element = {
@@ -106,9 +107,6 @@ timeout, students, ModalService, professors) {
             };
             vm.projectsTable.body.push(element);
         }
-
-        console.log(vm.section.projectIds);
-        console.log(result);
     }
 
     function getClasses() {
@@ -174,47 +172,49 @@ timeout, students, ModalService, professors) {
             'No se pudieron cargar los proyectos.');
         vm.professorsLoading = false;
     }
-    function assignSectionToProjectSuccess(response){
-        console.log(response.data);
+
+    function assignSectionToProjectSuccess(response) {
+
     }
 
-    function assignSectionToProjectError(){
+    function assignSectionToProjectError() {
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron guardar el proyecto.');
         vm.professorsLoading = false;
     }
 
-    function getStudents () {
+    function getStudents() {
         students.get(response => {
             TbUtils.fillListWithResponseData(response.data, vm.students);
             vm.studentsLoading = false;
         }, response => {
             TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los estudiantes.' +
-                                        ' Intenta resfrescando la pagina.');
+                ' Intenta resfrescando la pagina.');
         });
     }
 
-    function queryStudents (searchText) {
-        let results = searchText ? vm.students.filter( createFilterFor(searchText) ) : vm.students,
-          deferred;
-          if (vm.simulateQuery) {
+    function queryStudents(searchText) {
+        let results = searchText ? vm.students.filter(createFilterFor(searchText)) : vm.students,
+            deferred;
+        if (vm.simulateQuery) {
             deferred = q.defer();
-            timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+            timeout(function() {
+                deferred.resolve(results);
+            }, Math.random() * 1000, false);
             return deferred.promise;
-          } else {
+        } else {
             return results;
-          }
+        }
     }
 
     function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(item) {
-        return (item.AccountId.indexOf(lowercaseQuery) === 0);
-      };
+        var lowercaseQuery = angular.lowercase(query);
+        return function filterFn(item) {
+            return (item.AccountId.indexOf(lowercaseQuery) === 0);
+        };
     }
 
-    function addStudentToSection () {
-        console.log(vm.selectedItem);
+    function addStudentToSection() {
         if (vm.selectedItem && !isAlreadyOnList(vm.selectedItem.AccountId)) {
             vm.sectionStudents.push(vm.selectedItem);
             const element = {
@@ -229,7 +229,7 @@ timeout, students, ModalService, professors) {
         }
     }
 
-    function isAlreadyOnList (accountId) {
+    function isAlreadyOnList(accountId) {
         for (let i = 0; i < vm.sectionStudents.length; i++) {
             const student = vm.sectionStudents[i];
             if (student.AccountId === accountId)
@@ -239,20 +239,23 @@ timeout, students, ModalService, professors) {
         return false;
     }
 
-    function deleteElementFromStudentsTable (element) {
+    function deleteElementFromStudentsTable(element) {
         const index = vm.studentsTable.body.indexOf(element);
         vm.studentsTable.body.splice(index, 1);
         vm.sectionStudents.splice(index, 1);
     }
 
-    function deleteElementFromProjectsTable (element) {
+    function deleteElementFromProjectsTable(element) {
         const index = vm.projectsTable.body.indexOf(element);
         vm.projectsTable.body.splice(index, 1);
         vm.section.projectIds.splice(index, 1);
         projects.selectedProjectsInSectionForm.splice(index, 1);
-        console.log(vm.section.projectIds);
+
     }
 
 }
 
-module.exports = { name: 'SectionFormController', ctrl: SectionFormController };
+module.exports = {
+    name: 'SectionFormController',
+    ctrl: SectionFormController
+};

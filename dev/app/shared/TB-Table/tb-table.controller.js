@@ -8,19 +8,18 @@ function TbTableController($scope, $state, TbUtils) {
     let btnClicked = false;
 
     function onRowClick(row) {
-        console.log(row);
         if (!btnClicked && $scope.ref) {
             TbUtils.preventGeneralLoading();
             $state.go($scope.ref, {
                 sectionId: row.data.sectionId ? row.data.sectionId : row.data.Id,
-                projectId: row.data.Id
+                projectId: row.data.projectId ? row.data.projectId : row.data.Id
             });
         }
-            
+
         btnClicked = false;
     }
 
-    function onBtnClick (row) {
+    function onBtnClick(row) {
         btnClicked = true;
         vm.loseFocus();
     }
