@@ -1,10 +1,15 @@
 
 describe('TbUtils', function() {
 
-	var service;
+	var service, mock;
 
 	beforeEach(function() {
+		mock = {pop: jasmine.createSpy()};
+
 		module('VinculacionApp');
+		module(function($provide) {
+			$provide.value('toaster', mock);
+		});
 
 		inject(function($injector) {
 			service = $injector.get('TbUtils');
@@ -17,7 +22,6 @@ describe('TbUtils', function() {
 			let destiny = [];
 			service.fillListWithResponseData(origin, destiny);
 			expect(destiny).toEqual(origin);
-			//expect(true).toBe(false);
 		});
 	});
 
@@ -52,33 +56,27 @@ describe('TbUtils', function() {
 	});
 
 	describe('showErrorMessage', function() {
-		var response, mock;
+		var response;
 
-		beforeEach(function($provide) {
+		beforeEach(function() {
 			response = {
 				statusText: 'Falla de Credenciales',
 				data: 'Las credenciales ingresadas son incorrectas'
 			};
-
-			mock = {pop: jasmine.createSpy()};
-			
-			module(function($provide) {
-				$provide.value('toaster', mock);
-			})
 		});
 
 		it('should show api error message', function() {
 			service.showErrorMessage('error', response, 'Credenciales incorrectas', 'Ha habido un error');
 			expect(mock.pop).toHaveBeenCalledWith({
 				type: 'error',
-				title: response.statusTex,
+				title: response.statusText,
 				body: response.data,
 				timeout: 1500
 			});
 		});
 
 		it('should show custom error message', function() {
-			service.showErrorMessage('error', null, 'Ha habido un error', 'Credenciales incorrectas');
+			service.showErrorMessage('error', null, 'Credenciales incorrectas', 'Ha habido un error');
 			expect(mock.pop).toHaveBeenCalledWith({
 				type: 'error',
 				title: 'Ha habido un error',
