@@ -1,21 +1,15 @@
-(function() {
-    "use strict";
+function tbHeaderbar() {
+    var directive = 
+    {
+        restrict: 'E',
+        scope: {
+            expand: '=?',
+            username: '@?'
+        },
+        templateUrl: 'templates/shared/TB-Headerbar/tb-headerbar.html'        
+    };
 
-    angular
-        .module('VinculacionApp')
-        .directive('tbHeaderbar', tbHeaderbar);
+    return directive;
+}
 
-    function tbHeaderbar() {
-        var directive = 
-        {
-            restrict: 'E',
-            scope: {
-                expand: '=?'
-            },
-            templateUrl: 'templates/shared/TB-Headerbar/tb-headerbar.html'        
-        };
-
-        return directive;
-    }
-
-})();
+module.exports = { name: 'tbHeaderbar', drtv: tbHeaderbar };

@@ -9,6 +9,10 @@
     margin: 0;
     padding: 0;
 
+    * {
+        outline: none;
+    }
+
     tb-sidebar {
         height: $main-height;
         min-height: $main-height;
@@ -47,6 +51,7 @@
     .dynamic-area
     {
         overflow-y: auto;
+        overflow-x: hidden;
 
         transition: all .3s linear;
 

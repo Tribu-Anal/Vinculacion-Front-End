@@ -1,19 +1,12 @@
-(function() {
-    "use strict";
+function tbRoundBtn() {
+    var directive = 
+    {
+        restrict: 'E',
+        transclude: true,
+        template: '<ng-transclude></ng-transclude>'        
+    };
 
-    angular
-        .module('VinculacionApp')
-        .directive('tbRoundBtn', tbRoundBtn);
+    return directive;
+}
 
-    function tbRoundBtn() {
-        var directive = 
-        {
-            restrict: 'E',
-            transclude: true,
-            template: '<ng-transclude></ng-transclude>'        
-        };
-
-        return directive;
-    }
-
-})();
+module.exports = { name: 'tbRoundBtn', drtv: tbRoundBtn };

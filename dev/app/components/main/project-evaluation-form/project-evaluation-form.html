@@ -1,0 +1,45 @@
+<div class="evaluation-form">
+<form name="reportForm" class="cd-form" ng-submit="reportForm.$valid && vm.downloadReport()" novalidate>
+    <legend>
+        <strong>Evaluación de Proyecto de Vinculación</strong>
+    </legend>
+    
+    <div>
+        <label class="cd-label">Grupo(s) meta beneficiado(s) con el producto entregado</label>
+        <input ng-model="vm.formData.beneficiariGroups" validation-no-special-chars="true" class="user" type="text" name="accountId" id="cd-name" required>
+        <p class="error-message" ng-show="reportForm.$submitted && reportForm.accountId.$error.required">
+            * Por favor ingrese un Grupo(s) meta beneficiado(s) valido.
+        </p>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Número de personas beneficiadas</label>
+        <input ng-model="vm.formData.beneficiariesQuantities" class="user" type="number" name="Email" id="cd-name"  validation-no-space="true" validation-field-required="true" required>
+        <p class="error-message" ng-show="reportForm.$submitted && reportForm.Email.$error.required">
+            * Por favor ingrese el numero de personas beneficiadas.
+        </p>
+    </div>
+    
+    <div>
+        <label class="cd-label">Horas de trabajo de campo alumnos </label>
+        <input ng-model="vm.formData.fieldHours" class="user" type="text" name="number" id="cd-name" validation-no-space="true" validation-field-required="true" validation-max-length="20" validation-no-special-chars="true" required> 
+        <p class="error-message" ng-show="reportForm.$submitted && reportForm.Name.$error.required">
+            * Por favor ingrese las horas de trabajo de campo de los alumnos.
+        </p>
+    </div>
+    
+    <div>
+        <label class="cd-label">Nota asignada al proyecto (%)</label>
+        <input ng-model="vm.formData.calification" class="user" type="number" name="Email" id="cd-name" validation-no-space="true" validation-field-required="true"  required>
+        <p class="error-message" ng-show="reportForm.$submitted && reportForm.Email.$error.required">
+            * Por favor ingrese la nota del proyecto.
+        </p>
+    </div>
+
+    <div>
+        <input type="submit" ng-hide="vm.submitting" value="Confirmar">
+    </div>
+</form>
+</div>
+<iframe id="my_iframe" style="display:none;"></iframe>
+<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading>

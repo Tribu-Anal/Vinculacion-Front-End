@@ -1,10 +1,5 @@
 node_modules/
-public/css/
-public/fonts/
-public/img/
-public/js/
-public/lib/
-public/templates/
+public/
 
 # cache files for sublime text
 *.tmlanguage.cache
@@ -22,3 +17,8 @@ public/templates/
 sftp-config.json
 
 npm-debug.log
+
+#For vim workspace
+*~
+*.swp
+*.swo

@@ -1,0 +1,25 @@
+<div class="modal fade" style="z-index: 10000000;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Ingrese el numero de cuenta del alumno que desea agregar.</h4>
+      </div>
+      <div class="modal-body">
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Numero Cuenta</label>
+        <div class="col-sm-10">
+          <input type="number" min="0" class="form-control" id="name" placeholder="Numero de Cuenta" ng-model="numCuenta">
+        </div>
+      </div>
+    </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close(false)" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" ng-click="close(true)" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

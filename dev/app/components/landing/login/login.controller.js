@@ -1,59 +1,64 @@
-(function () {
-    "use strict";
+LoginController.$inject = ['$rootScope', '$location', 'auth',
+                                'role', 'toaster', 'TbUtils', '$state'];
 
-    angular
-        .module('VinculacionApp')
-        .controller('LoginController', LoginController);
+function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $state) {
+    var vm = this;
 
-    LoginController.$inject = ['$rootScope', '$location', 'authentication', 
-                                'role', 'toaster', 'TbUtils'];
+    vm.username = "";
+    vm.password = "";
+    vm.login = login;
+    vm.loading = false;
 
-    function LoginController ($rootScope, $location, authentication, role, toaster, TbUtils) {
-        var vm = this;
+    let DBId = -1;
 
-        vm.username = "";
-        vm.password = "";
-        vm.login = login;
-        vm.loading = false;
+    auth.ClearCredentials();
 
-        authentication.ClearCredentials();
+    function login() {
+        vm.loading = true;
 
-        function login() {
-            vm.loading = true;
-
-            authentication.Login( vm.username, vm.password, LoginSuccess, LoginFail);
-        }
-        
-        function LoginSuccess(response) {
-            console.log(response);
-            authentication.SetCredentials(response.data);
-            
-            window.localStorage['Session'] = 
-            $rootScope.Session =
-            JSON.parse(response.config.data).User;
-
-            window.localStorage['Email'] =
-            $rootScope.Email = 
-            vm.username;
-            role.get($rootScope.Session, getRoleSuccess);
-        }
-
-        function getRoleSuccess (response) {
-            window.localStorage['Role'] = 
-            $rootScope.Role =
-            response.data;
-
-            $location.path('/home');
-            vm.loading = false;
-        }
-        
-        function LoginFail(response) {
-            console.log(response);
-            TbUtils.showErrorMessage('error', response, 
-                                     'La cuenta ingresada no tiene privilegios de acceso',
-                                     'Falla autorizacion');
-            
-            vm.loading = false;
-        }
+        auth.Login( vm.username, vm.password, LoginSuccess, LoginFail);
     }
-})();
+
+    function LoginSuccess(response) {
+        DBId = response.data.Id;
+        auth.SetCredentials(response.data);
+
+        window.localStorage['Session'] =
+        $rootScope.Session =
+        vm.username;
+
+        window.localStorage['Username'] =
+        $rootScope.Username =
+        $rootScope.Session.slice(0, $rootScope.Session.indexOf('@'));
+
+        role.get($rootScope.Session, getRoleSuccess);
+    }
+
+    function getRoleSuccess (response) {
+        window.localStorage['Role'] =
+        $rootScope.Role =
+        response.data;
+
+        if(response.data === 'Professor') {
+            window.localStorage['ProfessorDBId'] =
+            $rootScope.ProfessorDBId = DBId;
+        }
+
+        if ($rootScope.Role === 'Admin')
+            $state.go('main.projects');
+        else
+            $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
+
+        vm.loading = false;
+    }
+
+    function LoginFail(response) {
+        TbUtils.showErrorMessage('error', response,
+                                 'La cuenta ingresada no tiene privilegios de acceso',
+                                 'Falla autorizacion');
+
+        vm.loading = false;
+    }
+}
+
+module.exports = { name: 'LoginController', ctrl: LoginController };

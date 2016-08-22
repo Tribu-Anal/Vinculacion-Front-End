@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sat Apr 23 2016 14:17:00 GMT-0600 (CST)
+// Generated on Sat Aug 20 2016 17:11:36 GMT-0600 (CST)
 
 module.exports = function(config) {
   config.set({
@@ -15,13 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'dev/assets/lib/jQuery/*.js', 
-      'dev/assets/lib/jquery-validate/jquery-validate.js',
-      'dev/assets/lib/jquery-validate/*.js',
-      'dev/assets/lib/angular/*.js',
-      'dev/assets/lib/**/*.js',
+      'test-hack.js',
+      'public/js/bundle.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'dev/app/**/*.js',
       'specs/**/*.js'
     ],
 
@@ -40,7 +36,22 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['kjhtml', 'mocha'],
+
+    mochaReporter: {
+      colors: {
+        success: 'blue',
+        info: 'bgGreen',
+        warning: 'cyan',
+        error: 'bgRed'
+      },
+      symbols: {
+        success: '+',
+        info: '#',
+        warning: '!',
+        error: 'x'
+      }
+    },
 
 
     // web server port
@@ -62,7 +73,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode

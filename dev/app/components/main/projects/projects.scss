@@ -1,15 +1,19 @@
 .projects
 {
+    tb-paginator {
+        .container {
+            margin-top: 20px;
+        }
+    }
+
     .gallery
     {
         position: absolute;
-        top: 7%;
-        left: 5%;
 
         display: flex;
 
         width: 95%;
-
+        padding-top: 20px;
         flex-wrap: wrap;
     }
     .card
@@ -27,7 +31,7 @@
 
         cursor: pointer;
 
-        background: #9ad3de;
+        background: #73A9A9;
         box-shadow: 0 0 10px #000;
 
         &:hover
@@ -85,6 +89,7 @@
                 text-align: center;
                 max-height: 30%;
                 overflow-y: hidden;
+                color: #363636;
             }
             .project-info h4
             {
