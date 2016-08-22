@@ -1,7 +1,7 @@
-StudentDashboardController.$inject = ['$rootScope', '$scope', '$state',
+StudentDashboardController.$inject = ['$rootScope', '$state',
     'TbUtils', 'tableContent', 'sections', 'filterFilter', 'hours', 'students'];
 
-function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableContent,
+function StudentDashboardController ($rootScope, $state, TbUtils, tableContent,
                                       sections, filterFilter, hours, students) {
   if($rootScope.Role !== 'Student' ){
     $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
@@ -18,6 +18,7 @@ function StudentDashboardController ($rootScope, $scope, $state, TbUtils, tableC
   vm.toTitleCase = TbUtils.toTitleCase;
   vm.studentsLoading = true;
   vm.sectionsLoading = true;
+  vm.limitProjects = limitProjects;
   students.getAccountId(getAccountIdSuccess, getStudentHourReportFail);
 
   function getAccountIdSuccess(response){
