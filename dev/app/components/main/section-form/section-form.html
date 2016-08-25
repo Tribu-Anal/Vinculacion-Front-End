@@ -2,14 +2,6 @@
     <legend>
         <strong>Nueva Seccion</strong>
     </legend>
-    
-    <div>
-        <label class="cd-label" for="cd-name">Codigo</label>
-        <input ng-model="vm.section.Code" class="user" type="text" name="sectionCode" id="cd-name" required>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.sectionCode.$error.required">
-            * Por favor ingrese un codigo para la seccion.
-        </p>
-    </div>
 
     <div>
         <label class="cd-label" for="cd-name">Clase</label>
@@ -20,6 +12,14 @@
             * Por favor escoja una clase.
         </p>
         <tb-loading class="main-loader" ng-show="vm.classesLoading"></tb-loading>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Costo</label>
+        <input ng-model="vm.section.Cost" class="user" type="number" name="cost" id="cd-name" min="0" required>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid && (sectionForm.cost.$error.required || sectionForm.cost.$invalid)">
+            * Asegurate de asignar un costo y que sea un valor mayor o igual a 0
+        </p>
     </div>
 
     <div ng-hide="vm.professorActive">
@@ -40,6 +40,14 @@
             * Por favor escoja un proyecto.
         </p>
         <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
+    </div>
+
+    <div class="icon">
+        <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
+        <textarea ng-model="vm.section.Description" class="message" name="sectionProjectDescription" id="cd-textarea" required></textarea>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid && sectionForm.sectionProjectDescription.$error.required">
+            * Por favor ingresa una descripcion para el proyecto
+        </p>
     </div>
 
     <div ng-show="vm.section.projectIds.length > 0">
