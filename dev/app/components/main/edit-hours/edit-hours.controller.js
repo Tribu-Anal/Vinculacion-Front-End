@@ -31,15 +31,15 @@ function EditHoursController($stateParams, $state, sections, projects,
         for (let i = 0; i < response.data.length; i++) {
             let student = response.data[i];
             let inputProperties = {
-                value: student.Hours[0] ? student.Hours[0].Amount : 0,
+                value: student.Hours ? student.Hours.Amount : 0,
                 type: 'number',
                 min: 0,
                 max: 100
             };
             let newTableElement = {
                 content: [
-                    tableContent.createALableElement(student.Students.AccountId),
-                    tableContent.createALableElement(student.Students.Name),
+                    tableContent.createALableElement(student.User.AccountId),
+                    tableContent.createALableElement(student.User.Name),
                     tableContent.createAnInputElement(inputProperties)
                 ],
                 data: student
