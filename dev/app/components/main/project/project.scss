@@ -1,73 +1,38 @@
 .project
 {
-    .help
-    {
-        padding: 3px;
-
-        border-bottom: 1px dotted;
-        background: #eee;
-    }
-    .img-responsive
-    {
-        width: 430px;
-    }
-    .panel > .panel-heading
-    {
-        cursor: pointer;
-        color: #fff;
-        border: none;
-        font-size: 16px;
-        background-color: #283B5B;
-    }
-    .panel > .panel-body{
-        word-wrap: break-word;
-    }
-    .container {
+   .container{
+        margin-top: 20px;
         width: 90%;
-        overflow-x: hidden;
-    }
-
-    .jumbotron{
-        position: relative;
-        
-    }
-
-    .label-container{
-        font-size: 30px;
-        margin: 0 auto;
-
-        &.description{
-            font-size: 20px;
-        }
-        &.section{
-            font-size: 20px;
-            text-align: center;
-        }
-
-        &.teacher{
-            font-size: 20px;
-            text-align: center;
-        }
-    }
-
-    p{
-        font-size: 16px;
-        color: #000;
-    }
-
-    .project-image{
-        width: 50%;
-        height: 50%;
-    }
-
-    .title{
+   }
+   .panel{  
+        border: none;
+        outline: none;
+   }
+   p{
+        font-size: 17px;
+   }
+   .panel-body{
         text-align: center;
-    }
+   }
+   .title_spec{
+        font-size: 22px;
+        gfont-weight: bold;
+   }
+   .panel-title{
+        font-size: 18px;
+        text-align: center;
+   }
+   .panel-primary > .panel-heading{
+        
+        background-color: #213250;
+   }
+   .responstable tr:hover {
+    background-color: rgba(0, 140, 186, 0.44);
+  }
 
-    .container{
-         border-radius: 10px;
-
-    }
+  .responstable tr:hover {
+    background-color: rgba(0, 140, 186, 0.44);
+  }
 
 
 }

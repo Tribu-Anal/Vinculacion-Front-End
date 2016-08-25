@@ -1,47 +1,62 @@
 tb-headerbar {
     display: flex;
-    
     #bar {
         display: flex;
-
         padding-left: 2%;
-
+        justify-content: space-between;
         flex-grow: 1;
         flex-basis: 100%;
-
         transition: all .3s linear;
-
         color: #7b96c4;
         border-bottom: 1px solid #e1ecff;
         background: #f7faff;
-
-        &.expanded
-        {
+        &.expanded {
             margin-left: -230px;
         }
-
-        &.shrunk
-        {
+        &.shrunk {
             left: 230px;
         }
-
     }
-
-    #activity-section
-    {
+    #activity-section {
         font-size: 18px;
-
         display: flex;
-
         align-self: center;
     }
-
-    #activity-section img
-    {
+    #activity-section img {
         width: 10%;
         height: 100%;
         margin-right: 3%;
-
+        cursor: pointer;
+    }
+    #user-section {
+        font-size: 18px;
+        display: flex;
+        align-self: center;
+        span {
+            margin-left: 0px;
+            margin-right: 6px;
+            align-self: center;
+        }
+        li,
+        ul {
+            list-style-type: none;
+        }
+        .circle-icon {
+            display: flex;
+            justify-content: center;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background: #ccc;
+            i {
+                align-self: center;
+            }
+        }
+    }
+    #user-section img {
+        width: 10%;
+        height: 100%;
+        margin-right: 3%;
         cursor: pointer;
     }
 }

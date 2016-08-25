@@ -1,29 +1,41 @@
-<div class="row">
-<div class="container">
-<h2 class="text-center">{{vm.project.Name}}</h2>
 <tb-loading ng-show="vm.projectLoading"
-      style="z-index: 99999"></tb-loading>
-</div>
-</div>
-<div class="jumbotron container center-block">
-<div class="container description">
-
-<div class="row">
-<div class="text-center col-md-10 center-block">
-<h3>Descripci&oacute;n</h3>
-<p>{{vm.project.Description}}</p>
-<tb-loading class="main-loader project-loader" ng-show="vm.projectLoading" style="z-index: 99999"></tb-loading>
-</div>
-
-</div>
+style="z-index: 99999"></tb-loading>
 </div>
 <div class="container">
-<div class="text-center">
-<h2>Participantes</h2>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h2 class="panel-title">
+		{{vm.project.Name}}
+		</h2>
+	</div>
+	<div class="panel-body row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h3 ng-show="vm.project.Description" class="title_spec">Descripci&oacute;n</h3>
+			<p>{{vm.project.Description}}</p>
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+			<h3 class="title_spec">Id Proyecto</h3>
+			<p>{{vm.project.ProjectId}}</p>
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+			<h3 class="title_spec">Organizac&iacute;on Beneficiaria</h3>
+			<p>{{vm.project.BeneficiarieOrganization}}</p>
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+			<h3 class="title_spec">Costo</h3>
+			<p>{{vm.project.Cost | currency : "Lps " : 2}}</p>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+			<h3 class="title_spec">Carreras Asociadas</h3>
+			<p ng-repeat="major in vm.majors">{{major}}</p>
+		</div>
+		<h1 ng-show="vm.sectionsTable.body.length > 0" style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Secciones</h1>
+		<tb-table ng-show="vm.sectionsTable.body.length > 0" class="col-md-12 mouse-hover" headers="vm.sectionsTable.headers"
+		body="vm.sectionsTable.body"
+		on-row-click="vm.preventGeneralLoading"
+		ref="main.edit-hours">
+		</tb-table>
+	</div>
 </div>
-<tb-table headers="vm.participants.headers" 
-                    body="vm.participants.body">
-</tb-table> 
-<tb-loading class="main-loader project-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
 </div>
-</div>
+<!-- ref="main.section" -->

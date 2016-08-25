@@ -2,14 +2,6 @@
     <legend>
         <strong>Nueva Seccion</strong>
     </legend>
-    
-    <div>
-        <label class="cd-label" for="cd-name">Codigo</label>
-        <input ng-model="vm.section.Code" class="user" type="text" name="sectionCode" id="cd-name" required>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.sectionCode.$error.required">
-            * Por favor ingrese un codigo para la seccion.
-        </p>
-    </div>
 
     <div>
         <label class="cd-label" for="cd-name">Clase</label>
@@ -23,17 +15,14 @@
     </div>
 
     <div>
-        <label class="cd-label" for="cd-name">Periodo</label>
-        <select name="period" ng-model="vm.section.PeriodId" required>
-            <option value="{{period.Id}}" ng-repeat="period in vm.periods">Modulo {{period.Number}} ({{period.Year}})</option>
-        </select>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.period.$error.required">
-            * Por favor escoja un periodo.
+        <label class="cd-label" for="cd-name">Costo</label>
+        <input ng-model="vm.section.Cost" class="user" type="number" name="cost" id="cd-name" min="0" required>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid && (sectionForm.cost.$error.required || sectionForm.cost.$invalid)">
+            * Asegurate de asignar un costo y que sea un valor mayor o igual a 0
         </p>
-        <tb-loading class="main-loader" ng-show="vm.periodsLoading"></tb-loading>
     </div>
 
-    <div>
+    <div ng-hide="vm.professorActive">
         <label class="cd-label" for="cd-name">Docente</label>
         <select name="professor" ng-model="vm.section.ProffesorAccountId" required>
             <option value="{{professor.AccountId}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
@@ -45,16 +34,47 @@
     </div>
 
     <div>
-        <label class="cd-label" for="cd-name">Alumnos</label>
-        <tb-search endpoint= 'vm.studentsSearch.endpoint' 
-            on-element-click= 'vm.studentsSearch.onElementClick' 
-            response-property-show= 'vm.studentsSearch.responsePropertyShow'
-            on-click-element="vm.studentsSearch.onClickElement"
-            ng-hide="vm.submitting">
-        </tb-search>    
+        <label class="cd-label" for="cd-name">Proyectos</label>
+        <input style="cursor: pointer" ng-click="vm.addProjects()" class="user" type="text" name="sectionProjects" id="cd-name" required>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.project.$error.required">
+            * Por favor escoja un proyecto.
+        </p>
+        <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
     </div>
+
+    <div class="icon">
+        <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
+        <textarea ng-model="vm.section.Description" class="message" name="sectionProjectDescription" id="cd-textarea" required></textarea>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid && sectionForm.sectionProjectDescription.$error.required">
+            * Por favor ingresa una descripcion para el proyecto
+        </p>
+    </div>
+
+    <div ng-show="vm.section.projectIds.length > 0">
+        <tb-table headers="vm.projectsTable.headers" 
+            body="vm.projectsTable.body"
+            on-row-click="vm.deleteElementFromProjectsTable"
+            ng-hide="vm.submitting">
+         </tb-table>
+    </div>
+
     <div>
-        <tb-table   headers="vm.studentsTable.headers" 
+        <label class="cd-label" for="cd-name">Alumnos</label>
+        <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="vm.searchText" md-items="item in vm.queryStudents(vm.searchText)" md-item-text="item.Name">
+          <md-item-template>
+              <span md-highlight-text="vm.searchText">{{ item.Name }}</span>
+          </md-item-template>
+          <md-not-found>
+              No se encontraron alumnos con el numero de cuenta: {{vm.searchText}}.
+          </md-not-found>
+        </md-autocomplete> 
+        <button type="button" class="add-student-btn" style="margin-top: 5px; margin-left: 83%;"
+                ng-click="vm.addStudentToSection()">AGREGAR</button>
+        <tb-loading class="main-loader" ng-show="vm.studentsLoading"></tb-loading>
+    </div> 
+
+    <div ng-show="vm.sectionStudents.length > 0">
+        <tb-table headers="vm.studentsTable.headers" 
             body="vm.studentsTable.body"
             on-row-click="vm.deleteElementFromStudentsTable"
             ng-hide="vm.submitting">

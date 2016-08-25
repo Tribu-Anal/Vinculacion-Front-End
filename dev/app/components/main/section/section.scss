@@ -6,9 +6,15 @@
     align-items: center;
     font-size: 1em;
     border-radius: 50%;
-    float: left;
-    margin-top: 2%;
-    margin-left: -8%;
+    outline: none;
+    background: #ccc;
+  }
+  .desc-section{
+    text-align: center;
+  }
+  .container{
+    background: #fff;
+    margin-top: 20px;
   }
   .professor{
     font-style: italic;
@@ -25,10 +31,9 @@
     width: 90%;
   }
   .logo-image{
-    position: fixed;
     width: 15%;
-    top: 15%;
-    left: 80%;
+    margin-top: 10%; 
+    margin-left: 10%;
   }
   .list{
     margin-top: 3%;
@@ -47,4 +52,8 @@
       }
     }
   }
+  .responstable tr:hover {
+    background-color: rgba(0, 140, 186, 0.44);
+  }
+
 }

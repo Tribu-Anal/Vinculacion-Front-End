@@ -1,17 +1,11 @@
-(function() {
-    "use strict";
+function tbLoading() {
+    var directive = 
+    {
+        restrict: 'E',
+        templateUrl: 'templates/shared/TB-Loading/tb-loading.html' 
+    };
 
-    angular
-        .module('VinculacionApp')
-        .directive('tbLoading', tbLoading);
+    return directive;
+}
 
-    function tbLoading() {
-        var directive = 
-        {
-            restrict: 'E',
-            templateUrl: 'templates/shared/TB-Loading/tb-loading.html' 
-        };
-
-        return directive;
-    }
-})();
+module.exports = { name: 'tbLoading', drtv: tbLoading };

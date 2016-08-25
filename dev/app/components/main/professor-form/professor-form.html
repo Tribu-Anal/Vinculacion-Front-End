@@ -13,7 +13,7 @@
     
     <div>
         <label class="cd-label">Nombre</label>
-        <input ng-model="vm.professor.Name" class="user" type="text" name="Name" id="cd-name" validation-no-space="true" validation-field-required="true" validation-max-length="20" validation-no-special-chars="true" required> 
+        <input ng-model="vm.professor.Name" class="user" type="text" name="Name" id="cd-name" validation-field-required="true" validation-max-length="20" validation-no-special-chars="true" required> 
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.Name.$error.required">
             * Por favor ingrese el nombre del profesor.
         </p>

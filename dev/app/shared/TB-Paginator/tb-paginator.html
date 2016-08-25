@@ -1,0 +1,8 @@
+<div class="center-block">
+<div class="container">
+        <div href="#" class="btn btn-info" ng-class="{true: 'active'}[page===vm.active]" ng-repeat="page in vm.init()"
+		 ng-click="vm.onPageChange(page)">
+		<span>{{page}}</span>
+	</div>
+</div>
+</div>
