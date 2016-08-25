@@ -76,8 +76,8 @@ function EditHoursController($stateParams, $state, sections, projects,
         for (let i = 0; i < vm.studentsTable.body.length; i++) {
             let student = vm.studentsTable.body[i];
             let element = {
-                AccountId: student.data.Students.AccountId,
-                HourId: student.data.Hours[0] ? student.data.Hours[0].Id : -1,
+                AccountId: student.data.User.AccountId,
+                HourId: student.data.Hours ? student.data.Hours.Id : -1,
                 Hour: student.content[2].properties.value
             }
             table.push(element);
