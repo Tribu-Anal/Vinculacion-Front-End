@@ -11,4 +11,4 @@
 	<md-button class="md-raised" ng-click="vm.reset()">Cancelar</md-button>
 	<md-button class="md-raised md-primary md-hue-2" style="margin-top: 15px;" ng-click="vm.submit()">Importar</md-button>
 </div>
-<tb-loading class="main-loader" ng-show="vm.parseLoading"></tb-loading>
+<tb-loading class="main-loader" ng-show="vm.parseLoading || vm.submitting"></tb-loading>
