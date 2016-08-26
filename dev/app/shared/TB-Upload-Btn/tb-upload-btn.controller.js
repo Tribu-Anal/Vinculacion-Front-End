@@ -7,7 +7,11 @@ function TbUploadBtnController ($scope) {
 	vm.upload = upload;
 
 	document.getElementById("uploadBtn").onchange = function () {
-		vm.file = this.files[0];
+		const file = this.files[0];
+
+		if (!file) return;
+
+		vm.file = file;
 		document.getElementById('uploadFile').value = vm.file.name;
 	    $scope.$apply();
 	};

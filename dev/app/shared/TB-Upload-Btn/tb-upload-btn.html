@@ -4,4 +4,4 @@
     <span>Importar</span>
     <input id="uploadBtn" type="file" class="upload"/>
 </div> 
-<md-button class="md-raised" style="width: 100%; margin: 5px 0;" ng-hide="vm.file === null" ng-click="vm.upload()" type="submit">Confirmar</md-button>
+<md-button class="md-raised" style="width: 100%; margin: 5px 0;" ng-hide="!vm.file" ng-click="vm.upload()" type="submit">Confirmar</md-button>
