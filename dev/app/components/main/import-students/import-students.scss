@@ -8,6 +8,17 @@
 		padding-top: 5%;
 	}
 
+	.table-container {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+
+		button {
+			width: 90%;
+			margin: auto;
+		}
+	}
+
 	tb-upload-btn {
 		width: 40%;
 	}

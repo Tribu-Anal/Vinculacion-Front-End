@@ -1,3 +1,14 @@
-<div class="upload-container">
+<div class="upload-container" ng-hide="vm.excelStudents">
 	<tb-upload-btn label="Importar Alumnos" upload="vm.upload" placeholder="Seleccionar Excel"></tb-upload-btn>
 </div>
+<div class="table-container" ng-show="vm.studentsTable">
+	<tb-table class="col-md-12" headers="vm.studentsTable.headers"
+		body="vm.studentsTable.body"
+		actions="vm.studentsTable.actions"
+		class="mouse-hover"
+		style="margin-bottom: 40px;">
+	</tb-table>
+	<md-button class="md-raised" ng-click="vm.reset()">Cancelar</md-button>
+	<md-button class="md-raised md-primary md-hue-2" style="margin-top: 15px;" ng-click="vm.submit()">Importar</md-button>
+</div>
+<tb-loading class="main-loader" ng-show="vm.parseLoading"></tb-loading>
