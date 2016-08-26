@@ -8,7 +8,8 @@ function students ($http, $q) {
 		getHours: getHours,
 		getAccountId: getAccountId,
 		getSectionHours: getSectionHours,
-		getParsedStudentsExcel: getParsedStudentsExcel
+		getParsedStudentsExcel: getParsedStudentsExcel,
+		importStudents: importStudents
 	};
 
 	return service;
@@ -42,7 +43,17 @@ function students ($http, $q) {
 
       	$http.get(url+'/Parse/'+data)
 	        .success(response => { deferred.resolve(response.data); })
-	        .error(reject => { deferred.reject('No se pudo importar el archivo.'); });
+	        .error(reject => { deferred.reject('No se pudo cargar el archivo.'); });
+
+	    return deferred.promise;
+	}
+
+	function importStudents (students) {
+		const deferred = $q.defer();
+
+      	$http.post(url+'/Import', students)
+	        .success(response => { deferred.resolve(response.data); })
+	        .error(reject => { deferred.reject('No se pudo importar los alumnos.'); });
 
 	    return deferred.promise;
 	}
