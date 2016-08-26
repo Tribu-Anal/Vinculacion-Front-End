@@ -5,7 +5,7 @@ SettlementController.$inject = ['TbUtils', 'settlement',
 
 function SettlementController(TbUtils, settlement,
     tableContent, $scope, filterFilter, $rootScope, $state) {
-    if ($rootScope.Role !== 'Admin') $state.go('main.projects');
+    
     const vm = this;
     vm.settlementLoading = true;
     vm.settlementTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas Totales', 'Carrera', 'Descargar Finiquito']);

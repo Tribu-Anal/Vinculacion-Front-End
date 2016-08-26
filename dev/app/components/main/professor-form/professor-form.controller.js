@@ -1,7 +1,6 @@
 ProfessorFormController.$inject = ['$rootScope', '$state', 'professors', 'TbUtils'];
 
 function ProfessorFormController($rootScope, $state, professors, TbUtils) {
-    if ($rootScope.Role !== 'Admin') $state.go('main.dashboard');
 
     var vm = this;
 

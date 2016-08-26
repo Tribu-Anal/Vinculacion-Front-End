@@ -8,7 +8,6 @@ function ProjectFormController($rootScope, $state, $stateParams,
     projects, sections,
     majors, toaster,
     TbUtils, $location) {
-    if ($rootScope.Role !== 'Admin') $state.go('main.projects');
 
     var vm = this;
 

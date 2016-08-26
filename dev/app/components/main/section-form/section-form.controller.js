@@ -5,9 +5,6 @@ SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 
 function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
     timeout, students, ModalService, professors) {
 
-    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.' + $rootScope.Role.toLowerCase() + "-dashboard");
-
-
     var vm = this;
 
     vm.classes = [];
