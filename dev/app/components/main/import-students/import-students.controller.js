@@ -7,8 +7,9 @@ function ImportStudentsController ($scope, TbUtils) {
 	vm.upload = upload;
 
 	function upload (data) {
-		console.log(data);
 		// To base64
+		const encodedData = btoa(data);
+		console.log(encodedData);
 		// API call
 	}
 
