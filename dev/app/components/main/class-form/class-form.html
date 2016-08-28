@@ -1,0 +1,26 @@
+<form name="classForm" class="cd-form" ng-submit="classForm.$valid && vm.submit()" novalidate>
+    <legend>
+        <strong>Nueva Clase</strong>
+    </legend>
+
+    <div>
+        <label class="cd-label" for="cd-name">Clase</label>
+        <input ng-model="vm.class.Name" class="user" type="text" name="class-name" id="cd-name"  required>
+        <p class="error-message" ng-show="classForm.$submitted && classForm.$invalid">
+            * Por favor ingrese el nombre de la clase.
+        </p>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Codigo</label>
+        <input ng-model="vm.class.Code" class="user" type="text" name="code" id="cd-name" required>
+        <p class="error-message" ng-show="classForm.$submitted && classForm.$invalid">
+            * Por favor ingresa el codigo de la clase
+        </p>
+    </div>
+
+    <div>
+        <input type="submit" ng-hide="vm.submitting" value="Confirmar">
+    </div>
+</form>
+<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading> 
