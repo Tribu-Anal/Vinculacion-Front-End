@@ -18,33 +18,24 @@ function ProjectController($rootScope, $stateParams, $state, projects,
         getSectionsByProjectSuccess, getSectionsByProjectFail)
     vm.showEvaluateProjectButton = $rootScope.Role === 'Professor';
 
-    function getNamesFromId(IdArray, getData, getSuccess, getFail) {
-        for (let id in IdArray) {
-            getData(IdArray[id], getSuccess, getFail);
-        }
-    }
-
     function getMajorSuccess(response) {
         vm.majors.push(response.data.Name);
     }
 
     function getMajorFail(response) {}
 
-    function getSectionSuccess(response) {
-        vm.sections.push({
-            code: response.data.Code,
-            name: response.data.Class.Name
-        });
-    }
-
-    function getSectionFail(response) {}
-
     function getProjectSuccess(response) {
         vm.project = response.data;
         vm.project.Name = TbUtils.toTitleCase(vm.project.Name);
-        getNamesFromId(vm.project.MajorIds, majors.getMajor, getMajorSuccess, getMajorFail);
-        getNamesFromId(vm.project.SectionIds, sections.getSection, getSectionSuccess, getSectionFail);
-        vm.projectLoading = false;
+
+        majors.getMajorsByProject($stateParams.projectId).then(function(response) {
+            TbUtils.fillListWithResponseData(response, vm.majors);
+            vm.projectLoading = false;
+        }, 
+            function(error) {
+                console.log(error);
+                vm.projectLoading = false;
+        });
     }
 
     function getProjectFail(response) {
