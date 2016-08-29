@@ -1,0 +1,56 @@
+.main {
+    $main-height: 100vh;
+    $header-height: 13vh;
+    $dynamic-height: ($main-height - $header-height);
+
+    font-family: 'Roboto', sans-serif;
+
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+
+    tb-sidebar {
+        height: $main-height;
+        min-height: $main-height;
+
+        &.col-xs-2 {
+            padding: 0;
+        }
+    }
+    
+    .container-fluid {
+        padding: 0;
+        margin: 0;
+
+        & > .row {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .main-container {
+        flex-grow: 1;
+        order: 2;
+        width: 82%;
+    }
+
+    tb-headerbar {
+        padding: 0;
+        height: $header-height;
+    }
+
+    .loading {
+        position: relative;
+        height: $dynamic-height;
+    }
+
+    .dynamic-area
+    {
+        overflow-y: auto;
+
+        transition: all .3s linear;
+
+        height: $dynamic-height;
+    }
+
+}

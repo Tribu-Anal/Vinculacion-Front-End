@@ -1,0 +1,102 @@
+.projects
+{
+    .gallery
+    {
+        position: absolute;
+        top: 7%;
+        left: 5%;
+
+        display: flex;
+
+        width: 95%;
+
+        flex-wrap: wrap;
+    }
+    .card
+    {
+        position: relative;
+        width: 28%;
+        min-width: 280px;
+        height: 300px;
+        margin-right: 5%;
+        margin-bottom: 5%;
+
+        tb-loading {
+            background: #213250;
+        }
+
+        cursor: pointer;
+
+        background: #9ad3de;
+        box-shadow: 0 0 10px #000;
+
+        &:hover
+        {
+            box-shadow: 0 0 30px #000;
+
+            .icon-group {
+                display: inline-block;
+            }
+        }
+
+        .icon-group {
+            display: none;
+            position: absolute;
+            background: transparentize(#111, 0.8);
+            width: 100%;
+            padding: 7px;
+            color: #ccc;
+            font-size: 1.2em;
+            z-index: 100;
+
+            i {
+                float: right;
+
+                margin-left: 7px;
+
+                &:hover { color: #fff; }
+            }
+        }
+
+        #body {
+            width: 100%;
+            height: 100%;
+            
+            .img-area
+            {
+                display: flex;
+
+                height: 70%;
+
+                background: #213250;
+
+                justify-content: center;
+            }
+            .img-area img
+            {
+                width: 50%;
+                max-width: 50%;
+                max-height: 100%;
+
+                align-self: center;
+            }
+            .project-info
+            {
+                text-align: center;
+                max-height: 30%;
+                overflow-y: hidden;
+            }
+            .project-info h4
+            {
+                font-size: 1.3em;
+            }
+            .overflow {
+                display: -webkit-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+body {
+    overflow-y: hidden;
+
+    .general-loader {
+        background: #213250;
+	}
+
+	.main-loader {
+		background: #f2f2f2;
+        .wave-spinner > div{
+            background-color: #283B5B;
+        }
+	}
+}

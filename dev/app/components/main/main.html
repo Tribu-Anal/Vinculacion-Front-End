@@ -1,0 +1,18 @@
+<div class="container-fluid">
+	<tb-sidebar id="sidebar" class="col-xs-2" 
+				nav-items="mvm.navItems" 
+				ng-hide="mvm.expand">
+	</tb-sidebar>
+
+	<div id="header" class="row">
+		<tb-headerbar class="col-xs-12"></tb-headerbar>
+	</div>
+
+	<div class="row start-xs loading">
+		<div id="dynamic-area" class="dynamic-area col-xs-12" 
+		 ng-class="mvm.expand ? 'expanded' : 'shrunk'"
+		 ng-cloak ui-view>
+		</div>
+		<tb-loading class="main-loader" ng-show="stateLoading"></tb-loading>
+	</div>
+</div>

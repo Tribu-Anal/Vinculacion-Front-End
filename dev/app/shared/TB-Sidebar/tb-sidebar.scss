@@ -1,0 +1,81 @@
+tb-sidebar {
+
+    display: flex;
+    flex-direction: column;
+
+    font-size: 1.2em;
+    font-weight: 500;
+
+    background: #283b5b;
+
+    #logo-area
+    {
+        display: flex;
+
+        background: #213250;
+
+        justify-content: center;
+
+        height: 13vh;
+    }
+
+    #logo-area img
+    {
+        width: 35%;
+        height: 80%;
+
+        cursor: pointer;
+
+        align-self: center;
+    }
+
+    #navigation
+    {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        margin: 30% 0;
+        padding: 0 15%;
+
+        color: #6b7fa4;
+    }
+
+    #navigation ul
+    {
+        padding: 0;
+
+        list-style: none;
+    }
+
+    #navigation li
+    {
+        margin-bottom: 15%;
+
+        cursor: pointer;
+    }
+
+    #navigation li:hover,
+    .active
+    {
+        color: #55e4d4;
+    }
+
+    #navigation i
+    {
+        margin-right: 6%;
+    }
+
+    @media screen and (max-width: 1228px) {
+        font-size: 1em;
+        #navigation i {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        font-size: 8px;
+        font-weight: normal;
+    }
+
+}

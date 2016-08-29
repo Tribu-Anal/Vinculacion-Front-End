@@ -1,0 +1,64 @@
+<div class="login-page">
+      <img class = "img-responsive logo" src="img/logo.png" />
+      <div class="form">
+        <form id="login-form" class="login-form" name="registerLogin" ng-submit="registerLogin.$valid && vm.login()" novalidate>
+            <div class="inner-addon left-addon">
+            <span class="fa fa-user"></span>
+            <input name="usuario" ng-model="vm.username" ng-pattern='/@unitec.edu$/' type="email" placeholder="Correo de Unitec" required/>
+            </div>
+            <div class="inner-addon left-addon">
+            <span class="fa fa-lock"></span>
+            <input name="clave" ng-model="vm.password" type="password" placeholder="Clave" required/>
+            </div>
+            <button id="ingresar" type="submit">Ingresar</button>
+            <p class="message register">No estas registrado? <a href="#">Crear una cuenta</a></p>
+            <tb-loading class="landing-loader main-loader" ng-show="vm.loading"></tb-loading>
+        </form>  
+        
+        <div ng-controller="RegisterController as vm">
+            <form id="register-form" class="register-form" name="register" 
+                  ng-submit="register.$valid && vm.registerStudent()" novalidate>
+                <span class="label-container">Registrar Usuario</span>
+                <div class="inner-addon left-addon">
+                <span class="fa fa-envelope"></span>
+                <input name="correo" type="email" placeholder="Correo Electr&oacute;nico" ng-model="vm.student.Email" 
+                       ng-pattern='/@unitec.edu$/' required/>
+                </div>
+                <div class="inner-addon left-addon">
+                <span class="fa fa-sort-numeric-desc"></span>
+                <input name="accountId" type="number" placeholder="N&uacute;mero de Cuenta" ng-model="vm.student.AccountId" required>
+                </div>
+                <div class="inner-addon left-addon">
+                <span class="fa fa-user register"></span>
+                <input name="nombre" type="text" placeholder="Nombre Completo" ng-model="vm.student.Name" required>
+                </div>
+                <div class="campus">
+                    <span class="label-container">Campus</span>
+                    <select class="form-control" ng-model="vm.student.Campus">
+                        <option>SPS</option>
+                        <option>TGU</option>
+                    </select>
+                </div>
+                <div class="inner-addon left-addon">
+                <span class="fa fa-lock pass"></span>
+                <input id="password" name="password" type="password" placeholder="Clave" ng-model="vm.student.Password" 
+                        ng-minlength="8" ng-keypress="vm.validate($event)" required/>
+                </div>
+                <div class="inner-addon left-addon">
+                <span class="fa fa-lock confirmpass"></span>
+                <input type="password" name="confirmpass" placeholder="Confirmar Clave" ng-pattern="vm.password" ng-model="confirmpass" required/>
+                </div>
+                <div class="carrera">
+                    <span class="label-container">Carrera</span>
+                    <select class="form-control" ng-model="vm.student.MajorId">
+                        <option ng-repeat="major in vm.majors" value="{{major.MajorId}}">{{major.Name}}</option>
+                    </select>
+                </div>
+                  <button id="registrar" type="submit">Registrar</button>
+                  <p class="message login">Ya estas registrado? <a href="#">Iniciar Sesion</a></p>
+            </form>  
+        </div>
+
+      </div>
+      
+</div>

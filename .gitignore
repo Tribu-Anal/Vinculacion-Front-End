@@ -1,6 +1,10 @@
 node_modules/
-test/
-public/
+public/css/
+public/fonts/
+public/img/
+public/js/
+public/lib/
+public/templates/
 
 # cache files for sublime text
 *.tmlanguage.cache
@@ -16,3 +20,5 @@ public/
 
 # sftp configuration file
 sftp-config.json
+
+npm-debug.log

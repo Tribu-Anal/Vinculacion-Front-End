@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="VinculacionApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title ng-bind="viewTitle">Vinculacion</title>
+
+        <link rel="icon" href="img/logo.png">
+        <link href="lib/vendor.css" rel="stylesheet"/>
+		<link href="css/style.css" rel="stylesheet"/>
+    </head>
+    <body class="{{viewStyles}}" ng-class="{ 'scrollable': !stateLoading }">
+    	<toaster-container></toaster-container>
+		<ui-view></ui-view>
+        <tb-loading class="general-loader" ng-show="generalLoading && stateLoading"></tb-loading>
+
+        <script>
+            var PORT = "8085"; 
+        </script>
+        <script src="lib/vendor.js"></script>
+		<script src="js/bundle.js"></script>	
+    </body>
+</html>
