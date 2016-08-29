@@ -33,7 +33,7 @@ function ProjectController($rootScope, $stateParams, $state, projects,
             vm.projectLoading = false;
         }, 
             function(error) {
-                console.log(error);
+                TbUtils.displayNotification('error', 'Error', error);
                 vm.projectLoading = false;
         });
     }
