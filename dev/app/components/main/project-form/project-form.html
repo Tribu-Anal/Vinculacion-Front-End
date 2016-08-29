@@ -1,3 +1,4 @@
+
 <form name="projectForm" class="cd-form" ng-submit="projectForm.$valid && vm.majorsAndStatusValid() && vm.submitProject()" novalidate>
     <legend><strong>{{vm.formLegend}}</strong></legend>
     
@@ -32,22 +33,6 @@
             * Por favor ingresa el nombre de un beneficiario.
         </p>
     </div>
-    
-<!--     <div>
-        <label class="cd-label" for="cd-name">Grupos Beneficiarios</label>
-        <input ng-model="vm.project.BeneficiarieGroups" class="user" type="text" name="projectBeneficiario" id="cd-name" required>
-        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectBeneficiario.$error.required">
-            * Por favor ingresa el nombre de un beneficiario.
-        </p>
-    </div>
-
-    <div>
-        <label class="cd-label" for="cd-name">Cantidad de Beneficiarios</label>
-        <input ng-model="vm.project.BeneficiariesQuantity" class="user" ng-pattern="/^\d+$/" type="number" name="projectBeneficiarieQuantity" id="cd-name" min="0" required>
-        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && (projectForm.projectBeneficiarieQuantity.$error.required || projectForm.projectBeneficiarieQuantity.$invalid)">
-            * Asigna la cantidad de beneficiarios.
-        </p>
-    </div> -->
 
     <div class="icon">
         <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
