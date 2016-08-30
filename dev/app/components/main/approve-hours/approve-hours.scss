@@ -1,4 +1,33 @@
 .approve-hours {
-
-
+	.projec-title{
+		text-align: center;
+	    margin-bottom: 5%;
+	    margin-top: 5%;
+	}
+	.container{
+    width: 100rem;
+	box-shadow: 0 0 2px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.24);
+    margin-top: 5%;
+    background: white;
+	.project-info{
+	    margin-bottom: 5%;
+        padding-left: 1%;
+	    padding-right: 1%;
+	}
+	}
+	h1{
+		font-weight: bold
+	}
+	h2{
+		font-weight: bold
+	}
+	h4{
+		font-weight: bold
+	}
+	.proffesor{
+		margin-top: 5%;
+	}
+	.approve-button{
+	   float: right;
+    	}
 }
