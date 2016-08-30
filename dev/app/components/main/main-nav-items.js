@@ -45,6 +45,14 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  	},
 
 	  	{
+		  	title: "NUEVA CLASE", ref: "main.newclass", url: '/nueva-clase',
+		  	icon: "glyphicon glyphicon-book",
+		  	active: $state.current.url.includes('/nueva-clase'),
+		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
+		  	clicked: TbUtils.preventGeneralLoading
+	  	},
+
+	  	{
 		  	title: "FINIQUITOS", ref: "main.settlement", url: '/finiquitos',
 		  	icon: "glyphicon glyphicon-list-alt",
 		  	active: $state.current.url.includes('/finiquitos'),
