@@ -71,7 +71,8 @@ function EditHoursController($stateParams, $state, sections, projects,
     function evaluateProject() {
         TbUtils.preventGeneralLoading();
         $state.go('main.evaluateproject', {
-            projectId: $stateParams.projectId
+            projectId: $stateParams.projectId,
+            sectionId: $stateParams.sectionId
         });
     }
 
