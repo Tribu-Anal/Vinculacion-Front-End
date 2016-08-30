@@ -1,6 +1,6 @@
-TbUtils.$inject = ['toaster', '$rootScope', '$mdDialog'];
+TbUtils.$inject = ['toaster', '$rootScope', '$mdDialog', '$state'];
 
-function TbUtils(toaster, $rootScope, $mdDialog) {
+function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     var service = {
         fillListWithResponseData: fillListWithResponseData,
         displayNotification: displayNotification,
@@ -8,13 +8,13 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
         initArrayToValue: initArrayToValue,
         removeItemFromList: removeItemFromList,
         showErrorMessage: showErrorMessage,
-        getTable: getTable,
         setModalParams: setModalParams,
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
         confirm: confirm,
         prompt: prompt,
-        customDialog: customDialog
+        customDialog: customDialog,
+        go: go
     };
     var vm = this;
     vm.ModalParams;
@@ -66,16 +66,6 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
         return true;
     }
 
-    function getTable(headers) {
-        let table = {
-            headers: headers,
-            body: [],
-            actions: false
-        }
-
-        return table;
-    }
-
     function setModalParams(params) {
         vm.ModalParams = params;
     }
@@ -124,6 +114,11 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
             parent: angular.element(document.body)
         }
         $mdDialog.show(options).then(callback);
+    }
+
+    function go (state, params) {
+        preventGeneralLoading();
+        $state.go(state, params);
     }
 
 }
