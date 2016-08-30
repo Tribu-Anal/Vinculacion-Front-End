@@ -4,11 +4,7 @@ function tbTable() {
         restrict: 'E',
         scope: {
             headers: '=?',
-            body: '=?',
-            actions:"=?",
-            onRowClick: '=?',
-            ref: '@?',
-            inputDisable: '=?'
+            rows: '=?'
         },
         controller : 'TbTableController as vm',
         templateUrl: 'templates/shared/TB-Table/tb-table.html'           
