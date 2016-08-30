@@ -12,6 +12,9 @@ function EditHoursController($stateParams, $state, sections, projects,
         value: false,
         text: 'Habilitar la edición de las horas'
     }
+    vm.isApproved = {
+        visible: false
+    }
     vm.evaluateProject = {
         onClick: evaluateProject
     }
@@ -27,9 +30,10 @@ function EditHoursController($stateParams, $state, sections, projects,
 
     function getStudentsHoursSuccess(response) {
         console.log(response);
-        if (response.data.Hours.length <= 0){
+        vm.isApproved.visible = response.data.IsApproved;
+        if (response.data.Hours.length <= 0) {
             TbUtils.displayNotification('error', 'Error',
-            'Esta sección y proyecto no tienen alumnos asginados.');
+                'Esta sección y proyecto no tienen alumnos asginados.');
             return;
         }
         for (let i = 0; i < response.data.Hours.length; i++) {

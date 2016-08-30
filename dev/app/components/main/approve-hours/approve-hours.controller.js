@@ -14,7 +14,6 @@ function ApproveHoursController(hours, TbUtils, $scope) {
     }
 
     function getHoursInfoSectionProjects(response) {
-        console.log(response)
         vm.model = response.data;
         if(vm.model.IsApproved)
         	TbUtils.displayNotification('warning', 'Advertencia',
