@@ -19,6 +19,7 @@ function ClassFormController ($rootScope, $state, TbUtils, classes) {
 	}
 
 	function postSuccess() {
+		TbUtils.displayNotification('success', 'Exito!', 'La clase ha sido creada!');
 		$state.go('main.projects');
 	}
 
