@@ -1,4 +1,4 @@
-function tbTableButtonElem () {
+function tbTableBtnElem () {
 	const directive = {
 		restrict: 'E',
 		scope: {
@@ -13,4 +13,4 @@ function tbTableButtonElem () {
 	return directive;
 }
 
-module.exports = { name: 'tbTableButtonElem', drtv: tbTableButtonElem };
+module.exports = { name: 'tbTableBtnElem', drtv: tbTableBtnElem };

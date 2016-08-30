@@ -15,24 +15,14 @@ function tableBuilder (tableContent) {
         const schema = model.schema;
 
         for (const obj of data) {
-
+            
             const row = {
                 elements: [],
                 data: obj
             };
 
             for (const sc of schema) {
-                let elem = tableContent.createALabelElement({ text: 'Invald Type' });
-
-                if (sc.type === 'label')
-                    elem = tableContent.createALabelElement(sc.props);
-                else if (sc.type === 'input')
-                    elem = tableContent.createAnInputElement(sc.props);
-                else if (sc.type === 'button')
-                    elem = tableContent.createAButtonElement(sc.props);
-                else if (sc.type === 'icon')
-                    elem = tableContent.createIconElement(sc.props);
-
+                let elem = tableContent.createNewElement(sc.type, sc.props, obj);
                 row.elements.push(elem);
             }
 

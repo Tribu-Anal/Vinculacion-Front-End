@@ -1,65 +1,43 @@
 tableContent.$inject = ['TbUtils'];
 
 function tableContent (TbUtils) {
+    const VALID_TYPES = [ 'label', 'input', 'button', 'icon' ];
+
     const service = {
-        createAnInputElement: createAnInputElement,
-        createALabelElement: createALableElement,
-        createAButtonElement: createAButtonElement,
-        createIconElement: createIconElement
+        createNewElement: createNewElement
     };
 
     return service;
 
-    function createAnInputElement(input) {
+    function createNewElement(type, props, data) {
+        const invalid = !VALID_TYPES.includes(type);
+
         const element = {
-            type: 'input',
-            props: {
-                model: input.model,
-                type: input.type,
-                min: input.min,
-                max: input.max,
-                inputDisabled: input.inputDisabled,
-                disable: input.disable
-            }
+            type: invalid ? 'label' : type,
+            props: invalid ? { text: 'Invalid Element Type' }  : evalProps(props, data)
         };
 
         return element;
     }
 
-    function createALabelElement(label) {
-        const element = {
-            type: 'label',
-            props: {
-                text: TbUtils.toTitleCase(label)
+    function evalProps (props, data) {
+        let evaluatedProps = {};
+
+        if (typeof props === 'function')
+            evaluatedProps = props(data);
+
+        else {
+            for (const key in props) {
+                const prop = props[key];
+
+                if (typeof prop === 'function')
+                    evaluatedProps[key] = prop(data);
+                else
+                    evaluatedProps[key] = prop;
             }
-        };
+        }
 
-        return element;
-    }
-
-    function createAButtonElement(button) {
-        const element = {
-            type: 'button',
-            props: {
-                onClick: button.onClick,
-                icon: button.icon,
-                tooltip: button.tooltip
-            }
-        };
-
-        return element;
-    }
-
-    function createIconElement (icon) {
-        const element = {
-            type: 'icon',
-            props: {
-                iconClass: icon.iconClass,
-                fontSize: icon.fontSize
-            }
-        };
-
-        return element;
+        return evaluatedProps;
     }
 
 }

@@ -1,6 +1,6 @@
-const directive = require('./tb-table-button-elem.directive');
+const directive = require('./tb-table-btn-elem.directive');
 
-const moduleName   = 'tb-table-button-elem.shared',
+const moduleName   = 'tb-table-btn-elem.shared',
       dependencies = [];
 
 angular.module(moduleName, dependencies)

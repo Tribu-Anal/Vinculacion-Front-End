@@ -1,6 +1,6 @@
-const directive = require('./tbtable-elem.directive');
+const directive = require('./tb-table-elem.directive');
 
-const moduleName   = 'tbtable-elem.shared',
+const moduleName   = 'tb-table-elem.shared',
       dependencies = [];
 
 angular.module(moduleName, dependencies)

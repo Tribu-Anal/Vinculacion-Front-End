@@ -1,40 +1,38 @@
-ImportStudentsController.$inject = [ 'TbUtils', 'tableBuilder', 'students', '$state' ];
+ImportStudentsController.$inject = [ 'TbUtils', 'students', '$state' ];
 
 const mockData = [ 
-	{ AccountId: 102987, Name: 'Alejandro Ferrera' }, 
-	{ AccountId: 834748, Name: 'Daniel Perez' }, 
-	{ AccountId: 390098, Name: 'Daniel Zelaya' }, 
-	{ AccountId: 202022, Name: 'Kelvin Chinchilla' }, 
-	{ AccountId: 737102, Name: 'Soware Malware' },
-	{ AccountId: 382722, Name: 'Fabian Love' },
-	{ AccountId: 393932, Name: 'Ooohhh Fabian' },
-	{ AccountId: 737282, Name: 'Ooohhh Que Canon' } 
+	{ AccountId: 102987, Name: 'Alejandro Ferrera', Email: 'ale.killer@unitec.edu',  Major: 'Sistemas', Exists: false }, 
+	{ AccountId: 834748, Name: 'Daniel Perez',      Email: 'dannyel@unitec.edu',     Major: 'Sistemas', Exists: false }, 
+	{ AccountId: 390098, Name: 'Daniel Zelaya',     Email: 'danielzy95@unitec.edu',  Major: 'Sistemas', Exists: false }, 
+	{ AccountId: 202022, Name: 'Kelvin Chinchilla', Email: 'kelvinnosse@unitec.edu', Major: 'Sistemas', Exists: false }, 
+	{ AccountId: 737102, Name: 'Soware Malware',    Email: 'soware@unitec.edu',      Major: 'Sistemas', Exists: false },
+	{ AccountId: 382722, Name: 'Fabian Love',       Email: 'fabianlove@unitec.edu',  Major: 'Sistemas', Exists: false },
+	{ AccountId: 393932, Name: 'Ooohhh Fabian',     Email: 'fabian@unitec.edu',      Major: 'Sistemas', Exists: false },
+	{ AccountId: 737282, Name: 'Ooohhh Que Canon',  Email: 'canon@unitec.edu',       Major: 'Sistemas', Exists: false } 
 ];
 
-function ImportStudentsController (TbUtils, tableBuilder, students, $state) {
+function ImportStudentsController (TbUtils, students, $state) {
 	const vm = this;
 
 	vm.upload = upload;
 	vm.submit = submit;
 	vm.reset  = reset;
 	vm.excelStudents = null;
-	vm.studentsTable = null;
+	vm.studentsTableModel = require('./students-table-model');
 	vm.parseLoading  = false;
 	vm.submitting    = false;
 
 	function upload (data) {
 		const base64Data = btoa(data);
-		console.log(base64Data);
-		// vm.parseLoading = true;
+		// console.log(base64Data);
+		vm.parseLoading = true;
 
-		// students.getParsedStudentsExcel(base64Data).then( 
-		// resolve => { vm.excelStudents = resolve;  buildStudentsTable(); vm.parseLoading = false; }, 
-		// reject => { TbUtils.displayNotification('error', 'Error', reject); vm.parseLoading = false; });
-	}
-
-	function buildStudentsTable () {
-		vm.studentsTable = tableBuilder.newTable([ 'Numero de Cuenta', 'Nombre' ], 
-			                                     vm.excelStudents, ['AccountId', 'Name']);
+		students.getParsedStudentsExcel(base64Data).then( 
+		resolve => { vm.studentsTableModel.data = resolve; vm.excelStudents = resolve; vm.parseLoading = false; }, 
+		reject => { 
+			vm.studentsTableModel.data = mockData; vm.excelStudents = mockData; vm.parseLoading = false;
+			//TbUtils.displayNotification('error', 'Error', reject); vm.parseLoading = false; 
+	});
 	}
 
 	function submit () {
@@ -53,7 +51,6 @@ function ImportStudentsController (TbUtils, tableBuilder, students, $state) {
 
 	function reset () {
 		vm.excelStudents = null;
-		vm.studentsTable = null;
 	}
 
 }

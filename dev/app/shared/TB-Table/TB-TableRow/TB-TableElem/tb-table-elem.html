@@ -1,23 +1,21 @@
-<td>
-	<tb-table-label-elem ng-if="type === 'label'"  text="{{props.text}}"></tb-table-label-elem>
+<tb-table-label-elem ng-if="type === 'label'"  text="{{props.text}}"></tb-table-label-elem>
 
-	<tb-table-input-elem ng-if="type === 'input'"  
-	                     type="{{props.type}}"
-	                     input-disabled="props.inputDisabled"
-	                     model="props.model"
-	                     max="{{props.max}}"
-	                     min="{{props.min}}"
-	                     disable="{{props.disable}}">
-	</tb-table-label-elem>
+<tb-table-input-elem ng-if="type === 'input'"  
+                     type="{{props.type}}"
+                     input-disabled="props.inputDisabled"
+                     model="props.model"
+                     max="{{props.max}}"
+                     min="{{props.min}}"
+                     disable="{{props.disable}}">
+</tb-table-input-elem>
 
-	<tb-table-btn-elem   ng-if="type === 'button'" 
-	                     on-click="props.onClick"
-	                     icon="{{props.icon}}" 
-	                     tooltip="{{props.tooltip}}">
-    </tb-table-label-elem>
-	
-	<tb-table-icon-elem  ng-if="type === 'icon'"  
-	                     icon-class="{{props.iconClass}}" 
-	                     font-size="{{props.fontSize}}">
-    </tb-table-label-elem>
-</td>
+<tb-table-btn-elem   ng-if="type === 'button'" 
+                     on-click="props.onClick"
+                     icon="{{props.icon}}" 
+                     tooltip="{{props.tooltip}}">
+</tb-table-btn-elem>
+
+<tb-table-icon-elem  ng-if="type === 'icon'"  
+                     icon-class="{{props.iconClass}}" 
+                     font-size="{{props.fontSize}}">
+</tb-table-icon-elem>

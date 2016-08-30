@@ -3,8 +3,8 @@ function tbTable() {
     {
         restrict: 'E',
         scope: {
-            headers: '=?',
-            rows: '=?'
+            tableModel: '=?',
+            onRowClick: '=?'
         },
         controller : 'TbTableController as vm',
         templateUrl: 'templates/shared/TB-Table/tb-table.html'           

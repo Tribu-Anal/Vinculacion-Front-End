@@ -1,4 +1,5 @@
 <table class="responstable">
 	<tb-table-header ng-repeat="header in headers" text="header"></tb-table-header>
-	<tb-table-row ng-repeat="row in rows" elements="row.elements" data="row.data"></tb-table-row>
+	<tb-table-row ng-repeat="row in rows" elements="row.elements" data="row.data" 
+	              ng-click="onRowClick(row.data)"></tb-table-row>
 </table>

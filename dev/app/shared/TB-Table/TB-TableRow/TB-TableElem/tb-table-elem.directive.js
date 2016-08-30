@@ -1,4 +1,4 @@
-function tbtableElem () {
+function tbTableElem () {
 	const directive = {
 		restrict: 'E',
 		scope: {
@@ -11,4 +11,4 @@ function tbtableElem () {
 	return directive;
 }
 
-module.exports = { name: 'tbtableElem', drtv: tbtableElem };
+module.exports = { name: 'tbTableElem', drtv: tbTableElem };

@@ -1,3 +1,5 @@
 <tr class="tb-body">
-	<tb-table-element ng-repeat="elem in elements" type="elem.type" props="elem.props"></tb-table-element>
+	<td ng-repeat="elem in elements">
+		<tb-table-elem type="{{elem.type}}" props="elem.props"></tb-table-elem>
+	</td>
 </tr>
