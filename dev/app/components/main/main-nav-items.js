@@ -47,7 +47,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  	{
 		  	title: "NUEVA CLASE", ref: "main.newclass", url: '/nueva-clase',
 		  	icon: "glyphicon glyphicon-plus",
-		  	active: $state.current.url.includes('/nuevo-clase'),
+		  	active: $state.current.url.includes('/nueva-clase'),
 		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
