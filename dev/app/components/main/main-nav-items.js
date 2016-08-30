@@ -53,7 +53,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  	},
 	  	
 	  	{
-		  	title: "APROBAR HORAS", ref: "main.settlement", url: '/aprobar-horas',
+		  	title: "APROBAR HORAS", ref: "main.approve-hours", url: '/aprobar-horas',
 		  	icon: "glyphicon glyphicon-check",
 		  	active: $state.current.url.includes('/aprobar-horas'),
 		  	show: $rootScope.Role === 'Admin',
