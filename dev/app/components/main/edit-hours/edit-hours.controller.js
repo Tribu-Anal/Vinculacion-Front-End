@@ -36,6 +36,10 @@ function EditHoursController($stateParams, $state, sections, projects,
                 'Esta sección y proyecto no tienen alumnos asginados.');
             return;
         }
+        if(vm.isApproved.visible)
+            TbUtils.displayNotification('warning', 'Aviso',
+                'Las horas de esta sección ya fueron aprobadas.');
+
         for (let i = 0; i < response.data.Hours.length; i++) {
             let student = response.data.Hours[i];
             let inputProperties = {
