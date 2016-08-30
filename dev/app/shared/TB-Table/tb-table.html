@@ -1,5 +1,40 @@
 <table class="responstable">
-	<tb-table-header ng-repeat="header in headers" text="header"></tb-table-header>
-	<tb-table-row ng-repeat="row in rows" elements="row.elements" data="row.data" 
-	              ng-click="onRowClick(row.data)"></tb-table-row>
+	<tr><th ng-repeat="header in headers">{{header}}</th></tr>
+
+	<tr class="tb-body" ng-repeat="row in rows" ng-click="onRowClick(row.data)">
+		<td ng-repeat="elem in row.elements">
+
+			<!-- LABEL ELEMENT -->
+
+			<label ng-if="elem.type === 'label'">{{elem.props.text}}</label>
+
+			<!-- INPUT ELEMENT -->
+
+			<input ng-if="elem.type === 'input'" 
+			       type="{{elem.props.type}}" 
+			       class="tb-input-wrapper" 
+			       ng-disabled="elem.props.inputDisable" 
+			       ng-model="elem.props.model" 
+			       min="{{elem.props.min}}" max="{{elem.props.max}}">
+			<p>{{elem.props.disable}}</p>
+
+			<!-- BUTTON ELEMENT -->
+
+			<button ng-if="elem.type === 'button'"  
+			        class="actions-button tb-tooltip" 
+			        style="float: none;" 
+			        ng-click="elem.props.onClick(row.data)">
+				<span class="{{elem.props.icon}}" aria-hidden="true"></span>
+				<span ng-show="tooltip" class="tooltiptext">{{elem.props.tooltip}}</span>
+			</button>
+
+			<!-- ICON ELEMENT -->
+
+			<i ng-if="elem.type === 'icon'" 
+			   class="{{elem.props.iconClass}}" 
+			   style="font-size: {{elem.props.fontSize}}">
+			</i>
+		</td>
+	</tr>
+
 </table>
