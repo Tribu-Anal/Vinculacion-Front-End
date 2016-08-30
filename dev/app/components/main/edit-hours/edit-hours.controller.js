@@ -8,7 +8,7 @@ function EditHoursController($stateParams, $state, sections, projects,
 
     vm.participantsLoading = true;
     vm.editHours = {
-        visible: $rootScope.Role === 'Professor',
+        visible: $rootScope.Role !== 'Student',
         value: false,
         text: 'Habilitar la edición de las horas'
     }
