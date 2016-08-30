@@ -51,9 +51,9 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function submit() {
         vm.submitting = true;
-
-        sections.postSection(vm.section,
-            submitSuccess, submitFailure);
+        console.log(vm.section);
+        // sections.postSection(vm.section,
+            // submitSuccess, submitFailure);
     }
 
     function getProfessorSuccess(response) {
@@ -71,6 +71,12 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
             response.data.Id,
             assignSectionToProjectSuccess,
             assignSectionToProjectError)
+        sections.postSectionProjects(vm.section,function(response){
+            console.log(response);
+            console.log('descripiot up');
+        },function(err){
+            console.log('fail');
+        });
     }
 
     function submitFailure(response) {

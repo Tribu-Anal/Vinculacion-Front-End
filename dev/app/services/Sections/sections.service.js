@@ -17,7 +17,8 @@ function sections($http) {
         getCurrentSections: getCurrentPeriodSections,
         getProjects: getProjects,
         getSectionsByProject: getSectionsByProject,
-        getStudentsHoursBySectionProjectId: getStudentsHoursBySectionProjectId
+        getStudentsHoursBySectionProjectId: getStudentsHoursBySectionProjectId,
+        postSectionProjects: postSectionProjects
     };
 
     return service;
@@ -98,6 +99,13 @@ function sections($http) {
 
     function getStudentsHoursBySectionProjectId(sectionId, projectId, successCallback, errorCallback) {
         $http.get(url + '/StudentsHour/' + sectionId + '/' + projectId).then(successCallback).catch(errorCallback);
+    }
+
+    function postSectionProjects(data, successCallback, errorCallback) {
+        let path = url.substring(0,(url.indexOf('api')+4));
+        $http.post(path+'SectionProjects', JSON.stringify(data))
+            .then(successCallback)
+            .catch(errorCallback);
     }
 }
 
