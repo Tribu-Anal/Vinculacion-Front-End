@@ -5,33 +5,38 @@ function tableBuilder (tableContent) {
 		newTable: newTable
 	};
 
-	function newTable (headers, data, keys, buttons, inputs) {
+	function newTable (model) {
         const table = {
-            headers: headers,
-            body: [],
-            actions: false
+            headers: model.headers,
+            rows: []
         };
 
-        for (let i = 0; i < data.length; i++) {
-            const obj = data[i];
+        const data = model.data;
+        const schema = model.schema;
 
-            const newTableElement = {
-                content: [],
+        for (const obj of data) {
+
+            const row = {
+                elements: [],
                 data: obj
             };
 
-            for (let k = 0; k < keys.length; k++) {
-                const key = keys[k];
-                newTableElement.content.push(tableContent.createALableElement(obj[key]));
+            for (const sc of schema) {
+                let elem = tableContent.createALabelElement({ text: 'Invald Type' });
+
+                if (sc.type === 'label')
+                    elem = tableContent.createALabelElement(sc.props);
+                else if (sc.type === 'input')
+                    elem = tableContent.createAnInputElement(sc.props);
+                else if (sc.type === 'button')
+                    elem = tableContent.createAButtonElement(sc.props);
+                else if (sc.type === 'icon')
+                    elem = tableContent.createIconElement(sc.props);
+
+                row.elements.push(elem);
             }
 
-            for (let k = 0; buttons && k < buttons.length; k++)
-                newTableElement.content.push(tableContent.createAButtonElement(buttons[k]));
-
-            for (let k = 0; inputs && k < inputs.length; k++)
-                newTableElement.content.push(tableContent.createAnInputElement(inputs[k]));
-
-            table.body.push(newTableElement);
+            table.rows.push(row);
         }
 
         return table;
