@@ -1,18 +1,19 @@
 tableContent.$inject = ['TbUtils'];
 
 function tableContent (TbUtils) {
-    var service = {
+    const service = {
         createAnInputElement: createAnInputElement,
         createALableElement: createALableElement,
-        createAButtonElement: createAButtonElement
+        createAButtonElement: createAButtonElement,
+        createIconElement: createIconElement
     };
 
     return service;
 
     function createAnInputElement(inputProperties) {
-        let element = {
-            typeObject: 'input',
-            properties: {
+        const element = {
+            type: 'input',
+            props: {
                 value: inputProperties.value,
                 type: inputProperties.type,
                 min: inputProperties.min,
@@ -21,24 +22,24 @@ function tableContent (TbUtils) {
         }
 
         return element;
-    };
+    }
 
     function createALableElement(modelValue) {
-        let element = {
-            typeObject: 'label',
-            properties: {
+        const element = {
+            type: 'label',
+            props: {
                 value: TbUtils.toTitleCase(modelValue),
                 click: TbUtils.preventGeneralLoading
             }
         }
 
         return element;
-    };
+    }
 
     function createAButtonElement(objectButton) {
-        let element = {
-            typeObject: 'button',
-            properties: {
+        const element = {
+            type: 'button',
+            props: {
                 onClick: objectButton.onClick,
                 icon: objectButton.icon,
                 tooltip: objectButton.tooltip
@@ -46,7 +47,20 @@ function tableContent (TbUtils) {
         }
 
         return element;
-    };
+    }
+
+    function createIconElement (icon) {
+        const element = {
+            type: 'icon',
+            props: {
+                iconClass: icon.iconClass,
+                fontSize: icon.fontSize
+            }
+        };
+
+        return element;
+    }
+
 }
 
 module.exports = { name: 'tableContent', srvc: tableContent };
