@@ -6,7 +6,8 @@ function hours($http) {
         getStudentsBySection: getStudentsBySection,
         postHours: postHours,
         getStudentHourReport: getStudentHourReport,
-        getFiniquitoURL: getFiniquitoURL
+        getFiniquitoURL: getFiniquitoURL,
+        getHoursInfoSectionProjects:getHoursInfoSectionProjects
     };
 
     return service;
@@ -33,6 +34,11 @@ function hours($http) {
 
     function getFiniquitoURL(accountId) {
         return url + '/Students/FiniquitoReport/' + accountId;
+    }
+
+    function getHoursInfoSectionProjects(sectionprojectId,successCallback,errorCallback){
+        $http.get(url + '/SectionProjects/Info/' + sectionprojectId).
+        then(successCallback).catch(errorCallback);
     }
     
 }
