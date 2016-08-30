@@ -1,21 +1,14 @@
-<tb-loading ng-show="vm.sectionsLoading"
-style="z-index: 99999"></tb-loading>
 <div class="container">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h2 class="panel-title text-center">Secciones Actuales</h2>
 		</div>
-		<div class="panel-body row">
-			<tb-table class="col-md-12 mouse-hover" headers="vm.sectionsTable.headers"
-			body="vm.sectionsTable.body"
-			on-row-click="vm.preventGeneralLoading"
-			ref="main.section"
-            on-row-click="vm.preventGeneralLoading"
-            class="mouse-hover">
+		<div class="panel-body row" ng-if="vm.sections">
+			<tb-table class="col-md-12" 
+			          table-model="vm.sectionTableModel" 
+			          on-row-click="vm.goToSection">
 			</tb-table>
 		</div>
 	</div>
 </div>
-<tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
-
-<!-- ref="main.section" -->
+<tb-loading class="main-loader" ng-show="vm.sectionsLoading" style="z-index: 99999"></tb-loading>

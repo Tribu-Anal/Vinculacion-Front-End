@@ -1,52 +1,30 @@
-ProfessorDashboardController.$inject = ['$rootScope', '$stateParams', 'TbUtils',
-    'sections', 'students', 'tableContent', '$state'
-];
+ProfessorDashboardController.$inject = [ 'TbUtils', 'sections' ];
 
-function ProfessorDashboardController($rootScope, $stateParams, TbUtils, sections, students, tableContent, $state) {
+function ProfessorDashboardController(TbUtils, sections) {
     var vm = this;
 
-    vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo']);
-    vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
-
+    vm.sections = null;
+    vm.sectionTableModel = require('./current-sections-table-model');
+    vm.goToSection = goToSection;
     vm.sectionsLoading = true;
 
     sections.getCurrentSections(currentSectionsSuccess, currentSectionsFail);
 
+    function goToSection (section) {
+        TbUtils.go('main.section', { sectionId: section.Id });
+    }
+
     function currentSectionsSuccess(response) {
-        if (response.data.length <= 0)
-            return;
-
-        for (let i = 0; i < response.data.length; i++) {
-            let section = response.data[i];
-            let newTableElement = {
-                content: [
-                    tableContent.createALableElement(section.Code),
-                    tableContent.createALableElement(getClassName(section)),
-                    tableContent.createALableElement(getPeriod(section))
-                ],
-                data: section
-            };
-            vm.sectionsTable.body.push(newTableElement);
-        }
-
+        vm.sections = vm.sectionTableModel.data = response.data;
         vm.sectionsLoading = false;
     }
 
     function currentSectionsFail(response) {
         TbUtils.displayNotification('error', 'Error',
             'No se pudieron cargar las secciones correctamente.');
+        vm.sectionsLoading = false;
     }
 
-    function getClassName(section) {
-        return section.Class.Name
-    }
-
-    function getPeriod(section) {
-        return section.Period.Number + " - " + section.Period.Year
-    }
 }
 
-module.exports = {
-    name: 'ProfessorDashboardController',
-    ctrl: ProfessorDashboardController
-};
+module.exports = { name: 'ProfessorDashboardController', ctrl: ProfessorDashboardController };
