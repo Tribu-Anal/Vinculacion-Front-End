@@ -3,48 +3,49 @@ tableContent.$inject = ['TbUtils'];
 function tableContent (TbUtils) {
     const service = {
         createAnInputElement: createAnInputElement,
-        createALableElement: createALableElement,
+        createALabelElement: createALableElement,
         createAButtonElement: createAButtonElement,
         createIconElement: createIconElement
     };
 
     return service;
 
-    function createAnInputElement(inputProperties) {
+    function createAnInputElement(input) {
         const element = {
             type: 'input',
             props: {
-                value: inputProperties.value,
-                type: inputProperties.type,
-                min: inputProperties.min,
-                max: inputProperties.max
+                model: input.model,
+                type: input.type,
+                min: input.min,
+                max: input.max,
+                inputDisabled: input.inputDisabled,
+                disable: input.disable
             }
-        }
+        };
 
         return element;
     }
 
-    function createALableElement(modelValue) {
+    function createALabelElement(label) {
         const element = {
             type: 'label',
             props: {
-                value: TbUtils.toTitleCase(modelValue),
-                click: TbUtils.preventGeneralLoading
+                text: TbUtils.toTitleCase(label)
             }
-        }
+        };
 
         return element;
     }
 
-    function createAButtonElement(objectButton) {
+    function createAButtonElement(button) {
         const element = {
             type: 'button',
             props: {
-                onClick: objectButton.onClick,
-                icon: objectButton.icon,
-                tooltip: objectButton.tooltip
+                onClick: button.onClick,
+                icon: button.icon,
+                tooltip: button.tooltip
             }
-        }
+        };
 
         return element;
     }

@@ -2,6 +2,7 @@ function tbTableButtonElem () {
 	const directive = {
 		restrict: 'E',
 		scope: {
+			onClick: '=?',
 			icon: '@?',
 			tooltip: '@?'
 		},
