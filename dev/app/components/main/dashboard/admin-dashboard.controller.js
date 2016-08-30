@@ -1,6 +1,6 @@
-AdminDashboardController.$inject = [];
+AdminDashboardController.$inject = ['$rootScope', '$stateParams', 'sectionProjects'];
 
-function AdminDashboardController () {
+function AdminDashboardController ($rootScope, $stateParams, sectionProjects) {
 	const vm = this;
 }
 
