@@ -22,12 +22,8 @@ style="z-index: 99999"></tb-loading>
 			<p>{{vm.project.BeneficiarieOrganization}}</p>
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-			<h3 class="title_spec">Costo</h3>
-			<p>{{vm.project.Cost | currency : "Lps " : 2}}</p>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 			<h3 class="title_spec">Carreras Asociadas</h3>
-			<p ng-repeat="major in vm.majors">{{major}}</p>
+			<p ng-repeat="major in vm.majors">{{major.Name}}</p>
 		</div>
 		<h1 ng-show="vm.sectionsTable.body.length > 0" style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Secciones</h1>
 		<tb-table ng-show="vm.sectionsTable.body.length > 0" class="col-md-12 mouse-hover" headers="vm.sectionsTable.headers"
