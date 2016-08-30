@@ -7,7 +7,8 @@ function hours($http) {
         postHours: postHours,
         getStudentHourReport: getStudentHourReport,
         getFiniquitoURL: getFiniquitoURL,
-        getHoursInfoSectionProjects:getHoursInfoSectionProjects
+        getHoursInfoSectionProjects:getHoursInfoSectionProjects,
+        putSectionProjectsApprove:putSectionProjectsApprove
     };
 
     return service;
@@ -41,6 +42,10 @@ function hours($http) {
         then(successCallback).catch(errorCallback);
     }
     
+    function putSectionProjectsApprove(sectionprojectId,successCallback,errorCallback){
+        $http.put(url + '/SectionProjects/Approve/' + sectionprojectId).
+        then(successCallback).catch(errorCallback);
+    }
 }
 
 module.exports = { name: 'hours', srvc: hours };
