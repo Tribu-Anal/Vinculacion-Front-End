@@ -51,6 +51,14 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
+	  	
+	  	{
+		  	title: "APROBAR HORAS", ref: "main.settlement", url: '/aprobar-horas',
+		  	icon: "glyphicon glyphicon-check",
+		  	active: $state.current.url.includes('/aprobar-horas'),
+		  	show: $rootScope.Role === 'Admin',
+		  	clicked: TbUtils.preventGeneralLoading
+	  	},
 
 	  	{
 	  		title: "LOG OUT", ref: "landing.login",
