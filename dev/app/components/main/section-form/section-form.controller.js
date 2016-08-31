@@ -1,13 +1,9 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-    'tableContent', 'projects', '$q', '$timeout', 'students', 'ModalService', 'professors',
-    'sectionProjects'
+    'projects', '$q', '$timeout', 'students', 'ModalService', 'professors', 'sectionProjects'
 ];
 
-function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
+function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, projects, q,
     timeout, students, ModalService, professors, sectionProjects) {
-
-    if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.' + $rootScope.Role.toLowerCase() + "-dashboard");
-
 
     var vm = this;
 
@@ -22,18 +18,23 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     vm.periodsLoading = true;
     vm.studentsLoading = true;
     vm.submitting = false;
+
+    vm.selectedProjects = [];
+    vm.projectsTableSchema = require('../../../table-schemas/form-projects-table-schema');
+    vm.removeProject = removeProject;
+
+    vm.studentsTableSchema = require('../../../table-schemas/form-students-table-schema');
+    vm.removeStudent = removeStudent;
+    vm.addStudent = addStudent;
+
     vm.section = {
         projectIds: []
     };
     vm.submit = submit;
-    vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre']);
-    vm.projectsTable = TbUtils.getTable(['Proyectos']);
     vm.queryStudents = queryStudents;
     vm.simulateQuery = false;
-    vm.addStudentToSection = addStudentToSection;
+    // vm.addStudentToSection = addStudentToSection;
     vm.addProjects = addProjects;
-    vm.deleteElementFromStudentsTable = deleteElementFromStudentsTable;
-    vm.deleteElementFromProjectsTable = deleteElementFromProjectsTable;
     vm.professorActive = $rootScope.Role === 'Professor';
     projects.selectedProjectsInSectionForm = [];
 
@@ -47,8 +48,26 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     getProjects();
     getStudents();
 
-    if (vm.professorActive) professors.getActiveProfessor($rootScope.ProfessorDBId, getProfessorSuccess, getProfessorFail);
+    if (vm.professorActive) 
+        professors.getActiveProfessor($rootScope.ProfessorDBId, getProfessorSuccess, getProfessorFail);
     else getProfessors();
+
+    function removeProject (project) {
+        vm.section.projectIds.splice(vm.section.projectIds.indexOf(project.Id), 1);
+        vm.selectedProjects.splice(vm.selectedProjects.indexOf(project), 1);
+        projects.selectedProjectsInSectionForm = vm.selectedProjects;
+    }
+
+    function removeStudent (student) {
+        vm.sectionStudents.splice(vm.sectionStudents.indexOf(student), 1);
+    }
+
+    function addStudent () {
+        if (vm.selectedItem && !isAlreadyOnList(vm.selectedItem.AccountId)) {
+            vm.sectionStudents.push(vm.selectedItem);
+            vm.searchText = "";
+        }
+    }
 
     function submit() {
         vm.submitting = true;
@@ -65,20 +84,20 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function submitSuccess(response) {
         addStudentsToSection(response.data.Id);
+
         projects.assignProjectstoSection(vm.section.projectIds,
             response.data.Id,
             assignSectionToProjectSuccess,
             assignSectionToProjectError);
 
-        let sectionProjecObj = {
+        let sectionProjectObj = {
             SectiontId: response.data.Id,
             ProjectIds: vm.section.projectIds,
             Description: vm.section.Description,
             Cost: vm.section.Cost
         };
-        
-        sectionProjects.postSectionProjects(sectionProjecObj,
-            postSectionProjectsSuccess, postSectionProjectsFail);
+
+        sectionProjects.postSectionProjects(sectionProjectObj, resp => {}, resp => {});
     }
 
     function submitFailure(response) {
@@ -95,26 +114,17 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function modalResolve(modal) {
         modal.element.modal();
-        modal.close.then(modalClose);
+        modal.close.then(selectProjects);
     }
 
-    function modalClose(result) {
-        if (!result.length)
-            return;
+    function selectProjects (projects) {
+        vm.selectedProjects = projects;
+        projects.selectedProjectsInSectionForm = vm.selectedProjects;
 
         vm.section.projectIds = [];
-        vm.projectsTable.body = [];
 
-        for (let prj in result) {
-            vm.section.projectIds.push(result[prj].Id);
-
-            const element = {
-                content: [
-                    tableContent.createALableElement(result[prj].Name)
-                ]
-            };
-            vm.projectsTable.body.push(element);
-        }
+        for (let prj in projects)
+            vm.section.projectIds.push(projects[prj].Id);
     }
 
     function getClasses() {
@@ -222,21 +232,6 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         };
     }
 
-    function addStudentToSection() {
-        if (vm.selectedItem && !isAlreadyOnList(vm.selectedItem.AccountId)) {
-            vm.sectionStudents.push(vm.selectedItem);
-            const element = {
-                content: [
-                    tableContent.createALableElement(vm.selectedItem.AccountId),
-                    tableContent.createALableElement(vm.selectedItem.Name)
-                ],
-                data: vm.selectedItem
-            };
-            vm.studentsTable.body.push(element);
-            vm.searchText = "";
-        }
-    }
-
     function isAlreadyOnList(accountId) {
         for (let i = 0; i < vm.sectionStudents.length; i++) {
             const student = vm.sectionStudents[i];
@@ -246,24 +241,6 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
         return false;
     }
-
-    function deleteElementFromStudentsTable(element) {
-        const index = vm.studentsTable.body.indexOf(element);
-        vm.studentsTable.body.splice(index, 1);
-        vm.sectionStudents.splice(index, 1);
-    }
-
-    function deleteElementFromProjectsTable(element) {
-        const index = vm.projectsTable.body.indexOf(element);
-        vm.projectsTable.body.splice(index, 1);
-        vm.section.projectIds.splice(index, 1);
-        projects.selectedProjectsInSectionForm.splice(index, 1);
-
-    }
-
-    function postSectionProjectsSuccess() {}
-
-    function postSectionProjectsFail() {}
 
 }
 

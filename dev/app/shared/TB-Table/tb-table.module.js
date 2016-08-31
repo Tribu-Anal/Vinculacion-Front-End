@@ -1,11 +1,9 @@
-const directive  = require('./tb-table.directive'),
-      controller = require('./tb-table.controller');
+const directive  = require('./tb-table.directive');
 
 const moduleName   = 'tb-table',
       dependencies = [];
 
 angular.module(moduleName, dependencies)
-	.directive(directive.name, directive.drtv)
-	.controller(controller.name, controller.ctrl);
+	.directive(directive.name, directive.drtv);
 
 module.exports = moduleName;

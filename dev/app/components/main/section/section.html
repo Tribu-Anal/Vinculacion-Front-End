@@ -1,5 +1,4 @@
 <div class="section-view">
-
     <div class="container">
       <div class="col-xs-9 col-sm-7 col-md-7" style="margin-top: 15px;">
         <div class="row">
@@ -32,25 +31,16 @@
       <img class="logo-image" src="img/logo.png"/>
     </div>
 
-    <div ng-show="(Role === 'Admin' || Role === 'Professor') && vm.studentsTable.body.length > 0">
+    <div ng-if="vm.students && vm.students.length > 0">
       <div>
         <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Alumnos</h1>
-        <tb-table   headers="vm.studentsTable.headers"
-                    body="vm.studentsTable.body"
-                    actions="vm.studentsTable.actions">
-        </tb-table>
+        <tb-table schema="vm.studentsTableSchema" model="vm.students"></tb-table>
       </div>
     </div>
-    <div ng-show="vm.projectsTable.body.length > 0" style="margin-bottom: 80px;">
+    <div ng-if="vm.projects && vm.projects.length > 0" style="margin-bottom: 80px;">
         <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Proyectos</h1>
-        <tb-table   headers="vm.projectsTable.headers"
-                    body="vm.projectsTable.body"
-                    ref="main.edit-hours"
-                    on-row-click="vm.preventGeneralLoading"
-                    class="mouse-hover">
-        </tb-table>
-      </div>
-    <tb-loading class="main-loader" ng-show="vm.sectionLoading || vm.projectsLoading || vm.hoursLoading || vm.studentsLoading"></tb-loading>
+        <tb-table schema="vm.projectsTableSchema" model="vm.projects" on-row-click="vm.goToEditHours"></tb-table>
+    </div>
 </div>
-<tb-round-btn ng-show="Role === 'Admin' || Role === 'Professor'" ng-click="vm.addStudent()">+
-</tb-round-btn>
+<tb-round-btn ng-click="vm.addStudent()">+</tb-round-btn>
+<tb-loading class="main-loader" ng-show="vm.sectionLoading || vm.projectsLoading || vm.studentsLoading"></tb-loading>

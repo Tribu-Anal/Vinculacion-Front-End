@@ -15,6 +15,7 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     $rootScope.guest = true;
 
     let stateUrl = "";
+    let redirect = require('./redirect');
 
     getBasicAuthentication();
 
@@ -40,13 +41,17 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
         }
 
         if ($location.path() === '/' && $rootScope.globals.token) {
-            $location.path('/inicio-'+$rootScope.Role.toLowerCase());
+            if ($rootScope.Role !== 'Admin')
+                $location.path('/inicio-'+$rootScope.Role.toLowerCase());
+            else
+                $location.path('/proyectos');
         }
     }
 
     function stateChangeStart (event, toState) {
         $rootScope.stateLoading = true;
         stateUrl = toState.url;
+        redirect($state, toState.name, $rootScope.Role.toLowerCase(), event);
     }
 
     function stateChangeSuccess (event) {

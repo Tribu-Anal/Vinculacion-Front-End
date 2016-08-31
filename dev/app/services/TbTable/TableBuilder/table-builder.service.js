@@ -2,39 +2,41 @@ tableBuilder.$inject = [ 'tableContent' ];
 
 function tableBuilder (tableContent) {
 	const service = {
-		newTable: newTable
+		newTable: newTable,
+        emptyTable: emptyTable
 	};
 
-	function newTable (headers, data, keys, buttons, inputs) {
+	function newTable (schema, model) {
         const table = {
-            headers: headers,
-            body: [],
-            actions: false
+            headers: schema.headers,
+            rows: []
         };
 
-        for (let i = 0; i < data.length; i++) {
-            const obj = data[i];
-
-            const newTableElement = {
-                content: [],
-                data: obj
-            };
-
-            for (let k = 0; k < keys.length; k++) {
-                const key = keys[k];
-                newTableElement.content.push(tableContent.createALableElement(obj[key]));
-            }
-
-            for (let k = 0; buttons && k < buttons.length; k++)
-                newTableElement.content.push(tableContent.createAButtonElement(buttons[k]));
-
-            for (let k = 0; inputs && k < inputs.length; k++)
-                newTableElement.content.push(tableContent.createAnInputElement(inputs[k]));
-
-            table.body.push(newTableElement);
-        }
+        for (const obj of model)
+            append(table, schema.rows, obj);
 
         return table;
+    }
+
+    function append (table, rowSchema, data) {
+        const row = {
+            elements: [],
+            data: data
+        };
+
+        for (const sc of rowSchema) {
+            let elem = tableContent.createNewElement(sc.type, sc.props, data);
+            row.elements.push(elem);
+        }
+
+        table.rows.push(row);
+    }
+
+    function emptyTable () {
+        return {
+            headers: [],
+            rows: []
+        };
     }
 
 	return service;
