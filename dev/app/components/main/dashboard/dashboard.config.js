@@ -4,6 +4,13 @@ function config ($stateProvider) {
 
 	 $stateProvider
 
+		.state('main.admin-dashboard', {
+			url: '/inicio-admin',
+			templateUrl: 'templates/components/main/dashboard/admin-dashboard.html',
+			controller: 'AdminDashboardController as vm',
+			onEnter: onStateEnter
+		})
+
 		.state('main.student-dashboard', {
 			url: '/inicio-student',
 			templateUrl: 'templates/components/main/dashboard/student-dashboard.html',
@@ -25,6 +32,7 @@ const getTemplateUrl = [ '$rootScope', '$templateCache',
 	(rootScope, $templateCache) => {
 		if($rootScope.Role === 'Student') $templateCache.get('templates/components/main/dashboard/student-dashboard.html');
 		if($rootScope.Role === 'Professor') $templateCache.get('templates/components/main/dashboard/professor-dashboard.html');
+		if($rootScope.Role === 'Admin') $templateCache.get('templates/components/main/dashboard/admin-dashboard.html');
     }
 ];
 
@@ -32,6 +40,7 @@ const getController = [ '$rootScope', '$templateCache',
 	(rootScope, $templateCache) => {
 		if($rootScope.Role === 'Student') $templateCache.get('StudentDashboardController as vm');
 		if($rootScope.Role === 'Professor') $templateCache.get('ProfessorDashboardController as vm');
+		if($rootScope.Role === 'Admin') $templateCache.get('AdminDashboardController as vm');
     }
 ];
 
