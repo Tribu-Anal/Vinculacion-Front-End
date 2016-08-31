@@ -4,7 +4,7 @@ function ProfessorDashboardController(TbUtils, sections) {
     var vm = this;
 
     vm.sections = null;
-    vm.sectionTableModel = require('../../../table-models/sections-table-model');
+    vm.tableSchema = require('../../../table-schemas/sections-table-schema');
     vm.goToSection = goToSection;
     vm.sectionsLoading = true;
 
@@ -15,7 +15,7 @@ function ProfessorDashboardController(TbUtils, sections) {
     }
 
     function currentSectionsSuccess(response) {
-        vm.sections = vm.sectionTableModel.data = response.data;
+        vm.sections = response.data;
         vm.sectionsLoading = false;
     }
 

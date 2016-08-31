@@ -5,7 +5,8 @@
 		</div>
 		<div class="panel-body row" ng-if="vm.sections">
 			<tb-table class="col-md-12" 
-			          table-model="vm.sectionTableModel" 
+			          schema="vm.tableSchema" 
+			          model="vm.sections" 
 			          on-row-click="vm.goToSection">
 			</tb-table>
 		</div>
