@@ -50,8 +50,8 @@ function projects($http, $rootScope) {
             .catch(errorCallback);
     }
 
-    function getProjectReportUrl(projectId, fieldHours, calification, beneficiariesQuantities, beneficiariGroups) {
-        return url + "/FinalReport/" + projectId + "/" + fieldHours + "/" + calification + "/" + beneficiariesQuantities + "/'" + beneficiariGroups + "'";
+    function getProjectReportUrl(projectId,sectionId, fieldHours, calification, beneficiariesQuantities, beneficiariGroups) {
+        return url + "/FinalReport/" + projectId +"/"+sectionId + "/" + fieldHours + "/" + calification + "/" + beneficiariesQuantities + "/'" + beneficiariGroups + "'";
     }
 
     function postProject(projectData, successCallback, errorCallback) {
