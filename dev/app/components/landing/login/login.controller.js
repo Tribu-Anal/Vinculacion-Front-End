@@ -22,7 +22,6 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
     function LoginSuccess(response) {
         DBId = response.data.Id;
         auth.SetCredentials(response.data);
-
         window.localStorage['Session'] =
         $rootScope.Session =
         vm.username;
