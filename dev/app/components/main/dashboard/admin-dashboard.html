@@ -1,2 +1,47 @@
-<div>
+<div class="container">
+  <div class="row">
+
+        <div class="col-lg-12">
+          <br>
+          <br>
+            <div class="panel panel-primary panel-table">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <h3 class="panel-title">Proyectos/Secciones No Aprobadas</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-list-search table-hover">
+                  <thead>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Seccion</th>
+                        <th>Clase</th>
+                        <th>Proyecto</th>
+                        <th>Maestro</th>
+                        <th>Correo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                          <tr ng-repeat="sproject in vm.sprojects">
+                            <td class="hidden-sm">{{sproject.Section.Period.Number}}</td>
+                            <td>{{sproject.Section.Code}}</td>
+                            <td>{{sproject.Section.Class.Name}}</td>
+                            <td>{{vm.toTitleCase(sproject.Project.Name)}}</td>
+                            <td>{{vm.toTitleCase(sproject.Section.User.Name)}}</td>
+                            <td>{{sproject.Section.User.Email}}</td>
+                          </tr>
+
+                        </tbody>
+                </table>
+
+              </div>
+
+            </div>
+
 </div>
+</div>
+</div>
+<tb-loading class="main-loader" ng-show="vm.sectionsProjectsLoading"></tb-loading>
