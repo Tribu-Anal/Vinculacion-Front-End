@@ -787,6 +787,9 @@
 .table-hover tr{
   cursor: pointer;
 }
+.admin.table.table-list-search.table-hover tr{
+  cursor: auto;
+}
 .panel-primary > .panel-heading{
   border-color: none;
   background-color: #213250;
