@@ -10,7 +10,7 @@ function ProjectController($rootScope, $stateParams, $state, projects,
     vm.majors = [];
     vm.sections = null;
     vm.projectLoading = true;
-    vm.projectSectionsTableModel = require('./project-sections-table-model');
+    vm.projectSectionsTableModel = require('../../../table-models/sections-table-model');
     vm.goToSection = goToSection;
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);

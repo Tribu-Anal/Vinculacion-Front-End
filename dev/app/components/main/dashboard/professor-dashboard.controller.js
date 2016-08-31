@@ -4,7 +4,7 @@ function ProfessorDashboardController(TbUtils, sections) {
     var vm = this;
 
     vm.sections = null;
-    vm.sectionTableModel = require('./current-sections-table-model');
+    vm.sectionTableModel = require('../../../table-models/sections-table-model');
     vm.goToSection = goToSection;
     vm.sectionsLoading = true;
 
