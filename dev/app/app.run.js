@@ -13,13 +13,12 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     $rootScope.StudentId = window.localStorage['StudentId'];
     $rootScope.ProfessorDBId = window.localStorage['ProfessorDBId'];
     $rootScope.guest = true;
+    $rootScope.loggedIn = $rootScope.Session.length > 0;
 
     let stateUrl = "";
     let redirect = require('./redirect');
 
     getBasicAuthentication();
-
-    $rootScope.$on('$locationChangeStart', locationChangeStart);
 
     $rootScope.$on('$stateChangeStart', stateChangeStart);
 
@@ -34,20 +33,11 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
         }
     }
 
-    function locationChangeStart(event, next, current) {
-        const loggedIn = $rootScope.globals.token;
-        
-        if ($location.path() === '/' || 
-            $location.path().includes('habilitar-estudiante') || 
-            $location.path().includes('/registro-maestro') && 
-            loggedIn)
-            $location.path('/inicio-'+$rootScope.Role.toLowerCase());
-    }
-
     function stateChangeStart (event, toState) {
         $rootScope.stateLoading = true;
         stateUrl = toState.url;
-        redirect($state, toState.name, $rootScope.Role.toLowerCase(), event);
+        redirect($state, toState.name, 
+            $rootScope.Role.toLowerCase(), $rootScope.Session.length > 0, event);
     }
 
     function stateChangeSuccess (event) {

@@ -43,6 +43,8 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
             $rootScope.ProfessorDBId = DBId;
         }
 
+        $rootScope.loggedIn = true;
+
         $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
 
         vm.loading = false;

@@ -1,7 +1,3 @@
-function closeSession () {
-	window.localStorage['Session'] = "";
-}
-
 module.exports = ($rootScope, $state, TbUtils) => {
 	return [
 		{
@@ -80,7 +76,10 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  		title: "LOG OUT", ref: "landing.login",
 	  		icon: "glyphicon glyphicon-log-out", active: false,
 		  	show: $state.current.url !== '/registro-maestro/{accountId}',
-		  	clicked: closeSession
+		  	clicked: () => {
+		  		$rootScope.Session = window.localStorage['Session'] = "";
+		  		$rootScope.loggedIn = false;
+		  	}
 	  	}
 	];
 };

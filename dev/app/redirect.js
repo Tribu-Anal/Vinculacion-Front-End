@@ -1,5 +1,5 @@
-function redirect (state, toState, role, ev) {
-
+function redirect (state, toState, role, loggedIn, ev) {
+	
 	switch (toState) {
 
 		// ADMIN-ONLY STATES
@@ -11,10 +11,12 @@ function redirect (state, toState, role, ev) {
 		case 'main.admin-dashboard':
 		case 'main.newclass':
 		case 'main.approve-hours':
-			if (role !== 'admin') {
-				goToDashboard(state, role);
-				ev.preventDefault();
-			}
+			if (!loggedIn)
+				goToLanding(state, ev);
+
+			else if (role !== 'admin')
+				goToDashboard(state, role, ev);
+			
 			break;
 
 		// ADMIN-TEACHER STATES
@@ -28,37 +30,45 @@ function redirect (state, toState, role, ev) {
 		case 'main.section':
 		case 'main.sections':
 		case 'main.newsection':
-			if (role === 'student') {
-				goToDashboard(state, role);
-				ev.preventDefault();
-			}
+			if (!loggedIn) 
+				goToLanding(state, ev);
+
+			else if (role === 'student')
+				goToDashboard(state, role, ev);
+
 			break;
 
 		// TEACHER-ONLY STATES
 
 		case 'main.professor-dashboard':
-			if (role !== 'professor') {
-				goToDashboard(state, role);
-				ev.preventDefault();
-			}
+			if (!loggedIn)
+				goToLanding(state, ev);
+
+			else if (role !== 'professor')
+				goToDashboard(state, role, ev);
+
 			break;
 
 		// STUDENT-ONLY STATES
 
 		case 'main.student-dashboard':
-			if (role !== 'student') {
-				goToDashboard(state, role);
-				ev.preventDefault();
-			}
+			if (!loggedIn)
+				goToLanding(state, ev);
+
+			else if (role !== 'student')
+				goToDashboard(state, role, ev);
+
 			break;
 
 		case 'landing':
 		case 'landing.login':
 		case 'landing.enable-student':
-		case 'main.activateprofessor': break;
+		case 'main.activateprofessor': 
+			if (loggedIn)
+				goToDashboard(state, role, ev);
+			break;
 
 		default:
-			goToDashboard(state, role);
 			ev.preventDefault();
 			break;
 
@@ -66,8 +76,14 @@ function redirect (state, toState, role, ev) {
 	
 }
 
-function goToDashboard (state, role) {
+function goToDashboard (state, role, ev) {
 	state.go(`main.${role}-dashboard`);
+	ev.preventDefault();
+}
+
+function goToLanding (state, ev) {
+	state.go(`landing.login`);
+	ev.preventDefault();
 }
 
 module.exports = redirect;
