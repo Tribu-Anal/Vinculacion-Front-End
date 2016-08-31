@@ -41,7 +41,7 @@ function students ($http, $q) {
 	function getParsedStudentsExcel (data) {
 		const deferred = $q.defer();
 
-      	$http.get(url+'/Parse/'+data)
+      	$http.post(url+'/Parse', data)
 	        .success(response => { deferred.resolve(response.data); })
 	        .error(reject => { deferred.reject('No se pudo cargar el archivo.'); });
 
