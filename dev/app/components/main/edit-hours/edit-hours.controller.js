@@ -30,11 +30,12 @@ function EditHoursController($stateParams, sections, projects,
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
 
     function getStudentsHoursSuccess(response) {
-        vm.students = reponse.data;
+        console.log(response);
+        vm.students = response.data.Hours;
 
-        vm.isApproved = students.IsApproved;
+        vm.isApproved = response.data.IsApproved;
 
-        if (vm.students.Hours.length <= 0) {
+        if (vm.students.length <= 0) {
             TbUtils.displayNotification('error', 'Error',
                 'Esta sección y proyecto no tienen alumnos asginados.');
             TbUtils.go('main.section', { sectionId: $stateParams.sectionId });

@@ -21,8 +21,8 @@ function projects($http, $rootScope) {
 
     return service;
 
-    function getProjectsWithPagination(page, size, successCallback, errorCallback) {
-        if($rootScope.Role === 'Professor' || $rootScope.Role === 'Student') 
+    function getProjectsWithPagination(page, size, successCallback, errorCallback, newSectionFlag) {
+        if(($rootScope.Role === 'Professor' || $rootScope.Role === 'Student') && !newSectionFlag) 
             $http.get(url + '/ProjectsByUser' + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc').then(successCallback)
                 .catch(errorCallback);
 

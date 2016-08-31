@@ -66,11 +66,13 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         if (vm.selectedItem && !isAlreadyOnList(vm.selectedItem.AccountId)) {
             vm.sectionStudents.push(vm.selectedItem);
             vm.searchText = "";
+            console.log(vm.sectionStudents);
         }
     }
 
     function submit() {
         vm.submitting = true;
+        console.log(vm.section.projectIds);
         sections.postSection(vm.section, submitSuccess, submitFailure);
     }
 
@@ -97,6 +99,8 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
             Cost: vm.section.Cost
         };
 
+        console.log(sectionProjectObj);
+
         sectionProjects.postSectionProjects(sectionProjectObj, resp => {}, resp => {});
     }
 
@@ -119,12 +123,12 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function selectProjects (projects) {
         vm.selectedProjects = projects;
-        projects.selectedProjectsInSectionForm = vm.selectedProjects;
+        //projects.selectedProjectsInSectionForm = vm.selectedProjects;
 
         vm.section.projectIds = [];
 
-        for (let prj in projects)
-            vm.section.projectIds.push(projects[prj].Id);
+        for (let prj in vm.selectedProjects)
+            vm.section.projectIds.push(vm.selectedProjects[prj].Id);
     }
 
     function getClasses() {
@@ -163,8 +167,8 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function addStudentsToSection(sectionId) {
         const students = [];
-        for (let i = 0; i < vm.studentsTable.body.length; i++) {
-            students.push(getAccountID(i));
+        for (let i = 0; i < vm.sectionStudents.length; i++) {
+            students.push(vm.sectionStudents[i].AccountId);
         }
         sections.addStudent(students, sectionId, addStudentSuccess, submitFailure);
     }
