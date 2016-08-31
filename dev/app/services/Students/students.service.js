@@ -42,7 +42,7 @@ function students ($http, $q) {
 		const deferred = $q.defer();
 
       	$http.post(url+'/Parse', data)
-	        .success(response => { deferred.resolve(response.data); })
+	        .success(response => { deferred.resolve(response); })
 	        .error(reject => { deferred.reject('No se pudo cargar el archivo.'); });
 
 	    return deferred.promise;
