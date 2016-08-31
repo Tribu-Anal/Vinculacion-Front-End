@@ -1,7 +1,6 @@
 module.exports = {
 	headers: [ 'Proyectos' ],
-	schema: [
+	rows: [
 		{ type: 'label', props: { text: obj => obj.Name }  }
-	],
-	data: {}
+	]
 };

@@ -1,7 +1,7 @@
 <table class="responstable">
-	<tr><th ng-repeat="header in vm.table.headers">{{header}}</th></tr>
+	<tr><th ng-repeat="header in table.headers">{{header}}</th></tr>
 
-	<tr class="tb-body" ng-repeat="row in vm.table.rows" ng-click="onRowClick(row.data)">
+	<tr class="tb-body" ng-repeat="row in table.rows" ng-click="onRowClick(row.data)">
 		<td ng-repeat="elem in row.elements">
 
 			<!-- LABEL ELEMENT -->
