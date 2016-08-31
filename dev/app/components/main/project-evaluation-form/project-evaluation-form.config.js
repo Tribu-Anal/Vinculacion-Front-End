@@ -6,7 +6,7 @@ function config ($stateProvider) {
 
 	$stateProvider
 		.state('main.evaluateproject', {
-			url: '/evaluacion-proyecto/{projectId}',
+			url: '/evaluacion-proyecto/{projectId}/{sectionId}',
 			params: {
                 projectId: null
             },
