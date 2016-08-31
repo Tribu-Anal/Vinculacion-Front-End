@@ -1,12 +1,13 @@
 EditHoursController.$inject = ['$stateParams', '$state', 'sections', 'projects',
-    'TbUtils', 'tableContent', '$rootScope', 'hours', '$mdDialog', 'students'
+    'TbUtils', 'tableContent', '$rootScope', 'hours', '$mdDialog', 'students','sectionProjects'
 ];
 
 function EditHoursController($stateParams, $state, sections, projects,
-    TbUtils, tableContent, $rootScope, hours, $mdDialog, students) {
+    TbUtils, tableContent, $rootScope, hours, $mdDialog, students, sectionProjects) {
     const vm = this;
 
     vm.participantsLoading = true;
+    vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
     vm.editHours = {
         visible: $rootScope.Role !== 'Student',
         value: false,
@@ -19,8 +20,9 @@ function EditHoursController($stateParams, $state, sections, projects,
         onClick: evaluateProject
     }
     vm.projectName = null;
+    vm.sprojects = null;
     vm.cost = null;
-    vm.sections = [];
+    vm.sectionprojects = [];
     vm.description = null;
     vm.addHours = {
         onClick: addHours,
@@ -30,6 +32,21 @@ function EditHoursController($stateParams, $state, sections, projects,
     vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre', 'Horas en este proyecto']);
     sections.getStudentsHoursBySectionProjectId($stateParams.sectionId, $stateParams.projectId, getStudentsHoursSuccess, getStudentsHoursFail);
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
+
+    sectionProjects.getUnapproved(unapprovedSuccess, unapprovedFail);
+
+    function unapprovedSuccess(response){
+        vm.preventGeneralLoading();
+        vm.sprojects = response.data;
+        if(vm.sprojects.length <= 0) return;
+
+        vm.sectionsProjectsLoading = false;
+    }
+
+    function unapprovedFail(response){
+        TbUtils.displayNotification('error', 'Error',
+                'Informacion correspondiente al dashboard no se pudo cargar.');
+    }
 
     function getStudentsHoursSuccess(response) {
         console.log(response);
