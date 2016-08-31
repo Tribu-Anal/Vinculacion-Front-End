@@ -72,6 +72,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function submit() {
         vm.submitting = true;
+        console.log(vm.section.projectIds);
         sections.postSection(vm.section, submitSuccess, submitFailure);
     }
 
@@ -85,6 +86,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function submitSuccess(response) {
         addStudentsToSection(response.data.Id);
+        console.log(response.data.Id);
 
         projects.assignProjectstoSection(vm.section.projectIds,
             response.data.Id,
@@ -120,12 +122,13 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function selectProjects (projects) {
         vm.selectedProjects = projects;
-        projects.selectedProjectsInSectionForm = vm.selectedProjects;
+        //projects.selectedProjectsInSectionForm = vm.selectedProjects;
 
         vm.section.projectIds = [];
+        console.log(vm.selectedProjects);
 
-        for (let prj in projects)
-            vm.section.projectIds.push(projects[prj].Id);
+        for (let prj in vm.selectedProjects)
+            vm.section.projectIds.push(vm.selectedProjects[prj].Id);
     }
 
     function getClasses() {
