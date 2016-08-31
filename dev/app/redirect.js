@@ -10,6 +10,8 @@ function redirect (state, toState, role, ev) {
 		case 'main.newsection':
 		case 'main.settlement':
 		case 'main.admin-dashboard':
+		case 'main.newclass':
+		case 'main.approve-hours':
 			if (role !== 'admin') {
 				goToDashboard(state, role);
 				ev.preventDefault();
