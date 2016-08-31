@@ -19,7 +19,7 @@ function SectionController($rootScope, $stateParams, $state,
     vm.sections = [];
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
-    vm.goToEditHours = project => { TbUtils.go('main.edit-hours', {projectId: project.Id}); };
+    vm.goToEditHours = project => { TbUtils.go('main.edit-hours', {projectId: project.Id, sectionId: $stateParams.sectionId}); };
 
     vm.student = undefined;
 
