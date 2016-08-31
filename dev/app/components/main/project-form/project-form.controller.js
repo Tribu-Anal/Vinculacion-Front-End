@@ -35,10 +35,10 @@ function ProjectFormController($rootScope, $state, $stateParams,
     function setProject() {
         return $stateParams.project ?
             JSON.parse($stateParams.project) : {
-                ProjectId: '',
+                // ProjectId: '',
                 Name: '',
                 Description: '',
-                Cost: 0.0,
+                //Cost: 0.0,
                 MajorIds: [],
                 SectionIds: [0],
                 BeneficiarieOrganization: ''

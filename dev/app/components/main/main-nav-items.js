@@ -15,7 +15,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 			title: "PROYECTOS", ref: "main.projects", url: '/proyectos',
 	  		icon: "glyphicon glyphicon-th-large",
 	  		active: $state.current.url.includes('/proyectos'),
-	  		show: $state.current.url !== '/registro-maestro/{accountId}',
+	  		show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role !== 'Student',
 	  		clicked:TbUtils.preventGeneralLoading
 	 	},
 
