@@ -52,8 +52,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     function submit() {
         vm.submitting = true;
         console.log(vm.section);
-        // sections.postSection(vm.section,
-            // submitSuccess, submitFailure);
+        sections.postSection(vm.section, submitSuccess, submitFailure);
     }
 
     function getProfessorSuccess(response) {
@@ -66,17 +65,21 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     }
 
     function submitSuccess(response) {
+        console.log("submitSuccess:")
+        console.log(response);
         addStudentsToSection(response.data.Id);
         projects.assignProjectstoSection(vm.section.projectIds,
             response.data.Id,
             assignSectionToProjectSuccess,
             assignSectionToProjectError)
-        sections.postSectionProjects(vm.section,function(response){
-            console.log(response);
-            console.log('descripiot up');
-        },function(err){
-            console.log('fail');
-        });
+        let sectionProjec = {
+            SectiontId: response.data.Id,
+            ProjectIds: vm.section.projectIds,
+            Description: vm.section.Description,
+            Cost: vm.section.Cost
+        }
+        sections.postSectionProjects(sectionProjec,
+            postSectionProjectsSuccess, postSectionProjectsFail);
     }
 
     function submitFailure(response) {
@@ -258,6 +261,10 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         projects.selectedProjectsInSectionForm.splice(index, 1);
 
     }
+
+    function postSectionProjectsSuccess() {}
+
+    function postSectionProjectsFail() {}
 
 }
 
