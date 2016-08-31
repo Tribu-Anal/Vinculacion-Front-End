@@ -1,22 +1,26 @@
 ProjectController.$inject = ['$rootScope', '$stateParams', '$state',
-    'projects', 'TbUtils', 'majors', 'sections', 'tableContent'
+    'projects', 'TbUtils', 'majors', 'sections'
 ];
 
 function ProjectController($rootScope, $stateParams, $state, projects,
-    TbUtils, majors, sections, tableContent) {
+    TbUtils, majors, sections) {
     var vm = this;
 
     vm.project = {};
     vm.majors = [];
-    vm.sections = [];
+    vm.sections = null;
     vm.projectLoading = true;
-    vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo']);
-    vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
+    vm.tableSchema = require('../../../table-schemas/sections-table-schema');
+    vm.goToSection = goToSection;
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
-    sections.getSectionsByProject($stateParams.projectId,
-        getSectionsByProjectSuccess, getSectionsByProjectFail)
-    vm.showEvaluateProjectButton = $rootScope.Role === 'Professor';
+
+    sections.getSectionsByProject($stateParams.projectId, getSectionsByProjectSuccess, 
+                                  getSectionsByProjectFail);
+
+    function goToSection (data) {
+        TbUtils.go('main.section', { sectionId: data.Id });
+    }
 
     function getMajorSuccess(response) {
         vm.majors.push(response.data.Name);
@@ -43,35 +47,13 @@ function ProjectController($rootScope, $stateParams, $state, projects,
             'El proyecto deseado no existe.',
             'Error');
 
-        $state.go('main.dashboard');
+        TbUtils.go('main.dashboard');
 
         vm.projectLoading = false;
     }
 
-
-    vm.downloadProjectReport = function() {
-        TbUtils.preventGeneralLoading();
-        $state.go('main.evaluateproject', {
-            projectId: vm.project.Id
-        });
-    }
-
     function getSectionsByProjectSuccess(response) {
-        if (response.data.length <= 0)
-            return;
-        for (let i = 0; i < response.data.length; i++) {
-            let section = response.data[i];
-            section.projectId = $stateParams.projectId;
-            let newTableElement = {
-                content: [
-                    tableContent.createALableElement(section.Code),
-                    tableContent.createALableElement(getClassName(section)),
-                    tableContent.createALableElement(getPeriod(section))
-                ],
-                data: section
-            };
-            vm.sectionsTable.body.push(newTableElement);
-        }
+        vm.sections = response.data;
     }
 
     function getSectionsByProjectFail() {
@@ -79,13 +61,6 @@ function ProjectController($rootScope, $stateParams, $state, projects,
             'No se pudieron cargar las secciones correctamente.');
     }
 
-    function getClassName(section) {
-        return section.Class.Name
-    }
-
-    function getPeriod(section) {
-        return section.Period.Number + " - " + section.Period.Year
-    }
 }
 
 module.exports = { name: 'ProjectController', ctrl: ProjectController };

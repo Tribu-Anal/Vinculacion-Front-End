@@ -1,0 +1,27 @@
+.import-students {
+
+	.upload-container {
+		display: flex;
+		justify-content: center;
+		height: 100%;
+		flex-wrap: wrap;
+		padding-top: 5%;
+	}
+
+	.table-container {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+
+		button {
+			width: 90%;
+			margin: auto;
+			margin-bottom: 15px;
+		}
+	}
+
+	tb-upload-btn {
+		width: 40%;
+	}
+
+}

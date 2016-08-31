@@ -45,6 +45,14 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  	},
 
 	  	{
+	  		title: "IMPORTAR ALUMNOS", ref: "main.import-students", url: '/importar-alumnos',
+	  		icon: "glyphicon glyphicon-upload",
+	  		active: $state.current.url.includes('/importar-alumnos'),
+	  		show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
+	  		clicked: TbUtils.preventGeneralLoading
+	  	},
+
+	  	{
 		  	title: "NUEVA CLASE", ref: "main.newclass", url: '/nueva-clase',
 		  	icon: "glyphicon glyphicon-book",
 		  	active: $state.current.url.includes('/nueva-clase'),
