@@ -1,6 +1,7 @@
-EnableStudentController.$inject = [];
+EnableStudentController.$inject = ['$rootScope', '$location', 'auth',
+                                'role', 'toaster', 'TbUtils', '$state'];
 
-function EnableStudentController () {
+function EnableStudentController ($rootScope, $location, auth, role, toaster, TbUtils, $state) {
 	const vm = this;
 }
 
