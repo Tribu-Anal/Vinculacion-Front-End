@@ -7,7 +7,8 @@ function tbTable(tableBuilder) {
         scope: {
             schema: '=',
             model: '=',
-            onRowClick: '=?'
+            onRowClick: '=?',
+            table: '=?'
         },
         link: scope => {
             scope.$watch('model', newModel => {
