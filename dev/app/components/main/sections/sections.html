@@ -1,13 +1,11 @@
 <div class="sections">
 <tb-search-field></tb-search-field>
-	<div class="row">
-		<tb-table class="col-md-12" headers="vm.sectionsTable.headers"
-		body="vm.sectionsTable.body"
-		actions="vm.sectionsTable.actions"
-		ref="main.section"
-		on-row-click="vm.preventGeneralLoading"
-		class="mouse-hover"
-		style="margin-bottom: 40px;">
+	<div class="row" ng-if="vm.sections && vm.sections.length > 0">
+		<tb-table class="col-md-12" 
+		          schema="vm.sectionsTableSchema" 
+		          model="vm.sections" 
+		          on-row-click="vm.goToSection" 
+		          style="margin-bottom: 40px;">
 		</tb-table>
 	</div>
 	<div style="display: flex; justify-content: center;" ng-hide="vm.searching">

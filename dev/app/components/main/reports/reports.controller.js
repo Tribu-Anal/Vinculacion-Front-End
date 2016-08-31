@@ -1,7 +1,6 @@
 ReportsController.$inject = [ '$rootScope', 'TbUtils', 'reports', '$state', '$mdDialog' ];
 
 function ReportsController ($rootScope, TbUtils, reports, $state, $mdDialog) {
-	if ($rootScope.Role !== 'Admin') $state.go('main.dashboard');
 
 	var vm = this;
 

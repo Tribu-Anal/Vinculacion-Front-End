@@ -1,16 +1,22 @@
-function tbTable() {
+tbTable.$inject = [ 'tableBuilder' ];
+
+function tbTable(tableBuilder) {
     var directive = 
     {
         restrict: 'E',
         scope: {
-            headers: '=?',
-            body: '=?',
-            actions:"=?",
-            onRowClick: '=?',
-            ref: '@?',
-            inputDisable: '=?'
+            schema: '=',
+            model: '=',
+            onRowClick: '=?'
         },
-        controller : 'TbTableController as vm',
+        link: scope => {
+            scope.$watch('model', newModel => {
+                if (newModel) 
+                    scope.table = tableBuilder.newTable(scope.schema, newModel);
+                else
+                    scope.table = tableBuilder.emptyTable();
+            }, true);
+        },
         templateUrl: 'templates/shared/TB-Table/tb-table.html'           
     };
 
