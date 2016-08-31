@@ -3,6 +3,7 @@ function tbTable() {
     {
         restrict: 'E',
         scope: {
+            table: '=?',
             tableModel: '=?',
             onRowClick: '=?'
         },
