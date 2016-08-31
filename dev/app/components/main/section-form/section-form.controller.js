@@ -68,13 +68,15 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         projects.assignProjectstoSection(vm.section.projectIds,
             response.data.Id,
             assignSectionToProjectSuccess,
-            assignSectionToProjectError)
+            assignSectionToProjectError);
+
         let sectionProjecObj = {
             SectiontId: response.data.Id,
             ProjectIds: vm.section.projectIds,
             Description: vm.section.Description,
             Cost: vm.section.Cost
-        }
+        };
+        
         sectionProjects.postSectionProjects(sectionProjecObj,
             postSectionProjectsSuccess, postSectionProjectsFail);
     }
