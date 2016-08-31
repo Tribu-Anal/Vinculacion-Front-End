@@ -33,7 +33,7 @@ function EditHoursController($stateParams, sections, projects,
         console.log(response);
         vm.students = response.data.Hours;
 
-        vm.isApproved = students.IsApproved;
+        vm.isApproved = response.data.IsApproved;
 
         if (vm.students.length <= 0) {
             TbUtils.displayNotification('error', 'Error',
