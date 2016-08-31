@@ -14,7 +14,7 @@ function config ($stateProvider) {
 const onStateEnter = [ '$rootScope',
 	rootScope => {
 		rootScope.viewTitle  = "Habilitar Estudiante";
-    	rootScope.viewStyles = "landing enablestudent";
+    	rootScope.viewStyles = "landing enable-student";
     }
 ];
 
