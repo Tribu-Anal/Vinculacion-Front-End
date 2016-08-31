@@ -24,11 +24,10 @@ function SectionController($rootScope, $stateParams, $state,
     vm.student = undefined;
 
     vm.students = null;
-    vm.studentsTable = null;
-    vm.studentsTableModel = require('../../../table-models/section-students-table-model')(deleteStudent);
+    vm.studentsTableSchema = require('../../../table-schemas/section-students-table-schema')(deleteStudent);
 
     vm.projects = null;
-    vm.projectsTableModel = require('../../../table-models/section-projects-table-model');
+    vm.projectsTableSchema = require('../../../table-schemas/section-projects-table-schema');
 
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
@@ -41,7 +40,7 @@ function SectionController($rootScope, $stateParams, $state,
         for(prj in response.data) {
             response.data[prj].sectionId = $stateParams.sectionId;
         }
-        vm.projects = vm.projectsTableModel.data = response.data;
+        vm.projects = response.data;
         vm.projectsLoading = false;
     }
 
@@ -108,7 +107,7 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getStudentsSuccess(response) {
-        vm.students = vm.studentsTableModel.data = response.data;
+        vm.students = response.data;
         vm.studentsLoading = false;
     }
 
@@ -129,8 +128,7 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function removeStudentSuccess(response) {
-        vm.studentsTableModel.data.splice(vm.students.indexOf(vm.student), 1);
-        vm.studentsTable.update(vm.studentsTableModel.data);
+        vm.students.splice(vm.students.indexOf(vm.student), 1);
     }
 
     function removeStudentFail(response) {

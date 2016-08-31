@@ -34,12 +34,12 @@
     <div ng-if="vm.students && vm.students.length > 0">
       <div>
         <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Alumnos</h1>
-        <tb-table table-model="vm.studentsTableModel" table="vm.studentsTable"></tb-table>
+        <tb-table schema="vm.studentsTableSchema" model="vm.students"></tb-table>
       </div>
     </div>
     <div ng-if="vm.projects && vm.projects.length > 0" style="margin-bottom: 80px;">
         <h1 style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">Proyectos</h1>
-        <tb-table table-model="vm.projectsTableModel" on-row-click="vm.goToEditHours"></tb-table>
+        <tb-table schema="vm.projectsTableSchema" model="vm.projects" on-row-click="vm.goToEditHours"></tb-table>
     </div>
 </div>
 <tb-round-btn ng-click="vm.addStudent()">+</tb-round-btn>
