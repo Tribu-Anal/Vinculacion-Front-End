@@ -9,7 +9,7 @@ function sectionProjects ($http) {
 	return service;
 
 	function getUnapproved(successCallback, errorCallback){
-		$http.get(url+'SectionProjects')
+		$http.get(url+'SectionProjects/UnApproved')
 			.then(successCallback)
 			.catch(errorCallback);
 	}
