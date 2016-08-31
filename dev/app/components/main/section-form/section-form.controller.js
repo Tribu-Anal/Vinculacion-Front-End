@@ -1,9 +1,10 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-    'tableContent', 'projects', '$q', '$timeout', 'students', 'ModalService', 'professors'
+    'tableContent', 'projects', '$q', '$timeout', 'students', 'ModalService', 'professors',
+    'sectionProjects'
 ];
 
 function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, tableContent, projects, q,
-    timeout, students, ModalService, professors) {
+    timeout, students, ModalService, professors, sectionProjects) {
 
     if ($rootScope.Role !== 'Admin' && $rootScope.Role !== 'Professor') $state.go('main.' + $rootScope.Role.toLowerCase() + "-dashboard");
 
@@ -51,14 +52,11 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function submit() {
         vm.submitting = true;
-
-        sections.postSection(vm.section,
-            submitSuccess, submitFailure);
+        sections.postSection(vm.section, submitSuccess, submitFailure);
     }
 
     function getProfessorSuccess(response) {
         vm.section.ProffesorAccountId = response.data[0].AccountId;
-
     }
 
     function getProfessorFail(response) {
@@ -71,6 +69,14 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
             response.data.Id,
             assignSectionToProjectSuccess,
             assignSectionToProjectError)
+        let sectionProjecObj = {
+            SectiontId: response.data.Id,
+            ProjectIds: vm.section.projectIds,
+            Description: vm.section.Description,
+            Cost: vm.section.Cost
+        }
+        sectionProjects.postSectionProjects(sectionProjecObj,
+            postSectionProjectsSuccess, postSectionProjectsFail);
     }
 
     function submitFailure(response) {
@@ -252,6 +258,10 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         projects.selectedProjectsInSectionForm.splice(index, 1);
 
     }
+
+    function postSectionProjectsSuccess() {}
+
+    function postSectionProjectsFail() {}
 
 }
 
