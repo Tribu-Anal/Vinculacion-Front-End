@@ -15,7 +15,7 @@ function tbTable(tableBuilder) {
                     scope.table = tableBuilder.newTable(scope.schema, newModel);
                 else
                     scope.table = tableBuilder.emptyTable();
-            });
+            }, true);
         },
         templateUrl: 'templates/shared/TB-Table/tb-table.html'           
     };
