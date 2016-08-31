@@ -7,7 +7,6 @@ function redirect (state, toState, role, ev) {
 		case 'main.import-students':
 		case 'main.newprofessor':
 		case 'main.reports':
-		
 		case 'main.settlement':
 		case 'main.admin-dashboard':
 		case 'main.newclass':
@@ -39,7 +38,7 @@ function redirect (state, toState, role, ev) {
 
 		case 'main.professor-dashboard':
 			if (role !== 'professor') {
-				goToDefault(state, role);
+				goToDashboard(state, role);
 				ev.preventDefault();
 			}
 			break;
@@ -48,16 +47,18 @@ function redirect (state, toState, role, ev) {
 
 		case 'main.student-dashboard':
 			if (role !== 'student') {
-				goToDefault(state, role);
+				goToDashboard(state, role);
 				ev.preventDefault();
 			}
 			break;
 
 		case 'landing':
-		case 'landing.login': break;
+		case 'landing.login':
+		case 'landing.enable-student':
+		case 'main.activateprofessor': break;
 
 		default:
-			goToDefault(state, role);
+			goToDashboard(state, role);
 			ev.preventDefault();
 			break;
 
@@ -65,19 +66,8 @@ function redirect (state, toState, role, ev) {
 	
 }
 
-function goToDefault (state, role) {
-	if (role !== 'admin')
-		goToDashboard(state, role);
-	else
-		goToProjects(state);
-}
-
 function goToDashboard (state, role) {
 	state.go(`main.${role}-dashboard`);
-}
-
-function goToProjects (state) {
-	state.go('main.projects');
 }
 
 module.exports = redirect;

@@ -3,7 +3,7 @@ const config = require('./landing.config'),
       EnableStudent = require('./enable-student/enable-student.module');
       
 const moduleName   = 'landing-bundle',
-      dependencies = [ Login ];
+      dependencies = [ Login, EnableStudent ];
 
 angular.module(moduleName, dependencies)
 	.config(config);

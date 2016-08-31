@@ -35,17 +35,13 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     }
 
     function locationChangeStart(event, next, current) {
-        let activationUrl = $location.path().substring(0, 17);
-        if ($location.path() !== '/' && !$rootScope.globals.token && activationUrl !== '/registro-maestro') {
-            $location.path('/');
-        }
-
-        if ($location.path() === '/' && $rootScope.globals.token) {
-            if ($rootScope.Role !== 'Admin')
-                $location.path('/inicio-'+$rootScope.Role.toLowerCase());
-            else
-                $location.path('/proyectos');
-        }
+        const loggedIn = $rootScope.globals.token;
+        
+        if ($location.path() === '/' || 
+            $location.path().includes('habilitar-estudiante') || 
+            $location.path().includes('/registro-maestro') && 
+            loggedIn)
+            $location.path('/inicio-'+$rootScope.Role.toLowerCase());
     }
 
     function stateChangeStart (event, toState) {
