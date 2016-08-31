@@ -42,8 +42,9 @@
         <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
     </div>
 
-    <div ng-if="vm.projectsTableModel.data && vm.projectsTableModel.data.length > 0">
-        <tb-table table-model="vm.projectsTableModel" on-row-click="vm.removeProject" table="vm.projectsTable" 
+    <div ng-if="vm.selectedProjects && vm.selectedProjects.length > 0">
+        <tb-table schema="vm.projectsTableSchema" model="vm.selectedProjects" 
+                  on-row-click="vm.removeProject"
                   ng-hide="vm.submitting">
         </tb-table>
     </div>
@@ -71,8 +72,8 @@
         <tb-loading class="main-loader" ng-show="vm.studentsLoading"></tb-loading>
     </div> 
 
-    <div ng-if="vm.studentsTableModel.data && vm.sectionStudents.length > 0">
-        <tb-table table-model="vm.studentsTableModel" table="vm.studentsTable" 
+    <div ng-if="vm.sectionStudents && vm.sectionStudents.length > 0">
+        <tb-table schema="vm.studentsTableSchema" model="vm.sectionStudents" 
                   on-row-click="vm.removeStudent" ng-hide="vm.submitting">
         </tb-table>
     </div>

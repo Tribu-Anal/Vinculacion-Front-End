@@ -19,12 +19,11 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     vm.studentsLoading = true;
     vm.submitting = false;
 
-    vm.projectsTable = null;
-    vm.projectsTableModel = require('../../../table-models/form-projects-table-model');
+    vm.selectedProjects = [];
+    vm.projectsTableSchema = require('../../../table-schemas/form-projects-table-schema');
     vm.removeProject = removeProject;
 
-    vm.studentsTable = null;
-    vm.studentsTableModel = require('../../../table-models/form-students-table-model');
+    vm.studentsTableSchema = require('../../../table-schemas/form-students-table-schema');
     vm.removeStudent = removeStudent;
     vm.addStudent = addStudent;
 
@@ -55,25 +54,17 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function removeProject (project) {
         vm.section.projectIds.splice(vm.section.projectIds.indexOf(project.Id), 1);
-        vm.projectsTableModel.data.splice(vm.projectsTableModel.data.indexOf(project), 1);
-        vm.projectsTable.update(vm.projectsTableModel.data);
+        vm.selectedProjects.splice(vm.selectedProjects.indexOf(project), 1);
         // projects.selectedProjectsInSectionForm.splice(index, 1);
     }
 
     function removeStudent (student) {
         vm.sectionStudents.splice(vm.sectionStudents.indexOf(student), 1);
-        vm.studentsTable.update(vm.sectionStudents);
     }
 
     function addStudent () {
         if (vm.selectedItem && !isAlreadyOnList(vm.selectedItem.AccountId)) {
             vm.sectionStudents.push(vm.selectedItem);
-
-            if (!vm.studentsTableModel.data) 
-                vm.studentsTableModel.data = vm.sectionStudents;
-            else
-            vm.studentsTable.update(vm.sectionStudents);
-        
             vm.searchText = "";
         }
     }
@@ -120,11 +111,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     }
 
     function selectProjects (projects) {
-        if (!projects.length)
-            return;
-
-        vm.projectsTableModel.data = projects;
-        vm.projectsTable.update(vm.projectsTableModel.data);
+        vm.selectedProjects = projects;
 
         vm.section.projectIds = [];
 
