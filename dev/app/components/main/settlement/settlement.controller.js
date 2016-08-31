@@ -1,53 +1,21 @@
-SettlementController.$inject = ['TbUtils', 'settlement',
-    'tableContent', '$scope', 'filterFilter', '$rootScope',
-    '$state'
-];
+SettlementController.$inject = ['TbUtils', 'settlement', '$scope', 'filterFilter', '$rootScope' ];
 
-function SettlementController(TbUtils, settlement,
-    tableContent, $scope, filterFilter, $rootScope, $state) {
+function SettlementController(TbUtils, settlement, $scope, filterFilter, $rootScope) {
     
     const vm = this;
     vm.settlementLoading = true;
-    vm.settlementTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre', 'Horas Totales', 'Carrera', 'Descargar Finiquito']);
-    vm.downloadButton = {
-        icon: 'glyphicon-save-file',
-        onClick: downloadSettlement,
-        tooltip: 'Descargar Finiquito'
-    }
-
-    vm.settlementTableData = [];
+    vm.tableData = [];
+    vm.tableDataTemp = [];
+    vm.tableSchema = require('../../../table-schemas/settlement-table-schema')(downloadSettlement);
     vm.limitInLettersToSearch = 3;
+
+    $scope.$watch('search.data', search);
 
     settlement.getPendingFiniquitos(getPendingFiniquitosSuccess, getPendingFiniquitosFail);
 
     function getPendingFiniquitosSuccess(response) {
-        if (response.data.length <= 0) {
-            vm.settlementLoading = false;
-            return;
-        }
-        vm.settlementTableData = response.data;
-        constructTableBody(vm.settlementTableData);
+        vm.tableData = vm.tableDataTemp = response.data;
         vm.settlementLoading = false;
-    }
-
-    function constructTableBody(data) {
-        vm.settlementLoading = true;
-        let table = [];
-        for (let i = 0; i < data.length; i++) {
-            let student = data[i];
-            let newTableElement = {
-                content: [
-                    tableContent.createALableElement(student.AccountId),
-                    tableContent.createALableElement(student.Name),
-                    tableContent.createALableElement(student.Hours),
-                    tableContent.createALableElement(getMajorName(student.Major)),
-                    tableContent.createAButtonElement(vm.downloadButton)
-                ],
-                data: student
-            }
-            table.push(newTableElement);
-        }
-        vm.settlementTable.body = table;
     }
 
     function getPendingFiniquitosFail() {
@@ -56,32 +24,27 @@ function SettlementController(TbUtils, settlement,
             'No se pudieron cargar los alumnos correctamente');
     }
 
-    function downloadSettlement(studentData) {
-        TbUtils.confirm('Descargar Finiquito', 'Una vez lo descargue, no podra volver a hacerlo. Continuar?', result => {
+    function downloadSettlement (student) {
+        TbUtils.confirm('Descargar Finiquito', 
+            'Una vez lo descargue, no podra volver a hacerlo. Continuar?', result => {
             if (result) {
-                window.open(settlement.dowloadFiniquitoReport(studentData.data.AccountId));
+                window.open(settlement.dowloadFiniquitoReport(student.AccountId));
                 location.reload();
             }
         });
     }
 
-    function getMajorName(major) {
-        return major.Name ? major.Name : "N/A";
-    }
-
-    $scope.$watch('search.data', function(term) {
+    function search (term) {
         let obj = {
             AccountId: term
         };
-        if (term && term.length >= vm.limitInLettersToSearch) {
-            let filterStudents = {
-                data: filterFilter(vm.settlementTableData, obj)
-            };
-            constructTableBody(filterStudents.data);
-        } else {
-            constructTableBody(vm.settlementTableData);
-        }
-    });
+
+        if (term && term.length >= vm.limitInLettersToSearch)
+            vm.tableData = filterFilter(vm.tableData, obj)
+        else
+            vm.tableData = vm.tableDataTemp;
+    }
+
 }
 
 module.exports = {
