@@ -22,7 +22,6 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
     function LoginSuccess(response) {
         DBId = response.data.Id;
         auth.SetCredentials(response.data);
-
         window.localStorage['Session'] =
         $rootScope.Session =
         vm.username;
@@ -44,10 +43,7 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
             $rootScope.ProfessorDBId = DBId;
         }
 
-        if ($rootScope.Role === 'Admin')
-            $state.go('main.projects');
-        else
-            $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
+        $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
 
         vm.loading = false;
     }

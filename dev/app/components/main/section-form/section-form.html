@@ -15,6 +15,14 @@
     </div>
 
     <div>
+        <label class="cd-label" for="cd-name">Codigo</label>
+        <input ng-model="vm.section.Code" class="user" type="text" name="code" id="cd-name" required>
+        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid">
+            * Ingresa el codigo de la nueva seccion
+        </p>
+    </div>
+
+        <div>
         <label class="cd-label" for="cd-name">Costo</label>
         <input ng-model="vm.section.Cost" class="user" type="number" name="cost" id="cd-name" min="0" required>
         <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid && (sectionForm.cost.$error.required || sectionForm.cost.$invalid)">

@@ -8,15 +8,18 @@ function EditHoursController($stateParams, sections, projects,
 
     vm.participantsLoading = true;
     vm.editHours = {
-        visible: $rootScope.Role === 'Professor',
+        visible: $rootScope.Role !== 'Student',
         value: false,
         text: 'Habilitar la edición de las horas'
     };
     vm.evaluateProject = evaluateProject;
+
+    vm.isApproved = false;
+
     vm.projectName = null;
     vm.students = [];
     vm.table = undefined;
-    vm.tableSchema = require('../../../table-schemas/edit-hours-table-schema');
+    vm.tableSchema = require('../../../table-schemas/edit-hours-table-schema')(vm.isApproved);
     vm.saveChanges = saveChanges;
 
     sections.getStudentsHoursBySectionProjectId($stateParams.sectionId, 
@@ -28,6 +31,20 @@ function EditHoursController($stateParams, sections, projects,
 
     function getStudentsHoursSuccess(response) {
         vm.students = reponse.data;
+
+        vm.isApproved = students.IsApproved;
+
+        if (vm.students.Hours.length <= 0) {
+            TbUtils.displayNotification('error', 'Error',
+                'Esta sección y proyecto no tienen alumnos asginados.');
+            TbUtils.go('main.section', { sectionId: $stateParams.sectionId });
+            return;
+        }
+
+        if(vm.isApproved)
+            TbUtils.displayNotification('warning', 'Aviso', 
+                'Las horas de esta sección ya fueron aprobadas.');
+
         vm.participantsLoading = false;
     }
 
@@ -46,7 +63,9 @@ function EditHoursController($stateParams, sections, projects,
     }
 
     function evaluateProject() {
-        TbUtils.go('main.evaluateproject', { projectId: $stateParams.projectId });
+        TbUtils.go('main.evaluateproject', 
+            { projectId: $stateParams.projectId,
+              sectionId: $stateParams.sectionId });
     }
 
     function getStudentsHours () {

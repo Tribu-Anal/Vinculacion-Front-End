@@ -14,7 +14,13 @@ function ProjectEvaluationFormController($rootScope, $state, $stateParams, proje
     vm.accountId;
 
     function downloadReport() {
-        document.getElementById('my_iframe').src = projects.getProjectReportUrl($state.params.projectId, vm.formData.fieldHours, vm.formData.calification, vm.formData.beneficiariesQuantities, vm.formData.beneficiariGroups);
+        console.log("mierda");
+        console.log(vm.formData);
+        document.getElementById('my_iframe').src = projects.getProjectReportUrl(
+            $state.params.projectId, $state.params.sectionId,
+            vm.formData.fieldHours, vm.formData.calification,
+            vm.formData.beneficiariesQuantities,
+            vm.formData.beneficiariGroups);
     }
 
     vm.downloadReport = downloadReport;

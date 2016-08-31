@@ -1,9 +1,9 @@
 SectionFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'sections', 'sectionData',
-    'projects', '$q', '$timeout', 'students', 'ModalService', 'professors'
+    'projects', '$q', '$timeout', 'students', 'ModalService', 'professors', 'sectionProjects'
 ];
 
 function SectionFormController($rootScope, $state, TbUtils, sections, sectionData, projects, q,
-    timeout, students, ModalService, professors) {
+    timeout, students, ModalService, professors, sectionProjects) {
 
     var vm = this;
 
@@ -55,7 +55,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     function removeProject (project) {
         vm.section.projectIds.splice(vm.section.projectIds.indexOf(project.Id), 1);
         vm.selectedProjects.splice(vm.selectedProjects.indexOf(project), 1);
-        // projects.selectedProjectsInSectionForm.splice(index, 1);
+        projects.selectedProjectsInSectionForm = vm.selectedProjects;
     }
 
     function removeStudent (student) {
@@ -71,14 +71,11 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function submit() {
         vm.submitting = true;
-
-        sections.postSection(vm.section,
-            submitSuccess, submitFailure);
+        sections.postSection(vm.section, submitSuccess, submitFailure);
     }
 
     function getProfessorSuccess(response) {
         vm.section.ProffesorAccountId = response.data[0].AccountId;
-
     }
 
     function getProfessorFail(response) {
@@ -87,10 +84,20 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function submitSuccess(response) {
         addStudentsToSection(response.data.Id);
+
         projects.assignProjectstoSection(vm.section.projectIds,
             response.data.Id,
             assignSectionToProjectSuccess,
-            assignSectionToProjectError)
+            assignSectionToProjectError);
+
+        let sectionProjectObj = {
+            SectiontId: response.data.Id,
+            ProjectIds: vm.section.projectIds,
+            Description: vm.section.Description,
+            Cost: vm.section.Cost
+        };
+
+        sectionProjects.postSectionProjects(sectionProjectObj, resp => {}, resp => {});
     }
 
     function submitFailure(response) {
@@ -112,6 +119,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function selectProjects (projects) {
         vm.selectedProjects = projects;
+        projects.selectedProjectsInSectionForm = vm.selectedProjects;
 
         vm.section.projectIds = [];
 
