@@ -66,6 +66,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         if (vm.selectedItem && !isAlreadyOnList(vm.selectedItem.AccountId)) {
             vm.sectionStudents.push(vm.selectedItem);
             vm.searchText = "";
+            console.log(vm.sectionStudents);
         }
     }
 
@@ -163,8 +164,8 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
 
     function addStudentsToSection(sectionId) {
         const students = [];
-        for (let i = 0; i < vm.studentsTable.body.length; i++) {
-            students.push(getAccountID(i));
+        for (let i = 0; i < vm.sectionStudents.length; i++) {
+            students.push(vm.sectionStudents[i].AccountId);
         }
         sections.addStudent(students, sectionId, addStudentSuccess, submitFailure);
     }
