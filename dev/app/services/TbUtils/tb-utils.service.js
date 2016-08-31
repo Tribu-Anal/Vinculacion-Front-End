@@ -117,7 +117,9 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     }
 
     function go (state, params) {
-        preventGeneralLoading();
+        if (state.includes('main'))
+            preventGeneralLoading();
+        
         $state.go(state, params);
     }
 
