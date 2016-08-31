@@ -19,6 +19,9 @@ function EditHoursController($stateParams, $state, sections, projects,
         onClick: evaluateProject
     }
     vm.projectName = null;
+    vm.cost = null;
+    vm.sections = [];
+    vm.description = null;
     vm.addHours = {
         onClick: addHours,
         icon: 'glyphicon-plus',
@@ -70,6 +73,11 @@ function EditHoursController($stateParams, $state, sections, projects,
 
     function getProjectSuccess(response) {
         vm.projectName = TbUtils.toTitleCase(response.data.Name);
+        vm.description = TbUtils.toTitleCase(response.data.Description);
+    }
+
+    function getProjectsBySection(sectionId) {
+        sections.getProjects(sectionId, getProjectSuccess, getProjectFail);
     }
 
     function getProjectFail(response) {
