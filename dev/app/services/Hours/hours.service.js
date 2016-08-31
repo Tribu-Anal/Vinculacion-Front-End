@@ -6,7 +6,9 @@ function hours($http) {
         getStudentsBySection: getStudentsBySection,
         postHours: postHours,
         getStudentHourReport: getStudentHourReport,
-        getFiniquitoURL: getFiniquitoURL
+        getFiniquitoURL: getFiniquitoURL,
+        getHoursInfoSectionProjects:getHoursInfoSectionProjects,
+        putSectionProjectsApprove:putSectionProjectsApprove
     };
 
     return service;
@@ -34,7 +36,16 @@ function hours($http) {
     function getFiniquitoURL(accountId) {
         return url + '/Students/FiniquitoReport/' + accountId;
     }
+
+    function getHoursInfoSectionProjects(sectionprojectId,successCallback,errorCallback){
+        $http.get(url + '/SectionProjects/Info/' + sectionprojectId).
+        then(successCallback).catch(errorCallback);
+    }
     
+    function putSectionProjectsApprove(sectionprojectId,successCallback,errorCallback){
+        $http.put(url + '/SectionProjects/Approve/' + sectionprojectId).
+        then(successCallback).catch(errorCallback);
+    }
 }
 
 module.exports = { name: 'hours', srvc: hours };

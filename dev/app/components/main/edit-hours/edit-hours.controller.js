@@ -8,9 +8,12 @@ function EditHoursController($stateParams, $state, sections, projects,
 
     vm.participantsLoading = true;
     vm.editHours = {
-        visible: $rootScope.Role === 'Professor',
+        visible: $rootScope.Role !== 'Student',
         value: false,
         text: 'Habilitar la edición de las horas'
+    }
+    vm.isApproved = {
+        visible: false
     }
     vm.evaluateProject = {
         onClick: evaluateProject
@@ -26,10 +29,19 @@ function EditHoursController($stateParams, $state, sections, projects,
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
 
     function getStudentsHoursSuccess(response) {
-        if (response.data.length <= 0)
+        console.log(response);
+        vm.isApproved.visible = response.data.IsApproved;
+        if (response.data.Hours.length <= 0) {
+            TbUtils.displayNotification('error', 'Error',
+                'Esta sección y proyecto no tienen alumnos asginados.');
             return;
-        for (let i = 0; i < response.data.length; i++) {
-            let student = response.data[i];
+        }
+        if(vm.isApproved.visible)
+            TbUtils.displayNotification('warning', 'Aviso',
+                'Las horas de esta sección ya fueron aprobadas.');
+
+        for (let i = 0; i < response.data.Hours.length; i++) {
+            let student = response.data.Hours[i];
             let inputProperties = {
                 value: student.Hours ? student.Hours.Amount : 0,
                 type: 'number',
@@ -67,7 +79,8 @@ function EditHoursController($stateParams, $state, sections, projects,
     function evaluateProject() {
         TbUtils.preventGeneralLoading();
         $state.go('main.evaluateproject', {
-            projectId: $stateParams.projectId
+            projectId: $stateParams.projectId,
+            sectionId: $stateParams.sectionId
         });
     }
 
