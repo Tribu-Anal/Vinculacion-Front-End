@@ -1,13 +1,15 @@
-students.$inject = ['$http'];
+students.$inject = ['$http', '$q'];
 
-function students ($http) {
+function students ($http, $q) {
 	const url = 'http://fiasps.unitec.edu:' + PORT + '/api/Students';
 
 	const service = {
 		get: get,
 		getHours: getHours,
 		getAccountId: getAccountId,
-		getSectionHours: getSectionHours
+		getSectionHours: getSectionHours,
+		getParsedStudentsExcel: getParsedStudentsExcel,
+		importStudents: importStudents
 	};
 
 	return service;
@@ -34,6 +36,26 @@ function students ($http) {
 	function getSectionHours(accountId, successCallback, errorCallback){
 				$http.get(url + '/'+accountId+'/SectionHours').then(successCallback)
 						.catch(errorCallback);
+	}
+
+	function getParsedStudentsExcel (data) {
+		const deferred = $q.defer();
+
+      	$http.post(url+'/Parse', data)
+	        .success(response => { deferred.resolve(response.data); })
+	        .error(reject => { deferred.reject('No se pudo cargar el archivo.'); });
+
+	    return deferred.promise;
+	}
+
+	function importStudents (students) {
+		const deferred = $q.defer();
+
+      	$http.post(url+'/Import', students)
+	        .success(response => { deferred.resolve(response.data); })
+	        .error(reject => { deferred.reject('No se pudo importar los alumnos.'); });
+
+	    return deferred.promise;
 	}
 
 }

@@ -1,9 +1,9 @@
-EditHoursController.$inject = ['$stateParams', '$state', 'sections', 'projects',
-    'TbUtils', 'tableContent', '$rootScope', 'hours', '$mdDialog', 'students'
+EditHoursController.$inject = ['$stateParams', 'sections', 'projects',
+    'TbUtils', '$rootScope', 'hours', '$mdDialog', 'students'
 ];
 
-function EditHoursController($stateParams, $state, sections, projects,
-    TbUtils, tableContent, $rootScope, hours, $mdDialog, students) {
+function EditHoursController($stateParams, sections, projects,
+    TbUtils, $rootScope, hours, $mdDialog, students) {
     const vm = this;
 
     vm.participantsLoading = true;
@@ -11,54 +11,41 @@ function EditHoursController($stateParams, $state, sections, projects,
         visible: $rootScope.Role !== 'Student',
         value: false,
         text: 'Habilitar la edición de las horas'
-    }
-    vm.isApproved = {
-        visible: false
-    }
-    vm.evaluateProject = {
-        onClick: evaluateProject
-    }
+    };
+    vm.evaluateProject = evaluateProject;
+
+    vm.isApproved = false;
+
     vm.projectName = null;
-    vm.addHours = {
-        onClick: addHours,
-        icon: 'glyphicon-plus',
-        tooltip: 'Agregar horas'
-    }
-    vm.studentsTable = TbUtils.getTable(['Número de Cuenta', 'Nombre', 'Horas en este proyecto']);
-    sections.getStudentsHoursBySectionProjectId($stateParams.sectionId, $stateParams.projectId, getStudentsHoursSuccess, getStudentsHoursFail);
+    vm.students = [];
+    vm.table = undefined;
+    vm.tableSchema = require('../../../table-schemas/edit-hours-table-schema')(vm.isApproved);
+    vm.saveChanges = saveChanges;
+
+    sections.getStudentsHoursBySectionProjectId($stateParams.sectionId, 
+                                                $stateParams.projectId, 
+                                                getStudentsHoursSuccess, 
+                                                getStudentsHoursFail);
+
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
 
     function getStudentsHoursSuccess(response) {
         console.log(response);
-        vm.isApproved.visible = response.data.IsApproved;
-        if (response.data.Hours.length <= 0) {
+        vm.students = response.data.Hours;
+
+        vm.isApproved = response.data.IsApproved;
+
+        if (vm.students.length <= 0) {
             TbUtils.displayNotification('error', 'Error',
                 'Esta sección y proyecto no tienen alumnos asginados.');
+            TbUtils.go('main.section', { sectionId: $stateParams.sectionId });
             return;
         }
-        if(vm.isApproved.visible)
-            TbUtils.displayNotification('warning', 'Aviso',
+
+        if(vm.isApproved)
+            TbUtils.displayNotification('warning', 'Aviso', 
                 'Las horas de esta sección ya fueron aprobadas.');
 
-        for (let i = 0; i < response.data.Hours.length; i++) {
-            let student = response.data.Hours[i];
-            let inputProperties = {
-                value: student.Hours ? student.Hours.Amount : 0,
-                type: 'number',
-                min: 0,
-                max: 100
-            };
-            let newTableElement = {
-                content: [
-                    tableContent.createALableElement(student.User.AccountId),
-                    tableContent.createALableElement(student.User.Name),
-                    tableContent.createAnInputElement(inputProperties)
-                ],
-                data: student
-            };
-
-            vm.studentsTable.body.push(newTableElement);
-        }
         vm.participantsLoading = false;
     }
 
@@ -73,36 +60,30 @@ function EditHoursController($stateParams, $state, sections, projects,
     }
 
     function getProjectFail(response) {
-
+        TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los datos.');
     }
 
     function evaluateProject() {
-        TbUtils.preventGeneralLoading();
-        $state.go('main.evaluateproject', {
-            projectId: $stateParams.projectId,
-            sectionId: $stateParams.sectionId
-        });
+        TbUtils.go('main.evaluateproject', 
+            { projectId: $stateParams.projectId,
+              sectionId: $stateParams.sectionId });
     }
 
-    function getStudentsHour() {
-        let table = [];
-        for (let i = 0; i < vm.studentsTable.body.length; i++) {
-            let student = vm.studentsTable.body[i];
-            let element = {
-                AccountId: student.data.User.AccountId,
-                HourId: student.data.Hours ? student.data.Hours.Id : -1,
-                Hour: student.content[2].properties.value
-            }
-            table.push(element);
+    function getStudentsHours () {
+        let reqData = [];
+        for (let i = 0; i < vm.students.length; i++) {
+            const student = vm.students[i];
+            const obj = {
+                AccountId: student.User.AccountId,
+                HourId: student.Hours ? student.Hours.Id : -1,
+                Hour:  vm.table.rows[i].elements[2].props.model
+            };
+            reqData.push(obj);
         }
-        return table;
+        return reqData;
     }
 
-    function addHours() {
-        showConfirmDialog();
-    }
-
-    function showConfirmDialog() {
+    function saveChanges () {
         const confirm = $mdDialog.confirm()
             .title('¿Está seguro de que quiere registrar las horas?')
             .textContent('Está apunto de asignarle horas a los estudiantes de esta sección en este proyecto.')
@@ -118,7 +99,7 @@ function EditHoursController($stateParams, $state, sections, projects,
         let obj = {
             ProjectId: parseInt($stateParams.projectId),
             SectionId: parseInt($stateParams.sectionId),
-            StudentsHour: getStudentsHour()
+            StudentsHour: getStudentsHours()
         };
         hours.postHours(obj, postHoursSuccess, postHoursFail);
     }

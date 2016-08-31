@@ -1,82 +1,46 @@
 SectionController.$inject = ['$rootScope', '$stateParams', '$state',
-    'TbUtils', 'ModalService', 'sections', 'projects', 'tableBuilder',
-    'hours', 'tableContent', 'students'
+    'TbUtils', 'ModalService', 'sections', 'projects',
+    'hours', 'students'
 ];
 
 function SectionController($rootScope, $stateParams, $state,
-    TbUtils, ModalService, sections, projects, tableBuilder,
-    hours, tableContent, students) {
+    TbUtils, ModalService, sections, projects, 
+    hours, students) {
 
     const vm = this,
-        sectionData = require('./section-data');
+          sectionData = require('./section-data');
 
     var modalFlag = '';
 
     vm.sectionLoading = true;
     vm.projectsLoading = true;
-    vm.hoursLoading = true;
     vm.studentsLoading = true;
     vm.addStudent = addStudent;
-    vm.accountId = null;
     vm.sections = [];
-    vm.sectionhours = null;
     vm.editSection = editSection;
     vm.toTitleCase = TbUtils.toTitleCase;
-    vm.deleteRowButton = {
-        icon: 'glyphicon-trash',
-        onClick: deleteStudent,
-        tooltip: 'Eliminar Alumno'
-    };
+    vm.goToEditHours = project => { TbUtils.go('main.edit-hours', {projectId: project.Id, sectionId: $stateParams.sectionId}); };
 
     vm.student = undefined;
 
+    vm.students = null;
+    vm.studentsTableSchema = require('../../../table-schemas/section-students-table-schema')(deleteStudent);
+
+    vm.projects = null;
+    vm.projectsTableSchema = require('../../../table-schemas/section-projects-table-schema');
+
     sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
     getProjectsBySection($stateParams.sectionId);
-    
-    if ($rootScope.Role === 'Student')
-        students.getAccountId(getAccountIdSuccess, getAccountIdFail);
-    else
-        vm.hoursLoading = false;
-
-    function getAccountIdSuccess(response){
-      vm.accountId = response.data.AccountId;
-      students.getSectionHours(vm.accountId, getSectionHoursSuccess, getSectionHoursFail);
-    }
-
-    function getAccountIdFail(response){
-      vm.hoursLoading = false;
-      TbUtils.displayNotification('error', 'Error!',
-          'No se ha podido cargar la seccion correctamente');
-    }
-
-    function getSectionHoursSuccess(response){
-      vm.sections = response.data;
-      for(obj in vm.sections){
-        if($stateParams.sectionId == vm.sections[obj].Id){
-          vm.sectionhours = vm.sections[obj].HoursWorked;
-        }
-      }
-      vm.hoursLoading = false;
-    }
-
-    function getSectionHoursFail(response){
-      vm.hoursLoading = false;
-      TbUtils.displayNotification('error', 'Error!',
-          'No se ha podido cargar las horas correspondientes de la seccion');
-    }
 
     function getProjectsBySection(sectionId) {
         sections.getProjects(sectionId, getProjectsSuccess, getProjectsFail);
     }
 
     function getProjectsSuccess(response) {
-        const headers = ['Id Proyecto', 'Nombre'];
-
         for(prj in response.data) {
             response.data[prj].sectionId = $stateParams.sectionId;
         }
-
-        vm.projectsTable = tableBuilder.newTable(headers, response.data, ['ProjectId', 'Name']);
+        vm.projects = response.data;
         vm.projectsLoading = false;
     }
 
@@ -143,33 +107,7 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function getStudentsSuccess(response) {
-        if (response.data.length <= 0) {
-            vm.studentsLoading = false;
-            return;
-        }
-        vm.studentsTable = TbUtils.getTable(['Numero de Cuenta', 'Nombre']);
-        vm.studentsTable.actions = false;
-
-        if ($rootScope.Role !== 'Student')
-            vm.studentsTable.headers.push('');
-
-        for (let i = 0; i < response.data.length; i++) {
-            let student = response.data[i];
-            let element = {
-                data: student,
-                content: [
-                    tableContent.createALableElement(student.AccountId),
-                    tableContent.createALableElement(student.Name)
-                ]
-            }
-
-            if ($rootScope.Role !== 'Student') {
-                element.content.push(
-                    tableContent.createAButtonElement(vm.deleteRowButton)
-                );
-            }
-            vm.studentsTable.body.push(element);
-        }
+        vm.students = response.data;
         vm.studentsLoading = false;
     }
 
@@ -180,18 +118,17 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function deleteStudent(student) {
-        TbUtils.confirm('Eliminar Estudiante', `Desea eliminar a ${student.data.Name} de la seccion?`, result => {
+        TbUtils.confirm('Eliminar Estudiante', `Desea eliminar a ${student.Name} de la seccion?`, result => {
             if (result) {
                 vm.student = student;
-                sections.removeStudent([student.data.AccountId], vm.section.Id,
+                sections.removeStudent([student.AccountId], vm.section.Id,
                     removeStudentSuccess, removeStudentFail);
             }
         });
     }
 
     function removeStudentSuccess(response) {
-        let index = vm.studentsTable.body.indexOf(vm.student);
-        vm.studentsTable.body.splice(index, 1);
+        vm.students.splice(vm.students.indexOf(vm.student), 1);
     }
 
     function removeStudentFail(response) {
@@ -235,21 +172,6 @@ function SectionController($rootScope, $stateParams, $state,
             $mdDialog.hide(response);
         }
 
-        sections.getProjects($stateParams.sectionId, function(response) {
-            if (response.data.length > 0) {
-                for (let i = 0; i < response.data.length; i++) {
-                    let project = response.data[i];
-                    let element = {
-                        Id: project.Id,
-                        Name: TbUtils.toTitleCase(project.Name)
-                    }
-                    $scope.projects.push(element);
-                }
-            }
-        }, function(err) {
-        TbUtils.showErrorMessage('error', response.data,
-            'No se ha podido editar la seccion', 'Error');
-        });
     }
 }
 
