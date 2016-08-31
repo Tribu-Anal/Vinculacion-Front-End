@@ -9,6 +9,7 @@ function redirect (state, toState, role, ev) {
 		case 'main.reports':
 		case 'main.newsection':
 		case 'main.settlement':
+		case 'main.admin-dashboard':
 			if (role !== 'admin') {
 				goToDashboard(state, role);
 				ev.preventDefault();
