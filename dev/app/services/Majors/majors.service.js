@@ -1,11 +1,12 @@
-majors.$inject = ['$http'];
+majors.$inject = ['$http', '$q'];
 
-function majors ($http) {
+function majors ($http, $q) {
    var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Majors';
     
     var service = {
         getMajors: getMajors,
-        getMajor : getMajor
+        getMajor : getMajor,
+        getMajorsByProject: getMajorsByProject
     };
     
     return service;
@@ -18,6 +19,14 @@ function majors ($http) {
     function getMajor(majorId, successCallback, errorCallback) {
     	$http.get(url + '/' + majorId).then(successCallback)
     		 .catch(errorCallback);
+    }
+
+    function getMajorsByProject(projectId) {
+        return $http.get(url + '/MajorsByProject/' + projectId).then(function(response) {
+            return response.data;
+        }, function(response) {
+            return $q.reject(response.data);
+        });
     }
 }
 
