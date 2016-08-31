@@ -1,72 +1,42 @@
-SectionsController.$inject = ['$rootScope', '$scope', '$state',
-    'TbUtils', 'tableContent', 'sections', 'filterFilter'
-];
+SectionsController.$inject = [ '$rootScope', '$scope', '$state',
+                               'TbUtils', 'sections', 'filterFilter' ];
 
 function SectionsController($rootScope, $scope, $state,
-    TbUtils, tableContent, sections, filterFilter) {
+                            TbUtils, sections, filterFilter) {
 
     var vm = this;
-
-    let defaultSectionTableBody = [];
 
     vm.limitInLettersToSearch = 3;
 
     vm.sectionsLoading = true;
-    vm.sectionsTable = TbUtils.getTable(['Codigo', 'Clase', 'Periodo', 'Año', 'Catedratico']);
+    vm.sectionsTable = null;
     vm.sections = [];
+    vm.sectionsTableSchema = require('../../../table-schemas/ext-sections-table-schema');
+    vm.goToSection = section => { TbUtils.go('main.section', { sectionId: section.Id }); };
     vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
+
+    vm.sectionsTemp = [];
 
     vm.options = {
         startingPage: 1,
         pageSize: 10
     };
 
-    vm.sections = [];
-
     vm.loadMore = loadMore;
     vm.loadingMore = false;
 
     sections.getCurrentPeriodSections(getCPSectionsSuccess, getCPSectionsFailure);
 
+    $scope.$watch('search.data', search);
+
     function getCPSectionsSuccess(response) {
         vm.options.pageSize = response.data.length;
-        if (response.data.length <= 0) {
-            vm.sectionsLoading = false;
-            return;
-        }
-
-        constructTableBody(response, vm.sectionsTable.body);
-        defaultSectionTableBody = vm.sectionsTable.body;
-        TbUtils.fillListWithResponseData(response.data, vm.sections);
-
+        vm.sectionsTemp = vm.sections = response.data;
         vm.sectionsLoading = false;
     }
 
     function getCPSectionsFailure(response) {
         TbUtils.displayNotification('Error', 'Error', 'No se pudieron cargar los proyectos.');
-    }
-
-    function constructTableBody(response, tableSections) {
-        for (let i = 0; i < response.data.length; i++) {
-            let section = response.data[i];
-            let name = 'N/A';
-
-            if (section.User !== null)
-                name = section.User.Name;
-
-            let newTableElement = {
-                content: [
-                    tableContent.createALableElement(section.Code),
-                    tableContent.createALableElement(section.Class.Name),
-                    tableContent.createALableElement(section.Period.Number),
-                    tableContent.createALableElement(section.Period.Year),
-                    tableContent.createALableElement(name)
-                ],
-                data: section
-            };
-
-            tableSections.push(newTableElement);
-        }
     }
 
     function loadMore() {
@@ -78,10 +48,9 @@ function SectionsController($rootScope, $scope, $state,
     }
 
     function getMoreSectionsSuccess(response) {
-        constructTableBody(response, vm.sectionsTable.body);
-        defaultSectionTableBody = vm.sectionsTable.body;
-        vm.loadingMore = false;
         TbUtils.fillListWithResponseData(response.data, vm.sections);
+        vm.sectionsTemp = vm.sections;
+        vm.loadingMore = false;
         vm.options.startingPage++;
     }
 
@@ -90,7 +59,7 @@ function SectionsController($rootScope, $scope, $state,
         vm.loadingMore = false;
     }
 
-    $scope.$watch('search.data', function(term) {
+    function search (term) {
         let obj = {
             Class: {
                 Name: term
@@ -99,18 +68,12 @@ function SectionsController($rootScope, $scope, $state,
 
         if (term && term.length >= vm.limitInLettersToSearch) {
             vm.searching = true;
-            let filterSections = {
-                data: filterFilter(vm.sections, obj)
-            };
-            let filterTable = [];
-            constructTableBody(filterSections, filterTable);
-            vm.sectionsTable.body = filterTable;
+            vm.sections = filterFilter(vm.sections, obj);
         } else {
-            vm.sectionsTable.body = defaultSectionTableBody;
+            vm.sections = vm.sectionsTemp;
             vm.searching = false;
         }
-
-    });
+    }
 
 }
 
