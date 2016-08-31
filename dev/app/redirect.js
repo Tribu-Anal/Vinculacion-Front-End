@@ -7,8 +7,11 @@ function redirect (state, toState, role, ev) {
 		case 'main.import-students':
 		case 'main.newprofessor':
 		case 'main.reports':
-		case 'main.newsection':
+		
 		case 'main.settlement':
+		case 'main.admin-dashboard':
+		case 'main.newclass':
+		case 'main.approve-hours':
 			if (role !== 'admin') {
 				goToDashboard(state, role);
 				ev.preventDefault();
@@ -25,6 +28,7 @@ function redirect (state, toState, role, ev) {
 		case 'main.projects':
 		case 'main.section':
 		case 'main.sections':
+		case 'main.newsection':
 			if (role === 'student') {
 				goToDashboard(state, role);
 				ev.preventDefault();

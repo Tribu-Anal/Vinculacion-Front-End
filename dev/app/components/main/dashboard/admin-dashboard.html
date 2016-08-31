@@ -16,22 +16,22 @@
                 <table class="admin table table-list-search table-hover">
                   <thead>
                     <tr>
-                        <th>Periodo</th>
+                        <th>Proyecto</th>
                         <th>Seccion</th>
                         <th>Clase</th>
-                        <th>Proyecto</th>
                         <th>Maestro</th>
                         <th>Correo</th>
+                        <th>Periodo</th>
                     </tr>
                   </thead>
                   <tbody>
                           <tr ng-repeat="sproject in vm.sprojects">
-                            <td class="hidden-sm">{{sproject.Section.Period.Number}}</td>
+                            <td>{{vm.toTitleCase(sproject.Project.Name)}}</td>
                             <td>{{sproject.Section.Code}}</td>
                             <td>{{sproject.Section.Class.Name}}</td>
-                            <td>{{vm.toTitleCase(sproject.Project.Name)}}</td>
                             <td>{{vm.toTitleCase(sproject.Section.User.Name)}}</td>
                             <td>{{sproject.Section.User.Email}}</td>
+                            <td class="hidden-sm">{{sproject.Section.Period.Number}}</td>
                           </tr>
 
                         </tbody>
