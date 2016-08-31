@@ -128,7 +128,6 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
     }
 
     function sortBy(array, property) {
-        console.log("mmm");
         array.sort(function(a, b) {
             if (a[property] > b[property]) {
                 return 1;
