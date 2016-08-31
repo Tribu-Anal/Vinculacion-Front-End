@@ -14,7 +14,8 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
         toTitleCase: toTitleCase,
         confirm: confirm,
         prompt: prompt,
-        customDialog: customDialog
+        customDialog: customDialog,
+        sortBy: sortBy
     };
     var vm = this;
     vm.ModalParams;
@@ -124,6 +125,20 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
             parent: angular.element(document.body)
         }
         $mdDialog.show(options).then(callback);
+    }
+
+    function sortBy(array, property) {
+        console.log("mmm");
+        array.sort(function(a, b) {
+            if (a[property] > b[property]) {
+                return 1;
+            }
+            if (a[property] < b[property]) {
+                return -1;
+            }
+            return 0;
+        });
+        return array;
     }
 
 }

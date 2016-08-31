@@ -120,7 +120,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     }
 
     function getClassesSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.classes);
+        TbUtils.fillListWithResponseData(TbUtils.sortBy(response.data, 'Name'), vm.classes);
         vm.classesLoading = false;
     }
 
@@ -135,7 +135,8 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     }
 
     function getProfessorsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.professors);
+        TbUtils.fillListWithResponseData(
+            TbUtils.sortBy(response.data, 'Name') , vm.professors);
         vm.professorsLoading = false;
     }
 
