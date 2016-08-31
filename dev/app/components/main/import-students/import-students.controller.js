@@ -18,7 +18,7 @@ function ImportStudentsController (TbUtils, students, $state) {
 	vm.submit = submit;
 	vm.reset  = reset;
 	vm.excelStudents = null;
-	vm.studentsTableModel = require('../../../table-models/excel-students-table-model');
+	vm.tableSchema = require('../../../table-schemas/excel-students-table-schema');
 	vm.parseLoading  = false;
 	vm.submitting    = false;
 
@@ -28,9 +28,9 @@ function ImportStudentsController (TbUtils, students, $state) {
 		vm.parseLoading = true;
 
 		students.getParsedStudentsExcel(base64Data).then( 
-		resolve => { vm.studentsTableModel.data = resolve; vm.excelStudents = resolve; vm.parseLoading = false; }, 
+		resolve => { vm.excelStudents = resolve; vm.parseLoading = false; }, 
 		reject => { 
-			// vm.studentsTableModel.data = mockData; vm.excelStudents = mockData; vm.parseLoading = false;
+			// vm.excelStudents = mockData; vm.parseLoading = false;
 			TbUtils.displayNotification('error', 'Error', reject); vm.parseLoading = false; 
 	});
 	}
