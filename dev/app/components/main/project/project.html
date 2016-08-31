@@ -26,10 +26,12 @@
 				<h3 class="title_spec">Carreras Asociadas</h3>
 				<p ng-repeat="major in vm.majors">{{major}}</p>
 			</div>
-			<div ng-if="vm.sections" style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">
+			<div ng-if="vm.sections && vm.sections.length > 0" 
+			     style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">
 				<h1>Secciones</h1>
 				<tb-table class="col-md-12" 
-				          table-model="vm.projectSectionsTableModel" 
+				          schema="vm.tableSchema" 
+				          model="vm.sections"
 				          on-row-click="vm.goToSection">
 				</tb-table>
 			</div>
