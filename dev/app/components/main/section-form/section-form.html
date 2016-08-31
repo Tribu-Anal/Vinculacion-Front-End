@@ -42,20 +42,18 @@
         <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
     </div>
 
+    <div ng-if="vm.projectsTableModel.data && vm.projectsTableModel.data.length > 0">
+        <tb-table table-model="vm.projectsTableModel" on-row-click="vm.removeProject" table="vm.projectsTable" 
+                  ng-hide="vm.submitting">
+        </tb-table>
+    </div>
+
     <div class="icon">
         <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
         <textarea ng-model="vm.section.Description" class="message" name="sectionProjectDescription" id="cd-textarea" required></textarea>
         <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid && sectionForm.sectionProjectDescription.$error.required">
             * Por favor ingresa una descripcion para el proyecto
         </p>
-    </div>
-
-    <div ng-show="vm.section.projectIds.length > 0">
-        <tb-table headers="vm.projectsTable.headers" 
-            body="vm.projectsTable.body"
-            on-row-click="vm.deleteElementFromProjectsTable"
-            ng-hide="vm.submitting">
-         </tb-table>
     </div>
 
     <div>
@@ -69,17 +67,16 @@
           </md-not-found>
         </md-autocomplete> 
         <button type="button" class="add-student-btn" style="margin-top: 5px; margin-left: 83%;"
-                ng-click="vm.addStudentToSection()">AGREGAR</button>
+                ng-click="vm.addStudent()">AGREGAR</button>
         <tb-loading class="main-loader" ng-show="vm.studentsLoading"></tb-loading>
     </div> 
 
-    <div ng-show="vm.sectionStudents.length > 0">
-        <tb-table headers="vm.studentsTable.headers" 
-            body="vm.studentsTable.body"
-            on-row-click="vm.deleteElementFromStudentsTable"
-            ng-hide="vm.submitting">
-         </tb-table>
+    <div ng-if="vm.studentsTableModel.data && vm.sectionStudents.length > 0">
+        <tb-table table-model="vm.studentsTableModel" table="vm.studentsTable" 
+                  on-row-click="vm.removeStudent" ng-hide="vm.submitting">
+        </tb-table>
     </div>
+
     <div>
         <input type="submit" ng-hide="vm.submitting" value="Confirmar">
     </div>
