@@ -787,8 +787,19 @@
 .table-hover tr{
   cursor: pointer;
 }
+.admin.table.table-list-search.table-hover tr{
+  cursor: auto;
+}
 .panel-primary > .panel-heading{
   border-color: none;
   background-color: #213250;
+}
+.panel.panel-primary.panel-table{
+  width: 100%;
+  font-size:16px;
+  margin-left: 0;
+}
+.admin.container{
+  width: 90%;
 }
 }
