@@ -6,7 +6,6 @@ function EnableStudentController ($rootScope, toaster, TbUtils, $state, students
   vm.email = "";
   vm.accountId = "";
   vm.password = "";
-  vm.confirm = "";
 
   vm.enableStudent = EnableStudent;
 
