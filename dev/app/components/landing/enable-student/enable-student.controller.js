@@ -6,27 +6,27 @@ function EnableStudentController ($rootScope, toaster, TbUtils, $state, students
   vm.email = "";
   vm.accountId = "";
   vm.password = "";
-
+  vm.submitting = false;
   vm.enableStudent = EnableStudent;
 
   function EnableStudent(){
+    vm.submitting = true;
     let student = {
-      AccountId: vm.AccountId,
+      AccountId: vm.accountId.toString(),
       Email: vm.email,
       Password: vm.password
     }
-    console.log("Data that is going to be sent: "+JSON.stringify(student));
     students.enableStudent(vm.student, enableStudentSuccess, enableStudentFail);
   }
 
   function enableStudentSuccess(response){
-    console.log(response);
+    vm.submitting = false;
     TbUtils.displayNotification('success', 'Alumno habilitado exitosamente!', 'Habilitado');
     $state.go('landing.login');
   }
 
   function enableStudentFail(response){
-    console.log(response);
+    vm.submitting = false;
     TbUtils.showErrorMessage('error',
                              'No se encontro una cuenta valida con los datos ingresados',
                              'Error de Habilitacion');
