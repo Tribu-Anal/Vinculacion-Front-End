@@ -28,7 +28,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	icon: "glyphicon glyphicon-th-list",
 		  	active: $state.current.url.includes('/secciones'),
 		  	show: $state.current.url !== '/registro-maestro/{accountId}'
-		  	      && $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
+		  	      && ($rootScope.Role === 'Admin' || $rootScope.Role === 'Professor'),
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
