@@ -9,7 +9,8 @@ function students ($http, $q) {
 		getAccountId: getAccountId,
 		getSectionHours: getSectionHours,
 		getParsedStudentsExcel: getParsedStudentsExcel,
-		importStudents: importStudents
+		importStudents: importStudents,
+		enableStudent: enableStudent
 	};
 
 	return service;
@@ -46,6 +47,11 @@ function students ($http, $q) {
 	        .error(reject => { deferred.reject('No se pudo cargar el archivo.'); });
 
 	    return deferred.promise;
+	}
+
+	function enableStudent(student, successCallback, errorCallback){
+		$http.post(url+'/EnableStudent', JSON.stringify(student)).then(successCallback)
+				.catch(errorCallback);
 	}
 
 	function importStudents (students) {

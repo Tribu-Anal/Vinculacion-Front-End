@@ -1,0 +1,60 @@
+.enable-student {
+
+  .student.container{
+    background: transparent;
+    width: 80%;
+  }
+
+  .form-control:focus {
+  border-color: none;
+  box-shadow: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+  input{
+    border-color: #4F628E;
+    outline: none;
+  }
+  .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3{
+    background: transparent;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+  }
+  .hab-form{
+    background: none;
+    padding: 5%;
+    padding-top: 2px;
+    border-radius: 20px;
+  }
+  .img-responsive
+  {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      margin-bottom: 6px;
+  }
+  .title{
+    color: #fff;
+  }
+
+  .btn.btn-primary.btn-block.btn-lg{
+    background: #306758;
+    border: none;
+  }
+
+  .btn.btn-primary.btn-block.btn-lg:hover{
+    border: none;
+    border-color: none;
+    background-color: #9D4A4A;
+    outline: 0;
+  }
+
+  .btn.btn-primary.btn-block.btn-lg:focus{
+    border: none;
+    border-color: none;
+    outline: 0;
+  }
+
+}

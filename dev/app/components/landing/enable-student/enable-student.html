@@ -1,0 +1,37 @@
+<div class="student container">
+  <br>
+<div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <img class = "img-responsive logo" src="img/logo.png" />
+		<form name="studentForm" ng-submit="studentForm.$valid && vm.enableStudent()" class="hab-form" role="form" autocomplete="off" novalidate>
+			<h2 class="title text-center">Registro</h2>
+			<hr class="colorgraph">
+      <div class="form-group">
+				<input ng-model="vm.accountId"
+         validation-max-length="8" type="number"
+         name="numcuenta" id="numcuenta"
+         class="form-control input-lg"
+         placeholder="Cuenta" tabindex="4"
+         value="" required>
+			</div>
+			<div class="form-group">
+				<input ng-model="vm.email"
+        type="email" name="email" id="email"
+        ng-pattern='/@unitec.edu$/'
+        class="form-control input-lg"
+        placeholder="Correo" autocomplete="off"
+        value="" autocomplete="off" required>
+			</div>
+      <div class="form-group">
+        <input value="" ng-model="vm.password" autocomplete="off" type="password" name="password" id="password" class="form-control input-lg" placeholder="Clave" tabindex="5"   required>
+      </div>
+
+			<hr class="colorgraph">
+			<div class="row">
+				<input type="submit" value="Confirmar" class="btn btn-primary btn-block btn-lg" >
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<tb-loading class="general-loader" ng-show="vm.submitting"></tb-loading>
