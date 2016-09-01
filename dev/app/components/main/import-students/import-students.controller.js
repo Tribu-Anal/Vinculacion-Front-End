@@ -24,7 +24,7 @@ function ImportStudentsController (TbUtils, students, $state) {
 	function submit () {
 		vm.submitting = true;
 
-		const newStudents = TbUtils.queryList(vm.excelStudents, 'Estado', false);
+		const newStudents = TbUtils.queryList(vm.excelStudents, 'Exists', false);
 
 		students.importStudents(newStudents).then(resolve => { 
 			TbUtils.displayNotification("success", "Exito", "Los alumnos se importaron exitosamente");
