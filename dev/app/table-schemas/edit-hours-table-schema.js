@@ -4,7 +4,7 @@ module.exports = inputDisabled => {
 		rows: [
 			{ type: 'label', props: { text: obj => obj.User.AccountId }  },
 			{ type: 'label', props: { text: obj => obj.User.Name }  },
-			{ type: 'input', props: { model: obj => obj.Hours.Amount, disable: '', 
+			{ type: 'input', props: { model: obj => obj.Hours ? obj.Hours.Amount : 0, disable: '', 
 				                      inputDisabled: inputDisabled, type: 'number', min: 0, max: 100 } }
 		]
 	};
