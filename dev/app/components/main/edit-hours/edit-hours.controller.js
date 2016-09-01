@@ -33,21 +33,6 @@ function EditHoursController($stateParams, $state, sections, projects,
     sections.getStudentsHoursBySectionProjectId($stateParams.sectionId, $stateParams.projectId, getStudentsHoursSuccess, getStudentsHoursFail);
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
 
-    sectionProjects.getUnapproved(unapprovedSuccess, unapprovedFail);
-
-    function unapprovedSuccess(response){
-        vm.preventGeneralLoading();
-        vm.sprojects = response.data;
-        if(vm.sprojects.length <= 0) return;
-
-        vm.sectionsProjectsLoading = false;
-    }
-
-    function unapprovedFail(response){
-        TbUtils.displayNotification('error', 'Error',
-                'Informacion correspondiente al dashboard no se pudo cargar.');
-    }
-
     function getStudentsHoursSuccess(response) {
         console.log(response);
         vm.isApproved.visible = response.data.IsApproved;
@@ -92,11 +77,7 @@ function EditHoursController($stateParams, $state, sections, projects,
         vm.projectName = TbUtils.toTitleCase(response.data.Name);
         vm.description = TbUtils.toTitleCase(response.data.Description);
     }
-
-    function getProjectsBySection(sectionId) {
-        sections.getProjects(sectionId, getProjectSuccess, getProjectFail);
-    }
-
+    
     function getProjectFail(response) {
 
     }
