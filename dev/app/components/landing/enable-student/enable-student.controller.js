@@ -20,7 +20,7 @@ function EnableStudentController ($rootScope, TbUtils,  students) {
   }
 
   function enableStudentSuccess(response){
-    TbUtils.displayNotification('success', 'Alumno habilitado exitosamente!', 'Habilitado');
+    TbUtils.displayNotification('success', 'Revisa tu correo con el link, para activar tu cuenta.', 'Correo enviado!');
     vm.submitting = false;
     TbUtils.go('landing.login');
   }
