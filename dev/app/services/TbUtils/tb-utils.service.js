@@ -15,6 +15,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         confirm: confirm,
         prompt: prompt,
         customDialog: customDialog,
+        sortBy: sortBy,
         go: go
     };
     var vm = this;
@@ -128,6 +129,19 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
             parent: angular.element(document.body)
         }
         $mdDialog.show(options).then(callback);
+    }
+
+    function sortBy(array, property) {
+        array.sort(function(a, b) {
+            if (a[property] > b[property]) {
+                return 1;
+            }
+            if (a[property] < b[property]) {
+                return -1;
+            }
+            return 0;
+        });
+        return array;
     }
 
     function go (state, params) {
