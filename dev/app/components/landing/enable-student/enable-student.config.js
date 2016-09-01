@@ -13,7 +13,7 @@ function config ($stateProvider) {
 
 let onStateEnter = [ '$rootScope',
 	function(rootScope){
-		rootScope.viewTitle  = "Habilitar Estudiante";
+		rootScope.viewTitle  = "Registrar Estudiante";
     	rootScope.viewStyles = "landing enable-student";
     }
 ];
