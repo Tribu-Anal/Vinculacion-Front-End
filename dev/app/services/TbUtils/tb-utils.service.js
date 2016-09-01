@@ -11,6 +11,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         setModalParams: setModalParams,
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
+        queryList: queryList,
         confirm: confirm,
         prompt: prompt,
         customDialog: customDialog,
@@ -45,6 +46,19 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     function initArrayToValue(array, value, size) {
         for (let i = 0; i < size; i++)
             array.push(value);
+    }
+
+    function queryList (list, key, where) {
+        if (!list || !key) return [];
+
+        let newList = [];
+
+        for (item of list) {
+            if (typeof item === 'object' && item[key] === where)
+                newList.push(item);
+        }
+
+        return newList;
     }
 
     function removeItemFromList(listItem, list) {
