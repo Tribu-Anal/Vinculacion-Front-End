@@ -1,52 +1,46 @@
 tableContent.$inject = ['TbUtils'];
 
 function tableContent (TbUtils) {
-    var service = {
-        createAnInputElement: createAnInputElement,
-        createALableElement: createALableElement,
-        createAButtonElement: createAButtonElement
+    const VALID_TYPES = [ 'label', 'input', 'button', 'icon' ];
+    const EVAL_SKIP_PROPS = [ 'onClick' ];
+
+    const service = {
+        createNewElement: createNewElement
     };
 
     return service;
 
-    function createAnInputElement(inputProperties) {
-        let element = {
-            typeObject: 'input',
-            properties: {
-                value: inputProperties.value,
-                type: inputProperties.type,
-                min: inputProperties.min,
-                max: inputProperties.max
+    function createNewElement(type, props, data) {
+        const invalid = !VALID_TYPES.includes(type);
+
+        const element = {
+            type: invalid ? 'label' : type,
+            props: invalid ? { text: 'Invalid Element Type' }  : evalProps(props, data)
+        };
+
+        return element;
+    }
+
+    function evalProps (props, data) {
+        let evaluatedProps = {};
+
+        if (typeof props === 'function')
+            evaluatedProps = props(data);
+
+        else {
+            for (const key in props) {
+                const prop = props[key];
+
+                if (typeof prop === 'function' && !EVAL_SKIP_PROPS.includes(key))
+                    evaluatedProps[key] = prop(data);
+                else
+                    evaluatedProps[key] = prop;
             }
         }
 
-        return element;
-    };
+        return evaluatedProps;
+    }
 
-    function createALableElement(modelValue) {
-        let element = {
-            typeObject: 'label',
-            properties: {
-                value: TbUtils.toTitleCase(modelValue),
-                click: TbUtils.preventGeneralLoading
-            }
-        }
-
-        return element;
-    };
-
-    function createAButtonElement(objectButton) {
-        let element = {
-            typeObject: 'button',
-            properties: {
-                onClick: objectButton.onClick,
-                icon: objectButton.icon,
-                tooltip: objectButton.tooltip
-            }
-        }
-
-        return element;
-    };
 }
 
 module.exports = { name: 'tableContent', srvc: tableContent };

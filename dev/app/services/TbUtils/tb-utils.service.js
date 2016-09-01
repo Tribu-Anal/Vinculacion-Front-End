@@ -1,6 +1,6 @@
-TbUtils.$inject = ['toaster', '$rootScope', '$mdDialog'];
+TbUtils.$inject = ['toaster', '$rootScope', '$mdDialog', '$state'];
 
-function TbUtils(toaster, $rootScope, $mdDialog) {
+function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     var service = {
         fillListWithResponseData: fillListWithResponseData,
         displayNotification: displayNotification,
@@ -8,13 +8,15 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
         initArrayToValue: initArrayToValue,
         removeItemFromList: removeItemFromList,
         showErrorMessage: showErrorMessage,
-        getTable: getTable,
         setModalParams: setModalParams,
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
+        queryList: queryList,
         confirm: confirm,
         prompt: prompt,
-        customDialog: customDialog
+        customDialog: customDialog,
+        sortBy: sortBy,
+        go: go
     };
     var vm = this;
     vm.ModalParams;
@@ -46,6 +48,19 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
             array.push(value);
     }
 
+    function queryList (list, key, where) {
+        if (!list || !key) return [];
+
+        let newList = [];
+
+        for (item of list) {
+            if (typeof item === 'object' && item[key] === where)
+                newList.push(item);
+        }
+
+        return newList;
+    }
+
     function removeItemFromList(listItem, list) {
         let indexOfItem = list.indexOf(listItem);
         list.splice(indexOfItem, 1);
@@ -64,16 +79,6 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
             return false;
 
         return true;
-    }
-
-    function getTable(headers) {
-        let table = {
-            headers: headers,
-            body: [],
-            actions: false
-        }
-
-        return table;
     }
 
     function setModalParams(params) {
@@ -124,6 +129,26 @@ function TbUtils(toaster, $rootScope, $mdDialog) {
             parent: angular.element(document.body)
         }
         $mdDialog.show(options).then(callback);
+    }
+
+    function sortBy(array, property) {
+        array.sort(function(a, b) {
+            if (a[property] > b[property]) {
+                return 1;
+            }
+            if (a[property] < b[property]) {
+                return -1;
+            }
+            return 0;
+        });
+        return array;
+    }
+
+    function go (state, params) {
+        if (state.includes('main'))
+            preventGeneralLoading();
+        
+        $state.go(state, params);
     }
 
 }

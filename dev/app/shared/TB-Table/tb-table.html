@@ -1,32 +1,40 @@
 <table class="responstable">
-	<tr>
-		<th ng-repeat="header in headers">{{header}}</th>
-		<th ng-if="actions"></th>
+	<tr><th ng-repeat="header in table.headers">{{header}}</th></tr>
+
+	<tr class="tb-body" ng-repeat="row in table.rows" ng-click="onRowClick(row.data)">
+		<td ng-repeat="elem in row.elements">
+
+			<!-- LABEL ELEMENT -->
+
+			<label ng-if="elem.type === 'label'">{{elem.props.text}}</label>
+
+			<!-- INPUT ELEMENT -->
+
+			<input ng-if="elem.type === 'input'" 
+			       type="{{elem.props.type}}" 
+			       class="tb-input-wrapper" 
+			       ng-disabled="elem.props.inputDisable" 
+			       ng-model="elem.props.model" 
+			       min="{{elem.props.min}}" max="{{elem.props.max}}">
+			<p>{{elem.props.disable}}</p>
+
+			<!-- BUTTON ELEMENT -->
+
+			<button ng-if="elem.type === 'button'"  
+			        class="actions-button tb-tooltip" 
+			        style="float: none;" 
+			        ng-click="elem.props.onClick(row.data)">
+				<span class="{{elem.props.icon}}" aria-hidden="true"></span>
+				<span ng-show="tooltip" class="tooltiptext">{{elem.props.tooltip}}</span>
+			</button>
+
+			<!-- ICON ELEMENT -->
+
+			<i ng-if="elem.type === 'icon'" 
+			   class="{{elem.props.iconClass}}" 
+			   style="font-size: {{elem.props.fontSize}}">
+			</i>
+		</td>
 	</tr>
 
-	<tr ng-init="Index = $index" ng-click="vm.onRowClick(row)" ng-repeat="row in body" class="tb-body">
-		<td ng-repeat="content in row.content">
-		  <label ng-if="content.typeObject == 'label'">
-		  		{{content.properties.value}}  
-  		  </label>
-  		  <input class="tb-input-wrapper" ng-if="content.typeObject == 'input'" ng-disabled="inputDisable"
-		  	type="{{content.properties.type}}" 
-  		  	ng-model="content.properties.value" min="{{content.properties.min}}" max="{{content.properties.max}}">
-  		  	<p ng-if="content.typeObject == 'input'">{{content.properties.disable}}</p>
-			<button class="actions-button tb-tooltip" style="float:none;" ng-if="content.typeObject == 'button'" 
-				ng-click="vm.onBtnClick(row)" ng-blur="content.properties.onClick($parent.$parent.$parent.body[Index])">
-				<span class="glyphicon {{content.properties.icon}}" aria-hidden="true" ></span>
-				<span ng-show="content.properties.tooltip" class="tooltiptext">{{content.properties.tooltip}}</span>
-			</button>	  	
-		</td>
-		<td ng-if="actions">
-			<button class="actions-button tb-tooltip" ng-repeat="action in row.actions" ng-click="vm.loseFocus()" ng-blur="action.onClick($parent.$index)">
-				<span class="glyphicon {{action.icon}}"></span>
-				<span class="tooltiptext">{{action.tooltip}}</span>
-			</button>	
-		</td>
-		<td ng-if="row.textInputs" ng-repeat="input in row.textInputs" >
-			<input type="{{input.type}}" ng-model="input.value">
-		</td>
-	</tr>
 </table>

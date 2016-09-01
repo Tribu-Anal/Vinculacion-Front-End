@@ -17,6 +17,10 @@
   background-color: #EAF3F3;
 }
 
+.responstable tr:hover {
+  background-color: rgba(0, 140, 186, 0.44);
+}
+
 .responstable th {
   display: none;
   border: 1px solid #FFF;
@@ -115,6 +119,7 @@ body {
     margin-right: auto;
     float: left;
 }
+
 .tb-body .actions-button .icon {
   font-size: 25px;
   margin: 5px 5px 5px 7px;

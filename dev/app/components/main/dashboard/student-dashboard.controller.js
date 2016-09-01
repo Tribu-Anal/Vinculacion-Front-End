@@ -3,11 +3,6 @@ StudentDashboardController.$inject = ['$rootScope', '$state',
 
 function StudentDashboardController ($rootScope, $state, TbUtils, tableContent,
                                       sections, filterFilter, hours, students) {
-  if($rootScope.Role !== 'Student' ){
-    $state.go('main.'+$rootScope.Role.toLowerCase()+'-dashboard');
-    return;
-  }
-
 	const vm = this;
   vm.accountId = null;
   vm.totalHours = null;
