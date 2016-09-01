@@ -11,7 +11,9 @@
             <input name="clave" ng-model="vm.password" type="password" placeholder="Clave" required/>
             </div>
             <button id="ingresar" type="submit">Ingresar</button>
+            <p class="message register">No estas registrado? <a ui-sref="landing.enable-student">Crear una cuenta </a></p>
             <tb-loading class="landing-loader main-loader" ng-show="vm.loading"></tb-loading>
-        </form> 
+        </form>
       </div>
+
 </div>
