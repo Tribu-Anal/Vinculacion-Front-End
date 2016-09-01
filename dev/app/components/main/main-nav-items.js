@@ -8,7 +8,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 			title: "INICIO", ref: 'main.'+$rootScope.Role.toLowerCase()+'-dashboard', url: '/inicio-'+$rootScope.Role.toLowerCase(),
 			icon: "glyphicon glyphicon-home",
 			active: $state.current.url.includes('/inicio-'+$rootScope.Role.toLowerCase()),
-			show: true,
+			show: $state.current.url !== '/registro-maestro/{accountId}',
 			clicked:TbUtils.preventGeneralLoading
 		},
 		{
@@ -64,7 +64,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "FINIQUITOS", ref: "main.settlement", url: '/finiquitos',
 		  	icon: "glyphicon glyphicon-list-alt",
 		  	active: $state.current.url.includes('/finiquitos'),
-		  	show: $rootScope.Role === 'Admin',
+		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 	  	
@@ -72,7 +72,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "APROBAR HORAS", ref: "main.approve-hours", url: '/aprobar-horas',
 		  	icon: "glyphicon glyphicon-check",
 		  	active: $state.current.url.includes('/aprobar-horas'),
-		  	show: $rootScope.Role === 'Admin',
+		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
