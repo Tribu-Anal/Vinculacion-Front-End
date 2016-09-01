@@ -11,9 +11,11 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         setModalParams: setModalParams,
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
+        queryList: queryList,
         confirm: confirm,
         prompt: prompt,
         customDialog: customDialog,
+        sortBy: sortBy,
         go: go
     };
     var vm = this;
@@ -44,6 +46,19 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     function initArrayToValue(array, value, size) {
         for (let i = 0; i < size; i++)
             array.push(value);
+    }
+
+    function queryList (list, key, where) {
+        if (!list || !key) return [];
+
+        let newList = [];
+
+        for (item of list) {
+            if (typeof item === 'object' && item[key] === where)
+                newList.push(item);
+        }
+
+        return newList;
     }
 
     function removeItemFromList(listItem, list) {
@@ -114,6 +129,19 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
             parent: angular.element(document.body)
         }
         $mdDialog.show(options).then(callback);
+    }
+
+    function sortBy(array, property) {
+        array.sort(function(a, b) {
+            if (a[property] > b[property]) {
+                return 1;
+            }
+            if (a[property] < b[property]) {
+                return -1;
+            }
+            return 0;
+        });
+        return array;
     }
 
     function go (state, params) {
