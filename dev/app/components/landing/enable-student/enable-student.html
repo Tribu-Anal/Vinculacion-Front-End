@@ -3,17 +3,27 @@
 <div class="row">
       <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
     <img class = "img-responsive logo" src="img/logo.png" />
-		<form name="studentForm" ng-submit="studentForm.$valid && vm.enableStudent()" class="hab-form" role="form" novalidate>
-			<h2 class="title text-center">Habilitar Estudiante</h2>
+		<form name="studentForm" ng-submit="studentForm.$valid && vm.enableStudent()" class="hab-form" role="form" autocomplete="off" novalidate>
+			<h2 class="title text-center">Registro</h2>
 			<hr class="colorgraph">
       <div class="form-group">
-				<input ng-model="vm.accountId" validation-field-required="true" validation-max-length="8" type="number" name="numcuenta" id="numcuenta" class="form-control input-lg" placeholder="Cuenta" tabindex="4" required>
+				<input ng-model="vm.accountId"
+         validation-max-length="8" type="number"
+         name="numcuenta" id="numcuenta"
+         class="form-control input-lg"
+         placeholder="Cuenta" tabindex="4"
+         value="" required>
 			</div>
 			<div class="form-group">
-				<input ng-model="vm.email" validation-field-required="true" type="email" name="email" id="email" ng-pattern='/@unitec.edu$/' class="form-control input-lg" placeholder="Correo" tabindex="4" validation-unitec-email="true" required>
+				<input ng-model="vm.email"
+        type="email" name="email" id="email"
+        ng-pattern='/@unitec.edu$/'
+        class="form-control input-lg"
+        placeholder="Correo" autocomplete="off"
+        value="" autocomplete="off" required>
 			</div>
       <div class="form-group">
-        <input ng-model="vm.password" validation-field-required="true" type="password" name="password" id="password" class="form-control input-lg" placeholder="Clave" tabindex="5" required>
+        <input value="" ng-model="vm.password" autocomplete="off" type="password" name="password" id="password" class="form-control input-lg" placeholder="Clave" tabindex="5"   required>
       </div>
 
 			<hr class="colorgraph">
@@ -24,3 +34,4 @@
 	</div>
 </div>
 </div>
+<tb-loading class="general-loader" ng-show="vm.submitting"></tb-loading>
