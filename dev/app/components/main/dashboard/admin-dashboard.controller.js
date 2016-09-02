@@ -10,8 +10,6 @@ function AdminDashboardController ($rootScope, $stateParams, sectionProjects, Tb
 	function unapprovedSuccess(response){
 		vm.preventGeneralLoading();
 		vm.sprojects = response.data;
-		if(vm.sprojects.length <= 0) return;
-
 		vm.sectionsProjectsLoading = false;
 	}
 

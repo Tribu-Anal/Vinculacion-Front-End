@@ -7,6 +7,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 			show: $state.current.url !== '/registro-maestro/{accountId}',
 			clicked:TbUtils.preventGeneralLoading
 		},
+		
 		{
 			title: "PROYECTOS", ref: "main.projects", url: '/proyectos',
 	  		icon: "glyphicon glyphicon-th-large",
@@ -14,14 +15,6 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  		show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role !== 'Student',
 	  		clicked:TbUtils.preventGeneralLoading
 	 	},
-
-	  	{
-	  		title: "REPORTES", ref: "main.reports", url: '/reportes',
-	  		icon: "glyphicon glyphicon-folder-open",
-		  	active: $state.current.url.includes('/reportes'),
-		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-			clicked: TbUtils.preventGeneralLoading
-		},
 
 	  	{
 	  		title: "SECCIONES", ref: "main.sections", url: '/secciones',
@@ -33,28 +26,12 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  	},
 
 	  	{
-		  	title: "NUEVO PROFESOR", ref: "main.newprofessor", url: '/nuevo-profesor',
-		  	icon: "glyphicon glyphicon-pencil",
-		  	active: $state.current.url.includes('/nuevo-profesor'),
-		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-		  	clicked: TbUtils.preventGeneralLoading
-	  	},
-
-	  	{
-	  		title: "IMPORTAR ALUMNOS", ref: "main.import-students", url: '/importar-alumnos',
-	  		icon: "glyphicon glyphicon-upload",
-	  		active: $state.current.url.includes('/importar-alumnos'),
-	  		show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-	  		clicked: TbUtils.preventGeneralLoading
-	  	},
-
-	  	{
 		  	title: "CLASES", ref: "main.classes", url: '/clases',
 		  	icon: "glyphicon glyphicon-book",
 		  	active: $state.current.url.includes('/clases'),
 		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-		  	clicked: TbUtils.preventGeneralLoading
-	  	},
+			clicked: TbUtils.preventGeneralLoading
+		},
 
 	  	{
 		  	title: "FINIQUITOS", ref: "main.settlement", url: '/finiquitos',
