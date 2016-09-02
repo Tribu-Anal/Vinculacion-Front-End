@@ -12,7 +12,7 @@ function ClassesController (scope, TbUtils, classes, filterFilter) {
 	vm.tableSchema = require('../../../table-schemas/classes-table-schema');
 
 	vm.loadMore = loadMore;
-    vm.editClass = _class => { TbUtils.go('main.edit-class', { classId: _class.Id }); };
+    vm.editClass = _class => { TbUtils.go('main.edit-class', { _class: btoa(JSON.stringify(_class)) }); };
 	vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
 	vm.classesLoading = true;
 	vm.loadingMore = false;

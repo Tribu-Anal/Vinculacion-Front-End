@@ -1,8 +1,6 @@
-ClassFormController.$inject = ['$rootScope', '$state', 'TbUtils', 'classes'];
+NewClassController.$inject = [ 'TbUtils', 'classes' ];
 
-function ClassFormController ($rootScope, $state, TbUtils, classes) {
-	if ($rootScope.Role !== 'Admin') $state.go('main.' + $rootScope.Role.toLowerCase() + "-dashboard");
-
+function NewClassController (TbUtils, classes) {
 	const vm = this;
 
 	vm.class = {
@@ -10,6 +8,7 @@ function ClassFormController ($rootScope, $state, TbUtils, classes) {
 		Code: ''
 	};
 
+	vm.formTitle = 'Crear Clase';
 	vm.submitting = false;
 	vm.submit = submit;
 
@@ -20,8 +19,7 @@ function ClassFormController ($rootScope, $state, TbUtils, classes) {
 
 	function postSuccess() {
 		TbUtils.displayNotification('success', 'Exito!', 'La clase ha sido creada!');
-		TbUtils.preventGeneralLoading();
-		$state.go('main.projects');
+		TbUtils.go('main.classes');
 	}
 
 	function postFail(response) {
@@ -30,4 +28,4 @@ function ClassFormController ($rootScope, $state, TbUtils, classes) {
 	}
 }
 
-module.exports = { name: 'ClassFormController', ctrl: ClassFormController };
+module.exports = { name: 'NewClassController', ctrl: NewClassController };
