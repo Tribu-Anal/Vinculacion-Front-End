@@ -1,0 +1,15 @@
+<tb-search-field></tb-search-field>
+<div class="row" ng-if="vm.classes.length > 0">
+	<tb-table class="col-md-12" 
+	          schema="vm.tableSchema" 
+	          model="vm.classes" 
+	          style="margin-bottom: 40px;">
+	</tb-table>
+</div>
+<div style="display: flex; justify-content: center;" ng-hide="vm.searching">
+	<div class="load-more" style="margin-bottom: 15px;" ng-click="vm.loadMore()">
+		Cargar Mas
+	</div>
+</div>
+<tb-loading class="main-loader" ng-show="vm.classesLoading"></tb-loading>
+<tb-round-btn ui-sref="main.newclass"  ng-click="vm.preventGeneralLoading()">+</tb-round-btn>
