@@ -9,7 +9,8 @@ function redirect (state, toState, role, loggedIn, ev) {
 		case 'main.reports':
 		case 'main.settlement':
 		case 'main.admin-dashboard':
-		case 'main.newclass':
+		case 'main.new-class':
+		case 'main.edit-class':
 		case 'main.approve-hours':
 		case 'main.classes':
 			if (!loggedIn)
