@@ -2,7 +2,8 @@
 <div class="row" ng-if="vm.classes.length > 0">
 	<tb-table class="col-md-12" 
 	          schema="vm.tableSchema" 
-	          model="vm.classes" 
+	          model="vm.classes"
+	          on-row-click="vm.editClass"
 	          style="margin-bottom: 40px;">
 	</tb-table>
 </div>
