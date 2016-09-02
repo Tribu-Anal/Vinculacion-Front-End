@@ -11,6 +11,7 @@ function redirect (state, toState, role, loggedIn, ev) {
 		case 'main.admin-dashboard':
 		case 'main.newclass':
 		case 'main.approve-hours':
+		case 'main.classes':
 			if (!loggedIn)
 				goToLanding(state, ev);
 

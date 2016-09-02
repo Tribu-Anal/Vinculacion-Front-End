@@ -7,6 +7,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 			show: $state.current.url !== '/registro-maestro/{accountId}',
 			clicked:TbUtils.preventGeneralLoading
 		},
+		
 		{
 			title: "PROYECTOS", ref: "main.projects", url: '/proyectos',
 	  		icon: "glyphicon glyphicon-th-large",
@@ -25,9 +26,9 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  	},
 
 	  	{
-	  		title: "REPORTES", ref: "main.reports", url: '/reportes',
-	  		icon: "glyphicon glyphicon-folder-open",
-		  	active: $state.current.url.includes('/reportes'),
+		  	title: "CLASES", ref: "main.classes", url: '/clases',
+		  	icon: "glyphicon glyphicon-book",
+		  	active: $state.current.url.includes('/clases'),
 		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
 			clicked: TbUtils.preventGeneralLoading
 		},
