@@ -16,14 +16,6 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	 	},
 
 	  	{
-	  		title: "REPORTES", ref: "main.reports", url: '/reportes',
-	  		icon: "glyphicon glyphicon-folder-open",
-		  	active: $state.current.url.includes('/reportes'),
-		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-			clicked: TbUtils.preventGeneralLoading
-		},
-
-	  	{
 	  		title: "SECCIONES", ref: "main.sections", url: '/secciones',
 		  	icon: "glyphicon glyphicon-th-list",
 		  	active: $state.current.url.includes('/secciones'),
@@ -33,28 +25,12 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  	},
 
 	  	{
-		  	title: "NUEVO PROFESOR", ref: "main.newprofessor", url: '/nuevo-profesor',
-		  	icon: "glyphicon glyphicon-pencil",
-		  	active: $state.current.url.includes('/nuevo-profesor'),
+	  		title: "REPORTES", ref: "main.reports", url: '/reportes',
+	  		icon: "glyphicon glyphicon-folder-open",
+		  	active: $state.current.url.includes('/reportes'),
 		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-		  	clicked: TbUtils.preventGeneralLoading
-	  	},
-
-	  	{
-	  		title: "IMPORTAR ALUMNOS", ref: "main.import-students", url: '/importar-alumnos',
-	  		icon: "glyphicon glyphicon-upload",
-	  		active: $state.current.url.includes('/importar-alumnos'),
-	  		show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-	  		clicked: TbUtils.preventGeneralLoading
-	  	},
-
-	  	{
-		  	title: "NUEVA CLASE", ref: "main.newclass", url: '/nueva-clase',
-		  	icon: "glyphicon glyphicon-book",
-		  	active: $state.current.url.includes('/nueva-clase'),
-		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
-		  	clicked: TbUtils.preventGeneralLoading
-	  	},
+			clicked: TbUtils.preventGeneralLoading
+		},
 
 	  	{
 		  	title: "FINIQUITOS", ref: "main.settlement", url: '/finiquitos',
