@@ -1,24 +1,22 @@
-ClassesController.$inject = [ '$scope', 'TbUtils', 'classes', 'filterFilter' ];
+ClassesController.$inject = [ 'TbUtils', 'classes' ];
 
-function ClassesController (scope, TbUtils, classes, filterFilter) {
+function ClassesController (TbUtils, classes) {
 	const vm = this,
-	      pageSize = 10,
-          minCharsToSearch = 3;
+	      pageSize = 10;
 
-    let page = 0,
-        classesTemp = [];
+    let page = 0;
 
 	vm.classes = [];
 	vm.tableSchema = require('../../../table-schemas/classes-table-schema');
+
+    vm.classObj = term => { return { Name: term }; };
+    vm.searchResults = [];
 
 	vm.loadMore = loadMore;
     vm.editClass = _class => { TbUtils.go('main.edit-class', { _class: btoa(JSON.stringify(_class)) }); };
 	vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
 	vm.classesLoading = true;
 	vm.loadingMore = false;
-	vm.searching = false;
-
-	scope.$watch('search.data', search);
 
 	loadMore();
 
@@ -33,7 +31,6 @@ function ClassesController (scope, TbUtils, classes, filterFilter) {
     	page++;
 
     	TbUtils.fillListWithResponseData(response.data, vm.classes);
-    	classesTemp = vm.classes;
 
     	vm.loadingMore = false;
     	vm.classesLoading = false;
@@ -43,16 +40,6 @@ function ClassesController (scope, TbUtils, classes, filterFilter) {
     	TbUtils.showErrorMessage('error', response, 'No se pudo cargar mas clases.', 'Error');
     	vm.loadingMore = false;
     	vm.classesLoading = false;
-    }
-
-    function search (term) {
-        if (term && term.length >= minCharsToSearch) {
-            vm.searching = true;
-            vm.classes = filterFilter(vm.classes, { Name: term });
-        } else {
-            vm.classes = classesTemp;
-            vm.searching = false;
-        }
     }
 
 }

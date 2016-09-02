@@ -1,13 +1,13 @@
-<tb-search-field></tb-search-field>
+<tb-search-field obj="vm.classObj" results="vm.searchResults" data="vm.classes" auto="true"></tb-search-field>
 <div class="row" ng-if="vm.classes.length > 0">
 	<tb-table class="col-md-12" 
 	          schema="vm.tableSchema" 
-	          model="vm.classes"
+	          model="vm.searchResults"
 	          on-row-click="vm.editClass"
 	          style="margin-bottom: 40px;">
 	</tb-table>
 </div>
-<div style="display: flex; justify-content: center;" ng-hide="vm.searching">
+<div style="display: flex; justify-content: center;" ng-hide="vm.searchResults.length !== vm.classes.length">
 	<div class="load-more" style="margin-bottom: 15px;" ng-click="vm.loadMore()">
 		Cargar Mas
 	</div>
