@@ -1,4 +1,4 @@
-sections.$inject = ['$http'];
+sections.$inject = [ '$http' ];
 
 function sections($http) {
     var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Sections';
@@ -17,15 +17,16 @@ function sections($http) {
         getCurrentSections: getCurrentPeriodSections,
         getProjects: getProjects,
         getSectionsByProject: getSectionsByProject,
-        getStudentsHoursBySectionProjectId: getStudentsHoursBySectionProjectId  
+        getStudentsHoursBySectionProjectId: getStudentsHoursBySectionProjectId
     };
 
     return service;
 
-    function getSections(successCallback, errorCallback) {
+    function getSections(success, error, fin) {
         $http.get(url)
-            .then(successCallback)
-            .catch(errorCallback);
+            .then(success)
+            .catch(error)
+            .finally(fin);
     }
 
     function postSection(data, successCallback, errorCallback) {
@@ -61,9 +62,11 @@ function sections($http) {
             .catch(errorCallback);
     }
 
-    function getSectionsWithPagination(page, size, successCallback, errorCallback) {
-        $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc').then(successCallback)
-            .catch(errorCallback);
+    function getSectionsWithPagination(page, size, success, error, fin) {
+        $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc')
+            .then(success)
+            .catch(error)
+            .finally(fin);
     }
 
     function getSectionCount(successCallback, errorCallback) {
@@ -91,9 +94,11 @@ function sections($http) {
             .catch(errorCallback);
     }
 
-    function getCurrentPeriodSections(getCurrentPeriodSectionsSuccess, getCurrentPeriodSectionsFail) {
-        $http.get(url + '/CurrentPeriodSections').then(getCurrentPeriodSectionsSuccess)
-            .catch(getCurrentPeriodSectionsFail);
+    function getCurrentPeriodSections (success, failure, _finally) {
+        $http.get(url + '/CurrentPeriodSections')
+            .then(success)
+            .catch(failure)
+            .finally(_finally);
     }
 
     function getStudentsHoursBySectionProjectId(sectionId, projectId, successCallback, errorCallback) {
