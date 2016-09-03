@@ -11,6 +11,8 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         setModalParams: setModalParams,
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
+        getAndLoad: getAndLoad,
+        deleteAndNotify: deleteAndNotify,
         queryList: queryList,
         confirm: confirm,
         prompt: prompt,
@@ -150,6 +152,23 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
             preventGeneralLoading();
         
         $state.go(state, params);
+    }
+
+    function getAndLoad (get, list, fin, page, size) {
+        if (page && size)
+            get(page, size, resp => { fillListWithResponseData(resp.data, list); },
+                            resp => { showErrorMessage(resp.data); },
+                            fin);
+        else
+            get(resp => { fillListWithResponseData(resp.data, list); },
+                resp => { showErrorMessage(resp.data); },
+                fin);
+    }
+
+    function deleteAndNotify (_delete, data, msg, fin) {
+        _delete(data, resp => { displayNotification('success', 'Exito', msg); },
+                      resp => { showErrorMessage(resp.data); },
+                      fin);
     }
 
 }
