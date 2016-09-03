@@ -1,5 +1,5 @@
-const config     = require('./sections.config'),
-	  controller = require('./sections.controller');
+const  config     = require('./sections.config'),
+	   controller = require('./sections.controller');
 
 const moduleName   = 'sections.component',
       dependencies = [];

@@ -4,17 +4,17 @@ function config ($stateProvider) {
 
 	$stateProvider
 		.state('main.sections', {
-            url: '/secciones',
-            templateUrl: 'templates/components/main/sections/sections.html',
-            controller: "SectionsController as vm",
+			url: '/secciones',
+			templateUrl: 'templates/components/main/sections/sections.html',
+			controller: "SectionsController as vm",
 			onEnter: onStateEnter
 		});
 }
 
-let onStateEnter = [ '$rootScope', 
-	function (rootScope) { 
+const onStateEnter = [ '$rootScope', 
+	rootScope => { 
 		rootScope.viewTitle  = "Vinculacion | Secciones";
-    	rootScope.viewStyles = "main sections";
+    	rootScope.viewStyles = "main";
     }
 ];
 
