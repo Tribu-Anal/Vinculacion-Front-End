@@ -66,19 +66,12 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         list.splice(indexOfItem, 1);
     }
 
-    function showErrorMessage(type, response, customMessage, customTitle) {
-        if (validateApiErrorMessageExists(response))
-            displayNotification(type, response.statusText, response.data);
-
+    function showErrorMessage (error) {
+        if (error && error.Title && error.Message)
+            displayNotification('error', error.Title, error.Message);
         else
-            displayNotification(type, customTitle, customMessage);
-    }
-
-    function validateApiErrorMessageExists(response) {
-        if (!response || !response.data)
-            return false;
-
-        return true;
+            displayNotification('error', 'Error', 
+                'Ha ocurrido un error en el servidor. Intentalo de nuevo.');
     }
 
     function setModalParams(params) {

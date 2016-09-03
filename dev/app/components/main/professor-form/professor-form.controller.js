@@ -27,7 +27,7 @@ function ProfessorFormController($rootScope, $state, professors, TbUtils) {
     }
 
     function registerProfessorFail(response) {
-        TbUtils.showErrorMessage('error', response, 'No se ha podido registrar al profesor', 'Error!');
+        TbUtils.showErrorMessage(response.data);
     }
 }
 

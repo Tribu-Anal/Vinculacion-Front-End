@@ -51,10 +51,7 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
     }
 
     function LoginFail(response) {
-        TbUtils.showErrorMessage('error', response,
-                                 'La cuenta ingresada no tiene privilegios de acceso',
-                                 'Falla autorizacion');
-
+        TbUtils.showErrorMessage(response.data);
         vm.loading = false;
     }
 }

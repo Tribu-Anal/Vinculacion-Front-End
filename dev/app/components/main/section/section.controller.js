@@ -102,8 +102,7 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function addStudentFail(response) {
-        TbUtils.showErrorMessage('error', response,
-            'No se ha podido agregar el estudiante', 'Error');
+        TbUtils.showErrorMessage(response.data);
     }
 
     function getStudentsSuccess(response) {
@@ -113,8 +112,7 @@ function SectionController($rootScope, $stateParams, $state,
 
     function getStudentsFail(response) {
         vm.studentsLoading = false;
-        TbUtils.showErrorMessage('error', response.data, 'Error',
-            'No se ha podido obtener los estudiantes de la seccion.');
+        TbUtils.showErrorMessage(response.data);
     }
 
     function deleteStudent(student) {
@@ -132,8 +130,7 @@ function SectionController($rootScope, $stateParams, $state,
     }
 
     function removeStudentFail(response) {
-        TbUtils.showErrorMessage('error', response.data,
-            'No se ha podido eliminar al estudiante', 'Error');
+        TbUtils.showErrorMessage(response.data);
     }
 
     function updateSectionSuccess(response) {
@@ -149,13 +146,11 @@ function SectionController($rootScope, $stateParams, $state,
 
     function getSectionFail(response) {
         vm.sectionLoading = false;
-        TbUtils.showErrorMessage('error', response.data, 'Error',
-            'No se ha podido obtener las secciones.');
+        TbUtils.showErrorMessage(response.data);
     }
 
     function updateSectionFail(response) {
-        TbUtils.showErrorMessage('error', response.data,
-            'No se ha podido editar la seccion', 'Error');
+        TbUtils.showErrorMessage(response.data);
     }
 
     /*
