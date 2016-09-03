@@ -118,7 +118,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     }
 
     function reload () {
-        if (state.includes('main'))
+        if ($state.includes('main'))
             preventGeneralLoading();
         
         $state.reload();
