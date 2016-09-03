@@ -13,6 +13,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         toTitleCase: toTitleCase,
         getAndLoad: getAndLoad,
         deleteAndNotify: deleteAndNotify,
+        getListCopy: getListCopy,
         queryList: queryList,
         confirm: confirm,
         prompt: prompt,
@@ -132,6 +133,15 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
             parent: angular.element(document.body)
         }
         $mdDialog.show(options).then(callback);
+    }
+
+    function getListCopy (list) {
+        let cpy = [];
+
+        for (e of list)
+            cpy.push(e);
+
+        return cpy;
     }
 
     function sortBy(array, property) {
