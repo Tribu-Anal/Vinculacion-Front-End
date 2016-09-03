@@ -10,7 +10,7 @@ function {{properCase name}}Controller (TbUtils, {{camelCase service}}) {
     vm.tableSchema = require('../../../table-schemas/{{camelCase schemaName}}-table-schema'){{#if delete}}(confirmDelete){{/if}};
 
     vm.pageSize = {{pageSize}};
-    vm.get = {{camelCase service}}.getAndLoad;
+    vm.get = {{camelCase service}}.getWithPagination; // Modify this to set the pagination API call you need
     vm.hideLoadBtn = () => vm.{{camelCase modelPlural}}.length !== vm.searchResults.length;
 
     {{#if create}}vm.goToNew{{pascalCase modelSingular}} = () => { TbUtils.go('main.new-{{camelCase modelSingular}}'); };{{/if}}{{#if update}}{{#if create}}
@@ -26,12 +26,15 @@ function {{properCase name}}Controller (TbUtils, {{camelCase service}}) {
 
     vm.{{camelCase modelPlural}}Loading = true;{{else}}vm.{{camelCase modelPlural}}Loading = true;{{/if}}{{/if}}
 
-    {{camelCase service}}.getAndLoad(0, vm.pageSize, vm.{{camelCase modelPlural}}, () => { vm.{{camelCase modelPlural}}Loading = false; });{{#if delete}}
+    TbUtils.getAndLoad(0, vm.pageSize, vm.{{camelCase modelPlural}}, () => { vm.{{camelCase modelPlural}}Loading = false; });{{#if delete}}
+
+    // Feel free to modify the confirm text
+    // Also, set the correct DELETE API call
 
     function confirmDelete ({{camelCase modelSingular}}) {
         TbUtils.confirm('Eliminar', 'Esta seguro de eliminar este dato?', result => { 
             if (result)
-                {{camelCase service}}.deleteAndNotify({{camelCase modelSingular}}, 'El dato se elimino exitosamente.');
+                TbUtils.deleteAndNotify({{camelCase service}}.delete, {{camelCase modelSingular}}, 'El dato se elimino exitosamente.');
         });
     }{{/if}}
 
