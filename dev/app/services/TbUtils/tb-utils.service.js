@@ -155,7 +155,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     }
 
     function getAndLoad (get, list, fin, page, size) {
-        if (page && size)
+        if (typeof page === 'number' && typeof size === 'number')
             get(page, size, resp => { fillListWithResponseData(resp.data, list); },
                             resp => { showErrorMessage(resp.data); },
                             fin);

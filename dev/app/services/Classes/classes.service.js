@@ -6,8 +6,7 @@ function classes($http, TbUtils) {
     var service = {
         postClass: postClass,
         update: update,
-        get: get,
-        getAndLoad: getAndLoad
+        get: get
     };
 
     return service;
@@ -29,12 +28,6 @@ function classes($http, TbUtils) {
             .then(success)
             .catch(error)
             .finally(_finally);
-    }
-
-    function getAndLoad (page, size, list, fin) {
-        get(page, size, resp => { TbUtils.fillListWithResponseData(resp.data, list); },
-                        resp => { TbUtils.showErrorMessage(resp.data); },
-                        fin);
     }
 
 }
