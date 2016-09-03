@@ -14,6 +14,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         queryList: queryList,
         confirm: confirm,
         prompt: prompt,
+        reload: reload,
         customDialog: customDialog,
         sortBy: sortBy,
         go: go
@@ -112,6 +113,13 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
             .cancel('Cancelar');
 
         $mdDialog.show(prompt).then(callback);
+    }
+
+    function reload () {
+        if (state.includes('main'))
+            preventGeneralLoading();
+        
+        $state.reload();
     }
 
     function customDialog(dialogController, dialogTemplateUrl, callback) {
