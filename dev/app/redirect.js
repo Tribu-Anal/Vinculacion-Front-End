@@ -5,7 +5,7 @@ function redirect (state, toState, role, loggedIn, ev) {
 		// ADMIN-ONLY STATES
 
 		case 'main.import-students':
-		case 'main.newprofessor':
+		case 'main.new-professor':
 		case 'main.reports':
 		case 'main.settlement':
 		case 'main.admin-dashboard':
@@ -34,7 +34,7 @@ function redirect (state, toState, role, loggedIn, ev) {
 		case 'main.projects':
 		case 'main.section':
 		case 'main.sections':
-		case 'main.newsection':
+		case 'main.new-section':
 			if (!loggedIn) 
 				goToLanding(state, ev);
 
