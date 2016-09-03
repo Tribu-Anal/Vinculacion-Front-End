@@ -4,7 +4,8 @@ function sectionProjects ($http) {
 	var url = 'http://fiasps.unitec.edu:' + PORT + '/api/';
 	const service = {
 		getUnapproved: getUnapproved,
-		postSectionProjects: postSectionProjects
+		postSectionProjects: postSectionProjects,
+		getSectionProject: getSectionProject
 	};
 
 	return service;
@@ -19,6 +20,12 @@ function sectionProjects ($http) {
         $http.post(url+'SectionProjects', JSON.stringify(data))
             .then(successCallback)
             .catch(errorCallback);
+    }
+
+    function getSectionProject(sectionId, projectId, successCallback, errorCallback){
+    	$http.get(url+'SectionProjects/Info/'+sectionId+'/'+projectId)
+    	.then(successCallback)
+		.catch(errorCallback);
     }
 }
 

@@ -1,9 +1,9 @@
 EditHoursController.$inject = ['$stateParams', 'sections', 'projects',
-    'TbUtils', '$rootScope', 'hours', '$mdDialog', 'students'
+    'TbUtils', '$rootScope', 'hours', '$mdDialog', 'students', 'sectionProjects'
 ];
 
 function EditHoursController($stateParams, sections, projects,
-    TbUtils, $rootScope, hours, $mdDialog, students) {
+    TbUtils, $rootScope, hours, $mdDialog, students, sectionProjects) {
     const vm = this;
 
     vm.participantsLoading = true;
@@ -16,7 +16,7 @@ function EditHoursController($stateParams, sections, projects,
     vm.evaluateProject = evaluateProject;
 
     vm.isApproved = false;
-
+    vm.cost = 0;
     vm.projectName = null;
     vm.description = null;
     vm.students = [];
@@ -30,6 +30,7 @@ function EditHoursController($stateParams, sections, projects,
                                                 getStudentsHoursFail);
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
+    sectionProjects.getSectionProject($stateParams.sectionId, $stateParams.projectId, getSectionProjectSuccess, getSectionProjectFail);
 
     function getStudentsHoursSuccess(response) {
         console.log(response);
@@ -64,6 +65,15 @@ function EditHoursController($stateParams, sections, projects,
     
     function getProjectFail(response) {
         TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los datos.');
+    }
+
+    function getSectionProjectSuccess(response){
+        vm.cost = response.data.Cost;
+        vm.description = response.data.Description;
+    }
+
+    function getSectionProjectFail(response){
+        TbUtils.displayNotification('error', 'Error', 'No existe relacion entre seccion y proyecto.');
     }
 
     function evaluateProject() {
