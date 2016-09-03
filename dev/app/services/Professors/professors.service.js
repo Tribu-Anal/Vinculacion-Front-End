@@ -6,7 +6,8 @@ function professors($http) {
     var service = {
         registerProfessor: registerProfessor,
         activateProfessor: activateProfessor,
-        getActiveProfessor: getActiveProfessor
+        getActiveProfessor: getActiveProfessor,
+        getWithPagination: getWithPagination
     };
 
     return service;
@@ -27,6 +28,14 @@ function professors($http) {
         $http.get(url + '?$filter=Id eq ' + professorId).then(successCallback)
             .catch(errorCallback);
     }
+
+    function getWithPagination (page, size, success, error, fin) {
+        $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc')
+            .then(success)
+            .catch(error)
+            .finally(fin);
+    }
+
 }
 
 module.exports = {

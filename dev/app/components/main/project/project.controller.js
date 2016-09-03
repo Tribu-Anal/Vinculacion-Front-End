@@ -43,9 +43,7 @@ function ProjectController($rootScope, $stateParams, $state, projects,
     }
 
     function getProjectFail(response) {
-        TbUtils.showErrorMessage('error', response,
-            'El proyecto deseado no existe.',
-            'Error');
+        TbUtils.showErrorMessage(response.data);
 
         TbUtils.go('main.dashboard');
 

@@ -1,7 +1,7 @@
-const  config     = require('./sections.config'),
-	   controller = require('./sections.controller');
+const  config     = require('./professors.config'),
+	   controller = require('./professors.controller');
 
-const moduleName   = 'sections.component',
+const moduleName   = 'professors.component',
       dependencies = [];
 
 angular.module(moduleName, dependencies)

@@ -32,9 +32,7 @@ function AddProjectsController($scope, _close, TbUtils, projects, filterFilter, 
     }
 
     function getProjectsFail(response) {
-        TbUtils.showErrorMessage('error', response,
-            'No se ha podido obtener los proyectos deseados.',
-            'Error');
+        TbUtils.showErrorMessage(response.data);
 
         vm.projectsLoading = false;
     }

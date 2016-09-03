@@ -1,83 +1,24 @@
-SectionsController.$inject = [ '$rootScope', '$scope', '$state',
-                               'TbUtils', 'sections', 'filterFilter' ];
+SectionsController.$inject = [ 'TbUtils', 'sections' ];
 
-function SectionsController($rootScope, $scope, $state,
-                            TbUtils, sections, filterFilter) {
+function SectionsController (TbUtils, sections) {
+	const vm = this;
 
-    var vm = this;
+    vm.searchResults = []   ;
+    vm.sectionObj = term => { return { Class: { Name: term } }; };
 
-    vm.limitInLettersToSearch = 3;
-
-    vm.sectionsLoading = true;
-    vm.sectionsTable = null;
     vm.sections = [];
-    vm.sectionsTableSchema = require('../../../table-schemas/ext-sections-table-schema');
+    vm.tableSchema = require('../../../table-schemas/ext-sections-table-schema');
     vm.goToSection = section => { TbUtils.go('main.section', { sectionId: section.Id }); };
-    vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
 
-    vm.sectionsTemp = [];
+    vm.pageSize = 10;
+    vm.get = sections.getSectionsWithPagination;
+    vm.hideLoadBtn = () => vm.sections.length !== vm.searchResults.length;
 
-    vm.options = {
-        startingPage: 1,
-        pageSize: 10
-    };
+    vm.goToNewSection = () => { TbUtils.go('main.new-section'); };
+    vm.sectionsLoading = true;
 
-    vm.loadMore = loadMore;
-    vm.loadingMore = false;
-
-    sections.getCurrentPeriodSections(getCPSectionsSuccess, getCPSectionsFailure);
-
-    $scope.$watch('search.data', search);
-
-    function getCPSectionsSuccess(response) {
-        vm.options.pageSize = response.data.length;
-        vm.sectionsTemp = vm.sections = response.data;
-        vm.sectionsLoading = false;
-    }
-
-    function getCPSectionsFailure(response) {
-        TbUtils.displayNotification('Error', 'Error', 'No se pudieron cargar los proyectos.');
-    }
-
-    function loadMore() {
-        if (vm.loadingMore) return;
-
-        vm.loadingMore = true;
-        sections.getSectionsWithPagination(vm.options.startingPage,
-            vm.options.pageSize, getMoreSectionsSuccess, getMoreSectionsFail);
-    }
-
-    function getMoreSectionsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.sections);
-        vm.sectionsTemp = vm.sections;
-        vm.loadingMore = false;
-        vm.options.startingPage++;
-    }
-
-    function getMoreSectionsFail(response) {
-        TbUtils.displayNotification('Error', 'Error', 'No se pudieron cargar mas proyectos.');
-        vm.loadingMore = false;
-    }
-
-    function search (term) {
-        let obj = {
-            Class: {
-                Name: term
-            }
-        };
-
-        if (term && term.length >= vm.limitInLettersToSearch) {
-            vm.searching = true;
-            vm.sections = filterFilter(vm.sections, obj);
-        } else {
-            vm.sections = vm.sectionsTemp;
-            vm.searching = false;
-        }
-    }
+    TbUtils.getAndLoad(sections.getCurrentPeriodSections, vm.sections, () => { vm.sectionsLoading = false; });
 
 }
 
-module.exports = {
-    name: 'SectionsController',
-    ctrl: SectionsController
-};
+module.exports = { name: 'SectionsController', ctrl: SectionsController };

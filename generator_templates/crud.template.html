@@ -1,0 +1,17 @@
+<tb-search-field obj="vm.{{camelCase modelSingular}}Obj" results="vm.searchResults" data="vm.{{camelCase modelPlural}}" auto="true"></tb-search-field>
+<div class="row" ng-if="vm.{{camelCase modelPlural}}.length > 0">
+	<tb-table class="col-md-12" 
+	          schema="vm.tableSchema" 
+	          model="vm.searchResults"{{#if update}}
+	          on-row-click="vm.edit{{pascalCase modelSingular}}"{{/if}}
+	          style="margin-bottom: 40px;">
+	</tb-table>
+</div>
+<tb-load-more-btn start-page="1" 
+                  page-size="vm.pageSize" 
+                  model="vm.{{camelCase modelPlural}}" 
+                  get="vm.get"
+                  ng-hide="vm.hideLoadBtn()">
+</tb-load-more-btn>
+<tb-loading class="main-loader" ng-show="vm.{{camelCase modelPlural}}Loading"></tb-loading>
+{{#if create}}<tb-round-btn ng-click="vm.goToNew{{pascalCase modelSingular}}()">+</tb-round-btn>{{/if}}

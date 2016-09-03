@@ -1,0 +1,17 @@
+<tb-search-field obj="vm.professorObj" results="vm.searchResults" data="vm.professors" auto="true"></tb-search-field>
+<div class="row" ng-if="vm.professors.length > 0">
+	<tb-table class="col-md-12" 
+	          schema="vm.tableSchema" 
+	          model="vm.searchResults"
+	          on-row-click="vm.editProfessor"
+	          style="margin-bottom: 40px;">
+	</tb-table>
+</div>
+<tb-load-more-btn start-page="1" 
+                  page-size="vm.pageSize" 
+                  model="vm.professors" 
+                  get="vm.get"
+                  ng-hide="vm.hideLoadBtn()">
+</tb-load-more-btn>
+<tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
+<tb-round-btn ng-click="vm.goToNewProfessor()">+</tb-round-btn>

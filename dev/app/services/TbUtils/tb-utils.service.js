@@ -11,9 +11,12 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         setModalParams: setModalParams,
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
+        getAndLoad: getAndLoad,
+        deleteAndNotify: deleteAndNotify,
         queryList: queryList,
         confirm: confirm,
         prompt: prompt,
+        reload: reload,
         customDialog: customDialog,
         sortBy: sortBy,
         go: go
@@ -66,19 +69,12 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         list.splice(indexOfItem, 1);
     }
 
-    function showErrorMessage(type, response, customMessage, customTitle) {
-        if (validateApiErrorMessageExists(response))
-            displayNotification(type, response.statusText, response.data);
-
+    function showErrorMessage (error) {
+        if (error && error.Title && error.Message)
+            displayNotification('error', error.Title, error.Message);
         else
-            displayNotification(type, customTitle, customMessage);
-    }
-
-    function validateApiErrorMessageExists(response) {
-        if (!response || !response.data)
-            return false;
-
-        return true;
+            displayNotification('error', 'Error', 
+                'Ha ocurrido un error en el servidor. Intentalo de nuevo.');
     }
 
     function setModalParams(params) {
@@ -121,6 +117,13 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         $mdDialog.show(prompt).then(callback);
     }
 
+    function reload () {
+        if (state.includes('main'))
+            preventGeneralLoading();
+        
+        $state.reload();
+    }
+
     function customDialog(dialogController, dialogTemplateUrl, callback) {
         let options = {
             controller: dialogController,
@@ -149,6 +152,23 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
             preventGeneralLoading();
         
         $state.go(state, params);
+    }
+
+    function getAndLoad (get, list, fin, page, size) {
+        if (typeof page === 'number' && typeof size === 'number')
+            get(page, size, resp => { fillListWithResponseData(resp.data, list); },
+                            resp => { showErrorMessage(resp.data); },
+                            fin);
+        else
+            get(resp => { fillListWithResponseData(resp.data, list); },
+                resp => { showErrorMessage(resp.data); },
+                fin);
+    }
+
+    function deleteAndNotify (_delete, data, msg, fin) {
+        _delete(data, resp => { displayNotification('success', 'Exito', msg); },
+                      resp => { showErrorMessage(resp.data); },
+                      fin);
     }
 
 }

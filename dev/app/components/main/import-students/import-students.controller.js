@@ -28,8 +28,7 @@ function ImportStudentsController (TbUtils, students, $state) {
 
 		students.importStudents(newStudents).then(resolve => { 
 			TbUtils.displayNotification("success", "Exito", "Los alumnos se importaron exitosamente");
-			TbUtils.preventGeneralLoading();
-			$state.reload();
+			TbUtils.reload();
 			vm.submitting = false;
 		}, reject => { 
 			TbUtils.displayNotification("error", "Error", reject); 

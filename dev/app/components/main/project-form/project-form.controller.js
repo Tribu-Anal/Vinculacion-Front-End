@@ -77,9 +77,7 @@ function ProjectFormController($rootScope, $state, $stateParams,
 
     function updateFailure(response) {
         vm.submitting = false;
-        TbUtils.showErrorMessage('error', response,
-            'No se pudo actualizar el proyecto.',
-            'Error');
+        TbUtils.showErrorMessage(response.data);
     }
 
     function postNewProject() {
@@ -111,17 +109,12 @@ function ProjectFormController($rootScope, $state, $stateParams,
     }
 
     function getMajorsFail(response) {
-        TbUtils.showErrorMessage('error', response,
-            'Hay un problema con el servidor.' +
-            ' No se ha podido obtener las carreras disponibles.',
-            'Error');
+        TbUtils.showErrorMessage(response.data);
         vm.majorsLoading = false;
     }
 
     function getSectionsFail(response) {
-        TbUtils.showErrorMessage('error', response,
-            'Hay un problema con el servidor. No se ha podido obtener las secciones disponibles.',
-            'Error');
+        TbUtils.showErrorMessage(response.data);
         vm.sectionsLoading = false;
     }
 
@@ -136,9 +129,7 @@ function ProjectFormController($rootScope, $state, $stateParams,
 
     function submitProjectFail(response) {
         vm.submitting = false;
-        TbUtils.showErrorMessage('error', response,
-            'No se ha podido crear el proyecto.',
-            'Error');
+        TbUtils.showErrorMessage(response.data);
     }
 }
 

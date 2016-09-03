@@ -3,17 +3,17 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('main.sections', {
-			url: '/secciones',
-			templateUrl: 'templates/components/main/sections/sections.html',
-			controller: "SectionsController as vm",
+		.state('main.students', {
+			url: '/alumnos',
+			templateUrl: 'templates/components/main/students/students.html',
+			controller: "StudentsController as vm",
 			onEnter: onStateEnter
 		});
 }
 
 const onStateEnter = [ '$rootScope', 
 	rootScope => { 
-		rootScope.viewTitle  = "Vinculacion | Secciones";
+		rootScope.viewTitle  = "Vinculacion | Alumnos";
     	rootScope.viewStyles = "main";
     }
 ];
