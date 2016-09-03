@@ -37,14 +37,18 @@ function hours($http) {
         return url + '/Students/FiniquitoReport/' + accountId;
     }
 
-    function getHoursInfoSectionProjects(sectionprojectId,successCallback,errorCallback){
-        $http.get(url + '/SectionProjects/Info/' + sectionprojectId).
-        then(successCallback).catch(errorCallback);
+    function getHoursInfoSectionProjects(sectionprojectId, success, error, fin){
+        $http.get(url + '/SectionProjects/Info/' + sectionprojectId)
+        .then(success)
+        .catch(error)
+        .finally(fin);
     }
     
-    function putSectionProjectsApprove(sectionprojectId,successCallback,errorCallback){
-        $http.put(url + '/SectionProjects/Approve/' + sectionprojectId).
-        then(successCallback).catch(errorCallback);
+    function putSectionProjectsApprove(sectionprojectId, success, error, fin){
+        $http.put(url + '/SectionProjects/Approve/' + sectionprojectId)
+        .then(success)
+        .catch(error)
+        .finally(fin);
     }
 }
 

@@ -1,4 +1,4 @@
-<tb-search-field></tb-search-field>
+<tb-search-field search="vm.search" placeholder="{{vm.placeholder}}"></tb-search-field>
 <div class="container" ng-show="vm.model && !vm.model.IsApproved">
 	<div class="row project-info">
 		<h1 class="projec-title col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -38,4 +38,5 @@
 			<md-button class="md-raised approve-button" style="background-color: #283b5b; color:white;" ng-click="vm.approveHours()">Aprobar Horas</md-button>
 		</div>
 	</div>
+<tb-loading class="main-loader" ng-show="vm.loading"></tb-loading>
 </div>
