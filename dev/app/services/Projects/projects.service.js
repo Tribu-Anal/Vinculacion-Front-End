@@ -16,7 +16,7 @@ function projects($http, $rootScope, $state) {
         getProjectsCount: getProjectsCount,
         assignSectionToProject: assignSectionToProject,
         assignProjectstoSection: assignProjectstoSection,
-        selectedProjectsInSectionForm: []
+        selectedProjects: []
     };
 
     return service;
@@ -31,9 +31,11 @@ function projects($http, $rootScope, $state) {
             .finally(fin);
     };
 
-    function getProjects(successCallback, errorCallback) {
-        $http.get(url).then(successCallback)
-            .catch(errorCallback);
+    function getProjects(success, error, fin) {
+        $http.get(url)
+            .then(success)
+            .catch(error)
+            .finally(fin);
     };
 
     function getProjectsByUser(successCallback, errorCallback) {
