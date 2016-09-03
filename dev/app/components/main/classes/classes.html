@@ -7,10 +7,11 @@
 	          style="margin-bottom: 40px;">
 	</tb-table>
 </div>
-<div style="display: flex; justify-content: center;" ng-hide="vm.searchResults.length !== vm.classes.length">
-	<div class="load-more" style="margin-bottom: 15px;" ng-click="vm.loadMore()">
-		Cargar Mas
-	</div>
-</div>
+<tb-load-more-btn start-page="1" 
+                  page-size="vm.pageSize" 
+                  model="vm.classes" 
+                  get="vm.get"
+                  ng-hide="vm.hideLoadBtn()">
+</tb-load-more-btn>
 <tb-loading class="main-loader" ng-show="vm.classesLoading"></tb-loading>
-<tb-round-btn ui-sref="main.new-class"  ng-click="vm.preventGeneralLoading()">+</tb-round-btn>
+<tb-round-btn ng-click="vm.goToNewClass()">+</tb-round-btn>
