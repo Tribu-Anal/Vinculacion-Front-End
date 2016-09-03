@@ -34,7 +34,7 @@ function {{properCase name}}Controller (TbUtils, {{camelCase service}}) {
     function confirmDelete ({{camelCase modelSingular}}) {
         TbUtils.confirm('Eliminar', 'Esta seguro de eliminar este dato?', result => { 
             if (result)
-                TbUtils.deleteAndNotify({{camelCase service}}.delete, {{camelCase modelSingular}}, 'El dato se elimino exitosamente.');
+                TbUtils.deleteAndNotify({{camelCase service}}.delete, {{camelCase modelSingular}}, vm.{{camelCase modelPlural}}, 'El dato se elimino exitosamente.');
         });
     }{{/if}}
 

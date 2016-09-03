@@ -165,10 +165,10 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
                 fin);
     }
 
-    function deleteAndNotify (_delete, data, msg, fin) {
-        _delete(data, resp => { displayNotification('success', 'Exito', msg); },
-                      resp => { showErrorMessage(resp.data); },
-                      fin);
+    function deleteAndNotify (_delete, data, list, msg, fin) {
+        _delete(data.Id, resp => { removeItemFromList(data, list); displayNotification('success', 'Exito', msg); },
+                         resp => { showErrorMessage(resp.data); },
+                         fin);
     }
 
 }
