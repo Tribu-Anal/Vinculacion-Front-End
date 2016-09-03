@@ -1,18 +1,11 @@
 .projects
 {
-    tb-paginator {
-        .container {
-            margin-top: 20px;
-        }
-    }
-
     .gallery
     {
-        position: absolute;
-
         display: flex;
-
         width: 95%;
+        margin-top: 9px;
+        margin-left: 4%;
         padding-top: 20px;
         flex-wrap: wrap;
     }

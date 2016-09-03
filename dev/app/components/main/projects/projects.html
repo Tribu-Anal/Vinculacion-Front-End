@@ -1,5 +1,5 @@
 <tb-search-field obj="vm.searchObj" results="vm.searchResults" data="vm.projects" auto="true"></tb-search-field>
-<div class="gallery" style="margin-top: 9px; left: 5%;">
+<div class="gallery">
 	<div class="card" ng-repeat="prj in vm.searchResults" title="{{prj.Description}}">
 		<span class="icon-group" ng-show="Role === 'Admin'">
 			<i class="glyphicon glyphicon-remove"
