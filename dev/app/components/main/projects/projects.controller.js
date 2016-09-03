@@ -94,9 +94,7 @@ function ProjectsController(projects, TbUtils, $state, ModalService,
     }
 
     function removeProjectFail(response) {
-        TbUtils.showErrorMessage('error', response,
-            'No se pudo borrar el proyecto.',
-            'Error');
+        TbUtils.showErrorMessage(response.data);
 
         vm.deletingProject[deleteIndex] = false;
     }
@@ -132,9 +130,7 @@ function ProjectsController(projects, TbUtils, $state, ModalService,
     }
 
     function getProjectsFail(response) {
-        TbUtils.showErrorMessage('error', response,
-            'No se ha podido obtener los proyectos deseados.',
-            'Error');
+        TbUtils.showErrorMessage(response.data);
 
         vm.projectsLoading = false;
     }

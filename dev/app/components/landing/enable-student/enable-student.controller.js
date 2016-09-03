@@ -20,15 +20,14 @@ function EnableStudentController ($rootScope, TbUtils,  students) {
   }
 
   function enableStudentSuccess(response){
-    TbUtils.displayNotification('success', 'Revisa tu correo con el link, para activar tu cuenta.', 'Correo enviado!');
+    TbUtils.displayNotification('success', 
+      'Revisa tu correo con el link, para activar tu cuenta.', 'Correo enviado!');
     vm.submitting = false;
     TbUtils.go('landing.login');
   }
 
   function enableStudentFail(response){
-    TbUtils.showErrorMessage('error', response,
-                             'No se encontro una cuenta valida con los datos ingresados',
-                             'Error de Habilitacion');
+    TbUtils.showErrorMessage(response.data);
     vm.submitting = false;
   }
 

@@ -13,7 +13,7 @@ function config ($stateProvider) {
 
 const onStateEnter = [ '$rootScope', 
 	rootScope => { 
-		rootScope.viewTitle  = "{{tabTitle}}";
+		rootScope.viewTitle  = "Vinculacion | {{tabTitle}}";
     	rootScope.viewStyles = "{{styles}}";
     }
 ];

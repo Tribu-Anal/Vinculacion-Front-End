@@ -30,7 +30,7 @@ function EditClassController (TbUtils, classes, stateParams) {
 
 	function updateFail (response) {
 		vm.submitting = false;
-		TbUtils.showErrorMessage('error', response, 'No se pudo actualizar la clase.', 'Error');
+		TbUtils.showErrorMessage(response.data);
 	}
 
 }

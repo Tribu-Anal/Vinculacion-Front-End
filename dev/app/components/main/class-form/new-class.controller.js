@@ -24,7 +24,7 @@ function NewClassController (TbUtils, classes) {
 
 	function postFail(response) {
 		vm.submitting = false;
-		TbUtils.showErrorMessage('error', response, 'No se pudo crear la clase!', 'Error');
+		TbUtils.showErrorMessage(response.data);
 	}
 }
 

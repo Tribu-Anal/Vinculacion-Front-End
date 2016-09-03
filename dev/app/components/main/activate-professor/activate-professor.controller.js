@@ -1,6 +1,6 @@
-ActivateProfessorController.$inject = ['$rootScope', '$state', '$stateParams', 'professors', 'TbUtils', 'auth'];
+ActivateProfessorController.$inject = ['$rootScope', '$stateParams', 'professors', 'TbUtils', 'auth'];
 
-function ActivateProfessorController($rootScope, $state, $stateParams, professors, TbUtils, auth) {
+function ActivateProfessorController($rootScope, $stateParams, professors, TbUtils, auth) {
 
     var vm = this;
 
@@ -23,25 +23,25 @@ function ActivateProfessorController($rootScope, $state, $stateParams, professor
     }
 
     function activateProfessorSuccess(response) {
-        $state.go('landing.login');
+        TbUtils.go('landing.login');
         TbUtils.displayNotification('success', 'Usuario activado!', 'Ya puede navegar el sitio.');
     }
 
     function activateProfessorFail(response) {
-        TbUtils.showErrorMessage('error', response, 'No se ha podido activar el profesor.', 'Error!');
-        $state.go('landing.login');
+        TbUtils.showErrorMessage(response.data);
+        TbUtils.go('landing.login');
     }
 
     function getToken() {
         if ($stateParams.accountId == undefined || $stateParams.accountId == '')
-            $state.go('landing.login');
+            TbUtils.go('landing.login');
         vm.professor.AccountId = $stateParams.accountId;
     }
 
     function leaveIfSessionStarted() {
         if ($rootScope.globals.token) {
             auth.ClearCredentials();
-            $state.go('landing.login');
+            TbUtils.go('landing.login');
         }
     }
 }
