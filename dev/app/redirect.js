@@ -34,7 +34,7 @@ function redirect (state, toState, role, loggedIn, ev) {
 		case 'main.projects':
 		case 'main.section':
 		case 'main.sections':
-		case 'main.newsection':
+		case 'main.new-section':
 			if (!loggedIn) 
 				goToLanding(state, ev);
 
