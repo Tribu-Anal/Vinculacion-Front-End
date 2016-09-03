@@ -4,24 +4,26 @@ function tbSearchField(filterFilter) {
     var directive = {
         restrict: 'E',
         scope: {
-            obj: '=',
-            results: '=',
-            data: '=',
+            obj: '=?',
+            results: '=?',
+            data: '=?',
             auto: '=?',
             min: '=?',
-            placeholder: '@?'
+            placeholder: '@?',
+            search: '=?'
         },
         templateUrl: 'templates/shared/TB-SearchField/tb-search-field.html',
         link: scope => {
             if (!scope.placeholder) scope.placeholder = "Ingrese su busqueda";
             if (scope.auto && !scope.min) scope.min = 1;
 
-            scope.search = term => {
-                if (typeof scope.obj === 'function')
-                    scope.results = filterFilter(scope.data, scope.obj(term));
-                else
-                    scope.results = scope.data;
-            };
+            if (!scope.search)
+                scope.search = term => {
+                    if (typeof scope.obj === 'function')
+                        scope.results = filterFilter(scope.data, scope.obj(term));
+                    else
+                        scope.results = scope.data;
+                };
 
             scope.$watch('searchText', term => {
                 if (scope.auto && term.length >= scope.min)
