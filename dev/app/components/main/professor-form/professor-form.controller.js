@@ -12,6 +12,7 @@ function ProfessorFormController($rootScope, $state, professors, TbUtils) {
         Campus: 'SPS'
     };
 
+    vm.submitting = false;
     vm.accountId;
 
     vm.registerProfessor = registerProfessor;
@@ -22,7 +23,8 @@ function ProfessorFormController($rootScope, $state, professors, TbUtils) {
     }
 
     function registerProfessorSuccess(response) {
-        $state.go('main.dashboard');
+        vm.submitting = true;
+        $state.go('main.admin-dashboard');
         TbUtils.displayNotification('success', 'Profesor Creado!', 'Se le ha enviado un correo de activacion al profesor.');
     }
 

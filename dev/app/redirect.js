@@ -5,7 +5,7 @@ function redirect (state, toState, role, loggedIn, ev) {
 		// ADMIN-ONLY STATES
 
 		case 'main.import-students':
-		case 'main.newprofessor':
+		case 'main.new-professor':
 		case 'main.reports':
 		case 'main.settlement':
 		case 'main.admin-dashboard':
