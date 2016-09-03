@@ -94,7 +94,7 @@ module.exports = {
             data.hasRun = false;
             data.hasAny = true;
 
-            data.styles = "";
+            data.styles = "main";
 
             data.type = 'component';
 

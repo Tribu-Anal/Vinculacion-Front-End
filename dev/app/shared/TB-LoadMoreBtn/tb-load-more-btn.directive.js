@@ -1,7 +1,8 @@
-function tbLoadMoreBtn () {
+tbLoadMoreBtn.$inject = [ 'TbUtils' ];
+
+function tbLoadMoreBtn (TbUtils) {
 	const directive = {
 		restrict: 'E',
-		replace: true,
 		scope: {
 			startPage: '=',
 			pageSize: '=',
@@ -17,9 +18,8 @@ function tbLoadMoreBtn () {
 				if (scope.loadingMore) return;
 
 				scope.loadingMore = true;
-				scope.get(scope.page, scope.pageSize, scope.model, 
-					() => { scope.loadingMore = false; });
-				scope.page++;
+				TbUtils.getAndLoad(scope.get, scope.model, () => { scope.loadingMore = false; scope.page++; }, 
+					               scope.page, scope.pageSize);
 			};
 
 		}

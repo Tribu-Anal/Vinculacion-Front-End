@@ -1,7 +1,7 @@
-const  config     = require('./sections.config'),
-	   controller = require('./sections.controller');
+const  config     = require('./periods.config'),
+	   controller = require('./periods.controller');
 
-const moduleName   = 'sections.component',
+const moduleName   = 'periods.component',
       dependencies = [];
 
 angular.module(moduleName, dependencies)

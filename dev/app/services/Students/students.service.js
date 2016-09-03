@@ -10,7 +10,8 @@ function students ($http, $q) {
 		getSectionHours: getSectionHours,
 		getParsedStudentsExcel: getParsedStudentsExcel,
 		importStudents: importStudents,
-		enableStudent: enableStudent
+		enableStudent: enableStudent,
+		getWithPagination: getWithPagination
 	};
 
 	return service;
@@ -23,10 +24,6 @@ function students ($http, $q) {
 	function getHours(accountId, successCallback, errorCallback) {
 		$http.get(url + '/' + accountId + '/Hour').then(successCallback)
 			.catch(errorCallback);
-
-		// return $http.get(url + '/' + accountId + '/Hour').then(function(response) {
-		// 	return response.data;
-		// });
 	}
 
 	function getAccountId(successCallback, errorCallback){
@@ -62,6 +59,13 @@ function students ($http, $q) {
 	        .error(reject => { deferred.reject('No se pudo importar los alumnos.'); });
 
 	    return deferred.promise;
+	}
+
+	function getWithPagination (page, size, success, error, fin) {
+		$http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc')
+            .then(success)
+            .catch(error)
+            .finally(fin);
 	}
 
 }

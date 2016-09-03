@@ -40,6 +40,30 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
+
+	  	{
+		  	title: "PERIODOS", ref: "main.periods", url: '/periodos',
+		  	icon: "glyphicon glyphicon-tasks",
+		  	active: $state.current.url.includes('/periodos'),
+		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
+		  	clicked: TbUtils.preventGeneralLoading
+	  	},
+
+	  	{
+		  	title: "PROFESORES", ref: "main.professors", url: '/profesores',
+		  	icon: "glyphicon glyphicon-user",
+		  	active: $state.current.url.includes('/profesores'),
+		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
+		  	clicked: TbUtils.preventGeneralLoading
+	  	},
+
+	  	{
+		  	title: "ALUMNOS", ref: "main.students", url: '/alumnos',
+		  	icon: "glyphicon glyphicon-education",
+		  	active: $state.current.url.includes('/alumnos'),
+		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
+		  	clicked: TbUtils.preventGeneralLoading
+	  	},
 	  	
 	  	{
 		  	title: "APROBAR HORAS", ref: "main.approve-hours", url: '/aprobar-horas',
@@ -48,6 +72,14 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
+
+	  	{
+		  	title: "REPORTES", ref: "main.reports", url: '/reportes',
+		  	icon: "glyphicon glyphicon-folder-open",
+		  	active: $state.current.url.includes('/reportes'),
+		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
+			clicked: TbUtils.preventGeneralLoading
+		},
 
 	  	{
 	  		title: "LOG OUT", ref: "landing.login",
