@@ -10,7 +10,7 @@ function ClassesController (TbUtils, classes) {
     vm.tableSchema = require('../../../table-schemas/classes-table-schema');
 
     vm.pageSize = 10;
-    vm.get = classes.getAndLoad;
+    vm.get = classes.get;
     vm.hideLoadBtn = () => vm.classes.length !== vm.searchResults.length;
 
     vm.goToNewClass = () => { TbUtils.go('main.new-class'); };
@@ -18,7 +18,7 @@ function ClassesController (TbUtils, classes) {
 
 	vm.classesLoading = true;
 
-    classes.getAndLoad(0, vm.pageSize, vm.classes, () => { vm.classesLoading = false; });
+    TbUtils.getAndLoad(classes.get, vm.classes, () => { vm.classesLoading = false; }, 0, vm.pageSize);
 
 }
 
