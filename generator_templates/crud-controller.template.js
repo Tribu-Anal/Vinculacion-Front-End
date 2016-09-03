@@ -26,7 +26,7 @@ function {{properCase name}}Controller (TbUtils, {{camelCase service}}) {
 
     vm.{{camelCase modelPlural}}Loading = true;{{else}}vm.{{camelCase modelPlural}}Loading = true;{{/if}}{{/if}}
 
-    TbUtils.getAndLoad(0, vm.pageSize, vm.{{camelCase modelPlural}}, () => { vm.{{camelCase modelPlural}}Loading = false; });{{#if delete}}
+    TbUtils.getAndLoad({{camelCase service}}.get, vm.{{camelCase modelPlural}}, () => { vm.{{camelCase modelPlural}}Loading = false; }, 0, vm.pageSize);{{#if delete}}
 
     // Feel free to modify the confirm text
     // Also, set the correct DELETE API call
