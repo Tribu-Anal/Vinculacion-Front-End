@@ -5,7 +5,7 @@
     
     <div>
         <label class="cd-label">Numero de Cuenta</label>
-        <input ng-model="vm.student.AccountId" min="20000000" maxlength="8" validation-max-length="8" validation-no-special-chars="true" class="user" type="number" name="accountId" id="cd-name" required>
+        <input ng-model="vm.accountId" min="20000000" maxlength="8" validation-max-length="8" validation-no-special-chars="true" class="user" type="number" name="accountId" id="cd-name" required>
         <p class="error-message" ng-show="studentForm.$submitted && studentForm.accountId.$error.required">
             * Por favor ingrese un numero de cuenta valido.
         </p>
@@ -50,7 +50,7 @@
         <label class="cd-label" for="cd-name">Campus</label>
         <select name="_class" ng-model="vm.student.Campus" required>
             <option value="TGU">TGU</option>
-            <option value="SPS">SPS</option>
+            <option value="USPS">USPS</option>
         </select>
         <p class="error-message" ng-show="studentForm.$submitted && studentForm._class.$error.required">
             * Por favor seleccione un campus.

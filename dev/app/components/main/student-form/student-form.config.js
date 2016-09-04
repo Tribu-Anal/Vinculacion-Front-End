@@ -6,14 +6,26 @@ function config ($stateProvider) {
 		.state('main.new-student', {
 			url: '/alumnos/nuevo-alumno',
 			templateUrl: 'templates/components/main/student-form/student-form.html',
-			controller: "StudentFormController as vm",
-			onEnter: onStateEnter
+			controller: "NewStudentController as vm",
+			onEnter: newStudentStateEnter
+		})
+
+		.state('main.edit-student', {
+			url: '/alumnos/editar-alumno/{student}',
+			templateUrl: 'templates/components/main/student-form/student-form.html',
+			controller: "EditStudentController as vm",
+			onEnter: editStudentStateEnter
 		});
 }
 
-const onStateEnter = [ '$rootScope', 
+const newStudentStateEnter = [ '$rootScope', 
 	rootScope => { 
 		rootScope.viewTitle  = "Vinculacion | Nuevo Alumno";
+    	rootScope.viewStyles = "main project-form";
+    }
+], editStudentStateEnter = [ '$rootScope', 
+	rootScope => { 
+		rootScope.viewTitle  = "Vinculacion | Editar Alumno";
     	rootScope.viewStyles = "main project-form";
     }
 ];
