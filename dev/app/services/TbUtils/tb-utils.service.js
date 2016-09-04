@@ -14,6 +14,8 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         getAndLoad: getAndLoad,
         deleteAndNotify: deleteAndNotify,
         updateAndNotify: updateAndNotify,
+        updateAndGoTo: updateAndGoTo,
+        postAndGoTo: postAndGoTo,
         getListCopy: getListCopy,
         queryList: queryList,
         confirm: confirm,
@@ -176,24 +178,32 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
                 fin);
     }
 
-    function deleteAndNotify (_delete, data, list, msg, fin, suc, err) {
-        _delete(data.Id, resp => { 
-                if (typeof suc === 'function') suc(resp);
+    function deleteAndNotify (_delete, data, list, msg, fin) {
+        _delete(data.Id, resp => {
                 removeItemFromList(data, list); displayNotification('success', 'Exito', msg); 
             }, resp => { 
-                if (typeof err === 'function') err(resp);
                 showErrorMessage(resp.data); 
             }, fin);
     }
 
-    function updateAndNotify (put, id, data, msg, fin, suc, err) {
+    function updateAndNotify (put, id, data, msg, fin) {
+        put(id, data, resp => {  displayNotification('success', 'Exito', msg); }, 
+                      resp => { showErrorMessage(resp.data); }, 
+                      fin);
+    }
+
+    function updateAndGoTo (put, id, data, toState, msg, fin) {
         put(id, data, resp => { 
-            if (typeof suc === 'function') suc(resp);
-            displayNotification('success', 'Exito', msg); 
-        }, resp => {
-            if (typeof err === 'function') err(resp);
-            showErrorMessage(resp.data);
-        }, fin);
+            displayNotification('success', 'Exito', msg ? msg : 'Actualizado!');
+            go(toState);
+        }, resp => { showErrorMessage(resp.data); }, fin);
+    }
+
+    function postAndGoTo (post, data, toState, msg, fin) {
+        post(data, resp => {
+            displayNotification('success', 'Exito', msg ? msg : 'Se creo con exito!');
+            go(toState);
+        }, resp => { showErrorMessage(resp.data); }, fin);
     }
 
 }
