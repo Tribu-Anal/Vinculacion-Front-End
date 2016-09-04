@@ -19,11 +19,12 @@ const ActivateProfessor     = require('./activate-professor/activate-professor.m
       Sections              = require('./sections/sections.module'),
       Settlement            = require('./settlement/settlement.module'),
       Students              = require('./students/students.module');
+      StudentForm           = require('./student-form/student-form.module');
 
 const moduleName = 'main-bundle',
       components = [ ActivateProfessor, ApproveHours, Classes, ClassForm, Dashboard, EditHours, ImportStudents, Main,
                      Periods, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm, Projects, Reports, 
-                     Section, SectionForm, Sections, Settlement, Students ];
+                     Section, SectionForm, Sections, Settlement, Students, StudentForm ];
 
 angular.module(moduleName, components);
 

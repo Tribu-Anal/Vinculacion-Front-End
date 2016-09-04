@@ -11,9 +11,10 @@ function majors ($http, $q) {
     
     return service;
     
-    function getMajors(successCallback, errorCallback) {
+    function getMajors(successCallback, errorCallback, fin) {
         $http.get(url).then(successCallback)
-                      .catch(errorCallback);
+                      .catch(errorCallback)
+                      .finally(fin);
     }
 
     function getMajor(majorId, successCallback, errorCallback) {

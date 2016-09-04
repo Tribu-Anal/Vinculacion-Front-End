@@ -1,0 +1,63 @@
+<form name="studentForm" class="cd-form" ng-submit="studentForm.$valid && vm.submit()" novalidate>
+    <legend>
+        <strong>{{vm.formTitle}}</strong>
+    </legend>
+    
+    <div>
+        <label class="cd-label">Numero de Cuenta</label>
+        <input ng-model="vm.student.AccountId" min="20000000" maxlength="8" validation-max-length="8" validation-no-special-chars="true" class="user" type="number" name="accountId" id="cd-name" required>
+        <p class="error-message" ng-show="studentForm.$submitted && studentForm.accountId.$error.required">
+            * Por favor ingrese un numero de cuenta valido.
+        </p>
+    </div>
+    
+    <div>
+        <label class="cd-label">Nombre</label>
+        <input ng-model="vm.student.Name" class="user" type="text" name="Name" id="cd-name" validation-field-required="true" validation-no-special-chars="true" required> 
+        <p class="error-message" ng-show="studentForm.$submitted && studentForm.Name.$error.required">
+            * Por favor ingrese el nombre del profesor.
+        </p>
+    </div>
+
+    <div>
+        <label class="cd-label">Password</label>
+        <input ng-model="vm.student.Password" class="user" type="password" name="Password" id="cd-name" validation-field-required="true" required> 
+        <p class="error-message" ng-show="studentForm.$submitted && studentForm.Password.$error.required">
+            * Por favor ingrese la password.
+        </p>
+    </div>
+
+    <div>
+        <label class="cd-label">Carrera</label>
+		<select ng-model="vm.student.MajorId" name="Major" required>
+			<option ng-repeat="major in vm.majors" value="{{major.MajorId}}">{{major.Name}}</option>
+		</select>
+        <p class="error-message" ng-show="studentForm.$submitted && studentForm.Major.$error.required">
+            * Por favor seleccione una de las carreras.
+        </p>
+        <tb-loading class="main-loader" ng-show="vm.majorsLoading"></tb-loading>
+    </div>
+    
+    <div>
+        <label class="cd-label">Email</label>
+        <input ng-model="vm.student.Email" class="user" type="email" name="Email" id="cd-name" ng-pattern='/@unitec.edu$/' validation-no-space="true" validation-field-required="true" required>
+        <p class="error-message" ng-show="studentForm.$submitted && studentForm.Email.$error.required">
+            * Por favor ingrese su correo electronico.
+        </p>
+    </div>
+
+    <div>
+        <label class="cd-label" for="cd-name">Campus</label>
+        <select name="_class" ng-model="vm.student.Campus" required>
+            <option value="TGU">TGU</option>
+            <option value="SPS">SPS</option>
+        </select>
+        <p class="error-message" ng-show="studentForm.$submitted && studentForm._class.$error.required">
+            * Por favor seleccione un campus.
+        </p>
+    </div>
+    <div>
+        <input type="submit" ng-hide="vm.submitting" value="Confirmar">
+    </div>
+</form>
+<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading> 

@@ -4,7 +4,7 @@ function NewProfessorController(TbUtils, professors) {
 
     const vm = this;
 
-    vm.formTitle = 'Nueva Clase';
+    vm.formTitle = 'Nuevo Profesor';
 
     vm.professor = {
         AccountId: '',
