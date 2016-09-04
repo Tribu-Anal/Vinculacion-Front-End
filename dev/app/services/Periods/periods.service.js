@@ -4,6 +4,7 @@ function periods ($http) {
 	const url = 'http://fiasps.unitec.edu:' + PORT + '/api/Periods';
 	const service = {
 		get: get,
+		post: post,
 		getWithPagination: getWithPagination,
 		setCurrentPeriod: setCurrentPeriod,
 		getCurrentPeriod: getCurrentPeriod
@@ -15,6 +16,13 @@ function periods ($http) {
 		$http.get(url)
             .then(success)
             .catch(error)
+            .finally(fin);
+	}
+
+	function post (data, suc, err, fin) {
+		$http.post(url, data)
+            .then(suc)
+            .catch(err)
             .finally(fin);
 	}
 

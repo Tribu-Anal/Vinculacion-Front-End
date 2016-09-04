@@ -7,6 +7,7 @@ const ActivateProfessor     = require('./activate-professor/activate-professor.m
       ImportStudents        = require('./import-students/import-students.module'),
       Main                  = require('./main.module'),
       Periods               = require('./periods/periods.module'),
+      PeriodForm            = require('./period-form/period-form.module'),
       Professors            = require('./professors/professors.module'),
       ProfessorForm         = require('./professor-form/professor-form.module'),
       Project               = require('./project/project.module'),
@@ -22,8 +23,8 @@ const ActivateProfessor     = require('./activate-professor/activate-professor.m
 
 const moduleName = 'main-bundle',
       components = [ ActivateProfessor, ApproveHours, Classes, ClassForm, Dashboard, EditHours, ImportStudents, Main,
-                     Periods, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm, Projects, Reports, 
-                     Section, SectionForm, Sections, Settlement, Students ];
+                     Periods, PeriodForm, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm, 
+                     Projects, Reports, Section, SectionForm, Sections, Settlement, Students ];
 
 angular.module(moduleName, components);
 
