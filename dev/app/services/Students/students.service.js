@@ -16,9 +16,11 @@ function students ($http, $q) {
 
 	return service;
 
-	function get (successCallback, errorCallback) {
-        $http.get(url).then(successCallback)
-            .catch(errorCallback);
+	function get (success, error, fin) {
+        $http.get(url)
+        	.then(success)
+            .catch(error)
+            .finally(fin);
 	}
 
 	function getHours(accountId, successCallback, errorCallback) {

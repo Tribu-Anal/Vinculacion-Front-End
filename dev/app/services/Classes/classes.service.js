@@ -4,12 +4,20 @@ classes.$inject = [ '$http', 'TbUtils' ];
 function classes($http, TbUtils) {
     var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Classes';
     var service = {
+        get: get,
         postClass: postClass,
         update: update,
-        get: get
+        getWithPagination: getWithPagination
     };
 
     return service;
+
+    function get (success, error, fin) {
+        $http.get(url)
+            .then(success)
+            .catch(error)
+            .finally(fin);
+    }
 
     function postClass(data, successCallback, errorCallback) {
         $http.post(url, JSON.stringify(data))
@@ -23,7 +31,7 @@ function classes($http, TbUtils) {
             .catch(error);
     }
 
-    function get (page, size, success, error, _finally) {
+    function getWithPagination (page, size, success, error, _finally) {
         $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc')
             .then(success)
             .catch(error)

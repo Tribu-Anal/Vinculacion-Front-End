@@ -4,7 +4,8 @@
 			<h2>{{vm.projectName}}</h2>
 		</div>
 		<div class="text-center">
-			<h3>{{vm.description}}</h3>
+			<h4>Descripcion: {{vm.description}}</h4>
+			<h4>Costo: {{vm.cost}}</h4>
 		</div>
 		<div class="col-md-12 switch" ng-show="vm.editHours.visible && !vm.isApproved">
 			<button ng-click="vm.evaluateProject()" class="btn btn-md pull-right eval-proj">
@@ -16,4 +17,7 @@
 		        ng-click="vm.saveChanges()">Guardar cambios</button>
 	</div>
 </div>
-<tb-loading class="main-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
+<tb-loading class="main-loader" 
+            ng-show="vm.participantsLoading || vm.projectLoading || vm.loadingProjectInfo || vm.postingHours" 
+            style="z-index: 99999">
+</tb-loading>

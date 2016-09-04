@@ -12,12 +12,13 @@ function SectionsController (TbUtils, sections) {
 
     vm.pageSize = 10;
     vm.get = sections.getSectionsWithPagination;
+    vm.getAll = sections.getSections;
     vm.hideLoadBtn = () => vm.sections.length !== vm.searchResults.length;
 
     vm.goToNewSection = () => { TbUtils.go('main.new-section'); };
-    vm.sectionsLoading = true;
+    vm.loading = true;
 
-    TbUtils.getAndLoad(sections.getCurrentPeriodSections, vm.sections, () => { vm.sectionsLoading = false; });
+    TbUtils.getAndLoad(sections.getCurrentPeriodSections, vm.sections, () => { vm.loading = false; });
 
 }
 

@@ -1,6 +1,6 @@
-projects.$inject = ['$http', '$rootScope'];
+projects.$inject = ['$http', '$rootScope', '$state'];
 
-function projects($http, $rootScope) {
+function projects($http, $rootScope, $state) {
     var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Projects';
 
     var service = {
@@ -16,24 +16,26 @@ function projects($http, $rootScope) {
         getProjectsCount: getProjectsCount,
         assignSectionToProject: assignSectionToProject,
         assignProjectstoSection: assignProjectstoSection,
-        selectedProjectsInSectionForm: []
+        selectedProjects: []
     };
 
     return service;
 
-    function getProjectsWithPagination(page, size, successCallback, errorCallback, newSectionFlag) {
-        if(($rootScope.Role === 'Professor' || $rootScope.Role === 'Student') && !newSectionFlag) 
-            $http.get(url + '/ProjectsByUser' + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc').then(successCallback)
-                .catch(errorCallback);
+    function getProjectsWithPagination(page, size, successCallback, errorCallback, fin) {
+        let res = ($rootScope.Role === 'Professor') && $state.current.name !== 'main.new-section' ?
+                  '/ProjectsByUser' : '';
 
-        else
-            $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc').then(successCallback)
-                .catch(errorCallback);
+        $http.get(url + res + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc')
+            .then(successCallback)
+            .catch(errorCallback)
+            .finally(fin);
     };
 
-    function getProjects(successCallback, errorCallback) {
-        $http.get(url).then(successCallback)
-            .catch(errorCallback);
+    function getProjects(success, error, fin) {
+        $http.get(url)
+            .then(success)
+            .catch(error)
+            .finally(fin);
     };
 
     function getProjectsByUser(successCallback, errorCallback) {
@@ -65,10 +67,11 @@ function projects($http, $rootScope) {
             .catch(errorCallback);
     }
 
-    function deleteProject(projectId, successCallback, errorCallback) {
+    function deleteProject(projectId, success, error, fin) {
         $http.delete(url + "/" + projectId)
-            .then(successCallback)
-            .catch(errorCallback);
+            .then(success)
+            .catch(error)
+            .fin(fin);
     }
 
     function getParticipants(projectId, successCallback, errorCallback) {

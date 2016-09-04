@@ -1,169 +1,40 @@
-ProjectsController.$inject = ['projects', 'TbUtils', '$state', 'ModalService',
-    '$rootScope', 'auth', '$scope', 'filterFilter'
-];
+ProjectsController.$inject = [ 'TbUtils', 'projects', '$rootScope' ];
 
-function ProjectsController(projects, TbUtils, $state, ModalService,
-    $rootScope, auth, $scope, filterFilter) {
-    var vm = this;
-    var deleteIndex = -1;
-    var deleteProject = {};
-    var confirmProjectDeleteModal = {
-        templateUrl: 'templates/components/main/projects/dialogs/' +
-            'confirm-project-delete/confirm-project-delete.html',
-        controller: 'ConfirmProjectDeleteController'
-    };
+function ProjectsController(TbUtils, projects, $rootScope) {
+    const vm = this;
 
-    vm.options = {};
-    vm.options.startingPage = 0;
-    vm.options.pageSize = 60;
-    vm.options.count = 0;
+    vm.searchObj = term => { return { Name: term }; };
+    vm.searchResults = [];
+
+    vm.pageSize = 9;
+    vm.get = projects.getProjectsWithPagination;
+    vm.getAll = projects.getProjects;
+    vm.hideLoadBtn = () => vm.projects.length !== vm.searchResults.length;
 
     vm.projects = [];
-    vm.totalProjects = [];
-    vm.projectsPagination = [];
-    vm.projectsLoading = true;
-    vm.limitInLettersToSearch = 3;
-    vm.deletingProject = [];
-    vm.preventGeneralLoading = preventGeneralLoading;
+
+    vm.goToProject = project => { TbUtils.go('main.project', { projectId: project.Id }); };
+    vm.goToNewProject = project => { TbUtils.go('main.addproject'); };
+    vm.goToEdit = project => { TbUtils.go('main.editproject', { project: JSON.stringify(project) }); };
+
+    vm.loading = true;
+
     vm.removeProjectClicked = removeProjectClicked;
-    vm.goToEdit = goToEdit;
     vm.toTitleCase = TbUtils.toTitleCase;
+    
+    TbUtils.getAndLoad(vm.get, vm.projects, () => { vm.loading = false; }, 0, vm.pageSize);
 
-    vm.reportButton = {
-        show: $rootScope.Role === 'Student',
-        onClick: loadReport,
-        icon: 'glyphicon-file'
-    };
-
-    if ($rootScope.Role === 'Professor' || $rootScope.Role === 'Student')
-        projects.getProjectsByUser(getTotalProjectsSuccess, getTotalProjectsFail);
-    else
-        projects.getProjects(getTotalProjectsSuccess, getTotalProjectsFail);
-
-    function getTotalProjectsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.totalProjects);
+    function removeProjectClicked(project) {
+        TbUtils.confirm('Eliminar Proyecto', `Esta seguro de eliminar ${project.Name}?`, 
+            resolve => {
+                if (resolve) {
+                    vm.loading = true;
+                    TbUtils.deleteAndNotify(projects.deleteProject, project, vm.projects, 
+                        () => { vm.loading = false; });
+                }
+            });
     }
 
-    $scope.$watch('search.data', function(term) {
-        let obj = {
-            Name: term
-        };
-
-        if (term && term.length >= vm.limitInLettersToSearch) {
-            $scope.filterProjects = filterFilter(vm.totalProjects, obj);
-            vm.projects = $scope.filterProjects;
-        } else {
-            vm.projects = vm.projectsPagination;
-        }
-    });
-
-    function getTotalProjectsFail(response) {}
-
-    function preventGeneralLoading() {
-        TbUtils.preventGeneralLoading();
-    }
-
-    function removeProjectClicked(project, index) {
-        deleteProject = project;
-        deleteIndex = index;
-
-        ModalService.showModal(confirmProjectDeleteModal)
-            .then(modalResolve);
-    }
-
-    function modalResolve(modal) {
-        modal.element.modal();
-        modal.close.then(modalClose);
-    }
-
-    function modalClose(result) {
-        if (result === true)
-            removeProject();
-    }
-
-    function removeProject() {
-        vm.deletingProject[deleteIndex] = true;
-
-        projects.deleteProject(deleteProject.Id,
-            removeProjectSucces, removeProjectFail);
-    }
-
-    function removeProjectSucces() {
-        vm.projects.splice(deleteIndex, 1);
-        vm.deletingProject.splice(deleteIndex, 1);
-    }
-
-    function removeProjectFail(response) {
-        TbUtils.showErrorMessage(response.data);
-
-        vm.deletingProject[deleteIndex] = false;
-    }
-
-    projects.getProjectsCount(getProjectsCountSuccess);
-
-    function getProjectsCountSuccess(response) {
-        vm.options.count = response.data;
-        projects.getProjectsWithPagination(vm.options.startingPage, vm.options.pageSize, getProjectsSuccess, getProjectsFail);
-    }
-
-    vm.onPageChange = function(skip, page) {
-        if ($scope.search) $scope.search.data = '';
-        vm.projects = vm.projectsPagination;
-        vm.projects.length = 0;
-        vm.projectsLoading = true;
-        projects.getProjectsWithPagination(page, skip, getProjectsSuccess, getProjectsFail);
-    }
-
-    function goToEdit(project) {
-        preventGeneralLoading();
-        $state.go('main.editproject', {
-            project: JSON.stringify(project)
-        });
-    }
-
-    function getProjectsSuccess(response) {
-        TbUtils.fillListWithResponseData(response.data, vm.projectsPagination);
-        TbUtils.initArrayToValue(vm.deletingProject, false,
-            vm.projectsPagination.length);
-
-        vm.projectsLoading = false;
-    }
-
-    function getProjectsFail(response) {
-        TbUtils.showErrorMessage(response.data);
-
-        vm.projectsLoading = false;
-    }
-
-    function successAccountId(response) {
-        response = response.data;
-        let params = {
-            reportParams: {
-                AccountId: response.AccountId,
-                Campus: response.Campus,
-                Major: response.Major.Name,
-                Name: response.Name
-            }
-        };
-        TbUtils.preventGeneralLoading();
-        $state.go('main.student-project-pdf', {
-            data: params
-        });
-    }
-
-    function failAccountId() {
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudo cargar el reporte correctamente.');
-    }
-
-    function loadReport() {
-        let email = $rootScope.Session;
-        let obj = {
-            Email: email
-        }
-        auth.AccountId(obj,
-            successAccountId, failAccountId)
-    }
 }
 
 module.exports = {
