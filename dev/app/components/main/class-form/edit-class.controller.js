@@ -9,28 +9,10 @@ function EditClassController (TbUtils, classes, stateParams) {
 	vm.submitting = false;
 	vm.submit = submit;
 
-	init();
-
-	function init () {
-		if (!vm.class || !vm.class.Id) {
-			TbUtils.displayNotification('error', 'Error', 'La clase no existe.');
-			TbUtils.go('main.classes');
-		}
-	}
-
 	function submit () {
 		vm.submitting = true;
-		classes.update(vm.class.Id, vm.class, updateSuccess, updateFail);
-	}
-
-	function updateSuccess (response) {
-		TbUtils.displayNotification('success', 'Exito!', 'La clase ha sido creada!');
-		TbUtils.go('main.classes');
-	}
-
-	function updateFail (response) {
-		vm.submitting = false;
-		TbUtils.showErrorMessage(response.data);
+		TbUtils.updateAndGoTo(classes.update, vm.class.Id, vm.class, 
+			'main.classes', 'La clase ha sido actualizada con exito!', () => { vm.submitting = false; });
 	}
 
 }

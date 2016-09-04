@@ -23,17 +23,8 @@ function NewProfessorController(TbUtils, professors) {
         vm.submitting = true;
 
         vm.professor.AccountId = vm.accountId.toString();
-        professors.registerProfessor(vm.professor, registerProfessorSuccess, registerProfessorFail);
-    }
-
-    function registerProfessorSuccess(response) {
-        TbUtils.displayNotification('success', 'Profesor Creado!', 
-            'Se le ha enviado un correo de activacion al profesor.');
-        TbUtils.go('main.professors');
-    }
-
-    function registerProfessorFail(response) {
-        TbUtils.showErrorMessage(response.data);
+        TbUtils.postAndGoTo(professors.registerProfessor, vm.professor, 
+            'main.professors', 'Se le ha enviado un correo de activacion al profesor.', () => { vm.submitting = false; });
     }
 
 }

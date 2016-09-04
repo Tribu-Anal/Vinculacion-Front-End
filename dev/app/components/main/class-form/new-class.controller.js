@@ -14,18 +14,10 @@ function NewClassController (TbUtils, classes) {
 
 	function submit() {
 		vm.submitting = true;
-		classes.postClass(vm.class, postSuccess, postFail);
+		TbUtils.postAndGoTo(classes.postClass, vm.class, 
+			'main.classes', 'La clase se creo con exito!', () => { vm.submitting = false; });
 	}
 
-	function postSuccess() {
-		TbUtils.displayNotification('success', 'Exito!', 'La clase ha sido creada!');
-		TbUtils.go('main.classes');
-	}
-
-	function postFail(response) {
-		vm.submitting = false;
-		TbUtils.showErrorMessage(response.data);
-	}
 }
 
 module.exports = { name: 'NewClassController', ctrl: NewClassController };
