@@ -7,6 +7,7 @@ function tbSearchField(filterFilter) {
             obj: '=?',
             results: '=?',
             data: '=?',
+            onClick: '=?',
             getAll: '=?',
             loading: '=?',
             auto: '=?',
@@ -17,34 +18,35 @@ function tbSearchField(filterFilter) {
         link: scope => {
             if (!scope.placeholder) scope.placeholder = "Ingrese su busqueda";
             if (scope.auto && !scope.min) scope.min = 1;
+            if (!scope.onClick) scope.onClick = searchAll;
 
             scope.all = null;
+            scope.search = search;
 
-            scope.search = term => {
-                if (typeof scope.obj === 'function')
-                    scope.results = filterFilter(scope.data, scope.obj(term));
+            scope.$watch('searchText', term => {
+                if (scope.auto && term.length >= scope.min)
+                    scope.search(scope.data, term);
                 else
                     scope.results = scope.data;
-            };
+            });
 
-            scope.searchAll = term => {
+            function searchAll (term) {
                 if (typeof scope.getAll === 'function' && !scope.all) {
                     scope.loading = true;
-                    scope.getAll(resp => { scope.all = resp.data; 
-                                           scope.results = filterFilter(scope.all, scope.obj(term)); }, 
+                    scope.getAll(resp => { scope.all = resp.data; search(scope.all, term); }, 
                                  resp => { TbUtils.showErrorMessage(resp.data) },
                                  ()   => { scope.loading = false; });
                 }
                 else
-                    scope.results = filterFilter(scope.all, scope.obj(term));
-            };
+                    search(scope.all, term);
+            }
 
-            scope.$watch('searchText', term => {
-                if (scope.auto && term.length >= scope.min)
-                    scope.search(term);
+            function search (list, term) {
+                if (list && typeof scope.obj === 'function')
+                    scope.results = filterFilter(list, scope.obj(term));
                 else
                     scope.results = scope.data;
-            });
+            }
 
         }
     }
