@@ -7,9 +7,11 @@ function settlement($http) {
         dowloadFiniquitoReport: dowloadFiniquitoReport
     };
 
-    function getPendingFiniquitos(successCallback, errorCallback) {
-        $http.get(url + '/PendingFiniquitoStudents').then(successCallback)
-            .catch(errorCallback);
+    function getPendingFiniquitos(success, error, fin) {
+        $http.get(url + '/PendingFiniquitoStudents')
+        .then(success)
+        .catch(error)
+        .finally(fin);
     }
 
     function dowloadFiniquitoReport(accountId) {

@@ -1,16 +1,27 @@
-ApproveHoursController.$inject = ['hours', 'TbUtils', '$scope'];
+ApproveHoursController.$inject = [ 'TbUtils', 'hours' ];
 
-function ApproveHoursController(hours, TbUtils, $scope) {
+function ApproveHoursController(TbUtils, hours) {
     const vm = this;
+
     vm.model = undefined;
     vm.toTitleCase = TbUtils.toTitleCase;
     vm.getPeriod = getPeriod;
-    $scope.placeholder = 'Buscar por código del reporte.';
-    $scope.search = searchInfo;
     vm.approveHours = approveHours;
+
+    vm.placeholder = 'Buscar por código del reporte.';
+    vm.search = searchInfo;
+
+    vm.loading = false;
 
     function getPeriod(period) {
         return period ? period.Number + period.Year : "";
+    }
+
+    function searchInfo (term) {
+        vm.loading = true;
+
+        hours.getHoursInfoSectionProjects(term, getHoursInfoSectionProjects,
+            getHoursInfoSectionProjectsFail, () => { vm.loading = false; });
     }
 
     function getHoursInfoSectionProjects(response) {
@@ -20,30 +31,24 @@ function ApproveHoursController(hours, TbUtils, $scope) {
             'Estas horas ya fueron Aprobadas');
     }
 
-    function getHoursInfoSectionProjectsFail() {
-        TbUtils.displayNotification('error', 'Error',
-            'No se encontró la sección');
-    }
-
-    function searchInfo() {
-        hours.getHoursInfoSectionProjects($scope.search.data, getHoursInfoSectionProjects,
-            getHoursInfoSectionProjectsFail);
+    function getHoursInfoSectionProjectsFail(resposne) {
+        TbUtils.showErrorMessage(response.data);
     }
 
     function approveHours() {
+        vm.loading = true;
         hours.putSectionProjectsApprove(vm.model.Id, putSectionProjectsApproveSuccess,
-            putSectionProjectsApproveFail);
+            putSectionProjectsApproveFail, () => { vm.loading = false; });
     }
 
     function putSectionProjectsApproveSuccess(){
     	TbUtils.displayNotification('success', 'Exitoso',
             'Horas aprobadas correctamente.');
-    	location.reload()
+    	TbUtils.reload()
     }
 
-    function putSectionProjectsApproveFail(){
-    	TbUtils.displayNotification('error', 'Error',
-            'Las horas no pudieron ser aprobadas correctamente.');
+    function putSectionProjectsApproveFail(resp){
+    	TbUtils.showErrorMessage(resp.data);
     }
 }
 
