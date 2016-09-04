@@ -1,8 +1,10 @@
-ProfessorFormController.$inject = ['$rootScope', '$state', 'professors', 'TbUtils'];
+NewProfessorController.$inject = [ 'TbUtils', 'professors' ];
 
-function ProfessorFormController($rootScope, $state, professors, TbUtils) {
+function NewProfessorController(TbUtils, professors) {
 
-    var vm = this;
+    const vm = this;
+
+    vm.formTitle = 'Nueva Clase';
 
     vm.professor = {
         AccountId: '',
@@ -12,26 +14,28 @@ function ProfessorFormController($rootScope, $state, professors, TbUtils) {
         Campus: 'SPS'
     };
 
-    vm.accountId;
+    vm.submitting = false;
+    vm.accountId = undefined;
 
     vm.registerProfessor = registerProfessor;
 
     function registerProfessor() {
+        vm.submitting = true;
+
         vm.professor.AccountId = vm.accountId.toString();
         professors.registerProfessor(vm.professor, registerProfessorSuccess, registerProfessorFail);
     }
 
     function registerProfessorSuccess(response) {
-        $state.go('main.dashboard');
-        TbUtils.displayNotification('success', 'Profesor Creado!', 'Se le ha enviado un correo de activacion al profesor.');
+        TbUtils.displayNotification('success', 'Profesor Creado!', 
+            'Se le ha enviado un correo de activacion al profesor.');
+        TbUtils.go('main.professors');
     }
 
     function registerProfessorFail(response) {
         TbUtils.showErrorMessage(response.data);
     }
+
 }
 
-module.exports = {
-    name: 'ProfessorFormController',
-    ctrl: ProfessorFormController
-};
+module.exports = { name: 'NewProfessorController', ctrl: NewProfessorController };
