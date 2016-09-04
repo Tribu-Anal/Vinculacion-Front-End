@@ -28,9 +28,6 @@ function EditStudentController (majors, TbUtils, stateParams, students) {
     function submit () {
     	vm.submitting = true;
     	vm.student.AccountId = vm.accountId.toString();
-    	// TbUtils.updateAndNotify(students.update, oldAccountId, vm.student, 'Estudiante actualizado!',
-    	// 	                    ()   => { vm.submitting = false; },
-    	// 	                    resp => { TbUtils.go('main.students'); });
     }
 
 }
