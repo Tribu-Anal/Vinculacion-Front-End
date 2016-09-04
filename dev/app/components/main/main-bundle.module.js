@@ -21,10 +21,10 @@ const ApproveHours          = require('./approve-hours/approve-hours.module'),
       Students              = require('./students/students.module');
 
 const moduleName = 'main-bundle',
-      components = [ ActivateProfessor, ApproveHours, Classes, ClassForm, Dashboard, EditHours, ImportStudents, Main,
-                     Periods, PeriodForm, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm,
-                     Projects, Reports, Section, SectionForm, Sections, Settlement, Students ];
-                     
+      components = [ ApproveHours, Classes, ClassForm, Dashboard, EditHours, ImportStudents, Main,
+                     Periods, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm, Projects, Reports,
+                     Section, SectionForm, Sections, Settlement, Students ];
+
 angular.module(moduleName, components);
 
 module.exports = moduleName;
