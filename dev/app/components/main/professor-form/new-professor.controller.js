@@ -17,9 +17,9 @@ function NewProfessorController(TbUtils, professors) {
     vm.submitting = false;
     vm.accountId = undefined;
 
-    vm.registerProfessor = registerProfessor;
+    vm.submit = submit;
 
-    function registerProfessor() {
+    function submit () {
         vm.submitting = true;
 
         vm.professor.AccountId = vm.accountId.toString();
