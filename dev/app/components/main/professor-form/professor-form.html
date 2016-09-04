@@ -5,15 +5,19 @@
     
     <div>
         <label class="cd-label">Numero de Cuenta</label>
-        <input ng-model="vm.accountId" min="20000000" maxlength="8" validation-max-length="8" validation-no-special-chars="true" class="user" type="number" name="accountId" id="cd-name" required>
+        <input ng-model="vm.accountId" minlength="8" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.accountId.$error.required">
             * Por favor ingrese un numero de cuenta valido.
+        </p>
+        <p class="error-message" ng-show="professorForm.$submitted && (professorForm.accountId.$error.maxlength ||
+           professorForm.accountId.$error.minlength)">
+            * Numero de cuenta de tener 8 digitos.
         </p>
     </div>
     
     <div>
         <label class="cd-label">Nombre</label>
-        <input ng-model="vm.professor.Name" class="user" type="text" name="Name" id="cd-name" validation-field-required="true" validation-max-length="20" validation-no-special-chars="true" required> 
+        <input ng-model="vm.professor.Name" class="user" type="text" name="Name" id="cd-name" required> 
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.Name.$error.required">
             * Por favor ingrese el nombre del profesor.
         </p>
@@ -21,9 +25,13 @@
     
     <div>
         <label class="cd-label">Email</label>
-        <input ng-model="vm.professor.Email" class="user" type="email" name="Email" id="cd-name" ng-pattern='/@unitec.edu$/' validation-no-space="true" validation-field-required="true" validation-unitec-email="true" required>
+        <input ng-model="vm.professor.Email" class="user" type="email" name="Email" id="cd-name" 
+               ng-pattern="/^[a-z0-9]{1,}@unitec.edu/" required>
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.Email.$error.required">
             * Por favor ingrese el correo del profesor.
+        </p>
+        <p class="error-message" ng-show="professorForm.$submitted && professorForm.Email.$invalid">
+            * Por favor ingrese un correo valido.
         </p>
     </div>
 
