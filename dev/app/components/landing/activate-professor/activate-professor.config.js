@@ -3,9 +3,9 @@ config.$inject = [ '$stateProvider' ];
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('main.activateprofessor', {
+		.state('landing.activate-professor', {
 			url: '/registro-maestro/{accountId}',
-			templateUrl: 'templates/components/main/activate-professor/activate-professor.html',
+			templateUrl: 'templates/components/landing/activate-professor/activate-professor.html',
 			controller: "ActivateProfessorController as vm",
 			onEnter: onStateEnter
 		});
