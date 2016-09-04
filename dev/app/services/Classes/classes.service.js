@@ -19,16 +19,18 @@ function classes($http, TbUtils) {
             .finally(fin);
     }
 
-    function postClass(data, successCallback, errorCallback) {
+    function postClass(data, success, error, fin) {
         $http.post(url, JSON.stringify(data))
-            .then(successCallback)
-            .catch(errorCallback);
+            .then(success)
+            .catch(error)
+            .finally(fin);
     }
 
-    function update (id, data, success, error) {
+    function update (id, data, success, error, fin) {
         $http.put(url + '/' + id, data)
             .then(success)
-            .catch(error);
+            .catch(error)
+            .finally(fin);
     }
 
     function getWithPagination (page, size, success, error, _finally) {
