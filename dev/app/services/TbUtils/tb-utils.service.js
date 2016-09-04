@@ -13,6 +13,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         toTitleCase: toTitleCase,
         getAndLoad: getAndLoad,
         deleteAndNotify: deleteAndNotify,
+        updateAndNotify: updateAndNotify,
         getListCopy: getListCopy,
         queryList: queryList,
         confirm: confirm,
@@ -175,10 +176,24 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
                 fin);
     }
 
-    function deleteAndNotify (_delete, data, list, msg, fin) {
-        _delete(data.Id, resp => { removeItemFromList(data, list); displayNotification('success', 'Exito', msg); },
-                         resp => { showErrorMessage(resp.data); },
-                         fin);
+    function deleteAndNotify (_delete, data, list, msg, fin, suc, err) {
+        _delete(data.Id, resp => { 
+                if (typeof suc === 'function') suc(resp);
+                removeItemFromList(data, list); displayNotification('success', 'Exito', msg); 
+            }, resp => { 
+                if (typeof err === 'function') err(resp);
+                showErrorMessage(resp.data); 
+            }, fin);
+    }
+
+    function updateAndNotify (put, id, data, msg, fin, suc, err) {
+        put(id, data, resp => { 
+            if (typeof suc === 'function') suc(resp);
+            displayNotification('success', 'Exito', msg); 
+        }, resp => {
+            if (typeof err === 'function') err(resp);
+            showErrorMessage(resp.data);
+        }, fin);
     }
 
 }
