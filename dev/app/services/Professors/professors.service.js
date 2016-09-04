@@ -8,7 +8,8 @@ function professors($http) {
         activateProfessor: activateProfessor,
         getActiveProfessor: getActiveProfessor,
         getWithPagination: getWithPagination,
-        get: get
+        get: get,
+        update: update
     };
 
     return service;
@@ -41,6 +42,13 @@ function professors($http) {
         $http.get(url)
             .then(success)
             .catch(error)
+            .finally(fin);
+    }
+
+    function update (id, data, suc, err, fin) {
+        $http.put(url+'/'+id, data)
+            .then(suc)
+            .catch(err)
             .finally(fin);
     }
 
