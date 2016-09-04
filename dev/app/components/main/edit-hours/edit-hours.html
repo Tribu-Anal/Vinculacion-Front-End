@@ -17,4 +17,7 @@
 		        ng-click="vm.saveChanges()">Guardar cambios</button>
 	</div>
 </div>
-<tb-loading class="main-loader" ng-show="vm.participantsLoading" style="z-index: 99999"></tb-loading>
+<tb-loading class="main-loader" 
+            ng-show="vm.participantsLoading || vm.projectLoading || vm.loadingProjectInfo || vm.postingHours" 
+            style="z-index: 99999">
+</tb-loading>
