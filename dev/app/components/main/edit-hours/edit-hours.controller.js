@@ -1,12 +1,16 @@
 EditHoursController.$inject = ['$stateParams', 'sections', 'projects',
-    'TbUtils', '$rootScope', 'hours', '$mdDialog', 'students'
+    'TbUtils', '$rootScope', 'hours', '$mdDialog', 'students', 'sectionProjects'
 ];
 
 function EditHoursController($stateParams, sections, projects,
-    TbUtils, $rootScope, hours, $mdDialog, students) {
+    TbUtils, $rootScope, hours, $mdDialog, students, sectionProjects) {
     const vm = this;
 
     vm.participantsLoading = true;
+    vm.projectLoading      = true;
+    vm.loadingProjectInfo  = true;
+    vm.postingHours        = false;
+
     vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
     vm.editHours = {
         visible: $rootScope.Role !== 'Student',
@@ -16,7 +20,7 @@ function EditHoursController($stateParams, sections, projects,
     vm.evaluateProject = evaluateProject;
 
     vm.isApproved = false;
-
+    vm.cost = 0;
     vm.projectName = null;
     vm.description = null;
     vm.students = [];
@@ -31,8 +35,10 @@ function EditHoursController($stateParams, sections, projects,
 
     projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
 
+    sectionProjects.getSectionProject($stateParams.sectionId, $stateParams.projectId, 
+                                      getSectionProjectSuccess, getSectionProjectFail);
+
     function getStudentsHoursSuccess(response) {
-        console.log(response);
         vm.students = response.data.Hours;
 
         vm.isApproved = response.data.IsApproved;
@@ -51,19 +57,30 @@ function EditHoursController($stateParams, sections, projects,
         vm.participantsLoading = false;
     }
 
-    function getStudentsHoursFail() {
+    function getStudentsHoursFail(response) {
         vm.participantsLoading = false;
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron cargar los alumnos correctamente.');
+        TbUtils.showErrorMessage(response.data);
     }
 
     function getProjectSuccess(response) {
         vm.projectName = TbUtils.toTitleCase(response.data.Name);
-        vm.description = TbUtils.toTitleCase(response.data.Description);
+        vm.projectLoading = false;
     }
     
     function getProjectFail(response) {
-        TbUtils.displayNotification('error', 'Error', 'No se pudieron cargar los datos.');
+        TbUtils.showErrorMessage(response.data);
+        vm.projectLoading = false;
+    }
+
+    function getSectionProjectSuccess(response){
+        vm.cost = response.data.Cost;
+        vm.description = response.data.Description;
+        vm.loadingProjectInfo = false;
+    }
+
+    function getSectionProjectFail(response){
+        TbUtils.displayNotification('error', 'Error', 'No existe relacion entre seccion y proyecto.');
+        vm.loadingProjectInfo = false;
     }
 
     function evaluateProject() {
@@ -99,6 +116,8 @@ function EditHoursController($stateParams, sections, projects,
     }
 
     function saveHours() {
+        vm.postingHours = true;
+
         let obj = {
             ProjectId: parseInt($stateParams.projectId),
             SectionId: parseInt($stateParams.sectionId),
@@ -107,17 +126,19 @@ function EditHoursController($stateParams, sections, projects,
         hours.postHours(obj, postHoursSuccess, postHoursFail);
     }
 
-    function postHoursFail(response) {
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron registrar las horas');
-    }
-
     function postHoursSuccess() {
         TbUtils.displayNotification('success', 'Exitoso',
             'Horas registradas exitosamente.');
         vm.editHours.value = false;
-        location.reload()
+        vm.postingHours = false;
+        TbUtils.reload();
     }
+
+    function postHoursFail(response) {
+        TbUtils.showErrorMessage(response.data);
+        vm.postingHours = false;
+    }
+
 }
 
 module.exports = {
