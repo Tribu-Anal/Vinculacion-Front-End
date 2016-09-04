@@ -17,6 +17,7 @@ function ActivateProfessorController($rootScope, $stateParams, professors, TbUti
 
     leaveIfSessionStarted();
     getToken();
+    console.log($stateParams.accountId);
 
     function activateProfessor() {
         professors.activateProfessor(vm.professor, activateProfessorSuccess, activateProfessorFail);

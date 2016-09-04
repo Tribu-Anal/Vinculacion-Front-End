@@ -15,6 +15,14 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     $rootScope.guest = true;
     $rootScope.loggedIn = $rootScope.Session.length > 0;
 
+    //console.log($location.$$path);/registro-maestro/MNzKO9OcC%2fxsr3gN41FTDw%3d%3d
+    let path = $location.$$path.substring(0, 18);
+    let view = $location.$$path.substring(18);
+    if(path === '/registro-maestro/') {
+        view = encodeURIComponent(view);
+        $location.path(path + view);
+    }
+
     let stateUrl = "";
     let redirect = require('./redirect');
 

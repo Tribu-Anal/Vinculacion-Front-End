@@ -1,5 +1,4 @@
-const ActivateProfessor     = require('./activate-professor/activate-professor.module'),
-      ApproveHours          = require('./approve-hours/approve-hours.module'),
+const ApproveHours          = require('./approve-hours/approve-hours.module'),
       Classes               = require('./classes/classes.module'),
       ClassForm             = require('./class-form/class-form.module'),
       Dashboard             = require('./dashboard/dashboard.module');
@@ -21,7 +20,7 @@ const ActivateProfessor     = require('./activate-professor/activate-professor.m
       Students              = require('./students/students.module');
 
 const moduleName = 'main-bundle',
-      components = [ ActivateProfessor, ApproveHours, Classes, ClassForm, Dashboard, EditHours, ImportStudents, Main,
+      components = [ ApproveHours, Classes, ClassForm, Dashboard, EditHours, ImportStudents, Main,
                      Periods, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm, Projects, Reports, 
                      Section, SectionForm, Sections, Settlement, Students ];
 
