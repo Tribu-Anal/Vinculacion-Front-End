@@ -1,4 +1,10 @@
-<tb-search-field obj="vm.sectionObj" results="vm.searchResults" data="vm.sections" auto="true"></tb-search-field>
+<tb-search-field obj="vm.sectionObj" 
+                 results="vm.searchResults" 
+                 data="vm.sections"
+                 get-all="vm.getAll"
+                 loading="vm.loading" 
+                 auto="true">
+</tb-search-field>
 <div class="row" ng-if="vm.sections.length > 0">
 	<tb-table class="col-md-12" 
 	          schema="vm.tableSchema" 
@@ -7,11 +13,12 @@
 	          style="margin-bottom: 40px;">
 	</tb-table>
 </div>
+<h1 style="text-align: center; color: #999;" ng-if="vm.searchResults.length === 0">Sin resultados.</h1>
 <tb-load-more-btn start-page="1" 
                   page-size="vm.pageSize" 
                   model="vm.sections" 
                   get="vm.get"
                   ng-hide="vm.hideLoadBtn()">
 </tb-load-more-btn>
-<tb-loading class="main-loader" ng-show="vm.sectionsLoading"></tb-loading>
+<tb-loading class="main-loader" ng-show="vm.loading"></tb-loading>
 <tb-round-btn ng-click="vm.goToNewSection()">+</tb-round-btn>

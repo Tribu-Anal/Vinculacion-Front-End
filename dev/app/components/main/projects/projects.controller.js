@@ -8,6 +8,7 @@ function ProjectsController(TbUtils, projects, $rootScope) {
 
     vm.pageSize = 9;
     vm.get = projects.getProjectsWithPagination;
+    vm.getAll = projects.getProjects;
     vm.hideLoadBtn = () => vm.projects.length !== vm.searchResults.length;
 
     vm.projects = [];
