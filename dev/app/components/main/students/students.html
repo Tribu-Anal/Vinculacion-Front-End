@@ -5,6 +5,8 @@
                  loading="vm.loading"
                  auto="true">
 </tb-search-field>
+<md-button class="md-raised" ng-click="vm.goToImportStudents()" 
+           style="position: absolute; top: 3.7%; left: 77%;">Importar Alumnos</md-button>
 <div class="row" ng-if="vm.students.length > 0">
 	<tb-table class="col-md-12" 
 	          schema="vm.tableSchema" 
@@ -21,4 +23,5 @@
                   ng-hide="vm.hideLoadBtn()">
 </tb-load-more-btn>
 <tb-loading class="main-loader" ng-show="vm.loading"></tb-loading>
+<!-- <tb-round-btn ng-click="vm.goToImportStudents()" style="top: 73%;"><i class="glyphicon glyphicon-upload" style="margin-top: 23%;"></i></tb-round-btn> -->
 <tb-round-btn ng-click="vm.goToNewStudent()">+</tb-round-btn>
