@@ -18,7 +18,7 @@ function tbSearchField(filterFilter) {
         link: scope => {
             if (!scope.placeholder) scope.placeholder = "Ingrese su busqueda";
             if (scope.auto && !scope.min) scope.min = 1;
-            if (!scope.onClick) scope.onClick = searchAll;
+            if (!scope.onClick) { scope.onClick = searchAll; scope.tooltip = 'Has click para buscar mas.'; }
 
             scope.all = null;
             scope.search = search;
