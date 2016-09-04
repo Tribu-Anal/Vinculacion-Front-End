@@ -17,10 +17,10 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
 
     //console.log($location.$$path);/registro-maestro/MNzKO9OcC%2fxsr3gN41FTDw%3d%3d
     let path = $location.$$path.substring(0, 18);
-    let view = $location.$$path.substring(18);
+    let token = $location.$$path.substring(18);
     if(path === '/registro-maestro/') {
-        view = encodeURIComponent(view);
-        $location.path(path + view);
+        token = encodeURIComponent(token);
+        $location.path(path + token);
     }
 
     let stateUrl = "";
