@@ -1,17 +1,27 @@
-<tb-search-field obj="vm.periodObj" results="vm.searchResults" data="vm.periods" auto="true"></tb-search-field>
+<div style="display: flex; text-align: center; flex-direction: column;">
+  <h1>Periodo Actual:</h1><h3>4-2016</h3>
+</div>
+<tb-search-field obj="vm.searchObj" 
+                 results="vm.searchResults"
+                 data="vm.periods"
+                 get-all="vm.getAll"
+                 loading="vm.loading"
+                 auto="true">
+</tb-search-field>
 <div class="row" ng-if="vm.periods.length > 0">
 	<tb-table class="col-md-12" 
 	          schema="vm.tableSchema" 
 	          model="vm.searchResults"
-	          on-row-click="vm.editPeriod"
+	          on-row-click="vm.setCurrentPeriod"
 	          style="margin-bottom: 40px;">
 	</tb-table>
 </div>
+<h1 style="text-align: center; color: #999;" ng-if="vm.searchResults.length === 0">Sin resultados.</h1>
 <tb-load-more-btn start-page="1" 
                   page-size="vm.pageSize" 
                   model="vm.periods" 
                   get="vm.get"
                   ng-hide="vm.hideLoadBtn()">
 </tb-load-more-btn>
-<tb-loading class="main-loader" ng-show="vm.periodsLoading"></tb-loading>
+<tb-loading class="main-loader" ng-show="vm.loading || vm.gettingCurrentPeriod"></tb-loading>
 <tb-round-btn ng-click="vm.goToNewPeriod()">+</tb-round-btn>

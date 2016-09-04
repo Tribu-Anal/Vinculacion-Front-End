@@ -1,0 +1,18 @@
+<md-content style="height: 100%;" ng-if="!vm.submitting" layout-padding>
+    <div layout-gt-xs="column" layout-align="center center">
+      <h2 style="margin-bottom: 30px;">{{vm.formTitle}}</h2>
+      <div flex-gt-xs style="margin-bottom: 30px;">
+        <h4>Inicio de Periodo</h4>
+        <md-datepicker ng-model="vm.period.FromDate" md-placeholder="Ingrese fecha"></md-datepicker>
+      </div>
+      <div flex-gt-xs style="margin-bottom: 30px;">
+        <h4>Fin de Periodo</h4>
+        <md-datepicker ng-model="vm.period.ToDate" md-placeholder="Ingrese fecha"></md-datepicker>
+      </div>
+    </div>
+    <div layout-gt-xs="row" layout-align="center">
+        <md-button class="md-raised md-primary" ng-click="vm.back()">Cancelar</md-button>
+        <md-button class="md-raised md-primary md-hue-2" ng-click="vm.submit()">Confirmar</md-button>
+    </div>
+</md-content>
+<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading> 

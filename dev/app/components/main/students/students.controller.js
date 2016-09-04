@@ -11,14 +11,16 @@ function StudentsController (TbUtils, students) {
 
     vm.pageSize = 10;
     vm.get = students.getWithPagination;
+    vm.getAll = students.get;
     vm.hideLoadBtn = () => vm.students.length !== vm.searchResults.length;
 
     vm.goToNewStudent = () => { TbUtils.go('main.new-student'); };
+    vm.goToImportStudents = () => { TbUtils.go('main.import-students'); };
     vm.editStudent = student => { TbUtils.go('main.edit-student', { student: btoa(JSON.stringify(student)) }); };
 
-    vm.studentsLoading = true;
+    vm.loading = true;
 
-    TbUtils.getAndLoad(students.getWithPagination, vm.students, () => { vm.studentsLoading = false; }, 0, vm.pageSize);
+    TbUtils.getAndLoad(vm.get, vm.students, () => { vm.loading = false; }, 0, vm.pageSize);
 
 }
 

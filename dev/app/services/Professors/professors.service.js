@@ -7,15 +7,18 @@ function professors($http) {
         registerProfessor: registerProfessor,
         activateProfessor: activateProfessor,
         getActiveProfessor: getActiveProfessor,
-        getWithPagination: getWithPagination
+        getWithPagination: getWithPagination,
+        get: get,
+        update: update
     };
 
     return service;
 
-    function registerProfessor(professor, successCallback, errorCallback) {
+    function registerProfessor(professor, successCallback, errorCallback, fin) {
         $http.post(url, JSON.stringify(professor))
             .then(successCallback)
-            .catch(errorCallback);
+            .catch(errorCallback)
+            .finally(fin);
     }
 
     function activateProfessor(professor, successCallback, errorCallback) {
@@ -33,6 +36,20 @@ function professors($http) {
         $http.get(url + '?$top=' + size + '&$skip=' + (page * size) + '&$orderby=Id desc')
             .then(success)
             .catch(error)
+            .finally(fin);
+    }
+
+    function get (success, error, fin) {
+        $http.get(url)
+            .then(success)
+            .catch(error)
+            .finally(fin);
+    }
+
+    function update (id, data, suc, err, fin) {
+        $http.put(url+'/'+id, data)
+            .then(suc)
+            .catch(err)
             .finally(fin);
     }
 

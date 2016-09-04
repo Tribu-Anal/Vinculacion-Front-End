@@ -102,8 +102,6 @@ function sections($http) {
     }
 
     function getStudentsHoursBySectionProjectId(sectionId, projectId, successCallback, errorCallback) {
-        console.log(sectionId);
-        console.log(projectId);
         $http.get(url + '/StudentsHour/' + sectionId + '/' + projectId).then(successCallback).catch(errorCallback);
     }
 

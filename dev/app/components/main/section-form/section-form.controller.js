@@ -33,10 +33,9 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     vm.submit = submit;
     vm.queryStudents = queryStudents;
     vm.simulateQuery = false;
-    // vm.addStudentToSection = addStudentToSection;
     vm.addProjects = addProjects;
     vm.professorActive = $rootScope.Role === 'Professor';
-    projects.selectedProjectsInSectionForm = [];
+    projects.selectedProjects = [];
 
     var addProjectsModal = {
         templateUrl: 'templates/components/main/section-form/dialogs/' +
@@ -55,7 +54,7 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
     function removeProject (project) {
         vm.section.projectIds.splice(vm.section.projectIds.indexOf(project.Id), 1);
         vm.selectedProjects.splice(vm.selectedProjects.indexOf(project), 1);
-        projects.selectedProjectsInSectionForm = vm.selectedProjects;
+        projects.selectedProjects = vm.selectedProjects;
     }
 
     function removeStudent (student) {
@@ -66,13 +65,11 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         if (vm.selectedItem && !isAlreadyOnList(vm.selectedItem.AccountId)) {
             vm.sectionStudents.push(vm.selectedItem);
             vm.searchText = "";
-            console.log(vm.sectionStudents);
         }
     }
 
     function submit() {
         vm.submitting = true;
-        console.log(vm.section.projectIds);
         sections.postSection(vm.section, submitSuccess, submitFailure);
     }
 
@@ -99,8 +96,6 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
             Cost: vm.section.Cost
         };
 
-        console.log(sectionProjectObj);
-
         sectionProjects.postSectionProjects(sectionProjectObj, resp => {}, resp => {});
     }
 
@@ -121,9 +116,10 @@ function SectionFormController($rootScope, $state, TbUtils, sections, sectionDat
         modal.close.then(selectProjects);
     }
 
-    function selectProjects (projects) {
-        vm.selectedProjects = projects;
-        //projects.selectedProjectsInSectionForm = vm.selectedProjects;
+    function selectProjects (_projects) {
+        if (!_projects) return;
+
+        vm.selectedProjects = projects.selectedProjects = _projects;
 
         vm.section.projectIds = [];
 

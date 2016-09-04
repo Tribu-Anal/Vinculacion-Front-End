@@ -13,6 +13,10 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         toTitleCase: toTitleCase,
         getAndLoad: getAndLoad,
         deleteAndNotify: deleteAndNotify,
+        updateAndNotify: updateAndNotify,
+        updateAndGoTo: updateAndGoTo,
+        postAndGoTo: postAndGoTo,
+        getListCopy: getListCopy,
         queryList: queryList,
         confirm: confirm,
         prompt: prompt,
@@ -118,7 +122,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     }
 
     function reload () {
-        if (state.includes('main'))
+        if ($state.includes('main'))
             preventGeneralLoading();
         
         $state.reload();
@@ -132,6 +136,15 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
             parent: angular.element(document.body)
         }
         $mdDialog.show(options).then(callback);
+    }
+
+    function getListCopy (list) {
+        let cpy = [];
+
+        for (e of list)
+            cpy.push(e);
+
+        return cpy;
     }
 
     function sortBy(array, property) {
@@ -165,10 +178,32 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
                 fin);
     }
 
-    function deleteAndNotify (_delete, data, msg, fin) {
-        _delete(data, resp => { displayNotification('success', 'Exito', msg); },
-                      resp => { showErrorMessage(resp.data); },
+    function deleteAndNotify (_delete, data, list, msg, fin) {
+        _delete(data.Id, resp => {
+                removeItemFromList(data, list); displayNotification('success', 'Exito', msg); 
+            }, resp => { 
+                showErrorMessage(resp.data); 
+            }, fin);
+    }
+
+    function updateAndNotify (put, id, data, msg, fin) {
+        put(id, data, resp => {  displayNotification('success', 'Exito', msg); }, 
+                      resp => { showErrorMessage(resp.data); }, 
                       fin);
+    }
+
+    function updateAndGoTo (put, id, data, toState, msg, fin) {
+        put(id, data, resp => { 
+            displayNotification('success', 'Exito', msg ? msg : 'Actualizado!');
+            go(toState);
+        }, resp => { showErrorMessage(resp.data); }, fin);
+    }
+
+    function postAndGoTo (post, data, toState, msg, fin) {
+        post(data, resp => {
+            displayNotification('success', 'Exito', msg ? msg : 'Se creo con exito!');
+            go(toState);
+        }, resp => { showErrorMessage(resp.data); }, fin);
     }
 
 }

@@ -1,21 +1,32 @@
-"use strict";
-
 config.$inject = [ '$stateProvider' ];
 
 function config ($stateProvider) {
+	const templateUrl = 'templates/components/main/professor-form/professor-form.html';
 
 	$stateProvider
-		.state('main.newprofessor', {
-			url: '/nuevo-profesor',
-			templateUrl: 'templates/components/main/professor-form/professor-form.html',
-			controller: "ProfessorFormController as vm",
-			onEnter: onStateEnter
+		.state('main.new-professor', {
+			url: '/profesores/nuevo-profesor',
+			templateUrl: templateUrl,
+			controller: "NewProfessorController as vm",
+			onEnter: newProfessorStateEnter
+		})
+
+		.state('main.edit-professor', {
+			url: '/profesores/editar-profesor/{professor}',
+			templateUrl: templateUrl,
+			controller: "EditProfessorController as vm",
+			onEnter: editProfessorStateEnter
 		});
 }
 
-let onStateEnter = [ '$rootScope', 
-	function (rootScope) { 
+let newProfessorStateEnter = [ '$rootScope', 
+	rootScope => { 
 		rootScope.viewTitle  = "Vinculacion | Nuevo Professor";
+    	rootScope.viewStyles = "main project-form";
+    }
+], editProfessorStateEnter = [ '$rootScope', 
+	rootScope => { 
+		rootScope.viewTitle  = "Vinculacion | Editar Professor";
     	rootScope.viewStyles = "main project-form";
     }
 ];

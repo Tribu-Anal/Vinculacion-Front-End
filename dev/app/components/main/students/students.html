@@ -1,4 +1,12 @@
-<tb-search-field obj="vm.studentObj" results="vm.searchResults" data="vm.students" auto="true"></tb-search-field>
+<tb-search-field obj="vm.studentObj" 
+                 results="vm.searchResults" 
+                 data="vm.students" 
+                 get-all="vm.getAll"
+                 loading="vm.loading"
+                 auto="true">
+</tb-search-field>
+<md-button class="md-raised" ng-click="vm.goToImportStudents()" 
+           style="position: absolute; top: 3.7%; left: 77%;">Importar Alumnos</md-button>
 <div class="row" ng-if="vm.students.length > 0">
 	<tb-table class="col-md-12" 
 	          schema="vm.tableSchema" 
@@ -7,11 +15,13 @@
 	          style="margin-bottom: 40px;">
 	</tb-table>
 </div>
+<h1 style="text-align: center; color: #999;" ng-if="vm.searchResults.length === 0">Sin resultados.</h1>
 <tb-load-more-btn start-page="1" 
                   page-size="vm.pageSize" 
                   model="vm.students" 
                   get="vm.get"
                   ng-hide="vm.hideLoadBtn()">
 </tb-load-more-btn>
-<tb-loading class="main-loader" ng-show="vm.studentsLoading"></tb-loading>
+<tb-loading class="main-loader" ng-show="vm.loading"></tb-loading>
+<!-- <tb-round-btn ng-click="vm.goToImportStudents()" style="top: 73%;"><i class="glyphicon glyphicon-upload" style="margin-top: 23%;"></i></tb-round-btn> -->
 <tb-round-btn ng-click="vm.goToNewStudent()">+</tb-round-btn>
