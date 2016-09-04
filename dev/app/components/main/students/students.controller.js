@@ -14,7 +14,8 @@ function StudentsController (TbUtils, students) {
     vm.getAll = students.get;
     vm.hideLoadBtn = () => vm.students.length !== vm.searchResults.length;
 
-    vm.goToNewStudent = () => { TbUtils.go('main.import-students'); };
+    vm.goToNewStudent = () => { TbUtils.go('main.new-student'); };
+    vm.goToImportStudents = () => { TbUtils.go('main.import-students'); };
     vm.editStudent = student => { TbUtils.go('main.edit-student', { student: btoa(JSON.stringify(student)) }); };
 
     vm.loading = true;

@@ -6661,7 +6661,7 @@ angular_ui_form_validations = (function(){
                 customValidationAttribute: 'validationUnitecEmail',
                 errorMessage: 'Por favor ingresar un correo de Unitec v&aacute;lido',
                 validator: function(errorMessageElement, val){
-                    return (/^[a-z0-9](\.?[a-z0-9]){5,}@unitec\.edu$/i).test(val);
+                    return (/^[a-z0-9](\.?[a-z0-9]){1,}@unitec\.edu$/gi).test(val);
                 }
             },
             {

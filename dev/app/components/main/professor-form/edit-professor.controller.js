@@ -17,9 +17,9 @@ function EditProfessorController (TbUtils, professors, stateParams) {
     function submit () {
     	vm.submitting = true;
     	vm.professor.AccountId = vm.accountId.toString();
-    	TbUtils.updateAndNotify(professors.update, oldAccountId, vm.professor, 'Profesor actualizado!',
-    		                    ()   => { vm.submitting = false; },
-    		                    resp => { TbUtils.go('main.professors'); });
+
+    	TbUtils.updateAndGoTo(professors.update, oldAccountId, vm.professor, 
+            'main.professors', 'Profesor actualizado!', () => { vm.submitting = false; });
     }
 
 }

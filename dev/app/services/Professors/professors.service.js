@@ -14,10 +14,11 @@ function professors($http) {
 
     return service;
 
-    function registerProfessor(professor, successCallback, errorCallback) {
+    function registerProfessor(professor, successCallback, errorCallback, fin) {
         $http.post(url, JSON.stringify(professor))
             .then(successCallback)
-            .catch(errorCallback);
+            .catch(errorCallback)
+            .finally(fin);
     }
 
     function activateProfessor(professor, successCallback, errorCallback) {
