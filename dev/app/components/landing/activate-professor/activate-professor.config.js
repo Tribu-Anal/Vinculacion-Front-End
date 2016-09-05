@@ -11,10 +11,10 @@ function config ($stateProvider) {
 		});
 }
 
-let onStateEnter = [ '$rootScope', 
-	function (rootScope) { 
+let onStateEnter = [ '$rootScope',
+	function (rootScope) {
 		rootScope.viewTitle  = "Vinculacion | Activar Professor";
-    	rootScope.viewStyles = "main project-form";
+    	rootScope.viewStyles = "landing activate-professor";
     }
 ];
 
