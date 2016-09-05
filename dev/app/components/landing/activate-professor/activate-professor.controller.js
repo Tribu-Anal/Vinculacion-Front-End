@@ -11,7 +11,7 @@ function ActivateProfessorController($rootScope, $stateParams, professors, TbUti
 
     vm.accountId;
     vm.confirmPass = '';
-
+    vm.submitting = false;
     vm.activateProfessor = activateProfessor;
     $rootScope.globals.guest = true;
 
@@ -19,6 +19,7 @@ function ActivateProfessorController($rootScope, $stateParams, professors, TbUti
     getToken();
 
     function activateProfessor() {
+        vm.submitting = true;
         professors.activateProfessor(vm.professor, activateProfessorSuccess, activateProfessorFail);
     }
 
