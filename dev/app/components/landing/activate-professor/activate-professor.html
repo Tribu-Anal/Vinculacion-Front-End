@@ -1,25 +1,42 @@
-<form name="activateProfessorForm" class="cd-form" ng-submit="activateProfessorForm.$valid && vm.activateProfessor()" novalidate>
-    <legend>
-        <strong>Activar Profesor</strong>
-    </legend>
-    
-    <div>
-        <label class="cd-label">Contraseña</label>
-        <input ng-model="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" validation-min-length="8" validation-one-number="true" validation-one-upper-case-letter="true" validation-one-lower-case-letter="true" validation-field-required="true" validation-no-space="true" required>
-        <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
-            * Por favor ingrese la contraseña.
-        </p>
+<div class="container">
+  <img class="img-responsive logo" src="img/logo.png" />
+  <div class="row">
+    <div class="span12" style="text-align:center; margin: 0 auto;">
+      <form ng-hide="vm.submitting" name="activateProfessorForm" ng-submit="activateProfessorForm.$valid && vm.activateProfessor()" novalidate class="form-horizontal">
+        <fieldset>
+          <h2>Registrar Maestro</h2>
+          <div class="control-group">
+            <label class="control-label">Nueva contraseña</label>
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-unlock"></span>
+                <input ng-model="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" required>
+              </div>
+              <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
+                Por favor ingrese la contraseña.
+              </p>
+            </div>
+
+          </div>
+          <div class="control-group">
+            <label class="control-label">Confirmar Contraseña</label>
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-lock"></span>
+                <input ng-model="vm.confirmPass" ng-pattern="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" required>
+              </div>
+              <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
+                Vuelve a escribir la contraseña.
+              </p>
+              <p class="error-message" ng-show="activateProfessorForm.$submitted && vm.confirmPass !== '' && vm.professor.Password !== vm.confirmPass">
+                Las contraseñas no coinciden.
+              </p>
+            </div>
+          </div>
+        </fieldset>
+        <input class="btn btn-lg btn-info" type="submit" value="Confirmar">
+      </form>
     </div>
-    
-    <div>
-        <label class="cd-label">Confirmar Contraseña</label>
-        <input ng-model="vm.confirmPass" ng-pattern="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" validation-confirm-password="true" required>
-        <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
-            * Vuelva a escribir la contraseña.
-        </p>
-    </div>
-    <div class="confirm-btn">
-        <input type="submit" value="Confirmar">
-    </div>
-</form>
-<tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading>
+  </div>
+</div>
+<tb-loading class="general-loader" ng-show="vm.submitting"></tb-loading>
