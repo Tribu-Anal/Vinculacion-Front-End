@@ -10,7 +10,7 @@
             <div class="controls">
               <div class="inner-addon left-addon">
                 <span class="fa fa-unlock"></span>
-                <input ng-model="vm.professor.Password" class="user" type="password" name="Password" id="cd-name" required>
+                <input ng-model="vm.professor.Password" type="password" name="Password" required>
               </div>
               <p class="error-message" ng-show="activateProfessorForm.$submitted && activateProfessorForm.Password.$error.required">
                 Por favor ingrese la contraseña.
@@ -23,7 +23,7 @@
             <div class="controls">
               <div class="inner-addon left-addon">
                 <span class="fa fa-lock"></span>
-                <input ng-model="vm.confirmPass" ng-pattern="vm.professor.Password" class="user" type="password" name="confirmpassword" id="cd-name" required>
+                <input ng-model="vm.confirmPass" ng-pattern="vm.professor.Password" type="password" name="confirmpassword" required>
               </div>
               <p class="error-message" ng-show="activateProfessorForm.$submitted && vm.confirmPass !== '' && vm.professor.Password !== vm.confirmPass">
                 Las contraseñas no coinciden.
