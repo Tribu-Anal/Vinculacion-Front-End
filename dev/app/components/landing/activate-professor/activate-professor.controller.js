@@ -1,8 +1,8 @@
-ActivateProfessorController.$inject = ['$rootScope', '$stateParams', 'professors', 'TbUtils', 'auth'];
+ActivateProfessorController.$inject = [ '$stateParams', 'professors', 'TbUtils', 'auth' ];
 
-function ActivateProfessorController($rootScope, $stateParams, professors, TbUtils, auth) {
+function ActivateProfessorController($stateParams, professors, TbUtils, auth) {
 
-    var vm = this;
+    const vm = this;
 
     vm.professor = {
         AccountId: '',
@@ -13,9 +13,7 @@ function ActivateProfessorController($rootScope, $stateParams, professors, TbUti
     vm.confirmPass = '';
     vm.submitting = false;
     vm.activateProfessor = activateProfessor;
-    $rootScope.globals.guest = true;
 
-    leaveIfSessionStarted();
     getToken();
 
     function activateProfessor() {
@@ -39,12 +37,6 @@ function ActivateProfessorController($rootScope, $stateParams, professors, TbUti
         vm.professor.AccountId = $stateParams.accountId;
     }
 
-    function leaveIfSessionStarted() {
-        if ($rootScope.globals.token) {
-            auth.ClearCredentials();
-            TbUtils.go('landing.login');
-        }
-    }
 }
 
 module.exports = {
