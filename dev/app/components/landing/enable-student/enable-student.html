@@ -1,37 +1,57 @@
-<div class="student container">
-  <br>
-<div class="row">
-      <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-    <img class = "img-responsive logo" src="img/logo.png" />
-		<form name="studentForm" ng-submit="studentForm.$valid && vm.enableStudent()" class="hab-form" role="form" autocomplete="off" novalidate>
-			<h2 class="title text-center">Registro</h2>
-			<hr class="colorgraph">
-      <div class="form-group">
-				<input ng-model="vm.accountId"
-         validation-max-length="8" type="number"
-         name="numcuenta" id="numcuenta"
-         class="form-control input-lg"
-         placeholder="Cuenta" tabindex="4"
-         value="" required>
-			</div>
-			<div class="form-group">
-				<input ng-model="vm.email"
-        type="email" name="email" id="email"
-        ng-pattern='/@unitec.edu$/'
-        class="form-control input-lg"
-        placeholder="Correo" autocomplete="off"
-        value="" autocomplete="off" required>
-			</div>
-      <div class="form-group">
-        <input value="" ng-model="vm.password" autocomplete="off" type="password" name="password" id="password" class="form-control input-lg" placeholder="Clave" tabindex="5"   required>
-      </div>
+<div class="container">
+  <img class="img-responsive logo" src="img/logo.png" />
+  <div class="row">
+    <div class="span12" style="text-align:center; margin: 0 auto;">
+      <form autocomplete="off" ng-hide="vm.submitting" name="studentForm" ng-submit="studentForm.$valid && vm.enableStudent()"
+      novalidate class="form-horizontal">
+        <fieldset>
+          <h2>Registrarte</h2>
+          <div class="control-group">
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-sort-numeric-asc"></span>
+                <input ng-model="vm.accountId" class="user" type="number" name="numcuenta" placeholder="Numero de Cuenta" required>
+              </div>
+              <p class="error-message" ng-show="studentForm.$submitted && studentForm.numcuenta.$error.required">
+                Por favor ingrese un numero de cuenta
+              </p>
+            </div>
 
-			<hr class="colorgraph">
-			<div class="row">
-				<input type="submit" value="Confirmar" class="btn btn-primary btn-block btn-lg" >
-			</div>
-		</form>
-	</div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-envelope-square"></span>
+                <input ng-model="vm.email" class="user" ng-pattern="/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@unitec\.edu$/" type="email" name="correo" placeholder="Correo de Unitec"
+                readonly onfocus="this.removeAttribute('readonly');" required>
+              </div>
+              <p class="error-message" ng-show="studentForm.$submitted && studentForm.correo.$error.required">
+                Por favor ingrese un correo
+              </p>
+              <p class="error-message" ng-show="studentForm.$submitted && studentForm.correo.$error.pattern">
+                Por favor ingrese un correo de Unitec v&aacute;lido
+              </p>
+            </div>
+
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-lock"></span>
+                <input ng-model="vm.password" ng-pattern="vm.professor.Password" class="user" type="password" name="Password" placeholder="Contrase&ntilde;a"
+                readonly onfocus="this.removeAttribute('readonly');" required>
+              </div>
+              <p class="error-message" ng-show="studentForm.$submitted && studentForm.Password.$error.required">
+                Vuelve a escribir la contraseña.
+              </p>
+            </div>
+          </div>
+          <p class="message register">Ya estas registrado? <a ui-sref="landing.login">Iniciar Sesion </a></p>
+        </fieldset>
+        <input class="btn btn-lg btn-info" type="submit" value="Confirmar">
+      </form>
+    </div>
+  </div>
 </div>
-</div>
+
 <tb-loading class="general-loader" ng-show="vm.submitting"></tb-loading>
