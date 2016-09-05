@@ -1,60 +1,111 @@
 .enable-student {
-
-  .student.container{
-    background: transparent;
-    width: 80%;
+  .container{
+    margin: auto;
+    padding: 5% 0 0;
   }
 
-  .form-control:focus {
-  border-color: none;
-  box-shadow: none;
-  outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-  input{
-    border-color: #4F628E;
-    outline: none;
+  .form-horizontal{
+    position: relative;
+    z-index: 1;
+    width: 360px;
+    max-width: 500px;
+    margin: 15px auto 100px;
+    padding: 25px;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, .2), 0 5px 5px 0 rgba(0, 0, 0, .24);
   }
-  .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3{
-    background: transparent;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+  .confirm-btn{
+    margin: 5% auto;
   }
-  .hab-form{
-    background: none;
-    padding: 5%;
-    padding-top: 2px;
-    border-radius: 20px;
+
+  h2{
+    margin-top: 0px;
+  }
+
+  .inner-addon
+  {
+      position: relative;
+  }
+  .inner-addon .fa
+  {
+      position: absolute;
+      font-size: 22px;
+      padding-top: 12px;
+      padding-left: 10px;
+
+      pointer-events: none;
+  }
+  .left-addon .fa
+  {
+      left: 0;
+  }
+  .right-addon .fa
+  {
+      right: 0;
+  }
+  .left-addon input
+  {
+      padding-left: 30px;
+  }
+  .right-addon input
+  {
+      padding-right: 30px;
+  }
+
+  .control-label{
+    margin-bottom: 5px;
+    color: #354663;
+  }
+
+  .controls input{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 15px;
+    padding-left: 40px;
+
+    border: 0;
+    outline: 0;
+    background: #f2f2f2;
+  }
+
+  .btn{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    margin-top: 8px;
+    width: 100%;
+    padding: 15px;
+
+    cursor: pointer;
+    -webkit-transition: all .3 ease;
+            transition: all .3 ease;
+    text-transform: uppercase;
+
+    color: #fff;
+    border: 0;
+    outline: 0;
+    background: #354663;
+  }
+
+  .btn:hover,
+  .btn:active,
+  .btn:focus
+  {
+      background: #4e5f7d;
+  }
+
+  .error-message{
+    color: #801515;
   }
   .img-responsive
   {
       width: 120px;
       height: 120px;
       margin: 0 auto;
-      margin-bottom: 6px;
-  }
-  .title{
-    color: #fff;
-  }
-
-  .btn.btn-primary.btn-block.btn-lg{
-    background: #306758;
-    border: none;
-  }
-
-  .btn.btn-primary.btn-block.btn-lg:hover{
-    border: none;
-    border-color: none;
-    background-color: #9D4A4A;
-    outline: 0;
-  }
-
-  .btn.btn-primary.btn-block.btn-lg:focus{
-    border: none;
-    border-color: none;
-    outline: 0;
   }
 
 }
