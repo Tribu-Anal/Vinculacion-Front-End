@@ -86,6 +86,9 @@
             transition: all .3 ease;
     text-transform: uppercase;
 
+    box-shadow:none !important;
+    border:1px solid #ccc !important;
+
     color: #fff;
     border: 0;
     outline: 0;
@@ -115,6 +118,9 @@
   .btn:focus
   {
       background: #4e5f7d;
+      outline: none;
+      box-shadow:none !important;
+      border:1px solid #ccc !important;
   }
 
   .error-message{
