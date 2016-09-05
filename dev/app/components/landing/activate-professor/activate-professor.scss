@@ -91,6 +91,24 @@
     outline: 0;
     background: #354663;
   }
+  .message
+  {
+      font-size: 14px;
+
+      margin: 5px 0 5px;
+
+      color: #b3b3b3;
+  }
+  .message a
+  {
+      text-decoration: none;
+
+      color: #354663;
+  }
+  .form .register-form
+  {
+      display: none;
+  }
 
   .btn:hover,
   .btn:active,
