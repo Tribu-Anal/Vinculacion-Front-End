@@ -52,7 +52,7 @@ function students ($http, $q) {
 		$http.post(url+'/EnableStudent', JSON.stringify(student))
 			.then(suc)
 			.catch(err)
-			finally(fin);
+			.finally(fin);
 	}
 
 	function importStudents (students) {
