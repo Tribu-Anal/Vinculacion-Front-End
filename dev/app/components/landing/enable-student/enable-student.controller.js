@@ -1,34 +1,22 @@
-EnableStudentController.$inject = ['$rootScope', 'TbUtils', 'students'];
+EnableStudentController.$inject = [ 'TbUtils', 'students' ];
 
-function EnableStudentController ($rootScope, TbUtils,  students) {
+function EnableStudentController (TbUtils,  students) {
 	const vm = this;
 
-  vm.email = "";
-  vm.accountId = "";
-  vm.password = "";
+  vm.student = {
+    AccountId: "",
+    Email: "",
+    Password: ""
+  };
+
   vm.submitting = false;
-  vm.enableStudent = enableStudent;
+  vm.submit = submit;
 
-  function enableStudent(){
+  function submit (){
     vm.submitting = true;
-    let student = {
-      AccountId: vm.accountId.toString(),
-      Email: vm.email,
-      Password: vm.password
-    };
-    students.enableStudent(student, enableStudentSuccess, enableStudentFail);
-  }
 
-  function enableStudentSuccess(response){
-    TbUtils.displayNotification('success', 
-      'Revisa tu correo con el link, para activar tu cuenta.', 'Correo enviado!');
-    vm.submitting = false;
-    TbUtils.go('landing.login');
-  }
-
-  function enableStudentFail(response){
-    TbUtils.showErrorMessage(response.data);
-    vm.submitting = false;
+    TbUtils.postAndGoTo(students.enableStudent, vm.student, 'landing.login', 
+      'Revisa tu correo con el link, para activar tu cuenta.', () => { vm.submitting = false; });
   }
 
 }
