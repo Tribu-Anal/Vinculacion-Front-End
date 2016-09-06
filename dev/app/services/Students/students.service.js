@@ -49,9 +49,11 @@ function students ($http, $q) {
 	    return deferred.promise;
 	}
 
-	function enableStudent(student, successCallback, errorCallback){
-		$http.post(url+'/EnableStudent', JSON.stringify(student)).then(successCallback)
-				.catch(errorCallback);
+	function enableStudent(student, suc, err, fin){
+		$http.post(url+'/EnableStudent', JSON.stringify(student))
+			.then(suc)
+			.catch(err)
+			.finally(fin);
 	}
 
 	function importStudents (students) {

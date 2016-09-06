@@ -1,3 +1,6 @@
+<div style="display: flex; text-align: center; flex-direction: column;">
+  <h1>Periodo Actual:</h1><h3>{{vm.currentPeriod.Number}} - {{vm.currentPeriod.Year}}</h3>
+</div>
 <tb-search-field obj="vm.searchObj" 
                  results="vm.searchResults"
                  data="vm.periods"
@@ -9,7 +12,7 @@
 	<tb-table class="col-md-12" 
 	          schema="vm.tableSchema" 
 	          model="vm.searchResults"
-	          on-row-click="vm.editPeriod"
+	          on-row-click="vm.setCurrentPeriod"
 	          style="margin-bottom: 40px;">
 	</tb-table>
 </div>
@@ -20,5 +23,5 @@
                   get="vm.get"
                   ng-hide="vm.hideLoadBtn()">
 </tb-load-more-btn>
-<tb-loading class="main-loader" ng-show="vm.loading"></tb-loading>
+<tb-loading class="main-loader" ng-show="vm.loading || vm.gettingCurrentPeriod"></tb-loading>
 <tb-round-btn ng-click="vm.goToNewPeriod()">+</tb-round-btn>

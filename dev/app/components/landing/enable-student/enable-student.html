@@ -1,37 +1,98 @@
-<div class="student container">
-  <br>
-<div class="row">
-      <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-    <img class = "img-responsive logo" src="img/logo.png" />
-		<form name="studentForm" ng-submit="studentForm.$valid && vm.enableStudent()" class="hab-form" role="form" autocomplete="off" novalidate>
-			<h2 class="title text-center">Registro</h2>
-			<hr class="colorgraph">
-      <div class="form-group">
-				<input ng-model="vm.accountId"
-         validation-max-length="8" type="number"
-         name="numcuenta" id="numcuenta"
-         class="form-control input-lg"
-         placeholder="Cuenta" tabindex="4"
-         value="" required>
-			</div>
-			<div class="form-group">
-				<input ng-model="vm.email"
-        type="email" name="email" id="email"
-        ng-pattern='/@unitec.edu$/'
-        class="form-control input-lg"
-        placeholder="Correo" autocomplete="off"
-        value="" autocomplete="off" required>
-			</div>
-      <div class="form-group">
-        <input value="" ng-model="vm.password" autocomplete="off" type="password" name="password" id="password" class="form-control input-lg" placeholder="Clave" tabindex="5"   required>
-      </div>
+<div class="container">
+  <img class="img-responsive logo" src="img/logo.png" />
+  <div class="row">
+    <div class="span12" style="text-align:center; margin: 0 auto;">
+      <form autocomplete="off" ng-hide="vm.submitting" name="form" ng-submit="form.$valid && vm.submit()"
+      novalidate class="form-horizontal">
+        <fieldset>
+          <h2 style="margin-bottom: 20px;">Registro</h2>
+          <div class="control-group">
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-sort-numeric-asc"></span>
+                <input ng-model="vm.student.AccountId" class="user" type="text" name="accountId" 
+                placeholder="N&uacute;mero de Cuenta" ng-pattern="regex['accountId']" 
+                minlength="8" maxlength="8" required>
+              </div>
+              <span ng-show="form.accountId.$touched">
+                <p class="error-message" ng-show="form.accountId.$error.required">
+                  Por favor ingrese un numero de cuenta.
+                </p>
+                <p class="error-message" 
+                ng-show="form.accountId.$error.minlength">
+                  El numero de cuenta debe de ser de 8 digitos.
+                </p>
+                <p class="error-message" ng-show="form.accountId.$error.pattern">
+                  El numero de cuenta solo puede contener numeros.
+                </p>
+              </span>
+            </div>
 
-			<hr class="colorgraph">
-			<div class="row">
-				<input type="submit" value="Confirmar" class="btn btn-primary btn-block btn-lg" >
-			</div>
-		</form>
-	</div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-envelope-square"></span>
+                <input ng-model="vm.student.Email" class="user" 
+                ng-pattern="regex['email']" type="email" name="email" placeholder="Correo de Unitec"
+                readonly onfocus="this.removeAttribute('readonly');" required>
+              </div>
+              <span ng-show="form.email.$touched">
+                <p class="error-message" ng-show="form.email.$error.required">
+                  Por favor ingrese un correo.
+                </p>
+                <p class="error-message" ng-show="form.email.$error.pattern">
+                  Por favor ingrese un correo de Unitec v&aacute;lido.
+                </p>
+              </span>
+            </div>
+
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-unlock"></span>
+                <input ng-model="vm.student.Password" ng-pattern="regex['password']" 
+                minlength="8" class="user" type="password" name="password" placeholder="Contrase&ntilde;a"
+                readonly onfocus="this.removeAttribute('readonly');" required>
+              </div>
+              <span ng-show="form.password.$touched">
+                <p class="error-message" ng-show="form.password.$error.required">
+                  Por favor ingrese su contraseña.
+                </p>
+                <p class="error-message" ng-show="form.password.$error.minlength">
+                  La contraseña debe tener 8 caracteres minimo.
+                </p>
+                <p class="error-message" ng-show="form.password.$error.pattern">
+                  La contraseña debe tener por lo menos 1 numero y 1 letra mayuscula.
+                </p>
+              </span>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-lock"></span>
+                <input ng-model="confirmPass" ng-pattern="vm.student.Password" class="user" type="password" 
+                name="confirmPass" placeholder="Confirmar Contrase&ntilde;a" tb-equals="vm.student.Password"
+                readonly onfocus="this.removeAttribute('readonly');" required>
+              </div>
+              <span ng-show="form.confirmPass.$touched">
+                <p class="error-message" ng-show="form.confirmPass.$error.required">
+                  Confirma tu contraseña.
+                </p>
+                <p class="error-message" ng-show="form.confirmPass.$error.tbEquals">
+                  Las contraseñas no coinciden.
+                </p>
+              </span>
+            </div>
+          </div>
+          <p class="message register">¿Ya estas registrado? <a ui-sref="landing.login">Iniciar Sesion </a></p>
+        </fieldset>
+        <input class="btn btn-lg btn-info" type="submit" value="Confirmar">
+      </form>
+    </div>
+  </div>
 </div>
-</div>
+
 <tb-loading class="general-loader" ng-show="vm.submitting"></tb-loading>

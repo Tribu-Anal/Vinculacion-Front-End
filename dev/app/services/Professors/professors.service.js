@@ -21,10 +21,11 @@ function professors($http) {
             .finally(fin);
     }
 
-    function activateProfessor(professor, successCallback, errorCallback) {
+    function activateProfessor(professor, suc, err, fin) {
         $http.post(url + '/Verified', JSON.stringify(professor))
-            .then(successCallback)
-            .catch(errorCallback);
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 
     function getActiveProfessor(professorId, successCallback, errorCallback) {

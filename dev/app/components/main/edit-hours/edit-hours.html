@@ -7,7 +7,7 @@
 			<h4>Descripcion: {{vm.description}}</h4>
 			<h4>Costo: {{vm.cost}}</h4>
 		</div>
-		<div class="col-md-12 switch" ng-show="vm.editHours.visible && !vm.isApproved">
+		<div class="col-md-12 switch" ng-show="Role === 'Professor' && vm.editHours.visible && !vm.isApproved">
 			<button ng-click="vm.evaluateProject()" class="btn btn-md pull-right eval-proj">
 				<strong>Generar Reporte</strong>
 			</button>
