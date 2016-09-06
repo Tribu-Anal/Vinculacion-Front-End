@@ -14,6 +14,7 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     $rootScope.ProfessorDBId = window.localStorage['ProfessorDBId'];
     $rootScope.guest = true;
     $rootScope.loggedIn = $rootScope.Session.length > 0;
+    $rootScope.regex = require('./regex');
 
     let stateUrl = "";
     let redirect = require('./redirect');
