@@ -28,6 +28,9 @@ function EditStudentController (majors, TbUtils, stateParams, students) {
     function submit () {
     	vm.submitting = true;
     	vm.student.AccountId = vm.accountId.toString();
+
+    	TbUtils.updateAndGoTo(students.update, vm.student.AccountId, vm.student, 'main.students', 
+			'Estudiante actualizado.', () => { vm.submitting = false; });
     }
 
 }

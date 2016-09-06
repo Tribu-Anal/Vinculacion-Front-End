@@ -12,7 +12,8 @@ function students ($http, $q) {
 		importStudents: importStudents,
 		enableStudent: enableStudent,
 		getWithPagination: getWithPagination,
-		update: update
+		update: update,
+		post: post
 	};
 
 	return service;
@@ -75,6 +76,13 @@ function students ($http, $q) {
 
 	function update (id, data, suc, err, fin) {
         $http.put(url+'/'+id, data)
+            .then(suc)
+            .catch(err)
+            .finally(fin);
+    }
+
+    function post (data, suc, err, fin) {
+        $http.post(url, data)
             .then(suc)
             .catch(err)
             .finally(fin);

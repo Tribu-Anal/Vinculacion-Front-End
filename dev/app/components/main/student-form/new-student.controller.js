@@ -24,6 +24,9 @@ function NewStudentController (majors, TbUtils) {
 	function submit() {
 		vm.student.AccountId = vm.accountId.toString();
 		vm.submitting = true;
+
+		TbUtils.postAndGoTo(students.post, vm.student, 'main.students', 
+			'Estudiante creado.', () => { vm.submitting = false; });
 	}
 }
 
