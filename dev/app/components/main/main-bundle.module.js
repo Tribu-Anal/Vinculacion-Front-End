@@ -22,8 +22,8 @@ const ApproveHours          = require('./approve-hours/approve-hours.module'),
 
 const moduleName = 'main-bundle',
       components = [ ApproveHours, Classes, ClassForm, Dashboard, EditHours, ImportStudents, Main,
-                     Periods, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm, Projects, Reports,
-                     Section, SectionForm, Sections, Settlement, Students ];
+                     Periods, PeriodForm, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm, 
+                     Projects, Reports, Section, SectionForm, Sections, Settlement, Students ];
 
 angular.module(moduleName, components);
 
