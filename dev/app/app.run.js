@@ -19,7 +19,6 @@ function run($rootScope, $location, $cookieStore, $http, $state, $timeout) {
     let stateUrl = "";
     let redirect = require('./redirect');
 
-
     getBasicAuthentication();
 
     $rootScope.$on('$stateChangeStart', stateChangeStart);

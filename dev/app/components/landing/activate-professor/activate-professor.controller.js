@@ -4,7 +4,7 @@ function ActivateProfessorController(TbUtils, professors, stateParams) {
 
     const vm = this;
 
-    vm.professor = { AccountId: '', Password: '' };
+    vm.professor = { AccountId: stateParams.accountId, Password: '' };
 
     vm.confirmPass = '';
     vm.submit = submit;
@@ -12,9 +12,9 @@ function ActivateProfessorController(TbUtils, professors, stateParams) {
 
     function submit () {
         vm.submitting = true;
-        
+
         TbUtils.postAndGoTo(professors.activateProfessor, vm.professor, 'landing.login', 
-            'Ya puede navegar el sitio.', () => { vm.submitting = false; });
+            'Su cuenta ha sido activada.', () => { vm.submitting = false; });
     }
 
 }
