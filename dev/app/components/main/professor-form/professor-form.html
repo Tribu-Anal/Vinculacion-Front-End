@@ -26,7 +26,7 @@
     <div>
         <label class="cd-label">Email</label>
         <input ng-model="vm.professor.Email" class="user" type="email" name="Email" id="cd-name" 
-               ng-pattern="/^[a-z0-9\.]{1,}@unitec.edu/" required>
+               ng-pattern="regex['email']" required>
         <p class="error-message" ng-show="professorForm.$submitted && professorForm.Email.$error.required">
             * Por favor ingrese el correo del profesor.
         </p>
