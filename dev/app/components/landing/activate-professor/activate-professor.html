@@ -1,0 +1,50 @@
+<div class="container">
+  <img class="img-responsive logo" src="img/logo.png" />
+  <div class="row">
+    <div class="span12" style="text-align:center; margin: 0 auto;">
+      <form class="form-horizontal" name="form" ng-hide="vm.submitting" ng-submit="form.$valid && vm.submit()" novalidate>
+        <fieldset>
+          <h2>Registrar Maestro</h2>
+          <div class="control-group">
+            <label class="control-label">Nueva Contraseña</label>
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-unlock"></span>
+                <input ng-model="vm.professor.Password" minlength="8" type="password" name="Password"
+                       ng-pattern="regex['password']" required>
+              </div>
+              <span ng-show="form.Password.$touched">
+                 <p class="error-message" ng-show="form.Password.$error.required">
+                  Por favor ingrese la contraseña.
+                </p>
+                <p class="error-message" ng-show="form.Password.$error.minlength">
+                  La contraseña debe ser de 8 caracteres minimo.
+                </p>
+                <p class="error-message" ng-show="form.Password.$error.pattern">
+                  La contraseña debe tener al menos una letra mayuscula y un numero.
+                </p>
+              </span>
+            </div>
+
+          </div>
+          <div class="control-group">
+            <label class="control-label">Confirmar Contraseña</label>
+            <div class="controls">
+              <div class="inner-addon left-addon">
+                <span class="fa fa-lock"></span>
+                <input ng-model="vm.confirmPass" tb-equals="vm.professor.Password" type="password" name="confirm" required>
+              </div>
+              <span ng-show="form.confirm.$touched">
+                <p class="error-message" ng-show="form.confirm.$error.tbEquals">
+                  Las contraseñas no coinciden.
+                </p>
+              </span>
+            </div>
+          </div>
+        </fieldset>
+        <input class="btn btn-lg btn-info" type="submit" value="Confirmar">
+      </form>
+    </div>
+  </div>
+</div>
+<tb-loading class="general-loader" ng-show="vm.submitting"></tb-loading>

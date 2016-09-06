@@ -41,7 +41,7 @@ function periods ($http) {
 	}
 
 	function getCurrentPeriod (suc, err, fin) {
-		$http.put(url+'/GetCurrentPeriod')
+		$http.get(url+'/GetCurrentPeriod')
             .then(suc)
             .catch(err)
             .finally(fin);

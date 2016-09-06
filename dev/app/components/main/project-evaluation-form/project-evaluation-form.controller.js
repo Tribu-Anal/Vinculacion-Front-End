@@ -1,9 +1,11 @@
-ProjectEvaluationFormController.$inject = ['$rootScope', '$state', '$stateParams', 'projects', 'TbUtils'];
+ProjectEvaluationFormController.$inject = [ 'TbUtils', 'projects', '$stateParams'];
 
-function ProjectEvaluationFormController($rootScope, $state, $stateParams, projects, TBUtils) {
-    if (!$stateParams.projectId) $state.go('main.projects');
+function ProjectEvaluationFormController(TbUtils, projects, $stateParams) {
+    if (!$stateParams.projectId || !$stateParams.sectionId) 
+        TbUtils.go('main.professor-dashboard');
 
-    var vm = this;
+    const vm = this;
+
     vm.formData = {
         fieldHours: 0,
         calification: 0,
@@ -11,22 +13,16 @@ function ProjectEvaluationFormController($rootScope, $state, $stateParams, proje
         beneficiariGroups: ''
     };
 
-    vm.accountId;
+    vm.downloadReport = downloadReport;
 
     function downloadReport() {
-        console.log("mierda");
-        console.log(vm.formData);
         document.getElementById('my_iframe').src = projects.getProjectReportUrl(
-            $state.params.projectId, $state.params.sectionId,
+            $stateParams.projectId, $stateParams.sectionId,
             vm.formData.fieldHours, vm.formData.calification,
             vm.formData.beneficiariesQuantities,
             vm.formData.beneficiariGroups);
     }
 
-    vm.downloadReport = downloadReport;
 }
 
-module.exports = {
-    name: 'ProjectEvaluationFormController',
-    ctrl: ProjectEvaluationFormController
-};
+module.exports = { name: 'ProjectEvaluationFormController', ctrl: ProjectEvaluationFormController };

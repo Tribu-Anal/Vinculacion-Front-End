@@ -1,4 +1,5 @@
 const tbButton      = require('./shared/TB-Button/tb-button.module'),
+      tbEquals      = require('./shared/TbEquals/tb-equals.module'),
       tbHeaderbar   = require('./shared/TB-Headerbar/tb-headerbar.module'),
 	  tbLoading     = require('./shared/TB-Loading/tb-loading.module'),
 	  tbLoadMore    = require('./shared/TB-LoadMoreBtn/tb-load-more-btn.module'),
@@ -10,7 +11,7 @@ const tbButton      = require('./shared/TB-Button/tb-button.module'),
 	  tbUploadBtn   = require('./shared/TB-Upload-Btn/tb-upload-btn.module');
 
 const moduleName  = 'vinculacion.shared',
-     dependencies = [ tbButton, tbHeaderbar, tbLoading, tbLoadMore, tbPaginator, tbSearchField, 
+     dependencies = [ tbButton, tbEquals, tbHeaderbar, tbLoading, tbLoadMore, tbPaginator, tbSearchField, 
                       tbRoundBtn, tbSidebar, tbTable, tbUploadBtn ];
 
 angular.module(moduleName, dependencies);
