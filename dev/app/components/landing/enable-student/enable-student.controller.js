@@ -4,7 +4,7 @@ function EnableStudentController (TbUtils,  students) {
 	const vm = this;
 
   vm.student = {
-    AccountId: 0,
+    AccountId: "",
     Email: "",
     Password: ""
   };
