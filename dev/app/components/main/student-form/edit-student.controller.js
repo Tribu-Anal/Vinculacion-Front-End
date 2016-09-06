@@ -1,35 +1,26 @@
-EditStudentController.$inject = ['majors', 'TbUtils', '$stateParams', 'students'];
+EditStudentController.$inject = [ 'TbUtils', 'students', 'majors', '$stateParams' ];
 
-function EditStudentController (majors, TbUtils, stateParams, students) {
+function EditStudentController (TbUtils, students, majors, stateParams) {
 	const vm = this;
 
-	vm.oldStudent = JSON.parse(atob(stateParams.student));
+	vm.student = JSON.parse(atob(stateParams.student));
+	vm.names = vm.student.Name.split(' ');
 
-	vm.student = {
-		AccountId: '',
-		Name: vm.oldStudent.Name,
-		Password: vm.oldStudent.Password,
-		MajorId: vm.oldStudent.Major.MajorId,
-		Campus: vm.oldStudent.Campus,
-		Email: vm.oldStudent.Email
-	};
-
-	const oldAccountId = vm.oldStudent.AccountId;
+	const oldAccountId = vm.student.AccountId;
 
 	vm.formTitle = "Editar Estudiante";
     vm.submitting = false;
-    vm.accountId = Number(vm.oldStudent.AccountId);
 	vm.majorsLoading = true;
 	vm.majors = [];
-
     vm.submit = submit;
+
     TbUtils.getAndLoad(majors.getMajors, vm.majors, () => { vm.majorsLoading = false;});
 
     function submit () {
     	vm.submitting = true;
-    	vm.student.AccountId = vm.accountId.toString();
+    	vm.student.Name = vm.names.join(' ');
 
-    	TbUtils.updateAndGoTo(students.update, vm.student.AccountId, vm.student, 'main.students', 
+    	TbUtils.updateAndGoTo(students.update, oldAccountId, vm.student, 'main.students', 
 			'Estudiante actualizado.', () => { vm.submitting = false; });
     }
 

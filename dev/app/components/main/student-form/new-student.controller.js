@@ -1,6 +1,6 @@
-NewStudentController.$inject = ['majors', 'TbUtils'];
+NewStudentController.$inject = [ 'TbUtils', 'students', 'majors' ];
 
-function NewStudentController (majors, TbUtils) {
+function NewStudentController (TbUtils, students, majors) {
 	const vm = this;
 
 	vm.student = {
@@ -11,8 +11,9 @@ function NewStudentController (majors, TbUtils) {
 		Campus: '',
 		Email: ''
 	};
+	vm.names = [ '', '', '', '' ]; 
 
-	vm.formTitle = "Nuevo Estudiante"
+	vm.formTitle = "Nuevo Estudiante";
 	vm.submitting = false;
 	vm.majorsLoading = true;
 	vm.majors = [];
@@ -22,7 +23,7 @@ function NewStudentController (majors, TbUtils) {
 	TbUtils.getAndLoad(majors.getMajors, vm.majors, () => { vm.majorsLoading = false;});
 
 	function submit() {
-		vm.student.AccountId = vm.accountId.toString();
+		vm.student.Name = vm.names.join(' ');
 		vm.submitting = true;
 
 		TbUtils.postAndGoTo(students.post, vm.student, 'main.students', 

@@ -1,61 +1,115 @@
-<form name="studentForm" class="cd-form" ng-submit="studentForm.$valid && vm.submit()" novalidate>
+<form name="form" class="cd-form" ng-submit="form.$valid && vm.submit()" novalidate>
     <legend>
         <strong>{{vm.formTitle}}</strong>
     </legend>
     
     <div>
         <label class="cd-label">Numero de Cuenta</label>
-        <input ng-model="vm.accountId" min="20000000" maxlength="8" validation-max-length="8" validation-no-special-chars="true" class="user" type="number" name="accountId" id="cd-name" required>
-        <p class="error-message" ng-show="studentForm.$submitted && studentForm.accountId.$error.required">
-            * Por favor ingrese un numero de cuenta valido.
-        </p>
+        <input ng-model="vm.student.AccountId" maxlength="8" minlength="8" type="text" 
+               ng-pattern="regex['accountId']" name="accountId" id="cd-name" required>
+        <span ng-show="form.accountId.$touched">
+            <p class="error-message" ng-show="form.accountId.$error.required">
+                * Por favor ingrese un numero de cuenta.
+            </p>
+            <p class="error-message" ng-show="form.accountId.$error.minlength">
+                * Numero de cuenta debe de estar compuesto por 8 digitos.
+            </p>
+            <p class="error-message" ng-show="form.accountId.$error.pattern">
+                * El numero de cuenta solo puede tener numeros.
+            </p>
+        </span>
     </div>
     
     <div>
-        <label class="cd-label">Nombre</label>
-        <input ng-model="vm.student.Name" class="user" type="text" name="Name" id="cd-name" validation-field-required="true" validation-no-special-chars="true" required> 
-        <p class="error-message" ng-show="studentForm.$submitted && studentForm.Name.$error.required">
-            * Por favor ingrese el nombre del profesor.
-        </p>
+        <label class="cd-label">Primer Nombre</label>
+        <input ng-model="vm.names[0]" class="user" type="text" name="firstName" id="cd-name"
+               ng-pattern="regex['name']" required> 
+        <span ng-show="form.firstName.$touched">
+            <p class="error-message" ng-show="form.firstName.$error.required">
+                * Primer nombre es requerido.
+            </p>
+            <p class="error-message" ng-show="form.firstName.$error.pattern">
+                * Ingrese un nombre valido.
+            </p>
+        </span>
     </div>
 
     <div>
-        <label class="cd-label">Password</label>
-        <input ng-model="vm.student.Password" class="user" type="password" name="Password" id="cd-name" validation-field-required="true" required> 
-        <p class="error-message" ng-show="studentForm.$submitted && studentForm.Password.$error.required">
-            * Por favor ingrese la password.
-        </p>
+        <label class="cd-label">Segundo Nombre (Opcional)</label>
+        <input ng-model="vm.names[1]" class="user" type="text" name="middleName" id="cd-name"
+               ng-pattern="regex['name']"> 
+        <span ng-show="form.middleName.$touched">
+            <p class="error-message" ng-show="form.middleName.$error.pattern">
+                * Ingrese un nombre valido.
+            </p>
+        </span>
+    </div>
+
+    <div>
+        <label class="cd-label">Primer Apellido</label>
+        <input ng-model="vm.names[2]" class="user" type="text" name="lastNameOne" id="cd-name"
+               ng-pattern="regex['name']" required> 
+        <span ng-show="form.lastNameOne.$touched">
+            <p class="error-message" ng-show="form.lastNameOne.$error.required">
+                * Primer apellido es requerido.
+            </p>
+            <p class="error-message" ng-show="form.lastNameOne.$error.pattern">
+                * Ingrese un apellido valido.
+            </p>
+        </span>
+    </div>
+
+    <div>
+        <label class="cd-label">Segundo Apellido (Opcional)</label>
+        <input ng-model="vm.names[3]" class="user" type="text" name="lastNameTwo" id="cd-name"
+               ng-pattern="regex['name']"> 
+        <span ng-show="form.lastNameTwo.$touched">
+            <p class="error-message" ng-show="form.lastNameTwo.$error.pattern">
+                * Ingrese un apellido valido.
+            </p>
+        </span>
+    </div>
+
+    <div>
+        <label class="cd-label">Correo</label>
+        <input ng-model="vm.student.Email" class="user" type="email" name="email" id="cd-name" 
+               ng-pattern="regex['email']" required>
+        <span ng-show="form.email.$touched">
+            <p class="error-message" ng-show="form.email.$error.required">
+                * Por favor ingrese un correo electronico.
+            </p>
+            <p class="error-message" ng-show="form.email.$error.pattern">
+                * Por favor ingrese un correo electronico valido.
+            </p>
+        </span>
     </div>
 
     <div>
         <label class="cd-label">Carrera</label>
-		<select ng-model="vm.student.MajorId" name="Major" required>
+		<select ng-model="vm.student.MajorId" name="major" required>
 			<option ng-repeat="major in vm.majors" value="{{major.MajorId}}">{{major.Name}}</option>
 		</select>
-        <p class="error-message" ng-show="studentForm.$submitted && studentForm.Major.$error.required">
-            * Por favor seleccione una de las carreras.
-        </p>
+        <span ng-show="form.major.$touched">
+            <p class="error-message" ng-show="form.major.$error.required">
+                * Por favor seleccione una carrera.
+            </p>
+        </span>
         <tb-loading class="main-loader" ng-show="vm.majorsLoading"></tb-loading>
-    </div>
-    
-    <div>
-        <label class="cd-label">Email</label>
-        <input ng-model="vm.student.Email" class="user" type="email" name="Email" id="cd-name" ng-pattern='/@unitec.edu$/' validation-no-space="true" validation-field-required="true" required>
-        <p class="error-message" ng-show="studentForm.$submitted && studentForm.Email.$error.required">
-            * Por favor ingrese su correo electronico.
-        </p>
     </div>
 
     <div>
         <label class="cd-label" for="cd-name">Campus</label>
-        <select name="_class" ng-model="vm.student.Campus" required>
+        <select name="campus" ng-model="vm.student.Campus" required>
             <option value="TGU">TGU</option>
             <option value="SPS">SPS</option>
         </select>
-        <p class="error-message" ng-show="studentForm.$submitted && studentForm._class.$error.required">
-            * Por favor seleccione un campus.
-        </p>
+        <span ng-show="form.campus.$touched">
+            <p class="error-message" ng-show="form.campus.$error.required">
+                * Por favor seleccione un campus.
+            </p>
+        </span>
     </div>
+
     <div>
         <input type="submit" ng-hide="vm.submitting" value="Confirmar">
     </div>
