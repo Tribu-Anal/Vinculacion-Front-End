@@ -4,7 +4,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 			title: "INICIO", ref: 'main.'+$rootScope.Role.toLowerCase()+'-dashboard', url: '/inicio-'+$rootScope.Role.toLowerCase(),
 			icon: "glyphicon glyphicon-home",
 			active: $state.current.url.includes('/inicio-'+$rootScope.Role.toLowerCase()),
-			show: $state.current.url !== '/registro-maestro/{accountId}',
+			show: true,
 			clicked:TbUtils.preventGeneralLoading
 		},
 		
@@ -12,7 +12,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 			title: "PROYECTOS", ref: "main.projects", url: '/proyectos',
 	  		icon: "glyphicon glyphicon-th-large",
 	  		active: $state.current.url.includes('/proyectos'),
-	  		show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role !== 'Student',
+	  		show: $rootScope.Role !== 'Student',
 	  		clicked:TbUtils.preventGeneralLoading
 	 	},
 
@@ -20,8 +20,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 	  		title: "SECCIONES", ref: "main.sections", url: '/secciones',
 		  	icon: "glyphicon glyphicon-th-list",
 		  	active: $state.current.url.includes('/secciones'),
-		  	show: $state.current.url !== '/registro-maestro/{accountId}'
-		  	      && ($rootScope.Role === 'Admin' || $rootScope.Role === 'Professor'),
+		  	show: $rootScope.Role === 'Admin' || $rootScope.Role === 'Professor',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
@@ -29,7 +28,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "CLASES", ref: "main.classes", url: '/clases',
 		  	icon: "glyphicon glyphicon-book",
 		  	active: $state.current.url.includes('/clases'),
-		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
+		  	show: $rootScope.Role === 'Admin',
 			clicked: TbUtils.preventGeneralLoading
 		},
 
@@ -37,7 +36,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "FINIQUITOS", ref: "main.settlement", url: '/finiquitos',
 		  	icon: "glyphicon glyphicon-list-alt",
 		  	active: $state.current.url.includes('/finiquitos'),
-		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
+		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
@@ -45,7 +44,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "PERIODOS", ref: "main.periods", url: '/periodos',
 		  	icon: "glyphicon glyphicon-tasks",
 		  	active: $state.current.url.includes('/periodos'),
-		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
+		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
@@ -53,7 +52,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "PROFESORES", ref: "main.professors", url: '/profesores',
 		  	icon: "glyphicon glyphicon-user",
 		  	active: $state.current.url.includes('/profesores'),
-		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
+		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
@@ -61,7 +60,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "ALUMNOS", ref: "main.students", url: '/alumnos',
 		  	icon: "glyphicon glyphicon-education",
 		  	active: $state.current.url.includes('/alumnos'),
-		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
+		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 	  	
@@ -69,7 +68,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "APROBAR HORAS", ref: "main.approve-hours", url: '/aprobar-horas',
 		  	icon: "glyphicon glyphicon-check",
 		  	active: $state.current.url.includes('/aprobar-horas'),
-		  	show: $state.current.url !== '/registro-maestro/{accountId}' && $rootScope.Role === 'Admin',
+		  	show: $rootScope.Role === 'Admin',
 		  	clicked: TbUtils.preventGeneralLoading
 	  	},
 
@@ -77,14 +76,14 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		  	title: "REPORTES", ref: "main.reports", url: '/reportes',
 		  	icon: "glyphicon glyphicon-folder-open",
 		  	active: $state.current.url.includes('/reportes'),
-		  	show: $rootScope.Role === 'Admin' && $state.current.url !== '/registro-maestro/{accountId}',
+		  	show: $rootScope.Role === 'Admin',
 			clicked: TbUtils.preventGeneralLoading
 		},
 
 	  	{
 	  		title: "LOG OUT", ref: "landing.login",
 	  		icon: "glyphicon glyphicon-log-out", active: false,
-		  	show: $state.current.url !== '/registro-maestro/{accountId}',
+		  	show: true,
 		  	clicked: () => {
 		  		$rootScope.Session = window.localStorage['Session'] = "";
 		  		$rootScope.loggedIn = false;
