@@ -1,7 +1,7 @@
 const ApproveHours          = require('./approve-hours/approve-hours.module'),
       Classes               = require('./classes/classes.module'),
       ClassForm             = require('./class-form/class-form.module'),
-      Dashboard             = require('./dashboard/dashboard.module');
+      Dashboard             = require('./dashboard/dashboard.module'),
       EditHours             = require('./edit-hours/edit-hours.module'),
       ImportStudents        = require('./import-students/import-students.module'),
       Main                  = require('./main.module'),
@@ -18,12 +18,13 @@ const ApproveHours          = require('./approve-hours/approve-hours.module'),
       SectionForm           = require('./section-form/section-form-bundle.module'),
       Sections              = require('./sections/sections.module'),
       Settlement            = require('./settlement/settlement.module'),
-      Students              = require('./students/students.module');
+      Students              = require('./students/students.module'),
+      StudentForm           = require('./student-form/student-form.module');
 
 const moduleName = 'main-bundle',
       components = [ ApproveHours, Classes, ClassForm, Dashboard, EditHours, ImportStudents, Main,
                      Periods, PeriodForm, Professors, ProfessorForm,  Project, ProjectEvaluationForm, ProjectForm, 
-                     Projects, Reports, Section, SectionForm, Sections, Settlement, Students ];
+                     Projects, Reports, Section, SectionForm, Sections, Settlement, Students, StudentForm ];
 
 angular.module(moduleName, components);
 

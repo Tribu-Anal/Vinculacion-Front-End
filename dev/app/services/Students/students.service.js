@@ -11,7 +11,9 @@ function students ($http, $q) {
 		getParsedStudentsExcel: getParsedStudentsExcel,
 		importStudents: importStudents,
 		enableStudent: enableStudent,
-		getWithPagination: getWithPagination
+		getWithPagination: getWithPagination,
+		update: update,
+		post: post
 	};
 
 	return service;
@@ -71,6 +73,20 @@ function students ($http, $q) {
             .catch(error)
             .finally(fin);
 	}
+
+	function update (id, data, suc, err, fin) {
+        $http.put(url+'/'+id, data)
+            .then(suc)
+            .catch(err)
+            .finally(fin);
+    }
+
+    function post (data, suc, err, fin) {
+        $http.post(url, data)
+            .then(suc)
+            .catch(err)
+            .finally(fin);
+    }
 
 }
 

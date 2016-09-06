@@ -18,6 +18,8 @@ function redirect (state, toState, role, loggedIn, ev) {
 		case 'main.periods':
 		case 'main.new-period':
 		case 'main.edit-professor':
+		case 'main.new-student':
+		case 'main.edit-student':
 			if (!loggedIn)
 				goToLanding(state, ev);
 
