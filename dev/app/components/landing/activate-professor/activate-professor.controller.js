@@ -1,45 +1,22 @@
-ActivateProfessorController.$inject = [ '$stateParams', 'professors', 'TbUtils', 'auth' ];
+ActivateProfessorController.$inject = [ 'TbUtils', 'professors', '$stateParams' ];
 
-function ActivateProfessorController($stateParams, professors, TbUtils, auth) {
+function ActivateProfessorController(TbUtils, professors, stateParams) {
 
     const vm = this;
 
-    vm.professor = {
-        AccountId: '',
-        Password: ''
-    };
+    vm.professor = { AccountId: '', Password: '' };
 
-    vm.accountId;
     vm.confirmPass = '';
+    vm.submit = submit;
     vm.submitting = false;
-    vm.activateProfessor = activateProfessor;
 
-    getToken();
-
-    function activateProfessor() {
+    function submit () {
         vm.submitting = true;
-        professors.activateProfessor(vm.professor, activateProfessorSuccess, activateProfessorFail);
-    }
-
-    function activateProfessorSuccess(response) {
-        TbUtils.go('landing.login');
-        TbUtils.displayNotification('success', 'Usuario activado!', 'Ya puede navegar el sitio.');
-    }
-
-    function activateProfessorFail(response) {
-        TbUtils.showErrorMessage(response.data);
-        TbUtils.go('landing.login');
-    }
-
-    function getToken() {
-        if ($stateParams.accountId == undefined || $stateParams.accountId == '')
-            TbUtils.go('landing.login');
-        vm.professor.AccountId = $stateParams.accountId;
+        
+        TbUtils.postAndGoTo(professors.activateProfessor, vm.professor, 'landing.login', 
+            'Ya puede navegar el sitio.', () => { vm.submitting = false; });
     }
 
 }
 
-module.exports = {
-    name: 'ActivateProfessorController',
-    ctrl: ActivateProfessorController
-};
+module.exports = { name: 'ActivateProfessorController', ctrl: ActivateProfessorController };
