@@ -6,17 +6,17 @@ function EditProfessorController (TbUtils, professors, stateParams) {
 	vm.formTitle = 'Editar Profesor';
 
 	vm.professor = JSON.parse(atob(stateParams.professor));
+    vm.names = vm.professor.Name.split(' ');
 
 	const oldAccountId = vm.professor.AccountId;
 
     vm.submitting = false;
-    vm.accountId = Number(vm.professor.AccountId);
 
     vm.submit = submit;
 
     function submit () {
     	vm.submitting = true;
-    	vm.professor.AccountId = vm.accountId.toString();
+    	vm.professor.Name = vm.names.join(' ');
 
     	TbUtils.updateAndGoTo(professors.update, oldAccountId, vm.professor, 
             'main.professors', 'Profesor actualizado!', () => { vm.submitting = false; });

@@ -13,16 +13,16 @@ function NewProfessorController(TbUtils, professors) {
         Email: '',
         Campus: 'SPS'
     };
+    vm.names = [ '', '', '', '' ];
 
     vm.submitting = false;
-    vm.accountId = undefined;
 
     vm.submit = submit;
 
     function submit () {
         vm.submitting = true;
+        vm.professor.Name = vm.names.join(' ');
 
-        vm.professor.AccountId = vm.accountId.toString();
         TbUtils.postAndGoTo(professors.registerProfessor, vm.professor, 
             'main.professors', 'Se le ha enviado un correo de activacion al profesor.', () => { vm.submitting = false; });
     }
