@@ -1,87 +1,66 @@
-<form name="sectionForm" class="cd-form" ng-submit="sectionForm.$valid && vm.submit()" novalidate>
+<form name="form" class="cd-form" ng-submit="form.$valid && vm.submit()" novalidate>
     <legend>
-        <strong>Nueva Seccion</strong>
+        <strong>{{vm.formTitle}}</strong>
     </legend>
+
+    <div>
+        <label class="cd-label" for="cd-name">Codigo</label>
+        <input ng-model="vm.section.Code" class="user" type="text" name="code" id="cd-name" required>
+        <span ng-show="form.code.$touched">
+            <p class="error-message" ng-show="form.code.$error.required">
+                * Por favor ingrese el codigo de la seccion
+            </p>
+        </span>
+    </div>
 
     <div>
         <label class="cd-label" for="cd-name">Clase</label>
         <select name="_class" ng-model="vm.section.ClassId" required>
             <option value="{{class.Id}}" ng-repeat="class in vm.classes">{{class.Name}}</option>
         </select>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm._class.$error.required">
-            * Por favor escoja una clase.
-        </p>
+        <span ng-show="form._class.$touched">
+            <p class="error-message" ng-show="form._class.$error.required">
+                * Por favor escoja una clase.
+            </p>
+        </span>
         <tb-loading class="main-loader" ng-show="vm.classesLoading"></tb-loading>
     </div>
 
-    <div>
-        <label class="cd-label" for="cd-name">Codigo</label>
-        <input ng-model="vm.section.Code" class="user" type="text" name="code" id="cd-name" required>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid">
-            * Ingresa el codigo de la nueva seccion
-        </p>
-    </div>
-
-        <div>
-        <label class="cd-label" for="cd-name">Costo</label>
-        <input ng-model="vm.section.Cost" class="user" type="number" name="cost" id="cd-name" min="0" required>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid && (sectionForm.cost.$error.required || sectionForm.cost.$invalid)">
-            * Asegurate de asignar un costo y que sea un valor mayor o igual a 0
-        </p>
-    </div>
-
-    <div ng-hide="vm.professorActive">
+    <div ng-if="Role === 'Admin'">
         <label class="cd-label" for="cd-name">Docente</label>
         <select name="professor" ng-model="vm.section.ProffesorAccountId" required>
             <option value="{{professor.AccountId}}" ng-repeat="professor in vm.professors">{{professor.Name}}</option>
         </select>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.professor.$error.required">
-            * Por favor escoja un profesor.
-        </p>
+        <span ng-show="form.professor.$touched">
+            <p class="error-message" ng-show="form.professor.$error.required">
+                * Por favor escoja un profesor.
+            </p>
+        </span>
         <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
-    </div>
-
-    <div>
-        <label class="cd-label" for="cd-name">Proyectos</label>
-        <input style="cursor: pointer" ng-click="vm.addProjects()" class="user" type="text" name="sectionProjects" id="cd-name" required>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.project.$error.required">
-            * Por favor escoja un proyecto.
-        </p>
-        <tb-loading class="main-loader" ng-show="vm.professorsLoading"></tb-loading>
-    </div>
-
-    <div ng-if="vm.selectedProjects && vm.selectedProjects.length > 0">
-        <tb-table schema="vm.projectsTableSchema" model="vm.selectedProjects" 
-                  on-row-click="vm.removeProject"
-                  ng-hide="vm.submitting">
-        </tb-table>
-    </div>
-
-    <div class="icon">
-        <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
-        <textarea ng-model="vm.section.Description" class="message" name="sectionProjectDescription" id="cd-textarea" required></textarea>
-        <p class="error-message" ng-show="sectionForm.$submitted && sectionForm.$invalid && sectionForm.sectionProjectDescription.$error.required">
-            * Por favor ingresa una descripcion para el proyecto
-        </p>
     </div>
 
     <div>
         <label class="cd-label" for="cd-name">Alumnos</label>
-        <md-autocomplete md-selected-item="vm.selectedItem" md-search-text="vm.searchText" md-items="item in vm.queryStudents(vm.searchText)" md-item-text="item.Name">
-          <md-item-template>
-              <span md-highlight-text="vm.searchText">{{ item.Name }}</span>
-          </md-item-template>
-          <md-not-found>
-              No se encontraron alumnos con el numero de cuenta: {{vm.searchText}}.
-          </md-not-found>
+        <md-autocomplete md-selected-item="vm.selectedStudent" 
+                         md-search-text="searchText" 
+                         md-items="student in vm.search(searchText)" 
+                         md-item-text="student.Name"
+                         placeholder="Ingrese numero de cuenta o nombre">
+            <md-item-template>
+                <span md-highlight-text="vm.searchText">{{ student.Name }}</span>
+            </md-item-template>
+            <md-not-found>
+                No se encontraron alumnos con el numero de cuenta: {{searchText}}.
+            </md-not-found>
         </md-autocomplete> 
         <button type="button" class="add-student-btn" style="margin-top: 5px; margin-left: 83%;"
                 ng-click="vm.addStudent()">AGREGAR</button>
         <tb-loading class="main-loader" ng-show="vm.studentsLoading"></tb-loading>
     </div> 
 
-    <div ng-if="vm.sectionStudents && vm.sectionStudents.length > 0">
-        <tb-table schema="vm.studentsTableSchema" model="vm.sectionStudents" 
+    <div ng-if="vm.selectedStudents.length">
+        <h3 style="margin-left: 20px;">Alumnos Seleccionados</h3>
+        <tb-table schema="vm.tableSchema" model="vm.selectedStudents" 
                   on-row-click="vm.removeStudent" ng-hide="vm.submitting">
         </tb-table>
     </div>
