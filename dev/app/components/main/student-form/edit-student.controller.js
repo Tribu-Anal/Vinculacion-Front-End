@@ -4,6 +4,8 @@ function EditStudentController (TbUtils, students, majors, stateParams) {
 	const vm = this;
 
 	vm.student = JSON.parse(atob(stateParams.student));
+	vm.student.MajorId = vm.student.Major.MajorId;
+	
 	vm.names = vm.student.Name.split(' ');
 
 	const oldAccountId = vm.student.AccountId;

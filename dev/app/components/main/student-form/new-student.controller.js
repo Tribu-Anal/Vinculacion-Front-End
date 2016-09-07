@@ -6,7 +6,7 @@ function NewStudentController (TbUtils, students, majors) {
 	vm.student = {
 		AccountId: '',
 		Name: '',
-		Password: '',
+		Password: '12345',
 		MajorId: '',
 		Campus: '',
 		Email: ''
