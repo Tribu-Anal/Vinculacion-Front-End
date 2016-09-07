@@ -16,6 +16,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         updateAndNotify: updateAndNotify,
         updateAndGoTo: updateAndGoTo,
         postAndGoTo: postAndGoTo,
+        assignAndGoTo: assignAndGoTo,
         getListCopy: getListCopy,
         queryList: queryList,
         confirm: confirm,
@@ -201,6 +202,13 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
 
     function postAndGoTo (post, data, toState, msg, fin) {
         post(data, resp => {
+            displayNotification('success', 'Exito', msg ? msg : 'Se creo con exito!');
+            go(toState);
+        }, resp => { showErrorMessage(resp.data); }, fin);
+    }
+
+    function assignAndGoTo (post, id, data, toState, msg, fin) {
+        post(id, data, resp => {
             displayNotification('success', 'Exito', msg ? msg : 'Se creo con exito!');
             go(toState);
         }, resp => { showErrorMessage(resp.data); }, fin);
