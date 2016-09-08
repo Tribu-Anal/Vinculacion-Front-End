@@ -56,15 +56,18 @@ function projects($http, $rootScope, $state) {
         return url + "/FinalReport/" + projectId +"/"+sectionId + "/" + fieldHours + "/" + calification + "/" + beneficiariesQuantities + "/'" + beneficiariGroups + "'";
     }
 
-    function postProject(projectData, successCallback, errorCallback) {
-        $http.post(url, JSON.stringify(projectData)).then(successCallback)
-            .catch(errorCallback);
+    function postProject(data, suc, err, fin) {
+        $http.post(url, JSON.stringify(data))
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 
-    function updateProject(projectId, data, successCallback, errorCallback) {
-        $http.put(url + "/" + projectId, data)
-            .then(successCallback)
-            .catch(errorCallback);
+    function updateProject(id, data, suc, err, fin) {
+        $http.put(url + "/" + id, data)
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 
     function deleteProject(projectId, success, error, fin) {
