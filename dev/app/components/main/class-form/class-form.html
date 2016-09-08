@@ -6,7 +6,7 @@
     <div>
         <label class="cd-label" for="cd-name">Codigo</label>
         <input ng-model="vm.class.Code" class="user" type="text" name="code" id="cd-name" required>
-        <span ng-show="form.code.$touched">
+        <span ng-show="form.$submitted || form.code.$touched">
             <p class="error-message" ng-show="form.code.$error.required">
                 * Por favor ingrese el codigo de la clase.
             </p>
@@ -16,7 +16,7 @@
     <div>
         <label class="cd-label" for="cd-name">Nombre</label>
         <input ng-model="vm.class.Name" class="user" type="text" name="name" id="cd-name"  required>
-        <span ng-show="form.name.$touched">
+        <span ng-show="form.$submitted || form.name.$touched">
             <p class="error-message" ng-show="form.name.$error.required">
                 * Por favor ingrese el nombre de la clase.
             </p>

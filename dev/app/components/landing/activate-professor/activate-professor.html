@@ -13,7 +13,7 @@
                 <input ng-model="vm.professor.Password" minlength="8" type="password" name="Password"
                        ng-pattern="regex['password']" required>
               </div>
-              <span ng-show="form.Password.$touched">
+              <span ng-show="form.$submitted || form.Password.$touched">
                  <p class="error-message" ng-show="form.Password.$error.required">
                   Por favor ingrese la contraseña.
                 </p>
@@ -34,7 +34,7 @@
                 <span class="fa fa-lock"></span>
                 <input ng-model="vm.confirmPass" tb-equals="vm.professor.Password" type="password" name="confirm" required>
               </div>
-              <span ng-show="form.confirm.$touched">
+              <span ng-show="form.$submitted || form.confirm.$touched">
                 <p class="error-message" ng-show="form.confirm.$error.tbEquals">
                   Las contraseñas no coinciden.
                 </p>

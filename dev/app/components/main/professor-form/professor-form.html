@@ -7,7 +7,7 @@
         <label class="cd-label">Numero de Cuenta</label>
         <input ng-model="vm.professor.AccountId" maxlength="8" minlength="8" type="text" 
                ng-pattern="regex['accountId']" name="accountId" id="cd-name" required>
-        <span ng-show="form.accountId.$touched">
+        <span ng-show="form.$submitted || form.accountId.$touched">
             <p class="error-message" ng-show="form.accountId.$error.required">
                 * Por favor ingrese un numero de cuenta.
             </p>
@@ -24,7 +24,7 @@
         <label class="cd-label">Primer Nombre</label>
         <input ng-model="vm.names[0]" class="user" type="text" name="firstName" id="cd-name"
                ng-pattern="regex['name']" required> 
-        <span ng-show="form.firstName.$touched">
+        <span ng-show="form.$submitted || form.firstName.$touched">
             <p class="error-message" ng-show="form.firstName.$error.required">
                 * Primer nombre es requerido.
             </p>
@@ -38,7 +38,7 @@
         <label class="cd-label">Segundo Nombre (Opcional)</label>
         <input ng-model="vm.names[1]" class="user" type="text" name="middleName" id="cd-name"
                ng-pattern="regex['name']"> 
-        <span ng-show="form.middleName.$touched">
+        <span ng-show="form.$submitted || form.middleName.$touched">
             <p class="error-message" ng-show="form.middleName.$error.pattern">
                 * Ingrese un nombre valido.
             </p>
@@ -49,7 +49,7 @@
         <label class="cd-label">Primer Apellido</label>
         <input ng-model="vm.names[2]" class="user" type="text" name="lastNameOne" id="cd-name"
                ng-pattern="regex['name']" required> 
-        <span ng-show="form.lastNameOne.$touched">
+        <span ng-show="form.$submitted || form.lastNameOne.$touched">
             <p class="error-message" ng-show="form.lastNameOne.$error.required">
                 * Primer apellido es requerido.
             </p>
@@ -63,7 +63,7 @@
         <label class="cd-label">Segundo Apellido (Opcional)</label>
         <input ng-model="vm.names[3]" class="user" type="text" name="lastNameTwo" id="cd-name"
                ng-pattern="regex['name']"> 
-        <span ng-show="form.lastNameTwo.$touched">
+        <span ng-show="form.$submitted || form.lastNameTwo.$touched">
             <p class="error-message" ng-show="form.lastNameTwo.$error.pattern">
                 * Ingrese un apellido valido.
             </p>
@@ -74,7 +74,7 @@
         <label class="cd-label">Correo</label>
         <input ng-model="vm.professor.Email" class="user" type="email" name="email" id="cd-name" 
                ng-pattern="regex['email']" required>
-        <span ng-show="form.email.$touched">
+        <span ng-show="form.$submitted || form.email.$touched">
             <p class="error-message" ng-show="form.email.$error.required">
                 * Por favor ingrese un correo electronico.
             </p>
@@ -90,7 +90,7 @@
             <option value="TGU">TGU</option>
             <option value="SPS" selected>SPS</option>
         </select>
-        <span ng-show="form.campus.$touched">
+        <span ng-show="form.$submitted || form.campus.$touched">
             <p class="error-message" ng-show="form.campus.$error.required">
                 * Por favor seleccione un campus.
             </p>
