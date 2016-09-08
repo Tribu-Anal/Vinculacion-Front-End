@@ -15,8 +15,8 @@
 
     <div>
         <label class="cd-label" for="cd-name">Clase</label>
-        <select name="_class" ng-model="vm.section.ClassId" required>
-            <option value="{{class.Id}}" ng-repeat="class in vm.classes">{{class.Name}}</option>
+        <select name="_class" ng-model="vm.section.ClassId" 
+                ng-options="_class.Id as _class.Name for _class in vm.classes" required>
         </select>
         <span ng-show="form._class.$touched">
             <p class="error-message" ng-show="form._class.$error.required">
