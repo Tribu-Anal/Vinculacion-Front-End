@@ -1,23 +1,20 @@
-"use strict";
-
 config.$inject = [ '$stateProvider' ];
 
 function config ($stateProvider) {
-	let templateUrl = 'templates/components/main/project-form/project-form.html',
-	    controller  = 'ProjectFormController as vm';
+	let templateUrl = 'templates/components/main/project-form/project-form.html';
 
 	$stateProvider
-		.state('main.addproject', {
-			url: '/nuevo-proyecto',
+		.state('main.new-project', {
+			url: '/proyectos/nuevo-proyecto',
 			templateUrl: templateUrl,
-			controller: controller,
+			controller: 'NewProjectController as vm',
 			onEnter: onStateEnterAdd
 		})
 
-		.state('main.editproject', {
-			url: '/editar-proyecto/{project}',
+		.state('main.edit-project', {
+			url: '/proyectos/editar-proyecto/?project',
 			templateUrl: templateUrl,
-			controller: controller,
+			controller: 'EditProjectController as vm',
 			onEnter: onStateEnterEdit
 		});
 }

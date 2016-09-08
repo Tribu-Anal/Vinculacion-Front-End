@@ -32,8 +32,8 @@ function redirect (state, toState, role, loggedIn, ev) {
 		
 		case 'main.edit-hours':
 		case 'main.project':
-		case 'main.addproject':
-		case 'main.editproject':
+		case 'main.new-project':
+		case 'main.edit-project':
 		case 'main.projects':
 		case 'main.section':
 		case 'main.sections':
