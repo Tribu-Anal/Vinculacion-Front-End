@@ -12,6 +12,9 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
         getAndLoad: getAndLoad,
+        getExistingAndLoad: getExistingAndLoad,
+        getNewFromArrays: getNewFromArrays,
+        getRemovedFromArrays: getRemovedFromArrays,
         deleteAndNotify: deleteAndNotify,
         updateAndNotify: updateAndNotify,
         updateAndGoTo: updateAndGoTo,
@@ -168,6 +171,21 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         $state.go(state, params);
     }
 
+    function getNewFromArrays (old, _new) {
+        let newItems = [];
+
+        for (item of _new) {
+            if (old.indexOf(item) >= 0) continue;
+            newItems.push(item);
+        }
+
+        return newItems;
+    }
+
+    function getRemovedFromArrays (old, _new) {
+        return getNewFromArrays(_new, old);
+    }
+
     function getAndLoad (get, list, fin, page, size) {
         if (typeof page === 'number' && typeof size === 'number')
             get(page, size, resp => { fillListWithResponseData(resp.data, list); },
@@ -175,6 +193,12 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
                             fin);
         else
             get(resp => { fillListWithResponseData(resp.data, list); },
+                resp => { showErrorMessage(resp.data); },
+                fin);
+    }
+
+    function getExistingAndLoad (get, id, list, fin) {
+        get(id, resp => { fillListWithResponseData(resp.data, list); },
                 resp => { showErrorMessage(resp.data); },
                 fin);
     }
