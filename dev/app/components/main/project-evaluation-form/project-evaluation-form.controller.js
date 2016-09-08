@@ -10,7 +10,7 @@ function ProjectEvaluationFormController(TbUtils, projects, $stateParams) {
         fieldHours: 0,
         calification: 0,
         beneficiariesQuantities: 0,
-        beneficiariGroups: ''
+        beneficiaryGroups: ''
     };
 
     vm.downloadReport = downloadReport;
@@ -20,7 +20,7 @@ function ProjectEvaluationFormController(TbUtils, projects, $stateParams) {
             $stateParams.projectId, $stateParams.sectionId,
             vm.formData.fieldHours, vm.formData.calification,
             vm.formData.beneficiariesQuantities,
-            vm.formData.beneficiariGroups);
+            vm.formData.beneficiaryGroups);
     }
 
 }

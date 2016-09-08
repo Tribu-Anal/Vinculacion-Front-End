@@ -50,7 +50,7 @@ function redirect (state, toState, role, loggedIn, ev) {
 		// TEACHER-ONLY STATES
 
 		case 'main.professor-dashboard':
-		case 'main.evaluateproject':
+		case 'main.evaluate-project':
 			if (!loggedIn)
 				goToLanding(state, ev);
 

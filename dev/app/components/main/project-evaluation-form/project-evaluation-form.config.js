@@ -1,15 +1,10 @@
-"use strict";
-
 config.$inject = [ '$stateProvider' ];
 
 function config ($stateProvider) {
 
 	$stateProvider
-		.state('main.evaluateproject', {
-			url: '/evaluacion-proyecto/{projectId}/{sectionId}',
-			params: {
-                projectId: null
-            },
+		.state('main.evaluate-project', {
+			url: '/secciones/evaluacion-proyecto/?projectId/?sectionId',
 			templateUrl: 'templates/components/main/project-evaluation-form/project-evaluation-form.html',
 			controller: "ProjectEvaluationFormController as vm",
 			onEnter: onStateEnter
