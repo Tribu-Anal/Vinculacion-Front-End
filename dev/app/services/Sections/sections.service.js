@@ -4,12 +4,13 @@ function sections($http) {
     var url = 'http://fiasps.unitec.edu:' + PORT + '/api/Sections';
     var service = {
         getSections: getSections,
-        postSection: postSection,
+        post: post,
         deleteSection: deleteSection,
         getStudents: getStudents,
-        addStudent: addStudent,
+        assignStudents: assignStudents,
+        reassignStudents: reassignStudents,
         removeStudent: removeStudent,
-        updateSection: updateSection,
+        update: update,
         getSectionsWithPagination: getSectionsWithPagination,
         getSectionCount: getSectionCount,
         getSection: getSection,
@@ -29,10 +30,11 @@ function sections($http) {
             .finally(fin);
     }
 
-    function postSection(data, successCallback, errorCallback) {
+    function post (data, suc, err, fin) {
         $http.post(url, JSON.stringify(data))
-            .then(successCallback)
-            .catch(errorCallback);
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 
     function deleteSection(sectionId, successCallback, errorCallback) {
@@ -40,12 +42,18 @@ function sections($http) {
             .catch(errorCallback);
     }
 
-    function addStudent(StudenstIds, sectionId, successCallback, errorCallback) {
-        $http.post(url + '/AssignStudents', {
-            SectionId: sectionId,
-            StudenstIds: StudenstIds
-        }).then(successCallback)
-            .catch(errorCallback);
+    function assignStudents (sectionId, studentIds, suc, err, fin) {
+        $http.post(url + '/AssignStudents', { SectionId: sectionId, StudenstIds: studentIds })
+        .then(suc)
+        .catch(err)
+        .finally(fin);
+    }
+
+     function reassignStudents (sectionId, studentIds, suc, err, fin) {
+        $http.post(url + '/Reassign', { SectionId: sectionId, StudenstIds: studentIds })
+        .then(suc)
+        .catch(err)
+        .finally(fin);
     }
 
     function removeStudent(StudenstIds, sectionId, successCallback, errorCallback) {
@@ -56,10 +64,11 @@ function sections($http) {
             .catch(errorCallback);
     }
 
-    function updateSection(data, sectionId, successCallback, errorCallback) {
-        $http.put(url + "/" + sectionId, data)
-            .then(successCallback)
-            .catch(errorCallback);
+    function update (id, data, suc, err, fin) {
+        $http.put(url + "/" + id, data)
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 
     function getSectionsWithPagination(page, size, success, error, fin) {
@@ -85,8 +94,11 @@ function sections($http) {
     }
 
 
-    function getStudents(sectionId, successCallback, errorCallback) {
-        $http.get(url + '/Students/' + sectionId).then(successCallback).catch(errorCallback);
+    function getStudents (id, suc, err, fin) {
+        $http.get(url + '/Students/' + id)
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 
     function getProjects(sectionId, successCallback, errorCallback) {
