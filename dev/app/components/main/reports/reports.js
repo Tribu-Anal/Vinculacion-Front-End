@@ -41,8 +41,8 @@ module.exports = [
 		placeholder: yearPlaceholder
 	},
 	{ 
-		title: 'Reporte de Proyectos', 
-	  	url: `${reportsUrl}/ProjectsReport`,
+		title: 'Reporte de Proyectos por Carrera', 
+	  	url: `${reportsUrl}/ProjectsByMajorReport`,
 		hasParam: false
 	}
 ];
