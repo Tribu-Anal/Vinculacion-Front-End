@@ -12,6 +12,7 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
         getAndLoad: getAndLoad,
+        showCustomModal: showCustomModal,
         getExistingAndLoad: getExistingAndLoad,
         getNewFromArrays: getNewFromArrays,
         getRemovedFromArrays: getRemovedFromArrays,
@@ -226,8 +227,8 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
 
     function postAndGoTo (post, data, toState, msg, fin) {
         post(data, resp => {
-            displayNotification('success', 'Exito', msg ? msg : 'Se creo con exito!');
-            go(toState);
+            if (msg) displayNotification('success', 'Exito', msg);
+            if(toState) go(toState);
         }, resp => { showErrorMessage(resp.data); }, fin);
     }
 
@@ -236,6 +237,17 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
             displayNotification('success', 'Exito', msg ? msg : 'Se creo con exito!');
             go(toState);
         }, resp => { showErrorMessage(resp.data); }, fin);
+    }
+
+    function showCustomModal (ctrl, templateUrl, _then, locals) {
+        $mdDialog.show({
+          controller: ctrl,
+          templateUrl: templateUrl,
+          parent: angular.element(document.body),
+          clickOutsideToClose: true,
+          locals: locals
+        })
+        .then(_then);
     }
 
 }
