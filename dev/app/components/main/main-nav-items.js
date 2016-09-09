@@ -1,9 +1,9 @@
 module.exports = ($rootScope, $state, TbUtils) => {
 	return [
 		{
-			title: "INICIO", ref: 'main.'+$rootScope.Role.toLowerCase()+'-dashboard', url: '/inicio-'+$rootScope.Role.toLowerCase(),
+			title: "INICIO", ref: 'main.'+$rootScope.Role.toLowerCase()+'-dashboard', url: '/inicio',
 			icon: "glyphicon glyphicon-home",
-			active: $state.current.url.includes('/inicio-'+$rootScope.Role.toLowerCase()),
+			active: $state.current.url.includes('/inicio'),
 			show: true,
 			clicked:TbUtils.preventGeneralLoading
 		},
