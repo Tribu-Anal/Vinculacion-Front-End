@@ -1,29 +1,30 @@
 sectionProjects.$inject = ['$http'];
 
 function sectionProjects ($http) {
-	var url = 'http://fiasps.unitec.edu:' + PORT + '/api/';
+	var url = 'http://fiasps.unitec.edu:' + PORT + '/api/SectionProjects';
 	const service = {
 		getUnapproved: getUnapproved,
-		postSectionProjects: postSectionProjects,
+		post: post,
 		getSectionProject: getSectionProject
 	};
 
 	return service;
 
 	function getUnapproved(successCallback, errorCallback){
-		$http.get(url+'SectionProjects/UnApproved')
+		$http.get(url+'/UnApproved')
 			.then(successCallback)
 			.catch(errorCallback);
 	}
 
-	function postSectionProjects(data, successCallback, errorCallback) {
-        $http.post(url+'SectionProjects', JSON.stringify(data))
-            .then(successCallback)
-            .catch(errorCallback);
+	function post (data, suc, err, fin) {
+        $http.post(url, JSON.stringify(data))
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 
     function getSectionProject(sectionId, projectId, successCallback, errorCallback){
-    	$http.get(url+'SectionProjects/Info/'+sectionId+'/'+projectId)
+    	$http.get(url+'/Info/'+sectionId+'/'+projectId)
     	.then(successCallback)
 		.catch(errorCallback);
     }

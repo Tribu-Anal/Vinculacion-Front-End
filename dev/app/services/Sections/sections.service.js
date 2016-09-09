@@ -101,9 +101,11 @@ function sections($http) {
             .finally(fin);
     }
 
-    function getProjects(sectionId, successCallback, errorCallback) {
-        $http.get(url + '/Projects/' + sectionId).then(successCallback)
-            .catch(errorCallback);
+    function getProjects(id, suc, err, fin) {
+        $http.get(url + '/Projects/' + id)
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 
     function getCurrentPeriodSections (success, failure, _finally) {

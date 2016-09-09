@@ -16,7 +16,8 @@ function projects($http, $rootScope, $state) {
         getProjectsCount: getProjectsCount,
         assignSectionToProject: assignSectionToProject,
         assignProjectstoSection: assignProjectstoSection,
-        selectedProjects: []
+        selectedProjects: [],
+        cached: null
     };
 
     return service;
@@ -53,7 +54,7 @@ function projects($http, $rootScope, $state) {
     }
 
     function getProjectReportUrl(projectId,sectionId, fieldHours, calification, beneficiariesQuantities, beneficiariGroups) {
-        return url + "/FinalReport/" + projectId +"/"+sectionId + "/" + fieldHours + "/" + calification + "/" + beneficiariesQuantities + "/'" + beneficiariGroups + "'";
+        return url + "/FinalReport/" + projectId +"/"+sectionId + "/" + fieldHours + "/" + calification + "/" + beneficiariesQuantities + "/" + beneficiariGroups + "";
     }
 
     function postProject(data, suc, err, fin) {
