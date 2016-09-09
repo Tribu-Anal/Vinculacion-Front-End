@@ -32,12 +32,13 @@ function redirect (state, toState, role, loggedIn, ev) {
 		
 		case 'main.edit-hours':
 		case 'main.project':
-		case 'main.addproject':
-		case 'main.editproject':
+		case 'main.new-project':
+		case 'main.edit-project':
 		case 'main.projects':
 		case 'main.section':
 		case 'main.sections':
 		case 'main.new-section':
+		case 'main.edit-section':
 			if (!loggedIn) 
 				goToLanding(state, ev);
 
@@ -49,7 +50,7 @@ function redirect (state, toState, role, loggedIn, ev) {
 		// TEACHER-ONLY STATES
 
 		case 'main.professor-dashboard':
-		case 'main.evaluateproject':
+		case 'main.evaluate-project':
 			if (!loggedIn)
 				goToLanding(state, ev);
 

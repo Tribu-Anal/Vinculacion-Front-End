@@ -7,7 +7,7 @@ function StudentsController (TbUtils, students) {
     vm.studentObj = term => { return { AccountId: term }; };
 
     vm.students = [];
-    vm.tableSchema = require('../../../table-schemas/users-table-schema');
+    vm.tableSchema = require('../../../table-schemas/users-table-schema')('student');
 
     vm.pageSize = 10;
     vm.get = students.getWithPagination;

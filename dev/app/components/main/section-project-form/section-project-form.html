@@ -1,0 +1,63 @@
+ <md-dialog aria-label="SectionProjectForm" flex="50">
+ 	<md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Nuevo Proyecto de Seccion</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon md-svg-src="img/close.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+  <md-content layout-padding>
+    <form name="form" ng-submit="form.$valid && vm.submit()" novalidate>
+
+	    <md-autocomplete flex required
+	        md-input-name="project"
+	        md-selected-item="vm.selectedProject"
+	        md-search-text="searchText"
+	        md-items="project in vm.search(searchText)"
+	        md-item-text="project.Name"
+	        md-floating-label="Proyecto"
+	        md-require-match>
+	      <md-item-template>
+	        <span md-highlight-text="searchText">{{project.Name}}</span>
+	      </md-item-template>
+	      <md-not-found>
+	      	No se encontro el proyecto: {{searchText}}.
+	      </md-not-found>
+	      <div ng-messages="form.$submitted || form.project.$error" ng-if="form.project.$touched">
+	        <div ng-message="required"><b>Debe</b> seleccionar un proyecto.</div>
+	        <div ng-message="md-require-match">Por favor escoja un proyecto existente.</div>
+	      </div>
+	    </md-autocomplete>
+
+      <md-input-container class="md-block">
+        <label>Descripcion</label>
+        <input md-maxlength="100" required name="description" ng-model="vm.project.Description">
+        <div ng-messages="form.$submitted || form.description.$error" ng-if="form.description.$touched">
+          <div ng-message="required">Ingrese una descripcion.</div>
+          <div ng-message="md-maxlength">La descripcion debe ser menor de 100 caracteres.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <label>Costo</label>
+        <input required type="number" step="any" name="cost" ng-model="vm.project.Cost" min="0"/>
+        <div ng-messages="form.cost.$submit || form.cost.$error" ng-if="form.cost.$touched" 
+             multiple md-auto-hide="false">
+          <div ng-message="required">
+            Debe ingresar un costo!
+          </div>
+          <div ng-message="min">
+            El costo debe ser mayor o igual que Lps. 0.
+          </div>
+        </div>
+      </md-input-container>
+
+        <md-button type="submit">Aceptar</md-button>
+      </div>
+
+    </form>
+    <tb-loading class="main-loader" ng-show="vm.projectsLoading || vm.submitting"></tb-loading>
+  </md-content>
+</md-dialog>

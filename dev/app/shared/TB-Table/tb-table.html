@@ -1,7 +1,7 @@
 <table class="responstable">
 	<tr><th ng-repeat="header in table.headers">{{header}}</th></tr>
 
-	<tr class="tb-body" ng-repeat="row in table.rows" ng-click="onRowClick(row.data)">
+	<tr class="tb-body" ng-repeat="row in table.rows" ng-click="rowClicked(row.data)">
 		<td ng-repeat="elem in row.elements">
 
 			<!-- LABEL ELEMENT -->
@@ -23,7 +23,7 @@
 			<button ng-if="elem.type === 'button'"  
 			        class="actions-button tb-tooltip" 
 			        style="float: none;" 
-			        ng-click="elem.props.onClick(row.data)">
+			        ng-click="btnClicked(row.data, elem.props.onClick)">
 				<span class="{{elem.props.icon}}" aria-hidden="true"></span>
 				<span ng-show="tooltip" class="tooltiptext">{{elem.props.tooltip}}</span>
 			</button>

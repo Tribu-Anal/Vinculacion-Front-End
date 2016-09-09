@@ -13,9 +13,9 @@ function ProjectsController(TbUtils, projects, $rootScope) {
 
     vm.projects = [];
 
-    vm.goToProject = project => { TbUtils.go('main.project', { projectId: project.Id }); };
-    vm.goToNewProject = project => { TbUtils.go('main.addproject'); };
-    vm.goToEdit = project => { TbUtils.go('main.editproject', { project: JSON.stringify(project) }); };
+    vm.goToProject = project => { TbUtils.go('main.project', { project: btoa(JSON.stringify(project)) }); };
+    vm.goToNewProject = project => { TbUtils.go('main.new-project'); };
+    vm.goToEdit = project => { TbUtils.go('main.edit-project', { project: btoa(JSON.stringify(project)) }); };
 
     vm.loading = true;
 
@@ -30,14 +30,11 @@ function ProjectsController(TbUtils, projects, $rootScope) {
                 if (resolve) {
                     vm.loading = true;
                     TbUtils.deleteAndNotify(projects.deleteProject, project, vm.projects, 
-                        () => { vm.loading = false; });
+                        'El proyecto se borro exitosamente.', () => { vm.loading = false; });
                 }
             });
     }
 
 }
 
-module.exports = {
-    name: 'ProjectsController',
-    ctrl: ProjectsController
-};
+module.exports = { name: 'ProjectsController', ctrl: ProjectsController };

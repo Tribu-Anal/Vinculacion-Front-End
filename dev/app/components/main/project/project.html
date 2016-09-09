@@ -18,7 +18,7 @@
 				<h3 class="title_spec">Carreras Asociadas</h3>
 				<p ng-repeat="major in vm.majors">{{major.Name}}</p>
 			</div>
-			<div ng-if="vm.sections && vm.sections.length > 0" 
+			<div ng-if="vm.sections.length > 0" 
 			     style="margin-left: 10%; margin-bottom: 20px;" class="col-md-10 class-style">
 				<h1>Secciones</h1>
 				<tb-table class="col-md-12" 
@@ -30,4 +30,4 @@
 		</div>
 	</div>
 </div>
-<tb-loading class="main-loader" ng-show="vm.projectLoading" style="z-index: 99999"></tb-loading>
+<!-- <tb-loading class="main-loader" ng-show="vm.projectLoading" style="z-index: 99999"></tb-loading> -->

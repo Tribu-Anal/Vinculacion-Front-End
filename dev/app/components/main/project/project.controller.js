@@ -1,63 +1,21 @@
-ProjectController.$inject = ['$rootScope', '$stateParams', '$state',
-    'projects', 'TbUtils', 'majors', 'sections'
-];
+ProjectController.$inject = [ 'TbUtils', 'majors', 'sections', '$stateParams' ];
 
-function ProjectController($rootScope, $stateParams, $state, projects,
-    TbUtils, majors, sections) {
-    var vm = this;
+function ProjectController(TbUtils, majors, sections, stateParams) {
+    const vm = this;
 
-    vm.project = {};
+    vm.project = JSON.parse(atob(stateParams.project));
     vm.majors = [];
-    vm.sections = null;
-    vm.projectLoading = true;
+    vm.sections = [];
+
     vm.tableSchema = require('../../../table-schemas/sections-table-schema');
-    vm.goToSection = goToSection;
 
-    projects.getProject($stateParams.projectId, getProjectSuccess, getProjectFail);
+    vm.majorsLoading = false;
+    vm.sectionsLoading = false;
 
-    sections.getSectionsByProject($stateParams.projectId, getSectionsByProjectSuccess, 
-                                  getSectionsByProjectFail);
+    vm.goToSection = section => { TbUtils.go('main.section', { section: btoa(JSON.stringify(section)) }); };
 
-    function goToSection (data) {
-        TbUtils.go('main.section', { sectionId: data.Id });
-    }
-
-    function getMajorSuccess(response) {
-        vm.majors.push(response.data.Name);
-    }
-
-    function getMajorFail(response) {}
-
-    function getProjectSuccess(response) {
-        vm.project = response.data;
-        vm.project.Name = TbUtils.toTitleCase(vm.project.Name);
-
-        majors.getMajorsByProject($stateParams.projectId).then(function(response) {
-            TbUtils.fillListWithResponseData(response, vm.majors);
-            vm.projectLoading = false;
-        }, 
-            function(error) {
-                TbUtils.displayNotification('error', 'Error', error);
-                vm.projectLoading = false;
-        });
-    }
-
-    function getProjectFail(response) {
-        TbUtils.showErrorMessage(response.data);
-
-        TbUtils.go('main.dashboard');
-
-        vm.projectLoading = false;
-    }
-
-    function getSectionsByProjectSuccess(response) {
-        vm.sections = response.data;
-    }
-
-    function getSectionsByProjectFail() {
-        TbUtils.displayNotification('error', 'Error',
-            'No se pudieron cargar las secciones correctamente.');
-    }
+    TbUtils.getExistingAndLoad(majors.getMajorsByProject, vm.project.Id, vm.majors, () => { vm.majorsLoading = false; });
+    TbUtils.getExistingAndLoad(sections.getSectionsByProject, vm.project.Id, vm.sections, () => { vm.sectionsLoading = false; });
 
 }
 

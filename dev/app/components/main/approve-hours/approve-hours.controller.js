@@ -31,7 +31,7 @@ function ApproveHoursController(TbUtils, hours) {
             'Estas horas ya fueron Aprobadas');
     }
 
-    function getHoursInfoSectionProjectsFail(resposne) {
+    function getHoursInfoSectionProjectsFail(response) {
         TbUtils.showErrorMessage(response.data);
     }
 

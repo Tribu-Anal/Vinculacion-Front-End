@@ -84,7 +84,7 @@ function EditHoursController($stateParams, sections, projects,
     }
 
     function evaluateProject() {
-        TbUtils.go('main.evaluateproject', 
+        TbUtils.go('main.evaluate-project', 
             { projectId: $stateParams.projectId,
               sectionId: $stateParams.sectionId });
     }

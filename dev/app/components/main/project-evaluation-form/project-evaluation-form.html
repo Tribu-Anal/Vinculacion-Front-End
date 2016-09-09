@@ -1,47 +1,55 @@
-<form name="reportForm" class="cd-form" ng-submit="reportForm.$valid && vm.downloadReport()" novalidate>
+<form name="form" class="cd-form" ng-submit="form.$valid && vm.downloadReport()" novalidate>
     <legend>
         <strong>Evaluación de Proyecto de Vinculación</strong>
     </legend>
     
     <div>
         <label class="cd-label">Grupo(s) meta beneficiado(s) con el producto entregado</label>
-        <input ng-model="vm.formData.beneficiariGroups" class="user" type="text" name="bg" id="cd-name" required>
-        <p class="error-message" ng-show="reportForm.$submitted && reportForm.bg.$error.required">
-            * Este campo es requerido.
-        </p>
+        <input ng-model="vm.formData.beneficiaryGroups" class="user" type="text" name="bg" id="cd-name" required>
+        <span ng-show="form.$submitted || form.bg.$touched">
+            <p class="error-message" ng-show="form.bg.$error.required">
+                * Este campo es requerido.
+            </p>
+        </span>
     </div>
 
     <div>
         <label class="cd-label" for="cd-name">Número de personas beneficiadas</label>
         <input ng-model="vm.formData.beneficiariesQuantities" min="0" class="user" type="number" name="bq" id="cd-name" required>
-        <p class="error-message" ng-show="reportForm.bq.$error.required">
-            * Este campo es requerido.
-        </p>
-        <p class="error-message" ng-show="reportForm.bq.$error.min">
-            * Ingrese un valor mayor o igual a 0.
-        </p>
+        <span ng-show="form.$submitted || form.bq.$touched">
+            <p class="error-message" ng-show="form.bq.$error.required">
+                * Este campo es requerido.
+            </p>
+            <p class="error-message" ng-show="form.bq.$error.min">
+                * Ingrese un valor mayor o igual a 0.
+            </p>
+        </span>
     </div>
     
     <div>
         <label class="cd-label">Horas de trabajo de campo alumnos</label>
         <input ng-model="vm.formData.fieldHours" class="user" type="number" name="hours" min="0" id="cd-name" required> 
-        <p class="error-message" ng-show="reportForm.hours.$error.required">
-            * Este campo es requerido.
-        </p>
-        <p class="error-message" ng-show="reportForm.hours.$error.min">
-            * Ingrese un valor mayor o igual a 0.
-        </p>
+        <span ng-show="form.$submitted || form.hours.$touched">
+            <p class="error-message" ng-show="form.hours.$error.required">
+                * Este campo es requerido.
+            </p>
+            <p class="error-message" ng-show="form.hours.$error.min">
+                * Ingrese un valor mayor o igual a 0.
+            </p>
+        </span>
     </div>
     
     <div>
         <label class="cd-label">Nota asignada al proyecto (%)</label>
         <input ng-model="vm.formData.calification" class="user" type="number" min="0" max="100" name="grade" required>
-        <p class="error-message" ng-show="reportForm.grade.$error.required">
-            * Este campo es requerido.
-        </p>
-        <p class="error-message" ng-show="reportForm.grade.$error.min || reportForm.grade.$error.max">
-            * La nota del proyecto debe ser entre 0 y 100.
-        </p>
+        <span ng-show="form.$submitted || form.grade.$touched">
+            <p class="error-message" ng-show="form.grade.$error.required">
+                * Este campo es requerido.
+            </p>
+            <p class="error-message" ng-show="form.grade.$error.min || form.grade.$error.max">
+                * La nota del proyecto debe ser entre 0 y 100.
+            </p>
+        </span>
     </div>
 
     <div>

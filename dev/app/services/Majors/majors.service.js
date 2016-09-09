@@ -22,12 +22,11 @@ function majors ($http, $q) {
     		 .catch(errorCallback);
     }
 
-    function getMajorsByProject(projectId) {
-        return $http.get(url + '/MajorsByProject/' + projectId).then(function(response) {
-            return response.data;
-        }, function(response) {
-            return $q.reject(response.data);
-        });
+    function getMajorsByProject(id, suc, err, fin) {
+        $http.get(url + '/MajorsByProject/' + id)
+            .then(suc)
+            .catch(err)
+            .finally(fin);
     }
 }
 

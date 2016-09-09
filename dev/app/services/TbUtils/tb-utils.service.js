@@ -12,10 +12,15 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         getModalParams: getModalParams,
         toTitleCase: toTitleCase,
         getAndLoad: getAndLoad,
+        showCustomModal: showCustomModal,
+        getExistingAndLoad: getExistingAndLoad,
+        getNewFromArrays: getNewFromArrays,
+        getRemovedFromArrays: getRemovedFromArrays,
         deleteAndNotify: deleteAndNotify,
         updateAndNotify: updateAndNotify,
         updateAndGoTo: updateAndGoTo,
         postAndGoTo: postAndGoTo,
+        assignAndGoTo: assignAndGoTo,
         getListCopy: getListCopy,
         queryList: queryList,
         confirm: confirm,
@@ -167,6 +172,21 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         $state.go(state, params);
     }
 
+    function getNewFromArrays (old, _new) {
+        let newItems = [];
+
+        for (item of _new) {
+            if (old.indexOf(item) >= 0) continue;
+            newItems.push(item);
+        }
+
+        return newItems;
+    }
+
+    function getRemovedFromArrays (old, _new) {
+        return getNewFromArrays(_new, old);
+    }
+
     function getAndLoad (get, list, fin, page, size) {
         if (typeof page === 'number' && typeof size === 'number')
             get(page, size, resp => { fillListWithResponseData(resp.data, list); },
@@ -174,6 +194,12 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
                             fin);
         else
             get(resp => { fillListWithResponseData(resp.data, list); },
+                resp => { showErrorMessage(resp.data); },
+                fin);
+    }
+
+    function getExistingAndLoad (get, id, list, fin) {
+        get(id, resp => { fillListWithResponseData(resp.data, list); },
                 resp => { showErrorMessage(resp.data); },
                 fin);
     }
@@ -201,9 +227,27 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
 
     function postAndGoTo (post, data, toState, msg, fin) {
         post(data, resp => {
+            if (msg) displayNotification('success', 'Exito', msg);
+            if(toState) go(toState);
+        }, resp => { showErrorMessage(resp.data); }, fin);
+    }
+
+    function assignAndGoTo (post, id, data, toState, msg, fin) {
+        post(id, data, resp => {
             displayNotification('success', 'Exito', msg ? msg : 'Se creo con exito!');
             go(toState);
         }, resp => { showErrorMessage(resp.data); }, fin);
+    }
+
+    function showCustomModal (ctrl, templateUrl, _then, locals) {
+        $mdDialog.show({
+          controller: ctrl,
+          templateUrl: templateUrl,
+          parent: angular.element(document.body),
+          clickOutsideToClose: true,
+          locals: locals
+        })
+        .then(_then);
     }
 
 }

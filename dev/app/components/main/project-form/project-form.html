@@ -1,45 +1,54 @@
-
-<form name="projectForm" class="cd-form" ng-submit="projectForm.$valid && vm.majorsAndStatusValid() && vm.submitProject()" novalidate>
-    <legend><strong>{{vm.formLegend}}</strong></legend>
+<form name="form" class="cd-form" ng-submit="form.$valid && vm.submit()" novalidate>
+    <legend>
+        <strong>{{vm.formTitle}}</strong>
+    </legend>
     
     <div>
-        <label class="cd-label" for="cd-name">Nombre</label>
-        <input ng-model="vm.project.Name" class="user" type="text" name="projectName" id="cd-name" required>
-        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectName.$error.required">
-            * Por favor ingresa un nombre
-        </p>
+        <label class="cd-label" for="name">Nombre</label>
+        <input ng-model="vm.project.Name" class="user" type="text" name="name" id="name" required>
+        <span ng-show="form.$submitted || form.name.$touched">
+            <p class="error-message" ng-show="form.name.$error.required">
+                * Por favor ingrese un nombre.
+            </p>
+        </span>
+    </div>
+
+    <div class="icon">
+        <label class="cd-label" for="description">Descripcion de Proyecto</label>
+        <textarea ng-model="vm.project.Description" class="message" name="description" id="description" required></textarea>
+       <span ng-show="form.$submitted || form.description.$touched">
+            <p class="error-message" ng-show="form.description.$error.required">
+                * Por favor ingrese una descripcion.
+            </p>
+       </span>
     </div>
 
     <div>
         <h4><strong>Carreras Asociadas</strong></h4>            
         <div class="tb-checklist">
             <div class="tb-checkbox" ng-repeat="major in vm.majors">
-                <span ng-click="vm.checkboxListItemClicked(mdl, major.MajorId, vm.project.MajorIds)">
-                    <input type="checkbox" id="majorBox{{major.MajorId}}" name="projectMajor" value="{{major.MajorId}}" ng-init="mdl = vm.edit && vm.project.MajorIds.indexOf(major.MajorId) >= 0" ng-model="mdl">
-                    <label ng-click="mdl = !mdl">{{vm.toTitleCase(major.Name)}}</label>
-                </span>
+                <input type="checkbox" id="m{{$index}}" 
+                       checklist-model="vm.project.MajorIds" checklist-value="major.MajorId">
+                <label for="m{{$index}}">{{major.Name}}</label>
             </div>
-            <tb-loading class="main-loader" style="z-index: 99999;" ng-show="vm.majorsLoading"></tb-loading>
+            <tb-loading class="main-loader" style="z-index: 99999;"
+                        ng-show="vm.majorsLoading || vm.projectMajorsLoading"></tb-loading>
         </div>
-        <p class="error-message" ng-show="projectForm.$submitted && vm.project.MajorIds.length === 0">
-            * Por favor selecciona una o mas de las carreras disponibles
-        </p>
+        <span ng-show="form.$submitted">
+            <p class="error-message" ng-show="vm.project.MajorIds.length === 0">
+                * Por favor selecciona una o mas de las carreras disponibles.
+            </p>
+        </span>
     </div> 
 
     <div>
-        <label class="cd-label" for="cd-name">Organizacion Beneficiaria</label>
-        <input ng-model="vm.project.BeneficiarieOrganization" class="user" type="text" name="projectBeneficiario" id="cd-name" required>
-        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectBeneficiario.$error.required">
-            * Por favor ingresa el nombre de un beneficiario.
-        </p>
-    </div>
-
-    <div class="icon">
-        <label class="cd-label" for="cd-textarea">Descripcion de Proyecto</label>
-        <textarea ng-model="vm.project.Description" class="message" name="projectDescription" id="cd-textarea" required></textarea>
-        <p class="error-message" ng-show="projectForm.$submitted && projectForm.$invalid && projectForm.projectDescription.$error.required">
-            * Por favor ingresa una descripcion para el proyecto
-        </p>
+        <label class="cd-label" for="bene">Organizacion Beneficiaria</label>
+        <input ng-model="vm.project.BeneficiarieOrganization" class="user" type="text" name="bene" id="bene" required>
+        <span ng-show="form.$submitted || form.bene.$touched">
+            <p class="error-message" ng-show="form.bene.$error.required">
+                * Por favor ingrese el nombre de un beneficiario.
+            </p>
+        </span>
     </div>
 
     <div>

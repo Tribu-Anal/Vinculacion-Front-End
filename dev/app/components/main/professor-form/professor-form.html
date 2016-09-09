@@ -1,50 +1,102 @@
-<form name="professorForm" class="cd-form" ng-submit="professorForm.$valid && vm.submit()" novalidate>
+<form name="form" class="cd-form" ng-submit="form.$valid && vm.submit()" novalidate>
     <legend>
         <strong>{{vm.formTitle}}</strong>
     </legend>
     
     <div>
         <label class="cd-label">Numero de Cuenta</label>
-        <input ng-model="vm.accountId" minlength="8" maxlength="8" class="user" type="number" name="accountId" id="cd-name" required>
-        <p class="error-message" ng-show="professorForm.$submitted && professorForm.accountId.$error.required">
-            * Por favor ingrese un numero de cuenta valido.
-        </p>
-        <p class="error-message" ng-show="professorForm.$submitted && (professorForm.accountId.$error.maxlength ||
-           professorForm.accountId.$error.minlength)">
-            * Numero de cuenta de tener 8 digitos.
-        </p>
+        <input ng-model="vm.professor.AccountId" maxlength="8" minlength="8" type="text" 
+               ng-pattern="regex['accountId']" name="accountId" id="cd-name" required>
+        <span ng-show="form.$submitted || form.accountId.$touched">
+            <p class="error-message" ng-show="form.accountId.$error.required">
+                * Por favor ingrese un numero de cuenta.
+            </p>
+            <p class="error-message" ng-show="form.accountId.$error.minlength">
+                * Numero de cuenta debe de estar compuesto por 8 digitos.
+            </p>
+            <p class="error-message" ng-show="form.accountId.$error.pattern">
+                * El numero de cuenta solo puede tener numeros.
+            </p>
+        </span>
     </div>
     
     <div>
-        <label class="cd-label">Nombre</label>
-        <input ng-model="vm.professor.Name" class="user" type="text" name="Name" id="cd-name" required> 
-        <p class="error-message" ng-show="professorForm.$submitted && professorForm.Name.$error.required">
-            * Por favor ingrese el nombre del profesor.
-        </p>
+        <label class="cd-label">Primer Nombre</label>
+        <input ng-model="vm.names[0]" class="user" type="text" name="firstName" id="cd-name"
+               ng-pattern="regex['name']" required> 
+        <span ng-show="form.$submitted || form.firstName.$touched">
+            <p class="error-message" ng-show="form.firstName.$error.required">
+                * Primer nombre es requerido.
+            </p>
+            <p class="error-message" ng-show="form.firstName.$error.pattern">
+                * Ingrese un nombre valido.
+            </p>
+        </span>
     </div>
-    
+
     <div>
-        <label class="cd-label">Email</label>
-        <input ng-model="vm.professor.Email" class="user" type="email" name="Email" id="cd-name" 
+        <label class="cd-label">Segundo Nombre (Opcional)</label>
+        <input ng-model="vm.names[1]" class="user" type="text" name="middleName" id="cd-name"
+               ng-pattern="regex['name']"> 
+        <span ng-show="form.$submitted || form.middleName.$touched">
+            <p class="error-message" ng-show="form.middleName.$error.pattern">
+                * Ingrese un nombre valido.
+            </p>
+        </span>
+    </div>
+
+    <div>
+        <label class="cd-label">Primer Apellido</label>
+        <input ng-model="vm.names[2]" class="user" type="text" name="lastNameOne" id="cd-name"
+               ng-pattern="regex['name']" required> 
+        <span ng-show="form.$submitted || form.lastNameOne.$touched">
+            <p class="error-message" ng-show="form.lastNameOne.$error.required">
+                * Primer apellido es requerido.
+            </p>
+            <p class="error-message" ng-show="form.lastNameOne.$error.pattern">
+                * Ingrese un apellido valido.
+            </p>
+        </span>
+    </div>
+
+    <div>
+        <label class="cd-label">Segundo Apellido (Opcional)</label>
+        <input ng-model="vm.names[3]" class="user" type="text" name="lastNameTwo" id="cd-name"
+               ng-pattern="regex['name']"> 
+        <span ng-show="form.$submitted || form.lastNameTwo.$touched">
+            <p class="error-message" ng-show="form.lastNameTwo.$error.pattern">
+                * Ingrese un apellido valido.
+            </p>
+        </span>
+    </div>
+
+    <div>
+        <label class="cd-label">Correo</label>
+        <input ng-model="vm.professor.Email" class="user" type="email" name="email" id="cd-name" 
                ng-pattern="regex['email']" required>
-        <p class="error-message" ng-show="professorForm.$submitted && professorForm.Email.$error.required">
-            * Por favor ingrese el correo del profesor.
-        </p>
-        <p class="error-message" ng-show="professorForm.$submitted && professorForm.Email.$invalid">
-            * Por favor ingrese un correo valido.
-        </p>
+        <span ng-show="form.$submitted || form.email.$touched">
+            <p class="error-message" ng-show="form.email.$error.required">
+                * Por favor ingrese un correo electronico.
+            </p>
+            <p class="error-message" ng-show="form.email.$error.pattern">
+                * Por favor ingrese un correo electronico valido.
+            </p>
+        </span>
     </div>
 
     <div>
         <label class="cd-label" for="cd-name">Campus</label>
-        <select name="_class" ng-model="vm.professor.Campus" required>
+        <select name="campus" ng-model="vm.professor.Campus" required>
             <option value="TGU">TGU</option>
-            <option value="SPS">SPS</option>
+            <option value="SPS" selected>SPS</option>
         </select>
-        <p class="error-message" ng-show="professorForm.$submitted && professorForm._class.$error.required">
-            * Por favor seleccione un campus.
-        </p>
+        <span ng-show="form.$submitted || form.campus.$touched">
+            <p class="error-message" ng-show="form.campus.$error.required">
+                * Por favor seleccione un campus.
+            </p>
+        </span>
     </div>
+    
     <div>
         <input type="submit" ng-hide="vm.submitting" value="Confirmar">
     </div>

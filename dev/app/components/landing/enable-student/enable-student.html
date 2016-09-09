@@ -14,7 +14,7 @@
                 placeholder="N&uacute;mero de Cuenta" ng-pattern="regex['accountId']" 
                 minlength="8" maxlength="8" required>
               </div>
-              <span ng-show="form.accountId.$touched">
+              <span ng-show="form.$submitted || form.accountId.$touched">
                 <p class="error-message" ng-show="form.accountId.$error.required">
                   Por favor ingrese un numero de cuenta.
                 </p>
@@ -37,7 +37,7 @@
                 ng-pattern="regex['email']" type="email" name="email" placeholder="Correo de Unitec"
                 readonly onfocus="this.removeAttribute('readonly');" required>
               </div>
-              <span ng-show="form.email.$touched">
+              <span ng-show="form.$submitted || form.email.$touched">
                 <p class="error-message" ng-show="form.email.$error.required">
                   Por favor ingrese un correo.
                 </p>
@@ -56,7 +56,7 @@
                 minlength="8" class="user" type="password" name="password" placeholder="Contrase&ntilde;a"
                 readonly onfocus="this.removeAttribute('readonly');" required>
               </div>
-              <span ng-show="form.password.$touched">
+              <span ng-show="form.$submitted || form.password.$touched">
                 <p class="error-message" ng-show="form.password.$error.required">
                   Por favor ingrese su contraseña.
                 </p>
@@ -77,7 +77,7 @@
                 name="confirmPass" placeholder="Confirmar Contrase&ntilde;a" tb-equals="vm.student.Password"
                 readonly onfocus="this.removeAttribute('readonly');" required>
               </div>
-              <span ng-show="form.confirmPass.$touched">
+              <span ng-show="form.$submitted || form.confirmPass.$touched">
                 <p class="error-message" ng-show="form.confirmPass.$error.required">
                   Confirma tu contraseña.
                 </p>

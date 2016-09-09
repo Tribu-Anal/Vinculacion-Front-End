@@ -7,7 +7,7 @@ function ProfessorsController (TbUtils, professors) {
     vm.professorObj = term => { return { AccountId: term }; };
 
     vm.professors = [];
-    vm.tableSchema = require('../../../table-schemas/users-table-schema');
+    vm.tableSchema = require('../../../table-schemas/users-table-schema')('professor');
 
     vm.pageSize = 10;
     vm.get = professors.getWithPagination;
