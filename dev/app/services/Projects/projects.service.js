@@ -75,7 +75,7 @@ function projects($http, $rootScope, $state) {
         $http.delete(url + "/" + projectId)
             .then(success)
             .catch(error)
-            .fin(fin);
+            .finally(fin);
     }
 
     function getParticipants(projectId, successCallback, errorCallback) {
