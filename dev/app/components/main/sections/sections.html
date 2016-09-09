@@ -12,12 +12,13 @@
 	          on-row-click="vm.goToSection">
 	</tb-table>
 </div>
-<h1 style="text-align: center; color: #999;" ng-if="vm.searchResults.length === 0">Sin resultados.</h1>
+<h1 style="text-align: center; color: #999;" ng-if="vm.sections.length > 0 && vm.searchResults.length === 0">Sin resultados.</h1>
 <tb-load-more-btn start-page="1" 
                   page-size="vm.pageSize" 
                   model="vm.sections" 
                   get="vm.get"
-                  ng-hide="vm.hideLoadBtn()">
+                  ng-hide="vm.hideLoadBtn()"
+                  style="margin-top: 15px;">
 </tb-load-more-btn>
 <tb-loading class="main-loader" ng-show="vm.loading"></tb-loading>
 <tb-round-btn ng-click="vm.goToNewSection()">+</tb-round-btn>
