@@ -6,7 +6,7 @@ function config ($stateProvider) {
 
 	$stateProvider
 		.state('main.project', {
-			url: '/proyectos/?projectId',
+			url: '/proyectos/?project',
 			templateUrl: "templates/components/main/project/project.html",
 			controller: 'ProjectController as vm',
 			onEnter: onStateEnter

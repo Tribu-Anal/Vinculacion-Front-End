@@ -13,7 +13,7 @@ function ProjectsController(TbUtils, projects, $rootScope) {
 
     vm.projects = [];
 
-    vm.goToProject = project => { TbUtils.go('main.project', { projectId: project.Id }); };
+    vm.goToProject = project => { TbUtils.go('main.project', { project: btoa(JSON.stringify(project)) }); };
     vm.goToNewProject = project => { TbUtils.go('main.new-project'); };
     vm.goToEdit = project => { TbUtils.go('main.edit-project', { project: btoa(JSON.stringify(project)) }); };
 
