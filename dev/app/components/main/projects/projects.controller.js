@@ -30,7 +30,7 @@ function ProjectsController(TbUtils, projects, $rootScope) {
                 if (resolve) {
                     vm.loading = true;
                     TbUtils.deleteAndNotify(projects.deleteProject, project, vm.projects, 
-                        () => { vm.loading = false; });
+                        'El proyecto se borro exitosamente.', () => { vm.loading = false; });
                 }
             });
     }
