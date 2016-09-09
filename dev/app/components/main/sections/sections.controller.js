@@ -10,7 +10,7 @@ function SectionsController (TbUtils, sections) {
 
     vm.sections = [];
     vm.tableSchema = require('../../../table-schemas/ext-sections-table-schema')(goToEdit);
-    vm.goToSection = section => { TbUtils.go('main.section', { sectionId: section.Id }); };
+    vm.goToSection = section => { TbUtils.go('main.section', { section: btoa(JSON.stringify(section)) }); };
 
     vm.pageSize = 10;
     vm.get = sections.getSectionsWithPagination;

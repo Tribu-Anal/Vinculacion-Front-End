@@ -1,176 +1,35 @@
-SectionController.$inject = ['$rootScope', '$stateParams', '$state',
-    'TbUtils', 'ModalService', 'sections', 'projects',
-    'hours', 'students'
-];
+SectionController.$inject = [ 'TbUtils', 'sections', '$stateParams' ];
 
-function SectionController($rootScope, $stateParams, $state,
-    TbUtils, ModalService, sections, projects, 
-    hours, students) {
+function SectionController (TbUtils, sections, stateParams) {
 
-    const vm = this,
-          sectionData = require('./section-data');
+    const vm = this;
 
-    var modalFlag = '';
+    vm.section  = JSON.parse(atob(stateParams.section));
+    vm.students = [];
+    vm.projects = [];
 
-    vm.sectionLoading = true;
-    vm.projectsLoading = true;
     vm.studentsLoading = true;
-    vm.addStudent = addStudent;
-    vm.sections = [];
-    vm.editSection = editSection;
-    vm.toTitleCase = TbUtils.toTitleCase;
-    vm.goToEditHours = project => { TbUtils.go('main.edit-hours', {projectId: project.Id, sectionId: $stateParams.sectionId}); };
+    vm.projectsLoading = true;
 
-    vm.student = undefined;
+    vm.showSectionProjectModal = showSectionProjectModal;
 
-    vm.students = null;
-    vm.studentsTableSchema = require('../../../table-schemas/section-students-table-schema')(deleteStudent);
-
-    vm.projects = null;
+    vm.studentsTableSchema = require('../../../table-schemas/section-students-table-schema');
     vm.projectsTableSchema = require('../../../table-schemas/section-projects-table-schema');
 
-    sections.getSection($stateParams.sectionId, getSectionSuccess, getSectionFail);
-    getProjectsBySection($stateParams.sectionId);
+    vm.goToEditHours = project => { TbUtils.go('main.edit-hours', { projectId: project.Id, sectionId: vm.section.Id} ) };
 
-    function getProjectsBySection(sectionId) {
-        sections.getProjects(sectionId, getProjectsSuccess, getProjectsFail);
+    vm.toTitleCase = TbUtils.toTitleCase;
+
+    TbUtils.getExistingAndLoad(sections.getStudents, vm.section.Id, vm.students, () => { vm.studentsLoading = false; });
+    TbUtils.getExistingAndLoad(sections.getProjects, vm.section.Id, vm.projects, () => { vm.projectsLoading = false; });
+
+    function showSectionProjectModal () {
+         TbUtils.showCustomModal('NewSectionProjectController as vm', 
+            'templates/components/main/section-project-form/section-project-form.html',
+            sectionProject => { vm.projects.push(sectionProject); },
+            { sectionId: vm.section.Id, projectIds: vm.projects.map(obj => obj.Id) });
     }
 
-    function getProjectsSuccess(response) {
-        for(prj in response.data) {
-            response.data[prj].sectionId = $stateParams.sectionId;
-        }
-        vm.projects = response.data;
-        vm.projectsLoading = false;
-    }
-
-    function getProjectsFail(response) {
-        vm.projectsLoading = false;
-        TbUtils.displayNotification('error', 'Error!',
-            'No se ha podido cargar los proyectos de la seccion');
-    }
-
-    function addStudent() {
-        modalFlag = 'AddStudent';
-        ModalService.showModal(sectionData.addStudentModal)
-            .then(modalResolve);
-    }
-
-    function editSection() {
-        modalFlag = 'EditSection';
-
-        const params = {
-            Code: vm.section.Code,
-            ClassId: String(vm.section.Class.Id),
-            PeriodId: String(vm.section.Period.Id),
-            ProffesorAccountId: vm.section.User === null ? '' : vm.section.User.AccountId
-        };
-
-        TbUtils.setModalParams(params);
-        ModalService.showModal(sectionData.editSectionModal)
-            .then(modalResolve);
-    }
-
-    function modalResolve(modal) {
-        modal.element.modal();
-        modal.close.then(modalClose);
-    }
-
-    function modalClose(result) {
-        if (modalFlag === 'AddStudent')
-            addStudentToSection(result);
-        else if (modalFlag === 'EditSection')
-            updateSection(result);
-        else
-            deleteSection(result);
-    }
-
-    function addStudentToSection(result) {
-        if (result.numCuenta > 0)
-            sections.addStudent([result.numCuenta], vm.section.Id,
-                addStudentSuccess, addStudentFail);
-    }
-
-    function updateSection(result) {
-        if (result.ClassId)
-            sections.updateSection(result, vm.section.Id,
-                updateSectionSuccess, updateSectionFail);
-    }
-
-    function addStudentSuccess(response) {
-        location.reload();
-    }
-
-    function addStudentFail(response) {
-        TbUtils.showErrorMessage(response.data);
-    }
-
-    function getStudentsSuccess(response) {
-        vm.students = response.data;
-        vm.studentsLoading = false;
-    }
-
-    function getStudentsFail(response) {
-        vm.studentsLoading = false;
-        TbUtils.showErrorMessage(response.data);
-    }
-
-    function deleteStudent(student) {
-        TbUtils.confirm('Eliminar Estudiante', `Desea eliminar a ${student.Name} de la seccion?`, result => {
-            if (result) {
-                vm.student = student;
-                sections.removeStudent([student.AccountId], vm.section.Id,
-                    removeStudentSuccess, removeStudentFail);
-            }
-        });
-    }
-
-    function removeStudentSuccess(response) {
-        vm.students.splice(vm.students.indexOf(vm.student), 1);
-    }
-
-    function removeStudentFail(response) {
-        TbUtils.showErrorMessage(response.data);
-    }
-
-    function updateSectionSuccess(response) {
-        sections.getSection(vm.section.Id, getSectionSuccess, getSectionFail);
-        location.reload();
-    }
-
-    function getSectionSuccess(response) {
-        vm.sectionLoading = false;
-        vm.section = response.data;
-        sections.getStudents(vm.section.Id, getStudentsSuccess, getStudentsFail);
-    }
-
-    function getSectionFail(response) {
-        vm.sectionLoading = false;
-        TbUtils.showErrorMessage(response.data);
-    }
-
-    function updateSectionFail(response) {
-        TbUtils.showErrorMessage(response.data);
-    }
-
-    /*
-        TODO: Mejorar lo del controlador
-    */
-    function dialogController($scope, $mdDialog, sections) {
-        $scope.projects = [];
-        $scope.response = {
-            projectId: '',
-            hours: ''
-        }
-
-        $scope.answer = function(response) {
-            $mdDialog.hide(response);
-        }
-
-    }
 }
 
-module.exports = {
-    name: 'SectionController',
-    ctrl: SectionController
-};
+module.exports = { name: 'SectionController', ctrl: SectionController };
