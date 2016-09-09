@@ -5,7 +5,7 @@ const config        = require("./app.config"),
 	  run           = require("./app.run");
 
 const moduleName   = 'VinculacionApp',
-      dependencies = [ 'ui.router', 'toaster', 'ngAnimate', 'ngMaterial',
+      dependencies = [ 'ui.router', 'toaster', 'ngAnimate', 'ngMaterial', 'ngMessages',
 		               'ngCookies', 'angular-spinkit', 'angularModalService',
 		               'directives.customvalidation.customValidationTypes',
 		               'checklist-model', components, services, shared
