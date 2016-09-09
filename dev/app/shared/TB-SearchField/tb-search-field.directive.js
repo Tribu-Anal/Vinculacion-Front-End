@@ -31,6 +31,8 @@ function tbSearchField(filterFilter) {
             });
 
             function searchAll (term) {
+                if (term.length === 0) return;
+                
                 if (typeof scope.getAll === 'function' && !scope.all) {
                     scope.loading = true;
                     scope.getAll(resp => { scope.all = resp.data; search(scope.all, term); }, 
