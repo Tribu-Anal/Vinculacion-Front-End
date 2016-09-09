@@ -3,7 +3,7 @@ tb-headerbar {
     #bar {
         display: flex;
         padding-left: 2%;
-        justify-content: space-between;
+        justify-content: flex-end;
         flex-grow: 1;
         flex-basis: 100%;
         transition: all .3s linear;
