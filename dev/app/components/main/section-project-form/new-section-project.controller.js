@@ -39,8 +39,8 @@ function NewSectionProjectController (TbUtils, projects, sectionProjects, sectio
 
 		vm.project.ProjectIds.push(vm.selectedProject.Id);
 
-		sectionProjects.post(vm.project, assignProjects, close, 
-			() => { vm.submitting = false; });
+		projects.assignProjectstoSection(vm.project.ProjectIds, sectionId, postSectionProject,
+			close, () => { vm.submitting = false; });
 	}
 
 	function close (resp) {
@@ -48,9 +48,9 @@ function NewSectionProjectController (TbUtils, projects, sectionProjects, sectio
 		mdDialog.cancel();
 	}
 
-	function assignProjects (response) {
-		projects.assignProjectstoSection(vm.project.ProjectIds, sectionId, 
-			resp => { mdDialog.hide(response.data.map(obj => obj.Project)); },
+	function postSectionProject () {
+		sectionProjects.post(vm.project, 
+			resp => { mdDialog.hide(resp.data.map(obj => obj.Project)); }, 
 			close, () => { vm.submitting = false; });
 	}
 
