@@ -1,18 +1,28 @@
 <md-content style="height: 100%;" ng-if="!vm.submitting" layout-padding>
-    <div layout-gt-xs="column" layout-align="center center">
-      <h2 style="margin-bottom: 30px;">{{vm.formTitle}}</h2>
-      <div flex-gt-xs style="margin-bottom: 30px;">
-        <h4>Inicio de Periodo</h4>
-        <md-datepicker ng-model="vm.period.FromDate" md-placeholder="Ingrese fecha"></md-datepicker>
-      </div>
-      <div flex-gt-xs style="margin-bottom: 30px;">
-        <h4>Fin de Periodo</h4>
-        <md-datepicker ng-model="vm.period.ToDate" md-placeholder="Ingrese fecha"></md-datepicker>
-      </div>
-    </div>
-    <div layout-gt-xs="row" layout-align="center">
-        <md-button class="md-raised md-primary" ng-click="vm.back()">Cancelar</md-button>
-        <md-button class="md-raised md-primary md-hue-2" ng-click="vm.submit()">Confirmar</md-button>
-    </div>
+      <form name="form" ng-submit="form.$valid && vm.submit()" novalidate>
+        <div layout-gt-xs="column" layout-align="center center">
+          <h2 style="margin-bottom: 30px;">{{vm.formTitle}}</h2>
+          <md-input-container class="md-block">
+            <h4>Numero de Periodo</h4>
+            <input type="number" name="num" ng-model="vm.period.Number" min="1" max="5" required>
+            <div ng-messages="form.$submitted || form.num.$error" ng-if="form.num.$touched">
+              <div ng-message="required">Escoja el numero del periodo.</div>
+              <div ng-message="min || max">El numero debe ser entre 1 y 5.</div>
+            </div>
+          </md-input-container>
+          <div flex-gt-xs style="margin-bottom: 30px;">
+            <h4>Inicio de Periodo</h4>
+            <md-datepicker ng-model="vm.period.FromDate" md-placeholder="Ingrese fecha"></md-datepicker>
+          </div>
+          <div flex-gt-xs style="margin-bottom: 30px;">
+            <h4>Fin de Periodo</h4>
+            <md-datepicker ng-model="vm.period.ToDate" md-placeholder="Ingrese fecha"></md-datepicker>
+          </div>
+        </div>
+        <div layout-gt-xs="row" layout-align="center">
+            <md-button class="md-raised md-primary" ng-click="vm.back()">Cancelar</md-button>
+            <md-button class="md-raised md-primary md-hue-2" type="submit">Confirmar</md-button>
+        </div>
+      </form>
 </md-content>
 <tb-loading class="main-loader" ng-show="vm.submitting"></tb-loading> 

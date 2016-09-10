@@ -6,7 +6,7 @@ function NewPeriodController (TbUtils, periods) {
 	const today = new Date();
 
 	vm.period = {
-		Number: 0,
+		Number: 1,
 		Year: 0,
 		FromDate: today,
 		ToDate: today
@@ -21,10 +21,9 @@ function NewPeriodController (TbUtils, periods) {
 	function submit() {
 		vm.submitting = true;
 
-		vm.period.Number = Math.floor(vm.period.FromDate.getMonth()/4)+1;
-		vm.period.Year = vm.period.FromDate.getFullYear();
-		vm.period.FromDate = getDate(vm.period.FromDate);
-		vm.period.ToDate = getDate(vm.period.ToDate);
+		vm.period.Year = vm.period.FromDate ? vm.period.FromDate.getFullYear() : today.getFullYear();
+		vm.period.FromDate = vm.period.FromDate ? getDate(vm.period.FromDate) : getDate(today);
+		vm.period.ToDate = vm.period.ToDate ? getDate(vm.period.ToDate) : getDate(today);
 		
 		TbUtils.postAndGoTo(periods.post, vm.period, 
 			'main.periods', 'El periodo se creo con exito!', () => { vm.submitting = false; });
