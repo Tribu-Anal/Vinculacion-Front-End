@@ -4,7 +4,7 @@
         <form id="login-form" class="login-form" name="registerLogin" ng-submit="registerLogin.$valid && vm.login()" novalidate>
             <div class="inner-addon left-addon">
             <span class="fa fa-user"></span>
-            <input name="usuario" ng-model="vm.username" ng-pattern='/@unitec.edu$/' type="email" placeholder="Correo de Unitec" required/>
+            <input name="usuario" ng-model="vm.username" ng-pattern="regex['email']" type="email" placeholder="Correo de Unitec" required/>
             </div>
             <div class="inner-addon left-addon">
             <span class="fa fa-lock"></span>
