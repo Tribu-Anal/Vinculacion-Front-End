@@ -5,8 +5,6 @@ function EditStudentController (TbUtils, students, majors, stateParams) {
 
 	vm.student = JSON.parse(atob(stateParams.student));
 	vm.student.MajorId = vm.student.Major.MajorId;
-	
-	vm.names = vm.student.Name.split(' ');
 
 	const oldAccountId = vm.student.AccountId;
 
@@ -20,7 +18,6 @@ function EditStudentController (TbUtils, students, majors, stateParams) {
 
     function submit () {
     	vm.submitting = true;
-    	vm.student.Name = vm.names.join(' ');
 
     	TbUtils.updateAndGoTo(students.update, oldAccountId, vm.student, 'main.students', 
 			'Estudiante actualizado.', () => { vm.submitting = false; });

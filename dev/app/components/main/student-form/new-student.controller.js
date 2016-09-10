@@ -10,8 +10,7 @@ function NewStudentController (TbUtils, students, majors) {
 		MajorId: '',
 		Campus: '',
 		Email: ''
-	};
-	vm.names = [ '', '', '', '' ]; 
+	}; 
 
 	vm.formTitle = "Nuevo Estudiante";
 	vm.submitting = false;
@@ -23,7 +22,6 @@ function NewStudentController (TbUtils, students, majors) {
 	TbUtils.getAndLoad(majors.getMajors, vm.majors, () => { vm.majorsLoading = false;});
 
 	function submit() {
-		vm.student.Name = vm.names.join(' ');
 		vm.submitting = true;
 
 		TbUtils.postAndGoTo(students.post, vm.student, 'main.students', 

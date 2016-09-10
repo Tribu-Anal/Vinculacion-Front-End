@@ -21,51 +21,11 @@
     </div>
     
     <div>
-        <label class="cd-label">Primer Nombre</label>
-        <input ng-model="vm.names[0]" class="user" type="text" name="firstName" id="cd-name"
-               ng-pattern="regex['name']" required> 
-        <span ng-show="form.$submitted || form.firstName.$touched">
-            <p class="error-message" ng-show="form.firstName.$error.required">
-                * Primer nombre es requerido.
-            </p>
-            <p class="error-message" ng-show="form.firstName.$error.pattern">
-                * Ingrese un nombre valido.
-            </p>
-        </span>
-    </div>
-
-    <div>
-        <label class="cd-label">Segundo Nombre (Opcional)</label>
-        <input ng-model="vm.names[1]" class="user" type="text" name="middleName" id="cd-name"
-               ng-pattern="regex['name']"> 
-        <span ng-show="form.$submitted || form.middleName.$touched">
-            <p class="error-message" ng-show="form.middleName.$error.pattern">
-                * Ingrese un nombre valido.
-            </p>
-        </span>
-    </div>
-
-    <div>
-        <label class="cd-label">Primer Apellido</label>
-        <input ng-model="vm.names[2]" class="user" type="text" name="lastNameOne" id="cd-name"
-               ng-pattern="regex['name']" required> 
-        <span ng-show="form.$submitted || form.lastNameOne.$touched">
-            <p class="error-message" ng-show="form.lastNameOne.$error.required">
-                * Primer apellido es requerido.
-            </p>
-            <p class="error-message" ng-show="form.lastNameOne.$error.pattern">
-                * Ingrese un apellido valido.
-            </p>
-        </span>
-    </div>
-
-    <div>
-        <label class="cd-label">Segundo Apellido (Opcional)</label>
-        <input ng-model="vm.names[3]" class="user" type="text" name="lastNameTwo" id="cd-name"
-               ng-pattern="regex['name']"> 
-        <span ng-show="form.$submitted || form.lastNameTwo.$touched">
-            <p class="error-message" ng-show="form.lastNameTwo.$error.pattern">
-                * Ingrese un apellido valido.
+        <label class="cd-label">Nombre</label>
+        <input ng-model="vm.student.Name" class="user" type="text" name="name" id="cd-name" required> 
+        <span ng-show="form.$submitted || form.name.$touched">
+            <p class="error-message" ng-show="form.name.$error.required">
+                * El nombre es requerido.
             </p>
         </span>
     </div>
