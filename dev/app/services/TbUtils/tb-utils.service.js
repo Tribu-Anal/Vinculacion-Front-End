@@ -79,9 +79,10 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     }
 
     function showErrorMessage (response) {
-        console.log(response);
         if (response.status === 400) {
-
+            const err = response.data.ModelState;
+            for (const key in err)
+                displayNotification('error', 'Error', err[key][0]);
         }
         else
             displayNotification('error', 'Error', response.data);
