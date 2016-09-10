@@ -10,10 +10,11 @@ function sectionProjects ($http) {
 
 	return service;
 
-	function getUnapproved(successCallback, errorCallback){
+	function getUnapproved(suc, err, fin){
 		$http.get(url+'/UnApproved')
-			.then(successCallback)
-			.catch(errorCallback);
+			.then(suc)
+			.catch(err)
+			.finally(fin);
 	}
 
 	function post (data, suc, err, fin) {
