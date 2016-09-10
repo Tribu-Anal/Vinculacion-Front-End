@@ -40,7 +40,7 @@ function run($rootScope, $cookieStore, $http, $state, $timeout) {
     }
 
     function stateChangeSuccess (event) {
-        $timeout(function(){
+        $timeout(() => {
             $rootScope.stateLoading = false;
             $rootScope.generalLoading = true;
         }, $rootScope.generalLoading ? 500 : 500);
