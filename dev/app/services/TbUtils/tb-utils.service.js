@@ -79,11 +79,12 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     }
 
     function showErrorMessage (response) {
-        // if (error && error.Title && error.Message)
-        //     displayNotification('error', error.Title, error.Message);
-        // else
-        //     displayNotification('error', 'Error', 
-        //         'Ha ocurrido un error en el servidor. Intentalo de nuevo.');
+        console.log(response);
+        if (response.status === 400) {
+
+        }
+        else
+            displayNotification('error', 'Error', response.data);
     }
 
     function setModalParams(params) {
