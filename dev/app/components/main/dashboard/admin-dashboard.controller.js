@@ -1,22 +1,15 @@
-AdminDashboardController.$inject = ['$rootScope', '$stateParams', 'sectionProjects', 'TbUtils'];
+AdminDashboardController.$inject = [ 'TbUtils', 'sectionProjects' ];
 
-function AdminDashboardController ($rootScope, $stateParams, sectionProjects, TbUtils) {
+function AdminDashboardController (TbUtils, sectionProjects) {
 	const vm = this;
-	vm.preventGeneralLoading = TbUtils.preventGeneralLoading;
-	vm.sprojects = null;
-	sectionProjects.getUnapproved(unapprovedSuccess, unapprovedFail);
-	vm.toTitleCase = TbUtils.toTitleCase;
-	vm.sectionsProjectsLoading = true;
-	function unapprovedSuccess(response){
-		vm.preventGeneralLoading();
-		vm.sprojects = response.data;
-		vm.sectionsProjectsLoading = false;
-	}
 
-	function unapprovedFail(response){
-		TbUtils.displayNotification('error', 'Error',
-				'Informacion correspondiente al dashboard no se pudo cargar.');
-	}
+	vm.sectionProjects = [];
+
+	vm.toTitleCase = TbUtils.toTitleCase;
+
+	vm.loading = true;
+
+	TbUtils.getAndLoad(sectionProjects.getUnapproved, vm.sectionProjects, () => { vm.loading = false; });
 }
 
 module.exports = { name: 'AdminDashboardController', ctrl: AdminDashboardController };

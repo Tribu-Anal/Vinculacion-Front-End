@@ -24,13 +24,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                          <tr ng-repeat="sproject in vm.sprojects">
-                            <td>{{vm.toTitleCase(sproject.Project.Name)}}</td>
-                            <td>{{sproject.Section.Code}}</td>
-                            <td>{{sproject.Section.Class.Name}}</td>
-                            <td>{{vm.toTitleCase(sproject.Section.User.Name)}}</td>
-                            <td>{{sproject.Section.User.Email}}</td>
-                            <td class="hidden-sm">{{sproject.Section.Period.Number}}</td>
+                          <tr ng-repeat="sectionProject in vm.sectionProjects">
+                            <td>{{vm.toTitleCase(sectionProject.Project.Name)}}</td>
+                            <td>{{sectionProject.Section.Code}}</td>
+                            <td>{{sectionProject.Section.Class.Name}}</td>
+                            <td>{{vm.toTitleCase(sectionProject.Section.User.Name)}}</td>
+                            <td>{{sectionProject.Section.User.Email}}</td>
+                            <td class="hidden-sm">{{sectionProject.Section.Period.Number}}</td>
                           </tr>
 
                         </tbody>
@@ -43,4 +43,4 @@
 </div>
 </div>
 </div>
-<tb-loading class="main-loader" ng-show="vm.sectionsProjectsLoading"></tb-loading>
+<tb-loading class="main-loader" ng-show="vm.loading"></tb-loading>
