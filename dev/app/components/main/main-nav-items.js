@@ -81,7 +81,7 @@ module.exports = ($rootScope, $state, TbUtils) => {
 		},
 
 	  	{
-	  		title: "LOG OUT", ref: "landing.login",
+	  		title: "SALIR", ref: "landing.login",
 	  		icon: "glyphicon glyphicon-log-out", active: false,
 		  	show: true,
 		  	clicked: () => {

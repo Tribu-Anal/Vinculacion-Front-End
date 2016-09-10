@@ -4,7 +4,7 @@ function config ($stateProvider) {
 
 	$stateProvider
 		.state('main.import-students', {
-			url: '/importar-alumnos',
+			url: '/alumnos/importar-alumnos',
 			templateUrl: 'templates/components/main/import-students/import-students.html',
 			controller: "ImportStudentsController as vm",
 			onEnter: onStateEnter

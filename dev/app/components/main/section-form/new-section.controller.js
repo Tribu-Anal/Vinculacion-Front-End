@@ -36,7 +36,7 @@ function NewSectionController (TbUtils, sections, classes, professors, students,
 
     function submit () {
         vm.submitting = true;
-
+        
         sections.post(vm.section, assignStudents, 
             resp => { TbUtils.showErrorMessage(resp.data); vm.submitting = false; });
     }

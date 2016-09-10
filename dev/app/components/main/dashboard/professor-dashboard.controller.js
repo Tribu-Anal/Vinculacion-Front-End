@@ -11,7 +11,7 @@ function ProfessorDashboardController(TbUtils, sections) {
     sections.getCurrentSections(currentSectionsSuccess, currentSectionsFail);
 
     function goToSection (section) {
-        TbUtils.go('main.section', { sectionId: section.Id });
+        TbUtils.go('main.section', { section: btoa(JSON.stringify(section)) });
     }
 
     function currentSectionsSuccess(response) {
