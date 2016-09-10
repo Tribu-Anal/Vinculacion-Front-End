@@ -6,7 +6,7 @@ function NewSectionProjectController (TbUtils, projects, sectionProjects, sectio
 	const vm = this;
 
 	vm.project = {
-		SectionId: sectionId,
+		SectiontId: sectionId,
 		ProjectIds: projectIds,
 		Description: '',
 		Cost: 0
@@ -39,10 +39,19 @@ function NewSectionProjectController (TbUtils, projects, sectionProjects, sectio
 
 		vm.project.ProjectIds.push(vm.selectedProject.Id);
 
-		sectionProjects.post(vm.project, 
-			resp => { mdDialog.hide(resp.data); }, 
-			resp => { TbUtils.showErrorMessage(resp.data); mdDialog.cancel(); }, 
+		sectionProjects.post(vm.project, assignProjects, close, 
 			() => { vm.submitting = false; });
+	}
+
+	function close (resp) {
+		TbUtils.showErrorMessage(resp.data); 
+		mdDialog.cancel();
+	}
+
+	function assignProjects (response) {
+		projects.assignProjectstoSection(vm.project.ProjectIds, sectionId, 
+			resp => { mdDialog.hide(response.data.map(obj => obj.Project)); },
+			close, () => { vm.submitting = false; });
 	}
 
 	function search (term) {

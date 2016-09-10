@@ -14,7 +14,6 @@ function projects($http, $rootScope, $state) {
         getProjectReportUrl: getProjectReportUrl,
         getProjectsWithPagination: getProjectsWithPagination,
         getProjectsCount: getProjectsCount,
-        assignSectionToProject: assignSectionToProject,
         assignProjectstoSection: assignProjectstoSection,
         selectedProjects: [],
         cached: null
@@ -83,20 +82,14 @@ function projects($http, $rootScope, $state) {
             .catch(errorCallback);
     }
 
-    function assignSectionToProject(ProjectId, SectionId, successCallback, errorCallback) {
-        $http.post(url + "/AssignSection", JSON.stringify({
-            ProjectId: ProjectId,
-            SectionId: SectionId
-        })).then(successCallback)
-            .catch(errorCallback);
-    }
-
-    function assignProjectstoSection(ProjectIds, SectionId, successCallback, errorCallback) {
+    function assignProjectstoSection(ProjectIds, SectionId, suc, err, fin) {
         $http.post(url + '/AssignProjectsToSection', JSON.stringify({
             ProjectIds: ProjectIds,
             SectionId: SectionId
-        })).then(successCallback)
-            .catch(errorCallback);
+        }))
+        .then(suc)
+        .catch(err)
+        .finally(fin);
     }
 }
 

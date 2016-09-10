@@ -26,7 +26,7 @@ function SectionController (TbUtils, sections, stateParams) {
     function showSectionProjectModal () {
          TbUtils.showCustomModal('NewSectionProjectController as vm', 
             'templates/components/main/section-project-form/section-project-form.html',
-            sectionProject => { vm.projects.push(sectionProject); },
+            projects => { vm.projects = projects; },
             { sectionId: vm.section.Id, projectIds: vm.projects.map(obj => obj.Id) });
     }
 
