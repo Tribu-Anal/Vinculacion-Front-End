@@ -8,7 +8,7 @@ function run($rootScope, $cookieStore, $http, $state, $timeout) {
     $rootScope.StudentId = window.localStorage['StudentId'];
     $rootScope.ProfessorDBId = window.localStorage['ProfessorDBId'];
 
-    $rootScope.loggedIn = $rootScope.Session.length > 0;
+    $rootScope.loggedIn = $rootScope.Session && $rootScope.Session.length > 0;
     $rootScope.regex = require('./regex');
 
     $rootScope.stateLoading = false;
@@ -36,7 +36,7 @@ function run($rootScope, $cookieStore, $http, $state, $timeout) {
         $rootScope.stateLoading = true;
         stateUrl = toState.url;
         redirect($state, toState.name, 
-            $rootScope.Role.toLowerCase(), $rootScope.Session.length > 0, event);
+            $rootScope.Role.toLowerCase(), $rootScope.Session && $rootScope.Session.length > 0, event);
     }
 
     function stateChangeSuccess (event) {
