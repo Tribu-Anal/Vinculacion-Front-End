@@ -20,7 +20,7 @@ function EditProjectController (TbUtils, projects, majors, stateParams) {
 
     majors.getMajorsByProject(vm.project.Id, 
                               resp => { vm.project.MajorIds = resp.data.map(obj => obj.MajorId); }, 
-                              resp => { TbUtils.showErrorMessage(resp.data); }, 
+                              TbUtils.showErrorMessage, 
                               () => { vm.projectMajorsLoading = false; });
 
     function submit () {

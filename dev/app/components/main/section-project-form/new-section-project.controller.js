@@ -44,7 +44,7 @@ function NewSectionProjectController (TbUtils, projects, sectionProjects, sectio
 	}
 
 	function close (resp) {
-		TbUtils.showErrorMessage(resp.data); 
+		TbUtils.showErrorMessage(resp); 
 		mdDialog.cancel();
 	}
 

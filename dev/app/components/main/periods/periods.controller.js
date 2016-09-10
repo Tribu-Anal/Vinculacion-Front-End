@@ -23,8 +23,7 @@ function PeriodsController (TbUtils, periods) {
 
     TbUtils.getAndLoad(periods.getWithPagination, vm.periods, () => { vm.loading = false; }, 0, vm.pageSize);
 
-    periods.getCurrentPeriod(resp => { vm.currentPeriod = resp.data; },
-                             resp => { TbUtils.showErrorMessage(resp.data); },
+    periods.getCurrentPeriod(resp => { vm.currentPeriod = resp.data; }, TbUtils.showErrorMessage,
                              ()   => { vm.gettingCurrentPeriod = false; });
 
     vm.setCurrentPeriod = period => {
@@ -33,8 +32,7 @@ function PeriodsController (TbUtils, periods) {
                 if (result) {
                     vm.loading = true;
                     periods.setCurrentPeriod(period.Id, 
-                    resp => { TbUtils.reload(); },
-                    resp => { TbUtils.showErrorMessage(resp.data); },
+                    resp => { TbUtils.reload(); }, TbUtils.showErrorMessage,
                     () => { vm.loading = false; });
                 }  
             });

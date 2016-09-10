@@ -59,7 +59,7 @@ function EditHoursController($stateParams, sections, projects,
 
     function getStudentsHoursFail(response) {
         vm.participantsLoading = false;
-        TbUtils.showErrorMessage(response.data);
+        TbUtils.showErrorMessage(response);
     }
 
     function getProjectSuccess(response) {
@@ -68,7 +68,7 @@ function EditHoursController($stateParams, sections, projects,
     }
     
     function getProjectFail(response) {
-        TbUtils.showErrorMessage(response.data);
+        TbUtils.showErrorMessage(response);
         vm.projectLoading = false;
     }
 
@@ -135,7 +135,7 @@ function EditHoursController($stateParams, sections, projects,
     }
 
     function postHoursFail(response) {
-        TbUtils.showErrorMessage(response.data);
+        TbUtils.showErrorMessage(response);
         vm.postingHours = false;
     }
 

@@ -78,12 +78,12 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
         list.splice(indexOfItem, 1);
     }
 
-    function showErrorMessage (error) {
-        if (error && error.Title && error.Message)
-            displayNotification('error', error.Title, error.Message);
-        else
-            displayNotification('error', 'Error', 
-                'Ha ocurrido un error en el servidor. Intentalo de nuevo.');
+    function showErrorMessage (response) {
+        // if (error && error.Title && error.Message)
+        //     displayNotification('error', error.Title, error.Message);
+        // else
+        //     displayNotification('error', 'Error', 
+        //         'Ha ocurrido un error en el servidor. Intentalo de nuevo.');
     }
 
     function setModalParams(params) {
@@ -190,53 +190,47 @@ function TbUtils(toaster, $rootScope, $mdDialog, $state) {
     function getAndLoad (get, list, fin, page, size) {
         if (typeof page === 'number' && typeof size === 'number')
             get(page, size, resp => { fillListWithResponseData(resp.data, list); },
-                            resp => { showErrorMessage(resp.data); },
-                            fin);
+                            showErrorMessage, fin);
         else
             get(resp => { fillListWithResponseData(resp.data, list); },
-                resp => { showErrorMessage(resp.data); },
-                fin);
+                showErrorMessage, fin);
     }
 
     function getExistingAndLoad (get, id, list, fin) {
         get(id, resp => { fillListWithResponseData(resp.data, list); },
-                resp => { showErrorMessage(resp.data); },
-                fin);
+                showErrorMessage, fin);
     }
 
     function deleteAndNotify (_delete, data, list, msg, fin) {
         _delete(data.Id, resp => {
                 removeItemFromList(data, list); displayNotification('success', 'Exito', msg); 
-            }, resp => { 
-                showErrorMessage(resp.data); 
-            }, fin);
+            }, showErrorMessage, fin);
     }
 
     function updateAndNotify (put, id, data, msg, fin) {
         put(id, data, resp => {  displayNotification('success', 'Exito', msg); }, 
-                      resp => { showErrorMessage(resp.data); }, 
-                      fin);
+                      showErrorMessage, fin);
     }
 
     function updateAndGoTo (put, id, data, toState, msg, fin) {
         put(id, data, resp => { 
             displayNotification('success', 'Exito', msg ? msg : 'Actualizado!');
             go(toState);
-        }, resp => { showErrorMessage(resp.data); }, fin);
+        }, showErrorMessage, fin);
     }
 
     function postAndGoTo (post, data, toState, msg, fin) {
         post(data, resp => {
             if (msg) displayNotification('success', 'Exito', msg);
             if(toState) go(toState);
-        }, resp => { showErrorMessage(resp.data); }, fin);
+        }, showErrorMessage, fin);
     }
 
     function assignAndGoTo (post, id, data, toState, msg, fin) {
         post(id, data, resp => {
             displayNotification('success', 'Exito', msg ? msg : 'Se creo con exito!');
             go(toState);
-        }, resp => { showErrorMessage(resp.data); }, fin);
+        }, showErrorMessage, fin);
     }
 
     function showCustomModal (ctrl, templateUrl, _then, locals) {

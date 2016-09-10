@@ -51,7 +51,7 @@ function LoginController ($rootScope, $location, auth, role, toaster, TbUtils, $
     }
 
     function LoginFail(response) {
-        TbUtils.showErrorMessage(response.data);
+        TbUtils.showErrorMessage(response);
         vm.loading = false;
     }
 }

@@ -32,7 +32,7 @@ function ApproveHoursController(TbUtils, hours) {
     }
 
     function getHoursInfoSectionProjectsFail(response) {
-        TbUtils.showErrorMessage(response.data);
+        TbUtils.showErrorMessage(response);
     }
 
     function approveHours() {
@@ -48,7 +48,7 @@ function ApproveHoursController(TbUtils, hours) {
     }
 
     function putSectionProjectsApproveFail(resp){
-    	TbUtils.showErrorMessage(resp.data);
+    	TbUtils.showErrorMessage(resp);
     }
 }
 
