@@ -182,6 +182,11 @@ gulp.task( 'reload-index', () => {
 		.pipe(connect.reload()); 
 } );
 
+gulp.task( 'index-move', () => { 
+	return gulp.src("./index.html")
+		.pipe(gulp.dest(pbl)); 
+} );
+
 
 /////////////////////////////////////////////////////////////////////////
 //                       RESOURCES TASKS                               //
@@ -220,12 +225,17 @@ gulp.task ( 'watch', () => {
 	gulp.watch ( "./index.html", ['reload-index'] );
 } );
 
+/////////////////////////////////////////////////////////////////////////
+//                            BUILDS                                   //
+/////////////////////////////////////////////////////////////////////////
 
+
+gulp.task('build-local', [ 'js', 'vendor-css', 'css', 'img', 'fonts', 'templates' ]);
+gulp.task('build-server', [ 'js', 'vendor-css', 'css', 'img', 'fonts', 'templates', 'index-move' ]);
 
 /////////////////////////////////////////////////////////////////////////
 //                            DEFAULT                                  //
 /////////////////////////////////////////////////////////////////////////
 
 
-gulp.task ( 'default', [ 'js', 'vendor-css', 'css', 
-                         'img', 'fonts', 'templates' ] );
+gulp.task ( 'default', [ 'build-local' ]);
