@@ -11,7 +11,7 @@ process.argv.forEach((val, index, array) => {
         port = val;
 });
 
-let indexHtml = fs.readFileSync('./index.html', 'utf-8');
+let indexHtml = fs.readFileSync('./public/index.html', 'utf-8');
 
 const searchString = 'var PORT';
 const jumpLength = searchString.length;
