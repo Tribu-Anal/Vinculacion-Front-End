@@ -84,6 +84,22 @@ gulp.task ('connect', () => {
   });
 });
 
+gulp.task ('connect-prod', () => {
+	connect.server({
+    root: 'public/',
+    port: 8086,
+    fallback: 'index.html'
+  });
+});
+
+gulp.task ('connect-dev', () => {
+	connect.server({
+    root: 'public/',
+    port: 8096,
+    fallback: 'index.html'
+  });
+});
+
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -231,7 +247,7 @@ gulp.task ( 'watch', () => {
 
 
 gulp.task('build-local', [ 'js', 'vendor-css', 'css', 'img', 'fonts', 'templates' ]);
-gulp.task('build-server', [ 'js', 'vendor-css', 'css', 'img', 'fonts', 'templates', 'index-move' ]);
+gulp.task('build-server', [ 'js', 'vendor-css', 'css', 'img', 'fonts', 'templates' ]);
 
 /////////////////////////////////////////////////////////////////////////
 //                            DEFAULT                                  //
