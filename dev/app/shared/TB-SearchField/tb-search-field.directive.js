@@ -1,6 +1,6 @@
-tbSearchField.$inject = [ 'filterFilter' ];
+tbSearchField.$inject = [ 'TbUtils', 'filterFilter' ];
 
-function tbSearchField(filterFilter) {
+function tbSearchField(TbUtils, filterFilter) {
     var directive = {
         restrict: 'E',
         scope: {
