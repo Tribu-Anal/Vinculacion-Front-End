@@ -5,6 +5,8 @@ require("angular");
 require("angular-animate");
 require("angular-cookies");
 require("angular-messages");
+require("angular-sanitize");
+require("angular-aria");
 require("angular-material");
 require("angular-modal-service");
 require("angular-spinkit");
