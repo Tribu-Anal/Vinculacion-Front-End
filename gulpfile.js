@@ -65,7 +65,7 @@ let appJs       = [ path.dev.app + "**/*.js" ],
     vendorCss   = [ path.dev.lib + "**/*.css", path.dev.lib + "**/*.*.css" ],
     sassSrc     = [ path.dev.app + "**/*.scss" ],
     templateSrc = [ path.dev.app + "**/*.html", path.dev.app + "**/*.*.html" ],
-    imgSrc      = [ path.dev.img + "*.jpg", path.dev.img + "*.png" ];
+    imgSrc      = [ path.dev.img + "*.jpg", path.dev.img + "*.png", path.dev.img + "*.svg" ];
 
 
 
