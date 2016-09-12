@@ -247,7 +247,7 @@ gulp.task ( 'watch', () => {
 
 
 gulp.task('build-local', [ 'js', 'vendor-css', 'css', 'img', 'fonts', 'templates' ]);
-gulp.task('build-server', [ 'js', 'vendor-css', 'css', 'img', 'fonts', 'templates' ]);
+gulp.task('build-server', [ 'js', 'vendor-css', 'css', 'img', 'fonts', 'templates', 'index-move' ]);
 
 /////////////////////////////////////////////////////////////////////////
 //                            DEFAULT                                  //
