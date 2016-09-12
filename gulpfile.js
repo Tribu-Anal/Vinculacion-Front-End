@@ -88,6 +88,7 @@ gulp.task ('connect-prod', () => {
 	connect.server({
     root: 'public/',
     port: 8086,
+    livereload: true,
     fallback: 'index.html'
   });
 });
@@ -96,6 +97,7 @@ gulp.task ('connect-dev', () => {
 	connect.server({
     root: 'public/',
     port: 8096,
+    livereload: true,
     fallback: 'index.html'
   });
 });
