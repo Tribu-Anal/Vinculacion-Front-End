@@ -6,7 +6,7 @@ module.exports = userType => {
 			{ type: 'label', props: { text: obj => obj.Name }  },
 			{ type: 'label', props: { text: obj => obj.Email ? obj.Email : 'N/A' }  },
 			{ type: 'label', props: { text: obj => obj.Campus } },
-			{ type: 'icon',  props: { iconClass: obj => obj.Status.Active ? 
+			{ type: 'icon',  props: { iconClass: obj => obj.Status == 1 ? 
 				'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove',  fontSize: 24 } }
 		]
 	};
