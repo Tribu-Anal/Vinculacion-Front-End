@@ -7,7 +7,7 @@ function NewSectionProjectController (TbUtils, projects, sectionProjects, sectio
 
 	vm.project = {
 		SectiontId: sectionId,
-		ProjectIds: projectIds,
+		ProjectIds: [],
 		Description: '',
 		Cost: 0
 	};
